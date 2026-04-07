@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
+<title>VR 로봇 원격 조종 + 자체 IK 솔버 — Case Study · 홍대기</title>
+<meta name="description" content="Meta Quest 3로 산업용 로봇 Doosan A0912 실시간 조종. Unity VR ↔ Flask ↔ RoboDK 전체 파이프라인을 Claude Code AI Agent 활용으로 단독 구현. 2025 해양 모빌리티 안전 엑스포 시연 성공."/>
+<meta property="og:title" content="VR 로봇 원격 조종 + 자체 IK 솔버 · Case Study"/>
+<meta property="og:description" content="AI Agent 활용으로 실제 산업용 로봇을 조종하고 부산 벡스코 엑스포 전시까지 성공한 실증 사례. RoboDK 의존 없이 IK 알고리즘 자체부터 자체 구축."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/case-study-vr-robot.html"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="VR 로봇 원격 조종 · Case Study"/>
+<meta name="twitter:description" content="AI Agent 활용으로 실제 산업용 로봇을 조종 + 엑스포 전시 성공."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "outline": "#8d90a2", "on-background": "#dce1fb", "primary-fixed-dim": "#b7c4ff",
+          "primary": "#b7c4ff", "tertiary": "#b7c8e1", "on-surface-variant": "#c3c5d9",
+          "primary-fixed": "#dde1ff", "on-primary": "#002682", "primary-container": "#0052ff",
+          "surface-variant": "#2e3447", "secondary-container": "#3f465c", "surface": "#0c1324",
+          "background": "#0c1324", "surface-container-highest": "#2e3447",
+          "surface-container-lowest": "#070d1f", "on-surface": "#dce1fb",
+          "surface-container": "#191f31", "secondary": "#bec6e0",
+          "outline-variant": "#434656", "surface-container-low": "#151b2d"
+        },
+        borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+        fontFamily: { headline: ["Space Grotesk"], body: ["Inter"], label: ["Manrope"] }
+      }
+    }
+  }
+</script>
+<style>
+  body { background-color: #0c1324; color: #dce1fb; font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .neural-bg { background-image: radial-gradient(circle at 2px 2px, #434656 1px, transparent 0); background-size: 40px 40px; opacity: 0.15; }
+  .pipeline-block { font-family: 'Consolas', 'D2Coding', monospace; }
+</style>
+</head>
+<body class="bg-background text-on-background">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0c1324]/60 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,0,0,0.4)]">
+  <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="flex flex-col">
+      <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
+      <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY × AI AGENT</div>
+    </a>
+    <div class="hidden md:flex items-center space-x-8 font-headline tracking-tight text-sm uppercase">
+      <a class="text-slate-400 hover:text-primary transition-colors" href="index.html">Home</a>
+      <a class="text-primary border-b-2 border-primary pb-1" href="projects.html">Projects</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="about.html">About</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="resume.html">Resume</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="cover-letter.html">Cover Letter</a>
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-24">
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-8 mb-24 lg:mb-32">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+      <div class="lg:col-span-8">
+
+        <div class="flex flex-wrap items-center gap-4 mb-6">
+          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">Case Study 01</span>
+          <span class="text-outline text-xs font-label uppercase tracking-widest">Industrial AI · Robotics · Live Deployment</span>
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-primary-fixed/15 text-primary-fixed text-[10px] uppercase tracking-widest font-label">
+            <span class="material-symbols-outlined text-[10px]">military_tech</span>
+            엑스포 전시 성공
+          </span>
+        </div>
+
+        <h1 class="text-5xl lg:text-7xl font-headline font-bold text-on-surface tracking-tighter leading-none mb-8">
+          <span class="text-primary">VR 로봇</span><br/>원격 조종 시스템<br/><span class="text-3xl text-slate-400">+ 자체 IK 솔버</span>
+        </h1>
+
+        <p class="text-xl text-on-surface-variant max-w-2xl font-body leading-relaxed">
+          Meta Quest 3 VR 컨트롤러로 산업용 로봇(Doosan A0912)을 실시간 원격 조종. <span class="text-on-surface">Unity VR ↔ Flask ↔ RoboDK ↔ 실 로봇</span> 전체 파이프라인을 <span class="text-primary-fixed">Claude Code AI Agent 활용으로 단독 구현</span>. 별도 R&amp;D에서 <span class="text-on-surface">Jacobian 기반 자체 IK 솔버</span>까지 직접 구현.
+        </p>
+      </div>
+
+      <div class="lg:col-span-4 flex flex-col gap-6">
+        <div class="flex gap-4">
+          <a class="flex-1 py-4 bg-surface-container-low rounded-md flex items-center justify-center gap-2 text-on-surface hover:bg-surface-container-highest transition-all group" href="https://github.com/darkhtk/MetaArm" target="_blank" rel="noopener noreferrer">
+            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">code</span>
+            <span class="font-label text-sm font-bold tracking-widest uppercase">MetaArm</span>
+          </a>
+          <a class="flex-1 py-4 bg-primary text-on-primary rounded-md flex items-center justify-center gap-2 hover:bg-primary-container transition-all group" href="https://github.com/darkhtk/ik_meta" target="_blank" rel="noopener noreferrer">
+            <span class="material-symbols-outlined group-hover:scale-110 transition-transform">calculate</span>
+            <span class="font-label text-sm font-bold tracking-widest uppercase">ik_meta</span>
+          </a>
+        </div>
+        <a href="https://youtube.com/shorts/Z6EnF1AfZWA" class="py-4 bg-surface-container-low rounded-md flex items-center justify-center gap-2 text-on-surface hover:bg-surface-container-highest transition-all group" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">play_circle</span>
+          <span class="font-label text-sm font-bold tracking-widest uppercase">엑스포 시연 영상</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Featured Banner: 실제 엑스포 시연 사진 -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
+        <img loading="lazy" src="assets/images/vr_robot_expo1.png" alt="VR 로봇 엑스포 시연 - HMD 내부 시점 (SAFE_BOX + Doosan A0912)" class="w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface/90 via-transparent to-transparent"></div>
+        <div class="absolute bottom-3 left-3 right-3">
+          <div class="font-label text-[10px] text-primary-fixed uppercase tracking-widest">엑스포 시연 — HMD 내부 시점</div>
+          <div class="text-xs text-on-surface mt-0.5">SAFE_BOX 영역 + Doosan A0912</div>
+        </div>
+      </div>
+      <div class="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
+        <img loading="lazy" src="assets/images/vr_robot_expo2.png" alt="VR 로봇 엑스포 시연 - Quest 3 컨트롤러로 실제 로봇 원격 조종" class="w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface/90 via-transparent to-transparent"></div>
+        <div class="absolute bottom-3 left-3 right-3">
+          <div class="font-label text-[10px] text-primary-fixed uppercase tracking-widest">실제 로봇 원격 조종</div>
+          <div class="text-xs text-on-surface mt-0.5">Quest 3 컨트롤러 + Doosan A0912</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 전시 정보 박스 -->
+    <div class="mt-6 p-6 bg-gradient-to-br from-primary-container/15 via-surface-container-low to-surface rounded-xl">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h4 class="font-headline font-bold text-primary mb-1">2025 대한민국 해양 모빌리티·안전 엑스포</h4>
+          <p class="text-sm text-on-surface-variant">2025.11.25 - 11.27 · 부산 벡스코 제1전시장 · 주제: 북극항로와 해양 밸류체인</p>
+        </div>
+        <a href="https://youtube.com/shorts/Z6EnF1AfZWA?feature=share" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2 bg-primary text-on-primary font-label text-sm font-bold rounded-md hover:scale-95 transition-transform uppercase tracking-widest">
+          <span class="material-symbols-outlined text-base">play_circle</span>
+          시연 영상 (HMD 내부)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge & 4 Stat Tiles -->
+  <section class="bg-surface-container-low py-24">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+
+        <div>
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">The Challenge</h2>
+          <h3 class="text-3xl font-headline font-bold text-on-surface mb-8">산업용 로봇을 VR로 안전하게 조종하기</h3>
+          <div class="space-y-6 text-on-surface-variant font-body leading-relaxed">
+            <p>Meta Quest 3 VR 컨트롤러로 산업용 로봇(Doosan A0912)을 <span class="text-on-surface">실시간 원격 조종</span>하는 시스템이 필요했다. 단순한 데모가 아니라 <span class="text-on-surface">RoboDK SIM과 실 로봇 양쪽에서 동작</span>해야 하고, 엑스포 현장에서 실제 관람객 앞에서 시연해야 했다.</p>
+            <p>핵심 제약: (1) 안전 — 사람과 로봇이 같은 공간에 있을 때 절대 사고가 없어야 함, (2) 실시간 — VR 입력의 지연이 30ms 이하, (3) 정확성 — VR 좌표계와 로봇 좌표계 매핑 오차 최소화.</p>
+            <p>해결: <span class="text-primary-fixed">Unity VR ↔ Flask ↔ RoboDK Python API ↔ 실 로봇</span> 전체 파이프라인을 단독 설계·구현. 4-스레드 UDP 브릿지, Deadman 스위치, SAFE_BOX, 특이점 방지, EMA 필터, 캘리브레이션 시스템까지. <span class="text-on-surface">Flask 서버와 UDP 브릿지 전체를 Claude Code AI Agent 활용으로 구현.</span></p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div class="p-8 bg-surface-container-highest rounded-xl">
+            <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">view_in_ar</span>
+            <h4 class="text-2xl font-headline font-bold text-on-surface mb-2">Quest 3</h4>
+            <p class="text-xs text-outline uppercase tracking-widest font-label">VR HMD · 컨트롤러</p>
+          </div>
+          <div class="p-8 bg-surface-container-highest rounded-xl">
+            <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">precision_manufacturing</span>
+            <h4 class="text-2xl font-headline font-bold text-on-surface mb-2">A0912</h4>
+            <p class="text-xs text-outline uppercase tracking-widest font-label">Doosan 6DOF Robot</p>
+          </div>
+          <div class="p-8 bg-surface-container-highest rounded-xl">
+            <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">memory</span>
+            <h4 class="text-2xl font-headline font-bold text-on-surface mb-2">4 Threads</h4>
+            <p class="text-xs text-outline uppercase tracking-widest font-label">UDP Real-time Bridge</p>
+          </div>
+          <div class="p-8 bg-surface-container-highest rounded-xl">
+            <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">calculate</span>
+            <h4 class="text-2xl font-headline font-bold text-on-surface mb-2">Jacobian</h4>
+            <p class="text-xs text-outline uppercase tracking-widest font-label">자체 IK Solver (R&amp;D)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Design (Bento Grid) -->
+  <section class="py-24 max-w-7xl mx-auto px-8">
+    <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-12 text-center">Architecture Design</h2>
+
+    <!-- Pipeline Block -->
+    <div class="bg-[#070d1f] p-8 rounded-xl mb-12 pipeline-block text-sm leading-relaxed">
+      <div class="text-xs text-outline uppercase tracking-widest font-label mb-4">전체 파이프라인</div>
+      <div class="text-on-surface-variant">
+        <span class="text-primary">Quest 3 컨트롤러</span> → <span class="text-primary-fixed">EMA 로우패스 필터</span> (위치/회전)
+      </div>
+      <div class="text-on-surface-variant ml-8 mt-2">
+        → <span class="text-primary-fixed">Unity → Robot 좌표 변환 (UNITY_TO_BASE)</span>
+      </div>
+      <div class="text-on-surface-variant ml-16 mt-2">
+        → <span class="text-primary-fixed">Flask /move/pose API</span>
+      </div>
+      <div class="text-on-surface-variant ml-24 mt-2">
+        → <span class="text-primary-fixed">RoboDK IK 해석</span>
+      </div>
+      <div class="text-on-surface-variant ml-32 mt-2">
+        → <span class="text-primary">실 Doosan A0912 로봇 구동</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 h-auto md:h-[600px]">
+
+      <!-- Main Card: 4-Thread UDP Bridge -->
+      <div class="md:col-span-2 md:row-span-2 bg-surface-container-highest rounded-xl p-8 flex flex-col justify-between group overflow-hidden relative">
+        <div class="relative z-10">
+          <h4 class="text-2xl font-headline font-bold mb-4">4-스레드 UDP 실시간 브릿지</h4>
+          <p class="text-on-surface-variant text-sm mb-6 max-w-md">
+            VR 컨트롤러 입력 → 로봇 명령을 4개의 독립 스레드로 분리해 실시간성을 보장. Deadband·Resend Skip·Steady-state Suppression으로 네트워크 부하 최소화.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3 text-sm">
+              <span class="w-1.5 h-1.5 bg-primary rounded-full mt-2"></span>
+              <div>
+                <code class="text-primary text-xs">CmdReceiver</code>
+                <span class="text-on-surface-variant text-xs ml-2">Unity → Flask 명령 수신</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <span class="w-1.5 h-1.5 bg-primary rounded-full mt-2"></span>
+              <div>
+                <code class="text-primary text-xs">StateReader</code>
+                <span class="text-on-surface-variant text-xs ml-2">로봇 상태 폴링</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <span class="w-1.5 h-1.5 bg-primary rounded-full mt-2"></span>
+              <div>
+                <code class="text-primary text-xs">StateSender</code>
+                <span class="text-on-surface-variant text-xs ml-2">Unity로 상태 전송</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3 text-sm">
+              <span class="w-1.5 h-1.5 bg-primary rounded-full mt-2"></span>
+              <div>
+                <code class="text-primary text-xs">CommandSender</code>
+                <span class="text-on-surface-variant text-xs ml-2">로봇 명령 발행 + 등가각 선택</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="mt-6 grid grid-cols-3 gap-2">
+          <div class="px-2 py-1 bg-primary/10 rounded text-center font-label text-[10px] text-primary uppercase tracking-tighter">Limit-aware</div>
+          <div class="px-2 py-1 bg-primary/10 rounded text-center font-label text-[10px] text-primary uppercase tracking-tighter">Deadband</div>
+          <div class="px-2 py-1 bg-primary/10 rounded text-center font-label text-[10px] text-primary uppercase tracking-tighter">Drift Resync</div>
+        </div>
+      </div>
+
+      <!-- Safety Logic -->
+      <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="material-symbols-outlined text-primary text-2xl">shield</span>
+          <h4 class="text-lg font-headline font-bold">Safety Logic</h4>
+        </div>
+        <p class="text-sm text-on-surface-variant leading-relaxed mb-3">
+          엑스포 현장에서 사람이 옆에 있는 상태로 시연. 실패할 수 없는 안전 요건.
+        </p>
+        <ul class="text-xs text-on-surface-variant space-y-1.5">
+          <li>· <span class="text-on-surface">Deadman 스위치</span> (그립 &gt;0.5)</li>
+          <li>· <span class="text-on-surface">SAFE_BOX</span> 영역 강제 클램프</li>
+          <li>· <span class="text-on-surface">특이점 방지</span> + Roll 스케일링</li>
+          <li>· 속도 250mm/s · 가속도 1000mm/s² 클램프</li>
+          <li>· Collision Clear · Drift Resync</li>
+        </ul>
+      </div>
+
+      <!-- Coordinate Transform -->
+      <div class="bg-surface-container-low rounded-xl p-8 flex flex-col items-center justify-center text-center">
+        <span class="material-symbols-outlined text-primary text-5xl mb-4">3d_rotation</span>
+        <h4 class="text-sm font-label font-bold uppercase mb-2">UNITY_TO_BASE</h4>
+        <p class="text-[10px] text-outline font-label">Quest 3 ↔ Robot Base 좌표계</p>
+      </div>
+
+      <!-- Calibration -->
+      <div class="bg-surface-container-low rounded-xl p-8 flex flex-col items-center justify-center text-center">
+        <span class="material-symbols-outlined text-primary text-5xl mb-4">tune</span>
+        <h4 class="text-sm font-label font-bold uppercase mb-2">Calibration</h4>
+        <p class="text-[10px] text-outline font-label">/calibrate/add → /solve 자동 행렬</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Agent Workflow Section (Signature) -->
+  <section class="bg-gradient-to-br from-primary-container/10 via-surface-container-low to-surface py-24">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7">
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary-fixed mb-6">AI Agent Workflow · 시그니처</h2>
+          <h3 class="text-4xl font-headline font-bold mb-8">AI로 산업용 로봇을<br/>실제로 조종하다</h3>
+          <div class="space-y-5 text-on-surface-variant font-body leading-relaxed text-lg">
+            <p>이 프로젝트의 핵심: <span class="text-primary-fixed">Flask 서버, 4-스레드 UDP 브릿지, 안전 로직 전체를 Claude Code AI Agent 활용으로 단독 구현</span>.</p>
+            <p>10년간의 로보틱스·시뮬레이션 도메인 지식으로 AI에게 <span class="text-on-surface">기술 제약(Jacobian·특이점·관절 리밋)과 실시간 통신 아키텍처를 정확히 전달</span>하여 산업용 수준의 코드를 구축.</p>
+            <p>결과: <span class="text-primary-fixed">AI Agent 활용으로 실제 산업용 로봇을 조종하고 부산 벡스코 엑스포 전시까지 성공한 실증 사례.</span></p>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="bg-surface-container-highest p-8 rounded-xl">
+            <div class="font-label text-xs text-primary uppercase tracking-[0.3em] mb-6">개발 방식 비교</div>
+            <div class="space-y-4">
+              <div>
+                <div class="text-xs text-slate-500 mb-1">전통적 접근</div>
+                <div class="text-sm text-on-surface-variant">로보틱스 전문 개발자 다수 + 수개월 + RoboDK SDK 깊은 학습</div>
+              </div>
+              <div class="border-t border-outline-variant/15"></div>
+              <div>
+                <div class="text-xs text-primary mb-1">이 프로젝트</div>
+                <div class="text-sm text-on-surface">10년 도메인 지식 1인 + Claude Code AI Agent 활용 + 단독 구현 → <span class="text-primary-fixed">엑스포 시연</span></div>
+              </div>
+            </div>
+            <div class="mt-6 p-4 bg-primary/5 rounded">
+              <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-2">Outputs</div>
+              <ul class="text-xs text-on-surface-variant space-y-1">
+                <li>· Unity 21개 C# 파일</li>
+                <li>· Python 브릿지 2개 (787 LOC)</li>
+                <li>· RoboDK SIM + 실 로봇 양쪽 안정 매핑</li>
+                <li>· 엑스포 전시 성공 (실패 0회)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sub: 자체 IK 솔버 R&D -->
+  <section class="py-24 max-w-7xl mx-auto px-8">
+    <div class="flex items-center gap-4 mb-12">
+      <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">Sub-Project · R&amp;D</span>
+      <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary">자체 IK 솔버 — RoboDK 의존 없이 단독 구현</h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7">
+        <h3 class="text-3xl font-headline font-bold mb-6">IK 알고리즘 자체부터 자체 구축</h3>
+        <p class="text-on-surface-variant font-body leading-relaxed mb-6">
+          엑스포 프로젝트(<code class="text-primary">MetaArm</code>)는 RoboDK API에 IK 해석을 위임했지만, 별도 R&amp;D(<code class="text-primary">ik_meta</code>)에서 <span class="text-on-surface">IK 알고리즘 자체부터 전체 파이프라인까지 모두 AI Agent 활용으로 단독 구현</span>.
+        </p>
+
+        <div class="space-y-4">
+          <div class="p-5 bg-surface-container-low rounded-xl">
+            <div class="font-headline font-bold text-primary text-sm mb-2">자체 IK 솔버 (RuntimeIK)</div>
+            <p class="text-xs text-on-surface-variant mb-2">Jacobian 기반 6DOF, 관절별 Weight Override, External Feedback (로봇 측정값 seed), 타겟 Rate Limit (선속도 m/s · 각속도 deg/s)</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="px-2 py-1 bg-surface-container-highest rounded font-label text-[9px] uppercase tracking-tighter text-primary">JointDef</span>
+              <span class="px-2 py-1 bg-surface-container-highest rounded font-label text-[9px] uppercase tracking-tighter text-primary">JointLimit</span>
+              <span class="px-2 py-1 bg-surface-container-highest rounded font-label text-[9px] uppercase tracking-tighter text-primary">SolveFlags</span>
+              <span class="px-2 py-1 bg-surface-container-highest rounded font-label text-[9px] uppercase tracking-tighter text-primary">Revolute · Prismatic</span>
+            </div>
+          </div>
+
+          <div class="p-5 bg-surface-container-low rounded-xl">
+            <div class="font-headline font-bold text-primary text-sm mb-2">IkMotion — Teaching 시스템</div>
+            <p class="text-xs text-on-surface-variant mb-2">관절 상태를 녹화 → 파일 저장 → 재생하는 모션 파이프라인. Recorder · Storage · Player 분리.</p>
+            <div class="text-[10px] font-label uppercase tracking-widest text-primary">Recorder → Storage → Player</div>
+          </div>
+
+          <div class="p-5 bg-surface-container-low rounded-xl">
+            <div class="font-headline font-bold text-primary text-sm mb-2">안전 로직 (단독 설계)</div>
+            <p class="text-xs text-on-surface-variant">6축 개별 관절 리밋 클램프, 동적 속도 계산 (변위 비례), 특이점 감지, deg/rad 혼동 방지 휴리스틱.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="sticky top-28 space-y-4">
+          <div class="p-6 bg-surface-container-highest rounded-xl">
+            <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Why It Matters</div>
+            <p class="text-sm text-on-surface-variant leading-relaxed">
+              <span class="text-on-surface">Jacobian 기반 IK는 일반적으로 로보틱스 전문 개발자가 수주~수개월 걸려 구현하는 영역.</span>
+              이 프로젝트는 그것까지 AI 협업으로 단독 구현했다. "AI 도구를 사용하는 시니어"가 아니라 "AI에게 수학 알고리즘까지 전달할 수 있는 시니어"라는 차별화의 직접적 증거.
+            </p>
+          </div>
+          <div class="p-6 bg-surface-container-low rounded-xl">
+            <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">관련 영상</div>
+            <ul class="space-y-2">
+              <li><a href="https://youtube.com/shorts/PuKlRUS_AKY?feature=share" class="text-xs text-primary hover:underline" target="_blank" rel="noopener noreferrer">▶ IK + Teaching VR 로봇</a></li>
+              <li><a href="https://youtube.com/shorts/pGh_t7gy27I?feature=share" class="text-xs text-primary hover:underline" target="_blank" rel="noopener noreferrer">▶ 다중 로봇 VR 동시 조작</a></li>
+              <li><a href="https://youtube.com/shorts/B_E7O60NLO4?feature=share" class="text-xs text-primary hover:underline" target="_blank" rel="noopener noreferrer">▶ IK + Damping 물리 테스트</a></li>
+              <li><a href="https://youtube.com/shorts/rUuPAdEcB7o?feature=share" class="text-xs text-primary hover:underline" target="_blank" rel="noopener noreferrer">▶ TCP IK 추적 로봇</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IK R&D Image Gallery -->
+    <div class="mt-12">
+      <h4 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6 text-center">R&amp;D 시연 갤러리</h4>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <a href="https://youtube.com/shorts/PuKlRUS_AKY?feature=share" target="_blank" rel="noopener noreferrer" class="group relative aspect-square rounded-lg overflow-hidden">
+          <img loading="lazy" src="assets/images/ik_vr_control.png" alt="VR 컨트롤러 IK 실시간 조종" class="w-full h-full object-cover transition-transform group-hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">VR IK 조종</div>
+            <div class="text-[9px] text-slate-400">Quest 3 → Robot</div>
+          </div>
+        </a>
+        <a href="https://youtube.com/shorts/pGh_t7gy27I?feature=share" target="_blank" rel="noopener noreferrer" class="group relative aspect-square rounded-lg overflow-hidden">
+          <img loading="lazy" src="assets/images/ik_multi_robot.png" alt="다중 로봇 VR 동시 조작" class="w-full h-full object-cover transition-transform group-hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">다중 로봇 VR</div>
+            <div class="text-[9px] text-slate-400">동시 조작</div>
+          </div>
+        </a>
+        <a href="https://youtube.com/shorts/rUuPAdEcB7o?feature=share" target="_blank" rel="noopener noreferrer" class="group relative aspect-square rounded-lg overflow-hidden">
+          <img loading="lazy" src="assets/images/ik_tcp_tracking.png" alt="TCP 실시간 IK 추적" class="w-full h-full object-cover transition-transform group-hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">TCP IK 추적</div>
+            <div class="text-[9px] text-slate-400">실시간 추종</div>
+          </div>
+        </a>
+        <a href="https://youtube.com/shorts/B_E7O60NLO4?feature=share" target="_blank" rel="noopener noreferrer" class="group relative aspect-square rounded-lg overflow-hidden">
+          <img loading="lazy" src="assets/images/ik_damping_physics.png" alt="IK + Damping 물리 테스트" class="w-full h-full object-cover transition-transform group-hover:scale-105"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">IK + Damping</div>
+            <div class="text-[9px] text-slate-400">물리 테스트</div>
+          </div>
+        </a>
+        <div class="group relative aspect-square rounded-lg overflow-hidden">
+          <img loading="lazy" src="assets/images/ik_debug_ui.png" alt="IK 솔버 디버그 UI" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">Debug UI</div>
+            <div class="text-[9px] text-slate-400">IK 솔버 모니터링</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Result · Impact -->
+  <section class="bg-surface-container-low py-24">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-5">
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">Project Impact</h2>
+          <h3 class="text-3xl font-headline font-bold mb-8">엑스포 시연 — 실패 0회</h3>
+          <p class="text-on-surface-variant font-body leading-relaxed mb-8">
+            2025 대한민국 해양 모빌리티 안전 엑스포 (부산 벡스코) 현장 시연. 관람객 앞에서 VR 컨트롤러로 실제 산업용 로봇을 직접 조종. 전체 시연 기간 동안 안전 사고 0회, 시스템 오류 0회.
+          </p>
+          <blockquote class="p-6 bg-surface border-l-4 border-primary rounded-r-xl text-on-surface/80 font-body">
+            <p class="italic mb-2">"10년 도메인 지식으로 AI에게 산업용 제약을 정확히 전달 → AI 협업만으로 산업 수준 코드 구축. 시뮬레이션이 아닌 <span class="text-primary-fixed">실제 산업용 로봇 제어</span>를 AI 협업으로 달성한 실증 사례."</p>
+            <footer class="mt-3 text-xs not-italic font-label uppercase tracking-widest text-primary">Project Self-Description</footer>
+          </blockquote>
+        </div>
+
+        <div class="lg:col-span-7 flex flex-col gap-4">
+          <div class="p-8 bg-surface rounded-xl flex justify-between items-center hover:bg-surface-container-highest transition-all group">
+            <div>
+              <h5 class="text-3xl font-headline font-bold text-on-surface">엑스포 전시 성공</h5>
+              <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">2025 해양 모빌리티 안전 엑스포 · 부산 벡스코</p>
+            </div>
+            <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">military_tech</span>
+          </div>
+          <div class="p-8 bg-surface rounded-xl flex justify-between items-center hover:bg-surface-container-highest transition-all group">
+            <div>
+              <h5 class="text-3xl font-headline font-bold text-on-surface">100% AI Agent Built</h5>
+              <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Flask · UDP 브릿지 · IK 솔버 전체</p>
+            </div>
+            <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">psychology</span>
+          </div>
+          <div class="p-8 bg-surface rounded-xl flex justify-between items-center hover:bg-surface-container-highest transition-all group">
+            <div>
+              <h5 class="text-3xl font-headline font-bold text-on-surface">단독 구현</h5>
+              <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Unity 21 C# + Python 787 LOC · 1인 R&amp;D</p>
+            </div>
+            <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">person</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-Reference -->
+  <section class="py-16 max-w-7xl mx-auto px-8">
+    <h3 class="font-headline text-2xl font-bold text-center mb-8">Other Case Studies</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a href="case-study-dxcenter.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 02</div>
+        <h4 class="text-2xl font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
+        <p class="text-sm text-on-surface-variant mb-4">9 EditorWindow + 5 패턴 + 멀티 페르소나 AI 협업</p>
+        <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
+      </a>
+      <a href="case-study-orchestration-ts.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Open Source · Self-Built</div>
+        <h4 class="text-2xl font-headline font-bold mb-3">Multi-Agent Orchestration Framework</h4>
+        <p class="text-sm text-on-surface-variant mb-4">본인 AI 협업 방법론을 framework로 추출. 산업 프로젝트의 메타 베이스</p>
+        <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full bg-[#0c1324]">
+  <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto">
+    <div class="mb-8 md:mb-0">
+      <div class="font-headline font-bold text-primary text-xl mb-2">DAEKI HONG</div>
+      <div class="text-slate-500 font-body text-sm uppercase tracking-widest">© 2026 · INDUSTRIAL UNITY × AI AGENT</div>
+    </div>
+    <div class="flex gap-8">
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

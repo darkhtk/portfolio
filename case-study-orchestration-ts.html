@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
+<title>Multi-Agent Orchestration Framework — Self-Built OSS · 홍대기</title>
+<meta name="description" content="본인의 AI Agent 활용 방법론을 코드로 추출한 자작 프레임워크. v1 (Bash · Markdown) → v2 (TypeScript · Claude Agent SDK 네이티브). DXCenter, VR 로봇, 너스탤지아 산업 프로젝트의 메타 베이스."/>
+<meta property="og:title" content="Multi-Agent Orchestration Framework · v1 → v2"/>
+<meta property="og:description" content="자연어 prompts로 시작한 v1 → TypeScript 컴포넌트화한 v2. 산업 프로젝트의 메타 베이스 도구."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/case-study-orchestration-ts.html"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Multi-Agent Orchestration Framework"/>
+<meta name="twitter:description" content="AI Agent 활용 방법론을 코드로 추출한 자작 프레임워크. v1 → v2 진화."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "outline": "#8d90a2", "on-background": "#dce1fb", "primary-fixed-dim": "#b7c4ff",
+          "primary": "#b7c4ff", "tertiary": "#b7c8e1", "on-surface-variant": "#c3c5d9",
+          "primary-fixed": "#dde1ff", "on-primary": "#002682", "primary-container": "#0052ff",
+          "surface-variant": "#2e3447", "secondary-container": "#3f465c", "surface": "#0c1324",
+          "background": "#0c1324", "surface-container-highest": "#2e3447",
+          "surface-container-lowest": "#070d1f", "on-surface": "#dce1fb",
+          "surface-container": "#191f31", "secondary": "#bec6e0",
+          "outline-variant": "#434656", "surface-container-low": "#151b2d"
+        },
+        borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+        fontFamily: { headline: ["Space Grotesk"], body: ["Inter"], label: ["Manrope"] }
+      }
+    }
+  }
+</script>
+<style>
+  body { background-color: #0c1324; color: #dce1fb; font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .neural-bg { background-image: radial-gradient(circle at 2px 2px, #434656 1px, transparent 0); background-size: 40px 40px; opacity: 0.15; }
+  .code-block {
+    font-family: 'Consolas', 'D2Coding', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    background: #070d1f;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    white-space: pre;
+    color: #c3c5d9;
+  }
+  .code-block .kw { color: #b7c4ff; font-weight: 600; }
+  .code-block .str { color: #dde1ff; }
+  .code-block .com { color: #8d90a2; font-style: italic; }
+  .code-block .num { color: #b7c8e1; }
+  .tab-btn-active {
+    background: #2e3447 !important;
+    color: #b7c4ff !important;
+    border-bottom: 2px solid #b7c4ff;
+  }
+  .text-glow { text-shadow: 0 0 32px rgba(183, 196, 255, 0.4); }
+</style>
+</head>
+<body class="bg-background text-on-background">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0c1324]/60 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,0,0,0.4)]">
+  <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="flex flex-col">
+      <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
+      <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY × AI AGENT</div>
+    </a>
+    <div class="hidden md:flex items-center space-x-8 font-headline tracking-tight text-sm uppercase">
+      <a class="text-slate-400 hover:text-primary transition-colors" href="index.html">Home</a>
+      <a class="text-primary border-b-2 border-primary pb-1" href="projects.html">Projects</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="about.html">About</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="resume.html">Resume</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="cover-letter.html">Cover Letter</a>
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-24">
+
+  <!-- Meta-Base Intro Banner -->
+  <section class="max-w-7xl mx-auto px-8 mb-12">
+    <div class="bg-gradient-to-br from-primary-container/10 via-surface-container-low to-surface p-8 rounded-xl">
+      <div class="font-label text-xs text-primary-fixed uppercase tracking-[0.3em] mb-3">📌 이 framework가 무엇을 위한 것인가</div>
+      <p class="text-lg text-on-surface-variant leading-relaxed">
+        이 자작 framework는 토이 프로젝트가 아닙니다.
+        <span class="text-on-surface">DXCenter (LG에너지솔루션) · VR 로봇 원격 조종 (해양 엑스포 시연) · 너스탤지아 (BIFAN 선정)</span> 같은
+        <span class="text-primary-fixed">산업 프로젝트의 작업 방식 자체를 코드로 추출한 메타 도구</span>입니다.
+        Claude Code 멀티 페르소나(감독관/개발자/고객저작자/감수자)를 인프라 레벨로 정형화하여, 다음 산업 프로젝트도 같은 방법론으로 작업할 수 있게 만든 것.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-5">
+        <a href="case-study-vr-robot.html" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">→ VR 로봇 케이스 보기</a>
+        <a href="case-study-dxcenter.html" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">→ DXCenter 케이스 보기</a>
+        <a href="projects.html" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">→ 모든 산업 프로젝트</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-8 mb-24 lg:mb-32">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+      <div class="lg:col-span-8">
+
+        <div class="flex flex-wrap items-center gap-4 mb-6">
+          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">Open Source · Self-Built Tooling</span>
+          <span class="text-outline text-xs font-label uppercase tracking-widest">Multi-Agent · Methodology R&amp;D</span>
+        </div>
+
+        <h1 class="text-5xl lg:text-7xl font-headline font-bold text-on-surface tracking-tighter leading-none mb-8">
+          Multi-Agent<br/>
+          <span class="text-primary text-glow">Orchestration</span><br/>
+          Framework
+        </h1>
+
+        <div class="flex items-center gap-3 mb-6 flex-wrap">
+          <span class="px-3 py-1 bg-surface-container-low rounded-md font-label text-xs text-on-surface uppercase tracking-widest">v1 · Bash · Markdown</span>
+          <span class="text-primary">→</span>
+          <span class="px-3 py-1 bg-primary/15 text-primary rounded-md font-label text-xs uppercase tracking-widest">v2 · TypeScript · Claude Agent SDK</span>
+        </div>
+
+        <p class="text-xl text-on-surface-variant max-w-2xl font-body leading-relaxed">
+          Claude Code 멀티 페르소나 운용 방법론을 인프라 레벨로 정형화한 자작 framework. 한국어 자연어 prompts 기반의 v1로 시작해, TypeScript + Claude Agent SDK 네이티브 컴포넌트 구조의 v2로 진화 중.
+        </p>
+      </div>
+
+      <div class="lg:col-span-4 flex flex-col gap-4">
+        <a class="py-4 bg-primary text-on-primary rounded-md flex items-center justify-center gap-2 hover:bg-primary-container transition-all group" href="https://github.com/darkhtk/orchestration-general_01" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform">code</span>
+          <span class="font-label text-sm font-bold tracking-widest uppercase">v2 Repo</span>
+        </a>
+        <a class="py-4 bg-surface-container-low rounded-md flex items-center justify-center gap-2 text-on-surface hover:bg-surface-container-highest transition-all group" href="https://github.com/darkhtk/orchestration-general_00" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">extension</span>
+          <span class="font-label text-sm font-bold tracking-widest uppercase">v1 Parent Repo</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- ACT 1: v1 (Origin) -->
+  <!-- ============================================ -->
+  <section class="bg-surface-container-low py-24">
+    <div class="max-w-7xl mx-auto px-8">
+
+      <div class="flex items-center gap-4 mb-12">
+        <span class="font-headline text-6xl font-black text-primary/30">v1</span>
+        <div>
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-2">Act 1 — Origin</h2>
+          <h3 class="text-3xl md:text-4xl font-headline font-bold">Bash · Markdown 기반의 첫 출발</h3>
+        </div>
+      </div>
+
+      <p class="text-lg text-on-surface-variant max-w-3xl mb-12 font-body leading-relaxed">
+        멀티 페르소나 AI 협업을 매번 수동으로 셋업하다 보면 페르소나마다 컨벤션·금지 패턴·실수 이력이 흩어진다. v1은 이 문제를 <span class="text-on-surface">Bash 스크립트와 Markdown 보드 시스템</span>으로 해결한 첫 시도. 사람과 에이전트가 같은 파일을 1급 시민으로 공유한다.
+      </p>
+
+      <!-- Architecture: 4 cards -->
+      <div class="mb-16">
+        <h4 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">Architecture · 구조</h4>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="bg-surface-container-highest p-6 rounded-xl">
+            <span class="material-symbols-outlined text-primary text-3xl mb-3">terminal</span>
+            <h5 class="font-headline font-bold mb-2">Bash Scripts</h5>
+            <p class="text-xs text-on-surface-variant">에이전트 루프 실행 + git commit + push 자동화. 운영자가 .sh 한 번 실행하면 4 페르소나가 자동 운용됨.</p>
+          </div>
+          <div class="bg-surface-container-highest p-6 rounded-xl">
+            <span class="material-symbols-outlined text-primary text-3xl mb-3">description</span>
+            <h5 class="font-headline font-bold mb-2">Markdown Board</h5>
+            <p class="text-xs text-on-surface-variant"><code class="text-primary">BOARD.md</code> 칸반 + <code class="text-primary">BACKLOG_RESERVE.md</code> 백로그. 사람과 에이전트가 같은 파일 편집.</p>
+          </div>
+          <div class="bg-surface-container-highest p-6 rounded-xl">
+            <span class="material-symbols-outlined text-primary text-3xl mb-3">groups</span>
+            <h5 class="font-headline font-bold mb-2">4 Personas</h5>
+            <p class="text-xs text-on-surface-variant"><code class="text-primary">prompts/*.txt</code> 4 파일로 정의된 Coordinator · Developer · Supervisor · Client.</p>
+          </div>
+          <div class="bg-surface-container-highest p-6 rounded-xl">
+            <span class="material-symbols-outlined text-primary text-3xl mb-3">menu_book</span>
+            <h5 class="font-headline font-bold mb-2">CLAUDE.md</h5>
+            <p class="text-xs text-on-surface-variant">아키텍처 패턴 · 금지 패턴 · 실수 이력을 한 곳에 누적. 다음 프로젝트로 그대로 이동.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Method: 풀 사이클 -->
+      <div class="mb-16">
+        <h4 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">Method · 풀 사이클</h4>
+        <div class="bg-surface-container-highest p-8 rounded-xl">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-xl bg-primary/20 flex items-center justify-center mb-2">
+                <span class="material-symbols-outlined text-primary">edit_note</span>
+              </div>
+              <div class="font-label text-[10px] text-primary uppercase tracking-widest">Coordinator</div>
+              <div class="text-[10px] text-slate-500 mt-1">SPEC 작성</div>
+            </div>
+            <div class="text-primary text-2xl">→</div>
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-xl bg-primary/20 flex items-center justify-center mb-2">
+                <span class="material-symbols-outlined text-primary">code</span>
+              </div>
+              <div class="font-label text-[10px] text-primary uppercase tracking-widest">Developer</div>
+              <div class="text-[10px] text-slate-500 mt-1">구현 + 단위 테스트</div>
+            </div>
+            <div class="text-primary text-2xl">→</div>
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-xl bg-primary/20 flex items-center justify-center mb-2">
+                <span class="material-symbols-outlined text-primary">supervised_user_circle</span>
+              </div>
+              <div class="font-label text-[10px] text-primary uppercase tracking-widest">Supervisor</div>
+              <div class="text-[10px] text-slate-500 mt-1">에셋 + 품질 + 런타임 감사</div>
+            </div>
+            <div class="text-primary text-2xl">→</div>
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-xl bg-primary-container/40 border-2 border-primary flex items-center justify-center mb-2">
+                <span class="material-symbols-outlined text-primary-fixed">verified</span>
+              </div>
+              <div class="font-label text-[10px] text-primary-fixed uppercase tracking-widest">Client</div>
+              <div class="text-[10px] text-slate-500 mt-1">SPEC 기준 수용 검증</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-6 border-t border-outline-variant/15">
+            <p class="text-sm text-on-surface-variant">
+              SPEC 작성 → 구현 → 감사 → 수용 검증을 자동으로 순환. 각 페르소나는 BOARD.md를 매 루프 시작 시 읽고 <code class="text-primary">FREEZE</code> / <code class="text-primary">DRAIN_FOR_TEST</code> 협력적 정지 플래그를 확인. 운영자가 언제든 끼어들 수 있는 구조.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Efficiency + Result -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-surface-container-highest p-8 rounded-xl">
+          <h4 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-4">Efficiency · 효율</h4>
+          <ul class="space-y-3 text-sm text-on-surface-variant">
+            <li class="flex gap-3">
+              <span class="text-primary">✓</span>
+              <span>매번 페르소나 셋업 수동 작업 제거 — 한 번 정의 후 모든 프로젝트 재사용</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-primary">✓</span>
+              <span>CLAUDE.md 단일 파일에 컨벤션·금지 패턴·실수 이력 누적</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-primary">✓</span>
+              <span>일관된 메타 베이스 위에서 다음 산업 프로젝트로 그대로 이동</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-surface-container-highest p-8 rounded-xl">
+          <h4 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-4">Result · 결과</h4>
+          <ul class="space-y-3 text-sm text-on-surface-variant">
+            <li class="flex gap-3">
+              <span class="text-primary">✓</span>
+              <span><a href="case-study-dxcenter.html" class="text-on-surface hover:text-primary underline">DXCenter (LG에너지솔루션)</a> 메타 베이스로 사용</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-primary">✓</span>
+              <span><a href="case-study-vr-robot.html" class="text-on-surface hover:text-primary underline">VR 로봇 원격 조종 (엑스포 시연)</a> 작업의 메타 베이스</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-primary">✓</span>
+              <span>너스탤지아 (BIFAN 선정) 백엔드 작업 표준화</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- v1 PROMPTS GALLERY -->
+  <!-- ============================================ -->
+  <section class="py-24 max-w-7xl mx-auto px-8">
+    <div class="mb-12">
+      <h3 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-4">v1 Prompts Gallery</h3>
+      <h4 class="text-3xl font-headline font-bold mb-4">자연어 한국어로 작성된 4 페르소나</h4>
+      <p class="text-on-surface-variant max-w-3xl">
+        v1의 핵심: 페르소나마다 한국어 자연어로 절차를 작성. 사람이 읽고 수정 가능. 아래는 각 페르소나의 핵심 발췌 (전체는 GitHub에서 확인).
+      </p>
+    </div>
+
+    <!-- Tab UI -->
+    <div data-tabs="v1" class="bg-surface-container-low rounded-xl overflow-hidden">
+      <div class="flex flex-wrap border-b border-outline-variant/15">
+        <button data-tab="coordinator" class="tab-btn tab-btn-active px-6 py-4 font-label text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-highest transition-all">
+          🎯 Coordinator
+        </button>
+        <button data-tab="developer" class="tab-btn px-6 py-4 font-label text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-highest transition-all">
+          💻 Developer
+        </button>
+        <button data-tab="supervisor" class="tab-btn px-6 py-4 font-label text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-highest transition-all">
+          👁 Supervisor
+        </button>
+        <button data-tab="client" class="tab-btn px-6 py-4 font-label text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-highest transition-all">
+          ✓ Client
+        </button>
+      </div>
+
+      <div class="p-8">
+
+        <div data-content="coordinator" class="tab-content">
+          <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+            <div>
+              <h5 class="font-headline font-bold text-lg text-primary mb-1">Coordinator · 소통 관리자</h5>
+              <p class="text-xs text-on-surface-variant">개발자/고객사/감독관 사이의 소통 관리. 코드 수정 금지. orchestration/ 파일만 관리.</p>
+            </div>
+            <a href="https://github.com/darkhtk/orchestration-general_00/blob/main/framework/prompts/COORDINATOR.txt" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
+          </div>
+<pre class="code-block"><span class="com">## Control Flags</span>
+Read <span class="str">`orchestration/BOARD.md`</span> before acting.
+- If the board contains <span class="str">`FREEZE`</span>, stop immediately.
+- If <span class="str">`DRAIN_FOR_TEST`</span>, do not replenish backlog.
+
+너는 소통 관리자(Coordinator) 에이전트다.
+
+<span class="com">## 역할</span>
+개발자/고객사/감독관 사이의 소통 흐름을 관리하고,
+오케스트레이션 시스템 자체를 개선한다.
+코드 수정은 하지 않는다. orchestration/ 파일만 관리한다.
+
+<span class="com">## 매 루프 실행 절차</span>
+
+<span class="kw">### Step 1: BOARD 동기화 점검</span>
+- 로드맵 vs 활성 섹션 일치 확인
+- In Review APPROVE → Done 이동 + 로드맵 ✅
+- NEEDS_WORK → Rejected 이동 + 로드맵 ❌
+- Rejected에 P0 + 개발자가 다른 작업 중 → ⛔ BLOCKED
+
+<span class="kw">### Step 2: RESERVE 잔여 점검</span>
+- 10건 이하 → 20건+ 대량 보충
+- project.config.md "개발 방향/우선순위" 참조
+
+<span class="kw">### Step 3: 에이전트 상태 감시</span>
+- DEVELOPER.md / CLIENT.md / SUPERVISOR.md 로그 읽기
+- 30분+ 미갱신 → "⚠️ AGENT_STALE"
+- 같은 태스크 3회+ NEEDS_WORK → DISCUSS 생성</pre>
+        </div>
+
+        <div data-content="developer" class="tab-content hidden">
+          <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+            <div>
+              <h5 class="font-headline font-bold text-lg text-primary mb-1">Developer · 개발자</h5>
+              <p class="text-xs text-on-surface-variant">태스크 픽업 → 구현 → 단위 테스트 → In Review 제출. BOARD 비어있을 때만 IDLE.</p>
+            </div>
+            <a href="https://github.com/darkhtk/orchestration-general_00/blob/main/framework/prompts/DEVELOPER.txt" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
+          </div>
+<pre class="code-block">너는 개발자 에이전트다.
+
+<span class="kw">## 절대 규칙</span>
+BOARD Backlog 또는 RESERVE에 태스크가 남아있으면
+IDLE 금지. 둘 다 비어있을 때만 IDLE.
+
+<span class="com">### Step 0.1: 빌드 + 런타임 에러 점검 (BOARD 읽기 전)</span>
+project.config.md의 에러 로그 경로 읽고:
+1. 빌드 에러 (`error CS` 등) → <span class="kw">모든 작업 중단</span>
+2. 런타임 에러 (NullReferenceException 등) → 수정 우선
+3. CRITICAL 항목 최우선 수정
+
+<span class="com">### Step 2: 할 일 결정 (위→아래 순서)</span>
+
+<span class="kw">A) Rejected 있음</span> → REVIEW 읽고 수정
+                    ⛔ BLOCKED 행이 있으면 BLOCKED 대상 먼저
+<span class="kw">B) In Progress 있음</span> → 구현
+<span class="kw">C) In Review에 내 태스크</span>
+   → APPROVE면 Done + 다음 픽업
+   → NEEDS_WORK면 Rejected + 수정
+<span class="kw">D) 전부 비어있음</span> → BACKLOG_RESERVE 최상단 픽업
+<span class="kw">E) RESERVE도 비어있음</span> → ⚠️ BACKLOG_EMPTY + IDLE
+
+<span class="com">### Step 2.5: UI 통합 자가 검증</span>
+In Review 제출 전 필수 — 3항목 모두 충족해야 제출 가능</pre>
+        </div>
+
+        <div data-content="supervisor" class="tab-content hidden">
+          <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+            <div>
+              <h5 class="font-headline font-bold text-lg text-primary mb-1">Supervisor · 감독관</h5>
+              <p class="text-xs text-on-surface-variant">에셋 생성 + 코드 품질 감사 + 런타임 에러 + 성능 최적화 + UX 개선의 자동 행동 사이클.</p>
+            </div>
+            <a href="https://github.com/darkhtk/orchestration-general_00/blob/main/framework/prompts/SUPERVISOR.txt" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
+          </div>
+<pre class="code-block">너는 감독관 에이전트다.
+에셋 생성 + 코드 품질 개선을 담당한다.
+
+<span class="com">## Step 1: 🎨 태스크 확인</span>
+RESERVE에서 🎨 태그 → 최상단 실행
+
+<span class="com">## Step 1.5: 런타임 모니터 리포트</span>
+MONITOR.md 존재 시 읽기
+- <span class="kw">CRITICAL 항목 → 즉시 수정 (P0)</span>
+- UI Error → 원인 추적 + 수정
+- 수정 후 MONITOR.md에서 해당 항목 제거
+
+<span class="com">## Step 2: 자동 행동 (5단계 순환)</span>
+순서대로 순환. 에러 점검만 반복 = 프로토콜 위반.
+
+<span class="num">1.</span> <span class="kw">에셋 선제 생성</span>
+   — RESERVE 다음 5건 필요 에셋 미리 생성
+<span class="num">2.</span> <span class="kw">코드 품질 감사</span>
+   — 주요 파일 읽고 버그 직접 수정
+<span class="num">3.</span> <span class="kw">런타임 에러 점검</span>
+   — Exception/Error 패턴 검색, 발견 시 수정
+<span class="num">4.</span> <span class="kw">성능 최적화</span>
+   — 캐싱, 불필요 할당 제거
+<span class="num">5.</span> <span class="kw">UX 개선</span>
+   — 누락 피드백 추가</pre>
+        </div>
+
+        <div data-content="client" class="tab-content hidden">
+          <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+            <div>
+              <h5 class="font-headline font-bold text-lg text-primary mb-1">Client · 고객사</h5>
+              <p class="text-xs text-on-surface-variant">In Review 검증, SPEC 기준 수용 검증, 페르소나별 리뷰 작성. 코드 수정 금지.</p>
+            </div>
+            <a href="https://github.com/darkhtk/orchestration-general_00/blob/main/framework/prompts/CLIENT.txt" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
+          </div>
+<pre class="code-block">너는 고객사 에이전트다.
+
+<span class="com">## 체크 순서</span>
+1. BOARD.md "👀 In Review" 섹션 확인
+2. 태스크가 있고 REVIEW 파일 미존재 → 리뷰 수행
+3. REVIEW 파일 이미 존재 → IDLE
+4. In Review 태스크 없음 → IDLE
+
+<span class="com">## 리뷰 수행 절차</span>
+1. <span class="kw">specs/SPEC-XXX.md 존재 시 반드시 참조</span> (수용 기준)
+2. project.config.md "검증 체계" 전부 수행
+3. project.config.md "리뷰 페르소나" 페르소나별 리뷰 작성
+4. reviews/REVIEW-{번호}-v{버전}.md 작성
+5. BOARD.md In Review 결과 컬럼 →
+   <span class="str">`✅ APPROVE`</span> 또는 <span class="str">`❌ NEEDS_WORK`</span>
+
+<span class="com">## 리뷰 필수 기준</span>
+- <span class="kw">새 시스템 추가</span> → 반드시 리뷰 (자가진행 금지)
+- QA/검증/수치조정 → 자가진행 허용
+- 5건 중 1건은 <span class="kw">깊은 리뷰</span>
+  (코드 직접 읽기, [깊은 리뷰] 태그)
+
+<span class="com">## 규칙</span>
+- <span class="kw">금지: 코드 수정</span>
+- BOARD.md: In Review 결과 컬럼만 수정 가능</pre>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- ACT 2: v2 (Evolution) -->
+  <!-- ============================================ -->
+  <section class="bg-surface-container-low py-24">
+    <div class="max-w-7xl mx-auto px-8">
+
+      <div class="flex items-center gap-4 mb-12">
+        <span class="font-headline text-6xl font-black text-primary">v2</span>
+        <div>
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-2">Act 2 — Evolution</h2>
+          <h3 class="text-3xl md:text-4xl font-headline font-bold">TypeScript · Claude Agent SDK 네이티브</h3>
+        </div>
+      </div>
+
+      <p class="text-lg text-on-surface-variant max-w-3xl mb-12 font-body leading-relaxed">
+        v1은 Bash·Markdown 만으로 구동되어 사람이 읽기 쉬웠지만, 타입 안전성이 없고 SDK 기능을 제대로 활용하지 못했다. v2는 같은 4 페르소나 narrative를 유지하되, <span class="text-on-surface">TypeScript 클래스 + 공식 Claude Agent SDK</span> 위에 컴포넌트화된 구조로 재설계.
+      </p>
+
+      <!-- v1 vs v2 비교 -->
+      <div class="mb-16">
+        <h4 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">v1 → v2 진화 포인트</h4>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="bg-surface-container-highest p-6 rounded-xl">
+            <span class="material-symbols-outlined text-primary text-3xl mb-3">bolt</span>
+            <h5 class="font-headline font-bold mb-2">Event-Driven</h5>
+            <p class="text-xs text-on-surface-variant">파일 폴링 → <code class="text-primary">tiny-typed-emitter</code> 기반 이벤트 버스. <code class="text-primary">wakeOn</code> · <code class="text-primary">shouldWake</code> 컴포넌트.</p>
+          </div>
+          <div class="bg-surface-container-highest p-6 rounded-xl">
+            <span class="material-symbols-outlined text-primary text-3xl mb-3">verified</span>
+            <h5 class="font-headline font-bold mb-2">Type Safe</h5>
+            <p class="text-xs text-on-surface-variant">자연어 휴리스틱 → <code class="text-primary">Board · Task · OrchestratorEvent</code> 타입 정의. Zod 스키마 검증.</p>
+          </div>
+          <div class="bg-surface-container-highest p-6 rounded-xl">
+            <span class="material-symbols-outlined text-primary text-3xl mb-3">hub</span>
+            <h5 class="font-headline font-bold mb-2">SDK Native</h5>
+            <p class="text-xs text-on-surface-variant">CLI 셸 호출 → <code class="text-primary">@anthropic-ai/claude-agent-sdk</code> 직접 사용. structured output / hooks / permissions.</p>
+          </div>
+          <div class="bg-surface-container-highest p-6 rounded-xl">
+            <span class="material-symbols-outlined text-primary text-3xl mb-3">shield</span>
+            <h5 class="font-headline font-bold mb-2">Cost Guard</h5>
+            <p class="text-xs text-on-surface-variant">예산 추적 부재 → <code class="text-primary">RunMetrics</code> JSONL append-only + 80% 경고 / 100% 자동 FREEZE.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- v2 Architecture diagram -->
+      <div>
+        <h4 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">Architecture · 컴포넌트화된 페르소나</h4>
+        <div class="bg-surface-container-highest p-8 rounded-xl">
+<pre class="code-block"><span class="com">// v1: 자연어 한국어 절차 → 사람이 읽고 수정</span>
+<span class="com">// v2: TypeScript 클래스 → 컴파일 타임 검증 + 이벤트 기반</span>
+
+<span class="kw">export class</span> CoordinatorAgent <span class="kw">extends</span> AgentBase {
+  readonly role: AgentRole = <span class="str">'coordinator'</span>;
+
+  <span class="com">// 1. 어떤 이벤트에 깨어날지 선언</span>
+  readonly wakeOn = [
+    <span class="str">'file:board-changed'</span>,
+    <span class="str">'task:moved-to-review'</span>,
+    <span class="str">'task:approved'</span>,
+    <span class="str">'task:rejected'</span>,
+    <span class="str">'clock:tick'</span>,
+  ];
+
+  <span class="com">// 2. 깨어날지 결정 (board 상태 + 이벤트 type 기반)</span>
+  shouldWake(event: OrchestratorEvent, board: Board): <span class="kw">boolean</span> {
+    <span class="kw">if</span> (board.frozen) <span class="kw">return</span> <span class="kw">false</span>;
+    <span class="kw">if</span> (event.type === <span class="str">'task:approved'</span>) <span class="kw">return</span> <span class="kw">true</span>;
+    <span class="kw">return</span> board.backlog.length &lt; <span class="num">3</span>;
+  }
+
+  <span class="com">// 3. 시스템 prompt + 동적 컨텍스트로 prompt 빌드</span>
+  <span class="kw">async</span> buildPrompt(event, board): <span class="kw">Promise</span>&lt;<span class="kw">string</span>&gt; {
+    <span class="kw">const</span> systemPrompt = <span class="kw">await</span> <span class="kw">this</span>.loadSystemPrompt();
+    <span class="kw">const</span> sections = [systemPrompt];
+    sections.push(<span class="str">`Rejected: ${board.rejected.length}`</span>);
+    sections.push(<span class="str">`In Progress: ${board.inProgress.length}`</span>);
+    <span class="kw">return</span> sections.join(<span class="str">'\n'</span>);
+  }
+
+  <span class="com">// 4. structured JSON output schema</span>
+  getOutputSchema(): <span class="kw">object</span> {
+    <span class="kw">return</span> COORDINATOR_OUTPUT_SCHEMA;
+  }
+}</pre>
+          <p class="text-sm text-on-surface-variant mt-6">
+            <span class="text-on-surface">핵심 변화:</span> v1의 "매 루프 절차" 자연어가 v2에서는 <code class="text-primary">wakeOn</code> · <code class="text-primary">shouldWake</code> · <code class="text-primary">buildPrompt</code> · <code class="text-primary">getOutputSchema</code> 4개 메서드로 분리. 시스템 prompt는 외부에서 <code class="text-primary">loadSystemPrompt()</code>로 로드 → 동일 페르소나 정의를 v1과 공유.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- v2 IN ACTION — Real Screenshots -->
+  <!-- ============================================ -->
+  <section class="py-24 max-w-7xl mx-auto px-8">
+    <div class="mb-12">
+      <h3 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-4">v2 In Action</h3>
+      <h4 class="text-3xl font-headline font-bold mb-4">실행 화면</h4>
+      <p class="text-on-surface-variant max-w-3xl">
+        v2는 단일 명령으로 launcher가 뜨고, 4 에이전트가 이벤트 기반으로 상호작용하며 board를 처리합니다. 운영자는 웹 대시보드에서 실시간으로 상태를 관찰할 수 있습니다.
+      </p>
+    </div>
+
+    <!-- Launcher (full width) -->
+    <div class="mb-8">
+      <div class="rounded-xl overflow-hidden shadow-2xl bg-surface-container-low">
+        <img loading="lazy" src="assets/images/v2_launcher.png" alt="orchestration v2 launcher — localhost:3000" class="w-full h-auto"/>
+      </div>
+      <div class="mt-3 flex justify-between items-start flex-wrap gap-2">
+        <div>
+          <div class="font-label text-[10px] text-primary uppercase tracking-widest">Launcher · localhost:3000</div>
+          <p class="text-sm text-on-surface-variant mt-1">단일 명령으로 v2 launcher 페이지가 뜸. 프로젝트 선택 + 에이전트 설정 + 실시간 운영 통제 진입점.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard 3 captures -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <div class="rounded-xl overflow-hidden shadow-2xl bg-surface-container-low">
+          <img loading="lazy" src="assets/images/v2_dashboard_1.png" alt="v2 dashboard 화면 1" class="w-full h-auto"/>
+        </div>
+        <div class="mt-3">
+          <div class="font-label text-[10px] text-primary uppercase tracking-widest">Dashboard #1 · localhost:3001</div>
+          <p class="text-xs text-on-surface-variant mt-1">에이전트 상태 + 보드 진행도</p>
+        </div>
+      </div>
+      <div>
+        <div class="rounded-xl overflow-hidden shadow-2xl bg-surface-container-low">
+          <img loading="lazy" src="assets/images/v2_dashboard_2.png" alt="v2 dashboard 화면 2" class="w-full h-auto"/>
+        </div>
+        <div class="mt-3">
+          <div class="font-label text-[10px] text-primary uppercase tracking-widest">Dashboard #2 · localhost:3001</div>
+          <p class="text-xs text-on-surface-variant mt-1">실시간 운영 화면</p>
+        </div>
+      </div>
+      <div>
+        <div class="rounded-xl overflow-hidden shadow-2xl bg-surface-container-low">
+          <img loading="lazy" src="assets/images/v2_dashboard_3.png" alt="v2 dashboard 화면 3" class="w-full h-auto"/>
+        </div>
+        <div class="mt-3">
+          <div class="font-label text-[10px] text-primary uppercase tracking-widest">Dashboard #3 · localhost:3001</div>
+          <p class="text-xs text-on-surface-variant mt-1">에이전트 상호작용 모니터링</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- v2 PROMPTS GALLERY -->
+  <!-- ============================================ -->
+  <section class="bg-surface-container-low py-24">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-12">
+        <h3 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-4">v2 Prompts Gallery</h3>
+        <h4 class="text-3xl font-headline font-bold mb-4">TypeScript 클래스로 구현된 4 페르소나</h4>
+        <p class="text-on-surface-variant max-w-3xl">
+          v2는 같은 4 페르소나를 TypeScript 클래스로 구현. 각 페르소나의 wake 조건과 prompt 빌드 로직이 코드로 명시되어 컴파일 타임 검증 가능.
+        </p>
+      </div>
+
+      <div data-tabs="v2" class="bg-surface rounded-xl overflow-hidden">
+        <div class="flex flex-wrap border-b border-outline-variant/15">
+          <button data-tab="coordinator" class="tab-btn tab-btn-active px-6 py-4 font-label text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-highest transition-all">
+            🎯 Coordinator
+          </button>
+          <button data-tab="developer" class="tab-btn px-6 py-4 font-label text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-highest transition-all">
+            💻 Developer
+          </button>
+          <button data-tab="supervisor" class="tab-btn px-6 py-4 font-label text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-highest transition-all">
+            👁 Supervisor
+          </button>
+          <button data-tab="client" class="tab-btn px-6 py-4 font-label text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-highest transition-all">
+            ✓ Client
+          </button>
+        </div>
+
+        <div class="p-8">
+          <div data-content="coordinator" class="tab-content">
+            <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+              <div>
+                <h5 class="font-headline font-bold text-lg text-primary mb-1">CoordinatorAgent.ts</h5>
+                <p class="text-xs text-on-surface-variant">5분 간격 sync · review 이벤트 즉시 wake · backlog 부족 시 wake</p>
+              </div>
+              <a href="https://github.com/darkhtk/orchestration-general_01/blob/main/src/agents/coordinator.ts" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
+            </div>
+<pre class="code-block"><span class="kw">export class</span> CoordinatorAgent <span class="kw">extends</span> AgentBase {
+  readonly role: AgentRole = <span class="str">'coordinator'</span>;
+  readonly wakeOn = [
+    <span class="str">'file:board-changed'</span>,
+    <span class="str">'task:moved-to-review'</span>,
+    <span class="str">'task:approved'</span>,
+    <span class="str">'task:rejected'</span>,
+    <span class="str">'clock:tick'</span>,
+  ];
+
+  <span class="kw">private</span> lastSyncAt?: Date;
+
+  shouldWake(event: OrchestratorEvent, board: Board): <span class="kw">boolean</span> {
+    <span class="kw">if</span> (board.frozen) <span class="kw">return</span> <span class="kw">false</span>;
+
+    <span class="com">// clock:tick 은 5분 이상 간격 보장</span>
+    <span class="kw">if</span> (event.type === <span class="str">'clock:tick'</span>) {
+      <span class="kw">if</span> (<span class="kw">this</span>.lastSyncAt) {
+        <span class="kw">const</span> elapsed = Date.now() - <span class="kw">this</span>.lastSyncAt.getTime();
+        <span class="kw">if</span> (elapsed &lt; <span class="num">300_000</span>) <span class="kw">return</span> <span class="kw">false</span>;
+      }
+      <span class="kw">return</span> <span class="kw">true</span>;
+    }
+
+    <span class="com">// review 관련 이벤트 → 즉시 wake</span>
+    <span class="kw">if</span> (event.type === <span class="str">'task:approved'</span> ||
+        event.type === <span class="str">'task:rejected'</span>) {
+      <span class="kw">return</span> <span class="kw">true</span>;
+    }
+
+    <span class="kw">return</span> board.backlog.length &lt; <span class="num">3</span>;
+  }
+}</pre>
+          </div>
+
+          <div data-content="developer" class="tab-content hidden">
+            <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+              <div>
+                <h5 class="font-headline font-bold text-lg text-primary mb-1">DeveloperAgent.ts</h5>
+                <p class="text-xs text-on-surface-variant">Rejected · In Progress · Backlog 우선순위로 wake</p>
+              </div>
+              <a href="https://github.com/darkhtk/orchestration-general_01/blob/main/src/agents/developer.ts" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
+            </div>
+<pre class="code-block"><span class="kw">export class</span> DeveloperAgent <span class="kw">extends</span> AgentBase {
+  readonly role: AgentRole = <span class="str">'developer'</span>;
+  readonly wakeOn = [
+    <span class="str">'task:status-changed'</span>,
+    <span class="str">'task:approved'</span>,
+    <span class="str">'task:rejected'</span>,
+    <span class="str">'task:created'</span>,
+    <span class="str">'clock:tick'</span>,
+  ];
+
+  shouldWake(event: OrchestratorEvent, board: Board): <span class="kw">boolean</span> {
+    <span class="kw">if</span> (board.frozen) <span class="kw">return</span> <span class="kw">false</span>;
+
+    <span class="kw">const</span> hasRejected = board.rejected.length &gt; <span class="num">0</span>;
+    <span class="kw">const</span> hasInProgress = board.inProgress.some(
+      (t) =&gt; t.assignee === <span class="str">'developer'</span>
+    );
+    <span class="kw">const</span> hasBacklog = board.backlog.length &gt; <span class="num">0</span>;
+
+    <span class="com">// rejected → 무조건 wake (수정 우선)</span>
+    <span class="kw">if</span> (event.type === <span class="str">'task:rejected'</span>) <span class="kw">return</span> <span class="kw">true</span>;
+
+    <span class="com">// approved → 다음 픽업할 게 있으면 wake</span>
+    <span class="kw">if</span> (event.type === <span class="str">'task:approved'</span>) <span class="kw">return</span> hasBacklog;
+
+    <span class="kw">return</span> hasRejected || hasInProgress || hasBacklog;
+  }
+}</pre>
+          </div>
+
+          <div data-content="supervisor" class="tab-content hidden">
+            <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+              <div>
+                <h5 class="font-headline font-bold text-lg text-primary mb-1">SupervisorAgent.ts</h5>
+                <p class="text-xs text-on-surface-variant">5단계 audit cycle 자동 순환 — asset / code / performance / ux / error</p>
+              </div>
+              <a href="https://github.com/darkhtk/orchestration-general_01/blob/main/src/agents/supervisor.ts" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
+            </div>
+<pre class="code-block"><span class="kw">export class</span> SupervisorAgent <span class="kw">extends</span> AgentBase {
+  readonly role: AgentRole = <span class="str">'supervisor'</span>;
+  readonly wakeOn = [<span class="str">'task:done'</span>, <span class="str">'clock:tick'</span>, <span class="str">'agent:errored'</span>];
+
+  <span class="kw">private</span> auditCycleIndex = <span class="num">0</span>;
+  <span class="kw">private</span> readonly AUDIT_CYCLE = [
+    <span class="str">'asset_prep'</span>,
+    <span class="str">'code_audit'</span>,
+    <span class="str">'performance'</span>,
+    <span class="str">'ux_improvement'</span>,
+    <span class="str">'error_check'</span>,
+  ] <span class="kw">as const</span>;
+
+  <span class="kw">async</span> buildPrompt(event, board): <span class="kw">Promise</span>&lt;<span class="kw">string</span>&gt; {
+    <span class="kw">const</span> systemPrompt = <span class="kw">await</span> <span class="kw">this</span>.loadSystemPrompt();
+    <span class="kw">const</span> sections = [systemPrompt];
+
+    <span class="com">// 매 루프 다음 audit action으로 자동 순환</span>
+    <span class="kw">const</span> action = <span class="kw">this</span>.AUDIT_CYCLE[
+      <span class="kw">this</span>.auditCycleIndex % <span class="kw">this</span>.AUDIT_CYCLE.length
+    ];
+    <span class="kw">this</span>.auditCycleIndex++;
+
+    sections.push(<span class="str">`## Current Action: ${action}`</span>);
+    <span class="kw">switch</span> (action) {
+      <span class="kw">case</span> <span class="str">'asset_prep'</span>:
+        sections.push(<span class="str">'🎨 RESERVE 다음 5건 에셋 미리 생성'</span>);
+        <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="str">'code_audit'</span>:
+        sections.push(<span class="str">'주요 코드 파일 읽고 버그 직접 수정'</span>);
+        <span class="kw">break</span>;
+      <span class="com">// ... performance, ux, error</span>
+    }
+    <span class="kw">return</span> sections.join(<span class="str">'\n'</span>);
+  }
+}</pre>
+          </div>
+
+          <div data-content="client" class="tab-content hidden">
+            <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+              <div>
+                <h5 class="font-headline font-bold text-lg text-primary mb-1">ClientAgent.ts</h5>
+                <p class="text-xs text-on-surface-variant">In Review 태스크 → SPEC 기준 검증 → structured JSON output</p>
+              </div>
+              <a href="https://github.com/darkhtk/orchestration-general_01/blob/main/src/agents/client.ts" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
+            </div>
+<pre class="code-block"><span class="kw">export class</span> ClientAgent <span class="kw">extends</span> AgentBase {
+  readonly role: AgentRole = <span class="str">'client'</span>;
+  readonly wakeOn = [
+    <span class="str">'task:moved-to-review'</span>,
+    <span class="str">'task:created'</span>,
+    <span class="str">'clock:tick'</span>
+  ];
+
+  shouldWake(_event, board): <span class="kw">boolean</span> {
+    <span class="kw">if</span> (board.frozen) <span class="kw">return</span> <span class="kw">false</span>;
+    <span class="com">// verdict 없는 In Review 태스크가 있으면 wake</span>
+    <span class="kw">return</span> board.inReview.some((t) =&gt; !t.reviewVerdict);
+  }
+
+  <span class="kw">async</span> buildPrompt(_event, board): <span class="kw">Promise</span>&lt;<span class="kw">string</span>&gt; {
+    <span class="kw">const</span> systemPrompt = <span class="kw">await</span> <span class="kw">this</span>.loadSystemPrompt();
+    <span class="kw">const</span> sections = [systemPrompt];
+
+    <span class="kw">const</span> pending = board.inReview.find((t) =&gt; !t.reviewVerdict);
+    <span class="kw">if</span> (!pending) <span class="kw">return</span> sections.join(<span class="str">'\n'</span>);
+
+    sections.push(<span class="str">`## Review Task: ${pending.id} — ${pending.title}`</span>);
+    <span class="kw">if</span> (pending.specRef) {
+      sections.push(<span class="str">`Spec: orchestration/specs/${pending.specRef}.md`</span>);
+    }
+
+    sections.push(<span class="str">'1. Read the spec and the implementation code'</span>);
+    sections.push(<span class="str">'2. Perform all 4 verifications'</span>);
+    sections.push(<span class="str">'3. Write persona reviews for each persona'</span>);
+    sections.push(<span class="str">'4. Return structured JSON with verdict + markdown'</span>);
+
+    <span class="kw">return</span> sections.join(<span class="str">'\n'</span>);
+  }
+
+  <span class="com">// structured output schema (Zod)</span>
+  getOutputSchema(): <span class="kw">object</span> {
+    <span class="kw">return</span> CLIENT_OUTPUT_SCHEMA;
+  }
+}</pre>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-Reference -->
+  <section class="py-16 max-w-7xl mx-auto px-8">
+    <h3 class="font-headline text-2xl font-bold text-center mb-8">Other Case Studies</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a href="case-study-vr-robot.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 01</div>
+        <h4 class="text-2xl font-headline font-bold mb-3">VR 로봇 원격 조종 + 자체 IK 솔버</h4>
+        <p class="text-sm text-on-surface-variant mb-4">이 framework를 메타 베이스로 활용한 첫 산업 프로젝트 — 엑스포 시연 성공</p>
+        <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
+      </a>
+      <a href="case-study-dxcenter.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 02</div>
+        <h4 class="text-2xl font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
+        <p class="text-sm text-on-surface-variant mb-4">3 CLI 멀티 페르소나 운용으로 43개 C# 파일 단독 구현</p>
+        <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full bg-[#0c1324]">
+  <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto">
+    <div class="mb-8 md:mb-0">
+      <div class="font-headline font-bold text-primary text-xl mb-2">DAEKI HONG</div>
+      <div class="text-slate-500 font-body text-sm uppercase tracking-widest">© 2026 · INDUSTRIAL UNITY × AI AGENT</div>
+    </div>
+    <div class="flex gap-8">
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tab UI for prompts gallery
+  document.querySelectorAll('[data-tabs]').forEach(group => {
+    const buttons = group.querySelectorAll('.tab-btn');
+    const contents = group.querySelectorAll('.tab-content');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = btn.getAttribute('data-tab');
+        buttons.forEach(b => b.classList.toggle('tab-btn-active', b === btn));
+        contents.forEach(c => {
+          const matches = c.getAttribute('data-content') === target;
+          c.classList.toggle('hidden', !matches);
+        });
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
