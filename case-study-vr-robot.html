@@ -53,12 +53,12 @@
 
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-[#0c1324]/60 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,0,0,0.4)]">
-  <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+  <div class="flex justify-between items-center px-4 sm:px-6 md:px-8 py-4 max-w-7xl mx-auto">
     <a href="index.html" class="flex flex-col">
       <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
       <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY × AI AGENT</div>
     </a>
-    <div class="hidden md:flex items-center space-x-8 font-headline tracking-tight text-sm uppercase">
+    <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
       <a class="text-slate-400 hover:text-primary transition-colors" href="index.html">Home</a>
       <a class="text-primary border-b-2 border-primary pb-1" href="projects.html">Projects</a>
       <a class="text-slate-400 hover:text-primary transition-colors" href="about.html">About</a>
@@ -66,13 +66,60 @@
       <a class="text-slate-400 hover:text-primary transition-colors" href="cover-letter.html">Cover Letter</a>
       <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">Connect</a>
     </div>
+    <div class="md:hidden flex items-center gap-3">
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-2 rounded-md hover:scale-95 active:scale-90 transition-transform" aria-label="Connect">
+        <span class="material-symbols-outlined text-lg align-middle">mail</span>
+      </a>
+      <button id="mobile-menu-toggle"
+              class="p-2 text-on-surface hover:text-primary transition-colors"
+              aria-label="메뉴 열기"
+              aria-expanded="false"
+              aria-controls="mobile-menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
   </div>
 </nav>
+
+<!-- Mobile menu overlay -->
+<div id="mobile-menu"
+     class="fixed inset-0 z-[60] bg-[#0c1324]/95 backdrop-blur-2xl hidden flex-col md:hidden"
+     role="dialog"
+     aria-modal="true"
+     aria-label="메인 메뉴">
+  <div class="flex justify-between items-center px-4 sm:px-6 py-4">
+    <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
+    <button id="mobile-menu-close"
+            class="p-2 text-on-surface hover:text-primary transition-colors"
+            aria-label="메뉴 닫기">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+
+  <div class="flex-1 flex flex-col justify-center px-8 gap-6">
+    <a href="index.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">HOME</a>
+    <a href="projects.html" class="font-headline text-3xl font-bold text-primary border-l-4 border-primary pl-3">PROJECTS</a>
+    <a href="about.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">ABOUT</a>
+    <a href="resume.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">RESUME</a>
+    <a href="cover-letter.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">COVER LETTER</a>
+
+    <hr class="border-outline-variant my-4"/>
+
+    <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold w-fit">
+      <span class="material-symbols-outlined">mail</span> CONNECT
+    </a>
+
+    <div class="flex gap-6 mt-2 text-sm font-body uppercase tracking-widest text-slate-400">
+      <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="hover:text-primary">GitHub</a>
+      <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="hover:text-primary">LinkedIn</a>
+    </div>
+  </div>
+</div>
 
 <main class="pt-24">
 
   <!-- Hero Section -->
-  <section class="max-w-7xl mx-auto px-8 mb-24 lg:mb-32">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-24 lg:mb-32">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
       <div class="lg:col-span-8">
 
@@ -85,7 +132,7 @@
           </span>
         </div>
 
-        <h1 class="text-5xl lg:text-7xl font-headline font-bold text-on-surface tracking-tighter leading-none mb-8">
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-headline font-bold text-on-surface tracking-tighter leading-none mb-8">
           <span class="text-primary">VR 로봇</span><br/>원격 조종 시스템<br/><span class="text-3xl text-slate-400">+ 자체 IK 솔버</span>
         </h1>
 
@@ -149,7 +196,7 @@
 
   <!-- The Challenge & 4 Stat Tiles -->
   <section class="bg-surface-container-low py-24">
-    <div class="max-w-7xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
 
         <div>
@@ -189,7 +236,7 @@
   </section>
 
   <!-- Architecture Design (Bento Grid) -->
-  <section class="py-24 max-w-7xl mx-auto px-8">
+  <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-12 text-center">Architecture Design</h2>
 
     <!-- Pipeline Block -->
@@ -252,7 +299,7 @@
             </li>
           </ul>
         </div>
-        <div class="mt-6 grid grid-cols-3 gap-2">
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-2">
           <div class="px-2 py-1 bg-primary/10 rounded text-center font-label text-[10px] text-primary uppercase tracking-tighter">Limit-aware</div>
           <div class="px-2 py-1 bg-primary/10 rounded text-center font-label text-[10px] text-primary uppercase tracking-tighter">Deadband</div>
           <div class="px-2 py-1 bg-primary/10 rounded text-center font-label text-[10px] text-primary uppercase tracking-tighter">Drift Resync</div>
@@ -295,7 +342,7 @@
 
   <!-- AI Agent Workflow Section (Signature) -->
   <section class="bg-gradient-to-br from-primary-container/10 via-surface-container-low to-surface py-24">
-    <div class="max-w-7xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-7">
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary-fixed mb-6">AI Agent Workflow · 시그니처</h2>
@@ -336,7 +383,7 @@
   </section>
 
   <!-- Sub: 자체 IK 솔버 R&D -->
-  <section class="py-24 max-w-7xl mx-auto px-8">
+  <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <div class="flex items-center gap-4 mb-12">
       <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">Sub-Project · R&amp;D</span>
       <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary">자체 IK 솔버 — RoboDK 의존 없이 단독 구현</h2>
@@ -446,7 +493,7 @@
 
   <!-- Result · Impact -->
   <section class="bg-surface-container-low py-24">
-    <div class="max-w-7xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
         <div class="lg:col-span-5">
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">Project Impact</h2>
@@ -488,7 +535,7 @@
   </section>
 
   <!-- Cross-Reference -->
-  <section class="py-16 max-w-7xl mx-auto px-8">
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <h3 class="font-headline text-2xl font-bold text-center mb-8">Other Case Studies</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <a href="case-study-dxcenter.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
@@ -509,7 +556,7 @@
 
 <!-- Footer -->
 <footer class="w-full bg-[#0c1324]">
-  <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto">
+  <div class="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 md:px-8 py-12 max-w-7xl mx-auto">
     <div class="mb-8 md:mb-0">
       <div class="font-headline font-bold text-primary text-xl mb-2">DAEKI HONG</div>
       <div class="text-slate-500 font-body text-sm uppercase tracking-widest">© 2026 · INDUSTRIAL UNITY × AI AGENT</div>
@@ -521,6 +568,32 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function() {
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const close  = document.getElementById('mobile-menu-close');
+  const menu   = document.getElementById('mobile-menu');
+  if (!toggle || !menu) return;
+
+  function openMenu() {
+    menu.classList.remove('hidden');
+    menu.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    menu.classList.add('hidden');
+    menu.classList.remove('flex');
+    document.body.style.overflow = '';
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  toggle.addEventListener('click', openMenu);
+  if (close) close.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+  menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+})();
+</script>
 
 </body>
 </html>
