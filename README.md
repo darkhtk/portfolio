@@ -59,6 +59,7 @@
 - `case-study-vr-robot.html` — VR 로봇 원격 조종 + 자체 IK 솔버
 - `case-study-dxcenter.html` — DXCenter (LG에너지솔루션)
 - `case-study-orchestration-ts.html` — Multi-Agent Orchestration Framework (v1 → v2)
+- `case-study-genworld-ollama.html` — GenWorld · Local Ollama LLM 기반 NPC 인지 시스템 (R&D)
 - `about.html` — About + Tech Ecosystem
 - `resume.html` — Resume
 - `cover-letter.html` — Cover Letter
