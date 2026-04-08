@@ -98,7 +98,7 @@
 
   <!-- TopAppBar -->
   <header class="fixed top-0 right-0 left-0 lg:left-64 z-40 bg-[#0c1324]/60 backdrop-blur-xl">
-    <div class="flex justify-between items-center px-8 py-4 w-full">
+    <div class="flex justify-between items-center px-4 sm:px-6 md:px-8 py-4 w-full">
       <div class="flex flex-col">
         <h1 class="text-2xl font-headline font-bold tracking-tighter text-primary">RESUME</h1>
         <span class="font-label text-[10px] text-slate-500 tracking-[0.2em]">VERSION 2026.04 · LIVE</span>
@@ -109,28 +109,71 @@
           <a class="text-slate-400 hover:text-slate-200 transition-colors" href="projects.html">Projects</a>
           <a class="text-slate-400 hover:text-slate-200 transition-colors" href="about.html">About</a>
           <a class="text-primary border-b-2 border-primary pb-1" href="resume.html">Resume</a>
-      <a class="text-slate-400 hover:text-primary transition-colors" href="cover-letter.html">Cover Letter</a>
+          <a class="text-slate-400 hover:text-primary transition-colors" href="cover-letter.html">Cover Letter</a>
         </div>
-        <div class="flex gap-4">
-          <a href="https://github.com/darkhtk" class="p-2 text-slate-400 hover:text-primary hover:bg-surface-container-highest/50 rounded-md transition-all" target="_blank" rel="noopener noreferrer">
+        <div class="flex gap-3 items-center">
+          <a href="https://github.com/darkhtk" class="hidden sm:inline-block p-2 text-slate-400 hover:text-primary hover:bg-surface-container-highest/50 rounded-md transition-all" target="_blank" rel="noopener noreferrer">
             <span class="material-symbols-outlined">code</span>
           </a>
-          <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-4 py-2 font-headline font-bold rounded-md text-xs active:scale-95 transition-transform">
-            Contact
+          <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-3 sm:px-4 py-2 font-headline font-bold rounded-md text-xs active:scale-95 transition-transform">
+            <span class="hidden sm:inline">Contact</span>
+            <span class="sm:hidden material-symbols-outlined text-base align-middle">mail</span>
           </a>
+          <button id="mobile-menu-toggle"
+                  class="md:hidden p-2 text-on-surface hover:text-primary transition-colors"
+                  aria-label="메뉴 열기"
+                  aria-expanded="false"
+                  aria-controls="mobile-menu">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
         </div>
       </div>
     </div>
   </header>
 
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu"
+       class="fixed inset-0 z-[60] bg-[#0c1324]/95 backdrop-blur-2xl hidden flex-col md:hidden"
+       role="dialog"
+       aria-modal="true"
+       aria-label="메인 메뉴">
+    <div class="flex justify-between items-center px-4 sm:px-6 py-4">
+      <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
+      <button id="mobile-menu-close"
+              class="p-2 text-on-surface hover:text-primary transition-colors"
+              aria-label="메뉴 닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <div class="flex-1 flex flex-col justify-center px-8 gap-6">
+      <a href="index.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">HOME</a>
+      <a href="projects.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">PROJECTS</a>
+      <a href="about.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">ABOUT</a>
+      <a href="resume.html" class="font-headline text-3xl font-bold text-primary border-l-4 border-primary pl-3">RESUME</a>
+      <a href="cover-letter.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">COVER LETTER</a>
+
+      <hr class="border-outline-variant my-4"/>
+
+      <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold w-fit">
+        <span class="material-symbols-outlined">mail</span> CONNECT
+      </a>
+
+      <div class="flex gap-6 mt-2 text-sm font-body uppercase tracking-widest text-slate-400">
+        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="hover:text-primary">GitHub</a>
+        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="hover:text-primary">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
   <!-- Content Shell -->
-  <div class="pt-24 px-8 pb-12 max-w-7xl mx-auto">
+  <div class="pt-24 px-4 sm:px-6 md:px-8 pb-12 max-w-7xl mx-auto">
 
     <!-- Hero Section -->
     <section id="overview" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-24">
       <div class="lg:col-span-8">
         <span class="font-label text-xs text-primary font-bold tracking-[0.3em] uppercase mb-4 block">Industrial Unity Senior × AI Agent Engineer</span>
-        <h2 class="text-6xl md:text-8xl font-headline font-bold tracking-tighter text-on-surface leading-tight">
+        <h2 class="text-4xl sm:text-6xl md:text-8xl font-headline font-bold tracking-tighter text-on-surface leading-tight">
           홍 <span class="text-primary text-glow">대기</span>
         </h2>
         <div class="text-2xl font-headline text-slate-400 tracking-tight mt-2">Daeki Hong</div>
@@ -760,7 +803,7 @@
 
   <!-- Footer -->
   <footer class="w-full py-12 mt-20 bg-[#0c1324]">
-    <div class="flex flex-col md:flex-row justify-between items-center px-12 w-full">
+    <div class="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 w-full">
       <div class="font-label text-[10px] text-slate-600 uppercase tracking-widest mb-4 md:mb-0">
         © 2026 DAEKI HONG · INDUSTRIAL UNITY × AI AGENT
       </div>
@@ -778,6 +821,32 @@
 <a href="mailto:darkhtk@gmail.com" class="fixed bottom-8 right-8 lg:right-12 z-50 w-16 h-16 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-md shadow-[0px_24px_48px_rgba(0,0,0,0.4)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
   <span class="material-symbols-outlined text-2xl">send</span>
 </a>
+
+<script>
+(function() {
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const close  = document.getElementById('mobile-menu-close');
+  const menu   = document.getElementById('mobile-menu');
+  if (!toggle || !menu) return;
+
+  function openMenu() {
+    menu.classList.remove('hidden');
+    menu.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    menu.classList.add('hidden');
+    menu.classList.remove('flex');
+    document.body.style.overflow = '';
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  toggle.addEventListener('click', openMenu);
+  if (close) close.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+  menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+})();
+</script>
 
 </body>
 </html>
