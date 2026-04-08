@@ -275,6 +275,147 @@
     </div>
   </section>
 
+  <!-- § 3. NPC Cognitive Architecture -->
+  <section class="py-16 sm:py-20 md:py-32 bg-surface-container-low relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 3 · NPC Cognitive Architecture</div>
+      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl">NPCBrain — mood · relationship · memory · triggers</h2>
+
+      <p class="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-10 max-w-4xl">
+        Ollama 는 단순한 텍스트 생성기. <span class="text-on-surface">진짜 흥미로운 부분은 NPC 인지 상태를 어떻게 모델링하느냐</span>에 있습니다. 각 NPC 에 per-instance <code class="text-primary-fixed">NPCBrain</code> 을 부여하고, AIManager 가 게임 진행에 따라 brain 상태를 갱신·직렬화·복원합니다.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        <div class="space-y-5">
+          <div class="bg-surface-container-highest/40 p-5 rounded-lg">
+            <h3 class="font-headline text-base font-bold text-on-surface mb-2"><span class="text-primary">NPCBrain</span> 구조</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">id, name, personality, mood (Happy/Neutral/Angry/Scared), relationship (대상별 -100~+100), memory (최근 N개 대화), wantToTalk 플래그, 트리거 발동 이력.</p>
+          </div>
+          <div class="bg-surface-container-highest/40 p-5 rounded-lg">
+            <h3 class="font-headline text-base font-bold text-on-surface mb-2"><span class="text-primary">AIManager</span> 오케스트레이션</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">per-NPC brain 등록. 10초 주기로 NPC 1명씩 순환하여 mood 갱신 (관계도 임계값 기반). 플레이어 근처 + 친밀도 ≥ 5 시 wantToTalk 자동 트리거.</p>
+          </div>
+          <div class="bg-surface-container-highest/40 p-5 rounded-lg">
+            <h3 class="font-headline text-base font-bold text-on-surface mb-2">JSON 구조화 응답</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Ollama <code>format=json</code> + temperature 0.8 + top_p 0.9 + repeat_penalty 1.3 으로 자유도와 일관성 균형. 응답 schema: <code>{ dialogue, options[], action, relationshipChange, newMemory, offerQuest }</code>.</p>
+          </div>
+          <div class="bg-surface-container-highest/40 p-5 rounded-lg">
+            <h3 class="font-headline text-base font-bold text-on-surface mb-2">Save/Load 통합</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed"><code>SerializeAllBrains()</code> / <code>RestoreAllBrains()</code> 로 모든 NPC 인지 상태(관계도·memory·트리거 이력)를 SaveSystem 에 통합. 게임 재개 시 NPC 가 플레이어를 "기억"함.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-2">AIManager.cs · UpdateBehavior (요약)</div>
+          <div class="code-block"><span class="kw">public void</span> UpdateBehavior(<span class="kw">string</span> playerRegion,
+    <span class="kw">float</span> playerX, <span class="kw">float</span> playerY,
+    Dictionary&lt;<span class="kw">string</span>, Vector2&gt; npcPositions)
+{
+    <span class="com">// 10s cycle — rotate one NPC at a time</span>
+    <span class="kw">int</span> rel = brain.GetRelationship(<span class="str">"player"</span>);
+
+    <span class="kw">if</span> (rel &gt;= <span class="num">10</span>) brain.CurrentMood = Mood.Happy;
+    <span class="kw">else if</span> (rel &gt;= <span class="num">0</span>)  brain.CurrentMood = Mood.Neutral;
+    <span class="kw">else if</span> (rel &gt;= -<span class="num">10</span>) brain.CurrentMood = Mood.Angry;
+    <span class="kw">else</span>             brain.CurrentMood = Mood.Scared;
+
+    <span class="kw">bool</span> isNearPlayer = npcPositions != <span class="kw">null</span>
+        &amp;&amp; npcPositions.TryGetValue(npcId, <span class="kw">out var</span> pos)
+        &amp;&amp; Vector2.Distance(pos, <span class="kw">new</span> Vector2(playerX, playerY)) &lt; <span class="num">200f</span>;
+
+    <span class="kw">if</span> (isNearPlayer &amp;&amp; rel &gt;= <span class="num">5</span> &amp;&amp; !brain.WantToTalk)
+    {
+        brain.WantToTalk = <span class="kw">true</span>;
+        brain.TalkReason = <span class="str">"nearby_friend"</span>;
+    }
+}</div>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-highest/40 p-6 sm:p-8 rounded-xl">
+        <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-3">Player → NPC AI Flow</div>
+        <div class="code-block">Player approaches NPC
+       ↓
+GameManager.Update() ──→ AIManager.UpdateBehavior(npcPositions)
+                              ↓
+                       per-NPC NPCBrain
+                       (mood / relationship / memory)
+                              ↓
+       relationship &gt;= 5 &amp;&amp; nearby ──→ wantToTalk = true
+                              ↓
+Player initiates dialogue
+       ↓
+DialogueController.HandleDialogueResponse(playerInput)
+       ↓
+AIManager.GenerateDialogue(npcId, input, history, ...)
+       ↓
+       ┌──────── Ollama available? ────────┐
+       ↓                                    ↓
+   YES: PromptBuilder → OllamaClient    NO: BuildOfflineResponse
+       ↓                                    ↓
+   gemma3:4b inference (JSON)           Template by mood
+       ↓                                    ↓
+   parse DialogueResponse               same DialogueResponse
+       ↓                                    ↓
+   ApplyResponse(brain, response) ←───────┘
+   - update relationship
+   - add memory
+   - evaluate triggers
+       ↓
+DialogueUI shows text + option buttons</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 4. Phaser TS → Unity 2D Port + AI Augmentation -->
+  <section class="py-16 sm:py-20 md:py-32 bg-surface relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 4 · Port + AI Augmentation</div>
+      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl">Phaser 3 TS RPG → Unity 2D + Local LLM</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        <div>
+          <div class="font-label text-xs text-slate-500 uppercase tracking-widest mb-3">Original</div>
+          <div class="bg-surface-container-highest/40 p-6 rounded-xl">
+            <h3 class="font-headline text-lg font-bold text-on-surface mb-3">testgame2 (Phaser 3 + TypeScript)</h3>
+            <ul class="text-on-surface-variant text-sm space-y-2 leading-relaxed">
+              <li>• Top-down 판타지 RPG, 2D 픽셀 아트 (32×32 PPU)</li>
+              <li>• 전투 / 스킬 / 인벤토리 / 퀘스트 / 대화 / 저장 시스템</li>
+              <li>• Phaser Tilemap, Y축 ↓, 시간 단위 ms</li>
+              <li><span class="text-on-surface">NPC 대화는 정적 스크립트 기반</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="font-label text-xs text-slate-500 uppercase tracking-widest mb-3">Ported + Augmented</div>
+          <div class="bg-surface-container-highest/40 p-6 rounded-xl">
+            <h3 class="font-headline text-lg font-bold text-on-surface mb-3">GenWorld (Unity 6 + C#)</h3>
+            <ul class="text-on-surface-variant text-sm space-y-2 leading-relaxed">
+              <li>• Unity 6 LTS + URP, 같은 게임 루프 네이티브 재구현</li>
+              <li>• Tilemap 마이그레이션, Y축 ↑, 시간 단위 sec, Rigidbody2D 신 API</li>
+              <li>• <span class="text-primary-fixed">로컬 LLM NPC 대화 시스템 신규 도입</span> (원본에 없던 기능)</li>
+              <li>• 4 CLI 멀티 페르소나 orchestration 으로 개발</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-surface-container-highest/40 p-6 rounded-xl">
+          <span class="material-symbols-outlined text-primary text-3xl mb-3">swap_vert</span>
+          <h3 class="font-headline text-lg font-bold mb-2">포팅 챌린지</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">Y축 반전(Phaser Y↓ → Unity Y↑)과 시간 단위 변환(ms → seconds), Tilemap 자료구조 마이그레이션, Phaser Scene 라이프사이클을 Unity Scene + GameManager 로 재매핑.</p>
+        </div>
+        <div class="bg-surface-container-highest/40 p-6 rounded-xl">
+          <span class="material-symbols-outlined text-primary text-3xl mb-3">groups</span>
+          <h3 class="font-headline text-lg font-bold mb-2">4 CLI 멀티 페르소나</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">Director / Dev-Backend / Dev-Frontend / Asset+QA. 폴더 소유권 기반 충돌 방지. <span class="text-primary-fixed">DXCenter 에서 정형화한 멀티 페르소나 패턴을 산업 외 프로젝트로 확장한 사례</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTIONS GO HERE — added by subsequent tasks -->
 
 </main>
