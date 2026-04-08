@@ -88,8 +88,8 @@ After:   grid-cols-2 sm:grid-cols-3
 ```
 **Rationale**: 모바일에서 4칸은 칸당 80px 미만 → 숫자/라벨 깨짐. 2×2 배치가 안정.
 
-### Token 5. Flex Direction
-이미 모든 주요 flex 컨테이너가 `flex-col md:flex-row` / `grid-cols-1 lg:grid-cols-12` 패턴 사용 중. **신규 토큰 없음 — 검증 항목으로만 유지**.
+### Token 5. Flex Direction (검증 전용)
+이미 모든 주요 flex 컨테이너가 `flex-col md:flex-row` / `grid-cols-1 lg:grid-cols-12` 패턴 사용 중. **신규 변경 없음**. 작업 중 새 flex/grid 컨테이너를 추가할 경우에만 이 패턴을 따른다는 가이드라인으로 유지.
 
 ## 5. Mobile Navigation Component
 
@@ -106,9 +106,9 @@ After:   grid-cols-2 sm:grid-cols-3
       <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY × AI AGENT</div>
     </a>
 
-    <!-- Desktop links: md 이상 -->
+    <!-- Desktop links: md 이상. 현재 페이지 링크에는 active 클래스 적용 (아래 'Active 링크 표시' 절 참조) -->
     <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
-      <a class="[active 클래스 페이지마다 다름]" href="index.html">Home</a>
+      <a class="text-primary border-b-2 border-primary pb-1" href="index.html">Home</a>
       <a class="text-slate-400 hover:text-primary transition-colors" href="projects.html">Projects</a>
       <a class="text-slate-400 hover:text-primary transition-colors" href="about.html">About</a>
       <a class="text-slate-400 hover:text-primary transition-colors" href="resume.html">Resume</a>
