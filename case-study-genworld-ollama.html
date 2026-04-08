@@ -285,6 +285,17 @@
 }</div>
         </div>
       </div>
+
+      <!-- Dialogue UI screenshot — JSON schema → 실제 UI 매핑 -->
+      <div class="mt-10">
+        <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-3">JSON 응답 → 게임 UI 렌더링</div>
+        <div class="relative rounded-xl overflow-hidden shadow-2xl">
+          <img loading="lazy" src="assets/images/genworld-dialogue.png" alt="GenWorld 사냥꾼 NPC와의 다중 턴 대화 화면 — gemma3 가 생성한 dialogue 본문과 3개의 options 버튼이 게임 UI에 렌더링됨" class="w-full h-auto block"/>
+        </div>
+        <p class="text-on-surface-variant text-sm leading-relaxed mt-4 max-w-4xl">
+          gemma3 가 반환한 JSON 응답의 <code class="text-primary-fixed">dialogue</code> 필드는 NPC 말풍선 본문으로, <code class="text-primary-fixed">options[]</code> 배열은 플레이어 선택지 버튼으로 렌더링됩니다. 위 화면은 사냥꾼 NPC 와의 다중 턴 대화 — 매 턴마다 새로운 prompt 가 PromptBuilder 를 통해 조립되어 OllamaClient 에 전달되고, 응답이 DialogueController 를 거쳐 UI 에 표시됩니다.
+        </p>
+      </div>
     </div>
   </section>
 
