@@ -293,20 +293,33 @@ GenWorld + Ollama (R&D · Side Project) — 2026
 
 ### 9.3 case-study-orchestration-ts.html
 **두 곳 업데이트 필요**:
-1. 상단 meta-base intro (`<section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-12">` 안의 cross-ref 링크 목록 — line ~104-108)
-2. 하단 cross-reference 섹션
+1. 상단 meta-base intro 안의 단순 텍스트 링크 목록 (line ~155-156, `<a href="case-study-vr-robot.html" class="text-xs text-primary hover:underline ...">→ VR 로봇 케이스 보기</a>` 패턴) — GenWorld 링크 1줄 추가
+2. 하단 Cross-Reference 섹션 (line ~871, `<div class="grid grid-cols-1 md:grid-cols-2 gap-6">`) — GenWorld 카드 1개 추가
 
-### 9.4 Cross-ref 카드 형식 (참고 예시)
+**참고**: 본문 line 316/320 에는 "DXCenter / VR Robot 이 orchestration framework의 메타 베이스" 라는 내용 인용이 있는데, 이는 사실 관계 인용이므로 GenWorld는 추가하지 않는다 (orchestration framework가 GenWorld의 메타 베이스인 것은 사실이지만, 이 문장의 맥락은 "orchestration이 어떤 산업 프로젝트의 메타 베이스가 되었나"이므로 산업 외 프로젝트 GenWorld는 별개).
+
+### 9.4 Cross-ref 카드 형식 (실제 기존 패턴 그대로)
+
+기존 3개 case study가 모두 동일한 카드 패턴 사용 (확인됨: vr-robot line 541, dxcenter line 460, orchestration-ts line 875). GenWorld 추가 카드도 같은 패턴 사용:
 
 ```html
-<a href="case-study-genworld-ollama.html" class="block bg-surface-container-highest/40 p-6 rounded-xl hover:bg-surface-container-highest/70 transition-all">
-  <div class="font-label text-[10px] text-primary-fixed uppercase tracking-widest mb-2">R&D · Local LLM</div>
-  <h4 class="font-headline text-lg font-bold mb-2">GenWorld + Ollama</h4>
-  <p class="text-sm text-on-surface-variant">Phaser 3 TS RPG → Unity 2D 포팅 + 로컬 LLM 기반 NPC 인지 시스템.</p>
+<a href="case-study-genworld-ollama.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
+  <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 04 · R&D</div>
+  <h4 class="text-2xl font-headline font-bold mb-3">GenWorld + Ollama</h4>
+  <p class="text-sm text-on-surface-variant mb-4">Phaser 3 TS RPG → Unity 2D + 로컬 LLM 기반 NPC 인지 시스템</p>
+  <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
 </a>
 ```
 
-각 case study 의 기존 cross-ref 디자인에 맞춰 implementer가 미세 조정.
+### 9.5 Grid 레이아웃 결정
+
+기존 3개 case study의 cross-ref 컨테이너는 모두 `<div class="grid grid-cols-1 md:grid-cols-2 gap-6">` (2 카드). GenWorld 카드 추가로 3 카드가 되면:
+- **선택 1 (추천)**: `md:grid-cols-2 lg:grid-cols-3` 으로 변경 — 데스크톱에서 한 줄에 3 카드
+- **선택 2**: `md:grid-cols-2` 유지 — 3번째 카드가 2번째 줄로 줄바꿈
+
+implementer가 각 case study 의 시각 균형을 보고 결정. 기본 추천은 선택 1.
+
+상단 orchestration-ts intro 의 텍스트 링크 목록은 단순 inline 텍스트라 grid 변경 없음.
 
 ## 10. Rollout Plan
 
