@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
+<title>GenWorld + Ollama — Local LLM NPC Cognition · Case Study · 홍대기</title>
+<meta name="description" content="Phaser 3 TS RPG (testgame2)를 Unity 2D C#으로 포팅하면서 로컬 Ollama LLM(gemma3) 기반 NPC 인지·대화 시스템을 직접 설계·구현. 클라우드 API 의존 없이 오프라인 우선 + graceful fallback. 4 CLI 멀티 페르소나 orchestration."/>
+<meta property="og:title" content="GenWorld + Ollama · Local LLM NPC Cognition · Case Study"/>
+<meta property="og:description" content="Phaser 3 TS RPG → Unity 2D 포팅 + 로컬 LLM 기반 NPC 인지 시스템. R&D · 자사 기술 실증."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/case-study-genworld-ollama.html"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="GenWorld + Ollama · Case Study"/>
+<meta name="twitter:description" content="Local LLM NPC Cognition · R&D 자사 기술 실증."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "outline": "#8d90a2", "on-background": "#dce1fb", "primary-fixed-dim": "#b7c4ff",
+          "primary": "#b7c4ff", "tertiary": "#b7c8e1", "on-surface-variant": "#c3c5d9",
+          "primary-fixed": "#dde1ff", "on-primary": "#002682", "primary-container": "#0052ff",
+          "surface-variant": "#2e3447", "secondary-container": "#3f465c", "surface": "#0c1324",
+          "background": "#0c1324", "surface-container-highest": "#2e3447",
+          "surface-container-lowest": "#070d1f", "on-surface": "#dce1fb",
+          "surface-container": "#191f31", "secondary": "#bec6e0",
+          "outline-variant": "#434656", "surface-container-low": "#151b2d"
+        },
+        borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+        fontFamily: { headline: ["Space Grotesk"], body: ["Inter"], label: ["Manrope"] }
+      }
+    }
+  }
+</script>
+<style>
+  body { background-color: #0c1324; color: #dce1fb; font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .neural-bg { background-image: radial-gradient(circle at 2px 2px, #434656 1px, transparent 0); background-size: 40px 40px; opacity: 0.15; }
+  .text-glow { text-shadow: 0 0 32px rgba(183, 196, 255, 0.4); }
+  .code-block {
+    font-family: 'Consolas', 'D2Coding', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    background: #070d1f;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    white-space: pre;
+    color: #c3c5d9;
+  }
+  .code-block .kw { color: #b7c4ff; font-weight: 600; }
+  .code-block .str { color: #dde1ff; }
+  .code-block .com { color: #8d90a2; font-style: italic; }
+  .code-block .num { color: #b7c8e1; }
+  @media (max-width: 640px) {
+    .code-block { padding: 12px; font-size: 11px; line-height: 1.5; }
+  }
+</style>
+</head>
+<body class="bg-background text-on-background">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0c1324]/60 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,0,0,0.4)]">
+  <div class="flex justify-between items-center px-4 sm:px-6 md:px-8 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="flex flex-col">
+      <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
+      <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY × AI AGENT</div>
+    </a>
+    <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
+      <a class="text-slate-400 hover:text-primary transition-colors" href="index.html">Home</a>
+      <a class="text-primary border-b-2 border-primary pb-1" href="projects.html">Projects</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="about.html">About</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="resume.html">Resume</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="cover-letter.html">Cover Letter</a>
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">Connect</a>
+    </div>
+    <div class="md:hidden flex items-center gap-3">
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-2 rounded-md hover:scale-95 active:scale-90 transition-transform" aria-label="Connect">
+        <span class="material-symbols-outlined text-lg align-middle">mail</span>
+      </a>
+      <button id="mobile-menu-toggle"
+              class="p-2 text-on-surface hover:text-primary transition-colors"
+              aria-label="메뉴 열기"
+              aria-expanded="false"
+              aria-controls="mobile-menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div id="mobile-menu"
+     class="fixed inset-0 z-[60] bg-[#0c1324]/95 backdrop-blur-2xl hidden flex-col md:hidden"
+     role="dialog"
+     aria-modal="true"
+     aria-label="메인 메뉴">
+  <div class="flex justify-between items-center px-4 sm:px-6 py-4">
+    <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
+    <button id="mobile-menu-close"
+            class="p-2 text-on-surface hover:text-primary transition-colors"
+            aria-label="메뉴 닫기">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+
+  <div class="flex-1 flex flex-col justify-center px-8 gap-6">
+    <a href="index.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">HOME</a>
+    <a href="projects.html" class="font-headline text-3xl font-bold text-primary border-l-4 border-primary pl-3">PROJECTS</a>
+    <a href="about.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">ABOUT</a>
+    <a href="resume.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">RESUME</a>
+    <a href="cover-letter.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">COVER LETTER</a>
+
+    <hr class="border-outline-variant my-4"/>
+
+    <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold w-fit">
+      <span class="material-symbols-outlined">mail</span> CONNECT
+    </a>
+
+    <div class="flex gap-6 mt-2 text-sm font-body uppercase tracking-widest text-slate-400">
+      <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="hover:text-primary">GitHub</a>
+      <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="hover:text-primary">LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<main class="pt-24">
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-16 sm:mb-20 md:mb-32">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+      <div class="lg:col-span-8">
+
+        <div class="flex flex-wrap items-center gap-4 mb-6">
+          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">Case Study 04</span>
+          <span class="text-outline text-xs font-label uppercase tracking-widest">Local LLM · Game Runtime · R&amp;D</span>
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-primary-fixed/15 text-primary-fixed text-[10px] uppercase tracking-widest font-label">
+            <span class="material-symbols-outlined text-[10px]">science</span>
+            R&amp;D · Tech Validation
+          </span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-headline font-bold text-on-surface tracking-tighter leading-none mb-8">
+          <span class="text-primary">GenWorld</span><br/>+ Ollama<br/><span class="text-2xl sm:text-3xl text-slate-400">Local LLM NPC Cognition</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-on-surface-variant leading-relaxed mb-8 max-w-3xl">
+          Phaser 3 TypeScript RPG (<span class="text-on-surface">testgame2</span>)를 <span class="text-on-surface">Unity 2D C#</span>로 포팅하면서, 게임 런타임에 <span class="text-primary-fixed">로컬 Ollama LLM(gemma3)</span> 기반 <span class="text-on-surface">NPC 인지·대화 시스템</span>을 직접 설계·구현. 클라우드 API 의존 없이 <span class="text-primary-fixed">오프라인 우선 + graceful fallback</span> 구조로, 산업 환경의 보안·비용 제약에서도 동일 패턴 적용 가능함을 검증.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
+          <div>
+            <div class="font-headline text-xl sm:text-2xl font-bold text-primary">Local LLM</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Stack Core</div>
+          </div>
+          <div>
+            <div class="font-headline text-xl sm:text-2xl font-bold text-primary">gemma3 4B/12B</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Models</div>
+          </div>
+          <div>
+            <div class="font-headline text-xl sm:text-2xl font-bold text-primary">4 CLI</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Multi-Persona Dev</div>
+          </div>
+          <div>
+            <div class="font-headline text-xl sm:text-2xl font-bold text-primary">100%</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Offline Capable</div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="https://github.com/darkhtk/game-GenWorld" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-surface-container-low hover:bg-surface-container-highest rounded-md text-sm font-headline font-bold transition-all">
+            <span class="material-symbols-outlined text-base">hub</span>
+            GitHub Repository
+          </a>
+          <a href="projects.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-surface-container-low hover:bg-surface-container-highest rounded-md text-sm font-headline font-bold transition-all">
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+            All Projects
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTIONS GO HERE — added by subsequent tasks -->
+
+</main>
+
+<!-- Footer -->
+<footer class="w-full bg-[#0c1324]">
+  <div class="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 md:px-8 py-12 max-w-7xl mx-auto">
+    <div class="mb-8 md:mb-0">
+      <div class="font-headline font-bold text-primary text-xl mb-2">DAEKI HONG</div>
+      <div class="text-slate-500 font-body text-sm uppercase tracking-widest">© 2026 · INDUSTRIAL UNITY × AI AGENT</div>
+    </div>
+    <div class="flex gap-8">
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const close  = document.getElementById('mobile-menu-close');
+  const menu   = document.getElementById('mobile-menu');
+  if (!toggle || !menu) return;
+
+  function openMenu() {
+    menu.classList.remove('hidden');
+    menu.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    menu.classList.add('hidden');
+    menu.classList.remove('flex');
+    document.body.style.overflow = '';
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  toggle.addEventListener('click', openMenu);
+  if (close) close.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+  menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+})();
+</script>
+
+</body>
+</html>
