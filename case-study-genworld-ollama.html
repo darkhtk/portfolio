@@ -192,6 +192,89 @@
     </div>
   </section>
 
+  <!-- § 1. The Challenge -->
+  <section class="py-16 sm:py-20 md:py-32 bg-surface-container-low relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 1 · The Challenge</div>
+      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl">왜 로컬 LLM인가</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+        <div class="bg-surface-container-highest/40 p-6 sm:p-8 rounded-xl">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4">paid</span>
+          <h3 class="font-headline text-xl font-bold mb-3">비용</h3>
+          <p class="text-on-surface-variant leading-relaxed text-sm">인디 게임 NPC 대화에 클라우드 LLM API를 쓰면 플레이어 1인당 분당 API 비용이 발생. 동시 접속자 증가 시 수익 모델이 무너짐.</p>
+        </div>
+        <div class="bg-surface-container-highest/40 p-6 sm:p-8 rounded-xl">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4">lock</span>
+          <h3 class="font-headline text-xl font-bold mb-3">프라이버시</h3>
+          <p class="text-on-surface-variant leading-relaxed text-sm">게임 안 자유 대화가 외부 서버를 통과. 산업 환경에 같은 패턴을 적용한다면 보안 정책상 클라우드 우회 자체가 차단됨.</p>
+        </div>
+        <div class="bg-surface-container-highest/40 p-6 sm:p-8 rounded-xl">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4">cloud_off</span>
+          <h3 class="font-headline text-xl font-bold mb-3">오프라인 동작</h3>
+          <p class="text-on-surface-variant leading-relaxed text-sm">네트워크가 없어도 게임은 굴러야 함. 클라우드 의존은 곧 가용성 의존. 산업 현장에서도 동일 — 망 분리 환경에서 LLM 활용 가능한가.</p>
+        </div>
+      </div>
+
+      <p class="text-on-surface-variant text-base sm:text-lg leading-relaxed max-w-4xl">
+        Ollama 는 <span class="text-on-surface">gemma3:4b ~ 12b</span> 같은 소·중형 모델을 로컬에서 합리적인 응답 시간(<span class="text-primary-fixed">~3-5초</span>)으로 실행. HTTP API 인터페이스로 Unity에서 직접 호출 가능. 사용자 환경에 따라 모델 교체 가능. <span class="text-on-surface">'너'스탤지아 프로젝트의 클라우드 5종 API 통합</span> 다음 단계로, 같은 "AI를 제품 파이프라인에 통합" 패턴을 <span class="text-primary-fixed">온디바이스 로컬 LLM</span> 환경으로 확장한 R&amp;D 사례.
+      </p>
+    </div>
+  </section>
+
+  <!-- § 2. Local LLM Operation -->
+  <section class="py-16 sm:py-20 md:py-32 bg-surface relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 2 · Local LLM Operation</div>
+      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl">OllamaClient 운영 + Graceful Fallback</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-headline text-lg font-bold text-on-surface mb-2"><span class="text-primary">01</span> · HTTP 클라이언트</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed"><code class="text-primary-fixed">http://localhost:11434/api/generate</code> 엔드포인트로 fast(<code>gemma3:4b</code>) / large(<code>gemma3:12b</code>) 모델 호출. <code>UnityWebRequest</code> 기반 비동기.</p>
+          </div>
+          <div>
+            <h3 class="font-headline text-lg font-bold text-on-surface mb-2"><span class="text-primary">02</span> · 가용성 체크 + Warm-up</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">게임 시작 시 3초 가용성 체크 → 성공 시 fast 모델 warm-up 호출 (첫 응답 지연 제거). 실패 시 <code>AiEnabled = false</code> 분기로 오프라인 모드 진입.</p>
+          </div>
+          <div>
+            <h3 class="font-headline text-lg font-bold text-on-surface mb-2"><span class="text-primary">03</span> · 타임아웃 + 재시도</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">30초 <code>UnityWebRequest.timeout</code> + AIManager 단의 <code>CancellationTokenSource</code> 2회 재시도. 최악의 경우 60초 후 fallback 분기.</p>
+          </div>
+          <div>
+            <h3 class="font-headline text-lg font-bold text-on-surface mb-2"><span class="text-primary">04</span> · Graceful Fallback</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Ollama 미가동 시 <code>BuildOfflineResponse()</code> 가 NPC mood/relationship 기반 템플릿 응답 생성. 게임 진행 끊김 없음. <span class="text-primary-fixed">100% offline-capable</span>.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-2">OllamaClient.cs · GenerateDialogue</div>
+          <div class="code-block"><span class="kw">public async</span> Task&lt;<span class="kw">string</span>&gt; GenerateDialogue(<span class="kw">string</span> prompt,
+    CancellationToken cancellationToken = <span class="kw">default</span>)
+{
+    <span class="kw">var</span> payload = <span class="kw">new</span> OllamaRequest
+    {
+        model = _fastModel,
+        prompt = prompt,
+        stream = <span class="kw">false</span>,
+        format = <span class="str">"json"</span>,
+        options = <span class="kw">new</span> OllamaOptions
+        {
+            temperature = <span class="num">0.8f</span>,
+            top_p = <span class="num">0.9f</span>,
+            repeat_penalty = <span class="num">1.3f</span>
+        }
+    };
+    <span class="com">// UnityWebRequest POST + cancellationToken handling</span>
+    <span class="com">// ...</span>
+    <span class="kw">return</span> response?.response;
+}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTIONS GO HERE — added by subsequent tasks -->
 
 </main>
