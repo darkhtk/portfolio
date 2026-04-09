@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script type="text/javascript" nonce="925901f1ad204a35ba4bf307bcc" src="//local.adguard.org?ts=1775690179592&amp;type=content-script&amp;dmn=contribution.usercontent.google.com&amp;url=https%3A%2F%2Fcontribution.usercontent.google.com%2Fdownload%3Fc%3DCgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzkwNGM0ZWFjYTJmYjQwZWQ5MTU0MjBlZDg4YjA3M2ZiEgsSBxC0j8OomwEYAZIBJAoKcHJvamVjdF9pZBIWQhQxNzA5NzcwODE0Njc3NjY5MjczNg%26filename%3D%26opi%3D89354086&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-loc&amp;st-dnt"></script><script type="text/javascript" nonce="925901f1ad204a35ba4bf307bcc" src="//local.adguard.org?ts=1775690179592&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#abb3b7",
+                    "secondary-container": "#e1e2e8",
+                    "primary-fixed": "#d3e4ff",
+                    "on-secondary-fixed": "#3d3f44",
+                    "on-background": "#2b3437",
+                    "primary-container": "#d3e4ff",
+                    "surface-dim": "#d1dce0",
+                    "tertiary": "#5b5d78",
+                    "inverse-surface": "#0c0f10",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-dim": "#4f516c",
+                    "on-error-container": "#752121",
+                    "secondary-dim": "#515358",
+                    "background": "#f8f9fa",
+                    "surface-container": "#eaeff1",
+                    "inverse-on-surface": "#9b9d9e",
+                    "secondary-fixed": "#e1e2e8",
+                    "error-dim": "#4e0309",
+                    "surface-container-low": "#f1f4f6",
+                    "on-surface": "#2b3437",
+                    "surface-variant": "#dbe4e7",
+                    "on-primary-fixed": "#004075",
+                    "surface": "#f8f9fa",
+                    "error-container": "#fe8983",
+                    "on-secondary": "#f8f8ff",
+                    "on-tertiary-container": "#4c4e69",
+                    "on-tertiary-fixed-variant": "#555873",
+                    "on-primary-fixed-variant": "#135da0",
+                    "on-surface-variant": "#586064",
+                    "primary-dim": "#005495",
+                    "surface-tint": "#1960a3",
+                    "on-secondary-fixed-variant": "#595b61",
+                    "on-tertiary": "#fbf8ff",
+                    "secondary-fixed-dim": "#d3d4da",
+                    "surface-container-high": "#e3e9ec",
+                    "secondary": "#5d5f64",
+                    "primary": "#1960a3",
+                    "tertiary-fixed": "#dcddfe",
+                    "error": "#9f403d",
+                    "tertiary-container": "#dcddfe",
+                    "on-tertiary-fixed": "#393c55",
+                    "on-error": "#fff7f6",
+                    "on-secondary-container": "#4f5257",
+                    "tertiary-fixed-dim": "#cecfef",
+                    "inverse-primary": "#75aef7",
+                    "on-primary-container": "#005394",
+                    "outline": "#737c7f",
+                    "surface-container-highest": "#dbe4e7",
+                    "surface-bright": "#f8f9fa",
+                    "on-primary": "#f6f7ff",
+                    "primary-fixed-dim": "#bbd6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .newsreader { font-family: 'Newsreader', serif; }
+        .manrope { font-family: 'Manrope', sans-serif; }
+        /* Smooth backdrop blur for glassmorphism as per Design System */
+        .glass-nav {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        /* No-line sectioning logic */
+        section { position: relative; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_12px_32px_rgba(25,96,163,0.06)]">
+<div class="flex justify-between items-center px-8 md:px-16 py-6 max-w-[1440px] mx-auto w-full">
+<span class="text-2xl font-serif italic text-slate-900 dark:text-white newsreader">The Ledger</span>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-blue-700 dark:text-blue-400 font-medium border-b-2 border-blue-700 pb-1 newsreader tracking-tight" href="#">Projects</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors newsreader tracking-tight" href="#">Writing</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors newsreader tracking-tight" href="#">Philosophy</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors newsreader tracking-tight" href="#">Archive</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-label font-bold text-xs uppercase tracking-[0.05em] hover:opacity-90 transition-all">
+                Get in Touch
+            </button>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="px-8 md:px-16 max-w-[1440px] mx-auto mb-32">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-end">
+<div class="md:col-span-8">
+<span class="block font-label text-xs uppercase tracking-[0.1em] text-primary mb-6 font-bold">Principal Systems Architect</span>
+<h1 class="font-headline text-6xl md:text-8xl text-on-surface leading-[0.9] tracking-tighter mb-8 italic">
+                        Structuring the <br/>Future of <span class="text-primary-dim not-italic font-medium">Digital Intelligence.</span>
+</h1>
+<p class="font-body text-xl text-on-surface-variant max-w-xl leading-relaxed">
+                        An editorial approach to software design. I build high-trust interfaces and scalable AI workflows where technical precision meets human intuition.
+                    </p>
+</div>
+<div class="md:col-span-4 pb-4">
+<div class="aspect-[3/4] bg-surface-container-low rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 transition-all duration-700" data-alt="Minimalist abstract architectural detail with clean lines and soft shadows on white concrete surfaces in bright daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr2lxPjmB-OYo-PX_B3cx_ZqJsbeNMfKNSpbuw-VHNl1UZ-Ry_MY6eSaKSzZBKyU4OjY06pK3JXU6VIX9kIxEjLAWnK6apzLRQfJthjSUP6v2L16LGDR7AMt0j09zjVLvtaWsqdlAn6U13Jpm9WcQPHyrhjgbBnKLbAntjnzgNjHtOk2Y0oP6Gh92qlT7somcc21S26auwaphCyjstTKVa43xBcPsVK0UCwivuDaJfW58VsSZHYHOyazigpPQv978iskd1wdIn-Mv0"/>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Workflow Overview (The "No-Line" Rule: background shift) -->
+<section class="bg-surface-container-low py-32 px-8 md:px-16">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-baseline mb-20 gap-8">
+<h2 class="font-headline text-4xl md:text-5xl text-on-surface">The Intelligence Workflow</h2>
+<p class="font-body text-on-surface-variant max-w-md">Bridging the gap between raw LLM capabilities and production-grade user experiences through rigorous systems design.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col gap-6">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container-lowest rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="schema">schema</span>
+</div>
+<h3 class="font-headline text-2xl">Semantic Mapping</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">Translating complex business logic into high-dimensional vector spaces for precise retrieval and context management.</p>
+</div>
+<div class="flex flex-col gap-6">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container-lowest rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</div>
+<h3 class="font-headline text-2xl">Iterative Prompting</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">Developing deterministic prompt chains that ensure reliability across varying model versions and unexpected user inputs.</p>
+</div>
+<div class="flex flex-col gap-6">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container-lowest rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="rebase_edit">rebase_edit</span>
+</div>
+<h3 class="font-headline text-2xl">Code Synthesis</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">Automating the transition from natural language requirements to optimized, type-safe production code with human-in-the-loop validation.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Case Studies -->
+<section class="py-32 px-8 md:px-16 max-w-[1440px] mx-auto">
+<div class="mb-20">
+<span class="font-label text-xs uppercase tracking-[0.1em] text-on-surface-variant font-bold mb-4 block">Case Studies</span>
+<h2 class="font-headline text-5xl md:text-6xl text-on-surface">Selected Chronicles</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+<!-- Case Study 01 -->
+<div class="group cursor-pointer">
+<div class="aspect-video bg-surface-container-low rounded-xl overflow-hidden mb-8">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Digital blue data visualization glowing on a dark screen representing complex network connections and artificial intelligence nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApHeiAtaU-vR9njWYWcJVxioReBo0owLZI_njUftwPfZxYRR2CvviNMU24F969s6ugZQ_GMF60hmglLsDeVSzL7uM3RuyK00vljYgewh7kUabr8EsvXK93B_cmr_16kEq8GSFzvqF_EBjmwNv2N6mbKO3hSWZMacesDSgFUPGuuYd6AkweIZsqcPqynV5qrjOyYZXBm6PMkRardHB7P72iL85C7mCMWAg9ChTmKKLRPVAulyruoJEwcBpMeeVHeV8m_cXFwkCBGtyM"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-3xl mb-3">Project Aether: Semantic Search</h3>
+<p class="font-body text-on-surface-variant max-w-sm mb-6">Designing a multi-modal search engine for 10M+ legal documents using hybrid RAG architectures.</p>
+<div class="flex gap-3">
+<span class="px-3 py-1 bg-surface-container-high rounded text-[10px] font-bold uppercase tracking-wider text-on-surface-variant manrope">AI Systems</span>
+<span class="px-3 py-1 bg-surface-container-high rounded text-[10px] font-bold uppercase tracking-wider text-on-surface-variant manrope">2024</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform" data-icon="north_east">north_east</span>
+</div>
+</div>
+<!-- Case Study 02 -->
+<div class="group cursor-pointer mt-0 md:mt-24">
+<div class="aspect-video bg-surface-container-low rounded-xl overflow-hidden mb-8">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Macro photo of a high-tech computer chip with glowing circuits and elegant geometric patterns in cool blue tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4JQFqImnzXH_knhEX5klZ3zbDRpeOahZFXItMyAkmVvpQ1K-MS6Nq_LwFBbVuis_d4YvDPgVwXomOxXWxQysL0Zsv-M-SeExSZOXeV6BhaqRhujS-2PPs5vrloFjybPPSFDYJ-HQIgK5ZyMgQhiVjTfYuCN-eWcO8Tl6QcoBkKO4U1L__BHDCT0njtnAt2_yVZXSeqFfJKy-hmQGRjHUnZiLoZ16mZJxekVtQ8G31m63ln25Ykqjsn6iaaM9oJgnYcXpWlnirO4lp"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-3xl mb-3">The Synthesis Engine</h3>
+<p class="font-body text-on-surface-variant max-w-sm mb-6">A visual programming interface for non-technical users to build custom AI agents without writing code.</p>
+<div class="flex gap-3">
+<span class="px-3 py-1 bg-surface-container-high rounded text-[10px] font-bold uppercase tracking-wider text-on-surface-variant manrope">Product Design</span>
+<span class="px-3 py-1 bg-surface-container-high rounded text-[10px] font-bold uppercase tracking-wider text-on-surface-variant manrope">2023</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform" data-icon="north_east">north_east</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Foundation Projects (Refined Category Cards) -->
+<section class="bg-surface-container-low py-32 px-8 md:px-16">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+<div class="max-w-xl">
+<span class="font-label text-xs uppercase tracking-[0.1em] text-on-surface-variant font-bold mb-4 block">Archive</span>
+<h2 class="font-headline text-4xl text-on-surface">Foundation Projects</h2>
+</div>
+<a class="text-primary font-bold font-label text-xs uppercase tracking-widest border-b-2 border-primary-container hover:border-primary pb-1 transition-all" href="#">View All Entries</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Category: System Architecture -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 shadow-sm">
+<h3 class="font-label text-[10px] uppercase tracking-[0.2em] text-primary font-black mb-8 pb-4 border-b border-outline-variant/10">System Architecture</h3>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="font-headline text-lg text-on-surface">Vector Pipeline V2</h4>
+<span class="text-[10px] text-on-surface-variant font-bold whitespace-nowrap ml-4">2023 • Internal</span>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed">Automated ingestion system for high-dimensional embedding updates.</p>
+</div>
+<div>
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="font-headline text-lg text-on-surface">Latency Monitor</h4>
+<span class="text-[10px] text-on-surface-variant font-bold whitespace-nowrap ml-4">2023 • Open Source</span>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed">Real-time observability tool for distributed inference nodes.</p>
+</div>
+</div>
+</div>
+<!-- Category: Core Infrastructure -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 shadow-sm">
+<h3 class="font-label text-[10px] uppercase tracking-[0.2em] text-primary font-black mb-8 pb-4 border-b border-outline-variant/10">Core Infrastructure</h3>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="font-headline text-lg text-on-surface">Flux Ledger Core</h4>
+<span class="text-[10px] text-on-surface-variant font-bold whitespace-nowrap ml-4">2022 • Fintech</span>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed">Highly-available transaction engine for digital asset management.</p>
+</div>
+<div>
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="font-headline text-lg text-on-surface">Veritas DB</h4>
+<span class="text-[10px] text-on-surface-variant font-bold whitespace-nowrap ml-4">2022 • Research</span>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed">Immutable storage layer for large-scale fact-checking operations.</p>
+</div>
+</div>
+</div>
+<!-- Category: Design Systems -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 shadow-sm">
+<h3 class="font-label text-[10px] uppercase tracking-[0.2em] text-primary font-black mb-8 pb-4 border-b border-outline-variant/10">Design Systems</h3>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="font-headline text-lg text-on-surface">Neural Canvas</h4>
+<span class="text-[10px] text-on-surface-variant font-bold whitespace-nowrap ml-4">2022 • UI Kit</span>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed">A specialized design language for generative AI interfaces.</p>
+</div>
+<div>
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="font-headline text-lg text-on-surface">Prism Tokens</h4>
+<span class="text-[10px] text-on-surface-variant font-bold whitespace-nowrap ml-4">2021 • Framework</span>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed">Automated theme generation for multi-platform applications.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Working Style (Editorial Pull-Quote) -->
+<section class="py-40 px-8 md:px-16 max-w-[1440px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<div class="md:col-span-4">
+<h2 class="font-headline text-5xl italic leading-none mb-4">Philosophy</h2>
+<div class="w-16 h-1 bg-primary rounded-full"></div>
+</div>
+<div class="md:col-span-7 md:col-start-6">
+<blockquote class="pl-8 border-l-4 border-primary-fixed-dim">
+<p class="font-headline text-4xl md:text-5xl italic text-on-surface leading-tight mb-10">
+                            "The most sophisticated systems are those that hide their complexity behind a veil of calm authority. We aren't just coding tools; we are curating understanding."
+                        </p>
+<cite class="not-italic block">
+<span class="font-label text-xs font-bold uppercase tracking-widest text-primary block mb-1">Methodology</span>
+<span class="font-body text-on-surface-variant">Focus on long-term scalability and cognitive load reduction in AI interfaces.</span>
+</cite>
+</blockquote>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="px-8 md:px-16 max-w-[1440px] mx-auto mb-32">
+<div class="bg-primary px-12 py-24 md:p-32 rounded-xl text-center relative overflow-hidden group">
+<!-- Subtle Gradient Pattern -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary to-primary-dim opacity-50"></div>
+<div class="relative z-10">
+<h2 class="font-headline text-5xl md:text-7xl text-on-primary mb-8 tracking-tighter italic">Ready to curate <br/>the next frontier?</h2>
+<p class="font-body text-on-primary/80 text-xl max-w-xl mx-auto mb-12">I am currently accepting select advisory roles and high-impact design partnerships for late 2024.</p>
+<div class="flex flex-col md:flex-row gap-4 justify-center">
+<button class="bg-surface-container-lowest text-primary px-10 py-5 rounded-lg font-label font-bold text-sm uppercase tracking-widest hover:scale-[1.02] transition-all">
+                            Initiate Inquiry
+                        </button>
+<button class="border border-white/20 text-on-primary px-10 py-5 rounded-lg font-label font-bold text-sm uppercase tracking-widest hover:bg-white/10 transition-all">
+                            View Credentials
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-slate-50 dark:bg-slate-950 border-t border-slate-200/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 md:px-16 max-w-[1440px] mx-auto w-full gap-8">
+<div class="text-slate-500 dark:text-slate-400 font-sans manrope uppercase tracking-[0.05em] text-xs">
+                © 2024 The Curated Ledger. Built for the Digital Age.
+            </div>
+<div class="flex gap-10">
+<a class="text-slate-500 dark:text-slate-400 hover:underline decoration-2 underline-offset-4 font-sans manrope uppercase tracking-[0.05em] text-xs transition-opacity duration-300 hover:opacity-80" href="#">LinkedIn</a>
+<a class="text-slate-500 dark:text-slate-400 hover:underline decoration-2 underline-offset-4 font-sans manrope uppercase tracking-[0.05em] text-xs transition-opacity duration-300 hover:opacity-80" href="#">Twitter</a>
+<a class="text-slate-500 dark:text-slate-400 hover:underline decoration-2 underline-offset-4 font-sans manrope uppercase tracking-[0.05em] text-xs transition-opacity duration-300 hover:opacity-80" href="#">GitHub</a>
+<a class="text-slate-500 dark:text-slate-400 hover:underline decoration-2 underline-offset-4 font-sans manrope uppercase tracking-[0.05em] text-xs transition-opacity duration-300 hover:opacity-80" href="#">Email</a>
+</div>
+</div>
+</footer>
+</body></html>

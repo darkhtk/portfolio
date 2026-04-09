@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script type="text/javascript" nonce="925901f1ad204a35ba4bf307bcc" src="//local.adguard.org?ts=1775690179592&amp;type=content-script&amp;dmn=contribution.usercontent.google.com&amp;url=https%3A%2F%2Fcontribution.usercontent.google.com%2Fdownload%3Fc%3DCgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sX2JkNjAyYTJkMTk4NDRiMjlhZDUxZWM4NDY0YTE1NDgxEgsSBxC0j8OomwEYAZIBJAoKcHJvamVjdF9pZBIWQhQxNzA5NzcwODE0Njc3NjY5MjczNg%26filename%3D%26opi%3D89354086&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-loc&amp;st-dnt"></script><script type="text/javascript" nonce="925901f1ad204a35ba4bf307bcc" src="//local.adguard.org?ts=1775690179592&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#fff7f6",
+                    "on-surface-variant": "#586064",
+                    "secondary-container": "#f1f3f7",
+                    "secondary-dim": "#515358",
+                    "primary-fixed": "#d3e4ff",
+                    "on-primary-fixed-variant": "#135da0",
+                    "error": "#9f403d",
+                    "primary": "#1960a3",
+                    "primary-dim": "#005495",
+                    "surface-variant": "#e2e8f0",
+                    "outline": "#737c7f",
+                    "on-primary-container": "#005394",
+                    "surface-container-low": "#f8fafc",
+                    "tertiary-dim": "#4f516c",
+                    "inverse-primary": "#75aef7",
+                    "surface-container": "#f1f5f9",
+                    "inverse-on-surface": "#9b9d9e",
+                    "on-secondary-fixed": "#3d3f44",
+                    "surface": "#ffffff",
+                    "on-tertiary-container": "#4c4e69",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#752121",
+                    "on-background": "#1e293b",
+                    "tertiary-container": "#dcddfe",
+                    "on-tertiary-fixed": "#393c55",
+                    "tertiary-fixed": "#dcddfe",
+                    "inverse-surface": "#0c0f10",
+                    "error-dim": "#4e0309",
+                    "error-container": "#fe8983",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#dbe4e7",
+                    "on-secondary-container": "#4f5257",
+                    "on-primary-fixed": "#004075",
+                    "surface-container-high": "#eef2f6",
+                    "outline-variant": "#cbd5e1",
+                    "primary-fixed-dim": "#bbd6ff",
+                    "primary-container": "#eff6ff",
+                    "tertiary": "#5b5d78",
+                    "secondary": "#64748b",
+                    "on-tertiary-fixed-variant": "#555873",
+                    "surface-dim": "#f1f5f9",
+                    "on-surface": "#1e293b",
+                    "on-primary": "#ffffff",
+                    "background": "#ffffff",
+                    "surface-bright": "#ffffff",
+                    "on-secondary-fixed-variant": "#595b61",
+                    "tertiary-fixed-dim": "#cecfef",
+                    "on-tertiary": "#fbf8ff",
+                    "secondary-fixed-dim": "#d3d4da",
+                    "secondary-fixed": "#e1e2e8",
+                    "surface-tint": "#1960a3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "2px",
+                    "xl": "4px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        .kerning-tight { letter-spacing: -0.02em; }
+        .editorial-shadow { box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.03); }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-surface-variant/30 flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="menu">menu</span>
+<span class="font-headline italic font-medium text-primary text-2xl tracking-tighter">The Ledger</span>
+</div>
+<div class="flex items-center">
+<div class="w-9 h-9 rounded-full bg-surface-container overflow-hidden ring-1 ring-surface-variant">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-reu-Fyq14cCkb0lS7-vZuBEoLF1_ko_9dwJXlLDWHE03madRst-aDA9Q6cygg7euINrsT1bYWkvGfD90y40SKsBO0jDil_xciqBalx50DgSJU0ua2tSiHFaCVoPyN55A2TipAfC0dc8VsCUmHcnFF9VBDokFHp78Csx7hAuweBlqifuwfy5hdRP5tqF-zFVMos-ppixgidrCNV_4MquRM_6idlLz82218aPPZOzINvT5npLyPR-_qNUvvaCJfE2ZhsiNJu3J_iC6"/>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="px-6 pt-16 pb-12 flex flex-col gap-6 max-w-screen-md mx-auto">
+<div class="space-y-4">
+<span class="font-label text-[10px] tracking-[0.2em] uppercase font-bold text-primary">Volume 01 — Portfolio</span>
+<h1 class="font-headline text-5xl font-light text-on-surface tracking-tighter leading-[1.05]">Architecture of Intelligence</h1>
+<p class="font-body text-lg text-secondary leading-relaxed max-w-[90%] kerning-tight">
+                Systems designed for clarity, built for the future. An exploration of computational aesthetics and human-centric logic.
+            </p>
+</div>
+<div class="mt-8 aspect-[4/5] overflow-hidden bg-surface-container-low">
+<img alt="Abstract AI Architecture" class="w-full h-full object-cover opacity-95" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR7uYknyj-xZoR_UYsQ-6d0Ih5DEARE3qYdGRsXVRvxmVzm7Ln5170Q-rqQt-nFvAqUJX3MqF7J9uHe82W3u2htpGVyc6eNdVHBkIcyIkgi3KSFqmmjPmYkJeXcNG-kv6_Rx0lYnO7mYPVt6jaIYItZy0n4ptsdzu6mF24yAvU9-xnGQyo1MJBQIlltUr0G05FS5znrZzZSYdyVkWnG0wcQ552yM5PUkKZb6SFwGl09unsXf5xJi15wHui63mxUVFxA19J9sQ7XHsv"/>
+</div>
+</section>
+<!-- AI Workflow Overview -->
+<section class="bg-surface-container-low py-20 px-6">
+<div class="max-w-screen-md mx-auto flex flex-col gap-10">
+<div>
+<h2 class="font-headline text-3xl text-on-surface mb-2">Process</h2>
+<p class="font-label text-[10px] tracking-[0.15em] uppercase font-bold text-outline">The Methodology of the Ledger</p>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Workflow Card 1 -->
+<div class="p-8 bg-white border border-surface-variant/50 flex flex-col gap-5 editorial-shadow">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="hub">hub</span>
+<div class="space-y-2">
+<h3 class="font-headline text-xl font-medium kerning-tight">Semantic Mapping</h3>
+<p class="font-body text-[14px] text-secondary leading-relaxed">Defining the core ontologies and linguistic structures that govern complex data environments.</p>
+</div>
+</div>
+<!-- Workflow Card 2 -->
+<div class="p-8 bg-white border border-surface-variant/50 flex flex-col gap-5 editorial-shadow">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="terminal">terminal</span>
+<div class="space-y-2">
+<h3 class="font-headline text-xl font-medium kerning-tight">Iterative Prompting</h3>
+<p class="font-body text-[14px] text-secondary leading-relaxed">Refining machine intelligence through recursive feedback loops and precision engineering.</p>
+</div>
+</div>
+<!-- Workflow Card 3 -->
+<div class="p-8 bg-white border border-surface-variant/50 flex flex-col gap-5 editorial-shadow">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="auto_awesome_motion">auto_awesome_motion</span>
+<div class="space-y-2">
+<h3 class="font-headline text-xl font-medium kerning-tight">Structural Synthesis</h3>
+<p class="font-body text-[14px] text-secondary leading-relaxed">Translating raw intelligence into elegant, functional interfaces with editorial restraint.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Case Studies -->
+<section class="py-20 px-6 max-w-screen-md mx-auto flex flex-col gap-12">
+<h2 class="font-headline text-4xl text-on-surface kerning-tight">Selected Works</h2>
+<div class="flex flex-col gap-16">
+<!-- Case Study 1 -->
+<div class="group">
+<div class="aspect-[16/10] bg-surface-container-low mb-6 overflow-hidden">
+<img alt="Lumina Wealth" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2I79m41rNkGzb1H-tIkdxSZw70nY93LvVyjHFtuxj6lfmQfizYyalU6FUi-afNLujiKpnSREu0h214DL9Mc4AZCaNo7pxRyMLHAUnwpJUC7P4s4rOno4OxtF-76B9c0xgu-ylkOFDj9VtEEA82VQ7Iq6vepvQDekGwx4Nx3kp23ST-_e8ZIOCJDLhXgDdIUgGrXm98IIy7MJ3xqHdDqOdSGsy19cRouBchnlmw4kYARqwul_itQu5RzFNCkmQ5-GUJBu7WZCgFEVK"/>
+</div>
+<div class="space-y-3">
+<h3 class="font-headline text-2xl kerning-tight">Lumina Wealth Interface</h3>
+<div class="flex gap-2">
+<span class="font-label text-[10px] tracking-[0.1em] uppercase font-bold text-outline">Fintech / Product Design</span>
+</div>
+<a class="inline-flex items-center gap-2 font-label text-[11px] font-bold text-primary tracking-widest uppercase pt-2" href="#">
+                        View Project <span class="material-symbols-outlined text-[14px]" data-icon="arrow_outward">arrow_outward</span>
+</a>
+</div>
+</div>
+<!-- Case Study 2 -->
+<div class="group">
+<div class="aspect-[16/10] bg-surface-container-low mb-6 overflow-hidden">
+<img alt="The Paper Engine" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVxKN5b56P1s_7I_UW4PbpvTKVxTU0e-M83RZtHwphr-_wpX7ZEmCbF4BI1MM2Me4tlkayyyXwTxfNFt3TX7NY5Fu3eazgDF5E-z2KJbD1pgbX7-wB5X1ATyD7Z6Fwj84OwmZGbsKcweB0y5S2fyygrgMVD9ZU6GD_H4HYD1VNkc-UKNRygnnOsFdiFVsxgFu7Hl74rLysqmjzPy-j1AkY-bfa0rZWo1pYBjDg7C4POH-0e9k09WTTexpE1xHktl9hyvuHYACjpCD0"/>
+</div>
+<div class="space-y-3">
+<h3 class="font-headline text-2xl kerning-tight">The Paper Engine</h3>
+<div class="flex gap-2">
+<span class="font-label text-[10px] tracking-[0.1em] uppercase font-bold text-outline">Editorial / Identity</span>
+</div>
+<a class="inline-flex items-center gap-2 font-label text-[11px] font-bold text-primary tracking-widest uppercase pt-2" href="#">
+                        View Project <span class="material-symbols-outlined text-[14px]" data-icon="arrow_outward">arrow_outward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Foundation Projects -->
+<section class="bg-surface-container-high py-20 px-6">
+<div class="max-w-screen-md mx-auto">
+<h2 class="font-headline text-3xl mb-10 kerning-tight">Archive &amp; Foundations</h2>
+<div class="flex flex-col border-t border-outline-variant/30">
+<div class="flex justify-between py-6 border-b border-outline-variant/30 items-baseline">
+<span class="font-body font-medium text-on-surface">Vector Systems 2.0</span>
+<span class="font-label text-[10px] tracking-widest text-outline uppercase ml-4">OS Design</span>
+<span class="font-label text-[10px] text-right text-outline min-w-[32px] ml-4">2023</span>
+</div>
+<div class="flex justify-between py-6 border-b border-outline-variant/30 items-baseline">
+<span class="font-body font-medium text-on-surface">Aether Protocol</span>
+<span class="font-label text-[10px] tracking-widest text-outline uppercase ml-4">Crypto</span>
+<span class="font-label text-[10px] text-right text-outline min-w-[32px] ml-4">2022</span>
+</div>
+<div class="flex justify-between py-6 border-b border-outline-variant/30 items-baseline">
+<span class="font-body font-medium text-on-surface">Kinetic Typography</span>
+<span class="font-label text-[10px] tracking-widest text-outline uppercase ml-4">Motion</span>
+<span class="font-label text-[10px] text-right text-outline min-w-[32px] ml-4">2021</span>
+</div>
+<div class="flex justify-between py-6 border-b border-outline-variant/30 items-baseline">
+<span class="font-body font-medium text-on-surface">Monolith Mobile</span>
+<span class="font-label text-[10px] tracking-widest text-outline uppercase ml-4">Telecom</span>
+<span class="font-label text-[10px] text-right text-outline min-w-[32px] ml-4">2020</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Working Style -->
+<section class="py-24 px-6 max-w-screen-md mx-auto">
+<div class="flex flex-col gap-12">
+<div class="pl-6 border-l-[1px] border-primary">
+<blockquote class="font-headline text-2xl italic text-on-surface leading-snug kerning-tight">
+                    "I believe in systems that breathe. Complexity should be managed, never hidden, through intentional hierarchy and typographic authority."
+                </blockquote>
+</div>
+<div class="grid grid-cols-1 gap-10">
+<div class="space-y-3">
+<h4 class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Restrained Aesthetic</h4>
+<p class="font-body text-[14px] text-secondary leading-relaxed">A commitment to essentialism. Every pixel must serve the narrative.</p>
+</div>
+<div class="space-y-3">
+<h4 class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Technical Precision</h4>
+<p class="font-body text-[14px] text-secondary leading-relaxed">Bridging the gap between creative intuition and machine logic.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="px-6 pb-24 max-w-screen-md mx-auto">
+<div class="bg-primary p-12 text-white flex flex-col gap-10">
+<h2 class="font-headline text-4xl tracking-tighter leading-tight">Let's build the next ledger</h2>
+<div class="flex flex-col gap-3">
+<button class="w-full bg-white text-primary font-bold py-4 rounded-sm text-[11px] tracking-[0.15em] uppercase transition-all active:scale-[0.98]">
+                    Start a Conversation
+                </button>
+<button class="w-full border border-white/30 text-white font-bold py-4 rounded-sm text-[11px] tracking-[0.15em] uppercase hover:bg-white/10 transition-all active:scale-[0.98]">
+                    Download CV
+                </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-high py-16 px-6 pb-32">
+<div class="flex flex-col items-start gap-8 max-w-screen-md mx-auto">
+<div class="flex gap-8">
+<a class="font-label text-[10px] tracking-widest uppercase font-bold text-outline hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="font-label text-[10px] tracking-widest uppercase font-bold text-outline hover:text-primary transition-colors" href="#">ReadCV</a>
+<a class="font-label text-[10px] tracking-widest uppercase font-bold text-outline hover:text-primary transition-colors" href="#">Email</a>
+</div>
+<p class="font-label text-[9px] tracking-widest uppercase font-bold text-outline/60">
+            © 2024 The Curated Ledger. Built with restraint.
+        </p>
+</div>
+</footer>
+<!-- Mobile Nav Drawer -->
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white border border-surface-variant/40 shadow-xl shadow-black/5 rounded-full flex gap-10 px-10 py-4 items-center z-50">
+<span class="material-symbols-outlined text-primary" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="material-symbols-outlined text-outline" data-icon="menu_book">menu_book</span>
+<span class="material-symbols-outlined text-outline" data-icon="inventory_2">inventory_2</span>
+<span class="material-symbols-outlined text-outline" data-icon="mail">mail</span>
+</div>
+</body></html>

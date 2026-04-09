@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
 <title>GenWorld + Ollama — Local LLM NPC Cognition · Case Study · 홍대기</title>
-<meta name="description" content="Phaser 3 TS RPG (testgame2)를 Unity 2D C#으로 포팅하면서 로컬 Ollama LLM(gemma3) 기반 NPC 인지·대화 시스템을 직접 설계·구현. 클라우드 API 의존 없이 오프라인 우선 + graceful fallback. 4 CLI 멀티 페르소나 orchestration."/>
+<meta name="description" content="Phaser 3 TS RPG를 Unity 2D C#으로 포팅하면서 로컬 Ollama LLM 기반 NPC 인지·대화 시스템을 설계·구현한 R&D 사례. 오프라인 우선과 graceful fallback 구조를 검증했습니다."/>
 <meta property="og:title" content="GenWorld + Ollama · Local LLM NPC Cognition · Case Study"/>
 <meta property="og:description" content="Phaser 3 TS RPG → Unity 2D 포팅 + 로컬 LLM 기반 NPC 인지 시스템. R&D · 자사 기술 실증."/>
 <meta property="og:type" content="article"/>
@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="GenWorld + Ollama · Case Study"/>
 <meta name="twitter:description" content="Local LLM NPC Cognition · R&D 자사 기술 실증."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -37,15 +37,32 @@
           "outline-variant": "#434656", "surface-container-low": "#151b2d"
         },
         borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
-        fontFamily: { headline: ["Space Grotesk"], body: ["Inter"], label: ["Manrope"] }
+        fontFamily: { headline: ["Noto Sans KR"], body: ["Noto Sans KR"], label: ["Noto Sans KR"] }
       }
     }
   }
 </script>
 <style>
-  body { background-color: #0c1324; color: #dce1fb; font-family: 'Inter', sans-serif; }
+  body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
+  .font-headline { font-style: normal !important; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  .neural-bg { background-image: radial-gradient(circle at 2px 2px, #434656 1px, transparent 0); background-size: 40px 40px; opacity: 0.15; }
+  .bg-background, .bg-surface { background-color: #f8f9fa !important; }
+  .bg-surface-container, .bg-surface-container-low, .bg-surface-container-high, .bg-surface-container-highest { background-color: #ffffff !important; box-shadow: 0 16px 44px rgba(25, 96, 163, 0.06); }
+  .bg-surface-container-lowest { background-color: #eef2f6 !important; }
+  .text-primary, .text-primary-fixed, .text-primary-fixed-dim { color: #1960A3 !important; }
+  .bg-primary { background-color: #1960A3 !important; }
+  .bg-primary-container { background-color: #d3e4ff !important; }
+  .text-on-primary { color: #f6f7ff !important; }
+  .text-on-background, .text-on-surface { color: #162033 !important; }
+  .text-on-surface-variant, .text-secondary, .text-slate-400, .text-slate-500 { color: #51607a !important; }
+  .border-outline, .border-outline-variant { border-color: #d6dde8 !important; }
+  nav.fixed { background: rgba(255, 255, 255, 0.82) !important; box-shadow: 0 12px 32px rgba(25, 96, 163, 0.06) !important; }
+  #mobile-menu { background: rgba(248, 249, 250, 0.96) !important; }
+  footer { background: #eef2f6 !important; color: #44506a !important; }
+  footer .text-on-surface, footer .text-on-background, footer .text-on-surface-variant { color: #44506a !important; }
+  .from-primary { --tw-gradient-from: #1960A3 var(--tw-gradient-from-position) !important; --tw-gradient-to: rgb(25 96 163 / 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
+  .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
+  .neural-bg { background-image: radial-gradient(circle at 2px 2px, rgba(25, 96, 163, 0.12) 1px, transparent 0); background-size: 40px 40px; opacity: 0.45; }
   .text-glow { text-shadow: 0 0 32px rgba(183, 196, 255, 0.4); }
   .code-block {
     font-family: 'Consolas', 'D2Coding', monospace;
@@ -74,7 +91,7 @@
   <div class="flex justify-between items-center px-4 sm:px-6 md:px-8 py-4 max-w-7xl mx-auto">
     <a href="index.html" class="flex flex-col">
       <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
-      <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY × AI AGENT</div>
+      <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY REAL-TIME SYSTEMS</div>
     </a>
     <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
       <a class="text-slate-400 hover:text-primary transition-colors" href="index.html">Home</a>
@@ -146,16 +163,17 @@
           <span class="text-outline text-xs font-label uppercase tracking-widest">Local LLM · Game Runtime · R&amp;D</span>
           <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-primary-fixed/15 text-primary-fixed text-[10px] uppercase tracking-widest font-label">
             <span class="material-symbols-outlined text-[10px]">science</span>
-            R&amp;D · Tech Validation
+            R&amp;D
           </span>
         </div>
 
-        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-headline font-bold text-on-surface tracking-tighter leading-none mb-8">
-          <span class="text-primary">GenWorld</span><br/>+ Ollama<br/><span class="text-2xl sm:text-3xl text-slate-400">Local LLM NPC Cognition</span>
+        <h1 class="max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
+          <span class="block"><span class="text-primary">GenWorld</span> + Ollama</span>
+          <span class="mt-2 block text-lg sm:text-2xl text-slate-400">Local LLM NPC Cognition</span>
         </h1>
 
-        <p class="text-base sm:text-lg text-on-surface-variant leading-relaxed mb-8 max-w-3xl">
-          Phaser 3 TypeScript RPG (<span class="text-on-surface">testgame2</span>)를 <span class="text-on-surface">Unity 2D C#</span>로 포팅하면서, 게임 런타임에 <span class="text-primary-fixed">로컬 Ollama LLM(gemma3)</span> 기반 <span class="text-on-surface">NPC 인지·대화 시스템</span>을 직접 설계·구현. 클라우드 API 의존 없이 <span class="text-primary-fixed">오프라인 우선 + graceful fallback</span> 구조로, 산업 환경의 보안·비용 제약에서도 동일 패턴 적용 가능함을 검증.
+        <p class="text-base text-on-surface-variant leading-relaxed mb-8 max-w-3xl">
+          Phaser 3 TypeScript RPG(<span class="text-on-surface">testgame2</span>)를 <span class="text-on-surface">Unity 2D C#</span>로 포팅하면서, 게임 런타임에 <span class="text-primary-fixed">로컬 Ollama LLM(gemma3)</span> 기반 <span class="text-on-surface">NPC 인지·대화 시스템</span>을 설계·구현했습니다. 클라우드 API 의존 없이 <span class="text-primary-fixed">오프라인 우선 + graceful fallback</span> 구조를 검토한 사례입니다.
         </p>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
@@ -169,7 +187,7 @@
           </div>
           <div>
             <div class="font-headline text-xl sm:text-2xl font-bold text-primary">4 CLI</div>
-            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Multi-Persona Dev</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Role-Split Workflow</div>
           </div>
           <div>
             <div class="font-headline text-xl sm:text-2xl font-bold text-primary">100%</div>
@@ -209,7 +227,7 @@
   <section class="py-16 sm:py-20 md:py-32 bg-surface-container-low relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 1 · The Challenge</div>
-      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl">왜 로컬 LLM인가</h2>
+      <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">왜 로컬 LLM인가</h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
         <div class="bg-surface-container-highest/40 p-6 sm:p-8 rounded-xl">
@@ -229,8 +247,8 @@
         </div>
       </div>
 
-      <p class="text-on-surface-variant text-base sm:text-lg leading-relaxed max-w-4xl">
-        Ollama 는 <span class="text-on-surface">gemma3:4b ~ 12b</span> 같은 소·중형 모델을 로컬에서 합리적인 응답 시간(<span class="text-primary-fixed">~3-5초</span>)으로 실행. HTTP API 인터페이스로 Unity에서 직접 호출 가능. 사용자 환경에 따라 모델 교체 가능. <span class="text-on-surface">'너'스탤지아 프로젝트의 클라우드 5종 API 통합</span> 다음 단계로, 같은 "AI를 제품 파이프라인에 통합" 패턴을 <span class="text-primary-fixed">온디바이스 로컬 LLM</span> 환경으로 확장한 R&amp;D 사례.
+      <p class="text-on-surface-variant text-base leading-relaxed max-w-4xl">
+        Ollama 는 <span class="text-on-surface">gemma3:4b ~ 12b</span> 같은 소·중형 모델을 로컬에서 약 <span class="text-primary-fixed">3-5초</span> 수준 응답 시간으로 실행할 수 있었고, HTTP API 인터페이스로 Unity에서 직접 호출했습니다. 이 프로젝트는 이전 클라우드 기반 흐름을 <span class="text-primary-fixed">로컬 LLM</span> 환경으로 옮겨 본 사례입니다.
       </p>
     </div>
   </section>
@@ -239,7 +257,7 @@
   <section class="py-16 sm:py-20 md:py-32 bg-surface relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 2 · Local LLM Operation</div>
-      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl">OllamaClient 운영 + Graceful Fallback</h2>
+      <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">OllamaClient 운영 + Graceful Fallback</h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         <div class="space-y-6">
@@ -303,9 +321,9 @@
   <section class="py-16 sm:py-20 md:py-32 bg-surface-container-low relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 3 · NPC Cognitive Architecture</div>
-      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl">NPCBrain — mood · relationship · memory · triggers</h2>
+      <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">NPCBrain — mood · relationship · memory · triggers</h2>
 
-      <p class="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-10 max-w-4xl">
+      <p class="text-on-surface-variant text-base leading-relaxed mb-10 max-w-4xl">
         Ollama 는 단순한 텍스트 생성기. <span class="text-on-surface">진짜 흥미로운 부분은 NPC 인지 상태를 어떻게 모델링하느냐</span>에 있습니다. 각 NPC 에 per-instance <code class="text-primary-fixed">NPCBrain</code> 을 부여하고, AIManager 가 게임 진행에 따라 brain 상태를 갱신·직렬화·복원합니다.
       </p>
 
@@ -395,7 +413,7 @@ DialogueUI shows text + option buttons</div>
   <section class="py-16 sm:py-20 md:py-32 bg-surface relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 4 · Port + AI Augmentation</div>
-      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl">Phaser 3 TS RPG → Unity 2D + Local LLM</h2>
+      <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">Phaser 3 TS RPG → Unity 2D + Local LLM</h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         <div>
@@ -419,7 +437,7 @@ DialogueUI shows text + option buttons</div>
               <li>• Unity 6 LTS + URP, 같은 게임 루프 네이티브 재구현</li>
               <li>• Tilemap 마이그레이션, Y축 ↑, 시간 단위 sec, Rigidbody2D 신 API</li>
               <li>• <span class="text-primary-fixed">로컬 LLM NPC 대화 시스템 신규 도입</span> (원본에 없던 기능)</li>
-              <li>• 4 CLI 멀티 페르소나 orchestration 으로 개발</li>
+          <li>• 4 CLI 역할 분리형 협업 구조로 개발</li>
             </ul>
           </div>
         </div>
@@ -433,8 +451,8 @@ DialogueUI shows text + option buttons</div>
         </div>
         <div class="bg-surface-container-highest/40 p-6 rounded-xl">
           <span class="material-symbols-outlined text-primary text-3xl mb-3">groups</span>
-          <h3 class="font-headline text-lg font-bold mb-2">4 CLI 멀티 페르소나</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed">Director / Dev-Backend / Dev-Frontend / Asset+QA. 폴더 소유권 기반 충돌 방지. <span class="text-primary-fixed">DXCenter 에서 정형화한 멀티 페르소나 패턴을 산업 외 프로젝트로 확장한 사례</span>.</p>
+          <h3 class="font-headline text-lg font-bold mb-2">4 CLI 역할 분리형 협업</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">Director / Dev-Backend / Dev-Frontend / Asset+QA. 폴더 소유권 기반 충돌 방지. DXCenter에서 정리한 협업 방식을 다른 도메인에 적용해 본 사례입니다.</p>
         </div>
       </div>
     </div>
@@ -444,7 +462,7 @@ DialogueUI shows text + option buttons</div>
   <section class="py-16 sm:py-20 md:py-32 bg-surface-container-low relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 5 · Result &amp; Verification</div>
-      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl">동작 검증 + 안정성 개선 진행 중</h2>
+      <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">동작 검증 + 안정성 개선 진행 중</h2>
 
       <!-- Screenshot — NPC dialogue UI with Mood/Relationship indicator -->
       <div class="relative rounded-xl overflow-hidden shadow-2xl mb-10">
@@ -486,8 +504,8 @@ DialogueUI shows text + option buttons</div>
         </div>
       </div>
 
-      <p class="text-on-surface-variant text-base sm:text-lg leading-relaxed max-w-4xl">
-        이 case study 는 산업 환경 외에서도 동일한 시니어 레벨 AI Agent 활용 패턴이 작동함을 보여주는 R&amp;D 사례입니다. 게임이라는 도메인을 통해 검증된 <span class="text-on-surface">로컬 LLM 운영 + 인지 아키텍처 + AI 증설 포팅</span> 패턴은 산업 트레이닝 시뮬레이터, 고객 세션 대화, 설비 매뉴얼 상호작용 등 산업 응용으로 확장 가능합니다.
+      <p class="text-on-surface-variant text-base leading-relaxed max-w-4xl">
+        이 case study는 산업 환경 밖에서도 같은 협업 패턴과 로컬 LLM 운영 방식이 적용 가능한지 확인해 본 R&amp;D 사례입니다. 여기서 다룬 <span class="text-on-surface">로컬 LLM 운영, 인지 구조, 포팅 방식</span>은 다른 실시간 인터랙션 프로젝트에도 참고할 수 있습니다.
       </p>
     </div>
   </section>
@@ -496,25 +514,25 @@ DialogueUI shows text + option buttons</div>
   <section class="py-16 sm:py-20 md:py-32 bg-surface relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 6 · Related Case Studies</div>
-      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-10 max-w-3xl">Other Case Studies</h2>
+      <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-10 max-w-3xl">Other Case Studies</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <a href="case-study-vr-robot.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
           <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 01</div>
           <h4 class="text-2xl font-headline font-bold mb-3">VR 로봇 원격 조종 + 자체 IK 솔버</h4>
-          <p class="text-sm text-on-surface-variant mb-4">Quest 3로 산업용 로봇 실시간 조종 — 엑스포 시연 성공</p>
+          <p class="text-sm text-on-surface-variant mb-4">Quest 3 기반 산업용 로봇 원격 조종 사례</p>
           <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
         </a>
         <a href="case-study-dxcenter.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
           <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 02</div>
           <h4 class="text-2xl font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
-          <p class="text-sm text-on-surface-variant mb-4">3 CLI 멀티 페르소나로 43개 C# 파일 단독 구현</p>
+          <p class="text-sm text-on-surface-variant mb-4">AI 협업을 적용해 정리한 디지털트윈 에디터 사례</p>
           <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
         </a>
-        <a href="case-study-orchestration-ts.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Open Source · Self-Built</div>
+      <a href="case-study-orchestration-ts.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Open Source · Workflow Framework</div>
           <h4 class="text-2xl font-headline font-bold mb-3">Multi-Agent Orchestration Framework</h4>
-          <p class="text-sm text-on-surface-variant mb-4">멀티 페르소나 방법론을 framework로 추출. 산업 프로젝트의 메타 베이스</p>
+          <p class="text-sm text-on-surface-variant mb-4">협업 방식을 재사용 가능한 형태로 정리한 도구</p>
           <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
         </a>
       </div>
@@ -525,8 +543,8 @@ DialogueUI shows text + option buttons</div>
   <section class="py-16 sm:py-20 md:py-24 bg-surface-container-low relative">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center">
       <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-6">전체 코드는 GitHub 에서 확인하세요</h2>
-      <p class="text-on-surface-variant text-base sm:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
-        OllamaClient · AIManager · NPCBrain · PromptBuilder · DialogueController 까지 전체 구현 + 4 CLI 멀티 페르소나 orchestration 보드.
+      <p class="text-on-surface-variant text-base leading-relaxed mb-8 max-w-2xl mx-auto">
+        OllamaClient · AIManager · NPCBrain · PromptBuilder · DialogueController 구현과 4 CLI 역할 분리형 협업 보드.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="https://github.com/darkhtk/game-GenWorld" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-md font-headline font-bold hover:scale-95 active:scale-90 transition-transform">
@@ -548,7 +566,7 @@ DialogueUI shows text + option buttons</div>
   <div class="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 md:px-8 py-12 max-w-7xl mx-auto">
     <div class="mb-8 md:mb-0">
       <div class="font-headline font-bold text-primary text-xl mb-2">DAEKI HONG</div>
-      <div class="text-slate-500 font-body text-sm uppercase tracking-widest">© 2026 · INDUSTRIAL UNITY × AI AGENT</div>
+  <div class="text-slate-500 font-body text-sm uppercase tracking-widest">© 2026 · INDUSTRIAL UNITY REAL-TIME SYSTEMS</div>
     </div>
     <div class="flex gap-8">
       <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
