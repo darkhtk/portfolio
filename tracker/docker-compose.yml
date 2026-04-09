@@ -1,0 +1,23 @@
+services:
+  portfolio-tracker:
+    build:
+      context: .
+    container_name: portfolio-tracker
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      DATA_DIR: /app/data
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+      TRACKER_BASE_URL: ${TRACKER_BASE_URL}
+      DASHBOARD_USER: ${DASHBOARD_USER}
+      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD}
+      TRUST_PROXY: "true"
+      HTTP_PORT: "3080"
+      HTTPS_PORT: "3443"
+      ENABLE_HTTP: "true"
+      SSL_KEY_PATH: /certs/privkey.pem
+      SSL_CERT_PATH: /certs/fullchain.pem
+    volumes:
+      - ./data:/app/data
+      - /usr/syno/etc/certificate/system/default/RSA-privkey.pem:/certs/privkey.pem:ro
+      - /usr/syno/etc/certificate/system/default/RSA-fullchain.pem:/certs/fullchain.pem:ro
