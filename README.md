@@ -1,57 +1,49 @@
-# Hong Daeki Portfolio
-
-Static portfolio site for industrial Unity real-time systems, XR, BIM, editor tooling, automation, robotics integration, and AI collaboration case studies.
+# 홍대기 Portfolio
 
 - Live: [https://darkhtk.github.io/portfolio/](https://darkhtk.github.io/portfolio/)
-- Repo: [https://github.com/darkhtk/portfolio](https://github.com/darkhtk/portfolio)
-- Deploy: push `main` to trigger GitHub Pages
 
-## Repository Layout
+## 구조와 도구로 협업 비용을 줄이는 개발자
 
-Keep only deployable site files in the repository root. Local-only service code and working materials now live in a sibling folder: `C:\sourcetree\portfolio-internal\portfolio`.
+같은 목표를 보더라도 역할마다 기준과 언어가 다르다. 개발만 빠르게 끝나는 구조보다, 기획·제작·검수·운영이 같은 기준으로 이어지는 구조를 만드는 쪽에 더 무게를 두고 일해 왔다. 그래서 화면을 만드는 데서 멈추지 않고, 실제로 여러 사람이 반복해서 쓰고 검증할 수 있는 흐름까지 함께 설계한다.
 
-- `index.html`, `projects.html`, `about.html`, `resume.html`, `cover-letter.html`
-  - Main pages
-- `case-study-*.html`
-  - Case study detail pages
-- `assets/`
-  - Images, favicons, shared scripts
-- `AGENTS.md`
-  - Repo working context
-- `C:\sourcetree\portfolio-internal\portfolio\tracker`
-  - NAS-hosted visitor tracker and dashboard source
-- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\site`
-  - Portfolio rewrite, architecture, and category planning docs
-- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers`
-  - Spec and plan documents
-- `C:\sourcetree\portfolio-internal\portfolio\workspace\layout`
-  - Layout references and mockups
-- `C:\sourcetree\portfolio-internal\portfolio\CLAUDE.md`
-  - Extended collaboration context backup
+## 도구로 협업 비용을 줄이다
 
-## Pages
+LG에너지솔루션 DXCenter에서는 콘텐츠 제작과 검수 흐름을 Unity Editor 도구로 정리했다. 비개발자도 직접 다룰 수 있는 구조를 만들기 위해 EditorWindow, 상태 관리, Undo, 실행 모드 분리 같은 기준을 함께 설계했다. 목표는 기능 추가 자체보다, 수정과 검수가 같은 도구 안에서 자연스럽게 이어지게 하는 것이었다.
 
-- `index.html`: Home
-- `projects.html`: Featured projects and foundation work
-- `about.html`: Working style and problem-solving approach
-- `resume.html`: Career flow
-- `cover-letter.html`: Cover letter
-- `case-study-vr-robot.html`: VR robot teleoperation
-- `case-study-dxcenter.html`: DXCenter editor tooling
-- `case-study-neostalgia.html`: Neostalgia
-- `case-study-orchestration-ts.html`: Orchestration framework
-- `case-study-genworld-ollama.html`: GenWorld + Ollama R&D
+VR 로봇 원격 조종 프로젝트와 DXCenter, 너스탤지아 같은 작업에서는 AI를 결과물 과시가 아니라 속도와 반복 작업 절감을 위한 도구로 사용했다. 필요한 구간을 정하고, 검증 기준을 유지하고, 프로젝트가 끝난 뒤에도 다시 쓸 수 있는 방식으로 정리하는 쪽에 더 집중했다.
 
-## Tracker
+## 대규모 데이터 처리와 성능 설계
 
-See [tracker README](/C:/sourcetree/portfolio-internal/portfolio/tracker/README.md).
+WatchBIM에서는 대용량 BIM 데이터를 Unity에서 다룰 수 있도록 로딩, 메시 생성, 단면 처리, 분석 도구까지 함께 다뤘다. 데이터가 크고 무거운 상황에서도 실제 업무 흐름 안에서 사용할 수 있도록 Job System 기반 처리, LOD 생성, 단면 시각화 같은 구조를 설계했다.
 
-- Dashboard: `https://semirain.synology.me:3443/dashboard`
-- Captures: public IP, visitor id, page path, referrer, user agent
-- Enrichment: reverse DNS, ASN/ISP, country, city
+중요했던 것은 단순히 “큰 데이터를 띄운다”가 아니라, 분석과 검토가 가능한 속도와 형태로 유지하는 일이었다. 그래서 성능 최적화는 별도 단계가 아니라, 처음부터 데이터 구조와 도구 구조 안에 같이 들어가야 한다고 보고 작업했다.
 
-## Notes
+## AI를 적용하는 세 가지 방식
 
-- No build system. Static HTML + Tailwind CDN only.
-- Root paths stay GitHub Pages friendly.
-- Local-only docs, layout references, and tracker source live under `C:\sourcetree\portfolio-internal\portfolio`.
+### 제품 파이프라인 적용
+
+너스탤지아에서는 음성 입력, 텍스트 처리, 이미지 생성, 3D 에셋 생성, 저장과 대시보드까지 이어지는 흐름 안에 AI를 넣었다. 중요한 것은 AI를 많이 붙였다는 사실보다, 실제 체험 가능한 제품 흐름 안에서 제어 가능한 구조로 연결했다는 점이었다.
+
+### 개발 과정 보조
+
+VR 로봇 원격 조종, IK 솔버 구현, DXCenter 에디터 툴링 같은 작업에서는 AI를 구현 속도를 높이는 보조 도구로 사용했다. 다만 구조 설계, 검증 기준, 실제 시스템 통제는 사람이 잡아야 한다는 원칙은 유지했다.
+
+### 운영 방식 추출
+
+최근에는 프로젝트마다 반복되던 협업 방식을 코드와 규칙으로 정리하는 쪽까지 확장하고 있다. Orchestration framework는 AI를 잘 쓴다는 인상을 위한 도구가 아니라, 역할 분리, 리뷰, 검증, 작업 흐름을 다시 사용할 수 있는 형태로 정리한 운영 구조에 가깝다.
+
+## 공학적 사고를 즐기는 개발자
+
+실시간 입력, 물리, 로봇 제어, 데이터 시각화처럼 제약이 많은 문제를 다루는 일을 오래 해 왔다. 그래서 새로운 기능을 붙이는 것보다, 어떤 구조가 실제 환경에서 버티는지 판단하고 구현하는 쪽에 강점이 있다.
+
+Unity를 오래 사용했지만, 관심은 엔진 자체보다 그 위에서 어떤 문제를 해결하느냐에 더 가깝다. XR, 시뮬레이션, BIM, 에디터 툴링, 자동화, 로봇 연동, AI 협업 모두 같은 흐름 위에 있다.
+
+## 마무리
+
+내가 계속 해 온 일은 복잡한 작업을 더 적은 마찰로 굴러가게 만드는 일이었다. 화면, 런타임, 에디터, 데이터, 외부 시스템, AI 협업까지 필요에 따라 연결하되, 결국은 실제로 동작하고 운영 가능한 구조로 남기는 것을 가장 중요하게 본다.
+
+## Contact
+
+- Email: darkhtk@gmail.com
+- GitHub: [https://github.com/darkhtk](https://github.com/darkhtk)
+- LinkedIn: [https://www.linkedin.com/in/daeki-hong-041947182](https://www.linkedin.com/in/daeki-hong-041947182)
