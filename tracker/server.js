@@ -234,6 +234,7 @@ async function summarizeVisits(visits) {
   const pageCounts = new Map();
   const ipCounts = new Map();
   const visitorCounts = new Map();
+  const dailyCounts = new Map();
   const uniqueIps = new Set();
   const uniqueVisitors = new Set();
   const ipSet = new Set();
@@ -242,6 +243,10 @@ async function summarizeVisits(visits) {
     pageCounts.set(visit.path, (pageCounts.get(visit.path) || 0) + 1);
     ipCounts.set(visit.ip, (ipCounts.get(visit.ip) || 0) + 1);
     visitorCounts.set(visit.visitorId, (visitorCounts.get(visit.visitorId) || 0) + 1);
+    const day = String(visit.createdAt || "").slice(0, 10);
+    if (day) {
+      dailyCounts.set(day, (dailyCounts.get(day) || 0) + 1);
+    }
     if (visit.ip) uniqueIps.add(visit.ip);
     if (visit.visitorId) uniqueVisitors.add(visit.visitorId);
     if (visit.ip) ipSet.add(visit.ip);
@@ -269,6 +274,11 @@ async function summarizeVisits(visits) {
     .sort((a, b) => b.views - a.views)
     .slice(0, 20);
 
+  const dailySeries = [...dailyCounts.entries()]
+    .map(([date, views]) => ({ date, views }))
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .slice(-14);
+
   const exclusions = loadExclusions();
 
   return {
@@ -280,12 +290,33 @@ async function summarizeVisits(visits) {
     topPages,
     topIps,
     topVisitors,
+    dailySeries,
     recent: visits.slice(0, 50).map((visit) => ({
       ...visit,
       enrichment: enrichments[visit.ip] || {}
     })),
     exclusions
   };
+}
+
+function classifyNetwork(enrichment) {
+  const source = `${enrichment.asn || ""} ${enrichment.isp || ""} ${enrichment.organization || ""} ${enrichment.reverseDns || ""}`.toLowerCase();
+  if (!source.trim()) {
+    return { label: "미분류", tone: "neutral" };
+  }
+  if (/(amazon|aws|google|gcp|azure|microsoft|oracle cloud|digitalocean|cloudflare|linode|vultr|ovh)/.test(source)) {
+    return { label: "클라우드", tone: "cloud" };
+  }
+  if (/(kt|korea telecom|sk broadband|skb|lg u\+|lgu\+|uplus|kornet)/.test(source)) {
+    return { label: "통신사 회선", tone: "isp" };
+  }
+  if (/(university|college|school|edu|ac\.kr|go\.kr|or\.kr|research|hospital)/.test(source)) {
+    return { label: "기관망", tone: "org" };
+  }
+  if (/(corp|co\., ltd|inc|ltd|company|enterprise|group)/.test(source)) {
+    return { label: "기업망 추정", tone: "company" };
+  }
+  return { label: "기타 네트워크", tone: "neutral" };
 }
 
 function escapeHtml(value) {
@@ -309,6 +340,18 @@ function dashboardTemplate(summary) {
     items.length
       ? items.map(render).join("")
       : `<tr><td colspan="${colspan}" class="empty-cell">아직 데이터가 없습니다.</td></tr>`;
+  const maxDailyViews = Math.max(...summary.dailySeries.map((item) => item.views), 1);
+  const dailyBars = summary.dailySeries.length
+    ? summary.dailySeries.map((item) => `
+        <div class="bar-col">
+          <div class="bar-value">${escapeHtml(item.views)}</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="height:${Math.max(16, Math.round((item.views / maxDailyViews) * 140))}px"></div>
+          </div>
+          <div class="bar-label">${escapeHtml(item.date.slice(5))}</div>
+        </div>
+      `).join("")
+    : `<div class="empty-cell">아직 그래프로 볼 데이터가 없습니다.</div>`;
 
   return `<!DOCTYPE html>
 <html lang="ko">
@@ -514,6 +557,61 @@ function dashboardTemplate(summary) {
       gap: 10px;
       margin-top: 10px;
     }
+    .network-cell {
+      min-width: 220px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .badge.isp { background: #e7f0ff; color: #1f63a9; }
+    .badge.cloud { background: #eef3ff; color: #4b53c0; }
+    .badge.company { background: #edf8f0; color: #237a46; }
+    .badge.org { background: #fff3e5; color: #9a5b00; }
+    .badge.neutral { background: #eef2f6; color: #51607a; }
+    .bar-chart {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+      gap: 10px;
+      align-items: end;
+      min-height: 220px;
+    }
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .bar-value {
+      font-size: 12px;
+      color: var(--muted);
+      min-height: 18px;
+    }
+    .bar-track {
+      width: 100%;
+      max-width: 36px;
+      height: 150px;
+      border-radius: 999px;
+      background: #edf2f7;
+      display: flex;
+      align-items: end;
+      overflow: hidden;
+    }
+    .bar-fill {
+      width: 100%;
+      background: linear-gradient(180deg, #7cb0ff 0%, #1f63a9 100%);
+      border-radius: 999px;
+    }
+    .bar-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
     @media (max-width: 900px) {
       .span-6, .span-12 { grid-column: span 12; }
       .shell { padding: 24px 14px 40px; }
@@ -536,6 +634,13 @@ function dashboardTemplate(summary) {
       ${metricCard("총 조회 수", summary.totals.views)}
       ${metricCard("고유 Public IP", summary.totals.uniqueIps)}
       ${metricCard("고유 Visitor ID", summary.totals.uniqueVisitors)}
+    </section>
+
+    <section class="panel-grid">
+      <article class="panel span-12">
+        <h2>날짜별 조회 수</h2>
+        <div class="bar-chart">${dailyBars}</div>
+      </article>
     </section>
 
     <section class="panel-grid">
@@ -590,14 +695,20 @@ function dashboardTemplate(summary) {
           <thead><tr><th>IP</th><th>Network</th><th>Views</th></tr></thead>
           <tbody>
             ${listRows(summary.topIps, (item) => `
+              ${(() => {
+                const badge = classifyNetwork(item.enrichment || {});
+                return `
               <tr>
                 <td class="mono">${escapeHtml(item.enrichment.normalizedIp || item.ip)}</td>
-                <td>
+                <td class="network-cell">
+                  <div class="badge ${escapeHtml(badge.tone)}">${escapeHtml(badge.label)}</div>
                   <div>${escapeHtml(item.enrichment.reverseDns || item.enrichment.isp || item.enrichment.organization || "-")}</div>
                   <div class="muted">${escapeHtml([item.enrichment.asn, item.enrichment.country, item.enrichment.city].filter(Boolean).join(" · ") || "-")}</div>
                 </td>
                 <td>${escapeHtml(item.views)}</td>
               </tr>
+            `;
+              })()}
             `, 3)}
           </tbody>
         </table>
@@ -624,15 +735,21 @@ function dashboardTemplate(summary) {
           <thead><tr><th>시간</th><th>Page</th><th>IP</th><th>Network</th></tr></thead>
           <tbody>
             ${listRows(summary.recent, (item) => `
+              ${(() => {
+                const badge = classifyNetwork(item.enrichment || {});
+                return `
               <tr>
                 <td>${escapeHtml(item.createdAt)}</td>
                 <td class="mono">${escapeHtml(item.path)}</td>
                 <td class="mono">${escapeHtml(item.enrichment.normalizedIp || item.ip)}</td>
-                <td>
+                <td class="network-cell">
+                  <div class="badge ${escapeHtml(badge.tone)}">${escapeHtml(badge.label)}</div>
                   <div>${escapeHtml(item.enrichment.reverseDns || item.enrichment.isp || item.enrichment.organization || "-")}</div>
                   <div class="muted">${escapeHtml([item.enrichment.asn, item.enrichment.country, item.enrichment.city].filter(Boolean).join(" · ") || "-")}</div>
                 </td>
               </tr>
+            `;
+              })()}
             `, 4)}
           </tbody>
         </table>
