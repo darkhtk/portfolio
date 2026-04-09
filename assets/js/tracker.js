@@ -43,6 +43,7 @@
   }
 
   function send() {
+    if (sessionStorage.getItem(sessionKey)) return;
     try {
       var blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
       if (navigator.sendBeacon) {
@@ -64,11 +65,7 @@
   }
 
   function scheduleSend() {
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(send, { timeout: 2000 });
-      return;
-    }
-    window.setTimeout(send, 1200);
+    window.setTimeout(send, 250);
   }
 
   if (document.readyState === "loading") {
@@ -76,6 +73,14 @@
   } else {
     scheduleSend();
   }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      send();
+    }
+  });
+
+  window.addEventListener("pagehide", send);
 
   window.PORTFOLIO_TRACKER = {
     getVisitorId: function () {
