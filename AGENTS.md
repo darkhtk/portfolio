@@ -11,6 +11,16 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 - **Live**: https://darkhtk.github.io/portfolio/
 - **Deployment**: main branch push → GitHub Pages 자동 배포 (1-2분)
 
+## Repository Layout
+
+- **Root**: 실제 GitHub Pages 배포 파일만 유지
+- **`AGENTS.md`**: 저장소 내부 협업 기준
+- **`C:\sourcetree\portfolio-internal\portfolio\tracker`**: NAS에 배포하는 방문 추적 서버와 대시보드
+- **`C:\sourcetree\portfolio-internal\portfolio\workspace\docs\site`**: 포트폴리오 리라이트, 구조, 카테고리 관련 문서
+- **`C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers`**: spec / plan 문서
+- **`C:\sourcetree\portfolio-internal\portfolio\workspace\layout`**: 레이아웃 레퍼런스와 시안
+- **`C:\sourcetree\portfolio-internal\portfolio\CLAUDE.md`**: 확장 컨텍스트 백업
+
 ## Tech Stack & Constraints
 
 - **HTML5** + **Tailwind CSS CDN** (`?plugins=forms,container-queries`)
@@ -172,13 +182,13 @@ colors: {
 
 ## Spec / Plan Documentation
 
-`docs/superpowers/specs/` (design spec) + `docs/superpowers/plans/` (implementation plan).
+`C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\specs\` (design spec) + `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\plans\` (implementation plan).
 
 **기존 문서**:
-- `docs/superpowers/specs/2026-04-08-mobile-responsive-redesign-design.md`
-- `docs/superpowers/plans/2026-04-08-mobile-responsive-redesign.md`
-- `docs/superpowers/specs/2026-04-08-genworld-ollama-case-study-design.md`
-- `docs/superpowers/plans/2026-04-08-genworld-ollama-case-study.md`
+- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\specs\2026-04-08-mobile-responsive-redesign-design.md`
+- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\plans\2026-04-08-mobile-responsive-redesign.md`
+- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\specs\2026-04-08-genworld-ollama-case-study-design.md`
+- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\plans\2026-04-08-genworld-ollama-case-study.md`
 
 새 작업도 같은 경로 패턴 (`YYYY-MM-DD-<topic>-design.md` / `YYYY-MM-DD-<topic>.md`) 으로 저장.
 

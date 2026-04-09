@@ -1,75 +1,57 @@
-# 홍대기 — Industrial Unity × AI Agent
+# Hong Daeki Portfolio
 
-산업 Unity 시니어 개발자 홍대기의 포트폴리오 사이트.
+Static portfolio site for industrial Unity real-time systems, XR, BIM, editor tooling, automation, robotics integration, and AI collaboration case studies.
 
-- **Live**: https://darkhtk.github.io/portfolio/
-- **About**: Unity 10년차 · XR 3년 + 산업 시각화·자동화 4년 + AI 융합 2년
-- **Awards**: 과학기술정보통신부 장관표창 (2025) · BIFAN XR Beyond Reality 공식 선정
+- Live: [https://darkhtk.github.io/portfolio/](https://darkhtk.github.io/portfolio/)
+- Repo: [https://github.com/darkhtk/portfolio](https://github.com/darkhtk/portfolio)
+- Deploy: push `main` to trigger GitHub Pages
 
----
+## Repository Layout
 
-## Cover Letter · 자기소개서
+Keep only deployable site files in the repository root. Local-only service code and working materials now live in a sibling folder: `C:\sourcetree\portfolio-internal\portfolio`.
 
-### 윤활유 같은 개발자
-
-사람이 모이면 서로 다른 속도와 기준이 생깁니다. 개발자만 해도 코딩 스타일, 커밋 습관, 패턴 선택이 다르고, 기획·아트·QA가 합류하면 "같은 목표를 보고 달린다"는 사실만 남기고 대부분의 의사결정에는 마찰이 따릅니다. 저는 이 마찰을 감정으로 풀기보다 **구조와 도구로 줄이는 개발자**입니다. 팀이 더 빠르게 같은 목표에 도달하도록 돕는 윤활유 같은 Unity 개발자를 지향합니다.
-
-### 도구로 협업 비용을 줄이다
-
-제가 조화를 만드는 방식은 단순한 "좋은 동료"가 아니라, **반복 비용을 제거하는 실행력**에서 시작합니다. 현재 와이엠엑스에서 두 가지 에디터 툴링 프로젝트를 진행하고 있습니다. 첫째는 LG에너지솔루션에 납품한 매뉴얼 에디터(LG eGuide Editor)로, 장비 매뉴얼을 카테고리·순서도·스텝 단위로 계층적으로 구성하고, 이미지·영상·PDF 등 다양한 미디어를 삽입하며, 순서도 노드와 각 스텝 간 연동으로 편집 효율을 높이는 구조를 설계했습니다. 에디터·런타임·WebGL 빌드 환경 모두에서 안정적으로 작동하도록 만들어 **콘텐츠 제작자가 코드 수정 없이 교육 콘텐츠를 직접 생산**할 수 있게 했습니다. 둘째는 산업 현장 디지털트윈 저작도구(DXCenter)로, 건물→층→장비→파트 4단계 구조의 현장 관리 시스템을 **9개 커스텀 EditorWindow**로 설계했습니다. 장비 상태 효과를 개발자가 코드로만 제어하면 기획자와의 피드백-수정 사이클이 길어지기 때문에, Strategy 패턴으로 상태 효과(Alpha/Blink/ColorChange/Highlight)를 교체 가능하게 만들어 기획자가 직접 제어할 수 있게 했습니다. Dummy/Live 서버모드 전환, Build Settings 자동 동기화, WebGL 원클릭 빌드까지 통합하여 기획/제작/검수 전 과정의 마찰을 줄였습니다.
-
-이 두 프로젝트 모두에서 QA 효율도 같은 관점으로 접근했습니다. 씬 컨텍스트 자동 감지로 현재 편집 중인 층에 맞는 UI만 노출하고, Play Mode 진입 시 편집을 자동 차단하며, Undo를 전 윈도우에서 지원하는 등 **검수자가 실수할 수 없는 구조**를 만들었습니다. "내가 개발을 빨리 하는 것"만큼이나 팀이 검증하고 수정하는 속도를 올리는 것이 릴리즈 품질과 일정 준수에 직결된다는 것을 경험으로 알고 있습니다.
-
-### 대규모 데이터 처리와 성능 설계
-
-장헌파트너스에서 4년 7개월간 고속도로 BIM 3D 시각화 플랫폼을 메인 개발했습니다. 수만 개에 달하는 BIM 모델을 Google Protocol Buffer 기반 DB로부터 Unity로 임포트할 때, 에디터 라이프사이클 안에서 멈추지 않고 빠르고 안정적으로 처리하는 설계가 필요했습니다. 저는 Vertices/Triangle 분석 기반으로 모델 타입별 LOD를 자동 생성하면서, 메시 생성 및 normal/UV 계산을 **Unity Job System으로 병렬 처리**해 병목을 제거했습니다. 그 결과 **10,000개 모델 기준 3시간 걸리던 임포트를 20분으로 단축**했고, Shader 기반 모델 타입별 시각 구분과 AABB/거리 기반 Clipping을 결합해 전체 고속도로 구간을 하나의 3D 환경에서 실시간으로 탐색할 수 있게 만들었습니다.
-
-같은 프로젝트에서 **다중 도로 횡단면 실시간 분석 알고리즘**도 직접 설계·구현했습니다. 도로 선형(Alignment)의 StationPoint 기준으로 3D 메쉬를 평면으로 절단하고, 정점 분석으로 교차 라인을 추출하여 2D 횡단면을 자동 렌더링합니다. 절토(1:N)·성토(1:N)·노면(N%) 등 모델 타입별 경사도를 자동 계산하고, 스냅핑이 가능한 치수선 시스템과 모델 타입별 레이어 On/Off까지 구현했습니다. 도로 종단면도 자동 생성과 플레이어 위치·시야 동기화, Coroutine 기반 비동기 처리로 진행률 표시와 취소를 지원하며, 전체 공사 구역의 설계 검토 효율을 크게 향상시켰습니다.
-
-### AI를 제품에 붙이고, AI로 제품을 만들고, AI 협업 자체를 코드로 추출하다
-
-#### 1. AI를 제품 파이프라인에 통합
-
-저는 생성형 AI를 세 가지 차원에서 실무에 적용하고 있습니다. 첫째는 **AI를 제품 파이프라인에 통합**하는 것입니다. '너'스탤지아 XR 콘텐츠에서 관객의 음성을 Whisper로 텍스트로 변환하고, GPT가 Function Calling으로 대화를 정제하여 닉네임 추출·BGM 선택·Skybox 프롬프트 생성을 수행하며, TTS로 음성 응답을 만들고, Blockade Labs API로 360° 환경을 생성하고, Meshy AI로 3D 모델을 preview→refine 자동 체인으로 만들어 Unity VR에 배치하는 **5종 AI API 통합 파이프라인**을 구축했습니다. Webhook 비동기 처리, GCS에 사용자별 디렉토리 구조 자동 저장, React 대시보드로 체험 데이터를 실시간 분석하는 운영 가능한 구조까지 만들었습니다. 이 프로젝트는 부천국제판타스틱영화제(BIFAN) XR 섹션에 공식 선정되었고, 과학기술정보통신부 장관표창으로 이어졌습니다. 기술 데모에 머무르지 않고, **실제로 관객 130명 이상이 체험하고 관측·개선이 가능한 구조**를 만드는 데 강점이 있습니다.
-
-#### 2. AI Agent를 개발 도구 자체로 활용
-
-둘째는 **AI Agent를 개발 도구 자체로 활용**하는 것입니다. VR 로봇 원격 조종 프로젝트에서 저는 AI 협업을 두 단계로 나누어 실행했습니다. 먼저 엑스포 전시 프로젝트에서는 Quest 3 컨트롤러 좌표를 EMA 필터로 안정화하고 Flask API를 통해 RoboDK에 전달하는 전체 파이프라인, 4-스레드 UDP 실시간 브릿지, 안전 로직까지를 **Claude Code AI Agent 활용으로 단독 구현**하여 **실제 Doosan A0912 산업용 로봇을 조종하고 2025 해양 모빌리티 안전 엑스포에서 전시를 성공**시켰습니다. 이 프로젝트에서는 RoboDK Python API에 IK 해석을 위임했습니다. 그 다음 단계로, **RoboDK 의존 없이 IK 알고리즘 자체부터 전체를 AI Agent 활용으로 단독 구현**하는 R&D 프로젝트를 진행했습니다. Jacobian 기반 6DOF IK 솔버, 관절별 Weight Override, 특이점 감지, 모션 녹화·재생 Teaching 시스템까지 수학적 제약과 실시간 통신 아키텍처를 AI에게 정확히 전달하여 산업용 수준의 코드를 구축했습니다. 같은 전시에서 Arduino·라즈베리파이·센서 기반의 실물 로봇 연동 콘텐츠도 담당하여, 물리 시뮬레이션 영상 출력과 실물 동작 간 오차를 0.2초 이내로 맞추고, 시나리오/동작 기반 모듈화 구조와 런타임 상태 모니터링 도구까지 구현했습니다. 디지털트윈 에디터(DXCenter) 프로젝트에서는 **Claude Code 3개 CLI를 감독관·개발자·고객저작자 페르소나로 분리 운용**하는 멀티 페르소나 방법론으로 9개 커스텀 EditorWindow + 5가지 아키텍처 패턴 + 43개 C# 파일을 체계적으로 구현했습니다. 이는 10년간의 도메인 지식으로 AI에게 정확한 기술 제약과 아키텍처를 전달할 수 있기에 가능한 방식이며, 단순한 코드 생성이 아닌 **AI Agent를 설계·통제하는 시니어 레벨의 역량**이라고 생각합니다.
-
-#### 3. AI 협업 방법론 자체를 코드로 추출
-
-셋째는 **AI 협업 방법론 자체를 코드로 추출**하는 것입니다. 멀티 페르소나 운용을 매번 수동으로 셋업하다 보면 페르소나마다 컨벤션·금지 패턴·실수 이력이 흩어지고, 다음 프로젝트로 옮길 때 같은 시행착오를 반복하게 됩니다. 이 문제를 해결하기 위해 저는 **Claude Code 멀티 페르소나(감독관/개발자/고객저작자/감수자) 풀 사이클을 인프라 레벨로 정형화한 자작 멀티 에이전트 오케스트레이션 프레임워크**를 v1(Bash·Markdown 기반)부터 v2(TypeScript · Claude Agent SDK 네이티브)까지 직접 만들어 운영하고 있습니다. SPEC 작성 → 구현 → 감사 → 수용 검증을 자동으로 순환하는 보드 기반 협업 구조와, CLAUDE.md에 아키텍처 패턴·금지 패턴·실수 이력을 체계적으로 누적하는 컨벤션을 통해, DXCenter·VR 로봇·너스탤지아 같은 산업 프로젝트의 작업 방식이 일관된 메타 베이스 위에서 이어지도록 만들었습니다. AI 에이전트를 단순히 사용하는 것이 아니라 **AI 협업 도구 자체를 직접 설계·구현해 내 작업 흐름의 인프라로 무장하는 것**이 시니어 단계의 가장 의미 있는 차별화라고 생각합니다.
-
-### 공학적 사고를 즐기는 개발자
-
-저는 수학과 물리 기반으로 실제 환경을 상상하고 도식화하는 것을 좋아합니다. 솔트웍스에서 해군에 납품한 차기상륙함 VR 시뮬레이터에서는 아지무스 추진기 조종 로직을 삼각함수와 미분으로 풀어 구현했고, HMD+PC 멀티플레이(RPC)를 설계했습니다. LG하우시스에 납품한 인쇄공장 VR 안전교육에서는 RS232 통신으로 전기충격장갑·압착장치 등 4D 하드웨어를 직접 제어했고, 건설현장 VR 시뮬레이터에서는 비계 구조를 클램프로 직접 설계해 흔들림·낙하 양쪽 체험이 가능한 장치를 구현했습니다. 이들 프로젝트는 전국 안전교육실 수십 곳에 납품되었습니다. 최근에는 로봇 IK 솔버를 Jacobian 기반으로 직접 구현하며 좌표계 변환, 관절 제약조건, 수치 안정성, 특이점 회피 같은 문제를 다루고 있으며, 이 IK 알고리즘까지 AI Agent 활용으로 단독 구현한 것은 수학·물리 기반의 도메인 지식이 뒷받침되었기에 가능했습니다. 이런 기반은 실시간 인터랙션, 물리, 카메라, 성능 최적화가 중요한 산업용 프로젝트에서 안정적인 밑바탕이 됩니다.
-
-### 마무리
-
-저는 도구로 제작 흐름을 정리하고, 대규모 데이터 처리와 성능 문제를 설계로 해결하며, AI를 **제품 파이프라인 · 개발 프로세스 · 협업 인프라** 세 영역 모두에 붙여 팀 생산성을 높이는 개발자입니다. RoboDK에 위임하던 IK 해석을 자체 솔버로 대체하고 그 과정 전체를 AI Agent 활용으로 단독 구현한 것처럼, 기존의 한계를 도메인 지식과 AI 협업으로 돌파하는 것이 제 강점입니다. 서로의 다름을 불편함이 아니라 생산성으로 바꾸고, 필요할 때는 윤활유 같은 역할로 팀의 마찰을 줄이며 결과의 완성도를 높이는 사람이 되겠습니다.
-
-— **홍대기 · Daeki Hong · 2026**
-
----
+- `index.html`, `projects.html`, `about.html`, `resume.html`, `cover-letter.html`
+  - Main pages
+- `case-study-*.html`
+  - Case study detail pages
+- `assets/`
+  - Images, favicons, shared scripts
+- `AGENTS.md`
+  - Repo working context
+- `C:\sourcetree\portfolio-internal\portfolio\tracker`
+  - NAS-hosted visitor tracker and dashboard source
+- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\site`
+  - Portfolio rewrite, architecture, and category planning docs
+- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers`
+  - Spec and plan documents
+- `C:\sourcetree\portfolio-internal\portfolio\workspace\layout`
+  - Layout references and mockups
+- `C:\sourcetree\portfolio-internal\portfolio\CLAUDE.md`
+  - Extended collaboration context backup
 
 ## Pages
 
-- `index.html` — Home
-- `projects.html` — Selected Works (8 projects)
-- `case-study-vr-robot.html` — VR 로봇 원격 조종 + 자체 IK 솔버
-- `case-study-dxcenter.html` — DXCenter (LG에너지솔루션)
-- `case-study-orchestration-ts.html` — Multi-Agent Orchestration Framework (v1 → v2)
-- `case-study-genworld-ollama.html` — GenWorld · Local Ollama LLM 기반 NPC 인지 시스템 (R&D)
-- `about.html` — About + Tech Ecosystem
-- `resume.html` — Resume
-- `cover-letter.html` — Cover Letter
+- `index.html`: Home
+- `projects.html`: Featured projects and foundation work
+- `about.html`: Working style and problem-solving approach
+- `resume.html`: Career flow
+- `cover-letter.html`: Cover letter
+- `case-study-vr-robot.html`: VR robot teleoperation
+- `case-study-dxcenter.html`: DXCenter editor tooling
+- `case-study-neostalgia.html`: Neostalgia
+- `case-study-orchestration-ts.html`: Orchestration framework
+- `case-study-genworld-ollama.html`: GenWorld + Ollama R&D
 
-## Stack
+## Tracker
 
-Tailwind CSS (CDN) · Space Grotesk + Inter + Manrope · Vanilla JS for filter & tabs.
+See [tracker README](/C:/sourcetree/portfolio-internal/portfolio/tracker/README.md).
 
-## Contact
+- Dashboard: `https://semirain.synology.me:3443/dashboard`
+- Captures: public IP, visitor id, page path, referrer, user agent
+- Enrichment: reverse DNS, ASN/ISP, country, city
 
-- Email: darkhtk@gmail.com
-- GitHub: https://github.com/darkhtk
-- LinkedIn: https://www.linkedin.com/in/daeki-hong-041947182
+## Notes
+
+- No build system. Static HTML + Tailwind CDN only.
+- Root paths stay GitHub Pages friendly.
+- Local-only docs, layout references, and tracker source live under `C:\sourcetree\portfolio-internal\portfolio`.
