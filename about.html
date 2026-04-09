@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
 <title>About | 홍대기</title>
-<meta name="description" content="홍대기의 About 페이지. 문제를 정의하고 제약을 정리하는 방식, 그리고 AI 협업을 어떤 기준으로 실무에 적용하는지 설명합니다."/>
+<meta name="description" content="홍대기의 About. 산업용 Unity 실시간 시스템을 다뤄 온 방식, 문제를 보는 기준, 그리고 AI 협업을 실무에 적용하는 태도를 소개합니다."/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"/>
@@ -61,26 +61,50 @@
   </div>
 </nav>
 
-<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f4f7fb]/98 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-  <div class="flex items-center justify-between px-4 py-4 sm:px-6">
-    <div class="font-headline text-2xl italic tracking-tight text-[#16325c]">Daeki Hong</div>
-    <button id="mobile-menu-close" class="p-2 text-[#16325c]" aria-label="메뉴 닫기">
-      <span class="material-symbols-outlined">close</span>
-    </button>
+<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
+        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
+      </div>
+      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
   </div>
-  <div class="flex flex-1 flex-col justify-center gap-6 px-8">
-    <a href="index.html" class="font-headline text-3xl font-bold text-[#162033]">HOME</a>
-    <a href="projects.html" class="font-headline text-3xl font-bold text-[#162033]">PROJECTS</a>
-    <a href="about.html" class="border-l-4 border-[#2251b2] pl-3 font-headline text-3xl font-bold text-[#16325c]">ABOUT</a>
-    <a href="resume.html" class="font-headline text-3xl font-bold text-[#162033]">RESUME</a>
-    <a href="cover-letter.html" class="font-headline text-3xl font-bold text-[#162033]">COVER LETTER</a>
-    <hr class="border-[#d9e3f1]"/>
-    <a href="mailto:darkhtk@gmail.com" class="inline-flex w-fit items-center gap-2 rounded-md bg-[#16325c] px-6 py-3 font-headline font-bold text-white">
-      <span class="material-symbols-outlined">mail</span> CONNECT
-    </a>
-    <div class="flex gap-6 text-sm uppercase tracking-[0.18em] text-[#6c7a92]">
-      <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
+    <div class="grid gap-3">
+      <a href="index.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div>
+      </a>
+      <a href="projects.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">PROJECTS</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div>
+      </a>
+      <a href="about.html" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">ABOUT</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">일하는 기준과 방식</div>
+      </a>
+      <a href="resume.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">RESUME</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">경력 흐름과 핵심 이력</div>
+      </a>
+      <a href="cover-letter.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">COVER LETTER</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">상세 서술과 협업 방식</div>
+      </a>
+    </div>
+    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white">
+        <span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com
+      </a>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
+        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
+      </div>
     </div>
   </div>
 </div>
@@ -88,10 +112,10 @@
 <main class="mx-auto max-w-7xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32 md:px-8">
   <section class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
     <div class="lg:col-span-7">
-      <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Philosophy</div>
+      <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">일하는 기준</div>
       <h1 class="mt-4 max-w-4xl font-headline text-4xl leading-[1.18] tracking-tight text-[#162033] sm:text-5xl md:text-6xl">
-        <span class="block">문제를 정리하는 기준</span>
-        <span class="block"><span class="text-[#1960A3] font-medium">업무를 설계하는 방식</span></span>
+        <span class="block">문제를 보는 기준</span>
+        <span class="block"><span class="text-[#1960A3] font-medium">업무를 풀어 가는 방식</span></span>
       </h1>
       <div class="mt-8 space-y-5 text-base leading-7 text-[#44506a]">
         <p>저는 산업용 Unity 실시간 시스템을 오래 만들어 온 개발자입니다. XR, 시뮬레이션, BIM 시각화, 에디터 툴링, 자동화, 로봇 연동처럼 제약이 많은 문제를 실제 프로젝트에서 풀어 왔습니다.</p>
@@ -156,11 +180,11 @@
     <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
       <article class="card rounded-2xl p-6 sm:p-8">
         <h2 class="font-headline text-2xl font-bold text-[#162033]">문제보다 먼저 제약을 봅니다</h2>
-        <p class="mt-4 text-sm leading-7 text-[#51607a]">산업용 시스템에서는 성능, 안전, 운영 환경, 납품 방식, 수정 비용이 설계의 출발점입니다. 그래서 기능보다 제약을 먼저 정리합니다.</p>
+        <p class="mt-4 text-sm leading-7 text-[#51607a]">산업용 시스템에서는 성능, 안전, 운영 환경, 납품 방식, 수정 비용이 설계의 출발점입니다. 그래서 기능보다 제약을 먼저 봅니다.</p>
       </article>
       <article class="card rounded-2xl p-6 sm:p-8">
         <h2 class="font-headline text-2xl font-bold text-[#162033]">반복 비용을 구조로 줄입니다</h2>
-        <p class="mt-4 text-sm leading-7 text-[#51607a]">Editor Tooling, 자동화, 데이터 구조 정리, 패턴 분리로 반복 작업과 협업 병목을 줄이는 쪽에 자주 집중합니다.</p>
+        <p class="mt-4 text-sm leading-7 text-[#51607a]">Editor Tooling, 자동화, 데이터 구조 설계, 패턴 분리로 반복 작업과 협업 병목을 줄이는 쪽에 자주 집중합니다.</p>
       </article>
       <article class="card rounded-2xl p-6 sm:p-8">
         <h2 class="font-headline text-2xl font-bold text-[#162033]">AI는 속도를 높이되 통제는 유지합니다</h2>
@@ -177,7 +201,7 @@
         <ul class="mt-5 space-y-4 text-sm leading-7 text-[#51607a]">
           <li>XR, Editor Tooling, 백엔드, 통신 모듈을 동시에 잡아야 할 때 반복 구현량이 많기 때문입니다.</li>
           <li>설계가 명확한 영역에서는 속도를 높이면서도 일관성을 유지할 수 있기 때문입니다.</li>
-          <li>프로젝트마다 다시 처음부터 셋업하지 않도록 작업 방식을 재사용 가능한 체계로 정리하기 위해서입니다.</li>
+          <li>프로젝트마다 다시 처음부터 셋업하지 않도록 작업 기준을 반복 가능한 형태로 남겨 두기 위해서입니다.</li>
         </ul>
       </article>
       <article class="card rounded-2xl p-6 sm:p-8">
@@ -216,8 +240,11 @@
   <section class="mt-20 rounded-3xl bg-[#eef2f6] px-6 py-10 sm:px-8 md:px-10">
     <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
       <div class="lg:col-span-8">
-        <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Next</div>
-    <h2 class="mt-4 max-w-3xl font-headline text-2xl font-bold tracking-tight text-[#162033]">Projects에서는 사례 구조를, Resume에서는 경력 흐름을 확인할 수 있습니다</h2>
+        <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">관련 페이지</div>
+    <h2 class="mt-4 max-w-2xl font-headline text-2xl font-bold tracking-tight text-[#162033]">
+      <span class="block">Projects와 Resume</span>
+      <span class="block">함께 보기</span>
+    </h2>
       </div>
       <div class="flex flex-wrap gap-4 lg:col-span-4 lg:justify-end">
         <a href="projects.html" class="rounded-md bg-[#2251b2] px-8 py-4 font-headline font-bold text-white">Projects 보기</a>

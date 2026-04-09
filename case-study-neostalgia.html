@@ -91,26 +91,33 @@
   </div>
 </nav>
 
-<div id="mobile-menu" class="fixed inset-0 z-[60] bg-[#0c1324]/95 backdrop-blur-2xl hidden flex-col md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-  <div class="flex justify-between items-center px-4 sm:px-6 py-4">
-    <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
-    <button id="mobile-menu-close" class="p-2 text-on-surface hover:text-primary transition-colors" aria-label="메뉴 닫기">
-      <span class="material-symbols-outlined">close</span>
-    </button>
+<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
+        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
+      </div>
+      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
   </div>
-  <div class="flex-1 flex flex-col justify-center px-8 gap-6">
-    <a href="index.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">HOME</a>
-    <a href="projects.html" class="font-headline text-3xl font-bold text-primary border-l-4 border-primary pl-3">PROJECTS</a>
-    <a href="about.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">ABOUT</a>
-    <a href="resume.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">RESUME</a>
-    <a href="cover-letter.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">COVER LETTER</a>
-    <hr class="border-outline-variant my-4"/>
-    <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold w-fit">
-      <span class="material-symbols-outlined">mail</span> CONNECT
-    </a>
-    <div class="flex gap-6 mt-2 text-sm font-body uppercase tracking-widest text-slate-400">
-      <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="hover:text-primary">GitHub</a>
-      <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="hover:text-primary">LinkedIn</a>
+  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
+    <div class="grid gap-3">
+      <a href="index.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
+      <a href="projects.html" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">PROJECTS</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
+<a href="about.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">ABOUT</div><div class="mt-1 text-sm leading-6 text-[#51607a]">일하는 기준과 방식</div></a>
+      <a href="resume.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">RESUME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력 흐름과 핵심 이력</div></a>
+      <a href="cover-letter.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">COVER LETTER</div><div class="mt-1 text-sm leading-6 text-[#51607a]">상세 서술과 협업 방식</div></a>
+    </div>
+    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white"><span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com</a>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
+        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
+      </div>
     </div>
   </div>
 </div>
@@ -135,7 +142,7 @@
 
         <p class="text-base text-on-surface-variant leading-relaxed max-w-3xl">
           관객 음성을 입력으로 받아 대화, 시각 요소 생성, XR 공간 연출, 운영 대시보드까지 하나의 흐름으로 연결한 프로젝트입니다.
-          Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 구조로 정리했습니다.
+Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 만들었습니다.
         </p>
       </div>
 
@@ -164,7 +171,7 @@
           <h2 class="text-2xl md:text-3xl font-headline font-bold mb-8">문제와 적용 방식</h2>
           <div class="space-y-5 text-on-surface-variant leading-relaxed text-base sm:text-lg">
             <p>이 프로젝트의 핵심은 관객의 음성 입력을 XR 경험 안에서 끊기지 않게 연결하는 일이었습니다.</p>
-            <p>AI는 전면 연출용으로만 쓰지 않고, 음성 인식, 대화 정리, 음성 응답, 360도 배경 생성, 3D 오브젝트 생성처럼 각 단계에 나눠 적용했습니다.</p>
+<p>AI는 전면 연출용으로만 쓰지 않고, 음성 인식, 대화 처리, 음성 응답, 360도 배경 생성, 3D 오브젝트 생성처럼 각 단계에 나눠 적용했습니다.</p>
             <p>중요했던 것은 생성 결과 자체보다, 비동기 처리와 사용자별 저장 구조, 운영 관측까지 포함해 실제 전시 가능한 흐름으로 묶는 일이었습니다.</p>
           </div>
         </div>
@@ -191,7 +198,7 @@
         <div class="bg-surface-container-low p-8 rounded-xl">
           <span class="material-symbols-outlined text-primary text-4xl mb-4">mic</span>
           <h3 class="font-headline text-lg font-bold mb-3">입력 해석</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">관객 음성을 실시간 흐름 안에서 텍스트와 의미 단위로 정리할 필요가 있었습니다.</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">관객 음성을 실시간 흐름 안에서 텍스트와 의미 단위로 나눌 필요가 있었습니다.</p>
         </div>
         <div class="bg-surface-container-low p-8 rounded-xl">
           <span class="material-symbols-outlined text-primary text-4xl mb-4">interests</span>
@@ -231,7 +238,7 @@
             <p><span class="text-on-surface">문제 2.</span> 전시 환경에서는 체험 중 상태를 운영자가 확인할 수 있어야 합니다.</p>
             <p><span class="text-on-surface">대응.</span> React 대시보드로 사용자별 기록과 생성 결과를 확인할 수 있게 구성했습니다.</p>
             <p><span class="text-on-surface">문제 3.</span> 생성 결과가 경험 안에서 어색하게 분리되면 전체 체험이 깨집니다.</p>
-            <p><span class="text-on-surface">대응.</span> 대화, 환경, 오브젝트 생성 결과를 하나의 흐름으로 이어서 XR 경험 안에서 자연스럽게 보이도록 정리했습니다.</p>
+<p><span class="text-on-surface">대응.</span> 대화, 환경, 오브젝트 생성 결과를 하나의 흐름으로 이어서 XR 경험 안에서 자연스럽게 이어지도록 만들었습니다.</p>
           </div>
         </div>
 
@@ -257,7 +264,7 @@
           <h2 class="text-2xl md:text-3xl font-headline font-bold mb-8">결과</h2>
           <div class="space-y-4 text-on-surface-variant leading-relaxed">
             <p>BIFAN XR Beyond Reality 섹션에 공식 선정됐습니다.</p>
-            <p>관객 체험과 운영 확인이 가능한 XR 흐름을 실제 프로젝트로 정리했습니다.</p>
+<p>관객 체험과 운영 확인이 가능한 XR 흐름을 실제 프로젝트로 만들었습니다.</p>
             <p>이 경험은 이후 AI를 제품 흐름 안에 배치하는 기준이 되는 사례가 됐습니다.</p>
           </div>
         </div>

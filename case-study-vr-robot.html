@@ -99,36 +99,33 @@
 </nav>
 
 <!-- Mobile menu overlay -->
-<div id="mobile-menu"
-     class="fixed inset-0 z-[60] bg-[#0c1324]/95 backdrop-blur-2xl hidden flex-col md:hidden"
-     role="dialog"
-     aria-modal="true"
-     aria-label="메인 메뉴">
-  <div class="flex justify-between items-center px-4 sm:px-6 py-4">
-    <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
-    <button id="mobile-menu-close"
-            class="p-2 text-on-surface hover:text-primary transition-colors"
-            aria-label="메뉴 닫기">
-      <span class="material-symbols-outlined">close</span>
-    </button>
+<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
+        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
+      </div>
+      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
   </div>
-
-  <div class="flex-1 flex flex-col justify-center px-8 gap-6">
-    <a href="index.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">HOME</a>
-    <a href="projects.html" class="font-headline text-3xl font-bold text-primary border-l-4 border-primary pl-3">PROJECTS</a>
-    <a href="about.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">ABOUT</a>
-    <a href="resume.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">RESUME</a>
-    <a href="cover-letter.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">COVER LETTER</a>
-
-    <hr class="border-outline-variant my-4"/>
-
-    <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold w-fit">
-      <span class="material-symbols-outlined">mail</span> CONNECT
-    </a>
-
-    <div class="flex gap-6 mt-2 text-sm font-body uppercase tracking-widest text-slate-400">
-      <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="hover:text-primary">GitHub</a>
-      <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="hover:text-primary">LinkedIn</a>
+  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
+    <div class="grid gap-3">
+      <a href="index.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
+      <a href="projects.html" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">PROJECTS</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
+<a href="about.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">ABOUT</div><div class="mt-1 text-sm leading-6 text-[#51607a]">일하는 기준과 방식</div></a>
+      <a href="resume.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">RESUME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력 흐름과 핵심 이력</div></a>
+      <a href="cover-letter.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">COVER LETTER</div><div class="mt-1 text-sm leading-6 text-[#51607a]">상세 서술과 협업 방식</div></a>
+    </div>
+    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white"><span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com</a>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
+        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
+      </div>
     </div>
   </div>
 </div>
@@ -520,7 +517,7 @@
             2025 대한민국 해양 모빌리티 안전 엑스포(부산 벡스코)에서 현장 시연을 진행했습니다. 관람객 앞에서 VR 컨트롤러로 실제 산업용 로봇을 조종했습니다.
           </p>
           <blockquote class="p-6 bg-surface border-l-4 border-primary rounded-r-xl text-on-surface/80 font-body">
-            <p class="italic mb-2">"산업용 제약과 안전 조건을 기준으로 구현과 검증을 반복해, 실제 로봇 시연까지 진행한 사례."</p>
+<p class="italic mb-2">"산업용 제약과 안전 조건 아래에서 구현과 검증을 반복해 실제 로봇 시연까지 진행한 사례."</p>
             <footer class="mt-3 text-xs not-italic font-label uppercase tracking-widest text-primary">Project Self-Description</footer>
           </blockquote>
         </div>
@@ -565,7 +562,7 @@
       <a href="case-study-orchestration-ts.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Open Source · Workflow Framework</div>
         <h4 class="text-2xl font-headline font-bold mb-3">Multi-Agent Orchestration Framework</h4>
-        <p class="text-sm text-on-surface-variant mb-4">AI 협업 방식을 재사용 가능한 형태로 정리한 도구</p>
+<p class="text-sm text-on-surface-variant mb-4">AI 협업 방식을 반복해서 쓸 수 있게 만든 도구</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="case-study-genworld-ollama.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">

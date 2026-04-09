@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
 <title>Multi-Agent Orchestration Framework — Workflow OSS · 홍대기</title>
-<meta name="description" content="AI 협업 방식을 재사용 가능한 구조로 정리한 오케스트레이션 도구. v1 (Bash · Markdown)에서 v2 (TypeScript · Claude Agent SDK)로 확장 중인 메타 베이스."/>
+<meta name="description" content="AI 협업 규칙과 운영 흐름을 도구로 만든 오케스트레이션 프레임워크. v1 (Bash · Markdown)에서 v2 (TypeScript · Claude Agent SDK)로 확장 중입니다."/>
 <meta property="og:title" content="Multi-Agent Orchestration Framework · v1 → v2"/>
 <meta property="og:description" content="자연어 prompts로 시작한 v1 → TypeScript 컴포넌트화한 v2. 산업 프로젝트의 메타 베이스 도구."/>
 <meta property="og:type" content="article"/>
@@ -16,7 +16,7 @@
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Multi-Agent Orchestration Framework"/>
-<meta name="twitter:description" content="AI 협업 방식을 재사용 가능한 구조로 정리한 오케스트레이션 도구."/>
+<meta name="twitter:description" content="AI 협업 규칙과 운영 흐름을 도구로 만든 오케스트레이션 프레임워크."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -122,36 +122,33 @@
 </nav>
 
 <!-- Mobile menu overlay -->
-<div id="mobile-menu"
-     class="fixed inset-0 z-[60] bg-[#0c1324]/95 backdrop-blur-2xl hidden flex-col md:hidden"
-     role="dialog"
-     aria-modal="true"
-     aria-label="메인 메뉴">
-  <div class="flex justify-between items-center px-4 sm:px-6 py-4">
-    <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
-    <button id="mobile-menu-close"
-            class="p-2 text-on-surface hover:text-primary transition-colors"
-            aria-label="메뉴 닫기">
-      <span class="material-symbols-outlined">close</span>
-    </button>
+<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
+        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
+      </div>
+      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
   </div>
-
-  <div class="flex-1 flex flex-col justify-center px-8 gap-6">
-    <a href="index.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">HOME</a>
-    <a href="projects.html" class="font-headline text-3xl font-bold text-primary border-l-4 border-primary pl-3">PROJECTS</a>
-    <a href="about.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">ABOUT</a>
-    <a href="resume.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">RESUME</a>
-    <a href="cover-letter.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">COVER LETTER</a>
-
-    <hr class="border-outline-variant my-4"/>
-
-    <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold w-fit">
-      <span class="material-symbols-outlined">mail</span> CONNECT
-    </a>
-
-    <div class="flex gap-6 mt-2 text-sm font-body uppercase tracking-widest text-slate-400">
-      <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="hover:text-primary">GitHub</a>
-      <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="hover:text-primary">LinkedIn</a>
+  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
+    <div class="grid gap-3">
+      <a href="index.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
+      <a href="projects.html" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">PROJECTS</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
+<a href="about.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">ABOUT</div><div class="mt-1 text-sm leading-6 text-[#51607a]">일하는 기준과 방식</div></a>
+      <a href="resume.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">RESUME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력 흐름과 핵심 이력</div></a>
+      <a href="cover-letter.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">COVER LETTER</div><div class="mt-1 text-sm leading-6 text-[#51607a]">상세 서술과 협업 방식</div></a>
+    </div>
+    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white"><span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com</a>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
+        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
+      </div>
     </div>
   </div>
 </div>
@@ -164,13 +161,13 @@
       <div class="font-label text-xs text-primary uppercase tracking-[0.3em] mb-4">운영 맥락</div>
       <div class="max-w-5xl space-y-4">
         <p class="text-base leading-8 text-[#44506a] sm:text-lg">
-          이 도구는 토이 프로젝트가 아니라, <span class="text-[#162033]">DXCenter (LG에너지솔루션) · VR 로봇 원격 조종 · 너스탤지아</span> 같은 실제 프로젝트에서 쓰인 협업 흐름을 코드와 운영 규칙으로 정리한 구조입니다.
+          이 도구는 토이 프로젝트가 아니라, <span class="text-[#162033]">DXCenter (LG에너지솔루션) · VR 로봇 원격 조종 · 너스탤지아</span> 같은 실제 프로젝트에서 쓰인 협업 흐름을 코드와 운영 규칙으로 옮긴 구조입니다.
         </p>
         <p class="text-base leading-8 text-[#44506a] sm:text-lg">
-          역할 분리형 AI 협업을 인프라 레벨에서 반복 가능하게 만들고, 다음 프로젝트에서도 같은 기준으로 이어질 수 있도록 설계했습니다.
+          역할 분리형 AI 협업을 인프라 레벨에서 반복 가능하게 만들고, 다음 프로젝트에서도 같은 기준을 이어 갈 수 있도록 설계했습니다.
         </p>
         <p class="text-base sm:text-lg text-on-surface-variant max-w-3xl font-body leading-relaxed">
-          역할 분리형 AI 협업 방식을 프로젝트마다 다시 조립하지 않도록 정리한 도구입니다.
+          역할 분리형 AI 협업 방식을 프로젝트마다 다시 조립하지 않도록 만든 도구입니다.
           프롬프트 중심의 v1에서 시작해, 현재는 TypeScript와 Claude Agent SDK 기반의 v2 구조로 확장하고 있습니다.
         </p>
       </div>
@@ -205,7 +202,7 @@
         </div>
 
         <p class="hidden text-base sm:text-lg text-on-surface-variant max-w-2xl font-body leading-relaxed">
-          역할을 나눈 AI 협업 방식을 재사용 가능한 형태로 정리한 도구입니다. 한국어 자연어 프롬프트 기반의 v1로 시작해, TypeScript + Claude Agent SDK 구조의 v2로 이어지고 있습니다.
+        역할을 나눈 AI 협업 방식을 반복해서 쓸 수 있게 만든 도구입니다. 한국어 자연어 프롬프트 기반의 v1로 시작해, TypeScript + Claude Agent SDK 구조의 v2로 이어지고 있습니다.
         </p>
       </div>
 
@@ -677,7 +674,7 @@ MONITOR.md 존재 시 읽기
       <div class="mt-3 flex justify-between items-start flex-wrap gap-2">
         <div>
           <div class="font-label text-[10px] text-primary uppercase tracking-widest">Launcher · localhost:3000</div>
-          <p class="text-sm text-on-surface-variant mt-1">단일 명령으로 v2 launcher 페이지가 뜸. 프로젝트 선택 + 에이전트 설정 + 실시간 운영 통제 진입점.</p>
+<p class="text-sm text-on-surface-variant mt-1">단일 명령으로 v2 launcher가 열립니다. 프로젝트 선택, 에이전트 설정, 실시간 운영 통제의 진입점입니다.</p>
         </div>
       </div>
     </div>
@@ -938,7 +935,7 @@ MONITOR.md 존재 시 읽기
       <a href="case-study-dxcenter.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 02</div>
         <h4 class="text-2xl font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
-          <p class="text-sm text-on-surface-variant mb-4">AI 협업을 적용해 정리한 디지털트윈 에디터 사례</p>
+<p class="text-sm text-on-surface-variant mb-4">AI 협업을 적용한 디지털트윈 에디터 사례</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="case-study-genworld-ollama.html" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">

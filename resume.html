@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
 <title>Resume | 홍대기</title>
-<meta name="description" content="홍대기의 Resume. 교육용 게임에서 출발해 VR/AR 안전교육, BIM 시각화와 설계 자동화, Unity Editor Tooling, AI 협업 적용과 로봇 제어로 이어진 경력 흐름을 정리했습니다."/>
+<meta name="description" content="홍대기의 Resume. 교육용 게임에서 출발해 VR/AR 안전교육, BIM 시각화와 설계 자동화, Unity Editor Tooling, AI 협업 적용과 로봇 제어로 이어진 경력 흐름을 담았습니다."/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"/>
@@ -42,15 +42,13 @@
       <div class="mt-2 font-label text-[10px] uppercase tracking-[0.24em] text-[#6c7a92]">Resume</div>
     </a>
   </div>
-  <nav class="flex flex-1 flex-col gap-2 px-4 py-6 font-label text-sm uppercase tracking-[0.16em] text-[#51607a]">
-    <a href="#overview" class="rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">Overview</a>
-    <a href="#growth" class="rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">Growth Flow</a>
-    <a href="#experience" class="rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">Experience</a>
-    <a href="#strengths" class="rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">Strengths</a>
-    <a href="#awards" class="rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">Awards</a>
-    <div class="mt-6 border-t border-[#d9e3f1] pt-6">
-      <a href="projects.html" class="block rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">Projects</a>
-      <a href="about.html" class="block rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">About</a>
+  <nav class="flex flex-1 flex-col px-4 py-6 font-label text-sm uppercase tracking-[0.16em] text-[#51607a]">
+    <div class="px-4 pb-3 text-[10px] tracking-[0.24em] text-[#8a97ac]">Across The Site</div>
+    <div class="flex flex-col gap-2">
+      <a href="index.html" class="rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">Home</a>
+      <a href="projects.html" class="rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">Projects</a>
+      <a href="about.html" class="rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">About</a>
+      <a href="cover-letter.html" class="rounded-md px-4 py-3 hover:bg-[#eef4fb] hover:text-[#2251b2]">Cover Letter</a>
     </div>
   </nav>
   <div class="px-6 pb-6">
@@ -76,33 +74,57 @@
   </div>
 </header>
 
-<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f4f7fb]/98 lg:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-  <div class="flex items-center justify-between px-4 py-4 sm:px-6">
-    <div class="font-headline text-2xl italic tracking-tight text-[#16325c]">Daeki Hong</div>
-    <button id="mobile-menu-close" class="p-2 text-[#16325c]" aria-label="메뉴 닫기">
-      <span class="material-symbols-outlined">close</span>
-    </button>
+<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl lg:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
+        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
+      </div>
+      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
   </div>
-  <div class="flex flex-1 flex-col justify-center gap-6 px-8">
-    <a href="index.html" class="font-headline text-3xl font-bold text-[#162033]">HOME</a>
-    <a href="projects.html" class="font-headline text-3xl font-bold text-[#162033]">PROJECTS</a>
-    <a href="about.html" class="font-headline text-3xl font-bold text-[#162033]">ABOUT</a>
-    <a href="resume.html" class="border-l-4 border-[#2251b2] pl-3 font-headline text-3xl font-bold text-[#16325c]">RESUME</a>
-    <a href="cover-letter.html" class="font-headline text-3xl font-bold text-[#162033]">COVER LETTER</a>
-    <hr class="border-[#d9e3f1]"/>
-    <a href="mailto:darkhtk@gmail.com" class="inline-flex w-fit items-center gap-2 rounded-md bg-[#16325c] px-6 py-3 font-headline font-bold text-white">
-      <span class="material-symbols-outlined">mail</span> CONNECT
-    </a>
-    <div class="flex gap-6 text-sm uppercase tracking-[0.18em] text-[#6c7a92]">
-      <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
+    <div class="grid gap-3">
+      <a href="index.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div>
+      </a>
+      <a href="projects.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">PROJECTS</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div>
+      </a>
+      <a href="about.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">ABOUT</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">일하는 기준과 방식</div>
+      </a>
+      <a href="resume.html" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">RESUME</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">경력 흐름과 핵심 이력</div>
+      </a>
+      <a href="cover-letter.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">COVER LETTER</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">상세 서술과 협업 방식</div>
+      </a>
+    </div>
+    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white">
+        <span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com
+      </a>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
+        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
+      </div>
     </div>
   </div>
 </div>
 
 <main class="px-4 pb-20 pt-28 sm:px-6 sm:pt-32 md:px-8 lg:ml-64">
   <div class="mx-auto max-w-7xl">
-    <section id="overview" class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+    <section class="grid grid-cols-1 gap-8 lg:grid-cols-12">
       <div class="lg:col-span-8">
         <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Curriculum</div>
         <h1 class="mt-4 max-w-5xl font-headline text-4xl leading-[1.18] tracking-tight text-[#162033] sm:text-5xl md:text-6xl">
@@ -127,9 +149,29 @@
           <li>최근에는 AI 협업을 실무에 적용하며 XR, 에디터, 백엔드, 제어 계층까지 함께 다루고 있습니다.</li>
         </ul>
       </div>
+      <div class="lg:col-span-12">
+        <div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <article class="card rounded-2xl p-6">
+            <h2 class="font-headline text-2xl font-bold text-[#162033]">XR / Simulation</h2>
+            <p class="mt-4 text-sm leading-7 text-[#51607a]">Quest, Vive, Oculus 기반 인터랙션과 현장형 XR 경험 설계.</p>
+          </article>
+          <article class="card rounded-2xl p-6">
+            <h2 class="font-headline text-2xl font-bold text-[#162033]">BIM / Visualization</h2>
+            <p class="mt-4 text-sm leading-7 text-[#51607a]">대용량 모델 처리, 최적화, 설계 자동화, 시각화 파이프라인.</p>
+          </article>
+          <article class="card rounded-2xl p-6">
+            <h2 class="font-headline text-2xl font-bold text-[#162033]">Editor Tooling / Automation</h2>
+            <p class="mt-4 text-sm leading-7 text-[#51607a]">제작자와 운영자의 반복 비용을 줄이는 저작도구와 자동화 설계.</p>
+          </article>
+          <article class="card rounded-2xl p-6">
+            <h2 class="font-headline text-2xl font-bold text-[#162033]">AI Collaboration / Robotics</h2>
+            <p class="mt-4 text-sm leading-7 text-[#51607a]">AI 협업 기반 구현과 로봇 제어, 통신, 안전 로직 연계 경험.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="growth" class="mt-20">
+    <section class="mt-20">
       <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Growth Flow</div>
       <div class="mt-8 grid grid-cols-1 gap-6">
         <article class="card rounded-2xl p-6 sm:p-8">
@@ -210,7 +252,7 @@
       </div>
     </section>
 
-    <section id="experience" class="mt-20">
+    <section class="mt-20">
       <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Experience</div>
       <div class="mt-8 grid grid-cols-1 gap-6">
         <article class="card rounded-2xl p-6 sm:p-8">
@@ -283,75 +325,42 @@
             </div>
           </div>
         </article>
-      </div>
-    </section>
 
-    <section id="strengths" class="mt-20">
-      <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Strengths</div>
-      <div class="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <div class="overflow-hidden rounded-2xl bg-white">
-          <img src="assets/images/vr_robot_expo1.png" alt="XR와 로보틱스 역량 대표 화면" class="h-28 w-full object-cover"/>
-        </div>
-        <div class="overflow-hidden rounded-2xl bg-white">
-          <img src="assets/images/watchbim_verticalgraph.png" alt="BIM 시각화 역량 대표 화면" class="h-28 w-full object-cover"/>
-        </div>
-        <div class="overflow-hidden rounded-2xl bg-white">
-          <img src="assets/images/customeditor.png" alt="Editor Tooling 역량 대표 화면" class="h-28 w-full object-cover"/>
-        </div>
-        <div class="overflow-hidden rounded-2xl bg-white">
-          <img src="assets/images/v2_dashboard_2.png" alt="AI 협업과 orchestration 역량 대표 화면" class="h-28 w-full object-cover"/>
-        </div>
-      </div>
-      <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <article class="card rounded-2xl p-6">
-          <h2 class="font-headline text-2xl font-bold text-[#162033]">XR / Simulation</h2>
-          <p class="mt-4 text-sm leading-7 text-[#51607a]">Quest, Vive, Oculus 기반 인터랙션과 현장형 XR 경험 설계.</p>
-        </article>
-        <article class="card rounded-2xl p-6">
-          <h2 class="font-headline text-2xl font-bold text-[#162033]">BIM / Visualization</h2>
-          <p class="mt-4 text-sm leading-7 text-[#51607a]">대용량 모델 처리, 최적화, 설계 자동화, 시각화 파이프라인.</p>
-        </article>
-        <article class="card rounded-2xl p-6">
-          <h2 class="font-headline text-2xl font-bold text-[#162033]">Editor Tooling / Automation</h2>
-          <p class="mt-4 text-sm leading-7 text-[#51607a]">제작자와 운영자의 반복 비용을 줄이는 저작도구와 자동화 설계.</p>
-        </article>
-        <article class="card rounded-2xl p-6">
-          <h2 class="font-headline text-2xl font-bold text-[#162033]">AI Collaboration / Robotics</h2>
-          <p class="mt-4 text-sm leading-7 text-[#51607a]">AI 협업 기반 구현과 로봇 제어, 통신, 안전 로직 연계 경험.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="awards" class="mt-20">
-      <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Recognition / References</div>
-      <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
         <article class="card rounded-2xl p-6 sm:p-8">
-    <h2 class="font-headline text-2xl font-bold text-[#162033]">Recognition</h2>
-          <ul class="mt-5 space-y-4 text-sm leading-7 text-[#51607a]">
-            <li>과학기술정보통신부 장관표창 (2025)</li>
-            <li>BIFAN XR Beyond Reality 공식 선정</li>
-            <li>해양 모빌리티 안전 엑스포 시연</li>
-          </ul>
-        </article>
-        <article class="card rounded-2xl p-8">
-    <h2 class="font-headline text-2xl font-bold text-[#162033]">Reference Links</h2>
-          <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-            <div class="overflow-hidden rounded-2xl bg-[#eef2f6]">
-              <img src="assets/images/vr_robot_expo2.png" alt="VR Robot reference thumbnail" class="h-24 w-full object-cover"/>
-            </div>
-            <div class="overflow-hidden rounded-2xl bg-[#eef2f6]">
-              <img src="assets/images/customeditor.png" alt="DXCenter reference thumbnail" class="h-24 w-full object-cover"/>
-            </div>
-            <div class="overflow-hidden rounded-2xl bg-[#eef2f6]">
-              <img src="assets/images/v2_launcher.png" alt="Orchestration reference thumbnail" class="h-24 w-full object-cover"/>
+          <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div>
+              <h2 class="font-headline text-2xl font-bold text-[#162033]">Recognition / References</h2>
+              <p class="mt-3 max-w-2xl text-sm leading-7 text-[#51607a]">경력의 신뢰도를 보강하는 선정 이력과 바로 확인할 수 있는 사례 링크입니다.</p>
             </div>
           </div>
-          <div class="mt-5 flex flex-wrap gap-3 text-xs">
-            <a href="projects.html" class="rounded-full bg-[#e9f0ff] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#2251b2]">Projects</a>
-            <a href="case-study-vr-robot.html" class="rounded-full bg-[#eef3f8] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#44506a]">VR Robot</a>
-            <a href="case-study-dxcenter.html" class="rounded-full bg-[#eef3f8] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#44506a]">DXCenter</a>
-            <a href="case-study-orchestration-ts.html" class="rounded-full bg-[#eef3f8] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#44506a]">Orchestration</a>
-            <a href="case-study-genworld-ollama.html" class="rounded-full bg-[#eef3f8] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#44506a]">GenWorld</a>
+          <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <ul class="space-y-4 text-sm leading-7 text-[#51607a]">
+                <li>과학기술정보통신부 장관표창 (2025)</li>
+                <li>BIFAN XR Beyond Reality 공식 선정</li>
+                <li>해양 모빌리티 안전 엑스포 시연</li>
+              </ul>
+            </div>
+            <div>
+              <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                <div class="overflow-hidden rounded-2xl bg-[#eef2f6]">
+                  <img src="assets/images/vr_robot_expo2.png" alt="VR Robot reference thumbnail" class="h-24 w-full object-cover"/>
+                </div>
+                <div class="overflow-hidden rounded-2xl bg-[#eef2f6]">
+                  <img src="assets/images/customeditor.png" alt="DXCenter reference thumbnail" class="h-24 w-full object-cover"/>
+                </div>
+                <div class="overflow-hidden rounded-2xl bg-[#eef2f6]">
+                  <img src="assets/images/v2_launcher.png" alt="Orchestration reference thumbnail" class="h-24 w-full object-cover"/>
+                </div>
+              </div>
+              <div class="mt-5 flex flex-wrap gap-3 text-xs">
+                <a href="projects.html" class="rounded-full bg-[#e9f0ff] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#2251b2]">Projects</a>
+                <a href="case-study-vr-robot.html" class="rounded-full bg-[#eef3f8] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#44506a]">VR Robot</a>
+                <a href="case-study-dxcenter.html" class="rounded-full bg-[#eef3f8] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#44506a]">DXCenter</a>
+                <a href="case-study-orchestration-ts.html" class="rounded-full bg-[#eef3f8] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#44506a]">Orchestration</a>
+                <a href="case-study-genworld-ollama.html" class="rounded-full bg-[#eef3f8] px-4 py-2 font-label uppercase tracking-[0.16em] text-[#44506a]">GenWorld</a>
+              </div>
+            </div>
           </div>
         </article>
       </div>

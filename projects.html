@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
 <title>Projects | 홍대기 포트폴리오</title>
-<meta name="description" content="홍대기의 대표 프로젝트 3개와 기반 경력 프로젝트. VR 로봇 원격 조종, 너스탤지아, DXCenter를 중심으로 산업용 Unity 실시간 시스템 경험과 AI 협업 적용 사례를 정리했습니다."/>
+<meta name="description" content="홍대기의 대표 프로젝트 3개와 기반 경력 프로젝트. VR 로봇 원격 조종, 너스탤지아, 오케스트레이션 프레임워크를 중심으로 산업용 Unity 실시간 시스템 경험과 AI 협업 적용 사례를 담았습니다."/>
 <meta property="og:title" content="Projects | 홍대기 포트폴리오"/>
 <meta property="og:description" content="대표 프로젝트 3개와 기반 경력 프로젝트를 통해 산업용 Unity 실시간 시스템 경험과 AI 협업 적용 사례를 보여 줍니다."/>
 <meta property="og:type" content="website"/>
@@ -68,39 +68,63 @@
   </div>
 </nav>
 
-<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f4f7fb]/98 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-  <div class="flex items-center justify-between px-4 py-4 sm:px-6">
-    <div class="font-headline text-2xl italic tracking-tight text-[#16325c]">Daeki Hong</div>
-    <button id="mobile-menu-close" class="p-2 text-[#16325c]" aria-label="메뉴 닫기">
-      <span class="material-symbols-outlined">close</span>
-    </button>
+<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
+        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
+      </div>
+      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
   </div>
-  <div class="flex flex-1 flex-col justify-center gap-6 px-8">
-    <a href="index.html" class="font-headline text-3xl font-bold text-[#162033]">HOME</a>
-    <a href="projects.html" class="border-l-4 border-[#2251b2] pl-3 font-headline text-3xl font-bold text-[#16325c]">PROJECTS</a>
-    <a href="about.html" class="font-headline text-3xl font-bold text-[#162033]">ABOUT</a>
-    <a href="resume.html" class="font-headline text-3xl font-bold text-[#162033]">RESUME</a>
-    <a href="cover-letter.html" class="font-headline text-3xl font-bold text-[#162033]">COVER LETTER</a>
-    <hr class="border-[#d9e3f1]"/>
-    <a href="mailto:darkhtk@gmail.com" class="inline-flex w-fit items-center gap-2 rounded-md bg-[#16325c] px-6 py-3 font-headline font-bold text-white">
-      <span class="material-symbols-outlined">mail</span> CONNECT
-    </a>
-    <div class="flex gap-6 text-sm uppercase tracking-[0.18em] text-[#6c7a92]">
-      <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
+    <div class="grid gap-3">
+      <a href="index.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div>
+      </a>
+      <a href="projects.html" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">PROJECTS</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div>
+      </a>
+      <a href="about.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">ABOUT</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">일하는 기준과 방식</div>
+      </a>
+      <a href="resume.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">RESUME</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">경력 흐름과 핵심 이력</div>
+      </a>
+      <a href="cover-letter.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">COVER LETTER</div>
+        <div class="mt-1 text-sm leading-6 text-[#51607a]">상세 서술과 협업 방식</div>
+      </a>
+    </div>
+    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white">
+        <span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com
+      </a>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
+        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
+      </div>
     </div>
   </div>
 </div>
 
 <main class="mx-auto max-w-7xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32 md:px-8">
   <header class="max-w-5xl">
-    <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Featured Projects</div>
+    <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">대표 프로젝트</div>
     <h1 class="mt-4 font-headline text-4xl leading-[1.18] tracking-tight text-[#162033] sm:text-5xl md:text-6xl">
       <span class="block">대표 프로젝트와 기반 경험</span>
-      <span class="block"><span class="text-[#1960A3] font-medium">문제를 해결해 온 방식</span></span>
+      <span class="block"><span class="text-[#1960A3] font-medium">문제를 풀어 온 흐름</span></span>
     </h1>
-    <p class="mt-6 max-w-4xl text-base leading-7 text-[#44506a]">
-      최근 프로젝트에서는 AI 협업 적용 방식을, 기반 경험에서는 그 이전부터 쌓아 온 실무 기반을 확인할 수 있습니다.
+    <p class="mt-6 max-w-3xl text-base leading-7 text-[#44506a]">
+      최근 프로젝트는 AI 협업 적용을, 기반 경험은 그 이전부터 쌓인 실무 기반을 보여 줍니다.
     </p>
   </header>
 
@@ -171,7 +195,7 @@
           <div class="lg:col-span-8">
             <div class="font-label text-[10px] uppercase tracking-[0.22em] text-[#2251b2] opacity-70">Entry_Ref: 2025-002</div>
             <h2 class="mt-4 font-headline text-2xl tracking-tight text-[#162033]">너스탤지아</h2>
-            <p class="mt-3 text-sm leading-7 text-[#586064] sm:text-base">XR 체험과 AI 기능, 운영 흐름을 함께 정리한 프로젝트.</p>
+              <p class="mt-3 text-sm leading-7 text-[#586064] sm:text-base">XR 체험 안에 AI 기능과 운영 구조를 함께 넣은 프로젝트.</p>
             <div class="mt-5 grid grid-cols-1 gap-3 text-sm md:grid-cols-2">
               <div class="bg-[#f8f9fa] p-4 text-[#44506a]">
                 <div class="font-label text-[10px] uppercase tracking-[0.12em] text-[#586064]">Problem</div>
@@ -247,9 +271,68 @@
   </section>
 
   <section class="mt-20">
+    <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Unity 문제 영역</div>
+    <div class="mt-4 max-w-4xl text-sm leading-7 text-[#51607a]">
+      XR 제어, 에디터 툴링, BIM 시각화, AI 런타임처럼 Unity로 다뤄 온 문제 영역입니다.
+    </div>
+    <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <article class="card rounded-2xl p-6">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">01</div>
+        <h3 class="mt-3 font-headline text-2xl tracking-tight text-[#162033]">Unity XR · Real-Time Control</h3>
+        <p class="mt-3 text-sm leading-7 text-[#51607a]">XR 입력, IK, 외부 장치 통신을 실시간 제어 구조로 연결해 온 영역입니다.</p>
+        <div class="mt-4 flex flex-wrap gap-2 text-xs">
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">VR 로봇 원격 조종</span>
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">IK Meta</span>
+        </div>
+        <div class="mt-4 text-sm leading-6 text-[#44506a]">런타임 IK, UDP 통신, 모션 기록, 보정 로직</div>
+      </article>
+      <article class="card rounded-2xl p-6">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">02</div>
+        <h3 class="mt-3 font-headline text-2xl tracking-tight text-[#162033]">Unity Editor Tooling · Authoring Systems</h3>
+        <p class="mt-3 text-sm leading-7 text-[#51607a]">Unity Editor를 제작자용 저작 도구와 검수 가능한 운영 구조로 확장해 온 영역입니다.</p>
+        <div class="mt-4 flex flex-wrap gap-2 text-xs">
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">DXCenter</span>
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">eGuide 계열</span>
+        </div>
+        <div class="mt-4 text-sm leading-6 text-[#44506a]">EditorWindow 기반 구조, 저작 Wizard, 검증기, EventBus, ServiceLocator</div>
+      </article>
+      <article class="card rounded-2xl p-6">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">03</div>
+        <h3 class="mt-3 font-headline text-2xl tracking-tight text-[#162033]">Unity BIM · Engineering Visualization</h3>
+        <p class="mt-3 text-sm leading-7 text-[#51607a]">대용량 BIM·토목 데이터를 실시간 탐색과 설계 검토 도구로 바꿔 온 영역입니다.</p>
+        <div class="mt-4 flex flex-wrap gap-2 text-xs">
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">WatchBIM</span>
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">횡단면 · 클리핑 도구</span>
+        </div>
+        <div class="mt-4 text-sm leading-6 text-[#44506a]">로더, 횡단면 생성, 클리핑, 수직 차트 도구</div>
+      </article>
+      <article class="card rounded-2xl p-6">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">04</div>
+        <h3 class="mt-3 font-headline text-2xl tracking-tight text-[#162033]">Unity XR Experience · AI Pipeline</h3>
+        <p class="mt-3 text-sm leading-7 text-[#51607a]">XR 체험 흐름 안에 음성, Flask, 생성형 AI, 환경 생성 파이프라인을 통합한 영역입니다.</p>
+        <div class="mt-4 flex flex-wrap gap-2 text-xs">
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">너스탤지아</span>
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">Youstalgia</span>
+        </div>
+        <div class="mt-4 text-sm leading-6 text-[#44506a]">체험 시퀀스, Flask 연동, Skybox 생성, 모델 관리</div>
+      </article>
+      <article class="card rounded-2xl p-6 lg:col-span-2">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">05</div>
+        <h3 class="mt-3 font-headline text-2xl tracking-tight text-[#162033]">Unity Game Systems · AI Runtime</h3>
+        <p class="mt-3 max-w-3xl text-sm leading-7 text-[#51607a]">게임 런타임 시스템 위에 NPC 상태, 기억, 대화, fallback 구조를 얹어 AI를 실제 플레이 흐름 안에서 검증한 영역입니다.</p>
+        <div class="mt-4 flex flex-wrap gap-2 text-xs">
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">GENWorld</span>
+          <span class="rounded-full bg-[#eef2f6] px-3 py-2 text-[#44506a]">Local LLM R&amp;D</span>
+        </div>
+        <div class="mt-4 text-sm leading-6 text-[#44506a]">NPC 상태 관리, 프롬프트 구성, 대화 제어, 퀘스트와 스킬 시스템</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="mt-20">
     <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Foundation Projects</div>
     <div class="mt-4 max-w-3xl text-sm leading-7 text-[#51607a]">
-      현재 포지셔닝의 기반이 된 영역만 압축해서 남겼습니다.
+      지금의 작업 방식은 아래 경험들 위에서 만들어졌습니다.
     </div>
     <div class="mt-8 space-y-0">
       <article class="grid grid-cols-1 items-center gap-4 py-8 md:grid-cols-12">
@@ -261,7 +344,7 @@
         </div>
         <h3 class="font-headline text-xl tracking-tight text-[#162033] md:col-span-4">고속도로 BIM 3D 시각화 + 설계 자동화</h3>
         <div class="text-sm text-[#586064] md:col-span-3">대용량 데이터 처리 · 최적화 · 설계 자동화</div>
-        <div class="text-sm text-[#586064] md:col-span-2">Background</div>
+        <div class="text-sm text-[#586064] md:col-span-2">기반 경력</div>
       </article>
       <article class="grid grid-cols-1 items-center gap-4 py-8 md:grid-cols-12">
         <div class="font-label text-xs font-bold text-[#586064] md:col-span-1">02</div>
@@ -272,7 +355,7 @@
         </div>
         <h3 class="font-headline text-xl tracking-tight text-[#162033] md:col-span-4">VR/AR 안전교육 시뮬레이션</h3>
         <div class="text-sm text-[#586064] md:col-span-3">현장형 XR · 하드웨어 연동 · 납품형 완성도</div>
-        <div class="text-sm text-[#586064] md:col-span-2">Background</div>
+        <div class="text-sm text-[#586064] md:col-span-2">기반 경력</div>
       </article>
       <article class="grid grid-cols-1 items-center gap-4 py-8 md:grid-cols-12">
         <div class="font-label text-xs font-bold text-[#586064] md:col-span-1">03</div>
@@ -283,7 +366,7 @@
         </div>
         <h3 class="font-headline text-xl tracking-tight text-[#162033] md:col-span-4">교육용 게임 및 서비스형 콘텐츠</h3>
         <div class="text-sm text-[#586064] md:col-span-3">교과 연계형 모바일 게임 · Android · 6개 구역 · 120단계</div>
-        <div class="text-sm text-[#586064] md:col-span-2">Background</div>
+        <div class="text-sm text-[#586064] md:col-span-2">기반 경력</div>
       </article>
       <article class="grid grid-cols-1 items-center gap-4 py-8 md:grid-cols-12">
         <div class="font-label text-xs font-bold text-[#586064] md:col-span-1">04</div>
@@ -294,7 +377,7 @@
         </div>
         <h3 class="font-headline text-xl tracking-tight text-[#162033] md:col-span-4">DXCenter + Unity Editor Tooling</h3>
         <div class="text-sm text-[#586064] md:col-span-3">에디터 · 운영 도구 · 제작 병목 감소</div>
-        <div class="text-sm text-[#586064] md:col-span-2">Background</div>
+        <div class="text-sm text-[#586064] md:col-span-2">기반 경력</div>
       </article>
     </div>
   </section>
@@ -302,9 +385,12 @@
   <section class="mt-20 rounded-3xl bg-[#eef2f6] px-6 py-10 sm:px-8 md:px-10">
     <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
       <div class="lg:col-span-8">
-        <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Read Together</div>
-        <h2 class="mt-4 max-w-3xl font-headline text-2xl font-bold tracking-tight text-[#162033]">프로젝트를 더 자세히 보려면 케이스 스터디와 Resume를 함께 보는 편이 좋습니다</h2>
-        <p class="mt-4 max-w-3xl text-sm leading-7 text-[#51607a] sm:text-base">케이스 스터디에서는 구현 맥락을, Resume에서는 경력 흐름을 확인할 수 있습니다.</p>
+        <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">관련 페이지</div>
+        <h2 class="mt-4 max-w-2xl font-headline text-2xl font-bold tracking-tight text-[#162033]">
+          <span class="block">케이스 스터디와 Resume</span>
+          <span class="block">함께 보기</span>
+        </h2>
+        <p class="mt-4 max-w-2xl text-sm leading-7 text-[#51607a] sm:text-base">구현 내용은 케이스 스터디에서, 경력 흐름은 Resume에서 이어집니다.</p>
       </div>
       <div class="flex flex-wrap gap-4 lg:col-span-4 lg:justify-end">
         <a href="resume.html" class="rounded-md bg-[#2251b2] px-8 py-4 font-headline font-bold text-white">Resume 보기</a>

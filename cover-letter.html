@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
 <title>Cover Letter · 홍대기</title>
-<meta name="description" content="홍대기 자기소개서. 제작 흐름을 정리하고, 대규모 데이터 처리와 성능 문제를 설계로 해결하며, 최근에는 AI 협업을 XR·에디터·백엔드·로봇 제어 실무에 적용해 온 산업용 Unity 개발자."/>
+<meta name="description" content="홍대기 자기소개서. 제작 흐름과 운영 구조를 다듬고, 대규모 데이터 처리와 성능 문제를 설계로 해결하며, 최근에는 AI 협업을 XR·에디터·백엔드·로봇 제어 실무에 적용해 온 산업용 Unity 개발자."/>
 <meta property="og:title" content="홍대기 Cover Letter"/>
 <meta property="og:description" content="구조와 도구로 협업 비용을 줄이고, 대규모 데이터 처리와 실시간 시스템 문제를 풀어 온 산업용 Unity 개발자."/>
 <meta property="og:type" content="article"/>
@@ -105,36 +105,33 @@
 </nav>
 
 <!-- Mobile menu overlay -->
-<div id="mobile-menu"
-     class="fixed inset-0 z-[60] bg-[#0c1324]/95 backdrop-blur-2xl hidden flex-col md:hidden"
-     role="dialog"
-     aria-modal="true"
-     aria-label="메인 메뉴">
-  <div class="flex justify-between items-center px-4 sm:px-6 py-4">
-    <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
-    <button id="mobile-menu-close"
-            class="p-2 text-on-surface hover:text-primary transition-colors"
-            aria-label="메뉴 닫기">
-      <span class="material-symbols-outlined">close</span>
-    </button>
+<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
+        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
+      </div>
+      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
   </div>
-
-  <div class="flex-1 flex flex-col justify-center px-8 gap-6">
-    <a href="index.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">HOME</a>
-    <a href="projects.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">PROJECTS</a>
-    <a href="about.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">ABOUT</a>
-    <a href="resume.html" class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors">RESUME</a>
-    <a href="cover-letter.html" class="font-headline text-3xl font-bold text-primary border-l-4 border-primary pl-3">COVER LETTER</a>
-
-    <hr class="border-outline-variant my-4"/>
-
-    <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold w-fit">
-      <span class="material-symbols-outlined">mail</span> CONNECT
-    </a>
-
-    <div class="flex gap-6 mt-2 text-sm font-body uppercase tracking-widest text-slate-400">
-      <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="hover:text-primary">GitHub</a>
-      <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="hover:text-primary">LinkedIn</a>
+  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
+    <div class="grid gap-3">
+      <a href="index.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
+      <a href="projects.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">PROJECTS</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
+<a href="about.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">ABOUT</div><div class="mt-1 text-sm leading-6 text-[#51607a]">일하는 기준과 방식</div></a>
+      <a href="resume.html" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">RESUME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력 흐름과 핵심 이력</div></a>
+      <a href="cover-letter.html" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">COVER LETTER</div><div class="mt-1 text-sm leading-6 text-[#51607a]">상세 서술과 협업 방식</div></a>
+    </div>
+    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white"><span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com</a>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
+        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
+      </div>
     </div>
   </div>
 </div>
@@ -213,7 +210,7 @@
   <!-- Section 4: AI (signature) -->
   <section class="cl-section mb-16">
     <div class="rounded-2xl bg-[#f1f4f6] p-8 md:p-12">
-      <div class="font-label text-xs text-primary font-bold tracking-[0.3em] uppercase mb-4">시그니처 섹션</div>
+      <div class="font-label text-xs text-primary font-bold tracking-[0.3em] uppercase mb-4">AI 적용 방식</div>
       <h2 class="max-w-4xl font-headline text-2xl md:text-3xl font-bold mb-10 text-[#162033] leading-tight">
         AI를 어디에 적용했고,
         어떤 방식으로 통제했는지
@@ -224,18 +221,18 @@
             <div class="flex h-9 w-9 items-center justify-center rounded-md bg-[#e9f0ff] text-sm font-bold text-[#1960A3]">1</div>
             <h3 class="font-headline text-xl font-bold text-[#162033]">제품 파이프라인 적용</h3>
           </div>
-          <p class="text-sm leading-7 text-[#51607a]">
-            너스탤지아 XR 콘텐츠에서는 음성 입력, Whisper, GPT, TTS, Skybox AI, Meshy를 하나의 흐름으로 묶고, Webhook 비동기 처리와 사용자별 저장 구조, 운영 대시보드까지 함께 정리했습니다.
-          </p>
+            <p class="text-sm leading-7 text-[#51607a]">
+              너스탤지아 XR 콘텐츠에서는 음성 입력, Whisper, GPT, TTS, Skybox AI, Meshy를 하나의 흐름으로 묶고, Webhook 비동기 처리와 사용자별 저장 구조, 운영 대시보드까지 연결했습니다.
+            </p>
         </article>
         <article class="rounded-2xl bg-white p-6 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
           <div class="flex items-center gap-3 mb-4">
             <div class="flex h-9 w-9 items-center justify-center rounded-md bg-[#e9f0ff] text-sm font-bold text-[#1960A3]">2</div>
             <h3 class="font-headline text-xl font-bold text-[#162033]">개발 과정 보조</h3>
           </div>
-          <p class="text-sm leading-7 text-[#51607a]">
-            VR 로봇 원격 조종에서는 입력 안정화, Flask API, UDP 브릿지, 안전 로직 구현에 AI 협업을 보조적으로 사용했고, DXCenter에서는 9개 EditorWindow와 패턴 정리를 같은 기준으로 다뤘습니다.
-          </p>
+            <p class="text-sm leading-7 text-[#51607a]">
+              VR 로봇 원격 조종에서는 입력 안정화, Flask API, UDP 브릿지, 안전 로직 구현에 AI 협업을 보조적으로 사용했고, DXCenter에서는 9개 EditorWindow와 패턴 분리를 같은 기준으로 다뤘습니다.
+            </p>
           <p class="mt-4 text-sm leading-7 text-[#51607a]">
             같은 기준을 GenWorld에도 적용해 로컬 Ollama LLM 기반 NPC 인지·대화 구조를 검증했습니다.
           </p>
@@ -245,9 +242,9 @@
             <div class="flex h-9 w-9 items-center justify-center rounded-md bg-[#e9f0ff] text-sm font-bold text-[#1960A3]">3</div>
             <h3 class="font-headline text-xl font-bold text-[#162033]">운영 방식 추출</h3>
           </div>
-          <p class="text-sm leading-7 text-[#51607a]">
-            프로젝트마다 반복되던 컨벤션, 금지 패턴, 검증 흐름을 정리해 다음 작업에서도 같은 기준을 유지할 수 있게 만들고 있습니다.
-          </p>
+            <p class="text-sm leading-7 text-[#51607a]">
+              프로젝트마다 반복되던 컨벤션, 금지 패턴, 검증 흐름을 남겨 두고 다음 작업에서도 같은 기준을 유지하고 있습니다.
+            </p>
         </article>
       </div>
     </div>
@@ -285,7 +282,7 @@
     <h2 class="font-headline text-2xl md:text-3xl font-bold mb-6 text-primary">마무리</h2>
     <div class="cl-body text-on-surface-variant">
       <p>
-        저는 제작 흐름을 정리하고, 대규모 데이터 처리와 성능 문제를 설계로 해결하며, 최근에는 AI 협업을 XR·에디터·백엔드·로봇 제어 실무에 적용하고 있습니다. 중요한 것은 AI 자체보다 실제로 동작하는 시스템과 유지 가능한 구조라고 생각합니다.
+        저는 제작 흐름과 운영 구조를 다듬고, 대규모 데이터 처리와 성능 문제를 설계로 해결하며, 최근에는 AI 협업을 XR·에디터·백엔드·로봇 제어 실무에 적용하고 있습니다. 중요한 것은 AI 자체보다 실제로 동작하는 시스템과 오래 유지할 수 있는 구조라고 생각합니다.
       </p>
     </div>
   </section>
