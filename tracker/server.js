@@ -174,6 +174,9 @@ function saveEnrichmentCache(cache) {
   fs.writeFileSync(ENRICHMENT_CACHE_FILE, JSON.stringify(cache, null, 2), "utf8");
 }
 
+const enrichmentQueue = new Set();
+let enrichmentWorkerRunning = false;
+
 async function enrichIp(ip) {
   const normalizedIp = normalizeIp(ip);
   if (!normalizedIp) {
@@ -230,6 +233,64 @@ async function enrichIp(ip) {
   return enriched;
 }
 
+function getCachedEnrichment(ip) {
+  const normalizedIp = normalizeIp(ip);
+  if (!normalizedIp) {
+    return {
+      normalizedIp: "",
+      reverseDns: "",
+      asn: "",
+      isp: "",
+      organization: "",
+      country: "",
+      city: ""
+    };
+  }
+
+  const cache = loadEnrichmentCache();
+  return cache[normalizedIp] || {
+    normalizedIp,
+    reverseDns: "",
+    asn: "",
+    isp: "",
+    organization: "",
+    country: "",
+    city: ""
+  };
+}
+
+function queueEnrichment(ip) {
+  const normalizedIp = normalizeIp(ip);
+  if (!normalizedIp) return;
+
+  const cache = loadEnrichmentCache();
+  if (cache[normalizedIp]) return;
+  if (enrichmentQueue.has(normalizedIp)) return;
+
+  enrichmentQueue.add(normalizedIp);
+  runEnrichmentWorker();
+}
+
+async function runEnrichmentWorker() {
+  if (enrichmentWorkerRunning) return;
+  enrichmentWorkerRunning = true;
+
+  try {
+    while (enrichmentQueue.size > 0) {
+      const [nextIp] = enrichmentQueue;
+      enrichmentQueue.delete(nextIp);
+      try {
+        await enrichIp(nextIp);
+      } catch (error) {}
+    }
+  } finally {
+    enrichmentWorkerRunning = false;
+    if (enrichmentQueue.size > 0) {
+      setImmediate(runEnrichmentWorker);
+    }
+  }
+}
+
 async function summarizeVisits(visits) {
   const pageCounts = new Map();
   const ipCounts = new Map();
@@ -253,11 +314,12 @@ async function summarizeVisits(visits) {
   }
 
   const enrichments = {};
-  await Promise.all(
-    [...ipSet].map(async (ip) => {
-      enrichments[ip] = await enrichIp(ip);
-    })
-  );
+  for (const ip of ipSet) {
+    enrichments[ip] = getCachedEnrichment(ip);
+    if (!enrichments[ip].asn && !enrichments[ip].isp && !enrichments[ip].organization && !enrichments[ip].country && !enrichments[ip].reverseDns) {
+      queueEnrichment(ip);
+    }
+  }
 
   const topPages = [...pageCounts.entries()]
     .map(([pathValue, views]) => ({ path: pathValue, views }))

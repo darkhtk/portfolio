@@ -63,10 +63,18 @@
     }).then(markSent).catch(function () {});
   }
 
+  function scheduleSend() {
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(send, { timeout: 2000 });
+      return;
+    }
+    window.setTimeout(send, 1200);
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", send, { once: true });
+    document.addEventListener("DOMContentLoaded", scheduleSend, { once: true });
   } else {
-    send();
+    scheduleSend();
   }
 
   window.PORTFOLIO_TRACKER = {
