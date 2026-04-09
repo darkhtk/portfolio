@@ -3,11 +3,11 @@ const path = require("path");
 const http = require("http");
 const https = require("https");
 const crypto = require("crypto");
-
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, "data");
 const DATA_FILE = path.join(DATA_DIR, "visits.jsonl");
 const EXCLUDED_IPS_FILE = path.join(DATA_DIR, "excluded-ips.json");
 const EXCLUDED_VISITOR_IDS_FILE = path.join(DATA_DIR, "excluded-visitor-ids.json");
+const ENRICHMENT_CACHE_FILE = path.join(DATA_DIR, "ip-enrichment-cache.json");
 const ORIGIN_ALLOWLIST = (process.env.ALLOWED_ORIGINS || "https://darkhtk.github.io,https://darkhtk.github.io/portfolio")
   .split(",")
   .map((value) => value.trim())
@@ -31,6 +31,9 @@ if (!fs.existsSync(EXCLUDED_IPS_FILE)) {
 }
 if (!fs.existsSync(EXCLUDED_VISITOR_IDS_FILE)) {
   fs.writeFileSync(EXCLUDED_VISITOR_IDS_FILE, "[]", "utf8");
+}
+if (!fs.existsSync(ENRICHMENT_CACHE_FILE)) {
+  fs.writeFileSync(ENRICHMENT_CACHE_FILE, "{}", "utf8");
 }
 
 function readBody(req) {
@@ -56,6 +59,11 @@ function getIp(req) {
     }
   }
   return req.socket.remoteAddress || "";
+}
+
+function normalizeIp(ip) {
+  const value = String(ip || "").trim();
+  return value.startsWith("::ffff:") ? value.slice(7) : value;
 }
 
 function corsHeaders(origin) {
@@ -154,12 +162,81 @@ function loadExclusions() {
   };
 }
 
-function summarizeVisits(visits) {
+function loadEnrichmentCache() {
+  try {
+    return JSON.parse(fs.readFileSync(ENRICHMENT_CACHE_FILE, "utf8"));
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveEnrichmentCache(cache) {
+  fs.writeFileSync(ENRICHMENT_CACHE_FILE, JSON.stringify(cache, null, 2), "utf8");
+}
+
+async function enrichIp(ip) {
+  const normalizedIp = normalizeIp(ip);
+  if (!normalizedIp) {
+    return {
+      normalizedIp: "",
+      reverseDns: "",
+      asn: "",
+      isp: "",
+      organization: "",
+      country: "",
+      city: ""
+    };
+  }
+
+  const cache = loadEnrichmentCache();
+  if (cache[normalizedIp]) {
+    return cache[normalizedIp];
+  }
+
+  let asn = "";
+  let isp = "";
+  let organization = "";
+  let country = "";
+  let city = "";
+  let reverseDns = "";
+
+  try {
+    const response = await fetch(`http://ip-api.com/json/${encodeURIComponent(normalizedIp)}?fields=status,message,country,city,isp,org,as,reverse,query`);
+    if (response.ok) {
+      const payload = await response.json();
+      if (payload && payload.status === "success") {
+        reverseDns = payload.reverse || "";
+        asn = payload.as || "";
+        isp = payload.isp || "";
+        organization = payload.org || "";
+        country = payload.country || "";
+        city = payload.city || "";
+      }
+    }
+  } catch (error) {}
+
+  const enriched = {
+    normalizedIp,
+    reverseDns,
+    asn,
+    isp,
+    organization,
+    country,
+    city
+  };
+
+  cache[normalizedIp] = enriched;
+  saveEnrichmentCache(cache);
+  return enriched;
+}
+
+async function summarizeVisits(visits) {
   const pageCounts = new Map();
   const ipCounts = new Map();
   const visitorCounts = new Map();
   const uniqueIps = new Set();
   const uniqueVisitors = new Set();
+  const ipSet = new Set();
 
   for (const visit of visits) {
     pageCounts.set(visit.path, (pageCounts.get(visit.path) || 0) + 1);
@@ -167,7 +244,15 @@ function summarizeVisits(visits) {
     visitorCounts.set(visit.visitorId, (visitorCounts.get(visit.visitorId) || 0) + 1);
     if (visit.ip) uniqueIps.add(visit.ip);
     if (visit.visitorId) uniqueVisitors.add(visit.visitorId);
+    if (visit.ip) ipSet.add(visit.ip);
   }
+
+  const enrichments = {};
+  await Promise.all(
+    [...ipSet].map(async (ip) => {
+      enrichments[ip] = await enrichIp(ip);
+    })
+  );
 
   const topPages = [...pageCounts.entries()]
     .map(([pathValue, views]) => ({ path: pathValue, views }))
@@ -175,7 +260,7 @@ function summarizeVisits(visits) {
     .slice(0, 15);
 
   const topIps = [...ipCounts.entries()]
-    .map(([ip, views]) => ({ ip, views }))
+    .map(([ip, views]) => ({ ip, views, enrichment: enrichments[ip] || {} }))
     .sort((a, b) => b.views - a.views)
     .slice(0, 20);
 
@@ -195,7 +280,10 @@ function summarizeVisits(visits) {
     topPages,
     topIps,
     topVisitors,
-    recent: visits.slice(0, 50),
+    recent: visits.slice(0, 50).map((visit) => ({
+      ...visit,
+      enrichment: enrichments[visit.ip] || {}
+    })),
     exclusions
   };
 }
@@ -439,7 +527,7 @@ function dashboardTemplate(summary) {
       <div>
         <div class="eyebrow">Portfolio Tracker</div>
         <h1>GitHub Pages 방문 집계</h1>
-        <p class="sub">같은 public IP, visitor id, 페이지별 조회 수를 NAS에서 직접 집계합니다. 이 화면은 Basic Auth로 보호되며 최근 방문 로그도 함께 보여줍니다.</p>
+        <p class="sub">같은 public IP, visitor id, 페이지별 조회 수를 NAS에서 직접 집계합니다. reverse DNS, ASN/ISP, 국가·도시 정보도 함께 보여 주어 접속 출처를 더 빨리 읽을 수 있게 했습니다.</p>
       </div>
       <div class="hint">tracker: ${escapeHtml(TRACKER_BASE_URL || "not configured")}</div>
     </section>
@@ -499,14 +587,18 @@ function dashboardTemplate(summary) {
       <article class="panel span-6">
         <h2>IP별 조회 수</h2>
         <table>
-          <thead><tr><th>IP</th><th>Views</th></tr></thead>
+          <thead><tr><th>IP</th><th>Network</th><th>Views</th></tr></thead>
           <tbody>
             ${listRows(summary.topIps, (item) => `
               <tr>
-                <td class="mono">${escapeHtml(item.ip)}</td>
+                <td class="mono">${escapeHtml(item.enrichment.normalizedIp || item.ip)}</td>
+                <td>
+                  <div>${escapeHtml(item.enrichment.reverseDns || item.enrichment.isp || item.enrichment.organization || "-")}</div>
+                  <div class="muted">${escapeHtml([item.enrichment.asn, item.enrichment.country, item.enrichment.city].filter(Boolean).join(" · ") || "-")}</div>
+                </td>
                 <td>${escapeHtml(item.views)}</td>
               </tr>
-            `)}
+            `, 3)}
           </tbody>
         </table>
       </article>
@@ -529,15 +621,19 @@ function dashboardTemplate(summary) {
       <article class="panel span-6">
         <h2>최근 방문 로그</h2>
         <table>
-          <thead><tr><th>시간</th><th>Page</th><th>IP</th></tr></thead>
+          <thead><tr><th>시간</th><th>Page</th><th>IP</th><th>Network</th></tr></thead>
           <tbody>
             ${listRows(summary.recent, (item) => `
               <tr>
                 <td>${escapeHtml(item.createdAt)}</td>
                 <td class="mono">${escapeHtml(item.path)}</td>
-                <td class="mono">${escapeHtml(item.ip)}</td>
+                <td class="mono">${escapeHtml(item.enrichment.normalizedIp || item.ip)}</td>
+                <td>
+                  <div>${escapeHtml(item.enrichment.reverseDns || item.enrichment.isp || item.enrichment.organization || "-")}</div>
+                  <div class="muted">${escapeHtml([item.enrichment.asn, item.enrichment.country, item.enrichment.city].filter(Boolean).join(" · ") || "-")}</div>
+                </td>
               </tr>
-            `)}
+            `, 4)}
           </tbody>
         </table>
       </article>
@@ -642,7 +738,7 @@ function makeVisit(req, payload) {
   return {
     id: crypto.randomUUID(),
     createdAt: new Date().toISOString(),
-    ip: getIp(req),
+    ip: normalizeIp(getIp(req)),
     path: payload.path || "/",
     title: payload.title || "",
     referrer: payload.referrer || "",
@@ -711,7 +807,7 @@ async function requestHandler(req, res) {
 
   if (req.url === "/api/exclusions/current-ip" && req.method === "POST") {
     if (!requireAuth(req, res)) return;
-    const value = getIp(req);
+    const value = normalizeIp(getIp(req));
     const excludedIps = writeExclusions("ip", "add", value);
     json(res, 200, { ok: true, value, excludedIps });
     return;
@@ -743,13 +839,13 @@ async function requestHandler(req, res) {
 
   if (req.url === "/api/stats") {
     if (!requireAuth(req, res)) return;
-    json(res, 200, summarizeVisits(loadVisits()));
+    json(res, 200, await summarizeVisits(loadVisits()));
     return;
   }
 
   if (req.url === "/" || req.url === "/dashboard") {
     if (!requireAuth(req, res)) return;
-    html(res, 200, dashboardTemplate(summarizeVisits(loadVisits())));
+    html(res, 200, dashboardTemplate(await summarizeVisits(loadVisits())));
     return;
   }
 

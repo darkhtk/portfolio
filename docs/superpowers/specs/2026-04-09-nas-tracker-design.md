@@ -12,6 +12,7 @@ GitHub Pages 포트폴리오 방문을 개인 NAS에서 직접 집계한다.
 - 보호된 대시보드 제공
 - GitHub Pages 정적 사이트와 연동 가능
 - 특정 IP와 visitor id 제외 가능
+- reverse DNS, ASN/ISP, 국가/도시 표시 가능
 
 ## Architecture
 
@@ -50,3 +51,9 @@ GitHub Pages 포트폴리오 방문을 개인 NAS에서 직접 집계한다.
 - 서버에서 `excluded-ips.json`, `excluded-visitor-ids.json` 유지
 - 저장 전에 `ip`, `visitorId` 기준으로 제외 검사
 - 클라이언트에서는 `?tracker_exclude=1` 로 현재 브라우저 추적 비활성화
+
+## Network Attribution
+
+- reverse DNS: Node DNS reverse lookup
+- ASN/ISP/Geo: 외부 IP metadata API 조회 후 캐시
+- 목적: 사람 식별이 아니라 통신사, 회사망, 클라우드 대역 등 접속 출처 추정
