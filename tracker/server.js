@@ -6,6 +6,8 @@ const crypto = require("crypto");
 
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, "data");
 const DATA_FILE = path.join(DATA_DIR, "visits.jsonl");
+const EXCLUDED_IPS_FILE = path.join(DATA_DIR, "excluded-ips.json");
+const EXCLUDED_VISITOR_IDS_FILE = path.join(DATA_DIR, "excluded-visitor-ids.json");
 const ORIGIN_ALLOWLIST = (process.env.ALLOWED_ORIGINS || "https://darkhtk.github.io,https://darkhtk.github.io/portfolio")
   .split(",")
   .map((value) => value.trim())
@@ -23,6 +25,12 @@ const SSL_CERT_PATH = process.env.SSL_CERT_PATH || "/certs/fullchain.pem";
 fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(DATA_FILE)) {
   fs.writeFileSync(DATA_FILE, "", "utf8");
+}
+if (!fs.existsSync(EXCLUDED_IPS_FILE)) {
+  fs.writeFileSync(EXCLUDED_IPS_FILE, "[]", "utf8");
+}
+if (!fs.existsSync(EXCLUDED_VISITOR_IDS_FILE)) {
+  fs.writeFileSync(EXCLUDED_VISITOR_IDS_FILE, "[]", "utf8");
 }
 
 function readBody(req) {
@@ -125,6 +133,27 @@ function loadVisits() {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 }
 
+function loadList(filePath) {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveList(filePath, values) {
+  const uniqueValues = [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))].sort();
+  fs.writeFileSync(filePath, JSON.stringify(uniqueValues, null, 2), "utf8");
+  return uniqueValues;
+}
+
+function loadExclusions() {
+  return {
+    excludedIps: loadList(EXCLUDED_IPS_FILE),
+    excludedVisitorIds: loadList(EXCLUDED_VISITOR_IDS_FILE)
+  };
+}
+
 function summarizeVisits(visits) {
   const pageCounts = new Map();
   const ipCounts = new Map();
@@ -155,6 +184,8 @@ function summarizeVisits(visits) {
     .sort((a, b) => b.views - a.views)
     .slice(0, 20);
 
+  const exclusions = loadExclusions();
+
   return {
     totals: {
       views: visits.length,
@@ -164,7 +195,8 @@ function summarizeVisits(visits) {
     topPages,
     topIps,
     topVisitors,
-    recent: visits.slice(0, 50)
+    recent: visits.slice(0, 50),
+    exclusions
   };
 }
 
@@ -185,10 +217,10 @@ function dashboardTemplate(summary) {
     </article>
   `;
 
-  const listRows = (items, render) =>
+  const listRows = (items, render, colspan = 3) =>
     items.length
       ? items.map(render).join("")
-      : `<tr><td colspan="3" class="empty-cell">아직 데이터가 없습니다.</td></tr>`;
+      : `<tr><td colspan="${colspan}" class="empty-cell">아직 데이터가 없습니다.</td></tr>`;
 
   return `<!DOCTYPE html>
 <html lang="ko">
@@ -289,6 +321,10 @@ function dashboardTemplate(summary) {
       font-size: 22px;
       line-height: 1.2;
     }
+    .panel h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+    }
     .span-6 { grid-column: span 6; }
     .span-12 { grid-column: span 12; }
     table {
@@ -323,6 +359,73 @@ function dashboardTemplate(summary) {
       color: var(--muted);
       font-size: 13px;
     }
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .field {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+    }
+    .button {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--accent);
+      color: #fff;
+    }
+    .button.secondary {
+      background: #e8eef7;
+      color: var(--text);
+    }
+    .button.danger {
+      background: #b42318;
+      color: #fff;
+    }
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eef3f8;
+      color: var(--text);
+      font-size: 13px;
+      margin: 0 8px 8px 0;
+    }
+    .inline-button {
+      border: 0;
+      background: transparent;
+      color: #b42318;
+      font: inherit;
+      cursor: pointer;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
     @media (max-width: 900px) {
       .span-6, .span-12 { grid-column: span 12; }
       .shell { padding: 24px 14px 40px; }
@@ -345,6 +448,36 @@ function dashboardTemplate(summary) {
       ${metricCard("총 조회 수", summary.totals.views)}
       ${metricCard("고유 Public IP", summary.totals.uniqueIps)}
       ${metricCard("고유 Visitor ID", summary.totals.uniqueVisitors)}
+    </section>
+
+    <section class="panel-grid">
+      <article class="panel span-12">
+        <h2>제외 목록 관리</h2>
+        <div class="actions">
+          <div class="stack">
+            <h3>현재 접속 IP 제외</h3>
+            <p class="muted">대시보드에 접속한 현재 public IP를 바로 제외 목록에 추가합니다.</p>
+            <div class="toolbar">
+              <button class="button" type="button" onclick="excludeCurrentIp()">현재 IP 제외</button>
+              <button class="button secondary" type="button" onclick="refreshStats()">새로고침</button>
+            </div>
+          </div>
+          <div class="stack">
+            <h3>IP 수동 추가</h3>
+            <input id="ip-input" class="field" type="text" placeholder="예: 221.146.72.221">
+            <button class="button" type="button" onclick="addExcludedIp()">IP 제외 추가</button>
+          </div>
+          <div class="stack">
+            <h3>Visitor ID 수동 추가</h3>
+            <input id="visitor-input" class="field" type="text" placeholder="portfolio_tracker_visitor_id 값">
+            <button class="button" type="button" onclick="addExcludedVisitor()">Visitor ID 제외 추가</button>
+            <p class="muted">내 브라우저는 포트폴리오 페이지에서 <code>?tracker_exclude=1</code>로 제외 상태를 켤 수 있습니다.</p>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button class="button secondary" type="button" onclick="alert('포트폴리오 URL 뒤에 ?tracker_exclude=1 을 붙여 열면 현재 브라우저에서 추적을 끕니다.\\n예: https://darkhtk.github.io/portfolio/?tracker_exclude=1\\n다시 켜려면 ?tracker_exclude=0 을 사용하세요.')">현재 브라우저 제외 방법 보기</button>
+        </div>
+      </article>
     </section>
 
     <section class="panel-grid">
@@ -408,10 +541,95 @@ function dashboardTemplate(summary) {
           </tbody>
         </table>
       </article>
+
+      <article class="panel span-6">
+        <h2>제외된 IP</h2>
+        <div>
+          ${summary.exclusions.excludedIps.length
+            ? summary.exclusions.excludedIps.map((ip) => `
+                <span class="pill mono">
+                  ${escapeHtml(ip)}
+                  <button class="inline-button" type="button" onclick="removeExcludedIp('${escapeHtml(ip)}')">삭제</button>
+                </span>
+              `).join("")
+            : `<div class="empty-cell">제외된 IP가 없습니다.</div>`}
+        </div>
+      </article>
+
+      <article class="panel span-6">
+        <h2>제외된 Visitor ID</h2>
+        <div>
+          ${summary.exclusions.excludedVisitorIds.length
+            ? summary.exclusions.excludedVisitorIds.map((visitorId) => `
+                <span class="pill mono">
+                  ${escapeHtml(visitorId)}
+                  <button class="inline-button" type="button" onclick="removeExcludedVisitor('${escapeHtml(visitorId)}')">삭제</button>
+                </span>
+              `).join("")
+            : `<div class="empty-cell">제외된 Visitor ID가 없습니다.</div>`}
+        </div>
+      </article>
     </section>
 
     <p class="footer">참고: public IP는 NAT, VPN, Private Relay 환경에서 여러 사용자가 같은 값으로 보일 수 있습니다. 사람 단위라기보다 접속 출처 단위에 가깝습니다.</p>
   </main>
+  <script>
+    async function request(path, options) {
+      const response = await fetch(path, Object.assign({
+        headers: { "Content-Type": "application/json" }
+      }, options || {}));
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+      return response.json();
+    }
+
+    async function refreshStats() {
+      location.reload();
+    }
+
+    async function excludeCurrentIp() {
+      const payload = await request('/api/exclusions/current-ip', { method: 'POST' });
+      alert('제외된 IP: ' + payload.value);
+      refreshStats();
+    }
+
+    async function addExcludedIp() {
+      const value = document.getElementById('ip-input').value.trim();
+      if (!value) return;
+      await request('/api/exclusions/ip', {
+        method: 'POST',
+        body: JSON.stringify({ value: value })
+      });
+      refreshStats();
+    }
+
+    async function addExcludedVisitor() {
+      const value = document.getElementById('visitor-input').value.trim();
+      if (!value) return;
+      await request('/api/exclusions/visitor', {
+        method: 'POST',
+        body: JSON.stringify({ value: value })
+      });
+      refreshStats();
+    }
+
+    async function removeExcludedIp(value) {
+      await request('/api/exclusions/ip', {
+        method: 'DELETE',
+        body: JSON.stringify({ value: value })
+      });
+      refreshStats();
+    }
+
+    async function removeExcludedVisitor(value) {
+      await request('/api/exclusions/visitor', {
+        method: 'DELETE',
+        body: JSON.stringify({ value: value })
+      });
+      refreshStats();
+    }
+  </script>
 </body>
 </html>`;
 }
@@ -436,6 +654,29 @@ function makeVisit(req, payload) {
   };
 }
 
+function shouldExclude(visit) {
+  const exclusions = loadExclusions();
+  return exclusions.excludedIps.includes(visit.ip) || exclusions.excludedVisitorIds.includes(visit.visitorId);
+}
+
+function readJsonBody(raw) {
+  return raw ? JSON.parse(raw) : {};
+}
+
+function writeExclusions(type, operation, value) {
+  if (!value) {
+    throw new Error("Value is required");
+  }
+
+  const filePath = type === "ip" ? EXCLUDED_IPS_FILE : EXCLUDED_VISITOR_IDS_FILE;
+  const currentValues = loadList(filePath);
+  const nextValues = operation === "remove"
+    ? currentValues.filter((item) => item !== value)
+    : [...currentValues, value];
+
+  return saveList(filePath, nextValues);
+}
+
 async function requestHandler(req, res) {
   const origin = req.headers.origin || "";
   const headers = corsHeaders(origin);
@@ -454,12 +695,48 @@ async function requestHandler(req, res) {
   if (req.url === "/track" && req.method === "POST") {
     try {
       const raw = await readBody(req);
-      const payload = raw ? JSON.parse(raw) : {};
+      const payload = readJsonBody(raw);
       const visit = makeVisit(req, payload);
+      if (shouldExclude(visit)) {
+        json(res, 200, { ok: true, excluded: true }, headers);
+        return;
+      }
       writeVisit(visit);
       json(res, 200, { ok: true }, headers);
     } catch (error) {
       json(res, 400, { ok: false, error: error.message }, headers);
+    }
+    return;
+  }
+
+  if (req.url === "/api/exclusions/current-ip" && req.method === "POST") {
+    if (!requireAuth(req, res)) return;
+    const value = getIp(req);
+    const excludedIps = writeExclusions("ip", "add", value);
+    json(res, 200, { ok: true, value, excludedIps });
+    return;
+  }
+
+  if (req.url === "/api/exclusions/ip" && (req.method === "POST" || req.method === "DELETE")) {
+    if (!requireAuth(req, res)) return;
+    try {
+      const payload = readJsonBody(await readBody(req));
+      const excludedIps = writeExclusions("ip", req.method === "DELETE" ? "remove" : "add", String(payload.value || "").trim());
+      json(res, 200, { ok: true, excludedIps });
+    } catch (error) {
+      json(res, 400, { ok: false, error: error.message });
+    }
+    return;
+  }
+
+  if (req.url === "/api/exclusions/visitor" && (req.method === "POST" || req.method === "DELETE")) {
+    if (!requireAuth(req, res)) return;
+    try {
+      const payload = readJsonBody(await readBody(req));
+      const excludedVisitorIds = writeExclusions("visitor", req.method === "DELETE" ? "remove" : "add", String(payload.value || "").trim());
+      json(res, 200, { ok: true, excludedVisitorIds });
+    } catch (error) {
+      json(res, 400, { ok: false, error: error.message });
     }
     return;
   }
