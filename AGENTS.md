@@ -36,14 +36,14 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 | 파일 | 역할 | nav 패턴 |
 |---|---|---|
 | `index.html` | Home (Hero + 3 Pillars + Featured Project) | A |
-| `projects.html` | Selected Works — bento grid + 6 필터 | A |
-| `about.html` | About + Tech Ecosystem | A-variant (`hero-gradient` 커스텀 CSS 클래스 사용) |
-| `resume.html` | Resume — 사이드바 + TopAppBar 레이아웃 | C (특수) |
-| `cover-letter.html` | 자기소개서 6 섹션 (max-w-5xl) | A |
-| `case-study-vr-robot.html` | VR 로봇 + 자체 IK 솔버 (Case Study 01) | B |
-| `case-study-dxcenter.html` | DXCenter LG에너지솔루션 (Case Study 02) | B |
-| `case-study-orchestration-ts.html` | Multi-Agent Orchestration Framework (Case Study 03) — `.code-block` CSS 가짐 | B |
-| `case-study-genworld-ollama.html` | GenWorld + Ollama R&D (Case Study 04) | B |
+| `projects/index.html` | Selected Works — bento grid + 6 필터 | A |
+| `about/index.html` | About + Tech Ecosystem | A-variant (`hero-gradient` 커스텀 CSS 클래스 사용) |
+| `resume/index.html` | Resume — 사이드바 + TopAppBar 레이아웃 | C (특수) |
+| `cover-letter/index.html` | 자기소개서 6 섹션 (max-w-5xl) | A |
+| `projects/vr-robot/index.html` | VR 로봇 + 자체 IK 솔버 (Case Study 01) | B |
+| `projects/dxcenter/index.html` | DXCenter LG에너지솔루션 (Case Study 02) | B |
+| `projects/orchestration-ts/index.html` | Multi-Agent Orchestration Framework (Case Study 03) — `.code-block` CSS 가짐 | B |
+| `projects/genworld-ollama/index.html` | GenWorld + Ollama R&D (Case Study 04) | B |
 
 ## Nav Patterns (4 variants)
 
@@ -58,7 +58,7 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 - **Pattern B** (3 case studies):
   - Connect 버튼이 desktop nav 안 (`<div class="hidden md:flex">` 안의 마지막 항목)
   - 모바일용 별도 `<div class="md:hidden flex items-center gap-3">` 안에 mail 아이콘 + 햄버거
-- **Pattern C** (resume.html — 특수):
+- **Pattern C** (resume/index.html — 특수):
   - `<aside>` SideNavBar (`hidden lg:flex w-64 fixed`) + `<header>` TopAppBar
   - 햄버거는 TopAppBar 우측에 위치 (`md:hidden`)
   - 사이드바는 lg+ 에서만, 데스크톱 nav는 md+ 에서, 햄버거는 md 미만에서
@@ -201,7 +201,7 @@ colors: {
 - branch: `mobile-responsive-redesign` (보존)
 
 ### 2026-04-08: GenWorld + Ollama Case Study (2차 작업)
-- `case-study-genworld-ollama.html` 신규 생성 (Case Study 04, R&D 톤)
+- `projects/genworld-ollama/index.html` 신규 생성 (Case Study 04, R&D 톤)
 - 통합: projects (카드+필터) / cover-letter (단락) / resume (R&D 항목) / README / 3개 기존 case study cross-ref
 - 4개 스크린샷 추가, 3개 사용 (Hero, § 2, § 5), 1개 미사용 보관
 - 새 'Local LLM' 필터 추가 (`data-filter="local-llm"`)
