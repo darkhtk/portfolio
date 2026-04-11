@@ -6,17 +6,17 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
-<title>GenWorld + Ollama — Local LLM NPC Cognition · Case Study · 홍대기</title>
+<title>GenWorld + Ollama — 로컬 LLM NPC 인지 구조 · 사례 · 홍대기</title>
 <meta name="description" content="Phaser 3 TS RPG를 Unity 2D C#으로 포팅하면서 로컬 Ollama LLM 기반 NPC 인지·대화 시스템을 설계·구현한 R&D 사례. 오프라인 우선과 graceful fallback 구조를 검증했습니다."/>
-<meta property="og:title" content="GenWorld + Ollama · Local LLM NPC Cognition · Case Study"/>
+<meta property="og:title" content="GenWorld + Ollama · 로컬 LLM NPC 인지 구조 · 사례"/>
 <meta property="og:description" content="Phaser 3 TS RPG → Unity 2D 포팅 + 로컬 LLM 기반 NPC 인지 시스템. R&D · 자사 기술 실증."/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/genworld-ollama/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="GenWorld + Ollama · Case Study"/>
-<meta name="twitter:description" content="Local LLM NPC Cognition · R&D 자사 기술 실증."/>
+<meta name="twitter:title" content="GenWorld + Ollama · 사례"/>
+<meta name="twitter:description" content="로컬 LLM NPC 인지 구조 · R&D 자사 기술 실증."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -43,7 +43,10 @@
   }
 </script>
 <style>
+  html { line-break: strict; }
   body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
+  .display-manual { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; hyphens: none; }
+  .hero-copy { max-inline-size: 34ch; text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
   .font-headline { font-style: normal !important; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .bg-background, .bg-surface { background-color: #f8f9fa !important; }
@@ -82,6 +85,8 @@
   @media (max-width: 640px) {
     .code-block { padding: 12px; font-size: 11px; line-height: 1.5; }
   }
+  @media (min-width: 640px) { .hero-copy { max-inline-size: 40ch; } }
+  @media (min-width: 1024px) { .hero-copy { max-inline-size: 46ch; } }
 </style>
 </head>
 <body class="bg-background text-on-background">
@@ -94,13 +99,13 @@
       <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY REAL-TIME SYSTEMS</div>
     </a>
     <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../../">Home</a>
-      <a class="text-primary border-b-2 border-primary pb-1" href="../">Projects</a>
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../../about/">Profile</a>
-      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">Connect</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="../../">홈</a>
+      <a class="text-primary border-b-2 border-primary pb-1" href="../">프로젝트</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="../../about/">프로필</a>
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">문의</a>
     </div>
     <div class="md:hidden flex items-center gap-3">
-      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-2 rounded-md hover:scale-95 active:scale-90 transition-transform" aria-label="Connect">
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-2 rounded-md hover:scale-95 active:scale-90 transition-transform" aria-label="문의하기">
         <span class="material-symbols-outlined text-lg align-middle">mail</span>
       </a>
       <button id="mobile-menu-toggle"
@@ -129,14 +134,14 @@
   </div>
   <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
     <div class="grid gap-3">
-      <a href="../../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
-      <a href="../" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">PROJECTS</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
-<a href="../../about/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">PROFILE</div><div class="mt-1 text-sm leading-6 text-[#51607a]">소개, 경력, 협업 방식을 한 번에 읽기</div></a>
+      <a href="../../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">홈</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
+      <a href="../" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">프로젝트</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
+      <a href="../../about/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">프로필</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력과 협업 기준 보기</div></a>
       
       
     </div>
     <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
-      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">문의</div>
       <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white"><span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com</a>
       <div class="mt-4 flex flex-wrap gap-3 text-sm">
         <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
@@ -154,50 +159,50 @@
       <div class="lg:col-span-8">
 
         <div class="flex flex-wrap items-center gap-4 mb-6">
-          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">Case Study 04</span>
-          <span class="text-outline text-xs font-label uppercase tracking-widest">Local LLM · Game Runtime · R&amp;D</span>
+          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">사례 04</span>
+          <span class="text-outline text-xs font-label uppercase tracking-widest">로컬 LLM · 게임 런타임 · R&amp;D</span>
           <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-primary-fixed/15 text-primary-fixed text-[10px] uppercase tracking-widest font-label">
             <span class="material-symbols-outlined text-[10px]">science</span>
             R&amp;D
           </span>
         </div>
 
-        <h1 class="max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
+        <h1 class="display-manual max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
           <span class="block"><span class="text-primary">GenWorld</span> + Ollama</span>
-          <span class="mt-2 block text-lg sm:text-2xl text-slate-400">Local LLM NPC Cognition</span>
+          <span class="mt-2 block text-lg sm:text-2xl text-slate-400">로컬 LLM NPC 인지 구조</span>
         </h1>
 
-        <p class="text-base text-on-surface-variant leading-relaxed mb-8 max-w-3xl">
+        <p class="hero-copy text-base text-on-surface-variant leading-relaxed mb-8 max-w-3xl">
           Phaser 3 TypeScript RPG(<span class="text-on-surface">testgame2</span>)를 <span class="text-on-surface">Unity 2D C#</span>로 포팅하면서, 게임 런타임에 <span class="text-primary-fixed">로컬 Ollama LLM(gemma3)</span> 기반 <span class="text-on-surface">NPC 인지·대화 시스템</span>을 설계·구현했습니다. 클라우드 API 의존 없이 <span class="text-primary-fixed">오프라인 우선 + graceful fallback</span> 구조를 검토한 사례입니다.
         </p>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
           <div>
             <div class="font-headline text-xl sm:text-2xl font-bold text-primary">Local LLM</div>
-            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Stack Core</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">핵심 기술</div>
           </div>
           <div>
             <div class="font-headline text-xl sm:text-2xl font-bold text-primary">gemma3 4B/12B</div>
-            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Models</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">모델</div>
           </div>
           <div>
             <div class="font-headline text-xl sm:text-2xl font-bold text-primary">4 CLI</div>
-            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Role-Split Workflow</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">역할 분리 워크플로</div>
           </div>
           <div>
             <div class="font-headline text-xl sm:text-2xl font-bold text-primary">100%</div>
-            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">Offline Capable</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">오프라인 대응</div>
           </div>
         </div>
 
         <div class="flex flex-wrap gap-3">
           <a href="https://github.com/darkhtk/game-GenWorld" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-surface-container-low hover:bg-surface-container-highest rounded-md text-sm font-headline font-bold transition-all">
             <span class="material-symbols-outlined text-base">hub</span>
-            GitHub Repository
+            GitHub 저장소
           </a>
           <a href="../" class="inline-flex items-center gap-2 px-5 py-2.5 bg-surface-container-low hover:bg-surface-container-highest rounded-md text-sm font-headline font-bold transition-all">
             <span class="material-symbols-outlined text-base">arrow_back</span>
-            All Projects
+            전체 프로젝트
           </a>
         </div>
 
@@ -209,8 +214,8 @@
           <img loading="lazy" src="../../assets/images/genworld-world.png" alt="GenWorld 게임 월드 뷰 — 탑다운 2D 픽셀 RPG, NPC와 몬스터(늑대·고블린·나무정령) 배치된 숲 환경" class="w-full h-full object-cover"/>
           <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent pointer-events-none"></div>
           <div class="absolute bottom-4 left-4 right-4">
-            <div class="font-label text-[10px] text-primary-fixed tracking-widest uppercase opacity-90">GenWorld · Game World</div>
-            <div class="font-label text-[9px] text-slate-400 tracking-widest uppercase mt-0.5">Unity 6 · 2D Pixel · NPC + Monster</div>
+            <div class="font-label text-[10px] text-primary-fixed tracking-widest uppercase opacity-90">GenWorld · 게임 월드</div>
+            <div class="font-label text-[9px] text-slate-400 tracking-widest uppercase mt-0.5">Unity 6 · 2D 픽셀 · NPC + 몬스터</div>
           </div>
         </div>
       </div>
@@ -221,7 +226,7 @@
   <!-- § 1. The Challenge -->
   <section class="py-16 sm:py-20 md:py-32 bg-surface-container-low relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 1 · The Challenge</div>
+      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 1 · 문제 정의</div>
       <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">왜 로컬 LLM인가</h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
@@ -251,7 +256,7 @@
   <!-- § 2. Local LLM Operation -->
   <section class="py-16 sm:py-20 md:py-32 bg-surface relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 2 · Local LLM Operation</div>
+      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 2 · 로컬 LLM 운영</div>
       <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">OllamaClient 운영 + Graceful Fallback</h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
@@ -315,7 +320,7 @@
   <!-- § 3. NPC Cognitive Architecture -->
   <section class="py-16 sm:py-20 md:py-32 bg-surface-container-low relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 3 · NPC Cognitive Architecture</div>
+      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 3 · NPC 인지 구조</div>
       <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">NPCBrain — mood · relationship · memory · triggers</h2>
 
       <p class="text-on-surface-variant text-base leading-relaxed mb-10 max-w-4xl">
@@ -407,12 +412,12 @@ DialogueUI shows text + option buttons</div>
   <!-- § 4. Phaser TS → Unity 2D Port + AI Augmentation -->
   <section class="py-16 sm:py-20 md:py-32 bg-surface relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 4 · Port + AI Augmentation</div>
+      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 4 · 포팅과 AI 확장</div>
       <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">Phaser 3 TS RPG → Unity 2D + Local LLM</h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         <div>
-          <div class="font-label text-xs text-slate-500 uppercase tracking-widest mb-3">Original</div>
+          <div class="font-label text-xs text-slate-500 uppercase tracking-widest mb-3">원본</div>
           <div class="bg-surface-container-highest/40 p-6 rounded-xl">
             <h3 class="font-headline text-lg font-bold text-on-surface mb-3">testgame2 (Phaser 3 + TypeScript)</h3>
             <ul class="text-on-surface-variant text-sm space-y-2 leading-relaxed">
@@ -425,7 +430,7 @@ DialogueUI shows text + option buttons</div>
         </div>
 
         <div>
-          <div class="font-label text-xs text-slate-500 uppercase tracking-widest mb-3">Ported + Augmented</div>
+          <div class="font-label text-xs text-slate-500 uppercase tracking-widest mb-3">포팅 후 AI 확장</div>
           <div class="bg-surface-container-highest/40 p-6 rounded-xl">
             <h3 class="font-headline text-lg font-bold text-on-surface mb-3">GenWorld (Unity 6 + C#)</h3>
             <ul class="text-on-surface-variant text-sm space-y-2 leading-relaxed">
@@ -456,7 +461,7 @@ DialogueUI shows text + option buttons</div>
   <!-- § 5. Result & Verification -->
   <section class="py-16 sm:py-20 md:py-32 bg-surface-container-low relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 5 · Result &amp; Verification</div>
+      <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 5 · 결과와 검증</div>
       <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-8 max-w-3xl">동작 검증 + 안정성 개선 진행 중</h2>
 
       <!-- Screenshot — NPC dialogue UI with Mood/Relationship indicator -->
@@ -500,7 +505,7 @@ DialogueUI shows text + option buttons</div>
       </div>
 
       <p class="text-on-surface-variant text-base leading-relaxed max-w-4xl">
-        이 case study는 산업 환경 밖에서도 같은 협업 패턴과 로컬 LLM 운영 방식이 적용 가능한지 확인해 본 R&amp;D 사례입니다. 여기서 다룬 <span class="text-on-surface">로컬 LLM 운영, 인지 구조, 포팅 방식</span>은 다른 실시간 인터랙션 프로젝트에도 참고할 수 있습니다.
+        이 사례는 산업 환경 밖에서도 같은 협업 패턴과 로컬 LLM 운영 방식이 적용 가능한지 확인해 본 R&amp;D 사례입니다. 여기서 다룬 <span class="text-on-surface">로컬 LLM 운영, 인지 구조, 포팅 방식</span>은 다른 실시간 인터랙션 프로젝트에도 참고할 수 있습니다.
       </p>
     </div>
   </section>
@@ -509,23 +514,23 @@ DialogueUI shows text + option buttons</div>
   <section class="py-16 sm:py-20 md:py-32 bg-surface relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div class="font-label text-xs text-primary tracking-[0.3em] uppercase mb-4">§ 6 · 함께 보면 좋은 사례</div>
-      <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-10 max-w-3xl">Other Case Studies</h2>
+      <h2 class="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-10 max-w-3xl">다른 사례</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <a href="../vr-robot/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 01</div>
+          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 01</div>
           <h4 class="text-2xl font-headline font-bold mb-3">VR 로봇 원격 조종 + 자체 IK 솔버</h4>
           <p class="text-sm text-on-surface-variant mb-4">Quest 3 기반 산업용 로봇 원격 조종 사례</p>
           <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
         </a>
         <a href="../dxcenter/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 02</div>
+          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 02</div>
           <h4 class="text-2xl font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
 <p class="text-sm text-on-surface-variant mb-4">AI 협업을 적용한 디지털트윈 에디터 사례</p>
           <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
         </a>
       <a href="../orchestration-ts/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Open Source · Workflow Framework</div>
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">오픈소스 · 협업 프레임워크</div>
           <h4 class="text-2xl font-headline font-bold mb-3">Multi-Agent Orchestration Framework</h4>
 <p class="text-sm text-on-surface-variant mb-4">협업 방식을 반복해서 쓸 수 있게 만든 도구</p>
           <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
@@ -544,11 +549,11 @@ DialogueUI shows text + option buttons</div>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="https://github.com/darkhtk/game-GenWorld" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-md font-headline font-bold hover:scale-95 active:scale-90 transition-transform">
           <span class="material-symbols-outlined">hub</span>
-          GitHub Repository
+          GitHub 저장소
         </a>
         <a href="../" class="inline-flex items-center gap-2 px-6 py-3 bg-surface-container-highest hover:bg-surface-container rounded-md font-headline font-bold transition-all">
           <span class="material-symbols-outlined">arrow_back</span>
-          All Projects
+          전체 프로젝트
         </a>
       </div>
     </div>
@@ -566,7 +571,7 @@ DialogueUI shows text + option buttons</div>
     <div class="flex gap-8">
       <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">Email</a>
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">이메일</a>
     </div>
   </div>
 </footer>
@@ -603,3 +608,4 @@ window.PORTFOLIO_TRACKER_ENDPOINT = 'https://semirain.synology.me:3443/track';
 
 </body>
 </html>
+

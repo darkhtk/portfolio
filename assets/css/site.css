@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: smooth;
+  line-break: strict;
 }
 
 body {
@@ -34,6 +35,8 @@ body {
     radial-gradient(circle at 85% 10%, rgba(215, 121, 61, 0.12), transparent 24%),
     linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
   color: var(--ink);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 body.menu-open {
@@ -305,6 +308,43 @@ a {
   color: var(--brand);
 }
 
+.display-balance {
+  max-inline-size: 13ch;
+  text-wrap: balance;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.display-manual {
+  text-wrap: pretty;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.heading-balance {
+  max-inline-size: 16ch;
+  text-wrap: balance;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.copy-measure {
+  max-inline-size: 36ch;
+  text-wrap: pretty;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.hero-copy {
+  max-inline-size: 34ch;
+  text-wrap: pretty;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
 @media (min-width: 640px) {
   .metric-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -313,10 +353,36 @@ a {
   .summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .display-balance {
+    max-inline-size: 14ch;
+  }
+
+  .heading-balance {
+    max-inline-size: 18ch;
+  }
+
+  .copy-measure,
+  .hero-copy {
+    max-inline-size: 40ch;
+  }
 }
 
 @media (min-width: 1024px) {
   .metric-strip {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .display-balance {
+    max-inline-size: 15ch;
+  }
+
+  .heading-balance {
+    max-inline-size: 20ch;
+  }
+
+  .copy-measure,
+  .hero-copy {
+    max-inline-size: 46ch;
   }
 }

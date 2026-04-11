@@ -6,16 +6,16 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
-<title>VR 로봇 원격 조종 + 자체 IK 솔버 — Case Study · 홍대기</title>
+<title>VR 로봇 원격 조종 + 자체 IK 솔버 — 사례 · 홍대기</title>
 <meta name="description" content="Meta Quest 3로 산업용 로봇 Doosan A0912를 실시간 원격 조종한 프로젝트. Unity VR, Flask, RoboDK, 안전 로직, 후속 IK 솔버 R&D까지 포함한 실제 시연 사례."/>
-<meta property="og:title" content="VR 로봇 원격 조종 + 자체 IK 솔버 · Case Study"/>
+<meta property="og:title" content="VR 로봇 원격 조종 + 자체 IK 솔버 · 사례"/>
 <meta property="og:description" content="실제 산업용 로봇을 조종하고 부산 벡스코 엑스포 전시까지 이어진 프로젝트. 후속 R&D로 RoboDK 의존 없이 IK 알고리즘까지 확장."/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/vr-robot/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="VR 로봇 원격 조종 · Case Study"/>
+<meta name="twitter:title" content="VR 로봇 원격 조종 · 사례"/>
 <meta name="twitter:description" content="실제 산업용 로봇 원격 조종과 엑스포 시연으로 이어진 VR 로봇 프로젝트."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
@@ -43,7 +43,10 @@
   }
 </script>
 <style>
+  html { line-break: strict; }
   body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
+  .display-manual { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; hyphens: none; }
+  .hero-copy { max-inline-size: 34ch; text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
   .font-headline { font-style: normal !important; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .bg-background, .bg-surface { background-color: #f8f9fa !important; }
@@ -64,6 +67,8 @@
   .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
   .neural-bg { background-image: radial-gradient(circle at 2px 2px, rgba(25, 96, 163, 0.12) 1px, transparent 0); background-size: 40px 40px; opacity: 0.45; }
   .pipeline-block { font-family: 'Consolas', 'D2Coding', monospace; }
+  @media (min-width: 640px) { .hero-copy { max-inline-size: 40ch; } }
+  @media (min-width: 1024px) { .hero-copy { max-inline-size: 46ch; } }
 </style>
 </head>
 <body class="bg-background text-on-background">
@@ -76,13 +81,13 @@
       <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY REAL-TIME SYSTEMS</div>
     </a>
     <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../../">Home</a>
-      <a class="text-primary border-b-2 border-primary pb-1" href="../">Projects</a>
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../../about/">Profile</a>
-      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">Connect</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="../../">홈</a>
+      <a class="text-primary border-b-2 border-primary pb-1" href="../">프로젝트</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="../../about/">프로필</a>
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">문의</a>
     </div>
     <div class="md:hidden flex items-center gap-3">
-      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-2 rounded-md hover:scale-95 active:scale-90 transition-transform" aria-label="Connect">
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-2 rounded-md hover:scale-95 active:scale-90 transition-transform" aria-label="문의하기">
         <span class="material-symbols-outlined text-lg align-middle">mail</span>
       </a>
       <button id="mobile-menu-toggle"
@@ -111,14 +116,14 @@
   </div>
   <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
     <div class="grid gap-3">
-      <a href="../../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
-      <a href="../" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">PROJECTS</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
-<a href="../../about/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">PROFILE</div><div class="mt-1 text-sm leading-6 text-[#51607a]">소개, 경력, 협업 방식을 한 번에 읽기</div></a>
+      <a href="../../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">홈</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
+      <a href="../" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">프로젝트</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
+      <a href="../../about/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">프로필</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력과 협업 기준 보기</div></a>
       
       
     </div>
     <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
-      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">문의</div>
       <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white"><span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com</a>
       <div class="mt-4 flex flex-wrap gap-3 text-sm">
         <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
@@ -136,20 +141,20 @@
       <div class="lg:col-span-8">
 
         <div class="flex flex-wrap items-center gap-4 mb-6">
-          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">Case Study 01</span>
-          <span class="text-outline text-xs font-label uppercase tracking-widest">Industrial Robotics · XR</span>
+          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">사례 01</span>
+          <span class="text-outline text-xs font-label uppercase tracking-widest">산업용 로보틱스 · XR</span>
           <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-primary-fixed/15 text-primary-fixed text-[10px] uppercase tracking-widest font-label">
             <span class="material-symbols-outlined text-[10px]">military_tech</span>
             엑스포 시연
           </span>
         </div>
 
-        <h1 class="max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
+        <h1 class="display-manual max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
           <span class="block text-primary">VR 로봇 원격 조종 시스템</span>
           <span class="mt-2 block text-lg sm:text-2xl text-slate-400">+ 자체 IK 솔버</span>
         </h1>
 
-        <p class="text-base text-on-surface-variant max-w-2xl font-body leading-relaxed">
+        <p class="hero-copy text-base text-on-surface-variant max-w-2xl font-body leading-relaxed">
           Meta Quest 3 VR 컨트롤러로 산업용 로봇(Doosan A0912)을 원격 조종한 프로젝트입니다. <span class="text-on-surface">Unity VR ↔ Flask ↔ RoboDK ↔ 실 로봇</span> 파이프라인과 안전 로직을 구현했고, 이후 <span class="text-on-surface">Jacobian 기반 IK 솔버</span> 구현으로 이어졌습니다.
         </p>
       </div>
@@ -207,13 +212,13 @@
     </div>
   </section>
 
-  <!-- The Challenge & 4 Stat Tiles -->
+  <!-- 문제 정의 & 4 Stat Tiles -->
   <section class="bg-surface-container-low py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
 
         <div>
-          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">The Challenge</h2>
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">문제 정의</h2>
           <h3 class="text-3xl font-headline font-bold text-on-surface mb-8">산업용 로봇을 VR로 안전하게 조종하기</h3>
           <div class="space-y-6 text-on-surface-variant font-body leading-relaxed">
             <p>Meta Quest 3 VR 컨트롤러로 산업용 로봇(Doosan A0912)을 <span class="text-on-surface">실시간 원격 조종</span>하는 시스템이 필요했다. 단순한 데모가 아니라 <span class="text-on-surface">RoboDK SIM과 실 로봇 양쪽에서 동작</span>해야 하고, 엑스포 현장에서 실제 관람객 앞에서 시연해야 했다.</p>
@@ -248,9 +253,9 @@
     </div>
   </section>
 
-  <!-- Architecture Design (Bento Grid) -->
+  <!-- 구조 설계 (Bento Grid) -->
   <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-12 text-center">Architecture Design</h2>
+    <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-12 text-center">구조 설계</h2>
 
     <!-- Pipeline Block -->
     <div class="mb-12 rounded-2xl border border-[#d9e3f1] bg-[#f1f4f6] p-8 text-sm leading-relaxed text-[#243047]">
@@ -319,11 +324,11 @@
         </div>
       </div>
 
-      <!-- Safety Logic -->
+      <!-- 안전 로직 -->
       <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8">
         <div class="flex items-center gap-3 mb-4">
           <span class="material-symbols-outlined text-primary text-2xl">shield</span>
-          <h4 class="text-lg font-headline font-bold">Safety Logic</h4>
+          <h4 class="text-lg font-headline font-bold">안전 로직</h4>
         </div>
         <p class="text-sm text-on-surface-variant leading-relaxed mb-3">
           엑스포 현장에서 사람이 옆에 있는 상태로 시연. 실패할 수 없는 안전 요건.
@@ -344,21 +349,21 @@
         <p class="text-[10px] text-outline font-label">Quest 3 ↔ Robot Base 좌표계</p>
       </div>
 
-      <!-- Calibration -->
+      <!-- 캘리브레이션 -->
       <div class="bg-surface-container-low rounded-xl p-8 flex flex-col items-center justify-center text-center">
         <span class="material-symbols-outlined text-primary text-5xl mb-4">tune</span>
-        <h4 class="text-sm font-label font-bold uppercase mb-2">Calibration</h4>
+        <h4 class="text-sm font-label font-bold uppercase mb-2">캘리브레이션</h4>
         <p class="text-[10px] text-outline font-label">/calibrate/add → /solve 자동 행렬</p>
       </div>
     </div>
   </section>
 
-  <!-- AI Collaboration Workflow Section -->
+  <!-- AI 협업 흐름 Section -->
   <section class="bg-[#eef2f6] py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-7">
-          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">AI Collaboration Workflow</h2>
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">AI 협업 흐름</h2>
           <h3 class="text-3xl font-headline font-bold mb-8">AI 협업을 활용한 구현 방식</h3>
           <div class="space-y-5 text-on-surface-variant font-body leading-relaxed text-base sm:text-lg">
             <p>이 프로젝트에서 AI 협업은 Flask 서버, 4-스레드 UDP 브릿지, 안전 로직처럼 반복 구현량이 큰 구간에 집중적으로 사용했습니다.</p>
@@ -381,7 +386,7 @@
               </div>
             </div>
             <div class="mt-6 rounded-xl bg-[#eef2f6] p-4">
-              <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-2">Outputs</div>
+              <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-2">산출물</div>
               <ul class="text-xs text-on-surface-variant space-y-1">
                 <li>· Unity 21개 C# 파일</li>
                 <li>· Python 브릿지 2개 (787 LOC)</li>
@@ -398,7 +403,7 @@
   <!-- Sub: 자체 IK 솔버 R&D -->
   <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <div class="flex items-center gap-4 mb-12">
-      <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">Sub-Project · R&amp;D</span>
+      <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">후속 연구 · R&amp;D</span>
       <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary">자체 IK 솔버 — RoboDK 의존 없이 확장한 후속 R&amp;D</h2>
     </div>
 
@@ -437,7 +442,7 @@
       <div class="lg:col-span-5">
         <div class="sticky top-28 space-y-4">
           <div class="p-6 bg-surface-container-highest rounded-xl">
-            <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Why It Matters</div>
+            <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">왜 중요한가</div>
             <p class="text-sm text-on-surface-variant leading-relaxed">
               <span class="text-on-surface">Jacobian 기반 IK는 일반적으로 로보틱스 전문 개발자가 수주~수개월 걸려 구현하는 영역.</span>
             이 후속 R&amp;D는 로봇 제어 경험이 단순 연동을 넘어 수학 알고리즘과 실시간 제약까지 다룰 수 있는 수준으로 이어졌다는 점을 보여 줍니다.
@@ -496,7 +501,7 @@
           <img loading="lazy" src="../../assets/images/ik_debug_ui.png" alt="IK 솔버 디버그 UI" class="w-full h-full object-cover"/>
           <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
           <div class="absolute bottom-2 left-2 right-2">
-            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">Debug UI</div>
+            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">디버그 UI</div>
             <div class="text-[9px] text-slate-400">IK 솔버 모니터링</div>
           </div>
         </div>
@@ -509,14 +514,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
         <div class="lg:col-span-5">
-          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">Project Impact</h2>
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">프로젝트 의미</h2>
         <h3 class="text-3xl font-headline font-bold mb-8">엑스포 시연</h3>
           <p class="text-on-surface-variant font-body leading-relaxed mb-8">
             2025 대한민국 해양 모빌리티 안전 엑스포(부산 벡스코)에서 현장 시연을 진행했습니다. 관람객 앞에서 VR 컨트롤러로 실제 산업용 로봇을 조종했습니다.
           </p>
           <blockquote class="p-6 bg-surface border-l-4 border-primary rounded-r-xl text-on-surface/80 font-body">
 <p class="italic mb-2">"산업용 제약과 안전 조건 아래에서 구현과 검증을 반복해 실제 로봇 시연까지 진행한 사례."</p>
-            <footer class="mt-3 text-xs not-italic font-label uppercase tracking-widest text-primary">Project Self-Description</footer>
+            <footer class="mt-3 text-xs not-italic font-label uppercase tracking-widest text-primary">프로젝트 요약</footer>
           </blockquote>
         </div>
 
@@ -549,22 +554,22 @@
 
   <!-- Cross-Reference -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h3 class="font-headline text-2xl font-bold text-center mb-8">Other Case Studies</h3>
+    <h3 class="font-headline text-2xl font-bold text-center mb-8">다른 사례</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <a href="../dxcenter/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 02</div>
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 02</div>
         <h4 class="text-2xl font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
         <p class="text-sm text-on-surface-variant mb-4">9 EditorWindow + 5 patterns + AI 협업 적용</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../orchestration-ts/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Open Source · Workflow Framework</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">Multi-Agent Orchestration Framework</h4>
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">오픈소스 · 협업 프레임워크</div>
+        <h4 class="text-2xl font-headline font-bold mb-3">멀티 에이전트 오케스트레이션</h4>
 <p class="text-sm text-on-surface-variant mb-4">AI 협업 방식을 반복해서 쓸 수 있게 만든 도구</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../genworld-ollama/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 04 · R&amp;D</div>
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 04 · R&amp;D</div>
         <h4 class="text-2xl font-headline font-bold mb-3">GenWorld + Ollama</h4>
         <p class="text-sm text-on-surface-variant mb-4">Phaser 3 TS RPG → Unity 2D + 로컬 LLM 기반 NPC 인지 시스템</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
@@ -583,7 +588,7 @@
     <div class="flex gap-8">
       <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">Email</a>
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">이메일</a>
     </div>
   </div>
 </footer>
@@ -620,3 +625,4 @@ window.PORTFOLIO_TRACKER_ENDPOINT = 'https://semirain.synology.me:3443/track';
 
 </body>
 </html>
+

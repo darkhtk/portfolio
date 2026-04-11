@@ -6,7 +6,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
-<title>DXCenter — LG에너지솔루션 디지털트윈 에디터 · Case Study · 홍대기</title>
+<title>DXCenter — LG에너지솔루션 디지털트윈 에디터 · 사례 · 홍대기</title>
 <meta name="description" content="비개발자가 코드 수정 없이 디지털트윈 콘텐츠를 제작·검수·배포할 수 있도록 만든 Unity 에디터 확장. 9개 EditorWindow와 5가지 패턴으로 제작 흐름을 구조화한 사례."/>
 <meta property="og:title" content="DXCenter · LG에너지솔루션 디지털트윈 에디터"/>
 <meta property="og:description" content="Unity 6 LTS · 9 EditorWindow · 5 아키텍처 패턴 · 비개발자도 다룰 수 있는 디지털트윈 저작도구 구조."/>
@@ -43,7 +43,10 @@
   }
 </script>
 <style>
+  html { line-break: strict; }
   body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
+  .display-manual { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; hyphens: none; }
+  .hero-copy { max-inline-size: 34ch; text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
   .font-headline { font-style: normal !important; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .bg-background, .bg-surface { background-color: #f8f9fa !important; }
@@ -63,6 +66,8 @@
   .from-primary { --tw-gradient-from: #1960A3 var(--tw-gradient-from-position) !important; --tw-gradient-to: rgb(25 96 163 / 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
   .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
   .neural-bg { background-image: radial-gradient(circle at 2px 2px, rgba(25, 96, 163, 0.12) 1px, transparent 0); background-size: 40px 40px; opacity: 0.45; }
+  @media (min-width: 640px) { .hero-copy { max-inline-size: 40ch; } }
+  @media (min-width: 1024px) { .hero-copy { max-inline-size: 46ch; } }
 </style>
 </head>
 <body class="bg-background text-on-background">
@@ -75,13 +80,13 @@
       <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY REAL-TIME SYSTEMS</div>
     </a>
     <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../../">Home</a>
-      <a class="text-primary border-b-2 border-primary pb-1" href="../">Projects</a>
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../../about/">Profile</a>
-      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">Connect</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="../../">홈</a>
+      <a class="text-primary border-b-2 border-primary pb-1" href="../">프로젝트</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="../../about/">프로필</a>
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">문의</a>
     </div>
     <div class="md:hidden flex items-center gap-3">
-      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-2 rounded-md hover:scale-95 active:scale-90 transition-transform" aria-label="Connect">
+      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-2 rounded-md hover:scale-95 active:scale-90 transition-transform" aria-label="문의하기">
         <span class="material-symbols-outlined text-lg align-middle">mail</span>
       </a>
       <button id="mobile-menu-toggle"
@@ -110,14 +115,14 @@
   </div>
   <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
     <div class="grid gap-3">
-      <a href="../../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
-      <a href="../" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">PROJECTS</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
-<a href="../../about/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">PROFILE</div><div class="mt-1 text-sm leading-6 text-[#51607a]">소개, 경력, 협업 방식을 한 번에 읽기</div></a>
+      <a href="../../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">홈</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
+      <a href="../" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">프로젝트</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
+      <a href="../../about/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">프로필</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력과 협업 기준 보기</div></a>
       
       
     </div>
     <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
-      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
+      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">문의</div>
       <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white"><span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com</a>
       <div class="mt-4 flex flex-wrap gap-3 text-sm">
         <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
@@ -135,20 +140,20 @@
       <div class="lg:col-span-8">
 
         <div class="flex flex-wrap items-center gap-4 mb-6">
-          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">Case Study 02</span>
-          <span class="text-outline text-xs font-label uppercase tracking-widest">Unity Editor · AI Collaboration</span>
+          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">사례 02</span>
+          <span class="text-outline text-xs font-label uppercase tracking-widest">Unity 에디터 · AI 협업</span>
           <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-primary-fixed/15 text-primary-fixed text-[10px] uppercase tracking-widest font-label">
             <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
             재직 중
           </span>
         </div>
 
-        <h1 class="max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
+        <h1 class="display-manual max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
           <span class="block"><span class="text-primary">DXCenter</span></span>
           <span class="mt-2 block">LG에너지솔루션 디지털트윈 에디터</span>
         </h1>
 
-        <p class="text-base sm:text-lg text-on-surface-variant max-w-2xl font-body leading-relaxed">
+        <p class="hero-copy text-base sm:text-lg text-on-surface-variant max-w-2xl font-body leading-relaxed">
           <span class="text-on-surface">비개발자(콘텐츠 제작자)가 코드 수정 없이 디지털트윈 콘텐츠를 제작·검수·배포할 수 있는</span> Unity 에디터 확장 저작도구. LG에너지솔루션 PRI 교육·시각화 시스템.
         </p>
       </div>
@@ -159,7 +164,7 @@
           <span class="font-label text-sm font-bold tracking-widest uppercase">test-customwindow_rims</span>
         </a>
         <div class="p-4 bg-primary/5 rounded-md">
-          <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-2">Stack</div>
+          <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-2">기술 구성</div>
           <div class="flex flex-wrap gap-2">
             <span class="px-2 py-1 bg-surface-container-highest rounded font-label text-[10px] text-primary">Unity 6 LTS</span>
             <span class="px-2 py-1 bg-surface-container-highest rounded font-label text-[10px] text-primary">URP · WebGL</span>
@@ -191,13 +196,13 @@
     </div>
   </section>
 
-  <!-- The Challenge & 4 Stat Tiles -->
+  <!-- 문제 정의 & 4 Stat Tiles -->
   <section class="bg-surface-container-low py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
 
         <div>
-          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">The Challenge</h2>
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">문제 정의</h2>
           <h3 class="text-3xl font-headline font-bold text-on-surface mb-8">비개발자가 만들 수 있는 디지털트윈 저작도구</h3>
           <div class="space-y-6 text-on-surface-variant font-body leading-relaxed">
             <p>LG에너지솔루션 PRI 교육·시각화 시스템 — <span class="text-on-surface">콘텐츠 제작자(비개발자)</span>가 코드 수정 없이 디지털트윈 콘텐츠를 제작·검수·배포할 수 있어야 했다.</p>
@@ -210,22 +215,22 @@
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">apps</span>
             <h4 class="text-3xl font-headline font-bold text-on-surface mb-2">9</h4>
-            <p class="text-xs text-outline uppercase tracking-widest font-label">Custom EditorWindows</p>
+            <p class="text-xs text-outline uppercase tracking-widest font-label">커스텀 에디터 창</p>
           </div>
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">architecture</span>
             <h4 class="text-3xl font-headline font-bold text-on-surface mb-2">5</h4>
-            <p class="text-xs text-outline uppercase tracking-widest font-label">Architecture Patterns</p>
+            <p class="text-xs text-outline uppercase tracking-widest font-label">구조 패턴</p>
           </div>
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">code</span>
             <h4 class="text-3xl font-headline font-bold text-on-surface mb-2">43</h4>
-            <p class="text-xs text-outline uppercase tracking-widest font-label">C# Files (Editor 23 + Runtime 20)</p>
+            <p class="text-xs text-outline uppercase tracking-widest font-label">C# 파일 (에디터 23 + 런타임 20)</p>
           </div>
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">groups</span>
             <h4 class="text-3xl font-headline font-bold text-on-surface mb-2">3</h4>
-            <p class="text-xs text-outline uppercase tracking-widest font-label">Claude CLIs (role-split workflow)</p>
+            <p class="text-xs text-outline uppercase tracking-widest font-label">Claude CLI 3개 (역할 분리 워크플로)</p>
           </div>
         </div>
       </div>
@@ -234,7 +239,7 @@
 
   <!-- 5가지 아키텍처 패턴 -->
   <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-12 text-center">5 Architecture Patterns</h2>
+    <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-12 text-center">5가지 구조 패턴</h2>
     <h3 class="text-3xl font-headline font-bold text-center mb-16">디지털트윈 저작도구를 구성한 5가지 패턴</h3>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -302,7 +307,7 @@
   <section class="bg-[#eef2f6] py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="text-center mb-16">
-          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">AI Collaboration Workflow</h2>
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">AI 협업 흐름</h2>
         <h3 class="text-3xl font-headline font-bold mb-4">AI 협업을 역할별로 나눠 사용한 방식</h3>
         <p class="text-base sm:text-lg text-on-surface-variant max-w-2xl mx-auto">
 구현, 검토, 기록 역할을 나눠 AI 협업을 보조적으로 사용했습니다.
@@ -315,7 +320,7 @@
           <div class="absolute top-4 right-4 font-headline font-black text-6xl text-primary/10">01</div>
           <span class="material-symbols-outlined text-primary text-4xl mb-4">supervised_user_circle</span>
           <h4 class="font-headline text-xl font-bold mb-2 text-primary">CLI 1 · 감독관</h4>
-          <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-4">Architect / Reviewer</div>
+          <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-4">설계 / 검토</div>
           <ul class="text-sm text-on-surface-variant space-y-2">
             <li>· 설계 검증</li>
             <li>· 코드 리뷰</li>
@@ -328,7 +333,7 @@
           <div class="absolute top-4 right-4 font-headline font-black text-6xl text-primary/10">02</div>
           <span class="material-symbols-outlined text-primary text-4xl mb-4">code</span>
           <h4 class="font-headline text-xl font-bold mb-2 text-primary">CLI 2 · 개발자</h4>
-          <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-4">Implementer</div>
+          <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-4">구현 담당</div>
           <ul class="text-sm text-on-surface-variant space-y-2">
             <li>· 실제 코드 구현</li>
             <li>· 단위 테스트 작성</li>
@@ -341,7 +346,7 @@
           <div class="absolute top-4 right-4 font-headline font-black text-6xl text-primary/10">03</div>
           <span class="material-symbols-outlined text-primary text-4xl mb-4">person</span>
           <h4 class="font-headline text-xl font-bold mb-2 text-primary">CLI 3 · 고객저작자</h4>
-          <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-4">UX Tester (Non-dev)</div>
+          <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-4">UX 검수 (비개발자)</div>
           <ul class="text-sm text-on-surface-variant space-y-2">
             <li>· 비개발자 관점 워크플로우 테스트</li>
             <li>· UX 검증</li>
@@ -381,7 +386,7 @@
 
   <!-- Architecture Detail (Bento) -->
   <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-12 text-center">Implementation Detail</h2>
+    <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-12 text-center">구현 세부</h2>
 
     <div class="mb-12 overflow-hidden rounded-2xl bg-white shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
       <div class="aspect-[16/8] overflow-hidden bg-[#eef2f6]">
@@ -456,7 +461,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
         <div class="lg:col-span-5">
-          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">Project Impact</h2>
+          <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">프로젝트 의미</h2>
           <h3 class="text-3xl font-headline font-bold mb-8">통합 협업 환경 구축</h3>
           <p class="text-on-surface-variant font-body leading-relaxed mb-8">
             DXCenter 도입 후 콘텐츠 제작 절차 표준화. 기획자·제작자·검수자가 같은 도구에서 작업하면서 실수가 크게 줄었음. 비개발자도 직관적으로 사용 가능한 워크플로우.
@@ -464,7 +469,7 @@
           <blockquote class="rounded-2xl border border-[#d9e3f1] bg-white p-6 font-body shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
             <div class="mb-3 h-1 w-14 rounded-full bg-[#cfe0ff]"></div>
 <p class="mb-3 text-base leading-7 text-[#51607a]">패턴 일관성과 비개발자 사용성을 함께 검토하면서 에디터 구조를 다듬은 사례입니다.</p>
-            <footer class="text-xs font-label uppercase tracking-widest text-primary">Project Self-Description</footer>
+            <footer class="text-xs font-label uppercase tracking-widest text-primary">프로젝트 요약</footer>
           </blockquote>
         </div>
 
@@ -497,22 +502,22 @@
 
   <!-- Cross-Reference -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h3 class="font-headline text-2xl font-bold text-center mb-8">Other Case Studies</h3>
+    <h3 class="font-headline text-2xl font-bold text-center mb-8">다른 사례</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <a href="../vr-robot/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 01</div>
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 01</div>
         <h4 class="text-2xl font-headline font-bold mb-3">VR 로봇 원격 조종 + 자체 IK 솔버</h4>
           <p class="text-sm text-on-surface-variant mb-4">산업용 로봇 원격 조종 시스템 사례</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../orchestration-ts/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Open Source · Workflow Framework</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">Multi-Agent Orchestration Framework</h4>
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">오픈소스 · 협업 프레임워크</div>
+        <h4 class="text-2xl font-headline font-bold mb-3">멀티 에이전트 오케스트레이션</h4>
 <p class="text-sm text-on-surface-variant mb-4">협업 방식을 반복해서 쓸 수 있게 만든 도구</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../genworld-ollama/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Case Study 04 · R&amp;D</div>
+        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 04 · R&amp;D</div>
         <h4 class="text-2xl font-headline font-bold mb-3">GenWorld + Ollama</h4>
         <p class="text-sm text-on-surface-variant mb-4">Phaser 3 TS RPG → Unity 2D + 로컬 LLM 기반 NPC 인지 시스템</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
@@ -531,7 +536,7 @@
     <div class="flex gap-8">
       <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">Email</a>
+      <a class="text-slate-500 font-body text-sm uppercase tracking-widest hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">이메일</a>
     </div>
   </div>
 </footer>
@@ -568,3 +573,4 @@ window.PORTFOLIO_TRACKER_ENDPOINT = 'https://semirain.synology.me:3443/track';
 
 </body>
 </html>
+
