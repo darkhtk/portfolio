@@ -1,343 +1,54 @@
 <!DOCTYPE html>
-<html class="dark" lang="ko">
+<html lang="ko">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="refresh" content="0; url=../about/"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
-<title>Cover Letter · 홍대기</title>
-<meta name="description" content="홍대기 자기소개서. 제작 흐름과 운영 구조를 다듬고, 대규모 데이터 처리와 성능 문제를 설계로 해결하며, 최근에는 AI 협업을 XR·에디터·백엔드·로봇 제어 실무에 적용해 온 산업용 Unity 개발자."/>
-<meta property="og:title" content="홍대기 Cover Letter"/>
-<meta property="og:description" content="구조와 도구로 협업 비용을 줄이고, 대규모 데이터 처리와 실시간 시스템 문제를 풀어 온 산업용 Unity 개발자."/>
-<meta property="og:type" content="article"/>
-<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
-<meta property="og:url" content="https://darkhtk.github.io/portfolio/cover-letter/"/>
-<meta property="og:locale" content="ko_KR"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="홍대기 Cover Letter"/>
-<meta name="twitter:description" content="산업용 Unity 실시간 시스템 개발자 · 자기소개서"/>
-<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<title>Cover Letter는 Profile로 통합되었습니다 | 홍대기 포트폴리오</title>
+<meta name="description" content="기존 Cover Letter 페이지는 통합 Profile 페이지로 병합되었습니다."/>
+<link rel="canonical" href="https://darkhtk.github.io/portfolio/about/"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
 <script id="tailwind-config">
   tailwind.config = {
-    darkMode: "class",
     theme: {
       extend: {
-        colors: {
-          "outline": "#8d90a2", "on-background": "#dce1fb", "primary-fixed-dim": "#b7c4ff",
-          "primary": "#b7c4ff", "tertiary": "#b7c8e1", "on-surface-variant": "#c3c5d9",
-          "primary-fixed": "#dde1ff", "on-primary": "#002682", "primary-container": "#0052ff",
-          "surface-variant": "#2e3447", "secondary-container": "#3f465c", "surface": "#0c1324",
-          "background": "#0c1324", "surface-container-highest": "#2e3447",
-          "surface-container-lowest": "#070d1f", "on-surface": "#dce1fb",
-          "surface-container": "#191f31", "secondary": "#bec6e0",
-          "outline-variant": "#434656", "surface-container-low": "#151b2d"
-        },
-        borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
-        fontFamily: { headline: ["Noto Sans KR"], body: ["Noto Sans KR"], label: ["Noto Sans KR"] }
+        fontFamily: {
+          headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
+          body: ["Noto Sans KR", "sans-serif"]
+        }
       }
     }
   }
 </script>
-<style>
-  body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
-  .font-headline { font-style: normal !important; }
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  .bg-background, .bg-surface { background-color: #f8f9fa !important; }
-  .bg-surface-container, .bg-surface-container-low, .bg-surface-container-high, .bg-surface-container-highest { background-color: #ffffff !important; box-shadow: 0 16px 44px rgba(25, 96, 163, 0.06); }
-  .bg-surface-container-lowest { background-color: #eef2f6 !important; }
-  .text-primary, .text-primary-fixed, .text-primary-fixed-dim { color: #1960A3 !important; }
-  .bg-primary { background-color: #1960A3 !important; }
-  .bg-primary-container { background-color: #d3e4ff !important; }
-  .text-on-primary { color: #f6f7ff !important; }
-  .text-on-background, .text-on-surface { color: #162033 !important; }
-  .text-on-surface-variant, .text-secondary, .text-slate-400, .text-slate-500 { color: #51607a !important; }
-  .border-outline, .border-outline-variant { border-color: #d6dde8 !important; }
-  nav.fixed { background: rgba(255, 255, 255, 0.82) !important; box-shadow: 0 12px 32px rgba(25, 96, 163, 0.06) !important; }
-  #mobile-menu { background: rgba(248, 249, 250, 0.96) !important; }
-  footer { background: #eef2f6 !important; color: #44506a !important; }
-  footer .text-on-surface, footer .text-on-background, footer .text-on-surface-variant { color: #44506a !important; }
-  .from-primary { --tw-gradient-from: #1960A3 var(--tw-gradient-from-position) !important; --tw-gradient-to: rgb(25 96 163 / 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
-  .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
-  .glass-card { background: rgba(255, 255, 255, 0.96); box-shadow: 0 16px 44px rgba(25, 96, 163, 0.06); }
-  .text-glow { text-shadow: none; }
-  .cl-section { scroll-margin-top: 100px; }
-  .cl-body { font-size: 1.05rem; line-height: 1.85; }
-  .cl-body p { margin-bottom: 1.25rem; }
-  .cl-body strong { color: #1960A3; font-weight: 600; }
-</style>
+<link rel="stylesheet" href="../assets/css/site.css"/>
 </head>
-<body class="bg-background text-on-background">
-
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#0c1324]/60 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,0,0,0.4)]">
-  <div class="flex justify-between items-center px-4 sm:px-6 md:px-8 py-4 max-w-7xl mx-auto">
-    <a href="../" class="flex flex-col">
-      <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
-      <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY REAL-TIME SYSTEMS</div>
-    </a>
-    <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../">Home</a>
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../projects/">Projects</a>
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../about/">About</a>
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../resume/">Resume</a>
-      <a class="text-primary border-b-2 border-primary pb-1" href="../cover-letter/">Cover Letter</a>
-    </div>
-    <div class="flex items-center gap-3">
-      <a href="mailto:darkhtk@gmail.com" class="px-4 sm:px-6 py-2 rounded-md bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-sm tracking-wide hover:scale-95 active:scale-90 transition-transform">
-        <span class="hidden sm:inline">Connect</span>
-        <span class="sm:hidden material-symbols-outlined text-lg align-middle">mail</span>
-      </a>
-      <button id="mobile-menu-toggle"
-              class="md:hidden p-2 text-on-surface hover:text-primary transition-colors"
-              aria-label="메뉴 열기"
-              aria-expanded="false"
-              aria-controls="mobile-menu">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<!-- Mobile menu overlay -->
-<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
-    <div class="flex items-start justify-between gap-4">
-      <div>
-        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
-        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
-      </div>
-      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-    </div>
-  </div>
-  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
-    <div class="grid gap-3">
-      <a href="../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
-      <a href="../projects/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">PROJECTS</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
-<a href="../about/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">ABOUT</div><div class="mt-1 text-sm leading-6 text-[#51607a]">일하는 기준과 방식</div></a>
-      <a href="../resume/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">RESUME</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력 흐름과 핵심 이력</div></a>
-      <a href="../cover-letter/" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">COVER LETTER</div><div class="mt-1 text-sm leading-6 text-[#51607a]">상세 서술과 협업 방식</div></a>
-    </div>
-    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
-      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
-      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white"><span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com</a>
-      <div class="mt-4 flex flex-wrap gap-3 text-sm">
-        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
-        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<main class="pt-32 pb-20 px-4 sm:px-6 md:px-8 max-w-5xl mx-auto">
-
-  <!-- Hero -->
-  <header class="mb-16">
-    <div class="font-label text-xs text-primary font-bold tracking-[0.3em] uppercase mb-4">Cover Letter · 자기소개서</div>
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-headline font-bold tracking-tight text-on-surface mb-6 leading-tight">
-      홍 <span class="text-primary text-glow">대기</span>
-    </h1>
-    <p class="text-base sm:text-lg text-on-surface-variant max-w-2xl">
-      산업용 Unity 실시간 시스템 개발자 · <span class="text-on-surface">XR 3년 + 산업 시각화·자동화 4년 + AI 융합 2년</span>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<main class="mx-auto flex min-h-screen max-w-3xl items-center px-4 py-16 sm:px-6">
+  <section class="surface-panel w-full p-8 text-center sm:p-10">
+    <div class="section-kicker justify-center">Merged Page</div>
+    <h1 class="mt-5 font-headline text-3xl font-bold tracking-[-0.05em] text-[#122033] sm:text-4xl">Cover Letter는 Profile로 통합되었습니다.</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-base leading-8 text-[#4f6077]">
+      자기소개, 협업 방식, 경력 흐름을 분리하지 않고 한 흐름으로 읽을 수 있도록 통합했습니다.
     </p>
-  </header>
-
-  <div class="h-[1px] w-full bg-gradient-to-r from-primary/40 via-outline-variant/20 to-transparent mb-16"></div>
-
-  <!-- Section 1 -->
-  <section class="cl-section mb-16">
-    <h2 class="font-headline text-2xl md:text-3xl font-bold mb-6 text-primary">구조와 도구로 협업 비용을 줄이는 개발자</h2>
-    <div class="cl-body text-on-surface-variant">
-      <p>
-        사람이 많아질수록 속도와 기준이 달라지고, 같은 목표를 보더라도 작업 방식은 쉽게 흔들립니다. 저는 이 마찰을 감정으로 풀기보다 <strong>구조와 도구로 줄이는 개발자</strong>입니다. 팀이 더 빠르게 같은 목표에 도달하도록 제작 흐름과 판단 기준을 정리하는 역할에 강점이 있습니다.
-      </p>
+    <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+      <a href="../about/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)]">Profile로 이동</a>
+      <a href="../projects/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033]">Projects 보기</a>
     </div>
   </section>
-
-  <!-- Section 2 -->
-  <section class="cl-section mb-16">
-    <h2 class="font-headline text-2xl md:text-3xl font-bold mb-6 text-primary">도구로 협업 비용을 줄이다</h2>
-    <div class="cl-body text-on-surface-variant">
-      <p>
-        제가 조화를 만드는 방식은 <strong>반복 비용을 줄이는 구조를 먼저 만드는 것</strong>에서 시작합니다. 현재 와이엠엑스에서 진행한 두 가지 에디터 툴링 프로젝트가 그 예입니다. LG eGuide Editor에서는 매뉴얼 콘텐츠를 카테고리·순서도·스텝 단위로 구성하고, 다양한 미디어와 스텝 연동을 안정적으로 다룰 수 있게 설계했습니다. 그 결과 콘텐츠 제작자가 코드 수정 없이 교육 콘텐츠를 직접 생산할 수 있게 됐습니다. DXCenter에서는 건물→층→장비→파트 구조의 현장 관리 시스템을 9개 커스텀 EditorWindow로 정리하고, 상태 효과와 운영 흐름을 패턴 단위로 분리해 기획·제작·검수 전 과정의 마찰을 줄였습니다.
-      </p>
-      <p>
-        두 프로젝트 모두에서 QA 효율도 같은 관점으로 접근했습니다. 씬 컨텍스트에 맞는 UI만 노출하고, Play Mode 진입 시 편집을 자동 차단하며, Undo를 전 윈도우에서 지원하는 등 <strong>검수자가 실수하기 어려운 구조</strong>를 만들었습니다. 저는 개발 속도만큼이나 검증과 수정 속도를 높이는 것이 품질과 일정에 직결된다고 생각합니다.
-      </p>
-    </div>
-    <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-      <div class="glass-card overflow-hidden rounded-2xl">
-        <div class="aspect-[16/10] overflow-hidden">
-          <img src="../assets/images/customeditor.png" alt="DXCenter와 LG eGuide Editor 화면" class="h-full w-full object-cover"/>
-        </div>
-        <div class="p-4 text-sm leading-6 text-[#51607a]">DXCenter와 LG eGuide Editor는 제작자와 검수자가 같은 구조를 공유하도록 설계한 대표 사례입니다.</div>
-      </div>
-      <div class="glass-card overflow-hidden rounded-2xl">
-        <div class="aspect-[16/10] overflow-hidden">
-          <img src="../assets/images/orchestration-v1-loop.png" alt="orchestration framework v1 운영 화면" class="h-full w-full object-cover"/>
-        </div>
-        <div class="p-4 text-sm leading-6 text-[#51607a]">운영 규칙과 검수 흐름까지 같이 버전 관리한 AI 협업 실험 화면입니다.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 3 -->
-  <section class="cl-section mb-16">
-    <h2 class="font-headline text-2xl md:text-3xl font-bold mb-6 text-primary">대규모 데이터 처리와 성능 설계</h2>
-    <div class="cl-body text-on-surface-variant">
-      <p>
-        장헌파트너스에서 4년 7개월간 고속도로 BIM 3D 시각화 플랫폼을 메인 개발했습니다. 수만 개에 달하는 BIM 모델을 Google Protocol Buffer 기반 DB로부터 Unity로 임포트할 때, 에디터 라이프사이클 안에서 멈추지 않고 빠르고 안정적으로 처리하는 설계가 필요했습니다. 저는 Vertices/Triangle 분석 기반으로 모델 타입별 LOD를 자동 생성하면서, 메시 생성 및 normal/UV 계산을 <strong>Unity Job System으로 병렬 처리</strong>해 병목을 제거했습니다. 그 결과 <strong>10,000개 모델 기준 3시간 걸리던 임포트를 20분으로 단축</strong>했고, Shader 기반 모델 타입별 시각 구분과 AABB/거리 기반 Clipping을 결합해 전체 고속도로 구간을 하나의 3D 환경에서 실시간으로 탐색할 수 있게 만들었습니다.
-      </p>
-      <p>
-        같은 프로젝트에서 <strong>다중 도로 횡단면 실시간 분석 알고리즘</strong>도 직접 설계·구현했습니다. 도로 선형(Alignment)의 StationPoint 기준으로 3D 메쉬를 평면으로 절단하고, 정점 분석으로 교차 라인을 추출하여 2D 횡단면을 자동 렌더링합니다. 절토(1:N)·성토(1:N)·노면(N%) 등 모델 타입별 경사도를 자동 계산하고, 스냅핑이 가능한 치수선 시스템과 모델 타입별 레이어 On/Off까지 구현했습니다. 도로 종단면도 자동 생성과 플레이어 위치·시야 동기화, Coroutine 기반 비동기 처리로 진행률 표시와 취소를 지원하며, 전체 공사 구역의 설계 검토 효율을 크게 향상시켰습니다.
-      </p>
-    </div>
-    <div class="mt-8 glass-card overflow-hidden rounded-2xl">
-      <div class="aspect-[16/9] overflow-hidden">
-        <img src="../assets/images/watchbim_generated_crosssection.png" alt="BIM 횡단면 생성과 시각화 화면" class="h-full w-full object-cover"/>
-      </div>
-      <div class="p-4 text-sm leading-6 text-[#51607a]">BIM 모델 처리와 횡단면 자동 생성은 성능 최적화와 설계 검토를 함께 요구하던 핵심 작업이었습니다.</div>
-    </div>
-  </section>
-
-  <!-- Section 4: AI (signature) -->
-  <section class="cl-section mb-16">
-    <div class="rounded-2xl bg-[#f1f4f6] p-8 md:p-12">
-      <div class="font-label text-xs text-primary font-bold tracking-[0.3em] uppercase mb-4">AI 적용 방식</div>
-      <h2 class="max-w-4xl font-headline text-2xl md:text-3xl font-bold mb-10 text-[#162033] leading-tight">
-        AI를 어디에 적용했고,
-        어떤 방식으로 통제했는지
-      </h2>
-      <div class="grid gap-6 md:grid-cols-3">
-        <article class="rounded-2xl bg-white p-6 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="flex h-9 w-9 items-center justify-center rounded-md bg-[#e9f0ff] text-sm font-bold text-[#1960A3]">1</div>
-            <h3 class="font-headline text-xl font-bold text-[#162033]">제품 파이프라인 적용</h3>
-          </div>
-            <p class="text-sm leading-7 text-[#51607a]">
-              너스탤지아 XR 콘텐츠에서는 음성 입력, Whisper, GPT, TTS, Skybox AI, Meshy를 하나의 흐름으로 묶고, Webhook 비동기 처리와 사용자별 저장 구조, 운영 대시보드까지 연결했습니다.
-            </p>
-        </article>
-        <article class="rounded-2xl bg-white p-6 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="flex h-9 w-9 items-center justify-center rounded-md bg-[#e9f0ff] text-sm font-bold text-[#1960A3]">2</div>
-            <h3 class="font-headline text-xl font-bold text-[#162033]">개발 과정 보조</h3>
-          </div>
-            <p class="text-sm leading-7 text-[#51607a]">
-              VR 로봇 원격 조종에서는 입력 안정화, Flask API, UDP 브릿지, 안전 로직 구현에 AI 협업을 보조적으로 사용했고, DXCenter에서는 9개 EditorWindow와 패턴 분리를 같은 기준으로 다뤘습니다.
-            </p>
-          <p class="mt-4 text-sm leading-7 text-[#51607a]">
-            같은 기준을 GenWorld에도 적용해 로컬 Ollama LLM 기반 NPC 인지·대화 구조를 검증했습니다.
-          </p>
-        </article>
-        <article class="rounded-2xl bg-white p-6 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="flex h-9 w-9 items-center justify-center rounded-md bg-[#e9f0ff] text-sm font-bold text-[#1960A3]">3</div>
-            <h3 class="font-headline text-xl font-bold text-[#162033]">운영 방식 추출</h3>
-          </div>
-            <p class="text-sm leading-7 text-[#51607a]">
-              프로젝트마다 반복되던 컨벤션, 금지 패턴, 검증 흐름을 남겨 두고 다음 작업에서도 같은 기준을 유지하고 있습니다.
-            </p>
-        </article>
-      </div>
-    </div>
-    <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-      <div class="glass-card overflow-hidden rounded-2xl">
-        <div class="aspect-[4/3] overflow-hidden">
-          <img src="../assets/images/neostalgia_dialogue.png" alt="너스탤지아 AI 대화 화면" class="h-full w-full object-cover"/>
-        </div>
-      </div>
-      <div class="glass-card overflow-hidden rounded-2xl">
-        <div class="aspect-[4/3] overflow-hidden">
-          <img src="../assets/images/v2_dashboard_1.png" alt="orchestration v2 대시보드 화면" class="h-full w-full object-cover"/>
-        </div>
-      </div>
-      <div class="glass-card overflow-hidden rounded-2xl">
-        <div class="aspect-[4/3] overflow-hidden">
-          <img src="../assets/images/genworld-dialogue.png" alt="GenWorld NPC 대화 화면" class="h-full w-full object-cover"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 5 -->
-  <section class="cl-section mb-16">
-    <h2 class="font-headline text-2xl md:text-3xl font-bold mb-6 text-primary">공학적 사고를 즐기는 개발자</h2>
-    <div class="cl-body text-on-surface-variant">
-      <p>
-        저는 수학과 물리 기반으로 실제 환경을 상상하고 도식화하는 것을 좋아합니다. 해군 VR 시뮬레이터에서는 아지무스 추진기 조종 로직과 HMD+PC 멀티플레이를 설계했고, LG하우시스 VR 안전교육에서는 RS232 기반 4D 하드웨어 제어를 직접 구현했습니다. 건설현장 VR 시뮬레이터에서는 비계 구조와 물리 체험을 에셋 없이 구성했습니다. 최근에는 Jacobian 기반 IK 솔버를 직접 구현하며 좌표계 변환, 관절 제약, 수치 안정성, 특이점 회피를 다루고 있습니다. 이런 기반은 실시간 인터랙션, 물리, 카메라, 성능 최적화가 중요한 산업용 프로젝트에서 안정적인 밑바탕이 됩니다.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 6: 마무리 -->
-  <section class="cl-section mb-16">
-    <h2 class="font-headline text-2xl md:text-3xl font-bold mb-6 text-primary">마무리</h2>
-    <div class="cl-body text-on-surface-variant">
-      <p>
-        저는 제작 흐름과 운영 구조를 다듬고, 대규모 데이터 처리와 성능 문제를 설계로 해결하며, 최근에는 AI 협업을 XR·에디터·백엔드·로봇 제어 실무에 적용하고 있습니다. 중요한 것은 AI 자체보다 실제로 동작하는 시스템과 오래 유지할 수 있는 구조라고 생각합니다.
-      </p>
-    </div>
-  </section>
-
-  <!-- Signature -->
-  <div class="flex justify-end mt-20 pt-12">
-    <div class="text-right">
-      <div class="font-headline text-3xl font-bold text-primary text-glow">홍대기</div>
-      <div class="font-label text-xs text-slate-500 uppercase tracking-widest mt-2">Daeki Hong · 2026</div>
-    </div>
-  </div>
 </main>
 
-<!-- Footer -->
-<footer class="w-full bg-[#0c1324]">
-  <div class="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 md:px-8 py-12 max-w-7xl mx-auto">
-    <div class="font-headline font-bold text-primary text-xl mb-8 md:mb-0">DAEKI HONG</div>
-    <div class="flex gap-8 mb-8 md:mb-0">
-      <a class="font-body text-sm uppercase tracking-widest text-slate-500 hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a class="font-body text-sm uppercase tracking-widest text-slate-500 hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a class="font-body text-sm uppercase tracking-widest text-slate-500 hover:text-primary underline decoration-primary underline-offset-4 transition-all duration-200" href="mailto:darkhtk@gmail.com">Email</a>
-    </div>
-    <div class="font-body text-sm uppercase tracking-widest text-slate-500">© 2026 · INDUSTRIAL UNITY REAL-TIME SYSTEMS</div>
-  </div>
-</footer>
-
 <script>
-(function() {
-  const toggle = document.getElementById('mobile-menu-toggle');
-  const close  = document.getElementById('mobile-menu-close');
-  const menu   = document.getElementById('mobile-menu');
-  if (!toggle || !menu) return;
-
-  function openMenu() {
-    menu.classList.remove('hidden');
-    menu.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-    toggle.setAttribute('aria-expanded', 'true');
-  }
-  function closeMenu() {
-    menu.classList.add('hidden');
-    menu.classList.remove('flex');
-    document.body.style.overflow = '';
-    toggle.setAttribute('aria-expanded', 'false');
-  }
-  toggle.addEventListener('click', openMenu);
-  if (close) close.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
-  menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
-})();
+window.location.replace("../about/");
 </script>
 <script>
 window.PORTFOLIO_TRACKER_ENDPOINT = 'https://semirain.synology.me:3443/track';
 </script>
 <script src="../assets/js/tracker.js"></script>
-
 </body>
 </html>

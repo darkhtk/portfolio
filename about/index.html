@@ -6,11 +6,17 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
-<title>About | 홍대기</title>
-<meta name="description" content="홍대기의 About. 산업용 Unity 실시간 시스템을 다뤄 온 방식, 문제를 보는 기준, 그리고 AI 협업을 실무에 적용하는 태도를 소개합니다."/>
+<title>Profile | 홍대기 포트폴리오</title>
+<meta name="description" content="홍대기의 소개, 경력 흐름, 협업 방식, AI 활용 원칙을 하나로 정리한 통합 프로필 페이지."/>
+<meta property="og:title" content="Profile | 홍대기 포트폴리오"/>
+<meta property="og:description" content="About, Resume, Cover Letter 내용을 하나로 묶은 통합 프로필. 문제 정의, 경력 흐름, 협업 방식까지 한 번에 읽을 수 있습니다."/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/about/"/>
+<meta property="og:locale" content="ko_KR"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -18,270 +24,333 @@
     theme: {
       extend: {
         fontFamily: {
-          headline: ["Noto Sans KR", "sans-serif"],
+          headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
           body: ["Noto Sans KR", "sans-serif"],
-          label: ["Noto Sans KR", "sans-serif"]
+          label: ["Space Grotesk", "Noto Sans KR", "sans-serif"]
         }
       }
     }
   }
 </script>
-<style>
-  body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
-  .font-headline { font-style: normal !important; }
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-  .card { background: #fff; box-shadow: 0 16px 44px rgba(25, 96, 163, 0.06); }
-  .glass-nav { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
-</style>
+<link rel="stylesheet" href="../assets/css/site.css"/>
 </head>
-<body class="font-body selection:bg-[#bfd4ff] selection:text-[#162033]">
-
-<nav class="glass-nav fixed top-0 z-50 w-full bg-white/80 shadow-[0_12px_32px_rgba(25,96,163,0.06)]">
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 md:px-8">
-    <a href="../" class="flex flex-col">
-      <div class="font-headline text-2xl italic tracking-tight text-[#16325c]">Daeki Hong</div>
-      <div class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6c7a92]">Industrial Unity Real-Time Systems</div>
-    </a>
-    <div class="hidden items-center gap-8 font-headline text-base tracking-tight text-[#51607a] md:flex">
-      <a class="transition-colors hover:text-[#2251b2]" href="../">Home</a>
-      <a class="transition-colors hover:text-[#2251b2]" href="../projects/">Projects</a>
-      <a class="border-b-2 border-[#2251b2] pb-1 text-[#16325c]" href="../about/">About</a>
-      <a class="transition-colors hover:text-[#2251b2]" href="../resume/">Resume</a>
-      <a class="transition-colors hover:text-[#2251b2]" href="../cover-letter/">Letter</a>
-    </div>
-    <div class="flex items-center gap-3">
-      <a href="mailto:darkhtk@gmail.com" class="rounded-lg bg-[#1960A3] px-4 py-2 font-label text-xs font-bold uppercase tracking-[0.05em] text-white transition-colors hover:opacity-90 sm:px-6">
-        <span class="hidden sm:inline">Connect</span>
-        <span class="material-symbols-outlined text-lg sm:hidden">mail</span>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<div class="site-shell">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="../" class="flex flex-col">
+        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity Real-Time Systems</span>
       </a>
-      <button id="mobile-menu-toggle" class="p-2 text-[#16325c] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
+      <nav class="hidden items-center gap-2 md:flex">
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../">Home</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../projects/">Projects</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="./">Profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="mailto:darkhtk@gmail.com" class="hidden rounded-full bg-[#1a57c7] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5 sm:inline-flex">Connect</a>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
     </div>
-  </div>
-</nav>
 
-<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
-    <div class="flex items-start justify-between gap-4">
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 backdrop-blur-2xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+        <div>
+          <div class="section-kicker">Navigation</div>
+          <div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div>
+        </div>
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="메뉴 닫기">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="mt-6 grid gap-3">
+        <a href="../" class="mobile-nav-link">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div>
+          <div class="mt-1 text-sm text-[#526178]">첫 화면에서 포지셔닝과 대표 사례를 빠르게 봅니다.</div>
+        </a>
+        <a href="../projects/" class="mobile-nav-link">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Projects</div>
+          <div class="mt-1 text-sm text-[#526178]">케이스 스터디와 프로젝트 맥락을 중심으로 탐색합니다.</div>
+        </a>
+        <a href="./" class="mobile-nav-link is-active">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">Profile</div>
+          <div class="mt-1 text-sm text-[#526178]">소개, 경력, 협업 방식까지 한 페이지로 읽습니다.</div>
+        </a>
+      </div>
+      <div class="mt-6 rounded-[24px] border border-[rgba(16,31,61,0.08)] bg-white p-5 shadow-[0_18px_48px_rgba(16,31,61,0.08)]">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">Connect</div>
+        <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#1a57c7] px-5 py-3 font-semibold text-white">darkhtk@gmail.com</a>
+        <div class="mt-4 flex gap-3 text-sm">
+          <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-[#edf2f8] px-4 py-2 text-[#526178]">GitHub</a>
+          <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-[#edf2f8] px-4 py-2 text-[#526178]">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative">
+    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div class="surface-panel p-6 sm:p-8 lg:p-10">
+          <div class="section-kicker">Integrated Profile</div>
+          <h1 class="mt-4 font-headline text-[2.3rem] font-bold leading-[1.04] tracking-[-0.05em] text-[#122033] sm:text-[3.3rem] lg:text-[4.2rem]">
+            소개, 경력, 협업 방식을
+            <span class="block text-[#1a57c7]">하나의 프로필 흐름으로</span>
+            다시 정리했습니다.
+          </h1>
+          <div class="content-prose mt-6 max-w-3xl">
+            <p>이 페이지는 기존 소개, 이력, 자기소개 내용을 하나로 묶은 통합 프로필입니다. 무엇을 만들었는지보다 어떤 문제를 다뤘고, 어떻게 구조를 만들며, 어떤 방식으로 협업하는지까지 한 번에 읽을 수 있도록 정리했습니다.</p>
+            <p>XR, BIM, Editor Tooling, Robotics, AI Workflow까지 영역은 넓어졌지만 중심은 같습니다. 복잡한 실시간 시스템을 운영 가능한 구조로 만들고, 반복 비용을 줄이며, 다음 프로젝트에서도 다시 쓸 수 있게 만드는 일입니다.</p>
+          </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="../projects/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">프로젝트 보기</a>
+            <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">문의하기</a>
+          </div>
+        </div>
+
+        <aside class="feature-panel p-5 sm:p-6">
+          <div class="overflow-hidden rounded-[24px] bg-[#edf2f8]">
+            <img src="../assets/profile.jpg" alt="홍대기 프로필 사진" class="aspect-[4/5] w-full object-cover"/>
+          </div>
+          <div class="mt-5">
+            <div class="font-headline text-2xl font-bold tracking-[-0.04em] text-[#122033]">홍대기</div>
+            <p class="mt-3 text-sm leading-7 text-[#4f6077]">Unity 기반 실시간 시스템을 중심으로 XR, BIM, 툴링, 로보틱스, AI 협업 구조를 연결해 온 개발자.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="project-chip">Unity</span>
+              <span class="project-chip">XR</span>
+              <span class="project-chip">Tooling</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="metric-strip">
+        <div class="metric-tile">
+          <div class="metric-label">Experience</div>
+          <div class="metric-value">10Y</div>
+          <div class="mt-2 text-sm leading-6 text-[#4f6077]">Unity 실무를 중심으로 교육, XR, 산업 프로젝트를 이어 왔습니다.</div>
+        </div>
+        <div class="metric-tile">
+          <div class="metric-label">Core Domain</div>
+          <div class="metric-value">XR + Tooling</div>
+          <div class="mt-2 text-sm leading-6 text-[#4f6077]">실시간 상호작용과 운영 구조를 함께 설계하는 편입니다.</div>
+        </div>
+        <div class="metric-tile">
+          <div class="metric-label">Scale</div>
+          <div class="metric-value">BIM / Robotics</div>
+          <div class="mt-2 text-sm leading-6 text-[#4f6077]">대용량 데이터와 제어 시스템까지 확장해 다뤘습니다.</div>
+        </div>
+        <div class="metric-tile">
+          <div class="metric-label">Recent Layer</div>
+          <div class="metric-value">AI Workflow</div>
+          <div class="mt-2 text-sm leading-6 text-[#4f6077]">구현 보조를 넘어서 운영 규칙과 검증 흐름까지 포함합니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="grid gap-4 md:grid-cols-3">
+        <article class="feature-panel p-6">
+          <div class="section-kicker">Principle 01</div>
+          <h2 class="mt-4 font-headline text-2xl font-bold tracking-[-0.04em] text-[#122033]">문제와 제약부터 본다</h2>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">성능, 안정성, 운영 환경, 수정 비용 같은 현실 조건을 먼저 구조화한 뒤 구현에 들어갑니다.</p>
+        </article>
+        <article class="feature-panel p-6">
+          <div class="section-kicker">Principle 02</div>
+          <h2 class="mt-4 font-headline text-2xl font-bold tracking-[-0.04em] text-[#122033]">반복 비용을 줄인다</h2>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">사람이 매번 손으로 처리하는 병목은 에디터, 규칙, 운영 흐름으로 줄이는 편입니다.</p>
+        </article>
+        <article class="feature-panel p-6">
+          <div class="section-kicker">Principle 03</div>
+          <h2 class="mt-4 font-headline text-2xl font-bold tracking-[-0.04em] text-[#122033]">AI는 운영 가능한 형태로 쓴다</h2>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">AI를 단순 가속기가 아니라 검증과 책임 범위를 포함한 시스템 요소로 다룹니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">Career Flow</div>
+          <h2 class="mt-4 font-headline text-3xl font-bold tracking-[-0.05em] text-[#122033]">경력은 넓어졌지만, 중심축은 늘 실시간 시스템이었습니다.</h2>
+          <div class="content-prose mt-5">
+            <p>모바일 게임과 교육 콘텐츠에서 출발해 XR 시뮬레이션, BIM 시각화, Editor Tooling, Robotics, AI Workflow까지 확장해 왔습니다. 다만 분야가 바뀔 때마다 새로 시작한 것이 아니라, 이전 단계에서 만든 감각과 구조를 다음 단계로 가져가며 넓혀 왔습니다.</p>
+            <p>그래서 이력은 기술 목록보다 문제 유형의 확장으로 읽는 편이 더 정확합니다. 사용자 흐름에서 시작해, 현장형 인터랙션, 대규모 데이터, 실시간 제어, 협업 구조 설계까지 범위를 넓혀 왔습니다.</p>
+          </div>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          <article class="timeline-card p-5 sm:p-6">
+            <div class="section-kicker">Stage 01</div>
+            <h3 class="mt-4 font-headline text-2xl font-bold tracking-[-0.04em] text-[#122033]">Educational Content</h3>
+            <p class="mt-3 text-sm leading-7 text-[#4f6077]">모바일 게임과 교육 콘텐츠를 통해 사용자 흐름과 반복 제작 구조를 익혔습니다.</p>
+          </article>
+          <article class="timeline-card p-5 sm:p-6">
+            <div class="section-kicker">Stage 02</div>
+            <h3 class="mt-4 font-headline text-2xl font-bold tracking-[-0.04em] text-[#122033]">XR and Simulation</h3>
+            <p class="mt-3 text-sm leading-7 text-[#4f6077]">VR/AR 기반 안전교육과 현장형 시뮬레이션으로 실시간 상호작용을 확장했습니다.</p>
+          </article>
+          <article class="timeline-card p-5 sm:p-6">
+            <div class="section-kicker">Stage 03</div>
+            <h3 class="mt-4 font-headline text-2xl font-bold tracking-[-0.04em] text-[#122033]">BIM and Tooling</h3>
+            <p class="mt-3 text-sm leading-7 text-[#4f6077]">대규모 시각화와 에디터 구조화를 통해 운영 가능한 시스템 설계에 집중했습니다.</p>
+          </article>
+          <article class="timeline-card p-5 sm:p-6">
+            <div class="section-kicker">Stage 04</div>
+            <h3 class="mt-4 font-headline text-2xl font-bold tracking-[-0.04em] text-[#122033]">Robotics and AI Ops</h3>
+            <p class="mt-3 text-sm leading-7 text-[#4f6077]">XR 제어, 로보틱스, AI 협업 규칙화까지 실전 문제 해결 범위를 넓히고 있습니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">Representative Proof</div>
+        <h2 class="mt-4 font-headline text-3xl font-bold tracking-[-0.05em] text-[#122033] sm:text-4xl">프로필을 가장 잘 설명하는 대표 사례들입니다.</h2>
+      </div>
+      <div class="mt-10 grid gap-6 xl:grid-cols-3">
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../assets/images/vr_robot_expo2.png" alt="VR Robot reference thumbnail"/>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="project-chip">XR</span>
+            <span class="project-chip">Robotics</span>
+          </div>
+          <h3 class="mt-4 font-headline text-[1.7rem] font-bold tracking-[-0.04em] text-[#122033]">VR Robot</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">실시간 입력과 실제 제어를 안전하게 연결한 대표 사례.</p>
+          <a href="../projects/vr-robot/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../assets/images/customeditor.png" alt="DXCenter reference thumbnail"/>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="project-chip">Tooling</span>
+            <span class="project-chip">Operations</span>
+          </div>
+          <h3 class="mt-4 font-headline text-[1.7rem] font-bold tracking-[-0.04em] text-[#122033]">DXCenter</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">비개발자도 다룰 수 있는 편집 흐름과 운영 구조를 설계한 작업.</p>
+          <a href="../projects/dxcenter/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../assets/images/v2_launcher.png" alt="Orchestration reference thumbnail"/>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="project-chip">AI Workflow</span>
+            <span class="project-chip">TypeScript</span>
+          </div>
+          <h3 class="mt-4 font-headline text-[1.7rem] font-bold tracking-[-0.04em] text-[#122033]">Orchestration</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">협업 규칙과 운영 구조를 시스템 자체로 만든 작업.</p>
+          <a href="../projects/orchestration-ts/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">How I Collaborate</div>
+          <h2 class="mt-4 font-headline text-3xl font-bold tracking-[-0.05em] text-[#122033]">협업에서는 결과물만큼 흐름을 중요하게 봅니다.</h2>
+          <ul class="list-checks mt-6 text-sm leading-7">
+            <li>처음부터 완벽한 답을 밀기보다, 문제와 제약을 같이 좁히면서 빠르게 구조를 잡습니다.</li>
+            <li>검수자나 비개발자가 실제로 다뤄야 한다면 편집 흐름과 운영 기준까지 같이 설계합니다.</li>
+            <li>AI 협업은 구현 보조를 넘어서, 다음 프로젝트에서도 재사용할 수 있는 규칙으로 추출할 때 가치가 커집니다.</li>
+          </ul>
+        </article>
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">How AI Fits</div>
+          <h2 class="mt-4 font-headline text-3xl font-bold tracking-[-0.05em] text-[#122033]">AI를 어디에 넣고, 어디까지 책임지게 할지 먼저 정합니다.</h2>
+          <div class="grid gap-4">
+            <div class="rounded-[20px] bg-white px-4 py-4">
+              <h3 class="text-xl">구현 보조</h3>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">반복 구현, 문서 정리, 규칙 초안 작성처럼 구조가 이미 잡힌 영역에서 효율이 큽니다.</p>
+            </div>
+            <div class="rounded-[20px] bg-white px-4 py-4">
+              <h3 class="text-xl">사람의 책임 영역</h3>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">핵심 설계, 검증 기준, 운영 판단은 사람이 쥐고 있어야 시스템이 오래 갑니다.</p>
+            </div>
+            <div class="rounded-[20px] bg-white px-4 py-4">
+              <h3 class="text-xl">운영 구조화</h3>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">프로젝트마다 다시 조립하지 않도록 협업 흐름을 규칙과 도구로 정리하는 쪽에 관심이 많습니다.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">What I Optimize</div>
+          <h2 class="mt-4 font-headline text-3xl font-bold tracking-[-0.05em] text-[#122033]">제가 자주 최적화하는 건 화면보다 흐름입니다.</h2>
+          <div class="content-prose mt-5">
+            <p><strong>작업 흐름</strong>이 막히는 지점, <strong>검증 흐름</strong>이 느린 지점, <strong>운영 흐름</strong>이 사람 손에 과하게 의존하는 지점을 찾아 구조로 해결하는 편입니다.</p>
+            <p>DXCenter와 LG eGuide Editor 같은 툴링 작업에서는 비개발자도 직접 다룰 수 있는 편집 흐름을 만드는 데 집중했고, BIM 시각화에서는 대용량 모델이 실제 업무 안에서 돌아갈 수 있게 데이터 구조와 처리 순서를 재구성했습니다.</p>
+          </div>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <article class="evidence-card">
+            <div class="project-media aspect-[4/3]">
+              <img src="../assets/images/customeditor.png" alt="DXCenter Unity 에디터 화면"/>
+            </div>
+            <div class="p-5">
+              <h3 class="text-xl">Editor Tooling</h3>
+              <p class="mt-3 text-sm leading-7 text-[#4f6077]">에디터 작업을 모듈화하고 운영 흐름을 함께 설계해 반복 편집 비용을 줄였습니다.</p>
+            </div>
+          </article>
+          <article class="evidence-card">
+            <div class="project-media aspect-[4/3]">
+              <img src="../assets/images/watchbim_clipping.png" alt="BIM 시각화와 설계 자동화 화면"/>
+            </div>
+            <div class="p-5">
+              <h3 class="text-xl">Large-Scale Visualization</h3>
+              <p class="mt-3 text-sm leading-7 text-[#4f6077]">큰 데이터를 현업에서 다룰 수 있게 만드는 성능 구조와 시각화 설계에 강점이 있습니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 pt-2 sm:px-6 sm:pb-20 lg:px-8">
+      <div class="cta-panel p-6 sm:p-8 lg:p-10">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div class="max-w-3xl">
+            <div class="section-kicker text-white">Next Path</div>
+            <h2 class="mt-4 font-headline text-3xl font-bold tracking-[-0.05em] text-white sm:text-4xl">프로필을 읽었다면, 다음은 프로젝트 사례를 보는 것이 가장 빠릅니다.</h2>
+            <p class="mt-4 text-base leading-7 text-white/82">대표 사례에서 문제, 접근, 결과를 보면 이 페이지의 내용이 실제 작업 방식과 어떻게 이어지는지 바로 확인할 수 있습니다.</p>
+          </div>
+          <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <a href="../projects/" class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#10264e]">Projects 보기</a>
+            <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold text-white">문의하기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
       <div>
-        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
-        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
+        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
+        <div class="mt-2 text-sm leading-6 text-[#526178]">Integrated profile for work, career, and collaboration.</div>
       </div>
-      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-    </div>
-  </div>
-  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
-    <div class="grid gap-3">
-      <a href="../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
-        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">HOME</div>
-        <div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div>
-      </a>
-      <a href="../projects/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
-        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">PROJECTS</div>
-        <div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div>
-      </a>
-      <a href="../about/" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4">
-        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">ABOUT</div>
-        <div class="mt-1 text-sm leading-6 text-[#51607a]">일하는 기준과 방식</div>
-      </a>
-      <a href="../resume/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
-        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">RESUME</div>
-        <div class="mt-1 text-sm leading-6 text-[#51607a]">경력 흐름과 핵심 이력</div>
-      </a>
-      <a href="../cover-letter/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4">
-        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">COVER LETTER</div>
-        <div class="mt-1 text-sm leading-6 text-[#51607a]">상세 서술과 협업 방식</div>
-      </a>
-    </div>
-    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
-      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">Connect</div>
-      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white">
-        <span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com
-      </a>
-      <div class="mt-4 flex flex-wrap gap-3 text-sm">
-        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
-        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
+      <div class="flex flex-wrap gap-5 text-sm">
+        <a class="footer-link" href="../projects/">Projects</a>
+        <a class="footer-link" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="footer-link" href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="footer-link" href="mailto:darkhtk@gmail.com">Email</a>
       </div>
     </div>
-  </div>
+  </footer>
 </div>
 
-<main class="mx-auto max-w-7xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32 md:px-8">
-  <section class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
-    <div class="lg:col-span-7">
-      <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">일하는 기준</div>
-      <h1 class="mt-4 max-w-4xl font-headline text-3xl leading-[1.16] tracking-tight text-[#162033] sm:text-5xl md:text-6xl">
-        <span class="block">문제를 보는 기준</span>
-        <span class="block"><span class="text-[#1960A3] font-medium">업무를 풀어 가는 방식</span></span>
-      </h1>
-      <div class="mt-8 space-y-5 text-base leading-7 text-[#44506a]">
-        <p>저는 산업용 Unity 실시간 시스템을 오래 만들어 온 개발자입니다. XR, 시뮬레이션, BIM 시각화, 에디터 툴링, 자동화, 로봇 연동처럼 제약이 많은 문제를 실제 프로젝트에서 풀어 왔습니다.</p>
-        <p>최근에는 AI 협업을 함께 사용하고 있지만, 중심은 언제나 구조와 검증입니다.</p>
-        <p>저는 데모보다 운영 가능성, 빠른 시제품보다 유지보수 가능한 구조, 많은 기술보다 문제와 제약에 맞는 설계를 더 중요하게 봅니다.</p>
-      </div>
-    </div>
-    <div class="card mx-auto w-full max-w-[220px] overflow-hidden rounded-3xl sm:max-w-[260px] lg:col-span-5 lg:mx-0 lg:justify-self-end">
-      <div class="aspect-[4/5] overflow-hidden">
-        <img src="../assets/profile.jpg" alt="홍대기 프로필 사진" class="h-full w-full object-cover"/>
-      </div>
-      <div class="p-5">
-        <div class="font-headline text-2xl font-bold text-[#162033]">홍대기 · Daeki Hong</div>
-        <p class="mt-3 text-sm leading-7 text-[#51607a]">Unity 개발 경력을 바탕으로 XR, 에디터, 백엔드, 로봇 제어와 AI 협업을 함께 다루고 있습니다.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="mt-12">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
-      <article class="card overflow-hidden rounded-2xl">
-        <div class="aspect-[4/3] overflow-hidden">
-          <img src="../assets/images/vr_robot_expo2.png" alt="VR 로봇 원격 조종 시스템 시연" class="h-full w-full object-cover"/>
-        </div>
-        <div class="p-4">
-          <div class="font-label text-[10px] uppercase tracking-[0.2em] text-[#2251b2]">XR / Robotics</div>
-          <p class="mt-2 text-sm leading-6 text-[#51607a]">실시간 XR과 로봇 제어를 연결한 산업용 시연 시스템</p>
-        </div>
-      </article>
-      <article class="card overflow-hidden rounded-2xl">
-        <div class="aspect-[4/3] overflow-hidden">
-          <img src="../assets/images/customeditor.png" alt="DXCenter Unity 에디터 화면" class="h-full w-full object-cover"/>
-        </div>
-        <div class="p-4">
-          <div class="font-label text-[10px] uppercase tracking-[0.2em] text-[#2251b2]">Editor Tooling</div>
-          <p class="mt-2 text-sm leading-6 text-[#51607a]">비개발자도 다룰 수 있는 산업용 저작도구와 운영 흐름</p>
-        </div>
-      </article>
-      <article class="card overflow-hidden rounded-2xl">
-        <div class="aspect-[4/3] overflow-hidden">
-          <img src="../assets/images/watchbim_clipping.png" alt="BIM 시각화와 설계 자동화 화면" class="h-full w-full object-cover"/>
-        </div>
-        <div class="p-4">
-          <div class="font-label text-[10px] uppercase tracking-[0.2em] text-[#2251b2]">BIM / Visualization</div>
-          <p class="mt-2 text-sm leading-6 text-[#51607a]">대용량 데이터와 설계 검토 흐름을 다룬 시각화 시스템</p>
-        </div>
-      </article>
-      <article class="card overflow-hidden rounded-2xl">
-        <div class="aspect-[4/3] overflow-hidden">
-          <img src="../assets/images/neostalgia_skybox.png" alt="너스탤지아 XR 콘텐츠 화면" class="h-full w-full object-cover"/>
-        </div>
-        <div class="p-4">
-          <div class="font-label text-[10px] uppercase tracking-[0.2em] text-[#2251b2]">AI Pipeline</div>
-          <p class="mt-2 text-sm leading-6 text-[#51607a]">AI 적용 XR 콘텐츠와 운영 대시보드 구조</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="mt-20">
-    <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">How I Work</div>
-    <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-      <article class="card rounded-2xl p-6 sm:p-8">
-        <h2 class="font-headline text-2xl font-bold text-[#162033]">문제보다 먼저 제약을 봅니다</h2>
-        <p class="mt-4 text-sm leading-7 text-[#51607a]">산업용 시스템에서는 성능, 안전, 운영 환경, 납품 방식, 수정 비용이 설계의 출발점입니다. 그래서 기능보다 제약을 먼저 봅니다.</p>
-      </article>
-      <article class="card rounded-2xl p-6 sm:p-8">
-        <h2 class="font-headline text-2xl font-bold text-[#162033]">반복 비용을 구조로 줄입니다</h2>
-        <p class="mt-4 text-sm leading-7 text-[#51607a]">Editor Tooling, 자동화, 데이터 구조 설계, 패턴 분리로 반복 작업과 협업 병목을 줄이는 쪽에 자주 집중합니다.</p>
-      </article>
-      <article class="card rounded-2xl p-6 sm:p-8">
-        <h2 class="font-headline text-2xl font-bold text-[#162033]">AI는 속도를 높이되 통제는 유지합니다</h2>
-        <p class="mt-4 text-sm leading-7 text-[#51607a]">AI는 구현 보조와 반복 축소에 쓰지만, 시스템 구조와 검증 기준은 사람이 잡아야 결과물이 오래 갑니다.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="mt-20">
-    <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">Where AI Fits</div>
-    <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <article class="card rounded-2xl p-6 sm:p-8">
-    <h2 class="font-headline text-2xl font-bold text-[#162033]">AI를 쓰는 이유</h2>
-        <ul class="mt-5 space-y-4 text-sm leading-7 text-[#51607a]">
-          <li>XR, Editor Tooling, 백엔드, 통신 모듈을 동시에 잡아야 할 때 반복 구현량이 많기 때문입니다.</li>
-          <li>설계가 명확한 영역에서는 속도를 높이면서도 일관성을 유지할 수 있기 때문입니다.</li>
-          <li>프로젝트마다 다시 처음부터 셋업하지 않도록 작업 기준을 반복 가능한 형태로 남겨 두기 위해서입니다.</li>
-        </ul>
-      </article>
-      <article class="card rounded-2xl p-6 sm:p-8">
-    <h2 class="font-headline text-2xl font-bold text-[#162033]">AI를 쓰지 않는 방식</h2>
-        <ul class="mt-5 space-y-4 text-sm leading-7 text-[#51607a]">
-          <li>AI를 전면 성과처럼 내세우지 않습니다.</li>
-          <li>도메인 제약이 불명확한 상태에서 결과를 그대로 믿지 않습니다.</li>
-          <li>동작 검증, 안전 기준, 운영 판단을 AI에 맡기지 않습니다.</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <section class="mt-20">
-    <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">What I Have Solved</div>
-    <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-      <article class="card rounded-2xl p-6 sm:p-8">
-        <h2 class="font-headline text-2xl font-bold text-[#162033]">실시간 XR과 시뮬레이션</h2>
-        <p class="mt-4 text-sm leading-7 text-[#51607a]">VR/AR 안전교육, 몰입형 시뮬레이터, 관객 반응형 XR 콘텐츠를 만들며 실제 상호작용 구조와 납품 완성도를 다뤘습니다.</p>
-      </article>
-      <article class="card rounded-2xl p-6 sm:p-8">
-        <h2 class="font-headline text-2xl font-bold text-[#162033]">BIM과 대용량 시각화</h2>
-        <p class="mt-4 text-sm leading-7 text-[#51607a]">고속도로 BIM 3D 시각화, 설계 자동화, 횡단면 생성, 최적화 구조를 통해 대규모 데이터와 성능 문제를 풀었습니다.</p>
-      </article>
-      <article class="card rounded-2xl p-6 sm:p-8">
-        <h2 class="font-headline text-2xl font-bold text-[#162033]">Unity Editor Tooling과 자동화</h2>
-        <p class="mt-4 text-sm leading-7 text-[#51607a]">콘텐츠 제작자와 운영 담당자가 직접 다룰 수 있는 에디터와 빌드 흐름을 만들며 협업 마찰을 줄였습니다.</p>
-      </article>
-      <article class="card rounded-2xl p-6 sm:p-8">
-        <h2 class="font-headline text-2xl font-bold text-[#162033]">로봇 연동과 실물 제어</h2>
-        <p class="mt-4 text-sm leading-7 text-[#51607a]">VR 로봇 조종, 통신 브릿지, 안전 로직, 하드웨어 연동 콘텐츠를 통해 실시간 제어 계층을 직접 다뤘습니다.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="mt-20 rounded-3xl bg-[#eef2f6] px-6 py-10 sm:px-8 md:px-10">
-    <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
-      <div class="lg:col-span-8">
-        <div class="font-label text-xs uppercase tracking-[0.28em] text-[#2251b2]">관련 페이지</div>
-    <h2 class="mt-4 max-w-2xl font-headline text-xl font-bold tracking-tight text-[#162033] sm:text-2xl">
-      <span class="block">Projects와 Resume</span>
-      <span class="block">함께 보기</span>
-    </h2>
-      </div>
-      <div class="flex flex-wrap gap-4 lg:col-span-4 lg:justify-end">
-        <a href="../projects/" class="rounded-md bg-[#2251b2] px-8 py-4 font-headline font-bold text-white">Projects 보기</a>
-        <a href="../resume/" class="rounded-md border border-[#c8d3e1] bg-white px-8 py-4 font-headline font-bold text-[#162033]">Resume 보기</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<script>
-(function() {
-  const toggle = document.getElementById('mobile-menu-toggle');
-  const close = document.getElementById('mobile-menu-close');
-  const menu = document.getElementById('mobile-menu');
-  if (!toggle || !menu) return;
-  function openMenu() {
-    menu.classList.remove('hidden');
-    menu.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-    toggle.setAttribute('aria-expanded', 'true');
-  }
-  function closeMenu() {
-    menu.classList.add('hidden');
-    menu.classList.remove('flex');
-    document.body.style.overflow = '';
-    toggle.setAttribute('aria-expanded', 'false');
-  }
-  toggle.addEventListener('click', openMenu);
-  if (close) close.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeMenu();
-  });
-  menu.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', closeMenu);
-  });
-})();
-</script>
+<script src="../assets/js/site.js"></script>
 <script>
 window.PORTFOLIO_TRACKER_ENDPOINT = 'https://semirain.synology.me:3443/track';
 </script>
