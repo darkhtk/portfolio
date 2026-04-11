@@ -47,6 +47,11 @@
   body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
   .display-manual { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; hyphens: none; }
   .hero-copy { max-inline-size: 34ch; text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
+  .case-hero-title { font-size: 1.65rem; line-height: 1.02; }
+  .case-hero-subtitle { font-size: 0.95rem; line-height: 1.1; }
+  .case-section-title { font-size: 1.4rem; line-height: 1.1; }
+  .case-card-title { font-size: 1.15rem; line-height: 1.14; }
+  .case-mini-title { font-size: 1rem; line-height: 1.16; }
   .font-headline { font-style: normal !important; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .bg-background, .bg-surface { background-color: #f8f9fa !important; }
@@ -90,8 +95,22 @@
   @media (max-width: 640px) {
     .code-block { padding: 12px; font-size: 11px; line-height: 1.5; }
   }
-  @media (min-width: 640px) { .hero-copy { max-inline-size: 40ch; } }
-  @media (min-width: 1024px) { .hero-copy { max-inline-size: 46ch; } }
+  @media (min-width: 640px) {
+    .hero-copy { max-inline-size: 40ch; }
+    .case-hero-title { font-size: 1.95rem; }
+    .case-hero-subtitle { font-size: 1.1rem; }
+    .case-section-title { font-size: 1.65rem; }
+    .case-card-title { font-size: 1.25rem; }
+    .case-mini-title { font-size: 1.05rem; }
+  }
+  @media (min-width: 1024px) {
+    .hero-copy { max-inline-size: 46ch; }
+    .case-hero-title { font-size: 2.25rem; }
+    .case-hero-subtitle { font-size: 1.2rem; }
+    .case-section-title { font-size: 1.85rem; }
+    .case-card-title { font-size: 1.35rem; }
+    .case-mini-title { font-size: 1.1rem; }
+  }
 </style>
 </head>
 <body class="bg-background text-on-background">
@@ -158,31 +177,6 @@
 
 <main class="pt-24">
 
-  <!-- Meta-Base Intro Banner -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-12">
-    <div class="rounded-2xl bg-white p-6 shadow-[0_16px_44px_rgba(25,96,163,0.06)] sm:p-8">
-      <div class="font-label text-xs text-primary uppercase tracking-[0.3em] mb-4">운영 맥락</div>
-      <div class="max-w-5xl space-y-4">
-        <p class="text-base leading-8 text-[#44506a] sm:text-lg">
-          이 도구는 토이 프로젝트가 아니라, <span class="text-[#162033]">DXCenter (LG에너지솔루션) · VR 로봇 원격 조종 · 너스탤지아</span> 같은 실제 프로젝트에서 쓰인 협업 흐름을 코드와 운영 규칙으로 옮긴 구조입니다.
-        </p>
-        <p class="text-base leading-8 text-[#44506a] sm:text-lg">
-          역할 분리형 AI 협업을 인프라 레벨에서 반복 가능하게 만들고, 다음 프로젝트에서도 같은 기준을 이어 갈 수 있도록 설계했습니다.
-        </p>
-        <p class="text-base sm:text-lg text-on-surface-variant max-w-3xl font-body leading-relaxed">
-          역할 분리형 AI 협업 방식을 프로젝트마다 다시 조립하지 않도록 만든 도구입니다.
-          프롬프트 중심의 v1에서 시작해, 현재는 TypeScript와 Claude Agent SDK 기반의 v2 구조로 확장하고 있습니다.
-        </p>
-      </div>
-      <div class="mt-6 flex flex-wrap gap-3">
-        <a href="../vr-robot/" class="rounded-full bg-[#eef2f6] px-4 py-2 text-xs font-label uppercase tracking-[0.18em] text-primary transition-colors hover:bg-[#dfe9f6]">VR 로봇 케이스</a>
-        <a href="../dxcenter/" class="rounded-full bg-[#eef2f6] px-4 py-2 text-xs font-label uppercase tracking-[0.18em] text-primary transition-colors hover:bg-[#dfe9f6]">DXCenter 케이스</a>
-        <a href="../genworld-ollama/" class="rounded-full bg-[#eef2f6] px-4 py-2 text-xs font-label uppercase tracking-[0.18em] text-primary transition-colors hover:bg-[#dfe9f6]">GenWorld + Ollama</a>
-        <a href="../" class="rounded-full bg-[#eef2f6] px-4 py-2 text-xs font-label uppercase tracking-[0.18em] text-primary transition-colors hover:bg-[#dfe9f6]">전체 프로젝트</a>
-      </div>
-    </div>
-  </section>
-
   <!-- Hero Section -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-24 lg:mb-32">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
@@ -193,9 +187,9 @@
           <span class="text-outline text-xs font-label uppercase tracking-widest">역할 분리형 AI 협업</span>
         </div>
 
-        <h1 class="display-manual max-w-5xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
+        <h1 class="display-manual case-hero-title max-w-5xl font-headline font-bold text-on-surface tracking-tight mb-6">
           <span class="block">역할 분리형 AI 협업을</span>
-          <span class="block"><span class="text-primary">운영 구조로 만든</span> 프레임워크</span>
+          <span class="case-hero-subtitle mt-2 block text-slate-400"><span class="text-primary">운영 구조로 만든</span> 프레임워크</span>
         </h1>
 
         <div class="flex items-center gap-3 mb-6 flex-wrap">
@@ -222,6 +216,31 @@
     </div>
   </section>
 
+  <!-- Meta-Base Intro Banner -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-12">
+    <div class="rounded-2xl bg-white p-6 shadow-[0_16px_44px_rgba(25,96,163,0.06)] sm:p-8">
+      <div class="font-label text-xs text-primary uppercase tracking-[0.3em] mb-4">운영 맥락</div>
+      <div class="max-w-5xl space-y-4">
+        <p class="text-base leading-8 text-[#44506a] sm:text-lg">
+          이 도구는 토이 프로젝트가 아니라, <span class="text-[#162033]">DXCenter (LG에너지솔루션) · VR 로봇 원격 조종 · 너스탤지아</span> 같은 실제 프로젝트에서 쓰인 협업 흐름을 코드와 운영 규칙으로 옮긴 구조입니다.
+        </p>
+        <p class="text-base leading-8 text-[#44506a] sm:text-lg">
+          실행 규칙, 리뷰 기준, 역할 분리를 코드와 런타임 구조로 옮긴 협업 프레임워크입니다.
+        </p>
+        <p class="text-base sm:text-lg text-on-surface-variant max-w-3xl font-body leading-relaxed">
+          역할 분리형 AI 협업 방식을 프로젝트마다 다시 조립하지 않도록 만든 도구입니다.
+          프롬프트 중심의 v1에서 시작해, 현재는 TypeScript와 Claude Agent SDK 기반의 v2 구조로 확장하고 있습니다.
+        </p>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="../vr-robot/" class="rounded-full bg-[#eef2f6] px-4 py-2 text-xs font-label uppercase tracking-[0.18em] text-primary transition-colors hover:bg-[#dfe9f6]">VR 로봇 케이스</a>
+        <a href="../dxcenter/" class="rounded-full bg-[#eef2f6] px-4 py-2 text-xs font-label uppercase tracking-[0.18em] text-primary transition-colors hover:bg-[#dfe9f6]">DXCenter 케이스</a>
+        <a href="../genworld-ollama/" class="rounded-full bg-[#eef2f6] px-4 py-2 text-xs font-label uppercase tracking-[0.18em] text-primary transition-colors hover:bg-[#dfe9f6]">GenWorld + Ollama</a>
+        <a href="../" class="rounded-full bg-[#eef2f6] px-4 py-2 text-xs font-label uppercase tracking-[0.18em] text-primary transition-colors hover:bg-[#dfe9f6]">전체 프로젝트</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================================ -->
   <!-- ACT 1: v1 (Origin) -->
   <!-- ============================================ -->
@@ -232,7 +251,7 @@
         <span class="font-headline text-6xl font-black text-primary/30">v1</span>
         <div>
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-2">1막 — 출발점</h2>
-          <h3 class="text-3xl md:text-4xl font-headline font-bold">Bash와 Markdown으로 시작한 첫 구조</h3>
+          <h3 class="case-section-title font-headline font-bold">Bash와 Markdown으로 시작한 첫 구조</h3>
         </div>
       </div>
 
@@ -259,22 +278,22 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div class="bg-surface-container-highest p-6 rounded-xl">
             <span class="material-symbols-outlined text-primary text-3xl mb-3">terminal</span>
-            <h5 class="font-headline font-bold mb-2">Bash Scripts</h5>
+            <h5 class="case-mini-title font-headline font-bold mb-2">Bash Scripts</h5>
             <p class="text-xs text-on-surface-variant">에이전트 루프 실행 + git commit + push 자동화. 운영자가 .sh 한 번 실행하면 4 페르소나가 자동 운용됨.</p>
           </div>
           <div class="bg-surface-container-highest p-6 rounded-xl">
             <span class="material-symbols-outlined text-primary text-3xl mb-3">description</span>
-            <h5 class="font-headline font-bold mb-2">Markdown Board</h5>
+            <h5 class="case-mini-title font-headline font-bold mb-2">Markdown Board</h5>
             <p class="text-xs text-on-surface-variant"><code class="text-primary">BOARD.md</code> 칸반 + <code class="text-primary">BACKLOG_RESERVE.md</code> 백로그. 사람과 에이전트가 같은 파일 편집.</p>
           </div>
           <div class="bg-surface-container-highest p-6 rounded-xl">
             <span class="material-symbols-outlined text-primary text-3xl mb-3">groups</span>
-            <h5 class="font-headline font-bold mb-2">4 Personas</h5>
+            <h5 class="case-mini-title font-headline font-bold mb-2">4 Personas</h5>
             <p class="text-xs text-on-surface-variant"><code class="text-primary">prompts/*.txt</code> 4 파일로 정의된 Coordinator · Developer · Supervisor · Client.</p>
           </div>
           <div class="bg-surface-container-highest p-6 rounded-xl">
             <span class="material-symbols-outlined text-primary text-3xl mb-3">menu_book</span>
-            <h5 class="font-headline font-bold mb-2">CLAUDE.md</h5>
+            <h5 class="case-mini-title font-headline font-bold mb-2">CLAUDE.md</h5>
             <p class="text-xs text-on-surface-variant">아키텍처 패턴 · 금지 패턴 · 실수 이력을 한 곳에 누적. 다음 프로젝트로 그대로 이동.</p>
           </div>
         </div>
@@ -371,7 +390,7 @@
   <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <div class="mb-12">
       <h3 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-4">v1 프롬프트 아카이브</h3>
-      <h4 class="text-3xl font-headline font-bold mb-4">프롬프트로 정의한 4개 역할</h4>
+        <h4 class="case-section-title font-headline font-bold mb-4">프롬프트로 정의한 4개 역할</h4>
       <p class="text-on-surface-variant max-w-3xl">
         v1의 핵심: 페르소나마다 한국어 자연어로 절차를 작성. 사람이 읽고 수정 가능. 아래는 각 페르소나의 핵심 발췌 (전체는 GitHub에서 확인).
       </p>
@@ -420,7 +439,7 @@
         <div data-content="coordinator" class="tab-content">
           <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
             <div>
-              <h5 class="font-headline font-bold text-lg text-primary mb-1">Coordinator · 소통 관리자</h5>
+            <h5 class="case-mini-title font-headline font-bold text-primary mb-1">Coordinator · 소통 관리자</h5>
               <p class="text-xs text-on-surface-variant">개발자/고객사/감독관 사이의 소통 관리. 코드 수정 금지. orchestration/ 파일만 관리.</p>
             </div>
             <a href="https://github.com/darkhtk/orchestration-general_00/blob/main/framework/prompts/COORDINATOR.txt" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
@@ -458,7 +477,7 @@ Read <span class="str">`orchestration/BOARD.md`</span> before acting.
         <div data-content="developer" class="tab-content hidden">
           <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
             <div>
-              <h5 class="font-headline font-bold text-lg text-primary mb-1">Developer · 개발자</h5>
+            <h5 class="case-mini-title font-headline font-bold text-primary mb-1">Developer · 개발자</h5>
               <p class="text-xs text-on-surface-variant">태스크 픽업 → 구현 → 단위 테스트 → In Review 제출. BOARD 비어있을 때만 IDLE.</p>
             </div>
             <a href="https://github.com/darkhtk/orchestration-general_00/blob/main/framework/prompts/DEVELOPER.txt" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
@@ -493,7 +512,7 @@ In Review 제출 전 필수 — 3항목 모두 충족해야 제출 가능</pre>
         <div data-content="supervisor" class="tab-content hidden">
           <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
             <div>
-              <h5 class="font-headline font-bold text-lg text-primary mb-1">Supervisor · 감독관</h5>
+            <h5 class="case-mini-title font-headline font-bold text-primary mb-1">Supervisor · 감독관</h5>
               <p class="text-xs text-on-surface-variant">에셋 생성 + 코드 품질 감사 + 런타임 에러 + 성능 최적화 + UX 개선의 자동 행동 사이클.</p>
             </div>
             <a href="https://github.com/darkhtk/orchestration-general_00/blob/main/framework/prompts/SUPERVISOR.txt" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
@@ -528,7 +547,7 @@ MONITOR.md 존재 시 읽기
         <div data-content="client" class="tab-content hidden">
           <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
             <div>
-              <h5 class="font-headline font-bold text-lg text-primary mb-1">Client · 고객사</h5>
+            <h5 class="case-mini-title font-headline font-bold text-primary mb-1">Client · 고객사</h5>
               <p class="text-xs text-on-surface-variant">In Review 검증, SPEC 기준 수용 검증, 페르소나별 리뷰 작성. 코드 수정 금지.</p>
             </div>
             <a href="https://github.com/darkhtk/orchestration-general_00/blob/main/framework/prompts/CLIENT.txt" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
@@ -574,7 +593,7 @@ MONITOR.md 존재 시 읽기
         <span class="font-headline text-6xl font-black text-primary">v2</span>
         <div>
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-2">2막 — 확장</h2>
-          <h3 class="text-3xl md:text-4xl font-headline font-bold">TypeScript · Claude Agent SDK 네이티브</h3>
+          <h3 class="case-section-title font-headline font-bold">TypeScript · Claude Agent SDK 네이티브</h3>
         </div>
       </div>
 
@@ -588,22 +607,22 @@ MONITOR.md 존재 시 읽기
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div class="bg-surface-container-highest p-6 rounded-xl">
             <span class="material-symbols-outlined text-primary text-3xl mb-3">bolt</span>
-            <h5 class="font-headline font-bold mb-2">Event-Driven</h5>
+            <h5 class="case-mini-title font-headline font-bold mb-2">Event-Driven</h5>
             <p class="text-xs text-on-surface-variant">파일 폴링 → <code class="text-primary">tiny-typed-emitter</code> 기반 이벤트 버스. <code class="text-primary">wakeOn</code> · <code class="text-primary">shouldWake</code> 컴포넌트.</p>
           </div>
           <div class="bg-surface-container-highest p-6 rounded-xl">
             <span class="material-symbols-outlined text-primary text-3xl mb-3">verified</span>
-            <h5 class="font-headline font-bold mb-2">Type Safe</h5>
+            <h5 class="case-mini-title font-headline font-bold mb-2">Type Safe</h5>
             <p class="text-xs text-on-surface-variant">자연어 휴리스틱 → <code class="text-primary">Board · Task · OrchestratorEvent</code> 타입 정의. Zod 스키마 검증.</p>
           </div>
           <div class="bg-surface-container-highest p-6 rounded-xl">
             <span class="material-symbols-outlined text-primary text-3xl mb-3">hub</span>
-            <h5 class="font-headline font-bold mb-2">SDK Native</h5>
+            <h5 class="case-mini-title font-headline font-bold mb-2">SDK Native</h5>
             <p class="text-xs text-on-surface-variant">CLI 셸 호출 → <code class="text-primary">@anthropic-ai/claude-agent-sdk</code> 직접 사용. structured output / hooks / permissions.</p>
           </div>
           <div class="bg-surface-container-highest p-6 rounded-xl">
             <span class="material-symbols-outlined text-primary text-3xl mb-3">shield</span>
-            <h5 class="font-headline font-bold mb-2">Cost Guard</h5>
+            <h5 class="case-mini-title font-headline font-bold mb-2">Cost Guard</h5>
             <p class="text-xs text-on-surface-variant">예산 추적 부재 → <code class="text-primary">RunMetrics</code> JSONL append-only + 80% 경고 / 100% 자동 FREEZE.</p>
           </div>
         </div>
@@ -663,7 +682,7 @@ MONITOR.md 존재 시 읽기
   <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <div class="mb-12">
       <h3 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-4">v2 실행 화면</h3>
-      <h4 class="text-3xl font-headline font-bold mb-4">실행 화면</h4>
+        <h4 class="case-section-title font-headline font-bold mb-4">실행 화면</h4>
       <p class="text-on-surface-variant max-w-3xl">
         v2는 단일 명령으로 launcher가 뜨고, 4 에이전트가 이벤트 기반으로 상호작용하며 board를 처리합니다. 운영자는 웹 대시보드에서 실시간으로 상태를 관찰할 수 있습니다.
       </p>
@@ -721,7 +740,7 @@ MONITOR.md 존재 시 읽기
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="mb-12">
         <h3 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-4">v2 프롬프트 아카이브</h3>
-        <h4 class="text-3xl font-headline font-bold mb-4">TypeScript 클래스로 구현된 4 페르소나</h4>
+        <h4 class="case-section-title font-headline font-bold mb-4">TypeScript 클래스로 구현된 4 페르소나</h4>
         <p class="text-on-surface-variant max-w-3xl">
           v2는 같은 4 페르소나를 TypeScript 클래스로 구현. 각 페르소나의 wake 조건과 prompt 빌드 로직이 코드로 명시되어 컴파일 타임 검증 가능.
         </p>
@@ -747,7 +766,7 @@ MONITOR.md 존재 시 읽기
           <div data-content="coordinator" class="tab-content">
             <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
               <div>
-                <h5 class="font-headline font-bold text-lg text-primary mb-1">CoordinatorAgent.ts</h5>
+            <h5 class="case-mini-title font-headline font-bold text-primary mb-1">CoordinatorAgent.ts</h5>
                 <p class="text-xs text-on-surface-variant">5분 간격 sync · review 이벤트 즉시 wake · backlog 부족 시 wake</p>
               </div>
               <a href="https://github.com/darkhtk/orchestration-general_01/blob/main/src/agents/coordinator.ts" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
@@ -790,7 +809,7 @@ MONITOR.md 존재 시 읽기
           <div data-content="developer" class="tab-content hidden">
             <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
               <div>
-                <h5 class="font-headline font-bold text-lg text-primary mb-1">DeveloperAgent.ts</h5>
+            <h5 class="case-mini-title font-headline font-bold text-primary mb-1">DeveloperAgent.ts</h5>
                 <p class="text-xs text-on-surface-variant">Rejected · In Progress · Backlog 우선순위로 wake</p>
               </div>
               <a href="https://github.com/darkhtk/orchestration-general_01/blob/main/src/agents/developer.ts" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
@@ -828,7 +847,7 @@ MONITOR.md 존재 시 읽기
           <div data-content="supervisor" class="tab-content hidden">
             <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
               <div>
-                <h5 class="font-headline font-bold text-lg text-primary mb-1">SupervisorAgent.ts</h5>
+            <h5 class="case-mini-title font-headline font-bold text-primary mb-1">SupervisorAgent.ts</h5>
                 <p class="text-xs text-on-surface-variant">5단계 audit cycle 자동 순환 — asset / code / performance / ux / error</p>
               </div>
               <a href="https://github.com/darkhtk/orchestration-general_01/blob/main/src/agents/supervisor.ts" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
@@ -874,7 +893,7 @@ MONITOR.md 존재 시 읽기
           <div data-content="client" class="tab-content hidden">
             <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
               <div>
-                <h5 class="font-headline font-bold text-lg text-primary mb-1">ClientAgent.ts</h5>
+            <h5 class="case-mini-title font-headline font-bold text-primary mb-1">ClientAgent.ts</h5>
                 <p class="text-xs text-on-surface-variant">In Review 태스크 → SPEC 기준 검증 → structured JSON output</p>
               </div>
               <a href="https://github.com/darkhtk/orchestration-general_01/blob/main/src/agents/client.ts" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline font-label uppercase tracking-widest">전체 GitHub →</a>
@@ -927,23 +946,23 @@ MONITOR.md 존재 시 읽기
 
   <!-- Cross-Reference -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h3 class="font-headline text-2xl font-bold text-center mb-8">다른 사례</h3>
+      <h3 class="case-card-title font-headline font-bold text-center mb-8">다른 사례</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <a href="../vr-robot/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 01</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">VR 로봇 원격 조종 + 자체 IK 솔버</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">VR 로봇 원격 조종 + 자체 IK 솔버</h4>
         <p class="text-sm text-on-surface-variant mb-4">이 도구의 방식을 적용한 산업용 로봇 프로젝트 사례</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../dxcenter/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 02</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
 <p class="text-sm text-on-surface-variant mb-4">AI 협업을 적용한 디지털트윈 에디터 사례</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../genworld-ollama/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 04 · R&amp;D</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">GenWorld + Ollama</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">GenWorld + Ollama</h4>
         <p class="text-sm text-on-surface-variant mb-4">Phaser 3 TS RPG → Unity 2D + 로컬 LLM 기반 NPC 인지 시스템</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>

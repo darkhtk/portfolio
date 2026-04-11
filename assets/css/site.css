@@ -323,6 +323,36 @@ a {
   hyphens: none;
 }
 
+.page-hero-title {
+  font-size: 1.6rem;
+  line-height: 1.02;
+}
+
+.page-section-title {
+  font-size: 1.5rem;
+  line-height: 1.08;
+}
+
+.page-block-title {
+  font-size: 1.2rem;
+  line-height: 1.12;
+}
+
+.page-card-title {
+  font-size: 1.12rem;
+  line-height: 1.14;
+}
+
+.page-mini-title {
+  font-size: 1rem;
+  line-height: 1.16;
+}
+
+.redirect-title {
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
 .heading-balance {
   max-inline-size: 16ch;
   text-wrap: balance;
@@ -354,6 +384,30 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .page-hero-title {
+    font-size: 2rem;
+  }
+
+  .page-section-title {
+    font-size: 1.8rem;
+  }
+
+  .page-block-title {
+    font-size: 1.35rem;
+  }
+
+  .page-card-title {
+    font-size: 1.24rem;
+  }
+
+  .page-mini-title {
+    font-size: 1.05rem;
+  }
+
+  .redirect-title {
+    font-size: 1.75rem;
+  }
+
   .display-balance {
     max-inline-size: 14ch;
   }
@@ -371,6 +425,26 @@ a {
 @media (min-width: 1024px) {
   .metric-strip {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .page-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .page-section-title {
+    font-size: 2rem;
+  }
+
+  .page-block-title {
+    font-size: 1.5rem;
+  }
+
+  .page-card-title {
+    font-size: 1.35rem;
+  }
+
+  .page-mini-title {
+    font-size: 1.1rem;
   }
 
   .display-balance {

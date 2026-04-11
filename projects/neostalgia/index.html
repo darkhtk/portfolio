@@ -47,6 +47,11 @@
   body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
   .display-manual { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; hyphens: none; }
   .hero-copy { max-inline-size: 34ch; text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
+  .case-hero-title { font-size: 1.65rem; line-height: 1.02; }
+  .case-hero-subtitle { font-size: 0.95rem; line-height: 1.1; }
+  .case-section-title { font-size: 1.4rem; line-height: 1.1; }
+  .case-card-title { font-size: 1.15rem; line-height: 1.14; }
+  .case-mini-title { font-size: 1rem; line-height: 1.16; }
   .font-headline { font-style: normal !important; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .bg-background, .bg-surface { background-color: #f8f9fa !important; }
@@ -65,8 +70,22 @@
   footer .text-on-surface, footer .text-on-background, footer .text-on-surface-variant { color: #44506a !important; }
   .from-primary { --tw-gradient-from: #1960A3 var(--tw-gradient-from-position) !important; --tw-gradient-to: rgb(25 96 163 / 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
   .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
-  @media (min-width: 640px) { .hero-copy { max-inline-size: 40ch; } }
-  @media (min-width: 1024px) { .hero-copy { max-inline-size: 46ch; } }
+  @media (min-width: 640px) {
+    .hero-copy { max-inline-size: 40ch; }
+    .case-hero-title { font-size: 1.95rem; }
+    .case-hero-subtitle { font-size: 1.1rem; }
+    .case-section-title { font-size: 1.65rem; }
+    .case-card-title { font-size: 1.25rem; }
+    .case-mini-title { font-size: 1.05rem; }
+  }
+  @media (min-width: 1024px) {
+    .hero-copy { max-inline-size: 46ch; }
+    .case-hero-title { font-size: 2.25rem; }
+    .case-hero-subtitle { font-size: 1.2rem; }
+    .case-section-title { font-size: 1.85rem; }
+    .case-card-title { font-size: 1.35rem; }
+    .case-mini-title { font-size: 1.1rem; }
+  }
 </style>
 </head>
 <body class="bg-background text-on-background">
@@ -138,9 +157,9 @@
           </span>
         </div>
 
-        <h1 class="display-manual max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
+        <h1 class="display-manual case-hero-title max-w-4xl font-headline font-bold text-on-surface tracking-tight mb-6">
           <span class="block text-primary">너스탤지아</span>
-          <span class="mt-2 block text-slate-400">XR 경험과 AI 파이프라인</span>
+          <span class="case-hero-subtitle mt-2 block text-slate-400">XR 경험과 AI 파이프라인</span>
         </h1>
 
         <p class="hero-copy text-base text-on-surface-variant leading-relaxed max-w-3xl">
@@ -171,7 +190,7 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <div class="lg:col-span-5">
           <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">프로젝트 개요</div>
-          <h2 class="text-2xl md:text-3xl font-headline font-bold mb-8">문제와 적용 방식</h2>
+          <h2 class="case-section-title font-headline font-bold mb-8">문제와 적용 방식</h2>
           <div class="space-y-5 text-on-surface-variant leading-relaxed text-base sm:text-lg">
             <p>이 프로젝트의 핵심은 관객의 음성 입력을 XR 경험 안에서 끊기지 않게 연결하는 일이었습니다.</p>
 <p>AI는 전면 연출용으로만 쓰지 않고, 음성 인식, 대화 처리, 음성 응답, 360도 배경 생성, 3D 오브젝트 생성처럼 각 단계에 나눠 적용했습니다.</p>
@@ -196,21 +215,21 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
   <section class="py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">AI가 필요한 이유</div>
-      <h2 class="text-2xl md:text-3xl font-headline font-bold mb-10">왜 AI가 필요했는가</h2>
+      <h2 class="case-section-title font-headline font-bold mb-10">왜 AI가 필요했는가</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-surface-container-low p-8 rounded-xl">
           <span class="material-symbols-outlined text-primary text-4xl mb-4">mic</span>
-          <h3 class="font-headline text-lg font-bold mb-3">입력 해석</h3>
+          <h3 class="case-mini-title font-headline font-bold mb-3">입력 해석</h3>
 <p class="text-sm text-on-surface-variant leading-relaxed">관객 음성을 실시간 흐름 안에서 텍스트와 의미 단위로 나눌 필요가 있었습니다.</p>
         </div>
         <div class="bg-surface-container-low p-8 rounded-xl">
           <span class="material-symbols-outlined text-primary text-4xl mb-4">interests</span>
-          <h3 class="font-headline text-lg font-bold mb-3">생성 연결</h3>
+          <h3 class="case-mini-title font-headline font-bold mb-3">생성 연결</h3>
           <p class="text-sm text-on-surface-variant leading-relaxed">대화, 배경, 오브젝트 생성이 따로 놀지 않고 하나의 경험으로 이어져야 했습니다.</p>
         </div>
         <div class="bg-surface-container-low p-8 rounded-xl">
           <span class="material-symbols-outlined text-primary text-4xl mb-4">monitoring</span>
-          <h3 class="font-headline text-lg font-bold mb-3">운영 관측</h3>
+          <h3 class="case-mini-title font-headline font-bold mb-3">운영 관측</h3>
           <p class="text-sm text-on-surface-variant leading-relaxed">전시 환경에서는 결과뿐 아니라 사용자별 기록과 운영 확인 흐름도 필요했습니다.</p>
         </div>
       </div>
@@ -234,7 +253,7 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <div class="lg:col-span-7">
           <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">Control / Validation</div>
-          <h2 class="text-2xl md:text-3xl font-headline font-bold mb-8">문제와 대응</h2>
+      <h2 class="case-section-title font-headline font-bold mb-8">문제와 대응</h2>
           <div class="space-y-5 text-on-surface-variant leading-relaxed text-base sm:text-lg">
             <p><span class="text-on-surface">문제 1.</span> 여러 AI 서비스를 한 번에 쓰면 응답 지연과 비동기 처리 문제가 생깁니다.</p>
             <p><span class="text-on-surface">대응.</span> Webhook 기반 비동기 처리와 사용자별 저장 구조로 생성 흐름을 분리했습니다.</p>
@@ -264,7 +283,7 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div class="lg:col-span-5">
           <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">Result</div>
-          <h2 class="text-2xl md:text-3xl font-headline font-bold mb-8">결과</h2>
+      <h2 class="case-section-title font-headline font-bold mb-8">결과</h2>
           <div class="space-y-4 text-on-surface-variant leading-relaxed">
             <p>BIFAN XR Beyond Reality 섹션에 공식 선정됐습니다.</p>
 <p>관객 체험과 운영 확인이 가능한 XR 흐름을 실제 프로젝트로 만들었습니다.</p>
@@ -275,21 +294,21 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
         <div class="lg:col-span-7 flex flex-col gap-4">
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center">
             <div>
-              <h3 class="text-2xl font-headline font-bold text-on-surface">BIFAN 선정</h3>
+              <h3 class="case-card-title font-headline font-bold text-on-surface">BIFAN 선정</h3>
               <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">XR Beyond Reality</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl">movie</span>
           </div>
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center">
             <div>
-              <h3 class="text-2xl font-headline font-bold text-on-surface">AI 파이프라인 연결</h3>
+              <h3 class="case-card-title font-headline font-bold text-on-surface">AI 파이프라인 연결</h3>
               <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Whisper · GPT · TTS · Skybox · Meshy</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl">hub</span>
           </div>
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center">
             <div>
-              <h3 class="text-2xl font-headline font-bold text-on-surface">운영 구조 정리</h3>
+              <h3 class="case-card-title font-headline font-bold text-on-surface">운영 구조 정리</h3>
               <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Webhook · 사용자별 저장 · Dashboard</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl">dashboard</span>
@@ -300,23 +319,23 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
   </section>
 
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h3 class="font-headline text-2xl font-bold text-center mb-8">다른 사례</h3>
+      <h3 class="case-card-title font-headline font-bold text-center mb-8">다른 사례</h3>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <a href="../vr-robot/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 01</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">VR 로봇 원격 조종 시스템</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">VR 로봇 원격 조종 시스템</h4>
         <p class="text-sm text-on-surface-variant mb-4">산업용 로봇 제어와 XR 입력 구조를 연결한 사례</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../dxcenter/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 02</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">DXCenter</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">DXCenter</h4>
         <p class="text-sm text-on-surface-variant mb-4">비개발자도 사용하는 Unity 저작도구 사례</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../genworld-ollama/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 04</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">GenWorld + Ollama</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">GenWorld + Ollama</h4>
         <p class="text-sm text-on-surface-variant mb-4">로컬 LLM과 게임 런타임을 연결한 R&amp;D 사례</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>

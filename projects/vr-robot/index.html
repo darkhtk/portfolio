@@ -47,6 +47,11 @@
   body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
   .display-manual { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; hyphens: none; }
   .hero-copy { max-inline-size: 34ch; text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
+  .case-hero-title { font-size: 1.65rem; line-height: 1.02; }
+  .case-hero-subtitle { font-size: 0.95rem; line-height: 1.1; }
+  .case-section-title { font-size: 1.4rem; line-height: 1.1; }
+  .case-card-title { font-size: 1.15rem; line-height: 1.14; }
+  .case-mini-title { font-size: 1rem; line-height: 1.16; }
   .font-headline { font-style: normal !important; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .bg-background, .bg-surface { background-color: #f8f9fa !important; }
@@ -67,8 +72,22 @@
   .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
   .neural-bg { background-image: radial-gradient(circle at 2px 2px, rgba(25, 96, 163, 0.12) 1px, transparent 0); background-size: 40px 40px; opacity: 0.45; }
   .pipeline-block { font-family: 'Consolas', 'D2Coding', monospace; }
-  @media (min-width: 640px) { .hero-copy { max-inline-size: 40ch; } }
-  @media (min-width: 1024px) { .hero-copy { max-inline-size: 46ch; } }
+  @media (min-width: 640px) {
+    .hero-copy { max-inline-size: 40ch; }
+    .case-hero-title { font-size: 1.95rem; }
+    .case-hero-subtitle { font-size: 1.1rem; }
+    .case-section-title { font-size: 1.65rem; }
+    .case-card-title { font-size: 1.25rem; }
+    .case-mini-title { font-size: 1.05rem; }
+  }
+  @media (min-width: 1024px) {
+    .hero-copy { max-inline-size: 46ch; }
+    .case-hero-title { font-size: 2.25rem; }
+    .case-hero-subtitle { font-size: 1.2rem; }
+    .case-section-title { font-size: 1.85rem; }
+    .case-card-title { font-size: 1.35rem; }
+    .case-mini-title { font-size: 1.1rem; }
+  }
 </style>
 </head>
 <body class="bg-background text-on-background">
@@ -149,9 +168,9 @@
           </span>
         </div>
 
-        <h1 class="display-manual max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
+        <h1 class="display-manual case-hero-title max-w-4xl font-headline font-bold text-on-surface tracking-tight mb-6">
           <span class="block text-primary">VR 로봇 원격 조종 시스템</span>
-          <span class="mt-2 block text-lg sm:text-2xl text-slate-400">+ 자체 IK 솔버</span>
+          <span class="case-hero-subtitle mt-2 block text-slate-400">+ 자체 IK 솔버</span>
         </h1>
 
         <p class="hero-copy text-base text-on-surface-variant max-w-2xl font-body leading-relaxed">
@@ -219,7 +238,7 @@
 
         <div>
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">문제 정의</h2>
-          <h3 class="text-3xl font-headline font-bold text-on-surface mb-8">산업용 로봇을 VR로 안전하게 조종하기</h3>
+          <h3 class="case-section-title font-headline font-bold text-on-surface mb-8">산업용 로봇을 VR로 안전하게 조종하기</h3>
           <div class="space-y-6 text-on-surface-variant font-body leading-relaxed">
             <p>Meta Quest 3 VR 컨트롤러로 산업용 로봇(Doosan A0912)을 <span class="text-on-surface">실시간 원격 조종</span>하는 시스템이 필요했다. 단순한 데모가 아니라 <span class="text-on-surface">RoboDK SIM과 실 로봇 양쪽에서 동작</span>해야 하고, 엑스포 현장에서 실제 관람객 앞에서 시연해야 했다.</p>
             <p>핵심 제약: (1) 안전 — 사람과 로봇이 같은 공간에 있을 때 절대 사고가 없어야 함, (2) 실시간 — VR 입력의 지연이 30ms 이하, (3) 정확성 — VR 좌표계와 로봇 좌표계 매핑 오차 최소화.</p>
@@ -230,22 +249,22 @@
         <div class="grid grid-cols-2 gap-8">
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">view_in_ar</span>
-            <h4 class="text-2xl font-headline font-bold text-on-surface mb-2">Quest 3</h4>
+            <h4 class="case-card-title font-headline font-bold text-on-surface mb-2">Quest 3</h4>
             <p class="text-xs text-outline uppercase tracking-widest font-label">VR HMD · 컨트롤러</p>
           </div>
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">precision_manufacturing</span>
-            <h4 class="text-2xl font-headline font-bold text-on-surface mb-2">A0912</h4>
+            <h4 class="case-card-title font-headline font-bold text-on-surface mb-2">A0912</h4>
             <p class="text-xs text-outline uppercase tracking-widest font-label">Doosan 6DOF Robot</p>
           </div>
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">memory</span>
-            <h4 class="text-2xl font-headline font-bold text-on-surface mb-2">4 Threads</h4>
+            <h4 class="case-card-title font-headline font-bold text-on-surface mb-2">4 Threads</h4>
             <p class="text-xs text-outline uppercase tracking-widest font-label">UDP Real-time Bridge</p>
           </div>
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">calculate</span>
-            <h4 class="text-2xl font-headline font-bold text-on-surface mb-2">Jacobian</h4>
+            <h4 class="case-card-title font-headline font-bold text-on-surface mb-2">Jacobian</h4>
             <p class="text-xs text-outline uppercase tracking-widest font-label">자체 IK Solver (R&amp;D)</p>
           </div>
         </div>
@@ -282,7 +301,7 @@
       <!-- Main Card: 4-Thread UDP Bridge -->
       <div class="md:col-span-2 md:row-span-2 bg-surface-container-highest rounded-xl p-8 flex flex-col justify-between group overflow-hidden relative">
         <div class="relative z-10">
-          <h4 class="text-2xl font-headline font-bold mb-4">4-스레드 UDP 실시간 브릿지</h4>
+            <h4 class="case-card-title font-headline font-bold mb-4">4-스레드 UDP 실시간 브릿지</h4>
           <p class="text-on-surface-variant text-sm mb-6 max-w-md">
             VR 컨트롤러 입력 → 로봇 명령을 4개의 독립 스레드로 분리해 실시간성을 보장. Deadband·Resend Skip·Steady-state Suppression으로 네트워크 부하 최소화.
           </p>
@@ -328,7 +347,7 @@
       <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8">
         <div class="flex items-center gap-3 mb-4">
           <span class="material-symbols-outlined text-primary text-2xl">shield</span>
-          <h4 class="text-lg font-headline font-bold">안전 로직</h4>
+              <h4 class="case-mini-title font-headline font-bold">안전 로직</h4>
         </div>
         <p class="text-sm text-on-surface-variant leading-relaxed mb-3">
           엑스포 현장에서 사람이 옆에 있는 상태로 시연. 실패할 수 없는 안전 요건.
@@ -364,7 +383,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-7">
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">AI 협업 흐름</h2>
-          <h3 class="text-3xl font-headline font-bold mb-8">AI 협업을 활용한 구현 방식</h3>
+          <h3 class="case-section-title font-headline font-bold mb-8">AI 협업을 활용한 구현 방식</h3>
           <div class="space-y-5 text-on-surface-variant font-body leading-relaxed text-base sm:text-lg">
             <p>이 프로젝트에서 AI 협업은 Flask 서버, 4-스레드 UDP 브릿지, 안전 로직처럼 반복 구현량이 큰 구간에 집중적으로 사용했습니다.</p>
             <p>중요했던 것은 AI 사용 자체보다, 로봇 안전, 실시간 통신, Unity XR, 좌표계 제약을 정확히 전달하고 계속 검증하는 방식이었습니다.</p>
@@ -409,7 +428,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <div class="lg:col-span-7">
-        <h3 class="text-3xl font-headline font-bold mb-6">IK 알고리즘 자체부터 자체 구축</h3>
+          <h3 class="case-section-title font-headline font-bold mb-6">IK 알고리즘 자체부터 자체 구축</h3>
         <p class="text-on-surface-variant font-body leading-relaxed mb-6">
             엑스포 프로젝트(<code class="text-primary">MetaArm</code>)는 RoboDK API에 IK 해석을 위임했지만, 별도 R&amp;D(<code class="text-primary">ik_meta</code>)에서 <span class="text-on-surface">IK 알고리즘 자체부터 전체 파이프라인까지 직접 확장 구현</span>했습니다.
         </p>
@@ -515,7 +534,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
         <div class="lg:col-span-5">
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">프로젝트 의미</h2>
-        <h3 class="text-3xl font-headline font-bold mb-8">엑스포 시연</h3>
+          <h3 class="case-section-title font-headline font-bold mb-8">엑스포 시연</h3>
           <p class="text-on-surface-variant font-body leading-relaxed mb-8">
             2025 대한민국 해양 모빌리티 안전 엑스포(부산 벡스코)에서 현장 시연을 진행했습니다. 관람객 앞에서 VR 컨트롤러로 실제 산업용 로봇을 조종했습니다.
           </p>
@@ -528,21 +547,21 @@
         <div class="lg:col-span-7 flex flex-col gap-4">
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center hover:bg-surface-container-highest transition-all group">
             <div>
-              <h5 class="text-3xl font-headline font-bold text-on-surface">엑스포 시연</h5>
+              <h5 class="case-card-title font-headline font-bold text-on-surface">엑스포 시연</h5>
               <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">2025 해양 모빌리티 안전 엑스포 · 부산 벡스코</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">military_tech</span>
           </div>
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center hover:bg-surface-container-highest transition-all group">
             <div>
-          <h5 class="text-3xl font-headline font-bold text-on-surface">구현 범위</h5>
+              <h5 class="case-card-title font-headline font-bold text-on-surface">구현 범위</h5>
               <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Flask · UDP 브릿지 · IK 솔버 전체</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">psychology</span>
           </div>
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center hover:bg-surface-container-highest transition-all group">
             <div>
-          <h5 class="text-3xl font-headline font-bold text-on-surface">후속 구현</h5>
+              <h5 class="case-card-title font-headline font-bold text-on-surface">후속 구현</h5>
               <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Unity 21 C# + Python 787 LOC</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">person</span>
@@ -554,23 +573,23 @@
 
   <!-- Cross-Reference -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h3 class="font-headline text-2xl font-bold text-center mb-8">다른 사례</h3>
+      <h3 class="case-card-title font-headline font-bold text-center mb-8">다른 사례</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <a href="../dxcenter/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 02</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
         <p class="text-sm text-on-surface-variant mb-4">9 EditorWindow + 5 patterns + AI 협업 적용</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../orchestration-ts/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">오픈소스 · 협업 프레임워크</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">멀티 에이전트 오케스트레이션</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">멀티 에이전트 오케스트레이션</h4>
 <p class="text-sm text-on-surface-variant mb-4">AI 협업 방식을 반복해서 쓸 수 있게 만든 도구</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../genworld-ollama/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 04 · R&amp;D</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">GenWorld + Ollama</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">GenWorld + Ollama</h4>
         <p class="text-sm text-on-surface-variant mb-4">Phaser 3 TS RPG → Unity 2D + 로컬 LLM 기반 NPC 인지 시스템</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>

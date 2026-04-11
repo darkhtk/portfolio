@@ -47,6 +47,12 @@
   body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
   .display-manual { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; hyphens: none; }
   .hero-copy { max-inline-size: 34ch; text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
+  .case-hero-title { font-size: 1.65rem; line-height: 1.02; }
+  .case-hero-subtitle { font-size: 0.95rem; line-height: 1.1; }
+  .case-section-title { font-size: 1.4rem; line-height: 1.1; }
+  .case-card-title { font-size: 1.15rem; line-height: 1.14; }
+  .case-mini-title { font-size: 1rem; line-height: 1.16; }
+  .case-metric-value { font-size: 1.55rem; line-height: 1; }
   .font-headline { font-style: normal !important; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .bg-background, .bg-surface { background-color: #f8f9fa !important; }
@@ -66,8 +72,24 @@
   .from-primary { --tw-gradient-from: #1960A3 var(--tw-gradient-from-position) !important; --tw-gradient-to: rgb(25 96 163 / 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
   .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
   .neural-bg { background-image: radial-gradient(circle at 2px 2px, rgba(25, 96, 163, 0.12) 1px, transparent 0); background-size: 40px 40px; opacity: 0.45; }
-  @media (min-width: 640px) { .hero-copy { max-inline-size: 40ch; } }
-  @media (min-width: 1024px) { .hero-copy { max-inline-size: 46ch; } }
+  @media (min-width: 640px) {
+    .hero-copy { max-inline-size: 40ch; }
+    .case-hero-title { font-size: 1.95rem; }
+    .case-hero-subtitle { font-size: 1.1rem; }
+    .case-section-title { font-size: 1.65rem; }
+    .case-card-title { font-size: 1.25rem; }
+    .case-mini-title { font-size: 1.05rem; }
+    .case-metric-value { font-size: 1.75rem; }
+  }
+  @media (min-width: 1024px) {
+    .hero-copy { max-inline-size: 46ch; }
+    .case-hero-title { font-size: 2.25rem; }
+    .case-hero-subtitle { font-size: 1.2rem; }
+    .case-section-title { font-size: 1.85rem; }
+    .case-card-title { font-size: 1.35rem; }
+    .case-mini-title { font-size: 1.1rem; }
+    .case-metric-value { font-size: 1.95rem; }
+  }
 </style>
 </head>
 <body class="bg-background text-on-background">
@@ -148,9 +170,9 @@
           </span>
         </div>
 
-        <h1 class="display-manual max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-surface tracking-tight leading-tight mb-8">
+        <h1 class="display-manual case-hero-title max-w-4xl font-headline font-bold text-on-surface tracking-tight mb-6">
           <span class="block"><span class="text-primary">DXCenter</span></span>
-          <span class="mt-2 block">LG에너지솔루션 디지털트윈 에디터</span>
+          <span class="case-hero-subtitle mt-2 block text-slate-400">LG에너지솔루션 디지털트윈 에디터</span>
         </h1>
 
         <p class="hero-copy text-base sm:text-lg text-on-surface-variant max-w-2xl font-body leading-relaxed">
@@ -203,7 +225,7 @@
 
         <div>
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">문제 정의</h2>
-          <h3 class="text-3xl font-headline font-bold text-on-surface mb-8">비개발자가 만들 수 있는 디지털트윈 저작도구</h3>
+          <h3 class="case-section-title font-headline font-bold text-on-surface mb-8">비개발자가 만들 수 있는 디지털트윈 저작도구</h3>
           <div class="space-y-6 text-on-surface-variant font-body leading-relaxed">
             <p>LG에너지솔루션 PRI 교육·시각화 시스템 — <span class="text-on-surface">콘텐츠 제작자(비개발자)</span>가 코드 수정 없이 디지털트윈 콘텐츠를 제작·검수·배포할 수 있어야 했다.</p>
             <p>핵심 제약: (1) <span class="text-on-surface">비개발자가 직관적으로 조작</span>할 수 있는 UX, (2) Editor 작업이 Runtime/WebGL 모두에서 안정 동작, (3) 콘텐츠 구조가 확장 가능 (건물 → 층 → 장비 → 파트), (4) Dummy/Live 서버 모드 전환 자유.</p>
@@ -214,22 +236,22 @@
         <div class="grid grid-cols-2 gap-8">
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">apps</span>
-            <h4 class="text-3xl font-headline font-bold text-on-surface mb-2">9</h4>
+            <h4 class="case-metric-value font-headline font-bold text-on-surface mb-2">9</h4>
             <p class="text-xs text-outline uppercase tracking-widest font-label">커스텀 에디터 창</p>
           </div>
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">architecture</span>
-            <h4 class="text-3xl font-headline font-bold text-on-surface mb-2">5</h4>
+            <h4 class="case-metric-value font-headline font-bold text-on-surface mb-2">5</h4>
             <p class="text-xs text-outline uppercase tracking-widest font-label">구조 패턴</p>
           </div>
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">code</span>
-            <h4 class="text-3xl font-headline font-bold text-on-surface mb-2">43</h4>
+            <h4 class="case-metric-value font-headline font-bold text-on-surface mb-2">43</h4>
             <p class="text-xs text-outline uppercase tracking-widest font-label">C# 파일 (에디터 23 + 런타임 20)</p>
           </div>
           <div class="p-8 bg-surface-container-highest rounded-xl">
             <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">groups</span>
-            <h4 class="text-3xl font-headline font-bold text-on-surface mb-2">3</h4>
+            <h4 class="case-metric-value font-headline font-bold text-on-surface mb-2">3</h4>
             <p class="text-xs text-outline uppercase tracking-widest font-label">Claude CLI 3개 (역할 분리 워크플로)</p>
           </div>
         </div>
@@ -240,43 +262,43 @@
   <!-- 5가지 아키텍처 패턴 -->
   <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-12 text-center">5가지 구조 패턴</h2>
-    <h3 class="text-3xl font-headline font-bold text-center mb-16">디지털트윈 저작도구를 구성한 5가지 패턴</h3>
+          <h3 class="case-section-title font-headline font-bold text-center mb-16">디지털트윈 저작도구를 구성한 5가지 패턴</h3>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
       <div class="bg-surface-container-low p-8 rounded-xl">
         <span class="material-symbols-outlined text-primary text-4xl mb-4">database</span>
-        <h4 class="font-headline text-xl font-bold mb-3">ScriptableObject as Data</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">ScriptableObject as Data</h4>
         <p class="text-sm text-on-surface-variant leading-relaxed">콘텐츠 데이터를 ScriptableObject로 직렬화. GameBootstrap SO 자동 업데이트로 현장 전환 시 참조 자동 갱신.</p>
       </div>
 
       <div class="bg-surface-container-low p-8 rounded-xl">
         <span class="material-symbols-outlined text-primary text-4xl mb-4">hub</span>
-        <h4 class="font-headline text-xl font-bold mb-3">Service Locator</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">Service Locator</h4>
         <p class="text-sm text-on-surface-variant leading-relaxed">에디터/런타임 모듈 간 의존성을 Service Locator로 분리. 에디터에서 더미 서비스, 런타임에서 라이브 서비스 주입.</p>
       </div>
 
       <div class="bg-surface-container-low p-8 rounded-xl">
         <span class="material-symbols-outlined text-primary text-4xl mb-4">bolt</span>
-        <h4 class="font-headline text-xl font-bold mb-3">EventBus Pub/Sub</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">EventBus Pub/Sub</h4>
         <p class="text-sm text-on-surface-variant leading-relaxed">EditorWindow 간 통신을 이벤트 기반으로. AssetManager가 추가하면 EquipmentManager가 자동 인지.</p>
       </div>
 
       <div class="bg-surface-container-low p-8 rounded-xl">
         <span class="material-symbols-outlined text-primary text-4xl mb-4">extension</span>
-        <h4 class="font-headline text-xl font-bold mb-3">Strategy (IStateEffect)</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">Strategy (IStateEffect)</h4>
         <p class="text-sm text-on-surface-variant leading-relaxed">상태 효과 4종 (Alpha / Blink / ColorChange / Highlight)을 Strategy 패턴으로 교체 가능하게.</p>
       </div>
 
       <div class="bg-surface-container-low p-8 rounded-xl">
         <span class="material-symbols-outlined text-primary text-4xl mb-4">undo</span>
-        <h4 class="font-headline text-xl font-bold mb-3">Command (Undo/Redo)</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">Command (Undo/Redo)</h4>
         <p class="text-sm text-on-surface-variant leading-relaxed">에디터 모든 작업을 Command로 캡슐화. Unity Editor의 Undo 시스템과 통합.</p>
       </div>
 
       <div class="bg-surface-container-low p-8 rounded-xl">
         <span class="material-symbols-outlined text-primary text-4xl mb-4">layers</span>
-        <h4 class="font-headline text-xl font-bold mb-3">DXEditorWindowBase</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">DXEditorWindowBase</h4>
         <p class="text-sm text-on-surface-variant leading-relaxed">9개 EditorWindow의 공통 기반 추상 클래스. 씬 컨텍스트 자동 감지, Undo 지원, Play Mode 보호 자동.</p>
       </div>
     </div>
@@ -308,7 +330,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <div class="text-center mb-16">
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">AI 협업 흐름</h2>
-        <h3 class="text-3xl font-headline font-bold mb-4">AI 협업을 역할별로 나눠 사용한 방식</h3>
+          <h3 class="case-section-title font-headline font-bold mb-4">AI 협업을 역할별로 나눠 사용한 방식</h3>
         <p class="text-base sm:text-lg text-on-surface-variant max-w-2xl mx-auto">
 구현, 검토, 기록 역할을 나눠 AI 협업을 보조적으로 사용했습니다.
         </p>
@@ -319,7 +341,7 @@
         <div class="bg-surface-container-highest p-8 rounded-xl relative overflow-hidden">
           <div class="absolute top-4 right-4 font-headline font-black text-6xl text-primary/10">01</div>
           <span class="material-symbols-outlined text-primary text-4xl mb-4">supervised_user_circle</span>
-          <h4 class="font-headline text-xl font-bold mb-2 text-primary">CLI 1 · 감독관</h4>
+          <h4 class="case-card-title font-headline font-bold mb-2 text-primary">CLI 1 · 감독관</h4>
           <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-4">설계 / 검토</div>
           <ul class="text-sm text-on-surface-variant space-y-2">
             <li>· 설계 검증</li>
@@ -332,7 +354,7 @@
         <div class="bg-surface-container-highest p-8 rounded-xl relative overflow-hidden">
           <div class="absolute top-4 right-4 font-headline font-black text-6xl text-primary/10">02</div>
           <span class="material-symbols-outlined text-primary text-4xl mb-4">code</span>
-          <h4 class="font-headline text-xl font-bold mb-2 text-primary">CLI 2 · 개발자</h4>
+          <h4 class="case-card-title font-headline font-bold mb-2 text-primary">CLI 2 · 개발자</h4>
           <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-4">구현 담당</div>
           <ul class="text-sm text-on-surface-variant space-y-2">
             <li>· 실제 코드 구현</li>
@@ -345,7 +367,7 @@
         <div class="bg-surface-container-highest p-8 rounded-xl relative overflow-hidden">
           <div class="absolute top-4 right-4 font-headline font-black text-6xl text-primary/10">03</div>
           <span class="material-symbols-outlined text-primary text-4xl mb-4">person</span>
-          <h4 class="font-headline text-xl font-bold mb-2 text-primary">CLI 3 · 고객저작자</h4>
+          <h4 class="case-card-title font-headline font-bold mb-2 text-primary">CLI 3 · 고객저작자</h4>
           <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-4">UX 검수 (비개발자)</div>
           <ul class="text-sm text-on-surface-variant space-y-2">
             <li>· 비개발자 관점 워크플로우 테스트</li>
@@ -360,7 +382,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
             <div class="font-label text-xs text-primary uppercase tracking-[0.3em] mb-3">CLAUDE.md 관리</div>
-            <h4 class="text-2xl font-headline font-bold mb-4">방법론을 코드와 함께 버전 관리</h4>
+            <h4 class="case-card-title font-headline font-bold mb-4">방법론을 코드와 함께 버전 관리</h4>
             <p class="text-sm text-on-surface-variant leading-relaxed">
               아키텍처 패턴, 코딩 컨벤션, 금지 패턴, 실수 이력까지 <span class="text-on-surface">CLAUDE.md에 체계적으로 관리</span>. 매 세션마다 3 CLI가 같은 컨텍스트로 시작.
             </p>
@@ -392,14 +414,14 @@
       <div class="aspect-[16/8] overflow-hidden bg-[#eef2f6]">
         <img src="../../assets/images/customeditor.png" alt="DXCenter 구현 세부 화면" class="h-full w-full object-cover object-center"/>
       </div>
-      <div class="p-4 text-sm leading-6 text-[#51607a]">콘텐츠 구조, 상태 효과, 더미·라이브 전환, 빌드 흐름이 한 에디터 체계 안에서 연결되도록 설계했습니다.</div>
+      <div class="p-4 text-sm leading-6 text-[#51607a]">콘텐츠 구조, 상태 효과, 더미·라이브 전환, 빌드 흐름이 하나의 에디터 안에서 이어집니다.</div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 
       <!-- Site 4단계 구조 -->
       <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8">
-        <h4 class="text-2xl font-headline font-bold mb-6">Site 4단계 콘텐츠 구조</h4>
+          <h4 class="case-card-title font-headline font-bold mb-6">Site 4단계 콘텐츠 구조</h4>
         <div class="space-y-3">
           <div class="flex items-center gap-4">
             <div class="w-8 h-8 rounded bg-primary/20 flex items-center justify-center font-bold text-primary text-sm">1</div>
@@ -424,28 +446,28 @@
       <!-- Editor/Runtime 분리 -->
       <div class="bg-surface-container-low rounded-xl p-8">
         <span class="material-symbols-outlined text-primary text-3xl mb-3">call_split</span>
-        <h4 class="text-lg font-headline font-bold mb-3">Editor/Runtime asmdef 분리</h4>
+              <h4 class="case-mini-title font-headline font-bold mb-3">Editor/Runtime asmdef 분리</h4>
         <p class="text-xs text-on-surface-variant">Editor 전용 코드와 Runtime 코드를 asmdef로 완전 분리. 빌드 사이즈 최적화.</p>
       </div>
 
       <!-- Dummy/Live 모드 -->
       <div class="bg-surface-container-low rounded-xl p-8">
         <span class="material-symbols-outlined text-primary text-3xl mb-3">swap_horiz</span>
-        <h4 class="text-lg font-headline font-bold mb-3">Dummy ↔ Live 전환</h4>
+              <h4 class="case-mini-title font-headline font-bold mb-3">Dummy ↔ Live 전환</h4>
         <p class="text-xs text-on-surface-variant">서버 의존성 없이 에디터에서 더미 데이터로 작업. 클릭 한 번으로 라이브 모드.</p>
       </div>
 
       <!-- WebGL 빌드 -->
       <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8">
         <span class="material-symbols-outlined text-primary text-3xl mb-3">cloud_upload</span>
-        <h4 class="text-lg font-headline font-bold mb-3">WebGL 원클릭 빌드</h4>
+              <h4 class="case-mini-title font-headline font-bold mb-3">WebGL 원클릭 빌드</h4>
         <p class="text-xs text-on-surface-variant">Build Settings 자동 동기화 + WebGL 압축 최적화 + 자동 배포 파이프라인. 콘텐츠 제작자가 빌드 과정을 알 필요 없음.</p>
       </div>
 
       <!-- 4 State Effects -->
       <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8">
         <span class="material-symbols-outlined text-primary text-3xl mb-3">auto_fix_high</span>
-        <h4 class="text-lg font-headline font-bold mb-3">State Effect 4종 (Strategy)</h4>
+              <h4 class="case-mini-title font-headline font-bold mb-3">State Effect 4종 (Strategy)</h4>
         <div class="grid grid-cols-2 gap-2 mt-4">
           <div class="px-3 py-2 bg-surface-container-highest rounded font-label text-[10px] uppercase tracking-tighter text-primary text-center">Alpha</div>
           <div class="px-3 py-2 bg-surface-container-highest rounded font-label text-[10px] uppercase tracking-tighter text-primary text-center">Blink</div>
@@ -462,7 +484,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
         <div class="lg:col-span-5">
           <h2 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6">프로젝트 의미</h2>
-          <h3 class="text-3xl font-headline font-bold mb-8">통합 협업 환경 구축</h3>
+          <h3 class="case-section-title font-headline font-bold mb-8">통합 협업 환경 구축</h3>
           <p class="text-on-surface-variant font-body leading-relaxed mb-8">
             DXCenter 도입 후 콘텐츠 제작 절차 표준화. 기획자·제작자·검수자가 같은 도구에서 작업하면서 실수가 크게 줄었음. 비개발자도 직관적으로 사용 가능한 워크플로우.
           </p>
@@ -476,21 +498,21 @@
         <div class="lg:col-span-7 flex flex-col gap-4">
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center hover:bg-surface-container-highest transition-all group">
             <div>
-              <h5 class="text-3xl font-headline font-bold text-on-surface">콘텐츠 제작 절차 표준화</h5>
+              <h5 class="case-card-title font-headline font-bold text-on-surface">콘텐츠 제작 절차 표준화</h5>
               <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">기획·제작·검수 통합 워크플로우</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">checklist</span>
           </div>
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center hover:bg-surface-container-highest transition-all group">
             <div>
-<h5 class="text-3xl font-headline font-bold text-on-surface">QA · 검수 흐름</h5>
+              <h5 class="case-card-title font-headline font-bold text-on-surface">QA · 검수 흐름</h5>
               <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">검수 관점 사전 확인</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">verified</span>
           </div>
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center hover:bg-surface-container-highest transition-all group">
             <div>
-          <h5 class="text-3xl font-headline font-bold text-on-surface">AI 협업 방식</h5>
+              <h5 class="case-card-title font-headline font-bold text-on-surface">AI 협업 방식</h5>
               <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">3 CLI 기반 역할 분리</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">groups</span>
@@ -502,23 +524,23 @@
 
   <!-- Cross-Reference -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h3 class="font-headline text-2xl font-bold text-center mb-8">다른 사례</h3>
+      <h3 class="case-card-title font-headline font-bold text-center mb-8">다른 사례</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <a href="../vr-robot/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 01</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">VR 로봇 원격 조종 + 자체 IK 솔버</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">VR 로봇 원격 조종 + 자체 IK 솔버</h4>
           <p class="text-sm text-on-surface-variant mb-4">산업용 로봇 원격 조종 시스템 사례</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../orchestration-ts/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">오픈소스 · 협업 프레임워크</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">멀티 에이전트 오케스트레이션</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">멀티 에이전트 오케스트레이션</h4>
 <p class="text-sm text-on-surface-variant mb-4">협업 방식을 반복해서 쓸 수 있게 만든 도구</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
       <a href="../genworld-ollama/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
         <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 04 · R&amp;D</div>
-        <h4 class="text-2xl font-headline font-bold mb-3">GenWorld + Ollama</h4>
+            <h4 class="case-card-title font-headline font-bold mb-3">GenWorld + Ollama</h4>
         <p class="text-sm text-on-surface-variant mb-4">Phaser 3 TS RPG → Unity 2D + 로컬 LLM 기반 NPC 인지 시스템</p>
         <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
       </a>
