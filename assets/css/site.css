@@ -41,6 +41,7 @@ body {
 
 body.menu-open {
   overflow: hidden;
+  touch-action: none;
 }
 
 img {
@@ -92,6 +93,12 @@ a {
   -webkit-backdrop-filter: blur(24px);
   background: rgba(247, 249, 252, 0.82);
   border-bottom: 1px solid rgba(23, 35, 63, 0.06);
+}
+
+body.menu-open .sticky-nav {
+  background: #f7f9fc;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .brand-mark {
@@ -214,12 +221,17 @@ a {
 
 .mobile-drawer {
   display: flex;
+  min-height: 100dvh;
+  overflow-y: auto;
+  background: #f7f9fc !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 .mobile-nav-link {
   border-radius: 20px;
   border: 1px solid rgba(23, 35, 63, 0.08);
-  background: rgba(255, 255, 255, 0.92);
+  background: #ffffff;
   padding: 1rem 1.1rem;
 }
 
