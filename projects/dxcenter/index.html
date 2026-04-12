@@ -417,7 +417,7 @@
       <div class="p-4 text-sm leading-6 text-[#51607a]">콘텐츠 구조, 상태 효과, 더미·라이브 전환, 빌드 흐름이 하나의 에디터 안에서 이어집니다.</div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 
       <!-- Site 4단계 구조 -->
       <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8">
@@ -465,11 +465,11 @@
       </div>
 
       <!-- 4 State Effects -->
-      <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8">
-        <span class="material-symbols-outlined text-primary text-3xl mb-3">auto_fix_high</span>
+        <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8">
+          <span class="material-symbols-outlined text-primary text-3xl mb-3">auto_fix_high</span>
               <h4 class="case-mini-title font-headline font-bold mb-3">State Effect 4종 (Strategy)</h4>
-        <div class="grid grid-cols-2 gap-2 mt-4">
-          <div class="px-3 py-2 bg-surface-container-highest rounded font-label text-[10px] uppercase tracking-tighter text-primary text-center">Alpha</div>
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <div class="px-3 py-2 bg-surface-container-highest rounded font-label text-[10px] uppercase tracking-tighter text-primary text-center">Alpha</div>
           <div class="px-3 py-2 bg-surface-container-highest rounded font-label text-[10px] uppercase tracking-tighter text-primary text-center">Blink</div>
           <div class="px-3 py-2 bg-surface-container-highest rounded font-label text-[10px] uppercase tracking-tighter text-primary text-center">ColorChange</div>
           <div class="px-3 py-2 bg-surface-container-highest rounded font-label text-[10px] uppercase tracking-tighter text-primary text-center">Highlight</div>
@@ -517,6 +517,29 @@
             </div>
             <span class="material-symbols-outlined text-primary text-5xl group-hover:translate-x-2 transition-transform">groups</span>
           </div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-surface-container-low rounded-xl p-8">
+          <h4 class="case-mini-title font-headline font-bold mb-3">EditorWindow 9종</h4>
+          <p class="text-xs text-on-surface-variant leading-relaxed">
+            DXCenterMainPanel, AssetManagerWindow, CameraEditorWindow, DataMappingWindow, EquipmentManagerWindow, NavigationEditorWindow,
+            StateEffectWindow, UIEditorWindow, ProjectWizard까지 하나의 저작 흐름으로 묶었습니다.
+          </p>
+        </div>
+        <div class="bg-surface-container-low rounded-xl p-8">
+          <h4 class="case-mini-title font-headline font-bold mb-3">Runtime 코어 20파일</h4>
+          <p class="text-xs text-on-surface-variant leading-relaxed">
+            GameBootstrap, FloorBootstrap, SceneAutoLoader, EventBus, ServiceLocator, DXCameraController, NavigationController,
+            BuildingSelectUI, FloorSceneUI 같은 런타임 코어를 Editor 구조와 분리해 유지했습니다.
+          </p>
+        </div>
+        <div class="bg-surface-container-low rounded-xl p-8">
+          <h4 class="case-mini-title font-headline font-bold mb-3">Data Mapping 흐름</h4>
+          <p class="text-xs text-on-surface-variant leading-relaxed">
+            protocol, endpoint URL, topic/path, Object/UI 매핑 규칙, display format, normalize toggle까지 DataMappingWindow 안에서 설정하고 CSV 파이프라인과 연결했습니다.
+          </p>
         </div>
       </div>
     </div>

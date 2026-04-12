@@ -416,14 +416,38 @@ AIManager.GenerateDialogue(npcId, input, history, ...)
        ↓                                    ↓
    gemma3:4b inference (JSON)           Template by mood
        ↓                                    ↓
-   parse DialogueResponse               same DialogueResponse
-       ↓                                    ↓
-   ApplyResponse(brain, response) ←───────┘
-   - update relationship
-   - add memory
-   - evaluate triggers
-       ↓
-DialogueUI shows text + option buttons</div>
+    parse DialogueResponse               same DialogueResponse
+        ↓                                    ↓
+    ApplyResponse(brain, response) ←───────┘
+    - update relationship
+    - add memory
+    - evaluate triggers
+        ↓
+    DialogueUI shows text + option buttons</div>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-container-highest/40 p-6 rounded-xl">
+          <h3 class="case-mini-title font-headline font-bold mb-3">ai-rules pack</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            <code class="text-primary-fixed">conversation.md</code>, <code class="text-primary-fixed">memory.md</code>,
+            <code class="text-primary-fixed">relationship.md</code>, <code class="text-primary-fixed">quest.md</code>,
+            <code class="text-primary-fixed">decisions.md</code>를 StreamingAssets에 분리해 프롬프트 규칙과 게임 규칙을 같이 유지했습니다.
+          </p>
+        </div>
+        <div class="bg-surface-container-highest/40 p-6 rounded-xl">
+          <h3 class="case-mini-title font-headline font-bold mb-3">기억과 관계 규칙</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            <code class="text-primary-fixed">newMemory</code>는 매 턴 10자 이내 한국어 요약으로 저장하고, 시스템은 퀘스트 수락/거절, 지역 방문, 레벨업 같은 이벤트를 별도 기억으로 누적합니다.
+          </p>
+        </div>
+        <div class="bg-surface-container-highest/40 p-6 rounded-xl">
+          <h3 class="case-mini-title font-headline font-bold mb-3">Quest 연동</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            AI는 <code class="text-primary-fixed">offerQuest: true</code>로 제안 타이밍만 결정하고, 실제 퀘스트 내용과 보상 연결은 <code class="text-primary-fixed">QuestSystem</code>,
+            <code class="text-primary-fixed">NpcQuestPanel</code>, <code class="text-primary-fixed">QuestUI</code>가 기존 데이터 정의로 처리합니다.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -473,6 +497,15 @@ DialogueUI shows text + option buttons</div>
           <h3 class="case-mini-title font-headline font-bold mb-2">4 CLI 역할 분리형 협업</h3>
 <p class="text-on-surface-variant text-sm leading-relaxed">Director / Dev-Backend / Dev-Frontend / Asset+QA. 폴더 소유권 기반 충돌 방지. DXCenter에서 썼던 협업 기준을 다른 도메인에 적용한 사례입니다.</p>
         </div>
+      </div>
+
+      <div class="mt-6 bg-surface-container-highest/40 p-6 rounded-xl">
+        <div class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-3">StreamingAssets / Data</div>
+        <p class="text-on-surface-variant text-sm leading-relaxed">
+          <code class="text-primary-fixed">Data/ai-rules</code> 아래의 규칙 문서와
+          <code class="text-primary-fixed">Data/lore</code> 아래의 <code>world</code>, <code>npcs</code>, <code>monsters</code>,
+          <code>crafting</code>, <code>events</code> 요약 파일을 분리해, 코드 수정 없이 프롬프트 규칙과 세계관 데이터를 갱신할 수 있게 구성했습니다.
+        </p>
       </div>
     </div>
   </section>

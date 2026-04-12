@@ -213,6 +213,31 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
             <div class="p-4 text-sm text-on-surface-variant">대화와 감정선을 XR 장면 안에서 자연스럽게 이어가도록 구성했습니다.</div>
           </div>
         </div>
+
+        <div class="lg:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-surface-container-highest rounded-xl p-6">
+            <h3 class="case-mini-title font-headline font-bold mb-3">Client Runtime</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">
+              <code class="text-primary-fixed">FlaskManager</code>, <code class="text-primary-fixed">SequenceManager</code>,
+              <code class="text-primary-fixed">SkyboxGenerator</code>, <code class="text-primary-fixed">MeshyManager</code>,
+              <code class="text-primary-fixed">SessionDataManager</code>가 XR 체험 루프를 담당했습니다.
+            </p>
+          </div>
+          <div class="bg-surface-container-highest rounded-xl p-6">
+            <h3 class="case-mini-title font-headline font-bold mb-3">Flask Backend</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">
+              Flask + SocketIO 기반 백엔드에서 <code class="text-primary-fixed">/process_audio</code>,
+              <code class="text-primary-fixed">/process_chat</code>, <code class="text-primary-fixed">/skybox</code>,
+              <code class="text-primary-fixed">/generate_3d</code> 흐름을 묶고 GCP App Engine 2개 서비스로 운영했습니다.
+            </p>
+          </div>
+          <div class="bg-surface-container-highest rounded-xl p-6">
+            <h3 class="case-mini-title font-headline font-bold mb-3">Ops Dashboard</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">
+              React 19 + Vite 7 대시보드에서 Google OAuth, GCS 파일 트리, GLB 미리보기, 날짜별 통계, 키워드 추출, raw log 확인까지 지원했습니다.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -248,6 +273,21 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
           <div class="bg-surface-container-highest rounded-xl p-4">TTS</div>
           <div class="bg-surface-container-highest rounded-xl p-4">Skybox / Meshy</div>
           <div class="bg-surface-container-highest rounded-xl p-4">XR / Dashboard</div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-surface-container-low rounded-xl p-6">
+          <div class="font-headline text-2xl font-bold text-primary">130명+</div>
+          <div class="mt-2 text-xs font-label uppercase tracking-widest text-slate-500">체험 세션</div>
+        </div>
+        <div class="bg-surface-container-low rounded-xl p-6">
+          <div class="font-headline text-2xl font-bold text-primary">6회</div>
+          <div class="mt-2 text-xs font-label uppercase tracking-widest text-slate-500">국내외 전시</div>
+        </div>
+        <div class="bg-surface-container-low rounded-xl p-6">
+          <div class="font-headline text-2xl font-bold text-primary">2,000명</div>
+          <div class="mt-2 text-xs font-label uppercase tracking-widest text-slate-500">누적 관람</div>
         </div>
       </div>
     </div>
@@ -291,9 +331,9 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
       <h2 class="case-section-title font-headline font-bold mb-8">결과</h2>
           <div class="space-y-4 text-on-surface-variant leading-relaxed">
             <p>BIFAN XR Beyond Reality 섹션에 공식 선정됐습니다.</p>
-            <p>프로젝트 완성도와 전시 가능성을 바탕으로 장관표창을 받았습니다.</p>
-            <p>관객 체험과 운영 확인이 가능한 XR 흐름을 실제 프로젝트로 만들었습니다.</p>
-            <p>이 경험은 이후 AI를 제품 흐름 안에 배치하는 기준이 되는 사례가 됐습니다.</p>
+            <p>프로젝트 완성도와 전시 가능성을 바탕으로 과학기술정보통신부 장관표창을 받았습니다.</p>
+            <p>국내외 6회 전시와 130명+ 체험 세션, 누적 관람 2,000명 규모로 운영된 XR 사례가 됐습니다.</p>
+            <p>Flask 백엔드와 React 대시보드까지 포함한 운영 구조를 실제 전시 환경에서 검증했습니다.</p>
           </div>
         </div>
 
@@ -321,8 +361,8 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
           </div>
           <div class="p-8 bg-surface rounded-xl flex justify-between items-center">
             <div>
-              <h3 class="case-card-title font-headline font-bold text-on-surface">운영 구조 정리</h3>
-              <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Webhook · 사용자별 저장 · Dashboard</p>
+              <h3 class="case-card-title font-headline font-bold text-on-surface">운영 대시보드</h3>
+              <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Google OAuth · GCS Tree · GLB Preview</p>
             </div>
             <span class="material-symbols-outlined text-primary text-5xl">dashboard</span>
           </div>
