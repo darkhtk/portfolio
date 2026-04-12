@@ -70,6 +70,9 @@
   footer .text-on-surface, footer .text-on-background, footer .text-on-surface-variant { color: #44506a !important; }
   .from-primary { --tw-gradient-from: #1960A3 var(--tw-gradient-from-position) !important; --tw-gradient-to: rgb(25 96 163 / 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
   .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
+  .video-frame { position: relative; overflow: hidden; border-radius: 1rem; background: #ffffff; box-shadow: 0 16px 44px rgba(25, 96, 163, 0.08); }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-frame--wide { aspect-ratio: 16 / 9; }
   @media (min-width: 640px) {
     .hero-copy { max-inline-size: 40ch; }
     .case-hero-title { font-size: 1.95rem; }
@@ -206,6 +209,32 @@ Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 
         <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">왜 중요한가</div>
         <p class="text-sm leading-7 text-on-surface-variant">여러 AI 구성요소를 전시형 XR 경험과 운영 대시보드까지 포함한 실제 서비스 흐름으로 묶어낸 사례입니다.</p>
       </article>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center">
+      <div class="video-frame video-frame--wide">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/wz6HslgOnl8"
+          title="너스탤지아 시연 영상"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <div class="rounded-[24px] border border-[#d9e3f1] bg-white p-6 sm:p-8 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Demo Video</div>
+        <h2 class="case-card-title font-headline font-bold mb-4">시연 영상</h2>
+        <p class="text-sm leading-7 text-on-surface-variant">
+          음성 인터뷰, 생성형 배경, 오브젝트 선물, 운영 흐름이 하나의 XR 체험으로 이어지는 장면을 바로 확인할 수 있도록 시연 영상을 페이지 안에 포함했습니다.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Whisper</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">GPT</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">TTS</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Skybox</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Meshy</span>
+        </div>
+      </div>
     </div>
   </section>
 

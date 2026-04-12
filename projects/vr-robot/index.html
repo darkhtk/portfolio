@@ -72,6 +72,10 @@
   .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
   .neural-bg { background-image: radial-gradient(circle at 2px 2px, rgba(25, 96, 163, 0.12) 1px, transparent 0); background-size: 40px 40px; opacity: 0.45; }
   .pipeline-block { font-family: 'Consolas', 'D2Coding', monospace; }
+  .video-frame { position: relative; overflow: hidden; border-radius: 1rem; background: #ffffff; box-shadow: 0 16px 44px rgba(25, 96, 163, 0.08); }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-frame--wide { aspect-ratio: 16 / 9; }
+  .video-frame--short { aspect-ratio: 9 / 16; }
   @media (min-width: 640px) {
     .hero-copy { max-inline-size: 40ch; }
     .case-hero-title { font-size: 1.95rem; }
@@ -237,6 +241,32 @@
           <li><span class="font-semibold text-on-surface">특이점 방지 + 등가각 선택</span>으로 불안정 자세를 피하고 제어 연속성을 유지했습니다.</li>
         </ul>
       </article>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-center">
+      <div class="video-frame video-frame--short max-w-[22rem] mx-auto w-full">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/Z6EnF1AfZWA"
+          title="VR 로봇 엑스포 시연 영상"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <div class="rounded-[24px] border border-[#d9e3f1] bg-white p-6 sm:p-8 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Demo Video</div>
+        <h2 class="case-card-title font-headline font-bold mb-4">엑스포 시연 영상</h2>
+        <p class="text-sm leading-7 text-on-surface-variant">
+          실제 공개 시연에서는 Quest 3 입력, Unity 런타임, Flask 브리지, RoboDK, Doosan A0912 제어가 한 흐름으로 동작해야 했습니다.
+          이 영상은 그 파이프라인이 실제 환경에서 안정적으로 돌아간다는 점을 가장 빠르게 보여주는 증거입니다.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Quest 3</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Unity VR</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Flask / UDP</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Doosan A0912</span>
+        </div>
+      </div>
     </div>
 
     <!-- Featured Banner: 실제 엑스포 시연 사진 -->
@@ -528,61 +558,70 @@
           </div>
           <div class="p-6 bg-surface-container-low rounded-xl">
             <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">관련 영상</div>
-            <ul class="space-y-2">
-              <li><a href="https://youtube.com/shorts/PuKlRUS_AKY?feature=share" class="text-xs text-primary hover:underline" target="_blank" rel="noopener noreferrer">▶ IK + Teaching VR 로봇</a></li>
-              <li><a href="https://youtube.com/shorts/pGh_t7gy27I?feature=share" class="text-xs text-primary hover:underline" target="_blank" rel="noopener noreferrer">▶ 다중 로봇 VR 동시 조작</a></li>
-              <li><a href="https://youtube.com/shorts/B_E7O60NLO4?feature=share" class="text-xs text-primary hover:underline" target="_blank" rel="noopener noreferrer">▶ IK + Damping 물리 테스트</a></li>
-              <li><a href="https://youtube.com/shorts/rUuPAdEcB7o?feature=share" class="text-xs text-primary hover:underline" target="_blank" rel="noopener noreferrer">▶ TCP IK 추적 로봇</a></li>
-            </ul>
+            <p class="text-xs leading-6 text-on-surface-variant">
+              IK 후속 R&amp;D는 단순 코드 설명보다 실제 동작 영상이 더 빠르게 전달됩니다. 아래 임베드로 Teaching, 다중 로봇, TCP 추적, damping 테스트를 바로 확인할 수 있게 정리했습니다.
+            </p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- IK R&D Image Gallery -->
+    <!-- IK R&D Video Gallery -->
     <div class="mt-12">
-      <h4 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6 text-center">R&amp;D 시연 갤러리</h4>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        <a href="https://youtube.com/shorts/PuKlRUS_AKY?feature=share" target="_blank" rel="noopener noreferrer" class="group relative aspect-square rounded-lg overflow-hidden">
-          <img loading="lazy" src="../../assets/images/ik_vr_control.png" alt="VR 컨트롤러 IK 실시간 조종" class="w-full h-full object-cover transition-transform group-hover:scale-105"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
-          <div class="absolute bottom-2 left-2 right-2">
-            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">VR IK 조종</div>
-            <div class="text-[9px] text-slate-400">Quest 3 → Robot</div>
+      <h4 class="text-xs font-label uppercase tracking-[0.3em] text-primary mb-6 text-center">R&amp;D 시연 영상</h4>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-4 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+          <div class="video-frame video-frame--short">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/PuKlRUS_AKY"
+              title="IK + Teaching VR 로봇"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
           </div>
-        </a>
-        <a href="https://youtube.com/shorts/pGh_t7gy27I?feature=share" target="_blank" rel="noopener noreferrer" class="group relative aspect-square rounded-lg overflow-hidden">
-          <img loading="lazy" src="../../assets/images/ik_multi_robot.png" alt="다중 로봇 VR 동시 조작" class="w-full h-full object-cover transition-transform group-hover:scale-105"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
-          <div class="absolute bottom-2 left-2 right-2">
-            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">다중 로봇 VR</div>
-            <div class="text-[9px] text-slate-400">동시 조작</div>
+          <div class="mt-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Teaching</div>
+          <div class="mt-2 text-sm leading-6 text-on-surface-variant">VR 입력과 IK, recording 흐름을 묶어 teaching 파이프라인을 검증한 영상.</div>
+        </article>
+        <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-4 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+          <div class="video-frame video-frame--short">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/pGh_t7gy27I"
+              title="다중 로봇 VR 동시 조작"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
           </div>
-        </a>
-        <a href="https://youtube.com/shorts/rUuPAdEcB7o?feature=share" target="_blank" rel="noopener noreferrer" class="group relative aspect-square rounded-lg overflow-hidden">
-          <img loading="lazy" src="../../assets/images/ik_tcp_tracking.png" alt="TCP 실시간 IK 추적" class="w-full h-full object-cover transition-transform group-hover:scale-105"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
-          <div class="absolute bottom-2 left-2 right-2">
-            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">TCP IK 추적</div>
-            <div class="text-[9px] text-slate-400">실시간 추종</div>
+          <div class="mt-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Multi Robot</div>
+          <div class="mt-2 text-sm leading-6 text-on-surface-variant">단일 입력 구조를 여러 로봇에 확장해 제어 가능성을 확인한 영상.</div>
+        </article>
+        <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-4 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+          <div class="video-frame video-frame--short">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/rUuPAdEcB7o"
+              title="TCP IK 추적 로봇"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
           </div>
-        </a>
-        <a href="https://youtube.com/shorts/B_E7O60NLO4?feature=share" target="_blank" rel="noopener noreferrer" class="group relative aspect-square rounded-lg overflow-hidden">
-          <img loading="lazy" src="../../assets/images/ik_damping_physics.png" alt="IK + Damping 물리 테스트" class="w-full h-full object-cover transition-transform group-hover:scale-105"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
-          <div class="absolute bottom-2 left-2 right-2">
-            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">IK + Damping</div>
-            <div class="text-[9px] text-slate-400">물리 테스트</div>
+          <div class="mt-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">TCP Tracking</div>
+          <div class="mt-2 text-sm leading-6 text-on-surface-variant">TCP 기준 추적과 외부 피드백 반영이 안정적으로 동작하는지 검증한 영상.</div>
+        </article>
+        <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-4 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+          <div class="video-frame video-frame--short">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/B_E7O60NLO4"
+              title="IK + Damping 물리 테스트"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
           </div>
-        </a>
-        <div class="group relative aspect-square rounded-lg overflow-hidden">
-          <img loading="lazy" src="../../assets/images/ik_debug_ui.png" alt="IK 솔버 디버그 UI" class="w-full h-full object-cover"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-surface/95 via-surface/30 to-transparent"></div>
-          <div class="absolute bottom-2 left-2 right-2">
-            <div class="text-[10px] text-primary-fixed font-label uppercase tracking-widest">디버그 UI</div>
-            <div class="text-[9px] text-slate-400">IK 솔버 모니터링</div>
-          </div>
-        </div>
+          <div class="mt-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Damping</div>
+          <div class="mt-2 text-sm leading-6 text-on-surface-variant">damping과 제어 안정성을 실험하며 솔버 응답을 다듬은 영상.</div>
+        </article>
       </div>
     </div>
   </section>
