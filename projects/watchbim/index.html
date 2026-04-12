@@ -70,6 +70,9 @@
   footer .text-on-surface, footer .text-on-background, footer .text-on-surface-variant { color: #44506a !important; }
   .from-primary { --tw-gradient-from: #1960A3 var(--tw-gradient-from-position) !important; --tw-gradient-to: rgb(25 96 163 / 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
   .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
+  .video-frame { position: relative; overflow: hidden; border-radius: 1rem; background: #ffffff; box-shadow: 0 16px 44px rgba(25, 96, 163, 0.08); }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-frame--wide { aspect-ratio: 16 / 9; }
   @media (min-width: 640px) {
     .hero-copy { max-inline-size: 42ch; }
     .case-hero-title { font-size: 1.95rem; }
@@ -200,6 +203,31 @@
         <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">왜 중요한가</div>
         <p class="text-sm leading-7 text-on-surface-variant">단순 뷰어가 아니라 도메인 알고리즘, 상호작용 엔진, 분석 도구를 Unity 런타임 안에 직접 구현한 사례입니다.</p>
       </article>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center">
+      <div class="video-frame video-frame--wide">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/ajJKPro7008"
+          title="WatchBIM 시연 영상"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <div class="rounded-[24px] border border-[#d9e3f1] bg-white p-6 sm:p-8 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Demo Video</div>
+        <h2 class="case-card-title font-headline font-bold mb-4">시연 영상</h2>
+        <p class="text-sm leading-7 text-on-surface-variant">
+          종단면 그래프, 횡단면 3D 생성, 2D 단면 뷰어, clipping 비교가 하나의 런타임에서 이어지는 장면을 바로 확인할 수 있도록 시연 영상을 페이지 안에 포함했습니다.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Vertical Graph</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Cross Section</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">2D Viewer</span>
+          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Clipping</span>
+        </div>
+      </div>
     </div>
   </section>
 
