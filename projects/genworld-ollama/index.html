@@ -195,23 +195,23 @@
           Phaser 3 TypeScript RPG(<span class="text-on-surface">testgame2</span>)를 <span class="text-on-surface">Unity 2D C#</span>로 포팅하면서, 게임 런타임에 <span class="text-primary-fixed">로컬 Ollama LLM(gemma3)</span> 기반 <span class="text-on-surface">NPC 인지·대화 시스템</span>을 설계·구현했습니다. 클라우드 API 의존 없이 <span class="text-primary-fixed">오프라인 우선 + graceful fallback</span> 구조를 검토한 사례입니다.
         </p>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
-          <div>
-            <div class="font-headline text-xl sm:text-2xl font-bold text-primary">Local LLM</div>
-            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">핵심 기술</div>
-          </div>
-          <div>
-            <div class="font-headline text-xl sm:text-2xl font-bold text-primary">gemma3 4B/12B</div>
-            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">모델</div>
-          </div>
-          <div>
-            <div class="font-headline text-xl sm:text-2xl font-bold text-primary">4 CLI</div>
-            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">역할 분리 워크플로</div>
-          </div>
-          <div>
-            <div class="font-headline text-xl sm:text-2xl font-bold text-primary">100%</div>
-            <div class="font-label text-[10px] uppercase tracking-widest text-slate-500 mt-1">오프라인 대응</div>
-          </div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 mb-8">
+          <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-5 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+            <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">내 역할</div>
+            <p class="text-sm leading-7 text-on-surface-variant">Unity 2D 포팅, OllamaClient, NPC 기억 규칙, 퀘스트 연동 흐름을 직접 연결했습니다.</p>
+          </article>
+          <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-5 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+            <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">문제</div>
+            <p class="text-sm leading-7 text-on-surface-variant">클라우드 의존 없이 NPC 대화와 인지 구조를 런타임에 넣고, 실패 시에도 게임 흐름이 유지되어야 했습니다.</p>
+          </article>
+          <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-5 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+            <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">결과</div>
+            <p class="text-sm leading-7 text-on-surface-variant">gemma3 4B/12B 기반 로컬 LLM과 graceful fallback 구조를 붙였고, 약 3-5초 수준 응답과 퀘스트 연동을 검증했습니다.</p>
+          </article>
+          <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-5 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
+            <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">왜 중요한가</div>
+            <p class="text-sm leading-7 text-on-surface-variant">망 분리나 오프라인 우선 환경에서도 AI 시스템을 설계할 수 있는지 검토한 실전형 R&amp;D 사례입니다.</p>
+          </article>
         </div>
 
         <div class="flex flex-wrap gap-3">
