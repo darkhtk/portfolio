@@ -215,6 +215,25 @@
       </article>
     </div>
 
+    <div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <article class="rounded-[20px] border border-[#d9e3f1] bg-[#eef2f6] p-6 shadow-[0_16px_44px_rgba(25,96,163,0.05)]">
+        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Before / After</div>
+        <ul class="space-y-3 text-sm leading-7 text-on-surface-variant">
+          <li><span class="font-semibold text-on-surface">Before</span> 씬, 데이터, UI 수정이 개발자 코드 변경과 수동 설정에 묶여 있었습니다.</li>
+          <li><span class="font-semibold text-on-surface">After</span> 콘텐츠 제작자가 Site, Floor, Equipment, Part 단위로 직접 편집하고 검수할 수 있게 했습니다.</li>
+          <li><span class="font-semibold text-on-surface">결과</span> 제작 흐름이 EditorWindow 중심으로 정리되고 배포 전 검수 경로도 더 명확해졌습니다.</li>
+        </ul>
+      </article>
+      <article class="rounded-[20px] border border-[#d9e3f1] bg-[#eef2f6] p-6 shadow-[0_16px_44px_rgba(25,96,163,0.05)]">
+        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">운영 안전장치</div>
+        <ul class="space-y-3 text-sm leading-7 text-on-surface-variant">
+          <li><span class="font-semibold text-on-surface">DXEditorWindowBase</span>로 씬 컨텍스트 자동 감지, Undo, Play Mode 보호를 공통 처리했습니다.</li>
+          <li><span class="font-semibold text-on-surface">Dummy / Live 서버 전환</span>을 분리해 개발과 운영 모드를 나눌 수 있게 했습니다.</li>
+          <li><span class="font-semibold text-on-surface">Build Settings 자동 동기화</span>와 GameBootstrap 갱신으로 수동 누락을 줄였습니다.</li>
+        </ul>
+      </article>
+    </div>
+
     <!-- Featured Banner: 실제 커스텀 에디터 스크린샷 -->
     <div class="mt-16 relative rounded-xl overflow-hidden shadow-2xl">
       <img loading="lazy" src="../../assets/images/customeditor.png" alt="DXCenter 커스텀 에디터 — 9개 EditorWindow 통합 패널" class="w-full h-auto"/>
