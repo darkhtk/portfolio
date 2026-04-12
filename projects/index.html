@@ -7,9 +7,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
 <title>프로젝트 | 홍대기 포트폴리오</title>
-<meta name="description" content="홍대기의 대표 프로젝트와 배경 경험을 모바일 우선 구조로 다시 구성한 프로젝트 모음."/>
+<meta name="description" content="산업용 Unity 시스템, 시뮬레이션 툴링, AI workflow 역할에 맞춰 읽을 수 있는 홍대기의 대표 프로젝트 모음입니다."/>
 <meta property="og:title" content="프로젝트 | 홍대기 포트폴리오"/>
-<meta property="og:description" content="XR, 로보틱스, BIM, 에디터 툴링, AI 협업까지 이어지는 주요 사례와 배경 경험을 모았습니다."/>
+<meta property="og:description" content="XR, 로보틱스, 시뮬레이션 툴링, AI workflow 관점에서 읽을 수 있는 대표 사례와 배경 경험을 모았습니다."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/"/>
@@ -93,8 +93,8 @@
           <div class="section-kicker">대표 작업</div>
           <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Projects</h1>
           <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">
-            실시간 제어, 운영 툴링, XR 경험, AI 확장 사례가 함께 있습니다.
-            강한 실무 증거와 확장 역량이 모두 드러나는 작업들입니다.
+            산업용 실시간 시스템, 시뮬레이션 툴링, XR 경험, AI workflow 사례를 한 화면에서 비교할 수 있게 모았습니다.
+            지원하려는 팀 성격에 따라 먼저 볼 사례를 바로 고를 수 있습니다.
           </p>
           <div class="mt-7 flex flex-wrap gap-2.5">
             <span class="pill text-sm">XR</span>
@@ -124,6 +124,19 @@
               <div class="mt-1 text-sm leading-6 text-[#4f6077]">전시형 XR과 수상 결과가 있는 사례</div>
             </div>
           </div>
+          <div class="mt-5 border-t border-[rgba(16,31,61,0.08)] pt-5">
+            <div class="section-kicker">Hiring Paths</div>
+            <div class="mt-4 grid gap-3">
+              <a href="#industrial-teams" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:bg-[#f5f8fc]">
+                <div class="metric-label">For Industrial Teams</div>
+                <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Industrial XR / Robotics / Tooling</div>
+              </a>
+              <a href="#ai-product-teams" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:bg-[#f5f8fc]">
+                <div class="metric-label">For AI Product Teams</div>
+                <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">AI Workflow / Agent Systems / Applied AI</div>
+              </a>
+            </div>
+          </div>
           <a href="../about/" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
             프로필 보기
             <span class="material-symbols-outlined text-base">arrow_forward</span>
@@ -142,7 +155,7 @@
       </div>
 
       <div class="mt-10 grid gap-6 xl:grid-cols-3">
-        <article class="project-card bg-white p-4 sm:p-5">
+        <article id="industrial-teams" class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]">
             <img src="../assets/images/vr_robot_expo1.png" alt="VR 로봇 원격 조종 시스템"/>
           </div>
@@ -154,6 +167,7 @@
           </div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">VR 로봇 원격 조종</h3>
           <p class="mt-3 text-sm leading-7 text-[#4f6077]">XR 입력과 산업용 로봇을 연결하고, 이후 자체 IK 확장까지 이어진 대표 사례.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant For · Industrial XR / Robotics</div>
           <a href="vr-robot/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
 
@@ -169,6 +183,7 @@
           </div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">DXCenter</h3>
           <p class="mt-3 text-sm leading-7 text-[#4f6077]">반복 편집 비용을 줄이기 위해 9개 EditorWindow 흐름을 재설계한 에디터 사례.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant For · Simulation Tooling / Digital Twin</div>
           <a href="dxcenter/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
 
@@ -188,10 +203,11 @@
           </div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Neostalgia</h3>
           <p class="mt-3 text-sm leading-7 text-[#4f6077]">BIFAN XR Beyond Reality 선정 및 장관표창을 받은 XR 프로젝트.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant For · Interactive XR / Experience Systems</div>
           <a href="neostalgia/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
 
-        <article class="project-card bg-white p-4 sm:p-5">
+        <article id="ai-product-teams" class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]">
             <img src="../assets/images/v2_launcher.png" alt="Multi-Agent Orchestration Framework 런처 화면"/>
           </div>
@@ -203,6 +219,7 @@
           </div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">멀티 에이전트 오케스트레이션</h3>
           <p class="mt-3 text-sm leading-7 text-[#4f6077]">AI 협업 절차를 반복 가능한 운영 시스템으로 추출한 확장 사례.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant For · AI Workflow / Agent Systems</div>
           <a href="orchestration-ts/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
 
@@ -218,6 +235,7 @@
           </div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">GenWorld + Ollama</h3>
           <p class="mt-3 text-sm leading-7 text-[#4f6077]">로컬 LLM 기반 NPC 인지 시스템과 대화 구조를 탐색한 연구형 사례.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant For · Applied AI / Local LLM R&amp;D</div>
           <a href="genworld-ollama/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
       </div>
