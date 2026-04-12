@@ -436,7 +436,7 @@ body.menu-open .sticky-nav {
 
 @media (min-width: 1024px) {
   .metric-strip {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .page-hero-title {
