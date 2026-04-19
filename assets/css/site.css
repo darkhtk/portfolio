@@ -219,6 +219,78 @@ body.menu-open .sticky-nav {
   color: var(--brand-deep);
 }
 
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 35, 63, 0.12);
+  background: rgba(255, 255, 255, 0.84);
+  padding: 0.28rem;
+}
+
+.lang-link {
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  font-family: "Space Grotesk", "Noto Sans KR", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.lang-link.is-active {
+  background: var(--brand);
+  color: #ffffff;
+}
+
+.media-frame {
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid rgba(23, 35, 63, 0.08);
+  background: var(--surface-strong);
+  box-shadow: var(--shadow);
+}
+
+.media-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-frame.video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.media-frame.video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.detail-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.detail-note {
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(23, 35, 63, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  padding: 1rem 1.1rem;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  box-shadow: 0 18px 48px rgba(16, 31, 61, 0.06);
+}
+
+.detail-note strong {
+  color: var(--brand-deep);
+}
+
 .mobile-drawer {
   display: flex;
   min-height: 100dvh;
@@ -389,6 +461,10 @@ body.menu-open .sticky-nav {
 
 @media (min-width: 640px) {
   .metric-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detail-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 

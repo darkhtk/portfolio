@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
-<title>프로젝트 | 홍대기 포트폴리오</title>
-<meta name="description" content="산업용 Unity 시스템, 시뮬레이션 툴링, AI workflow 역할에 맞춰 읽을 수 있는 홍대기의 대표 프로젝트 모음입니다."/>
-<meta property="og:title" content="프로젝트 | 홍대기 포트폴리오"/>
-<meta property="og:description" content="XR, 로보틱스, 시뮬레이션 툴링, AI workflow 관점에서 읽을 수 있는 대표 사례와 배경 경험을 모았습니다."/>
+<title>Projects | Daeki Hong</title>
+<meta name="description" content="English project archive for Daeki Hong across industrial XR, BIM runtime tooling, robotics control, and applied AI systems."/>
+<meta property="og:title" content="Projects | Daeki Hong"/>
+<meta property="og:description" content="Industrial XR, BIM runtime tooling, robotics control, and applied AI systems."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/"/>
-<meta property="og:locale" content="ko_KR"/>
+<meta property="og:locale" content="en_US"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
@@ -40,48 +40,51 @@
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
       <a href="../" class="flex flex-col">
         <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity Real-Time Systems</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity x AI Systems</span>
       </a>
       <nav class="hidden items-center gap-2 md:flex">
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../">홈</a>
-        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="./">프로젝트</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../about/">프로필</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../">Home</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="./">Projects</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../about/">Profile</a>
       </nav>
       <div class="flex items-center gap-3">
-        <a href="mailto:darkhtk@gmail.com" class="hidden rounded-full bg-[#1a57c7] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5 sm:inline-flex">문의</a>
-        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+        <div class="lang-toggle hidden sm:inline-flex">
+          <a class="lang-link is-active" href="./">EN</a>
+          <a class="lang-link" href="../ko/projects/">KO</a>
+        </div>
+        <a href="mailto:darkhtk@gmail.com" class="hidden rounded-full bg-[#1a57c7] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5 sm:inline-flex">Connect</a>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
           <span class="material-symbols-outlined">menu</span>
         </button>
       </div>
     </div>
-
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 backdrop-blur-2xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
       <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
         <div>
-          <div class="section-kicker">메뉴</div>
+          <div class="section-kicker">Menu</div>
           <div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div>
         </div>
-        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="메뉴 닫기">
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="Close menu">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
       <div class="mt-6 grid gap-3">
         <a href="../" class="mobile-nav-link">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">홈</div>
-          <div class="mt-1 text-sm text-[#526178]">포지셔닝과 대표 작업을 먼저 봅니다.</div>
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div>
+          <div class="mt-1 text-sm text-[#526178]">Positioning and featured proof.</div>
         </a>
         <a href="./" class="mobile-nav-link is-active">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">프로젝트</div>
-          <div class="mt-1 text-sm text-[#526178]">주요 사례와 확장 경험을 모아 봅니다.</div>
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">Projects</div>
+          <div class="mt-1 text-sm text-[#526178]">Core proof, AI extensions, and legacy simulators.</div>
         </a>
         <a href="../about/" class="mobile-nav-link">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">프로필</div>
-          <div class="mt-1 text-sm text-[#526178]">경력, 협업 기준, 작업 배경을 봅니다.</div>
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div>
+          <div class="mt-1 text-sm text-[#526178]">Experience and working style.</div>
         </a>
       </div>
-      <div class="mt-6 rounded-[24px] border border-[rgba(16,31,61,0.08)] bg-white p-5 shadow-[0_18px_48px_rgba(16,31,61,0.08)]">
-        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">문의</div>
-        <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#1a57c7] px-5 py-3 font-semibold text-white">darkhtk@gmail.com</a>
+      <div class="mt-6 flex gap-3">
+        <a href="./" class="lang-link is-active bg-white">EN</a>
+        <a href="../ko/projects/" class="lang-link bg-white">KO</a>
       </div>
     </div>
   </header>
@@ -90,219 +93,172 @@
     <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div class="surface-panel p-6 sm:p-8 lg:p-10">
-          <div class="section-kicker">대표 작업</div>
+          <div class="section-kicker">Selected Work</div>
           <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Projects</h1>
           <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">
-            산업용 실시간 시스템, 시뮬레이션 툴링, XR 경험, AI workflow 사례를 한 화면에서 비교할 수 있게 모았습니다.
-            지원하려는 팀 성격에 따라 먼저 볼 사례를 바로 고를 수 있습니다.
+            This archive is organized so hiring teams can quickly compare system types: industrial XR, BIM runtime tooling, robotics control, and AI workflow design.
           </p>
           <div class="mt-7 flex flex-wrap gap-2.5">
-            <span class="pill text-sm">XR</span>
-            <span class="pill text-sm">로보틱스</span>
-            <span class="pill text-sm">BIM</span>
-            <span class="pill text-sm">에디터 툴링</span>
-            <span class="pill text-sm">AI 협업</span>
+            <span class="pill text-sm">Industrial XR</span>
+            <span class="pill text-sm">BIM Runtime</span>
+            <span class="pill text-sm">Editor Tooling</span>
+            <span class="pill text-sm">Applied AI</span>
+            <span class="pill text-sm">Field Delivery</span>
           </div>
         </div>
 
         <aside class="feature-panel p-5 sm:p-6">
-          <div class="section-kicker">대표 사례</div>
+          <div class="section-kicker">Start Here</div>
           <div class="mt-5 grid gap-3">
             <div class="rounded-[20px] bg-white px-4 py-4">
               <div class="metric-label">01</div>
-              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">VR 로봇 원격 조종</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">실제 제어와 XR을 함께 보는 사례</div>
+              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">VR Robot Teleoperation</div>
+              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Best proof for industrial XR and robotics control.</div>
             </div>
             <div class="rounded-[20px] bg-white px-4 py-4">
               <div class="metric-label">02</div>
-              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">DXCenter</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">비개발자 제작 흐름과 툴링 구조</div>
+              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">WatchBIM</div>
+              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Best proof for runtime geometry, BIM tooling, and viewer logic.</div>
             </div>
             <div class="rounded-[20px] bg-white px-4 py-4">
               <div class="metric-label">03</div>
               <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Neostalgia</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">전시형 XR과 수상 결과가 있는 사례</div>
+              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Best proof for AI-connected XR experience and operations.</div>
             </div>
           </div>
-          <div class="mt-5 border-t border-[rgba(16,31,61,0.08)] pt-5">
-            <div class="section-kicker">분야</div>
-            <div class="mt-4 grid gap-3">
-              <a href="#industrial-teams" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:bg-[#f5f8fc]">
-                <div class="metric-label">Industrial Systems</div>
-                <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Industrial XR / Robotics / Tooling</div>
-              </a>
-              <a href="#ai-product-teams" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:bg-[#f5f8fc]">
-                <div class="metric-label">AI Systems</div>
-                <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">AI Workflow / Agent Systems / Applied AI</div>
-              </a>
-            </div>
-          </div>
-          <a href="../about/" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
-            프로필 보기
-            <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </a>
         </aside>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div class="max-w-3xl">
-          <div class="section-kicker">핵심 사례</div>
-          <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Featured</h2>
-          <p class="mt-4 text-base leading-7 text-[#4f6077]">산업 · BIM · XR 핵심 사례 다섯 개와 AI 확장 성격의 사례 두 개를 한 화면에서 비교할 수 있습니다.</p>
-        </div>
+    <section id="core-proof" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="section-kicker">Core Proof</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Systems with direct delivery pressure</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">These are the projects where system stability, operator context, and delivery constraints mattered as much as the code itself.</p>
       </div>
 
       <div class="mt-10 grid gap-6 xl:grid-cols-3">
-        <article id="industrial-teams" class="project-card bg-white p-4 sm:p-5">
+        <article class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]">
-            <img src="../assets/images/vr_robot_expo1.png" alt="VR 로봇 원격 조종 시스템"/>
+            <img src="../assets/images/vr_robot_expo1.png" alt="VR robot teleoperation"/>
           </div>
           <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Industrial XR</div>
           <div class="mt-3 flex flex-wrap gap-2">
             <span class="project-chip">XR</span>
-            <span class="project-chip">로보틱스</span>
+            <span class="project-chip">Robotics</span>
             <span class="project-chip">IK</span>
           </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">VR 로봇 원격 조종</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">XR 입력과 산업용 로봇을 연결하고, 이후 자체 IK 확장까지 이어진 대표 사례.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Industrial XR / Robotics</div>
-          <a href="vr-robot/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">VR Robot Teleoperation</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Quest 3 to Doosan A0912 control pipeline with safety logic, calibration, and in-house IK extension.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant for Industrial XR / Robotics</div>
+          <a href="../en/projects/vr-robot/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in English<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
 
         <article class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]">
-            <img src="../assets/images/watchbim_generated_crosssection.png" alt="WatchBIM 횡단면 생성 화면"/>
+            <img src="../assets/images/watchbim_generated_crosssection.png" alt="WatchBIM cross section"/>
           </div>
           <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">BIM Runtime</div>
           <div class="mt-3 flex flex-wrap gap-2">
             <span class="project-chip">BIM</span>
-            <span class="project-chip">횡단면</span>
-            <span class="project-chip">도구 런타임</span>
+            <span class="project-chip">Cross-section</span>
+            <span class="project-chip">Viewer</span>
           </div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">WatchBIM</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">대용량 BIM 상호작용, 횡단면 생성, 툴 카메라 시스템을 직접 구현한 런타임 도구.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">BIM Runtime / Simulation Viewer</div>
-          <a href="watchbim/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A Unity BIM runtime with custom geometry tooling, interaction logic, and cross-section analysis.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant for Simulation Tooling / BIM Systems</div>
+          <a href="../en/projects/watchbim/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in English<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
 
         <article class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]">
-            <img src="../assets/images/customeditor.png" alt="DXCenter Unity 에디터 화면"/>
+            <img src="../assets/images/customeditor.png" alt="DXCenter editor"/>
           </div>
           <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Tooling</div>
           <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">디지털 트윈</span>
-            <span class="project-chip">툴링</span>
-            <span class="project-chip">운영 구조</span>
+            <span class="project-chip">Editor</span>
+            <span class="project-chip">Pipeline</span>
+            <span class="project-chip">Operations</span>
           </div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">DXCenter</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">반복 편집 비용을 줄이기 위해 9개 EditorWindow 흐름을 재설계한 에디터 사례.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Simulation Tooling / Digital Twin</div>
-          <a href="dxcenter/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Nine EditorWindow tools for non-developer authoring, data mapping, and digital twin operations.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant for Simulation Tooling / Digital Twin</div>
+          <a href="../en/projects/dxcenter/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in English<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
 
         <article class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]">
-            <img src="../assets/images/neostalgia_skybox.png" alt="너스탤지아 XR 프로젝트"/>
+            <img src="../assets/images/neostalgia_skybox.png" alt="Neostalgia XR"/>
           </div>
           <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Interactive XR</div>
           <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">서사형 XR</span>
-            <span class="project-chip">인터랙티브</span>
-            <span class="project-chip">전시</span>
-          </div>
-          <div class="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold tracking-[0.02em]">
-            <span class="rounded-full bg-[#e7efff] px-3 py-2 text-[#1a57c7]">BIFAN 선정</span>
-            <span class="rounded-full bg-[#fff3d8] px-3 py-2 text-[#8a5a00]">장관표창</span>
+            <span class="project-chip">XR</span>
+            <span class="project-chip">Generative AI</span>
+            <span class="project-chip">Exhibition</span>
           </div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Neostalgia</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">BIFAN XR Beyond Reality 선정 및 과학기술정보통신부 장관 표창을 받은 XR 프로젝트.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Interactive XR / Experience Systems</div>
-          <a href="neostalgia/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
-
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
-            <img src="../assets/images/vr_construction_scaffold.png" alt="건설현장 VR 안전교육 시뮬레이터"/>
-          </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Legacy XR</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">VR 4D</span>
-            <span class="project-chip">안전교육</span>
-            <span class="project-chip">훈련 시뮬레이터</span>
-          </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">VR 시뮬레이터 통합</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">해군, 공공 안전교육, LG하우시스 현장교육까지 납품한 실감형 VR 시뮬레이터 묶음.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Safety XR / Training Simulators</div>
-          <a href="vr-simulators/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
-
-        <article id="ai-product-teams" class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
-            <img src="../assets/images/v2_launcher.png" alt="Multi-Agent Orchestration Framework 런처 화면"/>
-          </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">AI Workflow</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">AI 협업</span>
-            <span class="project-chip">TypeScript</span>
-            <span class="project-chip">규칙</span>
-          </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">멀티 에이전트 오케스트레이션</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">AI 협업 절차를 반복 가능한 운영 시스템으로 추출한 확장 사례.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">AI Workflow / Agent Systems</div>
-          <a href="orchestration-ts/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
-
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
-            <img src="../assets/images/genworld-world.png" alt="GenWorld 게임 월드 화면"/>
-          </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Local LLM R&D</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">R&D</span>
-            <span class="project-chip">로컬 LLM</span>
-            <span class="project-chip">NPC 시스템</span>
-          </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">GenWorld + Ollama</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">로컬 LLM 기반 NPC 인지 시스템과 대화 구조를 탐색한 연구형 사례.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Applied AI / Local LLM R&amp;D</div>
-          <a href="genworld-ollama/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">자세히 보기<span class="material-symbols-outlined text-base">north_east</span></a>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">An XR exhibition system that interviews visitors, generates content, and runs with a real operations dashboard.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant for Interactive XR / Applied AI</div>
+          <a href="../en/projects/neostalgia/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in English<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <div class="surface-panel p-6 sm:p-8">
-          <div class="section-kicker">기반 경험</div>
-          <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Background</h2>
-          <p class="mt-4 text-base leading-7 text-[#4f6077]">
-            대표 사례 바깥에도 대용량 시각화, 안전교육, 전시 설치·운영·철거, 하드웨어 셋업 경험이 이어져 있습니다.
-            현재 사례들은 이런 현장 대응 경험 위에서 확장된 결과물입니다.
-          </p>
-        </div>
-        <div class="surface-panel p-6 sm:p-8">
-          <div class="grid gap-3 sm:grid-cols-2">
-            <div class="rounded-[20px] bg-white px-4 py-4">
-              <div class="metric-label">BIM</div>
-              <p class="mt-2 text-sm leading-7 text-[#4f6077]">대용량 모델 처리, 시각화, 단면 생성, 설계 자동화 경험.</p>
-            </div>
-            <div class="rounded-[20px] bg-white px-4 py-4">
-              <div class="metric-label">Safety XR</div>
-              <p class="mt-2 text-sm leading-7 text-[#4f6077]">VR/AR 교육과 시뮬레이션을 통해 공장·공사현장 중심의 실제 교육 환경을 반복적으로 다뤘습니다.</p>
-            </div>
-            <div class="rounded-[20px] bg-white px-4 py-4">
-              <div class="metric-label">Exhibition Ops</div>
-              <p class="mt-2 text-sm leading-7 text-[#4f6077]">전시 설치·운영·철거 4회와 현장 셋업, 해외 관계자 대상 영문 제품 설명까지 직접 대응했습니다.</p>
-            </div>
-            <div class="rounded-[20px] bg-white px-4 py-4">
-              <div class="metric-label">Hardware Build</div>
-              <p class="mt-2 text-sm leading-7 text-[#4f6077]">이중축 비계 장치 고안, 드릴·탭·클램프 조립, 삼성·LG·포스코 안전교육실 납품 대응까지 맡았습니다.</p>
-            </div>
+    <section id="ai-extension" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">AI Extension</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">AI workflow and R&amp;D systems</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">These projects show how I structure agent workflows, local LLM experiments, and reusable AI operating rules.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 xl:grid-cols-3">
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../assets/images/v2_launcher.png" alt="AI orchestration framework"/>
           </div>
-        </div>
+          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">AI Workflow</div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="project-chip">Agents</span>
+            <span class="project-chip">TypeScript</span>
+            <span class="project-chip">Rules</span>
+          </div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Multi-Agent Orchestration</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A reusable framework for role-based AI collaboration, review rules, and launcher-dashboard operations.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant for AI Workflow / Agent Systems</div>
+          <a href="../en/projects/orchestration-ts/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in English<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
+
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../assets/images/genworld-world.png" alt="GenWorld world"/>
+          </div>
+          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Local LLM R&amp;D</div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="project-chip">Ollama</span>
+            <span class="project-chip">NPC</span>
+            <span class="project-chip">R&amp;D</span>
+          </div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">GenWorld + Ollama</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Local LLM experimentation for NPC behavior, memory rules, and world interaction design.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant for Applied AI / Local LLM R&amp;D</div>
+          <a href="../en/projects/genworld-ollama/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in English<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
+
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../assets/images/vr_construction_scaffold.png" alt="Legacy VR simulators"/>
+          </div>
+          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Legacy Simulators</div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="project-chip">VR 4D</span>
+            <span class="project-chip">Training</span>
+            <span class="project-chip">Delivery</span>
+          </div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">VR Simulator Collection</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A set of training simulators covering naval, construction, and factory safety contexts.</p>
+          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Relevant for Safety XR / Training Simulators</div>
+          <a href="../en/projects/vr-simulators/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in English<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
       </div>
     </section>
 
@@ -310,14 +266,14 @@
       <div class="surface-panel p-6 sm:p-8 lg:p-10">
         <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div class="max-w-3xl">
-            <div class="section-kicker">다음 흐름</div>
-            <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Profile</h2>
-            <p class="mt-4 text-base leading-7 text-[#4f6077]">경력의 흐름, 협업 기준, AI 활용 원칙은 프로필에서 이어집니다.</p>
+            <div class="section-kicker">Background</div>
+            <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Field context behind the portfolio</h2>
+            <p class="mt-4 text-base leading-7 text-[#4f6077]">My work is shaped by installation, factory visits, hardware assembly, public demos, and the practical cost of keeping systems running in front of real users.</p>
           </div>
-          <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
-            <a href="../about/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.18)]">프로필 보기</a>
-            <a href="mailto:darkhtk@gmail.com" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033]">문의하기</a>
-          </div>
+          <a href="../about/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
+            Read profile
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
         </div>
       </div>
     </section>
@@ -327,23 +283,16 @@
     <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
       <div>
         <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
-        <div class="mt-2 text-sm leading-6 text-[#526178]">대표 작업과 케이스 스터디를 한곳에서 볼 수 있습니다.</div>
+        <div class="mt-2 text-sm text-[#526178]">Project archive</div>
       </div>
-      <div class="flex flex-wrap gap-5 text-sm">
-        <a class="footer-link" href="../">홈</a>
-        <a class="footer-link" href="../about/">프로필</a>
-        <a class="footer-link" href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a class="footer-link" href="mailto:darkhtk@gmail.com">Email</a>
+      <div class="flex flex-wrap items-center gap-3 text-sm">
+        <a class="footer-link" href="../">Home</a>
+        <a class="footer-link" href="../about/">Profile</a>
+        <a class="footer-link" href="../ko/projects/">한국어</a>
       </div>
     </div>
   </footer>
 </div>
-
 <script src="../assets/js/site.js"></script>
-<script>
-window.PORTFOLIO_TRACKER_ENDPOINT = 'https://semirain.synology.me:3443/track';
-</script>
-<script src="../assets/js/tracker.js"></script>
-
 </body>
 </html>

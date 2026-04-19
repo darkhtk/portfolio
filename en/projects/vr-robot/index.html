@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VR Robot Teleoperation | Daeki Hong</title>
+<meta name="description" content="English case study for VR Robot Teleoperation: Quest 3, Unity runtime, Flask bridge, RoboDK, safety logic, and in-house Jacobian IK expansion."/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = { theme: { extend: { fontFamily: { headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], label: ["Space Grotesk", "Noto Sans KR", "sans-serif"] } } } }
+</script>
+<link rel="stylesheet" href="../../../assets/css/site.css"/>
+</head>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<div class="site-shell">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="../../../" class="flex flex-col">
+        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity x AI Systems</span>
+      </a>
+      <nav class="hidden items-center gap-2 md:flex">
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../">Home</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../../projects/">Projects</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../about/">Profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="lang-toggle hidden sm:inline-flex">
+          <a class="lang-link is-active" href="./">EN</a>
+          <a class="lang-link" href="../../../projects/vr-robot/">KO</a>
+        </div>
+        <a href="mailto:darkhtk@gmail.com" class="hidden rounded-full bg-[#1a57c7] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(26,87,199,0.24)] sm:inline-flex">Connect</a>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="Close menu"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-3">
+        <a href="../../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">Overview and positioning.</div></a>
+        <a href="../../../projects/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">Projects</div><div class="mt-1 text-sm text-[#526178]">Project archive and case studies.</div></a>
+        <a href="../../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">Working style and background.</div></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative">
+    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+        <div class="surface-panel p-6 sm:p-8 lg:p-10">
+          <div class="section-kicker">Industrial XR x Robotics</div>
+          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">VR Robot Teleoperation</h1>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">A working pipeline that connects Quest 3 controller input to a Doosan A0912 robot through Unity, Flask, RoboDK, safety logic, and later an in-house Jacobian IK extension.</p>
+          <div class="mt-7 flex flex-wrap gap-2.5">
+            <span class="pill text-sm">Quest 3</span>
+            <span class="pill text-sm">Flask</span>
+            <span class="pill text-sm">RoboDK</span>
+            <span class="pill text-sm">In-house IK</span>
+          </div>
+        </div>
+        <aside class="feature-panel p-5 sm:p-6">
+          <div class="section-kicker">Links</div>
+          <div class="mt-5 grid gap-3">
+            <a class="rounded-[20px] bg-white px-4 py-4 text-sm font-semibold text-[#122033]" href="https://github.com/darkhtk/MetaArm" target="_blank" rel="noopener noreferrer">MetaArm repository</a>
+            <a class="rounded-[20px] bg-white px-4 py-4 text-sm font-semibold text-[#122033]" href="https://github.com/darkhtk/ik_meta" target="_blank" rel="noopener noreferrer">ik_meta repository</a>
+            <a class="rounded-[20px] bg-white px-4 py-4 text-sm font-semibold text-[#122033]" href="https://youtube.com/shorts/Z6EnF1AfZWA" target="_blank" rel="noopener noreferrer">Demo video</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="summary-grid">
+        <article class="summary-card"><h3>Role</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Built the Unity runtime, Flask / UDP bridge, safety logic, calibration flow, and the Jacobian-based IK extension.</p></article>
+        <article class="summary-card"><h3>Problem</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">XR input had to map cleanly to a real industrial robot while handling latency, safety, and future expansion.</p></article>
+        <article class="summary-card"><h3>Outcome</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Delivered a public demo pipeline from Quest 3 to Doosan A0912 and later expanded the structure from myCobot 280 to industrial hardware.</p></article>
+        <article class="summary-card"><h3>Why It Matters</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">This is a direct proof of industrial XR that survived control constraints, safety logic, and real-world demonstration.</p></article>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+        <div class="media-frame video">
+          <iframe src="https://www.youtube-nocookie.com/embed/Z6EnF1AfZWA" title="VR Robot Teleoperation demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">Pipeline</div>
+          <h2 class="page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Quest 3 -> Unity -> Flask -> RoboDK -> Robot</h2>
+          <div class="content-prose mt-5">
+            <p>The project started as a VR interface for remote robot control and later grew into a more independent robotics stack. I kept the runtime stable while adding EMA filtering, safety boxes, deadman switch behavior, and calibration steps that reduced control drift.</p>
+            <p>After the first demo pipeline was proven, I extended the work into a Jacobian-based IK solver so the stack would not stay dependent on RoboDK alone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
+      <div class="detail-grid">
+        <div class="detail-note"><strong>Safety and failure handling:</strong> deadman switch, safe box constraints, and posture protection were treated as part of the core control loop, not optional polish.</div>
+        <div class="detail-note"><strong>Verification target:</strong> control latency and response stability were measured around a practical demo threshold so the system could be shown in public without feeling fragile.</div>
+        <div class="detail-note"><strong>Technical expansion:</strong> the later IK work was not a separate toy project. It was the continuation of the same control problem under tighter ownership.</div>
+        <div class="detail-note"><strong>Hiring signal:</strong> best fit for industrial XR, robotics interface, and real-time control workflow roles.</div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="../../../assets/js/site.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -7,8 +7,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
-<title>이력서는 프로필에 통합되었습니다 | 홍대기 포트폴리오</title>
-<meta name="description" content="이력서 내용은 프로필 페이지로 연결됩니다."/>
+<title>Resume moved to Profile | Daeki Hong</title>
+<meta name="description" content="The resume content is now integrated into the Profile page."/>
 <link rel="canonical" href="https://darkhtk.github.io/portfolio/about/"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -20,7 +20,8 @@
       extend: {
         fontFamily: {
           headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
-          body: ["Noto Sans KR", "sans-serif"]
+          body: ["Noto Sans KR", "sans-serif"],
+          label: ["Space Grotesk", "Noto Sans KR", "sans-serif"]
         }
       }
     }
@@ -31,12 +32,18 @@
 <body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
 <main class="mx-auto flex min-h-screen max-w-3xl items-center px-4 py-16 sm:px-6">
   <section class="surface-panel w-full p-8 text-center sm:p-10">
-    <div class="section-kicker justify-center">Profile</div>
-    <h1 class="redirect-title mt-5 font-headline font-bold tracking-[-0.05em] text-[#122033]">Profile</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-base leading-8 text-[#4f6077]">경력, 작업 기준, 대표 사례는 프로필에서 확인할 수 있습니다.</p>
+    <div class="flex justify-center">
+      <div class="lang-toggle">
+        <a class="lang-link is-active" href="./">EN</a>
+        <a class="lang-link" href="../ko/resume/">KO</a>
+      </div>
+    </div>
+    <div class="section-kicker mt-6 justify-center">Profile</div>
+    <h1 class="redirect-title mt-5 font-headline font-bold tracking-[-0.05em] text-[#122033]">Resume content moved to Profile</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-base leading-8 text-[#4f6077]">Experience, working principles, and project fit are now integrated into the Profile page.</p>
     <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-      <a href="../about/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)]">프로필로 이동</a>
-      <a href="../projects/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033]">프로젝트 보기</a>
+      <a href="../about/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)]">Open Profile</a>
+      <a href="../projects/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033]">View Projects</a>
     </div>
   </section>
 </main>
