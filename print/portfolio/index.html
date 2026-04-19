@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daeki Hong - Print Portfolio</title>
+  <meta name="description" content="A4 print portfolio for Daeki Hong across industrial XR, BIM runtime tooling, robotics interfaces, and applied AI systems."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../assets/css/print-docs.css"/>
+</head>
+<body>
+  <div class="screen-toolbar">
+    <div>
+      <div class="screen-toolbar__title">Print Portfolio</div>
+      <div class="screen-toolbar__meta">A4 layout. Each sheet is designed to export directly to PDF.</div>
+    </div>
+    <div class="screen-toolbar__actions">
+      <a class="screen-toolbar__link" href="../resume/">Open Resume PDF Layout</a>
+      <a class="screen-toolbar__link" href="../../projects/">Back to Site</a>
+      <button class="screen-toolbar__button screen-toolbar__button--primary" type="button" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </div>
+
+  <div class="document">
+    <section class="page page--cover">
+      <div class="profile-block">
+        <div class="profile-photo">
+          <img src="../../assets/profile.jpg" alt="Daeki Hong portrait"/>
+        </div>
+        <div class="stack">
+          <div class="eyebrow">Portfolio</div>
+          <h1 class="title">Industrial Unity systems that connect AI to real operations</h1>
+          <p class="lead">
+            This portfolio focuses on systems that had to survive delivery pressure: industrial XR, BIM runtime tooling, robotics control, exhibition operation, and AI workflows that needed rules and observability.
+          </p>
+          <div class="chip-row">
+            <span class="chip chip--accent">10 years in Unity</span>
+            <span class="chip chip--accent">XR x Robotics</span>
+            <span class="chip chip--accent">BIM Runtime Tooling</span>
+            <span class="chip chip--accent">Applied AI Systems</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <section class="section">
+          <h2 class="section__title">Positioning</h2>
+          <div class="card">
+            <ul class="compact-list">
+              <li>Hands-on senior engineer who works from runtime architecture to field delivery.</li>
+              <li>Strongest when interaction, heavy data, operator workflow, and safety constraints meet.</li>
+              <li>Builds AI features as operating components with structure, rules, and failure boundaries.</li>
+            </ul>
+          </div>
+        </section>
+        <section class="section">
+          <h2 class="section__title">Selected external proof</h2>
+          <div class="card">
+            <ul class="compact-list">
+              <li>BIFAN XR Beyond Reality Official Selection</li>
+              <li>Minister of Science and ICT Citation</li>
+              <li>2025 Korea Maritime Mobility Safety Expo demonstration</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <section class="section">
+        <h2 class="section__title">Project map</h2>
+        <div class="matrix">
+          <div class="matrix__item"><strong>VR Robot Teleoperation</strong><span>Industrial XR, robotics interface, safety logic, IK extension</span></div>
+          <div class="matrix__item"><strong>WatchBIM</strong><span>BIM hit engine, cross-section generation, 2D analysis viewer</span></div>
+          <div class="matrix__item"><strong>DXCenter</strong><span>Editor tooling, authoring flow, digital twin operations</span></div>
+          <div class="matrix__item"><strong>Neostalgia</strong><span>Interactive XR, voice AI, generative asset pipeline, dashboard ops</span></div>
+          <div class="matrix__item"><strong>Ops-Cure</strong><span>Discord-native local agent operations, bridge-launcher architecture</span></div>
+          <div class="matrix__item"><strong>Orchestration / GenWorld</strong><span>AI workflow rules, local LLM R&amp;D, inspectable system structure</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section__title">Why these projects matter together</h2>
+        <div class="card">
+          <div class="section__body">
+            The common thread is not a tool list. It is the ability to build systems that have to work under real constraints: geometry scale, robot safety, field setup, exhibition operation, non-developer authoring, or AI workflow control.
+          </div>
+        </div>
+      </section>
+
+      <div class="page__foot">
+        <span>Daeki Hong - Print Portfolio</span>
+        <span>Page 1 / 4</span>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Industrial systems</div>
+      <h2 class="title title--compact">XR, robotics, and BIM runtime proof</h2>
+
+      <article class="project-feature">
+        <div class="project-feature__visual">
+          <img src="../../assets/images/vr_robot_expo2.png" alt="VR Robot Teleoperation demo"/>
+        </div>
+        <div class="project-feature__body">
+          <div class="project-feature__meta">Industrial XR x Robotics</div>
+          <h3 class="project-feature__title">VR Robot Teleoperation</h3>
+          <div class="project-feature__summary">
+            A full pipeline from Quest 3 input to a Doosan A0912 robot through Unity, Flask, RoboDK, safety logic, calibration, and later an in-house Jacobian IK extension.
+          </div>
+          <div class="project-points">
+            <div class="project-point"><strong>Problem:</strong> XR input needed to control an industrial robot with stable mapping, safe movement, and room for later technical ownership.</div>
+            <div class="project-point"><strong>Build:</strong> Controller mapping, EMA filtering, coordinate transforms, bridge APIs, safety boxes, deadman switch logic, and in-house IK continuation.</div>
+            <div class="project-point"><strong>Outcome:</strong> Public exhibition success at BEXCO and a strong proof of industrial XR that handled real control constraints.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-feature">
+        <div class="project-feature__visual">
+          <img src="../../assets/images/watchbim_generated_crosssection.png" alt="WatchBIM generated cross section"/>
+        </div>
+        <div class="project-feature__body">
+          <div class="project-feature__meta">BIM Runtime Tooling</div>
+          <h3 class="project-feature__title">WatchBIM</h3>
+          <div class="project-feature__summary">
+            A Unity BIM runtime built around a custom hit engine, cross-section generation, 2D analysis viewer, and a tool-grade camera system for heavy geometry inspection.
+          </div>
+          <div class="project-points">
+            <div class="project-point"><strong>Problem:</strong> Large BIM scenes needed accurate selection, stable camera behavior, and cross-section analysis inside one usable runtime tool.</div>
+            <div class="project-point"><strong>Build:</strong> Triangle caching, hit filtering, geometry jobs, plane intersection, segment grouping, 3D to 2D conversion, and slope labeling.</div>
+            <div class="project-point"><strong>Outcome:</strong> A practical inspection and analysis runtime that goes beyond visualization into geometry tooling ownership.</div>
+          </div>
+        </div>
+      </article>
+
+      <div class="inline-note">
+        These two projects are the clearest proof that I can build runtime systems where control reliability and geometry complexity matter as much as the UI.
+      </div>
+
+      <div class="page__foot">
+        <span>Live case studies - /en/projects/vr-robot/ and /en/projects/watchbim/</span>
+        <span>Page 2 / 4</span>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Tooling and interactive XR</div>
+      <h2 class="title title--compact">Authoring systems and exhibition-grade AI XR</h2>
+
+      <article class="project-feature">
+        <div class="project-feature__visual">
+          <img src="../../assets/images/customeditor.png" alt="DXCenter editor tooling"/>
+        </div>
+        <div class="project-feature__body">
+          <div class="project-feature__meta">Simulation Tooling</div>
+          <h3 class="project-feature__title">DXCenter</h3>
+          <div class="project-feature__summary">
+            A Unity authoring environment for digital-twin style workflows, built around nine EditorWindow tools and a repeatable content structure for non-developer teams.
+          </div>
+          <div class="project-points">
+            <div class="project-point"><strong>Problem:</strong> Content teams were paying repeated cost whenever mapping, structure, and runtime checks had to be rebuilt by hand.</div>
+            <div class="project-point"><strong>Build:</strong> EditorWindow stack, shared operating patterns, data mapping flow, site-level content structure, and one-click WebGL output.</div>
+            <div class="project-point"><strong>Outcome:</strong> Lowered authoring friction and made content operations more consistent and reviewable.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-feature">
+        <div class="project-feature__visual">
+          <img src="../../assets/images/neostalgia_skybox.png" alt="Neostalgia XR skybox"/>
+        </div>
+        <div class="project-feature__body">
+          <div class="project-feature__meta">Interactive XR x Generative AI</div>
+          <h3 class="project-feature__title">Neostalgia</h3>
+          <div class="project-feature__summary">
+            An XR exhibition system that interviews visitors about memory, generates visual assets from the conversation, and keeps the whole experience operable through logging and a dashboard.
+          </div>
+          <div class="project-points">
+            <div class="project-point"><strong>Problem:</strong> The experience had to coordinate voice input, AI generation, XR state transitions, and real exhibition operations.</div>
+            <div class="project-point"><strong>Build:</strong> Memory interview orchestration, voice-to-AI pipeline, Skybox and Meshy asset generation, telemetry, and operations dashboard.</div>
+            <div class="project-point"><strong>Outcome:</strong> BIFAN XR selection, Minister citation, 130+ direct participants, and an exhibition system that held up under live traffic.</div>
+          </div>
+        </div>
+      </article>
+
+      <div class="page__foot">
+        <span>Live case studies - /en/projects/dxcenter/ and /en/projects/neostalgia/</span>
+        <span>Page 3 / 4</span>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">AI workflow and delivery context</div>
+      <h2 class="title title--compact">Applied AI systems, platform thinking, and field execution</h2>
+
+      <div class="three-col">
+        <article class="card">
+          <div class="card__meta">AI Ops Infrastructure</div>
+          <h3 class="card__title">Ops-Cure</h3>
+          <div class="card__copy">Discord-native local agent orchestration with a NAS control plane, Windows launcher, markdown session workspace, and drift-aware worker telemetry.</div>
+        </article>
+        <article class="card">
+          <div class="card__meta">AI Workflow</div>
+          <h3 class="card__title">Multi-Agent Orchestration</h3>
+          <div class="card__copy">A reusable structure for role-based AI collaboration, review rules, launcher flow, and repeatable operating logic.</div>
+        </article>
+        <article class="card">
+          <div class="card__meta">Local LLM R&amp;D</div>
+          <h3 class="card__title">GenWorld + Ollama</h3>
+          <div class="card__copy">Research work on NPC memory, relationship rules, and inspectable runtime structure for local LLM behavior.</div>
+        </article>
+      </div>
+
+      <div class="two-col">
+        <section class="section">
+          <h3 class="section__title">Why these AI projects are relevant</h3>
+          <div class="card">
+            <ul class="compact-list">
+              <li>They show movement from prompt experimentation into operating structure and platform thinking.</li>
+              <li>They connect AI to concrete outputs: worker routing, state visibility, XR timing, or gameplay data rules.</li>
+              <li>They fit teams building internal tools, agent infrastructure, or applied AI products with real operators.</li>
+            </ul>
+          </div>
+        </section>
+        <section class="section">
+          <h3 class="section__title">Field delivery context</h3>
+          <div class="card">
+            <ul class="compact-list">
+              <li>Four rounds of simulator installation, live operation, and teardown.</li>
+              <li>Factory and construction-site visits that fed directly back into simulator design decisions.</li>
+              <li>Hands-on fabrication and setup, including network installation, drill / impact work, tapping metal plates, and repeated assembly.</li>
+              <li>Hardware ownership and English product explanation in front of external stakeholders.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <section class="section">
+        <h3 class="section__title">Legacy simulator base</h3>
+        <div class="card">
+          <div class="section__body">
+            Earlier VR simulator work across naval, construction, and factory safety contexts is still important in this portfolio.
+            That period is where repeated field setup, operator education flow, hardware-linked delivery, and practical XR deployment habits were formed.
+          </div>
+        </div>
+      </section>
+
+      <div class="inline-note">
+        Best fit roles: Senior Unity/XR Systems Engineer, Industrial Real-Time Systems Engineer, AI-Integrated Simulation Engineer.
+      </div>
+
+      <div class="page__foot">
+        <span>Portfolio site - https://darkhtk.github.io/portfolio/</span>
+        <span>Page 4 / 4</span>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
