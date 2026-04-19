@@ -504,6 +504,43 @@ img {
   line-height: 1.7;
 }
 
+.proof-shot-grid {
+  display: grid;
+  gap: 9px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.proof-shot {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.proof-shot img {
+  height: 44mm;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.proof-shot__body {
+  padding: 9px 10px 10px;
+}
+
+.proof-shot__label {
+  color: var(--accent-strong);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.proof-shot__copy {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10.5px;
+  line-height: 1.6;
+}
+
 .divider {
   height: 1px;
   background: var(--line);
@@ -527,7 +564,8 @@ img {
   .three-col,
   .project-feature,
   .matrix,
-  .stat-grid {
+  .stat-grid,
+  .proof-shot-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -546,13 +584,20 @@ img {
   }
 
   .page {
-    width: 210mm;
-    min-height: 297mm;
-    height: 297mm;
-    margin: 0;
+    width: 184mm;
+    min-height: 271mm;
+    height: 271mm;
+    margin: 0 auto;
+    padding: 6mm 7mm 12mm;
     box-shadow: none;
     page-break-after: always;
     overflow: hidden;
+  }
+
+  .page__foot {
+    left: 7mm;
+    right: 7mm;
+    bottom: 6mm;
   }
 
   .page:last-child {
