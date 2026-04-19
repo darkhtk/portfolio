@@ -111,10 +111,10 @@
 
     <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <div class="summary-grid">
-        <article class="summary-card"><h3>역할</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Bridge / Launcher 분리, 세션 생명주기, adapter 프로토콜, 세션 워크스페이스, drift monitor 흐름을 직접 설계하고 구현했습니다.</p></article>
+        <article class="summary-card"><h3>역할</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Bridge / Launcher 분리, 세션 생명주기, adapter 프로토콜, 세션 워크스페이스, drift monitor 구조를 직접 만들었습니다.</p></article>
         <article class="summary-card"><h3>문제</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">로컬 AI CLI는 강력하지만, Discord 기반 협업 제어와 Windows 실행 환경을 그대로 붙이면 raw shell 노출과 상태 불투명 문제가 생깁니다.</p></article>
         <article class="summary-card"><h3>결과</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">NAS의 FastAPI + SQLite 제어 평면과 Windows launcher 실행 평면을 나누고, 세션·잡·트랜스크립트·heartbeat를 Discord thread 기준으로 운영하는 구조를 만들었습니다.</p></article>
-        <article class="summary-card"><h3>왜 중요한가</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">에이전트 워크플로 실험을 넘어서, 실제 팀이 제어하고 이어받고 감시할 수 있는 로컬 AI 운영 인프로 끌어올린 작업입니다.</p></article>
+        <article class="summary-card"><h3>왜 중요한가</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">실제 팀이 제어하고 이어받고 감시할 수 있는 로컬 AI 운영 인프라입니다.</p></article>
       </div>
     </section>
 
@@ -186,7 +186,7 @@
         <div class="detail-note"><strong>Project finder:</strong> launcher는 지정된 roots를 훑어 candidate를 만들고, finder agent가 가장 그럴듯한 로컬 프로젝트 경로를 골라 Discord에서 바로 세션을 재개할 수 있게 합니다.</div>
         <div class="detail-note"><strong>샘플 preset:</strong> 현재 sample project는 <code>planner</code>, <code>coder</code>, <code>reviewer</code> 3개 에이전트를 정의하고, finder용 roots와 prompt까지 YAML에 포함합니다.</div>
         <div class="detail-note"><strong>연결되는 작업:</strong> <a href="../orchestration-ts/" class="text-[#1a57c7]">Multi-Agent Orchestration</a>이 역할 규칙을 다뤘다면, Ops-Cure는 그 규칙을 Discord 중심 운영 인프로 끌어올린 단계입니다.</div>
-        <div class="detail-note"><strong>채용 시그널:</strong> Agent infrastructure, AI ops, developer tooling, internal platform 역할에서 가장 강하게 읽히는 프로젝트입니다.</div>
+        <div class="detail-note"><strong>핵심 역할:</strong> Agent infrastructure, AI ops, developer tooling, internal platform.</div>
       </div>
     </section>
   </main>
