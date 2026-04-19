@@ -259,6 +259,123 @@ body.menu-open .sticky-nav {
   object-fit: cover;
 }
 
+.stack-diagram {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(26, 87, 199, 0.18), transparent 28%),
+    radial-gradient(circle at 84% 16%, rgba(215, 121, 61, 0.16), transparent 24%),
+    linear-gradient(135deg, #f6f9fe 0%, #e8eff8 100%);
+}
+
+.stack-diagram--deep {
+  background:
+    radial-gradient(circle at 14% 18%, rgba(183, 196, 255, 0.26), transparent 24%),
+    radial-gradient(circle at 84% 16%, rgba(215, 121, 61, 0.18), transparent 22%),
+    linear-gradient(145deg, #10264e 0%, #1a57c7 100%);
+  color: #f7f9fc;
+}
+
+.stack-diagram__eyebrow {
+  font-family: "Space Grotesk", "Noto Sans KR", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(16, 38, 78, 0.72);
+}
+
+.stack-diagram--deep .stack-diagram__eyebrow {
+  color: rgba(247, 249, 252, 0.78);
+}
+
+.stack-diagram__title {
+  font-family: "Space Grotesk", "Noto Sans KR", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--ink);
+}
+
+.stack-diagram--deep .stack-diagram__title {
+  color: #ffffff;
+}
+
+.stack-diagram__copy {
+  max-width: 28ch;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.stack-diagram--deep .stack-diagram__copy {
+  color: rgba(247, 249, 252, 0.84);
+}
+
+.stack-diagram__grid {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stack-diagram__node {
+  display: flex;
+  min-height: 5rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  border-radius: 18px;
+  border: 1px solid rgba(23, 35, 63, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  padding: 0.9rem;
+  box-shadow: 0 14px 32px rgba(16, 31, 61, 0.05);
+}
+
+.stack-diagram--deep .stack-diagram__node {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(12, 19, 36, 0.28);
+  box-shadow: none;
+}
+
+.stack-diagram__node strong {
+  font-family: "Space Grotesk", "Noto Sans KR", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.stack-diagram--deep .stack-diagram__node strong {
+  color: #ffffff;
+}
+
+.stack-diagram__node span {
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.stack-diagram--deep .stack-diagram__node span {
+  color: rgba(247, 249, 252, 0.78);
+}
+
+.stack-diagram__footer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(16, 38, 78, 0.76);
+}
+
+.stack-diagram--deep .stack-diagram__footer {
+  color: rgba(247, 249, 252, 0.84);
+}
+
 .media-frame.video {
   position: relative;
   aspect-ratio: 16 / 9;
@@ -513,6 +630,14 @@ body.menu-open .sticky-nav {
 @media (min-width: 1024px) {
   .metric-strip {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .stack-diagram {
+    padding: 1.5rem;
+  }
+
+  .stack-diagram__title {
+    font-size: 2rem;
   }
 
   .page-hero-title {
