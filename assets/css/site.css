@@ -111,11 +111,11 @@ body.menu-open .sticky-nav {
   align-items: center;
   gap: 0.5rem;
   font-family: "Space Grotesk", "Noto Sans KR", sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--brand);
+  color: rgba(16, 38, 78, 0.86);
 }
 
 .section-kicker::before {
@@ -178,11 +178,11 @@ body.menu-open .sticky-nav {
 }
 
 .metric-label {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--brand);
+  color: rgba(16, 38, 78, 0.8);
 }
 
 .metric-value {
@@ -212,7 +212,7 @@ body.menu-open .sticky-nav {
   border-radius: 999px;
   background: var(--brand-soft);
   padding: 0.45rem 0.8rem;
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -525,8 +525,10 @@ body.menu-open .sticky-nav {
 }
 
 .page-hero-title {
-  font-size: 1.6rem;
-  line-height: 1.02;
+  max-inline-size: 13ch;
+  font-size: 1.45rem;
+  line-height: 1.06;
+  text-wrap: balance;
 }
 
 .page-section-title {
@@ -570,7 +572,7 @@ body.menu-open .sticky-nav {
 }
 
 .hero-copy {
-  max-inline-size: 34ch;
+  max-inline-size: 30ch;
   text-wrap: pretty;
   word-break: keep-all;
   overflow-wrap: normal;
@@ -590,7 +592,8 @@ body.menu-open .sticky-nav {
   }
 
   .page-hero-title {
-    font-size: 2rem;
+    max-inline-size: 14ch;
+    font-size: 1.9rem;
   }
 
   .page-section-title {
@@ -623,7 +626,7 @@ body.menu-open .sticky-nav {
 
   .copy-measure,
   .hero-copy {
-    max-inline-size: 40ch;
+    max-inline-size: 36ch;
   }
 }
 
@@ -641,7 +644,8 @@ body.menu-open .sticky-nav {
   }
 
   .page-hero-title {
-    font-size: 2.5rem;
+    max-inline-size: 15ch;
+    font-size: 2.35rem;
   }
 
   .page-section-title {
@@ -670,6 +674,6 @@ body.menu-open .sticky-nav {
 
   .copy-measure,
   .hero-copy {
-    max-inline-size: 46ch;
+    max-inline-size: 42ch;
   }
 }
