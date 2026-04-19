@@ -71,9 +71,9 @@
             <p class="proof-card__copy">Custom hit engine, cross-section generation, slope labeling, 2D analysis viewer, and tool camera.</p>
           </article>
           <article class="proof-card">
-            <div class="proof-card__eyebrow">Simulation Tooling</div>
-            <h3 class="proof-card__title">DXCenter</h3>
-            <p class="proof-card__copy">Nine EditorWindow tools for authoring, mapping, and digital twin operations.</p>
+          <div class="proof-card__eyebrow">AI Workflow</div>
+          <h3 class="proof-card__title">Multi-Agent Orchestration</h3>
+          <p class="proof-card__copy">Reusable role rules, review gates, launcher flow, and operating logic for agent collaboration.</p>
           </article>
           <article class="proof-card">
             <div class="proof-card__eyebrow">Interactive XR x AI</div>
@@ -86,9 +86,9 @@
             <p class="proof-card__copy">Discord-native local agent operations with bridge-launcher separation and artifact telemetry.</p>
           </article>
           <article class="proof-card">
-            <div class="proof-card__eyebrow">Workflow &amp; R&amp;D</div>
-            <h3 class="proof-card__title">Orchestration / GenWorld</h3>
-            <p class="proof-card__copy">AI workflow rules, local LLM experimentation, and inspectable runtime structure.</p>
+          <div class="proof-card__eyebrow">Local LLM R&amp;D</div>
+          <h3 class="proof-card__title">GenWorld + Ollama</h3>
+          <p class="proof-card__copy">NPC memory, relationship rules, quest hooks, and inspectable runtime structure for local LLM behavior.</p>
           </article>
         </div>
       </section>
@@ -170,27 +170,9 @@
 
     <section class="page">
       <div class="stack-lg">
-        <div class="eyebrow">Tooling and exhibition XR</div>
-        <h2 class="section-title">Authoring systems and AI-connected XR experience</h2>
+        <div class="eyebrow">Interactive XR and framework systems</div>
+        <h2 class="section-title">XR experience and reusable AI workflow structure</h2>
       </div>
-
-      <article class="project-feature">
-        <div class="project-image">
-          <img src="../../assets/images/customeditor.png" alt="DXCenter editor tooling"/>
-        </div>
-        <div class="project-copy">
-          <div class="project-kicker">Simulation Tooling</div>
-          <h3 class="project-title">DXCenter</h3>
-          <p class="project-summary">
-            A Unity authoring environment for digital-twin style workflows, built around nine EditorWindow tools and a repeatable content structure for non-developer teams.
-          </p>
-          <ul class="project-list">
-            <li><strong>Problem:</strong> Content mapping and runtime-safe authoring were too dependent on repeated developer intervention.</li>
-            <li><strong>Build:</strong> EditorWindow stack, shared operating patterns, data mapping flow, site-level content structure, and cleaner WebGL output flow.</li>
-            <li><strong>Outcome:</strong> Lowered authoring friction and made digital-twin content operations more stable and reviewable.</li>
-          </ul>
-        </div>
-      </article>
 
       <article class="project-feature">
         <div class="project-image">
@@ -210,21 +192,39 @@
         </div>
       </article>
 
+      <article class="project-feature">
+        <div class="project-image">
+          <img src="../../assets/images/v2_launcher.png" alt="Multi-Agent Orchestration launcher"/>
+        </div>
+        <div class="project-copy">
+          <div class="project-kicker">AI Workflow Framework</div>
+          <h3 class="project-title">Multi-Agent Orchestration</h3>
+          <p class="project-summary">
+            A reusable framework for role-based AI collaboration, review rules, launcher flow, and operating logic that came out of repeated project pressure.
+          </p>
+          <ul class="project-list">
+            <li><strong>Problem:</strong> Agent roles, review gates, and execution rules kept being rebuilt from scratch across different projects.</li>
+            <li><strong>Build:</strong> Role split, review and rejection rules, event-driven runtime structure, launcher flow, and a clearer ownership boundary in TypeScript.</li>
+            <li><strong>Outcome:</strong> A framework that turns prompt experiments into reusable operating structure for real AI-assisted work.</li>
+          </ul>
+        </div>
+      </article>
+
       <div class="mini-grid">
         <article class="mini-card">
-          <div class="mini-card__eyebrow">Authoring system</div>
-          <h3 class="mini-card__title">DXCenter</h3>
-          <p class="mini-card__copy">The value is not one window but the whole editor surface becoming safer and more usable for content teams.</p>
-        </article>
-        <article class="mini-card">
-          <div class="mini-card__eyebrow">Exhibition operation</div>
+          <div class="mini-card__eyebrow">Experience layer</div>
           <h3 class="mini-card__title">Neostalgia</h3>
           <p class="mini-card__copy">The project carries AI timing, session storage, and dashboard observability instead of stopping at content generation.</p>
+        </article>
+        <article class="mini-card">
+          <div class="mini-card__eyebrow">Framework layer</div>
+          <h3 class="mini-card__title">Orchestration</h3>
+          <p class="mini-card__copy">The value is reusable agent structure: reviewable roles, launch flow, and operating rules that can move between projects.</p>
         </article>
       </div>
 
       <div class="page__foot">
-        <span>Live case studies - /en/projects/dxcenter/ and /en/projects/neostalgia/</span>
+        <span>Live case studies - /en/projects/neostalgia/ and /en/projects/orchestration-ts/</span>
         <span>Page 3 / 5</span>
       </div>
     </section>
@@ -232,73 +232,68 @@
     <section class="page">
       <div class="stack-lg">
         <div class="eyebrow">Applied AI systems</div>
-        <h2 class="section-title">Agent operations, orchestration, and local AI structure</h2>
+        <h2 class="section-title">Ops-Cure and local LLM runtime structure</h2>
       </div>
 
-      <div class="section-grid">
-        <section class="stack-md">
-          <article class="panel panel--soft">
-            <div class="section-label">Ops-Cure</div>
-            <p class="body-copy">
-              Ops-Cure turns Discord into a control surface for local AI work. A NAS bridge keeps session state and artifacts visible, while a Windows launcher runs local workers behind fixed adapters.
-            </p>
-            <ul class="bullet-list">
-              <li>Discord thread as session key.</li>
-              <li>FastAPI + SQLite control plane.</li>
-              <li>Windows launcher and YAML-driven worker presets.</li>
-              <li>Artifact heartbeat and drift-aware monitoring.</li>
-            </ul>
-          </article>
+      <article class="project-feature">
+        <div class="project-image">
+          <img src="../../assets/images/ops-cure-discord-thread.jpg" alt="Ops-Cure Discord thread"/>
+        </div>
+        <div class="project-copy">
+          <div class="project-kicker">AI Ops Infrastructure</div>
+          <h3 class="project-title">Ops-Cure</h3>
+          <p class="project-summary">
+            Ops-Cure turns Discord into a control surface for local AI work. A NAS bridge keeps session state visible while a Windows launcher runs local workers behind fixed adapters.
+          </p>
+          <ul class="project-list">
+            <li><strong>Problem:</strong> Powerful local CLI tooling becomes hard to control safely when Discord collaboration and Windows execution are attached directly.</li>
+            <li><strong>Build:</strong> Bridge-launcher separation, session workspace protocol, YAML worker presets, transcript flow, and artifact heartbeat with drift monitoring.</li>
+            <li><strong>Outcome:</strong> A practical agent operations layer where state, handoff, and worker health stay visible without raw shell exposure.</li>
+          </ul>
+        </div>
+      </article>
 
-          <div class="snapshot-grid">
-            <article class="snapshot">
-              <img src="../../assets/images/ops-cure-discord-thread.jpg" alt="Ops-Cure Discord thread showing planner routing and workspace artifacts"/>
-              <div class="snapshot__body">
-                <div class="snapshot__label">Discord thread</div>
-                <p class="snapshot__copy">Planner status, workspace path, key files, and agent routing remain visible inside the session thread.</p>
-              </div>
-            </article>
-            <article class="snapshot">
-              <img src="../../assets/images/ops-cure-discord-report.jpg" alt="Ops-Cure Discord report summarizing artifacts and status"/>
-              <div class="snapshot__body">
-                <div class="snapshot__label">Artifact report</div>
-                <p class="snapshot__copy">Bridge reports artifacts, stage status, and handoff-ready files without exposing raw shell access to operators.</p>
-              </div>
-            </article>
+      <article class="project-feature">
+        <div class="project-image">
+          <img src="../../assets/images/genworld-world.png" alt="GenWorld world"/>
+        </div>
+        <div class="project-copy">
+          <div class="project-kicker">Local LLM R&amp;D</div>
+          <h3 class="project-title">GenWorld + Ollama</h3>
+          <p class="project-summary">
+            A local-LLM game experiment focused on NPC memory, relationship rules, quest hooks, and fallback-aware runtime structure instead of a single flashy prompt.
+          </p>
+          <ul class="project-list">
+            <li><strong>Problem:</strong> NPC conversation and cognitive structure had to survive without cloud dependency or gameplay collapse when inference failed.</li>
+            <li><strong>Build:</strong> Ollama runtime, memory and relationship rules, quest-system hooks, and graceful fallback around local models.</li>
+            <li><strong>Outcome:</strong> A useful test bed for local LLM behavior in offline-first or network-isolated environments.</li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="snapshot-grid">
+        <article class="snapshot">
+          <img src="../../assets/images/ops-cure-discord-report.jpg" alt="Ops-Cure Discord report summarizing artifacts and status"/>
+          <div class="snapshot__body">
+            <div class="snapshot__label">Artifact report</div>
+            <p class="snapshot__copy">Bridge reports artifacts, stage status, and handoff-ready files back into Discord.</p>
           </div>
-        </section>
-
-        <section class="stack-lg">
-          <div class="mini-grid">
-            <article class="mini-card">
-              <div class="mini-card__eyebrow">Workflow framework</div>
-              <h3 class="mini-card__title">Multi-Agent Orchestration</h3>
-              <p class="mini-card__copy">Reusable role rules, review gates, launcher flow, and operating logic for agent collaboration.</p>
-            </article>
-            <article class="mini-card">
-              <div class="mini-card__eyebrow">Local LLM R&amp;D</div>
-              <h3 class="mini-card__title">GenWorld + Ollama</h3>
-              <p class="mini-card__copy">NPC memory, relationship rules, quest hooks, and inspectable runtime structure for local LLM behavior.</p>
-            </article>
+        </article>
+        <article class="snapshot">
+          <img src="../../assets/images/genworld-npc-mood.png" alt="GenWorld NPC mood and relationship UI"/>
+          <div class="snapshot__body">
+            <div class="snapshot__label">NPC runtime state</div>
+            <p class="snapshot__copy">Mood and relationship state turn local LLM behavior into something inspectable inside the game loop.</p>
           </div>
+        </article>
+      </div>
 
-          <article class="panel">
-            <div class="section-label">Why this AI work matters</div>
-            <ul class="bullet-list">
-              <li>Moves beyond prompt experimentation into operating structure and platform thinking.</li>
-              <li>Connects AI to concrete outputs: worker routing, state visibility, XR timing, and gameplay data rules.</li>
-              <li>Fits teams building internal tools, agent infrastructure, and applied AI products with real operators.</li>
-            </ul>
-          </article>
-
-          <div class="note-strip">
-            The AI thread in this portfolio is practical by design: observability, routing, fallback structure, and runtime ownership matter more than flashy demos.
-          </div>
-        </section>
+      <div class="note-strip">
+        Together, Multi-Agent Orchestration, Ops-Cure, and GenWorld show the AI framework track in this portfolio: reusable workflow rules, operator-facing infrastructure, and local runtime experimentation.
       </div>
 
       <div class="page__foot">
-        <span>Live case studies - /en/projects/ops-cure/ / orchestration-ts / genworld-ollama</span>
+        <span>Live case studies - /en/projects/ops-cure/ and /en/projects/genworld-ollama/</span>
         <span>Page 4 / 5</span>
       </div>
     </section>
