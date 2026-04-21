@@ -2,6 +2,7 @@
 
 - Live: [https://darkhtk.github.io/portfolio/](https://darkhtk.github.io/portfolio/)
 - Cover Letter: [COVER_LETTER.md](./COVER_LETTER.md)
+- English Cover Letter: [COVER_LETTER_EN.md](./COVER_LETTER_EN.md)
 
 ## 구조와 도구로 협업 비용을 줄이는 개발자
 
