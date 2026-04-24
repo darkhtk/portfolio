@@ -12,7 +12,7 @@
 <meta property="og:description" content="Phaser 3 TS RPG → Unity 2D 포팅 + 로컬 LLM 기반 NPC 인지 시스템. R&D · 자사 기술 실증."/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
-<meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/genworld-ollama/"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/genworld-ollama/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="GenWorld + Ollama · 사례"/>
@@ -119,7 +119,8 @@
     </a>
     <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
       <a class="text-slate-400 hover:text-primary transition-colors" href="../../">홈</a>
-      <a class="text-primary border-b-2 border-primary pb-1" href="../">프로젝트</a>
+      <a class="text-slate-400 hover:text-primary transition-colors" href="../../projects/">프로젝트</a>
+      <a class="text-primary border-b-2 border-primary pb-1" href="../">AI Systems</a>
       <a class="text-slate-400 hover:text-primary transition-colors" href="../../about/">프로필</a>
       <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">문의</a>
     </div>
@@ -154,7 +155,8 @@
   <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
     <div class="grid gap-3">
       <a href="../../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">홈</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
-      <a href="../" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">프로젝트</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
+      <a href="../../projects/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">프로젝트</div><div class="mt-1 text-sm leading-6 text-[#51607a]">산업 XR, BIM, 로보틱스, 툴링</div></a>
+      <a href="../" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">AI Systems</div><div class="mt-1 text-sm leading-6 text-[#51607a]">커널, behavior, 응용 AI R&amp;D</div></a>
       <a href="../../about/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">프로필</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력과 협업 기준 보기</div></a>
       
       
@@ -221,7 +223,7 @@
           </a>
           <a href="../" class="inline-flex items-center gap-2 px-5 py-2.5 bg-surface-container-low hover:bg-surface-container-highest rounded-md text-sm font-headline font-bold transition-all">
             <span class="material-symbols-outlined text-base">arrow_back</span>
-            전체 프로젝트
+            AI Systems 로 돌아가기
           </a>
         </div>
 
@@ -569,22 +571,22 @@ AIManager.GenerateDialogue(npcId, input, history, ...)
       <h2 class="case-section-title font-headline font-bold tracking-tight mb-10 max-w-3xl">다른 사례</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <a href="../vr-robot/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 01</div>
+        <a href="../ops-cure/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
+          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">AI Systems · 커널</div>
+            <h4 class="case-card-title font-headline font-bold mb-3">Ops-Cure 커널</h4>
+          <p class="text-sm text-on-surface-variant mb-4">channel-native state/event 커널 + orchestration · remote_codex · chat behavior</p>
+          <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
+        </a>
+        <a href="../../projects/vr-robot/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
+          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Projects</div>
             <h4 class="case-card-title font-headline font-bold mb-3">VR 로봇 원격 조종 + 자체 IK 솔버</h4>
           <p class="text-sm text-on-surface-variant mb-4">Quest 3 기반 산업용 로봇 원격 조종 사례</p>
           <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
         </a>
-        <a href="../dxcenter/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 02</div>
+        <a href="../../projects/dxcenter/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
+          <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">Projects</div>
             <h4 class="case-card-title font-headline font-bold mb-3">DXCenter — LG에너지솔루션</h4>
 <p class="text-sm text-on-surface-variant mb-4">AI 협업을 적용한 디지털트윈 에디터 사례</p>
-          <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
-        </a>
-      <a href="../orchestration-ts/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">오픈소스 · 협업 프레임워크</div>
-            <h4 class="case-card-title font-headline font-bold mb-3">Multi-Agent Orchestration Framework</h4>
-<p class="text-sm text-on-surface-variant mb-4">협업 방식을 반복해서 쓸 수 있게 만든 도구</p>
           <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
         </a>
       </div>
@@ -605,7 +607,7 @@ AIManager.GenerateDialogue(npcId, input, history, ...)
         </a>
         <a href="../" class="inline-flex items-center gap-2 px-6 py-3 bg-surface-container-highest hover:bg-surface-container rounded-md font-headline font-bold transition-all">
           <span class="material-symbols-outlined">arrow_back</span>
-          전체 프로젝트
+          AI Systems
         </a>
       </div>
     </div>
