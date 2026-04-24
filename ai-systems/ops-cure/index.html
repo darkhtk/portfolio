@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ops-Cure 커널 | 홍대기</title>
+<meta name="description" content="Ops-Cure는 channel-native state/event 커널. 이 케이스는 커널 어휘(Space / Actor / Event / Behavior)와 그 위에 구현된 3개의 behavior — orchestration, remote_codex, chat — 를 다룬다."/>
+<meta property="og:title" content="Ops-Cure 커널 | 홍대기"/>
+<meta property="og:description" content="orchestration, remote_codex, chat behavior가 같은 커널 위에 돌아간다."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/ops-cure-discord-thread.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/ops-cure/"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Ops-Cure 커널 | 홍대기"/>
+<meta name="twitter:description" content="커널 + behaviors: orchestration, remote_codex, chat."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/ops-cure-discord-thread.jpg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
+          body: ["Noto Sans KR", "sans-serif"],
+          label: ["Space Grotesk", "Noto Sans KR", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="../../assets/css/site.css"/>
+</head>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<div class="site-shell">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="../../" class="flex flex-col">
+        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity x AI Systems</span>
+      </a>
+      <nav class="hidden items-center gap-2 md:flex">
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../">Home</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../projects/">Projects</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../ai-systems/">AI Systems</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../about/">Profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="lang-toggle hidden sm:inline-flex">
+          <a class="lang-link" href="../../en/ai-systems/ops-cure/">EN</a>
+          <a class="lang-link is-active" href="./">KO</a>
+        </div>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="메뉴 닫기"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-3">
+        <a href="../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">포지셔닝과 대표 작업.</div></a>
+        <a href="../../projects/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Projects</div><div class="mt-1 text-sm text-[#526178]">산업 납품 작업.</div></a>
+        <a href="../../ai-systems/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">AI Systems</div><div class="mt-1 text-sm text-[#526178]">커널과 behaviors.</div></a>
+        <a href="../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">경력과 작업 방식.</div></a>
+      </div>
+      <div class="mt-6 flex gap-3">
+        <a href="../../en/ai-systems/ops-cure/" class="lang-link bg-white">EN</a>
+        <a href="./" class="lang-link is-active bg-white">KO</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative">
+    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div class="surface-panel p-6 sm:p-8 lg:p-10">
+          <div class="section-kicker">AI Systems · 커널 케이스 스터디</div>
+          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Ops-Cure 커널</h1>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">채널 단위 state/event 커널. 세 개의 behavior — orchestration, remote_codex, chat — 이 같은 Space/Actor/Event 기반 위에 돌아간다.</p>
+          <div class="mt-7 flex flex-wrap gap-2.5">
+            <span class="pill text-sm">Kernel</span>
+            <span class="pill text-sm">Behavior Plugins</span>
+            <span class="pill text-sm">FastAPI</span>
+            <span class="pill text-sm">SQLite</span>
+            <span class="pill text-sm">Discord Transport</span>
+          </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
+              <span class="material-symbols-outlined mr-2 text-base">code</span>
+              GitHub 저장소
+            </a>
+            <a href="../../en/ai-systems/ops-cure/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">English version</a>
+          </div>
+        </div>
+        <aside class="feature-panel p-5 sm:p-6">
+          <div class="section-kicker">읽는 순서</div>
+          <div class="mt-5 grid gap-3">
+            <a href="#kernel" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">커널</div></a>
+            <a href="#orchestration" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">orchestration behavior</div></a>
+            <a href="#remote-codex" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">remote_codex behavior</div></a>
+            <a href="#chat" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">chat behavior</div></a>
+            <a href="#why" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">05</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">왜 behavior 세 개가 중요한가</div></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="summary-grid">
+        <article class="summary-card"><h3>역할</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">커널(Space/Actor/Event/Behavior 추상화), Discord transport, behavior 플러그인 레지스트리, canonical DB 설계·구현. 각 behavior 계약 설계와 orchestration, remote_codex, chat behavior 전반을 소유.</p></article>
+        <article class="summary-card"><h3>문제</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">에이전트 프레임워크는 하나의 워크플로에 굳어지는 경향이 있음. 원격 실행, AI 간 대화, 인시던트 방 등 새로운 상호작용 형태가 생길 때마다 코드베이스가 분기되고 공통 상태 모델이 썩는다.</p></article>
+        <article class="summary-card"><h3>접근</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">채널 자체를 추상화로 취급. 커널은 Space/Actor/Event/Behavior 만 안다. 도메인 로직은 behavior 플러그인, runtime 은 adapter. 특수 분기 없이 전혀 다른 behavior 를 같은 커널이 수용.</p></article>
+        <article class="summary-card"><h3>결과</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">프로덕션 또는 그 근처의 behavior 3개 — orchestration(프로덕션), remote_codex(계약 안정화 중), chat(라이브). 각각이 커널 범용성의 다른 축을 검증.</p></article>
+      </div>
+    </section>
+
+    <section id="kernel" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 01 · 커널</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Space · Actor · Event · Behavior</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">Ops-Cure의 핵심은 커널이 약속하는 범용 어휘. 커널은 태스크, handoff, Codex, Discord 스레드 어느 것도 구체적으로 알지 않는다.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div class="media-frame">
+          <div class="stack-diagram stack-diagram--deep aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">커널 구조</div>
+              <div class="mt-3 stack-diagram__title">Kernel · Behaviors · Transports · Runtimes</div>
+              <p class="mt-3 stack-diagram__copy">커널은 범용. 나머지가 맞춘다.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>Kernel</strong><span>Space / Actor / Event / Behavior</span></div>
+              <div class="stack-diagram__node"><strong>Behaviors</strong><span>orchestration · remote_codex · chat · ops · game</span></div>
+              <div class="stack-diagram__node"><strong>Transport</strong><span>Discord 봇, 스레드 매니저, presenter</span></div>
+              <div class="stack-diagram__node"><strong>Runtimes</strong><span>pc_launcher · remote_executor · chat_participant</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>behavior는 설치형 플러그인, 분기 아님.</span></div>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">어휘</div>
+          <div class="content-prose mt-5">
+            <p><strong>Space.</strong> 상태가 있는 방 — Discord 채널, 스레드, 세션 — 이 시간 축으로 상태를 누적. 프로세스 재시작을 넘어 지속.</p>
+            <p><strong>Actor.</strong> 공간에 붙은 참여자: 사람, AI 워커, 봇, 시스템. Identity 와 permission 은 있지만 behavior 는 없다.</p>
+            <p><strong>Event.</strong> 공간 안에 기록된 사실. Transport 독립적, 저장/재생 가능. 모든 behavior 는 이벤트를 쓰고 읽는다.</p>
+            <p><strong>Behavior.</strong> 커널 위에 얹힌 도메인 로직. 이벤트를 해석하고 자체 도메인 상태(태스크, 메시지, evidence — 도메인이 요구하는 것)를 유지하며, 범용 Space/Actor/Event view 로 투영.</p>
+            <p>커널은 orchestration 태스크가 무엇인지 모른다. 다만 "어떤 behavior 가 어떤 공간에 이벤트를 썼고, 어떤 actor 가 참여했다" 만 안다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="orchestration" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 02 · Behavior — orchestration</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Discord-native 멀티에이전트 워크플로</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">프로덕션 behavior. planner · curator · coder · verifier · reviewer 가 canonical task 와 handoff 위에 협업. 각 Discord 스레드가 한 워크플로 세션이 된다.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../../assets/images/ops-cure-discord-thread.jpg" alt="Ops-Cure Discord 스레드 — planner 리포트와 워커 ready 메시지"/>
+          </div>
+          <div class="mt-5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#5865F2]"><span class="material-symbols-outlined text-sm">forum</span>Discord 스레드</div>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">스레드가 세션 키. 워크스페이스 경로, 주요 파일, 라우팅이 같은 스레드 안에서 보인다. 평문은 기본적으로 planner 로 라우팅, <code>@coder</code> / <code>@reviewer</code> 태그로 override.</p>
+        </article>
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../../assets/images/ops-cure-discord-report.jpg" alt="Ops-Cure Discord 리포트 — planner artifact 업데이트와 운영자용 요약"/>
+          </div>
+          <div class="mt-5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#5865F2]"><span class="material-symbols-outlined text-sm">chat</span>Artifact 리포트</div>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">운영자용 요약 + 로컬 워크스페이스 경로 + 주요 artifact(RUN_LOGS, REPORT, HANDOFFS). 실행 로그 원본을 Discord 에 그대로 쏟아내지 않는다.</p>
+        </article>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">orchestration 이 소유하는 것</div>
+          <div class="content-prose mt-5">
+            <p><strong>Canonical task.</strong> planner 가 분해한 태스크 모델, self-claim 스케줄링, 역할 간 명시적 handoff.</p>
+            <p><strong>Workflow projection.</strong> 각 워커가 마크다운 artifact — <code>CURRENT_STATE.md</code>, <code>TASK_BOARD.md</code>, <code>HANDOFFS.md</code>, <code>REPORT.md</code> — 를 유지, bridge 는 이를 evidence 로 읽는다.</p>
+            <p><strong>Adapter 가드레일.</strong> 고정된 <code>codex</code>, <code>claude</code>, <code>mock</code> adapter 가 로컬 CLI 를 감싼다. Discord 입력이 raw shell 이 되지 않는다.</p>
+            <p><strong>Drift 모니터.</strong> Heartbeat 에 artifact 스냅샷을 실어, 살아있어 보이지만 공유 상태를 업데이트하지 않는 워커를 플래그.</p>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">히스토리</div>
+          <div class="content-prose mt-5">
+            <p>orchestration behavior 는 초기에 TypeScript 기반 독립 프레임워크에서 출발했다 — 역할 기반 collaboration, 리뷰 규칙, launcher 대시보드를 묶은 사고 실험. 그 프로토타입은 collaboration primitive 를 검증했지만, canonical state 없이는 실제 운영자를 견디지 못했다.</p>
+            <p>지금의 orchestration 은 그 프로덕션 후계: 같은 collaboration primitive 를 커널 위 플러그인으로 재구현. 이전 TS 프레임은 이 behavior 안으로 흡수, 은퇴.</p>
+            <p><strong>Runtime:</strong> <code>pc_launcher/</code> (Windows) — manifest 등록, 세션 claim, agent 당 워커 프로세스 1개, CLI adapter 실행.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Status · Production</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Runtime · pc_launcher</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Agents · planner · curator · coder · verifier · reviewer</span>
+      </div>
+    </section>
+
+    <section id="remote-codex" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 03 · Behavior — remote_codex</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">브라우저 기반 원격 실행</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">두 번째 behavior. 제어면이 Discord 가 아니라 브라우저 사이트. canonical state 는 bridge 가 소유하고 브라우저는 렌더링만.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div class="media-frame">
+          <div class="stack-diagram stack-diagram--deep aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">remote_codex 흐름</div>
+              <div class="mt-3 stack-diagram__title">Browser → Bridge → Executor</div>
+              <p class="mt-3 stack-diagram__copy">canonical task · evidence · approval 은 bridge 안. 브라우저는 projection, executor 는 adapter.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>Browser</strong><span>codex-remote 사이트 — typed read model 소비</span></div>
+              <div class="stack-diagram__node"><strong>Bridge</strong><span>canonical task / evidence / approval / stall 상태</span></div>
+              <div class="stack-diagram__node"><strong>Runtime</strong><span>대상 PC 의 remote_executor 커넥터</span></div>
+              <div class="stack-diagram__node"><strong>Discord</strong><span>coordination mirror, canonical 아님</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">swap_horiz</span><span>브라우저가 태스크 상태의 소유자가 되면 안 된다.</span></div>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">Ownership 규칙</div>
+          <div class="content-prose mt-5">
+            <p><strong>behavior 가 소유:</strong> machine + canonical thread binding, remote work object 와 assignment state, heartbeat + evidence state, approval/interrupt/stall state, 브라우저용 typed read model, 범용 Space/Actor/Event 로의 projection.</p>
+            <p><strong>behavior 가 소유하지 않음:</strong> 브라우저 레이아웃, Codex 프로세스 제어 세부, Windows UTF-8, Discord 메시지 에티켓, optimistic 렌더링. 이건 adapter 쪽.</p>
+            <p><strong>왜 이 경계가 중요한가:</strong> 사이트 전용 상태는 유혹적이다. 브라우저가 source of truth 가 되는 순간 다른 transport(모바일 앱, CLI, 또 다른 사이트) 를 붙일 수 없다 — fork 만 남는다. Bridge 소유 계약이 behavior 를 transport 독립으로 유지한다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 surface-panel p-6 sm:p-8">
+        <div class="section-kicker">현재 상태 (솔직히)</div>
+        <div class="content-prose mt-5 max-w-4xl">
+          <p>패키지는 현재 product-layer 의 remote task 서비스를 감싼 얇은 behavior 스캐폴드. 라이브 wiring (kernel binding, Discord binding) 은 의도적으로 아직 미활성 — 계약이 안정화되는 중이다. 안정화되면 현재 bridge 서비스와 브라우저 전용 상태에 흩어져 있는 remote task 로직이 이 패키지로 통합된다.</p>
+          <p>이걸 포트폴리오에 넣는 이유는 <em>설계</em> 가 포인트이기 때문. behavior / 브라우저 / Discord 미러 / Windows executor 간의 ownership 분할은 "제어면이 바뀌면 어떻게 되는가?" 에 대한 의도적 답변이다.</p>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Status · Scaffold · 계약 안정화 중</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Runtime · remote_executor</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">파트너 사이트 · codex-remote (browser)</span>
+      </div>
+    </section>
+
+    <section id="chat" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 04 · Behavior — chat</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Codex 끼리의 대화방</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">범용성 점검. 태스크도, handoff 도, evidence 도 없는 behavior — 방, 참여자, 메시지뿐. 여기서 커널이 성립하면 실체다.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div class="media-frame">
+          <div class="stack-diagram stack-diagram--deep aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">chat 흐름</div>
+              <div class="mt-3 stack-diagram__title">Thread → Participants → Messages</div>
+              <p class="mt-3 stack-diagram__copy">워크플로 없음. Actor 와 Event 만 있는 방.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>Room</strong><span>chat space 로서의 Discord 스레드</span></div>
+              <div class="stack-diagram__node"><strong>Participants</strong><span>AI 에이전트 또는 사람, 방 단위 등록</span></div>
+              <div class="stack-diagram__node"><strong>Messages</strong><span>submit · delta fetch · heartbeat</span></div>
+              <div class="stack-diagram__node"><strong>Runtime</strong><span>각 PC 의 chat_participant 커넥터</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">forum</span><span>태스크 없음. Handoff 없음. 대화만.</span></div>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">chat 이 진짜 검증인 이유</div>
+          <div class="content-prose mt-5">
+            <p>커널 어휘가 은연중 orchestration(태스크, handoff, reviewer) 에 맞춰 설계되어 있었다면, 그런 개념이 없는 behavior 를 추가할 때 추상화의 구멍이 드러난다. chat 은 그 개념이 전혀 없다. 방, actor, 메시지만 있으면 된다.</p>
+            <p>chat 은 orchestration 과 정확히 같은 Space/Actor/Event 어휘 위에서 돌아간다. 커널이 "태스크 모양" 으로 편향되지 않았다는 구체적 증거.</p>
+            <p><strong>Runtime:</strong> <code>chat_participant</code> 커넥터 — 가벼운 PC 측 프로세스, 방 delta 를 구독, 메시지를 post, 참여자 heartbeat 유지.</p>
+            <p><strong>유스케이스:</strong> Codex 간 대화, 사람-AI 대화방, workflow 엔진 없이 PC 간 대화.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Status · Live</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Runtime · chat_participant</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">목적 · 커널 범용성 증명</span>
+      </div>
+    </section>
+
+    <section id="why" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 05 · 왜 behavior 세 개가 중요한가</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">behavior 한 개는 기능. 세 개는 주장.</h2>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">orchestration</div>
+          <p class="mt-4 text-sm leading-7 text-[#4f6077]">상태/태스크 모델을 검증. 커널이 구조화된 워크플로를 특수 분기 없이 수용.</p>
+        </article>
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">remote_codex</div>
+          <p class="mt-4 text-sm leading-7 text-[#4f6077]">분산 runtime 아래의 canonical evidence 를 검증. 제어면이 브라우저로 옮겨가도 bridge 가 single source of truth 로 남는다.</p>
+        </article>
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">chat</div>
+          <p class="mt-4 text-sm leading-7 text-[#4f6077]">태스크 시맨틱 없는 방의 범용성을 검증. 순수 대화에서도 커널이 성립하면, 커널이 orchestration 에 몰래 편향되지 않았다는 증거.</p>
+        </article>
+      </div>
+
+      <div class="mt-10 surface-panel p-6 sm:p-8">
+        <p class="max-w-4xl text-base leading-7 text-[#4f6077]">중요한 축은 behavior 수가 아니라 behavior 의 폭. 3개가 의미 있는 건, 각각이 커널의 다른 부분을 압박하기 때문이다. orchestration 모양의 behavior 를 다섯 개 더 만들었다면 그건 feature farm 이지 플랫폼이 아니다.</p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 lg:px-8">
+      <div class="detail-grid">
+        <div class="detail-note"><strong>GitHub:</strong> <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener noreferrer" class="text-[#1a57c7]">github.com/darkhtk/ops-cure</a></div>
+        <div class="detail-note"><strong>저장소 구조:</strong> <code>nas_bridge/</code> 배포 코어 · <code>pc_launcher/</code> orchestration runtime · <code>pc_launcher/connectors/*</code> 다른 behavior 용 runtime adapter</div>
+        <div class="detail-note"><strong>관련 AI R&amp;D:</strong> <a href="../genworld-ollama/" class="text-[#1a57c7]">GenWorld + Ollama</a> — 커널 밖의 로컬 LLM 실험</div>
+        <div class="detail-note"><strong>AI Systems 랜딩:</strong> <a href="../../ai-systems/" class="text-[#1a57c7]">ai-systems/</a></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

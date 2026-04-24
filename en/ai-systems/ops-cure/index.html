@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ops-Cure Kernel | Daeki Hong</title>
+<meta name="description" content="Ops-Cure is a channel-native state/event kernel. This case study covers the kernel vocabulary (Space / Actor / Event / Behavior) and the three behaviors built on top: orchestration, remote_codex, and chat."/>
+<meta property="og:title" content="Ops-Cure Kernel | Daeki Hong"/>
+<meta property="og:description" content="Channel-native state/event kernel hosting orchestration, remote_codex, and chat behaviors."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/ops-cure-discord-thread.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/ops-cure/"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Ops-Cure Kernel | Daeki Hong"/>
+<meta name="twitter:description" content="Kernel + behaviors architecture: orchestration, remote_codex, chat."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/ops-cure-discord-thread.jpg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
+          body: ["Noto Sans KR", "sans-serif"],
+          label: ["Space Grotesk", "Noto Sans KR", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="../../../assets/css/site.css"/>
+</head>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<div class="site-shell">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="../../../" class="flex flex-col">
+        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity x AI Systems</span>
+      </a>
+      <nav class="hidden items-center gap-2 md:flex">
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../">Home</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../projects/">Projects</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../../ai-systems/">AI Systems</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../about/">Profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="lang-toggle hidden sm:inline-flex">
+          <a class="lang-link is-active" href="./">EN</a>
+          <a class="lang-link" href="../../../ai-systems/ops-cure/">KO</a>
+        </div>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="Close menu"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-3">
+        <a href="../../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">Overview and positioning.</div></a>
+        <a href="../../../projects/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Projects</div><div class="mt-1 text-sm text-[#526178]">Industrial delivery work.</div></a>
+        <a href="../../../ai-systems/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">AI Systems</div><div class="mt-1 text-sm text-[#526178]">Kernel + behaviors.</div></a>
+        <a href="../../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">Working style and background.</div></a>
+      </div>
+      <div class="mt-6 flex gap-3">
+        <a href="./" class="lang-link is-active bg-white">EN</a>
+        <a href="../../../ai-systems/ops-cure/" class="lang-link bg-white">KO</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative">
+    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div class="surface-panel p-6 sm:p-8 lg:p-10">
+          <div class="section-kicker">AI Systems · Kernel Case Study</div>
+          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Ops-Cure Kernel</h1>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">A channel-native state/event kernel. Three behaviors — orchestration, remote_codex, chat — run on the same Space/Actor/Event substrate.</p>
+          <div class="mt-7 flex flex-wrap gap-2.5">
+            <span class="pill text-sm">Kernel</span>
+            <span class="pill text-sm">Behavior Plugins</span>
+            <span class="pill text-sm">FastAPI</span>
+            <span class="pill text-sm">SQLite</span>
+            <span class="pill text-sm">Discord Transport</span>
+          </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
+              <span class="material-symbols-outlined mr-2 text-base">code</span>
+              GitHub repo
+            </a>
+            <a href="../../../ai-systems/ops-cure/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">Open Korean version</a>
+          </div>
+        </div>
+        <aside class="feature-panel p-5 sm:p-6">
+          <div class="section-kicker">Read in order</div>
+          <div class="mt-5 grid gap-3">
+            <a href="#kernel" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">The kernel</div></a>
+            <a href="#orchestration" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">orchestration behavior</div></a>
+            <a href="#remote-codex" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">remote_codex behavior</div></a>
+            <a href="#chat" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">chat behavior</div></a>
+            <a href="#why" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]"><div class="metric-label">05</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Why three behaviors matter</div></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="summary-grid">
+        <article class="summary-card"><h3>Role</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Designed and implemented the kernel (Space/Actor/Event/Behavior abstraction), the Discord transport, behavior plugin registry, and the canonical DB. Designed each behavior contract and owns the orchestration, remote_codex, and chat behaviors.</p></article>
+        <article class="summary-card"><h3>Problem</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Agent frameworks tend to solidify around one workflow. Any new interaction shape — remote execution, AI-to-AI chat, incident rooms — forks the codebase. The shared state model rots.</p></article>
+        <article class="summary-card"><h3>Approach</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Treat the channel itself as the abstraction. A kernel that only knows Space/Actor/Event/Behavior. Domain logic lives in plugin behaviors. Runtimes are adapters. The same kernel hosts very different behaviors without special-casing.</p></article>
+        <article class="summary-card"><h3>Outcome</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Three behaviors in production or near-production — orchestration (mature), remote_codex (contracts stabilizing), chat (live). Each validates a different axis of the kernel's generality.</p></article>
+      </div>
+    </section>
+
+    <section id="kernel" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 01 · The Kernel</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Space · Actor · Event · Behavior</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">The core of Ops-Cure is a generic vocabulary the kernel commits to. Nothing in the kernel knows about tasks, handoffs, Codex, or Discord threads specifically.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div class="media-frame">
+          <div class="stack-diagram stack-diagram--deep aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">Kernel layout</div>
+              <div class="mt-3 stack-diagram__title">Kernel · Behaviors · Transports · Runtimes</div>
+              <p class="mt-3 stack-diagram__copy">The kernel is generic. Everything else adapts.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>Kernel</strong><span>Space / Actor / Event / Behavior</span></div>
+              <div class="stack-diagram__node"><strong>Behaviors</strong><span>orchestration · remote_codex · chat · ops · game</span></div>
+              <div class="stack-diagram__node"><strong>Transport</strong><span>Discord bot, thread manager, presenter</span></div>
+              <div class="stack-diagram__node"><strong>Runtimes</strong><span>pc_launcher · remote_executor · chat_participant</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>Behaviors are installable plugins, not branches.</span></div>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">Vocabulary</div>
+          <div class="content-prose mt-5">
+            <p><strong>Space.</strong> A stateful room — Discord channel, thread, or session — that owns state over time. Spaces persist across process restarts.</p>
+            <p><strong>Actor.</strong> A participant attached to a space: human, AI worker, bot, or system. Actors have identity and permissions but not behavior.</p>
+            <p><strong>Event.</strong> A recorded fact inside a space. Events are transport-agnostic, persistable, replayable. Every behavior writes and reads events.</p>
+            <p><strong>Behavior.</strong> Domain logic layered on top of the kernel. A behavior interprets events, maintains its own domain state (tasks, messages, evidence — whatever the domain requires), and projects back into generic Space/Actor/Event views.</p>
+            <p>The kernel does not know what an orchestration task is. It only knows that some behavior wrote an event into a space, and some actor participated.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="orchestration" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 02 · Behavior — orchestration</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Discord-native multi-agent workflow</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">The production behavior. Planner, curator, coder, verifier, reviewer collaborate on canonical tasks and handoffs. Each Discord thread becomes a workflow session.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../../../assets/images/ops-cure-discord-thread.jpg" alt="Ops-Cure Discord thread showing planner report and worker ready message"/>
+          </div>
+          <div class="mt-5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#5865F2]"><span class="material-symbols-outlined text-sm">forum</span>Discord thread</div>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Thread as session key. Workspace path, key files, and routing appear inline. Plain text routes to the planner by default; <code>@coder</code>, <code>@reviewer</code> overrides.</p>
+        </article>
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../../../assets/images/ops-cure-discord-report.jpg" alt="Ops-Cure Discord report with planner artifact update and operator-facing summary"/>
+          </div>
+          <div class="mt-5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#5865F2]"><span class="material-symbols-outlined text-sm">chat</span>Artifact report</div>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Operator-facing summary plus local workspace path and key artifacts (RUN_LOGS, REPORT, HANDOFFS). Execution logs never dumped raw into Discord.</p>
+        </article>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">What orchestration owns</div>
+          <div class="content-prose mt-5">
+            <p><strong>Canonical tasks.</strong> A task model with planner-generated decomposition, self-claim scheduling, explicit handoffs between roles.</p>
+            <p><strong>Workflow projection.</strong> Each worker maintains markdown artifacts — <code>CURRENT_STATE.md</code>, <code>TASK_BOARD.md</code>, <code>HANDOFFS.md</code>, <code>REPORT.md</code> — that the bridge reads as evidence.</p>
+            <p><strong>Adapter guardrails.</strong> Fixed <code>codex</code>, <code>claude</code>, <code>mock</code> adapters wrap local CLIs. Discord input never becomes raw shell.</p>
+            <p><strong>Drift monitor.</strong> Heartbeats carry artifact snapshots. Workers that look alive but are not updating shared state get flagged.</p>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">History</div>
+          <div class="content-prose mt-5">
+            <p>The orchestration behavior began as a standalone TypeScript framework for role-based AI collaboration — a thought experiment in review rules, handoff contracts, and launcher dashboards. That prototype validated the collaboration primitives but couldn't survive real operators without canonical state.</p>
+            <p>The current orchestration is the production descendant: same collaboration primitives, now running as a plugin on a kernel that owns state, transport, and runtime routing. The TS framework is retired into this behavior.</p>
+            <p><strong>Runtime:</strong> <code>pc_launcher/</code> on Windows — manifest registration, session claim, one worker process per agent, CLI adapter execution.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Status · Production</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Runtime · pc_launcher</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Agents · planner · curator · coder · verifier · reviewer</span>
+      </div>
+    </section>
+
+    <section id="remote-codex" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 03 · Behavior — remote_codex</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Browser-first remote execution</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">The second behavior. Instead of Discord as the control surface, a browser site drives remote Codex execution. The bridge owns canonical state. The browser only renders.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div class="media-frame">
+          <div class="stack-diagram stack-diagram--deep aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">remote_codex flow</div>
+              <div class="mt-3 stack-diagram__title">Browser → Bridge → Executor</div>
+              <p class="mt-3 stack-diagram__copy">Canonical task, evidence, and approval truth lives in the bridge. The browser is a projection; the executor is an adapter.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>Browser</strong><span>codex-remote site — reads typed read models</span></div>
+              <div class="stack-diagram__node"><strong>Bridge</strong><span>canonical task / evidence / approval / stall state</span></div>
+              <div class="stack-diagram__node"><strong>Runtime</strong><span>remote_executor connector on the target PC</span></div>
+              <div class="stack-diagram__node"><strong>Discord</strong><span>coordination mirror, not canonical</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">swap_horiz</span><span>The browser cannot become the owner of task state.</span></div>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">Ownership rules</div>
+          <div class="content-prose mt-5">
+            <p><strong>The behavior owns</strong> machine + canonical thread bindings, remote work objects and assignment state, heartbeat + evidence state, approval / interrupt / stall state, typed read models for the browser, and projection into generic Space/Actor/Event.</p>
+            <p><strong>The behavior does not own</strong> browser layout, Codex process control details, Windows UTF-8 handling, Discord message etiquette, or optimistic rendering. Those are adapters.</p>
+            <p><strong>Why this boundary matters:</strong> site-specific state is seductive. Once the browser becomes the source of truth, another transport (mobile app, CLI, another site) cannot be added without forking. The bridge-owned contract keeps the behavior transport-independent.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 surface-panel p-6 sm:p-8">
+        <div class="section-kicker">Current state (honest)</div>
+        <div class="content-prose mt-5 max-w-4xl">
+          <p>The package is a thin behavior scaffold wrapping the current product-layer remote task service. Live wiring (kernel binding, Discord binding) is intentionally not enabled yet — the contracts are stabilizing. Once stable, the remote task logic folds into this package from its current spread across bridge services and browser-only state.</p>
+          <p>This is in the portfolio because the <em>design</em> is the point: the ownership split between behavior, browser, Discord mirror, and Windows executor is a deliberate answer to the question "what happens when the control surface changes?"</p>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Status · Scaffold · contracts stabilizing</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Runtime · remote_executor</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Partner site · codex-remote (browser)</span>
+      </div>
+    </section>
+
+    <section id="chat" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 04 · Behavior — chat</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Codex-to-Codex dialogue rooms</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">The generality check. A behavior with no tasks, no handoffs, no evidence state — just rooms, participants, and messages. If the kernel holds here, it's real.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div class="media-frame">
+          <div class="stack-diagram stack-diagram--deep aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">chat flow</div>
+              <div class="mt-3 stack-diagram__title">Thread → Participants → Messages</div>
+              <p class="mt-3 stack-diagram__copy">No workflow. Just a room with actors and events.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>Room</strong><span>Discord thread as chat space</span></div>
+              <div class="stack-diagram__node"><strong>Participants</strong><span>AI agents or humans, registered per room</span></div>
+              <div class="stack-diagram__node"><strong>Messages</strong><span>submit · delta fetch · heartbeat</span></div>
+              <div class="stack-diagram__node"><strong>Runtime</strong><span>chat_participant connector on each PC</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">forum</span><span>No tasks. No handoffs. Just dialogue.</span></div>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">Why chat is the real test</div>
+          <div class="content-prose mt-5">
+            <p>If the kernel vocabulary were secretly shaped by orchestration (tasks, handoffs, reviewers), adding a behavior without those concepts would reveal leaky abstractions. Chat has none of that. It only needs rooms, actors, messages.</p>
+            <p>Chat runs on the same Space/Actor/Event vocabulary as orchestration does. The kernel didn't grow a "task-shaped" bias. That is the concrete evidence that the abstraction holds.</p>
+            <p><strong>Runtime:</strong> <code>chat_participant</code> connector — lightweight PC-side process, subscribes to room delta, posts messages, maintains participant heartbeat.</p>
+            <p><strong>Use case:</strong> Codex-to-Codex dialogue, human-to-AI chat room, cross-PC conversation without the overhead of a workflow engine.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Status · Live</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Runtime · chat_participant</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Purpose · Kernel generality proof</span>
+      </div>
+    </section>
+
+    <section id="why" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 05 · Why three behaviors matter</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">One behavior is a feature. Three is a claim.</h2>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">orchestration</div>
+          <p class="mt-4 text-sm leading-7 text-[#4f6077]">Validates the state and task model. The kernel carries structured workflow without special-casing it.</p>
+        </article>
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">remote_codex</div>
+          <p class="mt-4 text-sm leading-7 text-[#4f6077]">Validates canonical evidence under distributed runtime. The bridge stays the single source of truth when the control surface moves to the browser.</p>
+        </article>
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">chat</div>
+          <p class="mt-4 text-sm leading-7 text-[#4f6077]">Validates room generality without task semantics. If the kernel holds for pure dialogue, it isn't quietly shaped by orchestration.</p>
+        </article>
+      </div>
+
+      <div class="mt-10 surface-panel p-6 sm:p-8">
+        <p class="max-w-4xl text-base leading-7 text-[#4f6077]">The axis that matters is breadth of behavior — not count of behaviors. Three behaviors only count because they stress different parts of the kernel. If I built five more orchestration-shaped behaviors, I would have a feature farm, not a platform.</p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 lg:px-8">
+      <div class="detail-grid">
+        <div class="detail-note"><strong>GitHub:</strong> <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener noreferrer" class="text-[#1a57c7]">github.com/darkhtk/ops-cure</a></div>
+        <div class="detail-note"><strong>Repo layout:</strong> <code>nas_bridge/</code> deployed core · <code>pc_launcher/</code> orchestration runtime · <code>pc_launcher/connectors/*</code> runtime adapters for other behaviors</div>
+        <div class="detail-note"><strong>Related AI R&amp;D:</strong> <a href="../genworld-ollama/" class="text-[#1a57c7]">GenWorld + Ollama</a> — local LLM experimentation outside the kernel</div>
+        <div class="detail-note"><strong>AI Systems landing:</strong> <a href="../../../ai-systems/" class="text-[#1a57c7]">ai-systems/</a></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="../../../assets/js/site.js"></script>
+</body>
+</html>
