@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
+<title>AI Systems | Daeki Hong</title>
+<meta name="description" content="Kernel-plus-behaviors architecture by Daeki Hong. Ops-Cure is a channel-native state/event kernel that hosts orchestration, remote execution, and dialogue behaviors on the same substrate."/>
+<meta property="og:title" content="AI Systems | Daeki Hong"/>
+<meta property="og:description" content="Kernel + behaviors architecture: orchestration, remote_codex, and chat on a shared channel-native substrate."/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/"/>
+<meta property="og:locale" content="en_US"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
+          body: ["Noto Sans KR", "sans-serif"],
+          label: ["Space Grotesk", "Noto Sans KR", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="../assets/css/site.css"/>
+</head>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<div class="site-shell">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="../" class="flex flex-col">
+        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity x AI Systems</span>
+      </a>
+      <nav class="hidden items-center gap-2 md:flex">
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../">Home</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../projects/">Projects</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="./">AI Systems</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../about/">Profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="lang-toggle hidden sm:inline-flex">
+          <a class="lang-link is-active" href="./">EN</a>
+          <a class="lang-link" href="../ko/ai-systems/">KO</a>
+        </div>
+        <a href="mailto:darkhtk@gmail.com" class="hidden rounded-full bg-[#1a57c7] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5 sm:inline-flex">Connect</a>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+        <div>
+          <div class="section-kicker">Menu</div>
+          <div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div>
+        </div>
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="Close menu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="mt-6 grid gap-3">
+        <a href="../" class="mobile-nav-link">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div>
+          <div class="mt-1 text-sm text-[#526178]">Positioning and featured proof.</div>
+        </a>
+        <a href="../projects/" class="mobile-nav-link">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Projects</div>
+          <div class="mt-1 text-sm text-[#526178]">Industrial XR, BIM, robotics, and tooling.</div>
+        </a>
+        <a href="./" class="mobile-nav-link is-active">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">AI Systems</div>
+          <div class="mt-1 text-sm text-[#526178]">Kernel, behaviors, and applied AI R&amp;D.</div>
+        </a>
+        <a href="../about/" class="mobile-nav-link">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div>
+          <div class="mt-1 text-sm text-[#526178]">Experience and working style.</div>
+        </a>
+      </div>
+      <div class="mt-6 flex gap-3">
+        <a href="./" class="lang-link is-active bg-white">EN</a>
+        <a href="../ko/ai-systems/" class="lang-link bg-white">KO</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative">
+    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div class="order-2 surface-panel p-6 sm:p-8 lg:order-1 lg:p-10">
+          <div class="section-kicker">Kernel · Behaviors · Runtimes</div>
+          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">AI Systems</h1>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">
+            I didn't just build an agent system. I built the kernel it runs on.
+          </p>
+          <p class="mt-5 max-w-3xl text-sm leading-7 text-[#526178] sm:text-base">
+            Ops-Cure treats a Discord channel or thread as a stateful space. On top of that substrate, different behaviors — orchestration, remote execution, dialogue — share the same <code class="rounded bg-[#edf2f8] px-1.5 py-0.5 text-xs text-[#1a57c7]">Space / Actor / Event</code> vocabulary. The kernel is the product. The behaviors are plugins.
+          </p>
+          <div class="mt-7 flex flex-wrap gap-2.5">
+            <span class="pill text-sm">Kernel</span>
+            <span class="pill text-sm">Behavior Plugins</span>
+            <span class="pill text-sm">Discord Transport</span>
+            <span class="pill text-sm">Local Runtimes</span>
+          </div>
+        </div>
+
+        <aside class="order-1 feature-panel p-5 sm:p-6 lg:order-2">
+          <div class="section-kicker">Read in order</div>
+          <div class="mt-5 grid gap-3">
+            <a href="#kernel" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
+              <div class="metric-label">01</div>
+              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Ops-Cure Kernel</div>
+              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Channel-native state/event substrate.</div>
+            </a>
+            <a href="#behaviors" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
+              <div class="metric-label">02</div>
+              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Behaviors</div>
+              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Orchestration, remote_codex, chat.</div>
+            </a>
+            <a href="#applied" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
+              <div class="metric-label">03</div>
+              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Applied AI R&amp;D</div>
+              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Local LLM experiments outside the kernel.</div>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="kernel" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="section-kicker">The Kernel</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Ops-Cure — channel-native state/event kernel</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">A channel is not just a message pipe. It is a stateful space with actors and events. Ops-Cure makes that treatment explicit: behaviors plug in, transports adapt, runtimes execute.</p>
+      </div>
+
+      <article class="mt-10 project-card bg-white p-6 sm:p-8 lg:p-10">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+          <div class="stack-diagram stack-diagram--deep aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">Channel-native kernel</div>
+              <div class="mt-3 stack-diagram__title">Space · Actor · Event · Behavior</div>
+              <p class="mt-3 stack-diagram__copy">The kernel stays generic. Domain semantics live inside behaviors. Machine-specific execution stays in runtimes.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>Kernel</strong><span>Space / Actor / Event / Behavior</span></div>
+              <div class="stack-diagram__node"><strong>Behaviors</strong><span>orchestration · remote_codex · chat</span></div>
+              <div class="stack-diagram__node"><strong>Transport</strong><span>Discord bot, threads, presenter</span></div>
+              <div class="stack-diagram__node"><strong>Runtimes</strong><span>pc_launcher, remote_executor, chat_participant</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>Kernel is the product. Behaviors are plugins.</span></div>
+          </div>
+
+          <div>
+            <div class="section-kicker">Core vocabulary</div>
+            <div class="content-prose mt-5">
+              <p><strong>Space.</strong> A stateful room — a Discord channel, thread, or session that owns its own state over time.</p>
+              <p><strong>Actor.</strong> A participant — human, AI worker, bot, or system.</p>
+              <p><strong>Event.</strong> A recorded fact inside a space. Transport-agnostic, persistable, replayable.</p>
+              <p><strong>Behavior.</strong> Domain logic that interprets events and maintains domain state on top of the kernel.</p>
+            </div>
+            <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+              <a href="../en/ai-systems/ops-cure/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
+                Open kernel case study
+                <span class="material-symbols-outlined ml-2 text-base">north_east</span>
+              </a>
+              <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
+                GitHub repo
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="behaviors" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">Behaviors</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Three behaviors, one kernel</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">The same Space/Actor/Event substrate carries a production multi-agent workflow, a browser-first remote execution surface, and a Codex-to-Codex dialogue room. Very different domains, same kernel. That is the test of the abstraction.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <div class="stack-diagram h-full">
+              <div>
+                <div class="stack-diagram__eyebrow">Behavior 01</div>
+                <div class="mt-3 stack-diagram__title">orchestration</div>
+                <p class="mt-3 stack-diagram__copy text-sm">Planner, curator, coder, verifier, reviewer collaborate on canonical tasks and handoffs inside a Discord thread.</p>
+              </div>
+              <div class="stack-diagram__grid">
+                <div class="stack-diagram__node"><strong>Tasks</strong><span>canonical + handoffs</span></div>
+                <div class="stack-diagram__node"><strong>Runtime</strong><span>pc_launcher</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Production</div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="project-chip">Planner</span>
+            <span class="project-chip">Coder</span>
+            <span class="project-chip">Reviewer</span>
+          </div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">orchestration</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Discord-native multi-agent workflow. Role-based collaboration, self-claim scheduling, markdown workspace projection.</p>
+          <a href="../en/ai-systems/ops-cure/#orchestration" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in kernel case study<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
+
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <div class="stack-diagram h-full">
+              <div>
+                <div class="stack-diagram__eyebrow">Behavior 02</div>
+                <div class="mt-3 stack-diagram__title">remote_codex</div>
+                <p class="mt-3 stack-diagram__copy text-sm">Browser-first remote Codex execution. Canonical task, evidence, and approval state owned by the bridge.</p>
+              </div>
+              <div class="stack-diagram__grid">
+                <div class="stack-diagram__node"><strong>Browser</strong><span>codex-remote site</span></div>
+                <div class="stack-diagram__node"><strong>Runtime</strong><span>remote_executor</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Scaffold · Contracts stabilizing</div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="project-chip">Browser</span>
+            <span class="project-chip">Evidence</span>
+            <span class="project-chip">Approval</span>
+          </div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">remote_codex</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Remote Codex task model with heartbeat, evidence, and approval state. The bridge owns canonical truth — the browser only renders.</p>
+          <a href="../en/ai-systems/ops-cure/#remote-codex" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in kernel case study<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
+
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <div class="stack-diagram h-full">
+              <div>
+                <div class="stack-diagram__eyebrow">Behavior 03</div>
+                <div class="mt-3 stack-diagram__title">chat</div>
+                <p class="mt-3 stack-diagram__copy text-sm">Codex-to-Codex dialogue rooms — no tasks, no handoffs. A pure room for conversation that proves the kernel generalizes.</p>
+              </div>
+              <div class="stack-diagram__grid">
+                <div class="stack-diagram__node"><strong>Rooms</strong><span>thread-backed</span></div>
+                <div class="stack-diagram__node"><strong>Runtime</strong><span>chat_participant</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Live · Kernel Generality Proof</div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="project-chip">Codex-to-Codex</span>
+            <span class="project-chip">Dialogue</span>
+            <span class="project-chip">No Tasks</span>
+          </div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">chat</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Dialogue-only rooms between AI agents. Participants, heartbeats, message submission — all without workflow semantics. Proof that Space/Actor/Event holds for non-workflow domains.</p>
+          <a href="../en/ai-systems/ops-cure/#chat" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read in kernel case study<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
+      </div>
+
+      <div class="mt-10 surface-panel p-6 sm:p-8">
+        <div class="section-kicker">Why three behaviors matters</div>
+        <p class="mt-4 max-w-4xl text-base leading-7 text-[#4f6077]">
+          One behavior is a feature. Three fundamentally different behaviors — structured workflow, remote execution with approval, free-form dialogue — running on the same kernel is a claim that the abstraction is real. Each behavior validates a different axis: <strong>orchestration</strong> tests the state/task model, <strong>remote_codex</strong> tests canonical evidence under distributed runtime, <strong>chat</strong> tests room generality without task semantics.
+        </p>
+      </div>
+    </section>
+
+    <section id="applied" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">Related Applied AI R&amp;D</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Outside the kernel</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">Work that informs the AI Systems practice but sits outside the Ops-Cure kernel — local LLM experimentation, prompt scaffolding, and NPC memory rules.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../assets/images/genworld-world.png" alt="GenWorld world"/>
+          </div>
+          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Local LLM R&amp;D</div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="project-chip">Ollama</span>
+            <span class="project-chip">NPC</span>
+            <span class="project-chip">Memory Rules</span>
+          </div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">GenWorld + Ollama</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Local LLM experimentation for NPC behavior, memory rules, and world interaction design. A standalone R&amp;D track, not a kernel behavior.</p>
+          <a href="../en/ai-systems/genworld-ollama/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Open case study<span class="material-symbols-outlined text-base">north_east</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 pt-2 sm:px-6 sm:pb-20 lg:px-8">
+      <div class="surface-panel p-6 sm:p-8 lg:p-10">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div class="max-w-3xl">
+            <div class="section-kicker">Next</div>
+            <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Industrial delivery work</h2>
+            <p class="mt-4 text-base leading-7 text-[#4f6077]">The other half of the portfolio — XR, BIM runtime tooling, robotics control, and exhibition delivery.</p>
+          </div>
+          <a href="../projects/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
+            Open Projects
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div>
+        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
+        <div class="mt-2 text-sm text-[#526178]">AI Systems — kernel and behaviors</div>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 text-sm">
+        <a class="footer-link" href="../">Home</a>
+        <a class="footer-link" href="../projects/">Projects</a>
+        <a class="footer-link" href="../about/">Profile</a>
+        <a class="footer-link" href="../ko/ai-systems/">한국어</a>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
