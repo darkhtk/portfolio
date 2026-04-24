@@ -45,6 +45,7 @@
       <nav class="hidden items-center gap-2 md:flex">
         <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../">홈</a>
         <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="./">프로젝트</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../ai-systems/">AI Systems</a>
         <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../about/">프로필</a>
       </nav>
       <div class="flex items-center gap-3">
@@ -75,7 +76,11 @@
         </a>
         <a href="./" class="mobile-nav-link is-active">
           <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">프로젝트</div>
-          <div class="mt-1 text-sm text-[#526178]">산업 XR, BIM, 로보틱스, AI 사례.</div>
+          <div class="mt-1 text-sm text-[#526178]">산업 XR, BIM, 로보틱스, 툴링.</div>
+        </a>
+        <a href="../ai-systems/" class="mobile-nav-link">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">AI Systems</div>
+          <div class="mt-1 text-sm text-[#526178]">커널, behavior, 응용 AI R&amp;D.</div>
         </a>
         <a href="../about/" class="mobile-nav-link">
           <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">프로필</div>
@@ -102,7 +107,7 @@
             <span class="pill text-sm">산업 XR</span>
             <span class="pill text-sm">BIM 런타임</span>
             <span class="pill text-sm">툴링</span>
-            <span class="pill text-sm">적용형 AI</span>
+            <span class="pill text-sm">안전 XR</span>
             <span class="pill text-sm">현장 납품</span>
           </div>
         </div>
@@ -173,61 +178,10 @@
           <p class="mt-3 text-sm leading-7 text-[#4f6077]">관객의 기억 인터뷰, 생성 자산, 운영 대시보드를 하나로 묶은 XR 전시 시스템입니다.</p>
           <a href="../../projects/neostalgia/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">상세 보기<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
-      </div>
-    </section>
-
-    <section id="ai-extension" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="max-w-3xl">
-        <div class="section-kicker">AI 확장</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">AI 워크플로, 인프라, R&amp;D 시스템</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">에이전트 워크플로, Discord 기반 AI 운영, 로컬 AI 규칙 실험을 모은 구간입니다.</p>
-      </div>
-
-      <div class="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]"><img src="../../assets/images/v2_launcher.png" alt="멀티 에이전트 프레임워크"/></div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">AI Workflow</div>
-          <div class="mt-3 flex flex-wrap gap-2"><span class="project-chip">Agents</span><span class="project-chip">TypeScript</span><span class="project-chip">Rules</span></div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Multi-Agent Orchestration</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">역할 분리, 리뷰 규칙, 실행 흐름을 재사용 가능한 구조로 만든 프레임워크입니다.</p>
-          <a href="../../projects/orchestration-ts/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">상세 보기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
-
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
-            <div class="stack-diagram h-full">
-              <div>
-                <div class="stack-diagram__eyebrow">Discord-native orchestration</div>
-                <div class="mt-3 stack-diagram__title">Ops-Cure</div>
-                <p class="mt-3 stack-diagram__copy text-sm">Discord를 제어면으로 쓰고, NAS bridge와 Windows launcher로 로컬 에이전트를 운영하는 시스템입니다.</p>
-              </div>
-              <div class="stack-diagram__grid">
-                <div class="stack-diagram__node"><strong>Discord</strong><span>Thread as session key</span></div>
-                <div class="stack-diagram__node"><strong>Bridge</strong><span>FastAPI + SQLite</span></div>
-                <div class="stack-diagram__node"><strong>Launcher</strong><span>Windows workers</span></div>
-                <div class="stack-diagram__node"><strong>Drift</strong><span>Artifact heartbeat</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">AI Ops Infra</div>
-          <div class="mt-3 flex flex-wrap gap-2"><span class="project-chip">Discord</span><span class="project-chip">FastAPI</span><span class="project-chip">SQLite</span></div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Ops-Cure</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Discord로 제어하고 로컬 워커를 실행하며 세션 상태를 추적하는 에이전트 운영 인프라입니다.</p>
-          <a href="../../projects/ops-cure/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">상세 보기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
-
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]"><img src="../../assets/images/genworld-world.png" alt="GenWorld 세계"/></div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Local LLM R&amp;D</div>
-          <div class="mt-3 flex flex-wrap gap-2"><span class="project-chip">Ollama</span><span class="project-chip">NPC</span><span class="project-chip">Rules</span></div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">GenWorld + Ollama</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">로컬 LLM으로 NPC 행동 규칙과 월드 상호작용을 검증한 R&amp;D 프로젝트입니다.</p>
-          <a href="../../projects/genworld-ollama/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">상세 보기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
 
         <article class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]"><img src="../../assets/images/vr_construction_scaffold.png" alt="VR 시뮬레이터 통합"/></div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Legacy XR</div>
+          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Safety XR</div>
           <div class="mt-3 flex flex-wrap gap-2"><span class="project-chip">Safety</span><span class="project-chip">Simulator</span><span class="project-chip">Delivery</span></div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">VR 시뮬레이터 통합</h3>
           <p class="mt-3 text-sm leading-7 text-[#4f6077]">건설, 공장, 함정 안전교육을 포함한 초기 XR 납품 경험을 묶은 아카이브입니다.</p>
