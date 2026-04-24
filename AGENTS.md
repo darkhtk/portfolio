@@ -31,19 +31,32 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 - **Dark theme 고정** (`<html class="dark">`)
 - **언어**: ko (한국어 + 영문 키워드 혼용)
 
-## Page Structure (8 페이지 + 4 case study)
+## Page Structure
+
+Nav is 4-item (`Home | Projects | AI Systems | Profile`) as of 2026-04-24. AI work is in its own top-level category.
 
 | 파일 | 역할 | nav 패턴 |
 |---|---|---|
-| `index.html` | Home (Hero + 3 Pillars + Featured Project) | A |
-| `projects/index.html` | Selected Works — bento grid + 6 필터 | A |
-| `about/index.html` | About + Tech Ecosystem | A-variant (`hero-gradient` 커스텀 CSS 클래스 사용) |
-| `resume/index.html` | Resume — 사이드바 + TopAppBar 레이아웃 | C (특수) |
-| `cover-letter/index.html` | 자기소개서 6 섹션 (max-w-5xl) | A |
-| `projects/vr-robot/index.html` | VR 로봇 + 자체 IK 솔버 (Case Study 01) | B |
-| `projects/dxcenter/index.html` | DXCenter LG에너지솔루션 (Case Study 02) | B |
-| `projects/orchestration-ts/index.html` | Multi-Agent Orchestration Framework (Case Study 03) — `.code-block` CSS 가짐 | B |
-| `projects/genworld-ollama/index.html` | GenWorld + Ollama R&D (Case Study 04) | B |
+| `index.html` | Home (Hero + 3 Focus tiles + Featured Project) | A |
+| `projects/index.html` | Projects landing (non-AI industrial work) | A |
+| `ai-systems/index.html` | AI Systems landing (kernel + behaviors + R&D) | A |
+| `about/index.html` | About + Tech Ecosystem | A-variant |
+| `resume/index.html` | Resume redirect → Profile | redirect page |
+| `cover-letter/index.html` | Cover letter redirect → Profile | redirect page |
+| `en/ai-systems/ops-cure/index.html` | Ops-Cure Kernel case study (kernel + 3 behaviors) | B (light) |
+| `en/ai-systems/genworld-ollama/index.html` | GenWorld + Ollama R&D (EN, minimal) | content-only |
+| `en/projects/vr-robot/index.html` | VR Robot + IK solver | B (light) |
+| `en/projects/watchbim/index.html` | WatchBIM | B (light) |
+| `en/projects/dxcenter/index.html` | DXCenter LG에너지솔루션 | B (light) |
+| `en/projects/neostalgia/index.html` | Neostalgia (EN, minimal) | content-only |
+| `en/projects/vr-simulators/index.html` | VR Simulator Collection (EN, minimal) | content-only |
+| `ko/ai-systems/index.html` | AI Systems landing (KO) | A |
+| `ko/projects/index.html` | Projects landing (KO) | A |
+| `ai-systems/ops-cure/index.html` | Ops-Cure Kernel (KO, light theme) | B (light) |
+| `ai-systems/genworld-ollama/index.html` | GenWorld + Ollama (KO, old dark theme) | B (dark legacy) |
+| `projects/<case>/index.html` | KO case studies (old dark theme: vr-robot, watchbim, dxcenter, neostalgia, vr-simulators) | B (dark legacy) |
+
+**Note on inconsistency**: existing KO case studies at top-level `projects/<case>/` still link their nav to EN root pages (legacy from pre-restructure). New AI Systems KO landing (`ko/ai-systems/`) and new KO kernel case (`ai-systems/ops-cure/`) link correctly inside EN nav tree. Fix is out of scope for the AI Systems category work.
 
 ## Nav Patterns (4 variants)
 
@@ -140,7 +153,7 @@ colors: {
 }
 ```
 
-## Code Block CSS (case-study-orchestration-ts + case-study-genworld-ollama)
+## Code Block CSS (KO legacy case studies using old dark theme)
 
 코드 스니펫이 있는 case study는 head `<style>` 블록에 `.code-block` CSS 정의. 모바일 미디어쿼리 포함.
 
@@ -182,13 +195,13 @@ colors: {
 
 ## Spec / Plan Documentation
 
-`C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\specs\` (design spec) + `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\plans\` (implementation plan).
+레포 내부: `docs/specs/` (design spec) + `docs/plans/` (implementation plan).
 
 **기존 문서**:
-- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\specs\2026-04-08-mobile-responsive-redesign-design.md`
-- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\plans\2026-04-08-mobile-responsive-redesign.md`
-- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\specs\2026-04-08-genworld-ollama-case-study-design.md`
-- `C:\sourcetree\portfolio-internal\portfolio\workspace\docs\superpowers\plans\2026-04-08-genworld-ollama-case-study.md`
+- `docs/specs/2026-04-11-mobile-first-responsive-renewal-design.md`
+- `docs/plans/2026-04-11-mobile-first-responsive-renewal.md`
+- `docs/specs/2026-04-24-ai-systems-category-design.md`
+- `docs/plans/2026-04-24-ai-systems-category.md`
 
 새 작업도 같은 경로 패턴 (`YYYY-MM-DD-<topic>-design.md` / `YYYY-MM-DD-<topic>.md`) 으로 저장.
 
@@ -207,6 +220,16 @@ colors: {
 - 새 'Local LLM' 필터 추가 (`data-filter="local-llm"`)
 - branch: `genworld-ollama-case-study` (보존)
 
+### 2026-04-24: AI Systems 카테고리 분리
+- Nav 3-item → 4-item (`Home | Projects | AI Systems | Profile`). 전 페이지 propagate.
+- 신규 페이지: `ai-systems/index.html` (EN), `ko/ai-systems/index.html` (KO), `en/ai-systems/ops-cure/index.html` + `ai-systems/ops-cure/index.html` (Ops-Cure 커널 + orchestration / remote_codex / chat behavior 케이스 스터디).
+- 이동: `en/projects/genworld-ollama/` → `en/ai-systems/genworld-ollama/`, `projects/genworld-ollama/` → `ai-systems/genworld-ollama/`.
+- 삭제: `en/projects/orchestration-ts/`, `projects/orchestration-ts/`, `en/projects/ops-cure/`, `projects/ops-cure/` (TS 프레임은 kernel 케이스 orchestration 섹션 history 로 흡수).
+- Projects 페이지: `AI Extension` 섹션 + `#ai-extension` 앵커 제거. VR Simulator 를 Core Proof 로 이동.
+- Home: Focus 01 을 "AI Systems" 로 리프레임, `#ai-extension` 링크 → `ai-systems/`.
+- docs: `docs/specs/2026-04-24-ai-systems-category-design.md`, `docs/plans/2026-04-24-ai-systems-category.md`.
+- branch: `ai-systems-category`.
+
 ## Workflow Conventions
 
 1. **큰 작업은 brainstorm → spec → plan → subagent-driven 패턴 사용** (superpowers skills)
@@ -221,6 +244,7 @@ colors: {
 - `main` — production (origin/main 동기화)
 - `mobile-responsive-redesign` — 보존 (mobile redesign 작업 history)
 - `genworld-ollama-case-study` — 보존 (case study 04 작업 history)
+- `ai-systems-category` — AI Systems 카테고리 분리 작업 (2026-04-24)
 
 ## External References
 
