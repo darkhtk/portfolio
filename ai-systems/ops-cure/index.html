@@ -333,6 +333,11 @@
       <div class="mt-10 surface-panel p-6 sm:p-8">
         <p class="max-w-4xl text-base leading-7 text-[#4f6077]">중요한 축은 behavior 수가 아니라 behavior 의 폭. 3개가 의미 있는 건, 각각이 커널의 다른 부분을 압박하기 때문이다. orchestration 모양의 behavior 를 다섯 개 더 만들었다면 그건 feature farm 이지 플랫폼이 아니다.</p>
       </div>
+
+      <div class="mt-6 surface-panel p-6 sm:p-8">
+        <div class="section-kicker">다음 축 · 설계 단계</div>
+        <p class="mt-4 max-w-4xl text-base leading-7 text-[#4f6077]">네 번째 behavior — <code>world</code> — 가 종이 위에 있고 코드는 아직 없다. <strong>simulation</strong> 축을 검증한다: actor 에 NPC 가 들어가고 그 일부는 behavior 규칙(mood / relationship / memory pruning / world-event window)에 의해 직접 시뮬레이션되며, event 는 sparse 와 dense 가 혼재하고, behavior 가 자체 clock 을 가지면서도 kernel 은 clock 을 모른다. 시드 R&amp;D 는 아래 GenWorld + Ollama 트랙이며, 설계와 실행 계획은 Ops-Cure 저장소 (<code>docs/world-behavior.md</code>, <code>docs/world-behavior-execution-plan.md</code>) 에 있다. GenWorld 가 stabilization 단계를 끝낼 때까지 게임 측 코드는 건드리지 않는다.</p>
+      </div>
     </section>
 
     <section class="mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 lg:px-8">

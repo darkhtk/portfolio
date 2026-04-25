@@ -220,6 +220,13 @@ colors: {
 - 새 'Local LLM' 필터 추가 (`data-filter="local-llm"`)
 - branch: `genworld-ollama-case-study` (보존)
 
+### 2026-04-25: `world` behavior 설계 (Phase 0)
+- ops-cure 저장소에 `docs/world-behavior.md` (design + 계약) + `docs/world-behavior-execution-plan.md` (Phase 0~3 plan) 신규.
+- 시드 R&D 는 `C:\Users\darkh\Projects\GenWorld` (NPCBrain · WorldEventSystem · QuestSystem · OllamaClient · EventBus 18개 struct). 분석으로 검증된 매핑: Space=save 세션, Actor=Player/NPC/Monster, Event=기존 EventBus 타입, Behavior=신규 `world`.
+- 새 축: simulation (NPC 가 부분적으로 behavior 가 직접 시뮬레이션 + sparse/dense 이벤트 혼재 + clock-driven). 지금 셋(orchestration / remote_codex / chat) 어느 것도 누르지 않은 자리.
+- portfolio 변경: EN/KO ops-cure 케이스 § 05 끝에 "다음 축 · 설계 단계" 패널 추가, AI Systems 랜딩의 GenWorld+Ollama 카드 부제 갱신("seed for upcoming `world` behavior").
+- GenWorld 코드 변경 0. CURRENT_GOAL.md 가 stabilization 단계를 끝낼 때까지 Phase 1 (Opscure scaffold) 도 보류.
+
 ### 2026-04-25: Ops-Cure / codex-remote 진척 반영
 - `remote_codex` behavior 가 `nas_bridge/app/behaviors/remote_codex/` (api/service/schemas/kernel_binding/discord_binding) 로 자리잡고 라이브 remote task 서비스를 감싼다는 점, codex-remote 가 site-proxy 모드 전용으로 정리되어 로컬 broker/`/api/agent/...` 가 은퇴됐다는 점, behavior 가 설치형 패키지 (`chat-participant`, `remote-executor`) 로 표준화돼 `python -m pc_launcher.behavior_tools` 로 install/doctor/run/send 한다는 점을 EN/KO ops-cure 케이스 스터디 + AI Systems 랜딩 카드에 반영.
 - 변경 파일: `en/ai-systems/ops-cure/index.html`, `ai-systems/ops-cure/index.html`, `ai-systems/index.html`, `ko/ai-systems/index.html`.
