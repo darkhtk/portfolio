@@ -220,6 +220,12 @@ colors: {
 - 새 'Local LLM' 필터 추가 (`data-filter="local-llm"`)
 - branch: `genworld-ollama-case-study` (보존)
 
+### 2026-04-25: Ops-Cure / codex-remote 진척 반영
+- `remote_codex` behavior 가 `nas_bridge/app/behaviors/remote_codex/` (api/service/schemas/kernel_binding/discord_binding) 로 자리잡고 라이브 remote task 서비스를 감싼다는 점, codex-remote 가 site-proxy 모드 전용으로 정리되어 로컬 broker/`/api/agent/...` 가 은퇴됐다는 점, behavior 가 설치형 패키지 (`chat-participant`, `remote-executor`) 로 표준화돼 `python -m pc_launcher.behavior_tools` 로 install/doctor/run/send 한다는 점을 EN/KO ops-cure 케이스 스터디 + AI Systems 랜딩 카드에 반영.
+- 변경 파일: `en/ai-systems/ops-cure/index.html`, `ai-systems/ops-cure/index.html`, `ai-systems/index.html`, `ko/ai-systems/index.html`.
+- remote_codex 카드/배지: `Scaffold · 계약 안정화 중` → `Live · Opscure 가 canonical` / `Live · Canonical via Opscure`.
+- 케이스 스터디 § 01 에 "behavior 는 설치형 패키지" 패널 신규.
+
 ### 2026-04-24: AI Systems 카테고리 분리
 - Nav 3-item → 4-item (`Home | Projects | AI Systems | Profile`). 전 페이지 propagate.
 - 신규 페이지: `ai-systems/index.html` (EN), `ko/ai-systems/index.html` (KO), `en/ai-systems/ops-cure/index.html` + `ai-systems/ops-cure/index.html` (Ops-Cure 커널 + orchestration / remote_codex / chat behavior 케이스 스터디).

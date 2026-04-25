@@ -118,7 +118,7 @@
         <article class="summary-card"><h3>역할</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">커널(Space/Actor/Event/Behavior 추상화), Discord transport, behavior 플러그인 레지스트리, canonical DB 설계·구현. 각 behavior 계약 설계와 orchestration, remote_codex, chat behavior 전반을 소유.</p></article>
         <article class="summary-card"><h3>문제</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">에이전트 프레임워크는 하나의 워크플로에 굳어지는 경향이 있음. 원격 실행, AI 간 대화, 인시던트 방 등 새로운 상호작용 형태가 생길 때마다 코드베이스가 분기되고 공통 상태 모델이 썩는다.</p></article>
         <article class="summary-card"><h3>접근</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">채널 자체를 추상화로 취급. 커널은 Space/Actor/Event/Behavior 만 안다. 도메인 로직은 behavior 플러그인, runtime 은 adapter. 특수 분기 없이 전혀 다른 behavior 를 같은 커널이 수용.</p></article>
-        <article class="summary-card"><h3>결과</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">프로덕션 또는 그 근처의 behavior 3개 — orchestration(프로덕션), remote_codex(계약 안정화 중), chat(라이브). 각각이 커널 범용성의 다른 축을 검증.</p></article>
+        <article class="summary-card"><h3>결과</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">같은 커널 위에서 라이브로 돌아가는 behavior 3개 — orchestration(프로덕션), remote_codex(Opscure 가 canonical, codex-remote 사이트는 site-proxy 모드 전용), chat(라이브). 각각이 커널 범용성의 다른 축을 검증.</p></article>
       </div>
     </section>
 
@@ -155,6 +155,13 @@
             <p><strong>Behavior.</strong> 커널 위에 얹힌 도메인 로직. 이벤트를 해석하고 자체 도메인 상태(태스크, 메시지, evidence — 도메인이 요구하는 것)를 유지하며, 범용 Space/Actor/Event view 로 투영.</p>
             <p>커널은 orchestration 태스크가 무엇인지 모른다. 다만 "어떤 behavior 가 어떤 공간에 이벤트를 썼고, 어떤 actor 가 참여했다" 만 안다.</p>
           </div>
+        </div>
+      </div>
+
+      <div class="mt-6 surface-panel p-6 sm:p-8">
+        <div class="section-kicker">behavior 는 설치형 패키지</div>
+        <div class="content-prose mt-5 max-w-4xl">
+          <p>런타임 측 behavior 는 느슨한 코드 경로가 아니라 설치형 패키지다. <code>chat-participant</code>, <code>remote-executor</code> 가 각자 behavior manifest, 클라이언트 프로젝트 + <code>.env</code> 를 깔아주는 installer, bridge 도달성과 로컬 Codex 가용성을 점검하는 doctor, 그리고 runner 를 가진다. 운영 표면: <code>python -m pc_launcher.behavior_tools install &lt;name&gt;</code> 이후 <code>doctor</code>, <code>run</code>, <code>send</code>. PowerShell 래퍼는 <code>pc_launcher/scripts/</code> 에. 새 runtime adapter 는 fork 가 아니라 패키지로 들어온다.</p>
         </div>
       </div>
     </section>
@@ -245,17 +252,18 @@
       </div>
 
       <div class="mt-10 surface-panel p-6 sm:p-8">
-        <div class="section-kicker">현재 상태 (솔직히)</div>
+        <div class="section-kicker">현재 상태</div>
         <div class="content-prose mt-5 max-w-4xl">
-          <p>패키지는 현재 product-layer 의 remote task 서비스를 감싼 얇은 behavior 스캐폴드. 라이브 wiring (kernel binding, Discord binding) 은 의도적으로 아직 미활성 — 계약이 안정화되는 중이다. 안정화되면 현재 bridge 서비스와 브라우저 전용 상태에 흩어져 있는 remote task 로직이 이 패키지로 통합된다.</p>
-          <p>이걸 포트폴리오에 넣는 이유는 <em>설계</em> 가 포인트이기 때문. behavior / 브라우저 / Discord 미러 / Windows executor 간의 ownership 분할은 "제어면이 바뀌면 어떻게 되는가?" 에 대한 의도적 답변이다.</p>
+          <p>behavior 패키지는 <code>nas_bridge/app/behaviors/remote_codex/</code> 에 자리잡았다 — <code>service.py</code>, <code>schemas.py</code>, <code>api.py</code>, <code>kernel_binding.py</code>, <code>discord_binding.py</code> 가 라이브 remote task 서비스를 감싸 canonical 계약 소스 역할을 한다. 브라우저 저장소 <code>codex-remote</code> 는 <em>site-proxy 모드 전용</em> 으로 정리됐다: 로컬 머신 레지스트리, 명령 브로커, 태스크 브로커, <code>/api/agent/...</code> 엔드포인트는 모두 은퇴. 모든 canonical 브라우저 API 호출은 <code>REMOTE_CODEX_UPSTREAM_BASE_URL</code> 을 통해 Opscure <code>remote_codex</code> behavior 로 프록시된다.</p>
+          <p>사이트는 브라우저 셸의 본업만 — 레이아웃, 트랜스크립트 렌더링, approval 컨트롤, reconnect/backfill UX, 그리고 Google OAuth + 서명된 세션 진입 — 을 가진다. canonical task 상태 집합 (<code>queued / claimed / executing / verifying / blocked_approval / interrupted / completed / failed</code>) 과 forward-compatible 메시지/approval kind (upstream codex rollout envelope 와 매핑) 은 사이트 contract 모듈에 고정돼 있어, behavior 쪽에서 이 필드들을 흘려보내기 시작하면 두 번째 마이그레이션 없이 바로 받는다.</p>
+          <p>이걸 포트폴리오에 넣는 이유는 경계가 실전 조건에서 버텼기 때문 — 제어면이 Discord 에서 브라우저로 옮겨가도 bridge 가 source of truth 로 남고 사이트는 정직하게 얇게 유지됐다.</p>
         </div>
       </div>
 
       <div class="mt-8 flex flex-wrap gap-3">
-        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Status · Scaffold · 계약 안정화 중</span>
-        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Runtime · remote_executor</span>
-        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">파트너 사이트 · codex-remote (browser)</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Status · Live · Opscure 가 canonical</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">Runtime · remote_executor (설치형)</span>
+        <span class="rounded-full bg-[#edf2f8] px-4 py-2 text-xs font-semibold text-[#51607a]">사이트 · codex-remote (proxy 전용 + Google 인증)</span>
       </div>
     </section>
 
