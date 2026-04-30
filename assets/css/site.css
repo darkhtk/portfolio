@@ -306,15 +306,22 @@ body.menu-open .sticky-nav {
   border-radius: 22px;
 }
 
+.remote-surface-copy {
+  max-width: 48rem;
+}
+
 .remote-play-store-grid {
   display: grid;
-  gap: 0.85rem;
+  gap: 0.8rem;
   align-items: start;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 24rem;
+  margin-inline: auto;
 }
 
 .remote-product-shot--store {
-  border-radius: 22px;
+  border-radius: 16px;
+  box-shadow: 0 14px 36px rgba(18, 32, 51, 0.1);
 }
 
 .remote-shot-caption {
@@ -655,10 +662,6 @@ body.menu-open .sticky-nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .remote-play-store-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .page-hero-title {
     max-inline-size: 14ch;
     font-size: 1.9rem;
@@ -709,6 +712,7 @@ body.menu-open .sticky-nav {
 
   .remote-play-store-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 48rem;
   }
 
   .stack-diagram {
