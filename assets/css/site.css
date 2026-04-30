@@ -260,11 +260,12 @@ body.menu-open .sticky-nav {
 }
 
 .remote-landing-thumb {
-  aspect-ratio: 4 / 3;
   background: #f7f4ee;
 }
 
 .remote-landing-thumb img {
+  height: auto;
+  object-fit: contain;
   object-position: top center;
 }
 
@@ -284,23 +285,24 @@ body.menu-open .sticky-nav {
 
 .remote-product-shot img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   object-position: top center;
 }
 
 .remote-product-shot--wide {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: auto;
 }
 
 .remote-phone-grid {
   display: grid;
+  align-items: start;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.85rem;
 }
 
 .remote-product-shot--phone {
-  aspect-ratio: 9 / 16;
+  aspect-ratio: auto;
   border-radius: 22px;
 }
 
