@@ -306,6 +306,17 @@ body.menu-open .sticky-nav {
   border-radius: 22px;
 }
 
+.remote-play-store-grid {
+  display: grid;
+  gap: 0.85rem;
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.remote-product-shot--store {
+  border-radius: 22px;
+}
+
 .remote-shot-caption {
   color: var(--ink-soft);
   font-size: 0.85rem;
@@ -644,6 +655,10 @@ body.menu-open .sticky-nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .remote-play-store-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .page-hero-title {
     max-inline-size: 14ch;
     font-size: 1.9rem;
@@ -690,6 +705,10 @@ body.menu-open .sticky-nav {
 
   .remote-screenshot-grid {
     grid-template-columns: minmax(0, 1.2fr) minmax(15rem, 0.8fr);
+  }
+
+  .remote-play-store-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .stack-diagram {

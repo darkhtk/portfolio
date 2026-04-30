@@ -8,13 +8,13 @@
 <meta property="og:title" content="Remote for Claude | Daeki Hong"/>
 <meta property="og:description" content="Browser/mobile control plane, Cloudflare relay, and local PC connector for a user's own Claude Code runtime."/>
 <meta property="og:type" content="article"/>
-<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-landing-820.png"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-play-store-chat.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/remote-for-claude/"/>
 <meta property="og:locale" content="en_US"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Remote for Claude | Daeki Hong"/>
 <meta name="twitter:description" content="A production-shaped remote-agent platform for local Claude Code."/>
-<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-landing-820.png"/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-play-store-chat.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
@@ -93,7 +93,7 @@
           <div class="section-kicker">Read in order</div>
           <div class="mt-5 grid gap-3">
             <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Problem</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Local Claude Code is powerful but tied to one machine.</div></a>
-            <a href="#product-surface" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Product surface</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Real responsive landing screens.</div></a>
+            <a href="#product-surface" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Product surface</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Play Store mobile product screens.</div></a>
             <a href="#architecture" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Architecture</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Browser, Workers, relay, connector, behavior.</div></a>
             <a href="#lifecycle" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Device lifecycle</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Pair, diagnose, unpair, clean up.</div></a>
             <a href="#boundary" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">05</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Trust boundary</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Thin storage now, E2E/WebRTC later.</div></a>
@@ -114,23 +114,24 @@
     <section id="product-surface" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
       <div class="max-w-3xl">
         <div class="section-kicker">§ 01 · Product surface</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">A responsive product face, not only backend plumbing</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">The portfolio now shows the actual alpha landing surface captured for packaging QA. It is intentionally plain and trust-forward: alpha status, no update guarantees, privacy links, locale switcher, and the browser-to-PC value proposition are visible before a user logs in.</p>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">A mobile control surface, not only backend plumbing</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">The portfolio now shows the Play Store screenshot set captured from the live alpha: chat, navigation, device registration, and per-device diagnostics. It makes the real operating surface visible instead of repeating near-identical landing captures.</p>
       </div>
-      <div class="remote-screenshot-grid mt-10">
-        <figure class="remote-product-shot remote-product-shot--wide">
-          <img src="../../../assets/images/remote-for-claude-landing-820.png" alt="Remote for Claude landing page in Korean at 820 pixel tablet width" loading="lazy" width="820" height="1180"/>
+      <div class="remote-play-store-grid mt-10">
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/remote-for-claude-play-store-chat.png" alt="Remote for Claude mobile chat screen with context chips and composer" loading="lazy" width="1179" height="1995"/>
         </figure>
-        <div class="remote-phone-grid">
-          <figure class="remote-product-shot remote-product-shot--phone">
-            <img src="../../../assets/images/remote-for-claude-landing-iphone12.png" alt="Remote for Claude landing page in an iPhone 12 viewport" loading="lazy" width="390" height="2400"/>
-          </figure>
-          <figure class="remote-product-shot remote-product-shot--phone">
-            <img src="../../../assets/images/remote-for-claude-landing-360.png" alt="Remote for Claude landing page in a 360 pixel mobile viewport" loading="lazy" width="360" height="1400"/>
-          </figure>
-        </div>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/remote-for-claude-play-store-sidebar.png" alt="Remote for Claude mobile sidebar with device picker, settings, recent sessions, and account controls" loading="lazy" width="1179" height="1995"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/remote-for-claude-play-store-devices.jpg" alt="Remote for Claude device registration flow in settings" loading="lazy" width="1080" height="2340"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/remote-for-claude-play-store-device-detail.jpg" alt="Remote for Claude selected device detail and diagnostics screen" loading="lazy" width="1080" height="2340"/>
+        </figure>
       </div>
-      <p class="remote-shot-caption mt-4">Screenshots from <code>packaging/screenshots</code>, used here as product evidence instead of a mockup.</p>
+      <p class="remote-shot-caption mt-4">Screenshots from <code>packaging/screenshots/play-store</code>, used here as product evidence instead of a mockup.</p>
     </section>
 
     <section id="architecture" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
