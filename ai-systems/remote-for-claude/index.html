@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Remote for Claude | 홍대기</title>
+<meta name="description" content="Remote for Claude는 사용자의 PC에 있는 Claude Code를 브라우저/모바일에서 제어하게 하는 browser/mobile-to-PC SaaS입니다."/>
+<meta property="og:title" content="Remote for Claude | 홍대기"/>
+<meta property="og:description" content="브라우저/모바일 제어면, Cloudflare relay, 로컬 PC connector로 사용자의 Claude Code runtime을 연결한 제품 사례."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/remote-for-claude/"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Remote for Claude | 홍대기"/>
+<meta name="twitter:description" content="로컬 Claude Code를 원격에서 다루는 제품형 agent runtime 플랫폼."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config={theme:{extend:{fontFamily:{headline:["Space Grotesk","Noto Sans KR","sans-serif"],body:["Noto Sans KR","sans-serif"],label:["Space Grotesk","Noto Sans KR","sans-serif"]}}}}</script>
+<link rel="stylesheet" href="../../assets/css/site.css"/>
+</head>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<div class="site-shell">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="../../" class="flex flex-col">
+        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity x AI Systems</span>
+      </a>
+      <nav class="hidden items-center gap-2 md:flex">
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../">Home</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../projects/">Projects</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../ai-systems/">AI Systems</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../about/">Profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="lang-toggle hidden sm:inline-flex">
+          <a class="lang-link" href="../../en/ai-systems/remote-for-claude/">EN</a>
+          <a class="lang-link is-active" href="./">KO</a>
+        </div>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="메뉴 닫기"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-3">
+        <a href="../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">포지셔닝과 대표 작업.</div></a>
+        <a href="../../projects/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Projects</div><div class="mt-1 text-sm text-[#526178]">산업 납품 작업.</div></a>
+        <a href="../../ai-systems/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">AI Systems</div><div class="mt-1 text-sm text-[#526178]">커널, behavior, 응용 AI 시스템.</div></a>
+        <a href="../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">경력과 작업 방식.</div></a>
+      </div>
+      <div class="mt-6 flex gap-3">
+        <a href="../../en/ai-systems/remote-for-claude/" class="lang-link bg-white">EN</a>
+        <a href="./" class="lang-link is-active bg-white">KO</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative">
+    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div class="surface-panel p-6 sm:p-8 lg:p-10">
+          <div class="section-kicker">AI Systems · Product Case Study</div>
+          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Remote for Claude</h1>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">사용자 PC의 Claude Code를 브라우저/모바일에서 다루는 제어면입니다. 사이트는 identity, pairing, relay, UX를 맡고, 실제 실행은 PC connector가 맡습니다.</p>
+          <div class="mt-7 flex flex-wrap gap-2.5">
+            <span class="pill text-sm">Cloudflare Workers</span>
+            <span class="pill text-sm">Durable Object Relay</span>
+            <span class="pill text-sm">Bun Connector</span>
+            <span class="pill text-sm">SolidJS</span>
+            <span class="pill text-sm">Capacitor Android</span>
+          </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="https://claude-remote-platform-site.semibanbi.workers.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
+              <span class="material-symbols-outlined mr-2 text-base">open_in_new</span>
+              Live alpha
+            </a>
+            <a href="https://github.com/darkhtk/claude-remote-platform" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">GitHub 저장소</a>
+            <a href="../../en/ai-systems/remote-for-claude/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">English version</a>
+          </div>
+        </div>
+        <aside class="feature-panel p-5 sm:p-6">
+          <div class="section-kicker">읽는 순서</div>
+          <div class="mt-5 grid gap-3">
+            <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">문제</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">로컬 Claude Code는 강력하지만 한 PC에 묶입니다.</div></a>
+            <a href="#architecture" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">아키텍처</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">브라우저, Workers, relay, connector, behavior.</div></a>
+            <a href="#lifecycle" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">디바이스 생명주기</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">페어링, 진단, 해제, 정리.</div></a>
+            <a href="#boundary" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">신뢰 경계</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">현재는 thin storage, 다음은 E2E/WebRTC.</div></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="problem" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="summary-grid">
+        <article class="summary-card"><h3>역할</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">제품 아키텍처, connector runtime, backend relay, frontend UX, 디바이스 생명주기, 릴리즈 패키징, 문서화를 설계·구현했습니다.</p></article>
+        <article class="summary-card"><h3>문제</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Claude Code는 사용자의 repo, shell, token이 있는 PC에서 가장 강합니다. 하지만 그만큼 작업 흐름이 한 키보드에 묶입니다.</p></article>
+        <article class="summary-card"><h3>접근</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">실행은 로컬에 둡니다. 페어링된 connector daemon 앞에 좁은 브라우저/모바일 제어면을 두고, 로컬 behavior를 구동하는 데 필요한 것만 relay합니다.</p></article>
+        <article class="summary-card"><h3>상태</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Alpha 제품. SaaS/self-host wiring, multi-device pairing, remote chat, diagnostics, unpair cleanup, 테스트, 빌드, 다국어, 릴리즈 패키징이 연결되어 있습니다.</p></article>
+      </div>
+    </section>
+
+    <section id="architecture" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 01 · Architecture</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">원격 UI, 로컬 실행</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">사이트는 제품처럼 느껴져야 하지만, 민감한 실행 표면은 사용자의 PC에 남아야 합니다.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div class="media-frame">
+          <div class="stack-diagram stack-diagram--deep sm:aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">End-to-end path</div>
+              <div class="mt-3 stack-diagram__title">Browser → Worker → DO → Connector → Claude</div>
+              <p class="mt-3 stack-diagram__copy">인증과 라우팅은 edge에서, 작업과 파일은 페어링된 PC에.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>Site</strong><span>SolidJS, i18n, quota, device settings</span></div>
+              <div class="stack-diagram__node"><strong>Worker</strong><span>Hono routes, D1 devices, KV replay guard</span></div>
+              <div class="stack-diagram__node"><strong>DO Relay</strong><span>Outbound WebSocket, request caps, stream relay</span></div>
+              <div class="stack-diagram__node"><strong>PC</strong><span>Bun daemon, local Bearer auth, remote-claude behavior</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>바깥은 제품 shell, 안쪽은 사용자 PC의 runtime authority.</span></div>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">System slices</div>
+          <div class="content-prose mt-5">
+            <p><strong>Frontend.</strong> SolidJS + Vite SPA. 4개 locale, device picker, chat, diagnostics, approval modal, workspace picker, Android Capacitor wrapper.</p>
+            <p><strong>Backend.</strong> Cloudflare Workers + Hono. D1은 user/device/pairing/license 상태를 저장하고, KV는 replay guard, Durable Object는 per-device outbound WebSocket relay 상태를 잡습니다.</p>
+            <p><strong>Connector.</strong> 데스크톱 배포용 Bun daemon. 로컬에 device identity를 저장하고, 인증된 local HTTP surface를 열고, site relay로 dial out하고, behavior를 host합니다.</p>
+            <p><strong>Behavior runtime.</strong> remote-claude behavior가 Claude Code 세션 시작/재개, 이벤트 스트리밍, 승인 중재, workspace guard를 담당합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lifecycle" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 02 · Device lifecycle</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">페어링과 해제는 운영 기능이 아니라 제품 UX입니다</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">어려운 부분은 디바이스를 추가하는 것만이 아닙니다. 디바이스가 사라질 때 브라우저, 백엔드, relay, 로컬 connector 상태를 모두 정직하게 정리하는 것입니다.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <article class="project-card bg-white p-5">
+          <div class="section-kicker">Pair</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">일회용 코드와 로컬 identity</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">사이트가 짧게 살아있는 코드를 발급합니다. connector가 pairing을 완료하고 Ed25519 기반 identity와 connection token을 저장한 뒤 relay에 붙습니다.</p>
+        </article>
+        <article class="project-card bg-white p-5">
+          <div class="section-kicker">Operate</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">진단과 workspace guard</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">connector 상태, 로드된 behavior, workspace roots, approval hook, Claude CLI 버전 등을 device settings에서 확인할 수 있습니다.</p>
+        </article>
+        <article class="project-card bg-white p-5">
+          <div class="section-kicker">Unpair</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">live relay를 끊고 stale state를 지움</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">삭제 시 selected device 상태, per-device browser preference, Durable Object relay 상태를 정리합니다. 로컬 connector identity는 명시적 CLI unpair 명령으로 지웁니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="boundary" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="surface-panel p-6 sm:p-8 lg:p-10">
+        <div class="section-kicker">§ 03 · Trust boundary</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">현재는 thin storage, 다음은 더 강한 transport</h2>
+        <div class="content-prose mt-5 max-w-4xl">
+          <p>Alpha 구현은 채팅 transcript와 사용자 코드를 D1, KV, 로그에 저장하지 않습니다. hosted-code assistant보다 얇은 구조입니다. 동시에 release boundary도 명시했습니다. 현재 outbound WebSocket relay는 사이트 프로세스를 통해 평문 request body가 지나가고, WebRTC/E2E body encryption은 다음 trust-model hardening 트랙입니다.</p>
+          <p>이 구분은 중요합니다. 아직 아키텍처가 강제하지 않는 privacy claim을 앞세우기보다, 코드와 문서가 같은 경계를 말하게 만드는 쪽을 선택했습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 pt-2 sm:px-6 sm:pb-20 lg:px-8">
+      <div class="surface-panel p-6 sm:p-8 lg:p-10">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div class="max-w-3xl">
+            <div class="section-kicker">Related</div>
+            <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">AI Systems로 돌아가기</h2>
+            <p class="mt-4 text-base leading-7 text-[#4f6077]">Remote for Claude는 Ops-Cure 옆에 놓이는 작업입니다. 하나는 kernel-first, 하나는 product-first이고, 둘 다 remote agent runtime을 중심에 둡니다.</p>
+          </div>
+          <a href="../../ai-systems/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
+            AI Systems 열기
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div>
+        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
+        <div class="mt-2 text-sm text-[#526178]">Remote for Claude — browser/mobile-to-PC agent runtime</div>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 text-sm">
+        <a class="footer-link" href="../../">Home</a>
+        <a class="footer-link" href="../../ai-systems/">AI Systems</a>
+        <a class="footer-link" href="../../about/">Profile</a>
+        <a class="footer-link" href="../../en/ai-systems/remote-for-claude/">English</a>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
