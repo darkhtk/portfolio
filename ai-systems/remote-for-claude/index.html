@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Remote for Claude | 홍대기</title>
-<meta name="description" content="Remote for Claude는 사용자의 PC에 있는 Claude Code를 브라우저/모바일에서 제어하게 하는 browser/mobile-to-PC SaaS입니다."/>
-<meta property="og:title" content="Remote for Claude | 홍대기"/>
-<meta property="og:description" content="브라우저/모바일 제어면, Cloudflare relay, 로컬 PC connector로 사용자의 Claude Code runtime을 연결한 제품 사례."/>
+<title>DeskRelay | 홍대기</title>
+<meta name="description" content="DeskRelay는 사용자 PC의 로컬 에이전트 실행을 브라우저/모바일에서 제어하게 하는 browser/mobile-to-PC control plane입니다."/>
+<meta property="og:title" content="DeskRelay | 홍대기"/>
+<meta property="og:description" content="브라우저/모바일 제어면, Cloudflare relay, 로컬 PC connector로 로컬 에이전트 실행을 연결한 제품 사례."/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-play-store-chat.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/remote-for-claude/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Remote for Claude | 홍대기"/>
-<meta name="twitter:description" content="로컬 Claude Code를 원격에서 다루는 제품형 agent runtime 플랫폼."/>
+<meta name="twitter:title" content="DeskRelay | 홍대기"/>
+<meta name="twitter:description" content="로컬 에이전트 실행을 원격에서 다루는 제품형 browser/mobile-to-PC 플랫폼."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-play-store-chat.jpg"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
@@ -71,8 +71,8 @@
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div class="surface-panel p-6 sm:p-8 lg:p-10">
           <div class="section-kicker">AI Systems · Product Case Study</div>
-          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Remote for Claude</h1>
-          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">사용자 PC의 Claude Code를 브라우저/모바일에서 다루는 제어면입니다. 사이트는 identity, pairing, relay, UX를 맡고, 실제 실행은 PC connector가 맡습니다.</p>
+          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay</h1>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">사용자 PC의 로컬 에이전트 실행을 브라우저/모바일에서 다루는 제어면입니다. 사이트는 identity, pairing, relay, UX를 맡고, 실제 실행은 PC connector가 맡습니다. 첫 어댑터는 Claude Code를 대상으로 합니다.</p>
           <div class="mt-7 flex flex-wrap gap-2.5">
             <span class="pill text-sm">Cloudflare Workers</span>
             <span class="pill text-sm">Durable Object Relay</span>
@@ -92,7 +92,7 @@
         <aside class="feature-panel p-5 sm:p-6">
           <div class="section-kicker">읽는 순서</div>
           <div class="mt-5 grid gap-3">
-            <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">문제</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">로컬 Claude Code는 강력하지만 한 PC에 묶입니다.</div></a>
+            <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">문제</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">로컬 에이전트 작업은 강력하지만 한 PC에 묶입니다.</div></a>
             <a href="#product-surface" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">제품 화면</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Play Store용 모바일 제품 화면.</div></a>
             <a href="#architecture" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">아키텍처</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">브라우저, Workers, relay, connector, behavior.</div></a>
             <a href="#lifecycle" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">디바이스 생명주기</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">페어링, 진단, 해제, 정리.</div></a>
@@ -105,7 +105,7 @@
     <section id="problem" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <div class="summary-grid">
         <article class="summary-card"><h3>역할</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">제품 아키텍처, connector runtime, backend relay, frontend UX, 디바이스 생명주기, 릴리즈 패키징, 문서화를 설계·구현했습니다.</p></article>
-        <article class="summary-card"><h3>문제</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Claude Code는 사용자의 repo, shell, token이 있는 PC에서 가장 강합니다. 하지만 그만큼 작업 흐름이 한 키보드에 묶입니다.</p></article>
+        <article class="summary-card"><h3>문제</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">에이전트 작업은 사용자의 repo, shell, token이 있는 PC에서 가장 강합니다. 하지만 그만큼 작업 흐름이 한 키보드에 묶입니다.</p></article>
         <article class="summary-card"><h3>접근</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">실행은 로컬에 둡니다. 페어링된 connector daemon 앞에 좁은 브라우저/모바일 제어면을 두고, 로컬 behavior를 구동하는 데 필요한 것만 relay합니다.</p></article>
         <article class="summary-card"><h3>상태</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Alpha 제품. SaaS/self-host wiring, multi-device pairing, remote chat, diagnostics, unpair cleanup, 테스트, 빌드, 다국어, 릴리즈 패키징이 연결되어 있습니다.</p></article>
       </div>
@@ -120,16 +120,16 @@
       </div>
       <div class="remote-play-store-grid mt-8">
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/remote-for-claude-play-store-chat.jpg" alt="컨텍스트 칩과 입력창이 보이는 Remote for Claude 모바일 채팅 화면" loading="lazy" width="1080" height="2340"/>
+          <img src="../../assets/images/remote-for-claude-play-store-chat.jpg" alt="컨텍스트 칩과 입력창이 보이는 DeskRelay 모바일 채팅 화면" loading="lazy" width="1080" height="2340"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/remote-for-claude-play-store-sidebar.jpg" alt="디바이스 선택, 설정, 최근 세션, 계정 컨트롤이 보이는 Remote for Claude 모바일 사이드바" loading="lazy" width="1080" height="2340"/>
+          <img src="../../assets/images/remote-for-claude-play-store-sidebar.jpg" alt="디바이스 선택, 설정, 최근 세션, 계정 컨트롤이 보이는 DeskRelay 모바일 사이드바" loading="lazy" width="1080" height="2340"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/remote-for-claude-play-store-devices.png" alt="Remote for Claude 설정창의 디바이스 등록 흐름" loading="lazy" width="1179" height="1995"/>
+          <img src="../../assets/images/remote-for-claude-play-store-devices.png" alt="DeskRelay 설정창의 디바이스 등록 흐름" loading="lazy" width="1179" height="1995"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/remote-for-claude-play-store-device-detail.png" alt="Remote for Claude 선택 디바이스 상세 및 진단 화면" loading="lazy" width="1179" height="1995"/>
+          <img src="../../assets/images/remote-for-claude-play-store-device-detail.png" alt="DeskRelay 선택 디바이스 상세 및 진단 화면" loading="lazy" width="1179" height="1995"/>
         </figure>
       </div>
     </section>
@@ -146,14 +146,14 @@
           <div class="stack-diagram stack-diagram--deep sm:aspect-[4/3]">
             <div>
               <div class="stack-diagram__eyebrow">End-to-end path</div>
-              <div class="mt-3 stack-diagram__title">Browser → Worker → DO → Connector → Claude</div>
+              <div class="mt-3 stack-diagram__title">Browser → Worker → DO → Connector → Agent CLI</div>
               <p class="mt-3 stack-diagram__copy">인증과 라우팅은 edge에서, 작업과 파일은 페어링된 PC에.</p>
             </div>
             <div class="stack-diagram__grid">
               <div class="stack-diagram__node"><strong>Site</strong><span>SolidJS, i18n, quota, device settings</span></div>
               <div class="stack-diagram__node"><strong>Worker</strong><span>Hono routes, D1 devices, KV replay guard</span></div>
               <div class="stack-diagram__node"><strong>DO Relay</strong><span>Outbound WebSocket, request caps, stream relay</span></div>
-              <div class="stack-diagram__node"><strong>PC</strong><span>Bun daemon, local Bearer auth, remote-claude behavior</span></div>
+              <div class="stack-diagram__node"><strong>PC</strong><span>Bun daemon, local Bearer auth, agent behavior host</span></div>
             </div>
             <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>바깥은 제품 shell, 안쪽은 사용자 PC의 runtime authority.</span></div>
           </div>
@@ -164,7 +164,7 @@
             <p><strong>Frontend.</strong> SolidJS + Vite SPA. 4개 locale, device picker, chat, diagnostics, approval modal, workspace picker, Android Capacitor wrapper.</p>
             <p><strong>Backend.</strong> Cloudflare Workers + Hono. D1은 user/device/pairing/license 상태를 저장하고, KV는 replay guard, Durable Object는 per-device outbound WebSocket relay 상태를 잡습니다.</p>
             <p><strong>Connector.</strong> 데스크톱 배포용 Bun daemon. 로컬에 device identity를 저장하고, 인증된 local HTTP surface를 열고, site relay로 dial out하고, behavior를 host합니다.</p>
-            <p><strong>Behavior runtime.</strong> remote-claude behavior가 Claude Code 세션 시작/재개, 이벤트 스트리밍, 승인 중재, workspace guard를 담당합니다.</p>
+            <p><strong>Behavior runtime.</strong> 첫 behavior adapter가 Claude Code 세션 시작/재개, 이벤트 스트리밍, 승인 중재, workspace guard를 담당합니다.</p>
           </div>
         </div>
       </div>
@@ -186,7 +186,7 @@
         <article class="project-card bg-white p-5">
           <div class="section-kicker">Operate</div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">진단과 workspace guard</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">connector 상태, 로드된 behavior, workspace roots, approval hook, Claude CLI 버전 등을 device settings에서 확인할 수 있습니다.</p>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">connector 상태, 로드된 behavior, workspace roots, approval hook, agent CLI 버전 등을 device settings에서 확인할 수 있습니다.</p>
         </article>
         <article class="project-card bg-white p-5">
           <div class="section-kicker">Unpair</div>
@@ -213,7 +213,7 @@
           <div class="max-w-3xl">
             <div class="section-kicker">Related</div>
             <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">AI Systems로 돌아가기</h2>
-            <p class="mt-4 text-base leading-7 text-[#4f6077]">Remote for Claude는 Ops-Cure 옆에 놓이는 작업입니다. 하나는 kernel-first, 하나는 product-first이고, 둘 다 remote agent runtime을 중심에 둡니다.</p>
+            <p class="mt-4 text-base leading-7 text-[#4f6077]">DeskRelay는 Ops-Cure 옆에 놓이는 작업입니다. 하나는 kernel-first, 하나는 product-first이고, 둘 다 remote agent runtime을 중심에 둡니다.</p>
           </div>
           <a href="../../ai-systems/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
             AI Systems 열기
@@ -228,7 +228,7 @@
     <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
       <div>
         <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
-        <div class="mt-2 text-sm text-[#526178]">Remote for Claude — browser/mobile-to-PC agent runtime</div>
+        <div class="mt-2 text-sm text-[#526178]">DeskRelay — browser/mobile-to-PC local agent runtime</div>
       </div>
       <div class="flex flex-wrap items-center gap-3 text-sm">
         <a class="footer-link" href="../../">Home</a>

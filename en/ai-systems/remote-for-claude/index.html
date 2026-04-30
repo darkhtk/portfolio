@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Remote for Claude | Daeki Hong</title>
-<meta name="description" content="Remote for Claude is a browser/mobile-to-PC SaaS that lets users drive their own local Claude Code from anywhere through a paired PC connector."/>
-<meta property="og:title" content="Remote for Claude | Daeki Hong"/>
-<meta property="og:description" content="Browser/mobile control plane, Cloudflare relay, and local PC connector for a user's own Claude Code runtime."/>
+<title>DeskRelay | Daeki Hong</title>
+<meta name="description" content="DeskRelay is a browser/mobile-to-PC control plane for local agent execution on a user's own paired PC."/>
+<meta property="og:title" content="DeskRelay | Daeki Hong"/>
+<meta property="og:description" content="Browser/mobile control plane, Cloudflare relay, and local PC connector for local agent execution."/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-play-store-chat.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/remote-for-claude/"/>
 <meta property="og:locale" content="en_US"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Remote for Claude | Daeki Hong"/>
-<meta name="twitter:description" content="A production-shaped remote-agent platform for local Claude Code."/>
+<meta name="twitter:title" content="DeskRelay | Daeki Hong"/>
+<meta name="twitter:description" content="A production-shaped browser/mobile-to-PC platform for local agent execution."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-play-store-chat.jpg"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
@@ -71,8 +71,8 @@
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div class="surface-panel p-6 sm:p-8 lg:p-10">
           <div class="section-kicker">AI Systems · Product Case Study</div>
-          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Remote for Claude</h1>
-          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">A browser/mobile control plane for a user's own PC Claude Code. The site coordinates identity, pairing, relay, and UX; the PC connector owns local execution.</p>
+          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay</h1>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">A browser/mobile control plane for local agent execution on a user's own PC. The site coordinates identity, pairing, relay, and UX; the PC connector owns local execution. The first adapter targets Claude Code.</p>
           <div class="mt-7 flex flex-wrap gap-2.5">
             <span class="pill text-sm">Cloudflare Workers</span>
             <span class="pill text-sm">Durable Object Relay</span>
@@ -92,7 +92,7 @@
         <aside class="feature-panel p-5 sm:p-6">
           <div class="section-kicker">Read in order</div>
           <div class="mt-5 grid gap-3">
-            <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Problem</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Local Claude Code is powerful but tied to one machine.</div></a>
+            <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Problem</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Local agent work is powerful but tied to one machine.</div></a>
             <a href="#product-surface" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Product surface</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Play Store mobile product screens.</div></a>
             <a href="#architecture" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Architecture</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Browser, Workers, relay, connector, behavior.</div></a>
             <a href="#lifecycle" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Device lifecycle</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Pair, diagnose, unpair, clean up.</div></a>
@@ -105,7 +105,7 @@
     <section id="problem" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <div class="summary-grid">
         <article class="summary-card"><h3>Role</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Designed and implemented the product architecture, connector runtime, backend relay, frontend UX, device lifecycle, release packaging, and documentation.</p></article>
-        <article class="summary-card"><h3>Problem</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Claude Code is most useful on a machine with the user's repo, shell, and tokens. But that also pins the workflow to one keyboard.</p></article>
+        <article class="summary-card"><h3>Problem</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Agent work is most useful on a machine with the user's repo, shell, and tokens. But that also pins the workflow to one keyboard.</p></article>
         <article class="summary-card"><h3>Approach</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Keep execution local. Put a narrow browser/mobile control plane in front of a paired connector daemon. Relay only what is needed to drive the local behavior.</p></article>
         <article class="summary-card"><h3>Status</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Alpha product: SaaS/self-host wiring, multi-device pairing, remote chat, diagnostics, unpair cleanup, tests, build, localization, and release packaging are wired.</p></article>
       </div>
@@ -120,16 +120,16 @@
       </div>
       <div class="remote-play-store-grid mt-8">
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../../assets/images/remote-for-claude-play-store-chat.jpg" alt="Remote for Claude mobile chat screen with context chips and composer" loading="lazy" width="1080" height="2340"/>
+          <img src="../../../assets/images/remote-for-claude-play-store-chat.jpg" alt="DeskRelay mobile chat screen with context chips and composer" loading="lazy" width="1080" height="2340"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../../assets/images/remote-for-claude-play-store-sidebar.jpg" alt="Remote for Claude mobile sidebar with device picker, settings, recent sessions, and account controls" loading="lazy" width="1080" height="2340"/>
+          <img src="../../../assets/images/remote-for-claude-play-store-sidebar.jpg" alt="DeskRelay mobile sidebar with device picker, settings, recent sessions, and account controls" loading="lazy" width="1080" height="2340"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../../assets/images/remote-for-claude-play-store-devices.png" alt="Remote for Claude device registration flow in settings" loading="lazy" width="1179" height="1995"/>
+          <img src="../../../assets/images/remote-for-claude-play-store-devices.png" alt="DeskRelay device registration flow in settings" loading="lazy" width="1179" height="1995"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../../assets/images/remote-for-claude-play-store-device-detail.png" alt="Remote for Claude selected device detail and diagnostics screen" loading="lazy" width="1179" height="1995"/>
+          <img src="../../../assets/images/remote-for-claude-play-store-device-detail.png" alt="DeskRelay selected device detail and diagnostics screen" loading="lazy" width="1179" height="1995"/>
         </figure>
       </div>
     </section>
@@ -146,14 +146,14 @@
           <div class="stack-diagram stack-diagram--deep sm:aspect-[4/3]">
             <div>
               <div class="stack-diagram__eyebrow">End-to-end path</div>
-              <div class="mt-3 stack-diagram__title">Browser → Worker → DO → Connector → Claude</div>
+              <div class="mt-3 stack-diagram__title">Browser → Worker → DO → Connector → Agent CLI</div>
               <p class="mt-3 stack-diagram__copy">Auth and routing at the edge. Work and files stay on the paired machine.</p>
             </div>
             <div class="stack-diagram__grid">
               <div class="stack-diagram__node"><strong>Site</strong><span>SolidJS, i18n, quota, device settings</span></div>
               <div class="stack-diagram__node"><strong>Worker</strong><span>Hono routes, D1 devices, KV replay guard</span></div>
               <div class="stack-diagram__node"><strong>DO Relay</strong><span>Outbound WebSocket, request caps, stream relay</span></div>
-              <div class="stack-diagram__node"><strong>PC</strong><span>Bun daemon, local Bearer auth, remote-claude behavior</span></div>
+              <div class="stack-diagram__node"><strong>PC</strong><span>Bun daemon, local Bearer auth, agent behavior host</span></div>
             </div>
             <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>Product shell outside, runtime authority inside the user's PC.</span></div>
           </div>
@@ -164,7 +164,7 @@
             <p><strong>Frontend.</strong> SolidJS + Vite SPA with four locale files, device picker, chat, diagnostics, approval modal, workspace picker, and Android Capacitor wrapper.</p>
             <p><strong>Backend.</strong> Cloudflare Workers + Hono. D1 stores users/devices/pairing/license state, KV handles replay guard, Durable Objects hold per-device outbound WebSocket relay state.</p>
             <p><strong>Connector.</strong> Bun daemon compiled for desktop distribution. It stores device identity locally, exposes a local authenticated HTTP surface, dials out to the site relay, and hosts behaviors.</p>
-            <p><strong>Behavior runtime.</strong> The remote-claude behavior starts/resumes Claude Code sessions, streams events, mediates approvals, enforces workspace guards, and keeps the browser UI decoupled from shell details.</p>
+            <p><strong>Behavior runtime.</strong> The first behavior adapter starts/resumes Claude Code sessions, streams events, mediates approvals, enforces workspace guards, and keeps the browser UI decoupled from shell details.</p>
           </div>
         </div>
       </div>
@@ -186,7 +186,7 @@
         <article class="project-card bg-white p-5">
           <div class="section-kicker">Operate</div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Diagnostics and guarded workspaces</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Users can inspect connector status, loaded behaviors, workspace roots, approval hooks, and Claude CLI version from the device settings surface.</p>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Users can inspect connector status, loaded behaviors, workspace roots, approval hooks, and agent CLI version from the device settings surface.</p>
         </article>
         <article class="project-card bg-white p-5">
           <div class="section-kicker">Unpair</div>
@@ -213,7 +213,7 @@
           <div class="max-w-3xl">
             <div class="section-kicker">Related</div>
             <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Back to AI Systems</h2>
-            <p class="mt-4 text-base leading-7 text-[#4f6077]">Remote for Claude sits beside Ops-Cure: one kernel-first, one product-first, both centered on remote agent runtimes.</p>
+            <p class="mt-4 text-base leading-7 text-[#4f6077]">DeskRelay sits beside Ops-Cure: one kernel-first, one product-first, both centered on remote agent runtimes.</p>
           </div>
           <a href="../../../ai-systems/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
             Open AI Systems
@@ -228,7 +228,7 @@
     <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
       <div>
         <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
-        <div class="mt-2 text-sm text-[#526178]">Remote for Claude — browser/mobile-to-PC agent runtime</div>
+        <div class="mt-2 text-sm text-[#526178]">DeskRelay — browser/mobile-to-PC local agent runtime</div>
       </div>
       <div class="flex flex-wrap items-center gap-3 text-sm">
         <a class="footer-link" href="../../../">Home</a>
