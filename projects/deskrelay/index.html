@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
+<title>DeskRelay | 홍대기 포트폴리오</title>
+<meta name="description" content="브라우저와 모바일에서 내 PC의 Claude Code를 원격으로 쓰기 위한 AI 플랫폼 프로젝트. Cloudflare Workers, SolidJS, Bun connector, pairing 흐름, 연결 진단 화면까지 포함한 제품화 사례입니다."/>
+<meta property="og:title" content="DeskRelay | Browser-to-PC Claude Platform"/>
+<meta property="og:description" content="AI workflow를 내부 도구에 머물지 않고 실제 원격 접속 플랫폼으로 확장한 사례."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-connection-status.png"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/deskrelay/"/>
+<meta property="og:locale" content="ko_KR"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
+          body: ["Noto Sans KR", "sans-serif"],
+          label: ["Space Grotesk", "Noto Sans KR", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="../../assets/css/site.css"/>
+</head>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<div class="site-shell">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="../../" class="flex flex-col">
+        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity Real-Time Systems</span>
+      </a>
+      <nav class="hidden items-center gap-2 md:flex">
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../">Home</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../">Projects</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../about/">About</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="mailto:darkhtk@gmail.com" class="hidden rounded-full bg-[#1a57c7] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5 sm:inline-flex">문의</a>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 backdrop-blur-2xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+        <div>
+          <div class="section-kicker">메뉴</div>
+          <div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div>
+        </div>
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="메뉴 닫기">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="mt-6 grid gap-3">
+        <a href="../../" class="mobile-nav-link">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div>
+          <div class="mt-1 text-sm text-[#526178]">첫 화면에서 전체 포지셔닝을 봅니다.</div>
+        </a>
+        <a href="../" class="mobile-nav-link is-active">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">Projects</div>
+          <div class="mt-1 text-sm text-[#526178]">대표 사례와 확장 프로젝트를 이어서 봅니다.</div>
+        </a>
+        <a href="../../about/" class="mobile-nav-link">
+          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">About</div>
+          <div class="mt-1 text-sm text-[#526178]">경력 흐름과 일하는 기준을 봅니다.</div>
+        </a>
+      </div>
+      <div class="mt-6 rounded-[24px] border border-[rgba(16,31,61,0.08)] bg-white p-5 shadow-[0_18px_48px_rgba(16,31,61,0.08)]">
+        <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">문의</div>
+        <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#1a57c7] px-5 py-3 font-semibold text-white">darkhtk@gmail.com</a>
+        <div class="mt-4 flex gap-3 text-sm">
+          <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-[#edf2f8] px-4 py-2 text-[#526178]">GitHub</a>
+          <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-[#edf2f8] px-4 py-2 text-[#526178]">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative">
+    <section class="mx-auto max-w-7xl px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-28 lg:px-8 lg:pb-20 lg:pt-32">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
+        <div class="surface-panel p-6 sm:p-8 lg:p-10">
+          <div class="section-kicker">AI Product Platform</div>
+          <h1 class="display-manual page-hero-title mt-5 max-w-5xl font-headline font-bold tracking-[-0.05em] text-[#122033]">
+            브라우저와 모바일에서
+            <span class="mt-2 block text-[#1a57c7]">내 PC의 Claude Code를 연결하는 플랫폼</span>
+          </h1>
+          <p class="hero-copy mt-6 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">
+            DeskRelay는 Claude Code를 로컬 개발자 도구에 머물게 두지 않고, 브라우저와 모바일에서 내 PC에 연결해 쓰는 원격 플랫폼으로 확장한 프로젝트입니다.
+            단순 원격 접속이 아니라 <span class="font-semibold text-[#122033]">로그인, 디바이스 pairing, 연결 상태 진단, 배포 경로</span>까지 포함한 제품 구조를 직접 설계하고 구현했습니다.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-2.5">
+            <span class="pill text-sm">Remote Claude</span>
+            <span class="pill text-sm">Cloudflare Workers</span>
+            <span class="pill text-sm">SolidJS</span>
+            <span class="pill text-sm">Bun Connector</span>
+          </div>
+          <div class="metric-strip mt-8">
+            <div class="metric-tile">
+              <div class="metric-label">Scope</div>
+              <div class="metric-value">Browser ↔ PC</div>
+              <div class="mt-2 text-sm leading-6 text-[#4f6077]">브라우저와 모바일에서 개인 PC의 Claude CLI에 붙는 구조를 제품 관점으로 풀었습니다.</div>
+            </div>
+            <div class="metric-tile">
+              <div class="metric-label">Architecture</div>
+              <div class="metric-value">1 User : N Devices</div>
+              <div class="mt-2 text-sm leading-6 text-[#4f6077]">한 사용자가 여러 PC를 pair하고 관리하는 1:N 디바이스 모델을 기준으로 잡았습니다.</div>
+            </div>
+            <div class="metric-tile">
+              <div class="metric-label">Delivery</div>
+              <div class="metric-value">Web · Mobile · Connector</div>
+              <div class="mt-2 text-sm leading-6 text-[#4f6077]">SolidJS 프론트엔드, Cloudflare 백엔드, PC connector, Android wrapper까지 이어집니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="feature-panel p-5 sm:p-6">
+          <div class="overflow-hidden rounded-[24px] bg-[#edf2f8] p-4">
+            <img src="../../assets/images/deskrelay-logo-lockup.png" alt="DeskRelay 로고" class="w-full object-contain"/>
+          </div>
+          <div class="mt-5 grid gap-3">
+            <a href="https://github.com/darkhtk/claude-remote-platform" target="_blank" rel="noopener noreferrer" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:bg-[#f5f8fc]">
+              <div class="metric-label">Repository</div>
+              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">claude-remote-platform</div>
+            </a>
+            <a href="https://claude-remote-platform-site.semibanbi.workers.dev" target="_blank" rel="noopener noreferrer" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:bg-[#f5f8fc]">
+              <div class="metric-label">Live</div>
+              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">DeskRelay Web</div>
+            </a>
+            <div class="rounded-[20px] bg-white px-4 py-4">
+              <div class="metric-label">Distribution</div>
+              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">MSIX · Homebrew · Android</div>
+              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Windows store 배포와 Homebrew 설치, Android wrapper까지 염두에 둔 구조입니다.</div>
+            </div>
+            <div class="rounded-[20px] bg-white px-4 py-4">
+              <div class="metric-label">What Shows Up</div>
+              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">채팅 · 디바이스 · 설정 · 진단</div>
+              <div class="mt-1 text-sm leading-6 text-[#4f6077]">사용자 화면과 운영 화면이 함께 보이는 제품형 사례입니다.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../../assets/images/deskrelay-chat-ui.png" alt="DeskRelay 채팅 UI와 이미지 결과 화면" style="object-position:left top;"/>
+          </div>
+          <div class="mt-5">
+            <div class="section-kicker">Visual Evidence 01</div>
+            <h2 class="page-block-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">채팅 결과를 바로 확인하는 메인 화면</h2>
+            <p class="mt-3 text-sm leading-7 text-[#4f6077]">왼쪽 세션 목록, 상단 디바이스 선택, 중앙 결과 스트림, 하단 입력창이 한 화면에 들어갑니다. Claude Code 결과를 브라우저에서 바로 소비하는 제품 경험의 중심 화면입니다.</p>
+          </div>
+        </article>
+
+        <article class="project-card bg-white p-4 sm:p-5">
+          <div class="project-media aspect-[4/3]">
+            <img src="../../assets/images/deskrelay-connection-status.png" alt="DeskRelay 연결 상태 진단 화면" style="object-position:center top;"/>
+          </div>
+          <div class="mt-5">
+            <div class="section-kicker">Visual Evidence 02</div>
+            <h2 class="page-block-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">연결 상태를 보여 주는 운영 화면</h2>
+            <p class="mt-3 text-sm leading-7 text-[#4f6077]">단순 채팅 UI가 아니라 connector 상태, websocket 연결, 세션 진단, 로그, reconnect 흐름까지 드러나는 운영 화면을 직접 설계했습니다. 문제 발생 시 무엇을 보여 주고 어떻게 복구시키는가가 먼저 보이도록 한 구성입니다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <article class="feature-panel p-6">
+          <div class="section-kicker">Problem</div>
+          <h2 class="page-block-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">로컬 AI 도구의 사용 범위</h2>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Claude Code는 개인 PC에서 강하지만, 이동 중이거나 다른 기기에서 같은 흐름을 이어가기 어렵습니다.</p>
+        </article>
+        <article class="feature-panel p-6">
+          <div class="section-kicker">System</div>
+          <h2 class="page-block-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">브라우저 · 모바일 · PC 연결</h2>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">웹 프론트엔드와 모바일 wrapper, Cloudflare 백엔드, 로컬 connector를 하나의 접속 모델로 묶었습니다.</p>
+        </article>
+        <article class="feature-panel p-6">
+          <div class="section-kicker">Control</div>
+          <h2 class="page-block-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Pairing과 연결 진단</h2>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">pairing code, Google 로그인, 연결 상태 표시, 로그와 reconnect 흐름으로 운영 가능한 상태를 만들었습니다.</p>
+        </article>
+        <article class="feature-panel p-6">
+          <div class="section-kicker">Meaning</div>
+          <h2 class="page-block-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">AI workflow의 제품화</h2>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Orchestration이 내부 작업 규칙을 정리한 사례였다면, DeskRelay는 그 흐름을 외부 사용 가능한 플랫폼으로 민 사례입니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="surface-panel p-6 sm:p-8">
+        <div class="max-w-3xl">
+          <div class="section-kicker">Product UX</div>
+          <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">실제로 보이는 제품 흐름</h2>
+          <p class="mt-4 text-base leading-7 text-[#4f6077]">원격 AI 플랫폼은 모델 연결만으로 끝나지 않습니다. 새 세션을 어떤 디렉터리에서 시작하는지, 여러 PC를 어떻게 고르는지, 언어와 접근 상태를 어디서 관리하는지까지 제품 화면 안에서 설명되어야 합니다.</p>
+        </div>
+        <div class="mt-8 grid gap-6 lg:grid-cols-3">
+          <article class="feature-panel overflow-hidden p-4">
+            <div class="project-media aspect-[5/4]">
+              <img src="../../assets/images/deskrelay-new-chat-directory.png" alt="DeskRelay 새 채팅 시작 디렉터리 선택 화면" style="object-position:left top;"/>
+            </div>
+            <div class="mt-4">
+              <div class="metric-label">New Session</div>
+              <h3 class="page-mini-title mt-2 font-headline font-bold text-[#122033]">작업 디렉터리 선택</h3>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">새 채팅을 열 때 어느 디렉터리에서 Claude Code를 시작할지 브라우저에서 직접 고를 수 있게 설계했습니다.</p>
+            </div>
+          </article>
+          <article class="feature-panel overflow-hidden p-4">
+            <div class="project-media aspect-[5/4]">
+              <img src="../../assets/images/deskrelay-device-switcher.png" alt="DeskRelay 디바이스 전환 드롭다운" style="object-position:left top;"/>
+            </div>
+            <div class="mt-4">
+              <div class="metric-label">Device Model</div>
+              <h3 class="page-mini-title mt-2 font-headline font-bold text-[#122033]">여러 PC 전환</h3>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">한 사용자가 여러 디바이스를 pair하고, 필요한 순간 다른 PC로 바로 전환하는 1:N 디바이스 모델을 UI에서 드러냅니다.</p>
+            </div>
+          </article>
+          <article class="feature-panel overflow-hidden p-4">
+            <div class="project-media aspect-[5/4]">
+              <img src="../../assets/images/deskrelay-settings-ui.png" alt="DeskRelay 설정 화면" style="object-position:center top;"/>
+            </div>
+            <div class="mt-4">
+              <div class="metric-label">Settings</div>
+              <h3 class="page-mini-title mt-2 font-headline font-bold text-[#122033]">언어와 접근 상태 관리</h3>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">다국어 UI, 브라우저 캐시 제어, 접근 상태 같은 운영 요소를 별도 설정 화면에서 다루게 해 서비스 사용성을 높였습니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">Engineering Scope</div>
+          <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">제품으로 만들기 위해 직접 다룬 범위</h2>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-[20px] bg-white px-4 py-4">
+              <div class="metric-label">Frontend</div>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">SolidJS SPA, 다국어 대응, 세션/연결 상태 UI</p>
+            </div>
+            <div class="rounded-[20px] bg-white px-4 py-4">
+              <div class="metric-label">Backend</div>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">Cloudflare Workers, Hono, D1, KV, Durable Object</p>
+            </div>
+            <div class="rounded-[20px] bg-white px-4 py-4">
+              <div class="metric-label">Connector</div>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">Bun 기반 PC daemon/CLI, pair 명령, 토큰 연결</p>
+            </div>
+            <div class="rounded-[20px] bg-white px-4 py-4">
+              <div class="metric-label">Distribution</div>
+              <p class="mt-2 text-sm leading-7 text-[#4f6077]">MSIX, Homebrew, Android wrapper까지 고려한 배포 구조</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">Why This Matters</div>
+          <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">포트폴리오 안에서 이 프로젝트가 의미하는 것</h2>
+          <div class="content-prose mt-5">
+            <p>이 프로젝트는 AI를 잘 안다는 주장보다, AI 기반 개발 흐름을 실제 제품과 운영 구조로 연결할 수 있다는 점을 보여 줍니다.</p>
+            <p>Unity, XR, 툴링, 로보틱스에서 해 왔던 일은 결국 복잡한 시스템을 구조화하고 운용 가능하게 만드는 일이었습니다. DeskRelay는 그 역량이 브라우저, 모바일, 백엔드, 로컬 connector, 배포 채널까지 넓어졌다는 증거에 가깝습니다.</p>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="../orchestration-ts/" class="inline-flex items-center gap-2 rounded-full bg-[#edf2f8] px-4 py-2 text-sm font-semibold text-[#1a57c7]">Orchestration 보기<span class="material-symbols-outlined text-base">arrow_forward</span></a>
+            <a href="../genworld-ollama/" class="inline-flex items-center gap-2 rounded-full bg-[#edf2f8] px-4 py-2 text-sm font-semibold text-[#1a57c7]">GenWorld 보기<span class="material-symbols-outlined text-base">arrow_forward</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div>
+        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
+        <div class="mt-2 text-sm leading-6 text-[#526178]">AI workflow를 실제 제품 구조로 확장한 사례까지 포트폴리오 안에 정리했습니다.</div>
+      </div>
+      <div class="flex flex-wrap gap-5 text-sm">
+        <a class="footer-link" href="../../">Home</a>
+        <a class="footer-link" href="../">Projects</a>
+        <a class="footer-link" href="../../about/">About</a>
+        <a class="footer-link" href="mailto:darkhtk@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="../../assets/js/site.js"></script>
+<script>
+window.PORTFOLIO_TRACKER_ENDPOINT = 'https://semirain.synology.me:3443/track';
+</script>
+<script src="../../assets/js/tracker.js"></script>
+</body>
+</html>

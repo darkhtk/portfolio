@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -189,6 +189,7 @@
               <div class="metric-label">Explore</div>
               <div class="mt-3 flex flex-wrap gap-3 text-sm font-semibold">
                 <a href="projects/" class="text-[#1a57c7] hover:text-[#10264e]">Industrial systems</a>
+                <a href="projects/deskrelay/" class="text-[#1a57c7] hover:text-[#10264e]">DeskRelay</a>
                 <a href="ai-systems/" class="text-[#1a57c7] hover:text-[#10264e]">AI Systems</a>
                 <a href="about/" class="text-[#1a57c7] hover:text-[#10264e]">Profile and PDFs</a>
               </div>
@@ -233,44 +234,40 @@
 
         <article class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]">
-            <img src="assets/images/watchbim_generated_crosssection.png" alt="WatchBIM generated cross section"/>
+            <img src="assets/images/deskrelay-chat-ui.png" alt="DeskRelay chat UI" style="object-position:left top;"/>
           </div>
           <div class="mt-5 flex flex-wrap gap-2">
-            <span class="project-chip">BIM</span>
-            <span class="project-chip">Runtime</span>
-            <span class="project-chip">Tooling</span>
+            <span class="project-chip">Remote Claude</span>
+            <span class="project-chip">Web · Mobile</span>
+            <span class="project-chip">Connector</span>
           </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">WatchBIM</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A Unity BIM runtime with a custom hit engine, cross-section generation, 2D analysis viewer, and camera system.</p>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">DeskRelay</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A browser/mobile-to-PC Claude Code platform with pairing, status diagnostics, and connector delivery.</p>
           <div class="mt-5 flex flex-wrap gap-2 text-xs text-[#4f6077]">
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Cross-section</span>
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">2D viewer</span>
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Geometry jobs</span>
+            <span class="rounded-full bg-[#edf2f8] px-3 py-2">1:N device model</span>
+            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Pairing</span>
+            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Diagnostics</span>
           </div>
-          <a href="en/projects/watchbim/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base">north_east</span></a>
+          <a href="projects/deskrelay/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
 
         <article class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]">
-            <img src="assets/images/neostalgia_skybox.png" alt="Neostalgia XR skybox"/>
+            <img src="assets/images/genworld-world.png" alt="GenWorld + Ollama game world"/>
           </div>
           <div class="mt-5 flex flex-wrap gap-2">
-            <span class="project-chip">XR Experience</span>
-            <span class="project-chip">AI Pipeline</span>
-            <span class="project-chip">Exhibition</span>
+            <span class="project-chip">Local LLM</span>
+            <span class="project-chip">NPC Systems</span>
+            <span class="project-chip">R&amp;D</span>
           </div>
-          <div class="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold tracking-[0.02em]">
-            <span class="rounded-full bg-[#e7efff] px-3 py-2 text-[#1a57c7]">BIFAN Selection</span>
-            <span class="rounded-full bg-[#fff3d8] px-3 py-2 text-[#8a5a00]">MSIT Minister Citation</span>
-          </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Neostalgia</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">An XR experience pipeline that interviews visitors, generates content, and operates as a real exhibition system.</p>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">GenWorld + Ollama</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A local-LLM R&amp;D case exploring NPC cognition, dialogue flow, and graceful fallback inside a Unity game runtime.</p>
           <div class="mt-5 flex flex-wrap gap-2 text-xs text-[#4f6077]">
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Whisper + GPT</span>
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Skybox + Meshy</span>
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Dashboard</span>
+            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Offline-first</span>
+            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Graceful fallback</span>
+            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Applied AI R&amp;D</span>
           </div>
-          <a href="en/projects/neostalgia/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base">north_east</span></a>
+          <a href="projects/genworld-ollama/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
       </div>
     </section>
