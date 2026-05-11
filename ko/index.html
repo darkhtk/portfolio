@@ -136,7 +136,7 @@
             <div class="metric-tile">
               <div class="metric-label">Focus 01</div>
               <div class="metric-value">AI Systems</div>
-              <div class="mt-2 text-sm leading-6 text-[#4f6077]">에이전트만 만들지 않고 커널과 제품 표면까지 만듭니다. Ops-Cure는 워크플로와 대화 behavior를 품고, DeskRelay는 로컬 에이전트 실행을 self-host 브라우저/모바일-to-PC 제어면으로 연결합니다.</div>
+              <div class="mt-2 text-sm leading-6 text-[#4f6077]">에이전트만 만들지 않고 커널과 제품 표면까지 만듭니다. Ops-Cure는 워크플로와 대화 behavior를 품고, DeskRelay는 GitHub 저장소 기준으로 내 PC의 Claude Code를 브라우저에서 제어하는 self-host 레이어입니다.</div>
             </div>
             <div class="metric-tile">
               <div class="metric-label">Focus 02</div>
@@ -154,7 +154,7 @@
         <div class="grid gap-4">
           <article class="project-card p-4 sm:p-5">
             <div class="project-media aspect-[4/3]">
-              <img src="../assets/images/deskrelay-chat-ui.png" alt="DeskRelay 채팅 UI" style="object-position:left top;"/>
+              <img src="../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay GitHub 매뉴얼 채팅 세션 스크린샷" style="object-position:left top;"/>
             </div>
             <div class="mt-4 flex flex-wrap gap-2">
               <span class="project-chip">대표 사례</span>
@@ -162,9 +162,9 @@
             </div>
             <h2 class="page-block-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">DeskRelay</h2>
             <p class="mt-3 text-sm leading-7 text-[#4f6077]">
-              로그인, 페어링, 연결 진단, connector 배포를 갖춘 browser/mobile-to-PC Claude Code 플랫폼입니다.
+              서버 PC, 등록 PC, connector daemon, LAN/Tailscale 운영, GitHub 매뉴얼 스크린샷으로 설명되는 Claude Code self-host 브라우저 제어 도구입니다.
             </p>
-            <a href="../projects/deskrelay/" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
+            <a href="../ai-systems/deskrelay/" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
               케이스 스터디 보기
               <span class="material-symbols-outlined text-base">north_east</span>
             </a>
@@ -190,7 +190,7 @@
               <div class="metric-label">바로 가기</div>
               <div class="mt-3 flex flex-wrap gap-3 text-sm font-semibold">
                 <a href="ai-systems/" class="text-[#1a57c7] hover:text-[#10264e]">AI Systems</a>
-                <a href="../projects/deskrelay/" class="text-[#1a57c7] hover:text-[#10264e]">DeskRelay</a>
+                <a href="../ai-systems/deskrelay/" class="text-[#1a57c7] hover:text-[#10264e]">DeskRelay</a>
                 <a href="projects/" class="text-[#1a57c7] hover:text-[#10264e]">산업 시스템</a>
                 <a href="about/" class="text-[#1a57c7] hover:text-[#10264e]">프로필과 PDF</a>
               </div>
@@ -216,7 +216,7 @@
       <div class="mt-10 grid gap-6 xl:grid-cols-3">
         <article class="project-card bg-white p-4 sm:p-5">
           <div class="project-media aspect-[4/3]">
-            <img src="../assets/images/deskrelay-chat-ui.png" alt="DeskRelay 채팅 UI" style="object-position:left top;"/>
+            <img src="../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay GitHub 매뉴얼 채팅 세션 스크린샷" style="object-position:left top;"/>
           </div>
           <div class="mt-5 flex flex-wrap gap-2">
             <span class="project-chip">Remote Claude</span>
@@ -224,13 +224,13 @@
             <span class="project-chip">Connector</span>
           </div>
           <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">DeskRelay</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">페어링, 상태 진단, connector 배포를 갖춘 browser/mobile-to-PC Claude Code 플랫폼입니다.</p>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">서버 PC, 등록 PC, connector daemon, LAN/Tailscale 운영을 갖춘 GitHub 기준 Claude Code self-host 브라우저 제어 도구입니다.</p>
           <div class="mt-5 flex flex-wrap gap-2 text-xs text-[#4f6077]">
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">1:N device model</span>
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Pairing</span>
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Diagnostics</span>
+            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Server PC :18193</span>
+            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Connector :18091</span>
+            <span class="rounded-full bg-[#edf2f8] px-3 py-2">LAN / Tailscale</span>
           </div>
-          <a href="../projects/deskrelay/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">케이스 스터디<span class="material-symbols-outlined text-base">north_east</span></a>
+          <a href="../ai-systems/deskrelay/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">케이스 스터디<span class="material-symbols-outlined text-base">north_east</span></a>
         </article>
 
         <article class="project-card bg-white p-4 sm:p-5">

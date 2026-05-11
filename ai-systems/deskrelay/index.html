@@ -4,17 +4,17 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>DeskRelay | 홍대기</title>
-<meta name="description" content="DeskRelay는 사용자가 직접 self-host한 사이트 백엔드와 PC connector daemon으로 자기 PC의 claude CLI를 브라우저/모바일에서 다루게 하는 오픈소스 도구입니다."/>
+<meta name="description" content="DeskRelay는 공개 GitHub README 기준, 내 PC에서 실행되는 Claude Code를 브라우저에서 제어하는 self-host 개발 도구입니다."/>
 <meta property="og:title" content="DeskRelay | 홍대기"/>
-<meta property="og:description" content="self-host 사이트 백엔드, 브라우저 UI, PC connector daemon으로 로컬 Claude Code 실행을 연결한 제품 사례."/>
+<meta property="og:description" content="서버 PC, 등록 PC, connector daemon, LAN/Tailscale, Site token 흐름을 GitHub 저장소 기준으로 다시 정리한 사례."/>
 <meta property="og:type" content="article"/>
-<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-play-store-chat.jpg"/>
-<meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/remote-for-claude/"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-chat-session.png"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/deskrelay/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="DeskRelay | 홍대기"/>
-<meta name="twitter:description" content="로컬 에이전트 실행을 self-host 브라우저/모바일-to-PC 제어면으로 다루는 제품 사례."/>
-<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/remote-for-claude-play-store-chat.jpg"/>
+<meta name="twitter:description" content="내 PC의 Claude Code를 브라우저에서 제어하는 GitHub 기준 self-host 개발 도구."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-chat-session.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
@@ -42,7 +42,7 @@
       </nav>
       <div class="flex items-center gap-3">
         <div class="lang-toggle hidden sm:inline-flex">
-          <a class="lang-link" href="../../en/ai-systems/remote-for-claude/">EN</a>
+          <a class="lang-link" href="../../en/ai-systems/deskrelay/">EN</a>
           <a class="lang-link is-active" href="./">KO</a>
         </div>
         <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
@@ -60,7 +60,7 @@
         <a href="../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">경력과 작업 방식.</div></a>
       </div>
       <div class="mt-6 flex gap-3">
-        <a href="../../en/ai-systems/remote-for-claude/" class="lang-link bg-white">EN</a>
+        <a href="../../en/ai-systems/deskrelay/" class="lang-link bg-white">EN</a>
         <a href="./" class="lang-link is-active bg-white">KO</a>
       </div>
     </div>
@@ -72,7 +72,7 @@
         <div class="surface-panel p-6 sm:p-8 lg:p-10">
           <div class="section-kicker">AI Systems · Product Case Study</div>
           <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay</h1>
-          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">사용자가 직접 self-host한 환경에서 자기 PC의 <code>claude</code> CLI를 브라우저 또는 선택적 모바일 shell로 다루는 오픈소스 도구입니다. 사이트 백엔드는 UI와 등록된 디바이스를 관리하고, PC connector daemon은 로컬 실행, 파일, shell, Git, MCP, Claude 인증을 보유합니다.</p>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">GitHub README 기준 DeskRelay는 내 PC에서 실행되는 Claude Code를 브라우저에서 제어하는 self-host 개발 도구입니다. 서버 PC 한 대가 <code>site-frontend</code>, <code>site-backend</code>, local connector daemon을 띄우고, 같은 LAN 또는 Tailscale 안의 다른 PC를 디바이스로 등록해서 씁니다.</p>
           <div class="mt-7 flex flex-wrap gap-2.5">
             <span class="pill text-sm">Self-host Site Backend</span>
             <span class="pill text-sm">Site Token Login</span>
@@ -85,7 +85,7 @@
               <span class="material-symbols-outlined mr-2 text-base">open_in_new</span>
               GitHub README
             </a>
-            <a href="../../en/ai-systems/remote-for-claude/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">English version</a>
+            <a href="../../en/ai-systems/deskrelay/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">English version</a>
           </div>
         </div>
         <aside class="feature-panel p-5 sm:p-6">
@@ -103,10 +103,10 @@
 
     <section id="problem" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <div class="summary-grid">
-        <article class="summary-card"><h3>역할</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">제품 아키텍처, connector runtime, self-host backend, frontend UX, 디바이스 생명주기, 스크린샷, 문서화를 설계·구현했습니다.</p></article>
+        <article class="summary-card"><h3>기준</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">이 페이지는 공개 GitHub 저장소의 README, docs/MANUAL.md, package metadata, manual screenshots만 기준으로 다시 작성했습니다.</p></article>
         <article class="summary-card"><h3>문제</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">에이전트 작업은 사용자의 repo, shell, token이 있는 PC에서 가장 강합니다. 하지만 그만큼 작업 흐름이 한 키보드에 묶입니다.</p></article>
-        <article class="summary-card"><h3>접근</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">실행은 로컬에 둡니다. self-host 사이트 백엔드를 띄우고 각 PC를 daemon URL과 token으로 등록해 private network 위에서 좁은 브라우저/모바일 제어면을 제공합니다.</p></article>
-        <article class="summary-card"><h3>상태</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">오픈소스 self-host 제품입니다. PC server script, site token login, local connector 자동 등록, Settings -> Devices 검증, remote chat, diagnostics, 문서가 연결되어 있습니다.</p></article>
+        <article class="summary-card"><h3>접근</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">서버 PC를 띄우고 브라우저 UI로 들어간 뒤, 메인 화면의 다른 PC 등록 명령을 대상 Windows PC에 실행해 connector와 device registry를 연결합니다.</p></article>
+        <article class="summary-card"><h3>상태</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">저장소 버전은 v0.0.0입니다. README에는 설치, 접속 URL과 token, 다른 PC 등록, 사용, 업데이트, 중지/제거, 문제 해결 흐름이 문서화되어 있습니다.</p></article>
       </div>
     </section>
 
@@ -114,21 +114,21 @@
       <div class="remote-surface-copy">
         <div class="section-kicker">§ 01 · Product surface</div>
         <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">백엔드 배관만이 아니라 실제 제어면까지</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">스크린샷은 실제 제품 표면을 보여 줍니다. 채팅 이어가기, 내비게이션, 디바이스 등록, 선택 디바이스 진단, 설정 화면을 목업이 아니라 제품 증거로 배치했습니다.</p>
-        <p class="remote-shot-caption mt-5">DeskRelay 제품 캡처를 README/manual의 self-host 흐름에 맞춰 사용했습니다.</p>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">기존 포트폴리오 이미지는 제거하고, GitHub 저장소의 <code>docs/assets/screenshots</code>에 포함된 manual screenshots만 제품 증거로 다시 배치했습니다.</p>
+        <p class="remote-shot-caption mt-5">Source: <code>darkhtk/deskrelay</code> GitHub README and <code>docs/MANUAL.md</code>.</p>
       </div>
       <div class="remote-play-store-grid mt-8">
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/remote-for-claude-play-store-chat.jpg" alt="컨텍스트 칩과 입력창이 보이는 DeskRelay 모바일 채팅 화면" loading="lazy" width="1080" height="2340"/>
+          <img src="../../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay 채팅 세션 화면" loading="lazy" width="960" height="1032"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/remote-for-claude-play-store-sidebar.jpg" alt="디바이스 선택, 설정, 최근 세션, 계정 컨트롤이 보이는 DeskRelay 모바일 사이드바" loading="lazy" width="1080" height="2340"/>
+          <img src="../../assets/images/deskrelay-github-new-chat-workspace.png" alt="DeskRelay 새 채팅 작업 폴더 선택 화면" loading="lazy" width="960" height="1032"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/remote-for-claude-play-store-devices.png" alt="DeskRelay 설정창의 디바이스 등록 흐름" loading="lazy" width="1179" height="1995"/>
+          <img src="../../assets/images/deskrelay-github-settings-diagnostics.png" alt="DeskRelay 설정 연결 진단 화면" loading="lazy" width="960" height="1032"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/remote-for-claude-play-store-device-detail.png" alt="DeskRelay 선택 디바이스 상세 및 진단 화면" loading="lazy" width="1179" height="1995"/>
+          <img src="../../assets/images/deskrelay-github-settings-updates.png" alt="DeskRelay 설정 업데이트 화면" loading="lazy" width="900" height="760"/>
         </figure>
       </div>
     </section>
@@ -145,14 +145,14 @@
           <div class="stack-diagram stack-diagram--deep sm:aspect-[4/3]">
             <div>
               <div class="stack-diagram__eyebrow">End-to-end path</div>
-              <div class="mt-3 stack-diagram__title">Browser → Site Backend → Connector Daemon → Claude CLI</div>
-              <p class="mt-3 stack-diagram__copy">백엔드는 UI와 디바이스 registry를 맡고, 작업·파일·인증은 제어 대상 PC에 남습니다.</p>
+              <div class="mt-3 stack-diagram__title">Browser → :18193 → :18192 → :18191/:18091 → Claude Code CLI</div>
+              <p class="mt-3 stack-diagram__copy">README 구조도 기준. 서버 PC와 등록 PC의 connector daemon이 각각 로컬 Claude Code CLI를 실행합니다.</p>
             </div>
             <div class="stack-diagram__grid">
-              <div class="stack-diagram__node"><strong>Browser</strong><span>SolidJS UI, chat, settings, approvals</span></div>
-              <div class="stack-diagram__node"><strong>Site backend</strong><span>Hono/Bun routes, site token, device registry</span></div>
-              <div class="stack-diagram__node"><strong>Connector</strong><span>Bun daemon, daemon token, workspace roots</span></div>
-              <div class="stack-diagram__node"><strong>PC</strong><span>claude CLI, files, shell, Git, MCP, auth</span></div>
+              <div class="stack-diagram__node"><strong>site-frontend</strong><span>Browser UI on :18193</span></div>
+              <div class="stack-diagram__node"><strong>site-backend</strong><span>:18192 and .self-server/state registry</span></div>
+              <div class="stack-diagram__node"><strong>connector</strong><span>server :18191, registered PC :18091</span></div>
+              <div class="stack-diagram__node"><strong>Claude Code</strong><span>CLI logged in on each controlled PC</span></div>
             </div>
             <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>바깥은 제품 shell, 안쪽은 사용자 PC의 runtime authority.</span></div>
           </div>
@@ -160,10 +160,10 @@
         <div class="surface-panel p-6 sm:p-8">
           <div class="section-kicker">System slices</div>
           <div class="content-prose mt-5">
-            <p><strong>Frontend.</strong> SolidJS + Vite SPA. locale, device picker, chat, diagnostics, approval modal, workspace picker, image preview, 선택적 Capacitor wrapper.</p>
-            <p><strong>Site backend.</strong> Hono/Bun self-host process. PC server script가 backend를 띄우고 site token을 출력하며, 브라우저 UI와 등록된 connector daemon URL을 관리합니다.</p>
-            <p><strong>Connector.</strong> 제어 대상 PC마다 실행되는 Bun daemon/CLI. 인증된 daemon URL과 <code>/status</code>를 제공하고 workspace roots를 보유하며, 파일·shell·Git·MCP·Claude auth를 그 PC에 남깁니다.</p>
-            <p><strong>Operations.</strong> manual은 Tailscale, WireGuard, private LAN, VPN을 권장하고 connector daemon port를 public internet에 직접 노출하지 말라고 명시합니다.</p>
+            <p><strong>Frontend.</strong> package metadata 기준 <code>@deskrelay/site-frontend</code>는 Solid + Vite SPA이고, <code>@deskrelay/mobile-app</code>은 Capacitor wrapper입니다.</p>
+            <p><strong>Backend.</strong> <code>@deskrelay/site-backend</code>는 self-host Hono/Bun backend이며 브라우저와 사용자가 등록한 connector daemon URL 사이를 연결합니다.</p>
+            <p><strong>Connector.</strong> <code>@deskrelay/pc-connector-daemon</code>은 private HTTP API로 local Claude Code behaviors를 노출하는 self-host connector daemon입니다.</p>
+            <p><strong>Behavior.</strong> <code>@deskrelay/behavior-remote-claude</code>는 사용자의 PC에서 <code>claude</code> CLI를 실행하고 stream-json output을 kernel events로 흘립니다.</p>
           </div>
         </div>
       </div>
@@ -172,25 +172,25 @@
     <section id="lifecycle" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
       <div class="max-w-3xl">
         <div class="section-kicker">§ 03 · Device lifecycle</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">디바이스 등록은 운영 기능이 아니라 제품 UX입니다</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">어려운 부분은 디바이스를 추가하는 것만이 아닙니다. 브라우저, self-host backend, connector daemon이 무엇에 접근 가능하고 무엇이 안전한지 같은 상태를 보게 만드는 것입니다.</p>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">설치와 등록 흐름이 제품의 뼈대입니다</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">README는 서버 설치, 접속 URL과 token, 다른 PC 등록, 검증 리포트, 업데이트, 문제 해결을 한 흐름으로 설명합니다.</p>
       </div>
 
       <div class="mt-10 grid gap-6 lg:grid-cols-3">
         <article class="project-card bg-white p-5">
-          <div class="section-kicker">Register</div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Daemon URL, label, token</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">대상 PC는 private-network host/port와 workspace roots로 connector daemon을 실행합니다. Settings -> Devices에서 daemon URL, label, daemon token을 등록합니다.</p>
+          <div class="section-kicker">Install</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">서버 PC에서 시작</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Windows PowerShell 또는 macOS Terminal에서 설치 스크립트를 실행합니다. 설치 후 기본 브라우저는 <code>http://127.0.0.1:18193</code>로 열립니다.</p>
         </article>
         <article class="project-card bg-white p-5">
-          <div class="section-kicker">Validate</div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">사용 전 status 검증</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">백엔드가 connector <code>/status</code> endpoint를 확인하고, 잘못된 URL이나 token은 디바이스로 등록하지 않습니다.</p>
+          <div class="section-kicker">Register</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">다른 PC 등록 명령</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">메인 화면의 등록 명령을 제어하려는 Windows PC PowerShell에 붙여넣으면 repo 설치/업데이트, connector 실행, Tailscale/LAN 주소 감지, 서버 접근 검증, 디바이스 등록을 처리합니다.</p>
         </article>
         <article class="project-card bg-white p-5">
           <div class="section-kicker">Operate</div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">전환, 진단, 이어가기</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">sidebar에서 디바이스를 전환하고, settings에서 연결 진단을 보며, 세션은 이어가기·fork·새 workspace 시작으로 나뉩니다.</p>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">디바이스, 세션, 권한, 스킬</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">왼쪽 드롭다운에서 PC를 고르고, 새 채팅의 작업 디렉토리를 선택하며, 권한 탭과 스킬 탭에서 현재 Claude 환경을 확인합니다.</p>
         </article>
       </div>
     </section>
@@ -200,8 +200,8 @@
         <div class="section-kicker">§ 04 · Trust boundary</div>
         <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">private-network 우선, 로컬 권한은 로컬에</h2>
         <div class="content-prose mt-5 max-w-4xl">
-          <p>README/manual의 경계는 의도적으로 분명합니다. DeskRelay에는 hosted account, payment flow, managed relay, 필수 app package가 없습니다. 사용자가 site backend와 connector daemon을 직접 띄우고, Tailscale, WireGuard, private LAN, VPN 같은 경로를 권장합니다.</p>
-          <p>이 구분은 중요합니다. 시스템 형태가 보장하지 않는 privacy claim보다, 스크린샷·문서·아키텍처가 같은 경계를 말하게 만드는 쪽을 선택했습니다.</p>
+          <p>README는 connector 포트를 공용 인터넷에 직접 노출하지 말고, 외부 접근이 필요하면 Tailscale 같은 사설 네트워크를 쓰라고 명시합니다. 다른 PC 등록 조건도 같은 LAN 또는 같은 Tailscale tailnet입니다.</p>
+          <p>문제 해결도 이 경계 안에서 설명됩니다. 디바이스가 목록에 없으면 서버 URL, 같은 LAN/Tailscale, 대상 PC의 <code>18091</code> 포트, 방화벽, registration report, connector 검증 리포트를 순서대로 확인합니다.</p>
         </div>
       </div>
     </section>
@@ -227,13 +227,13 @@
     <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
       <div>
         <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
-        <div class="mt-2 text-sm text-[#526178]">DeskRelay — self-host browser/mobile-to-PC local agent runtime</div>
+        <div class="mt-2 text-sm text-[#526178]">DeskRelay — GitHub README 기준 self-host browser control</div>
       </div>
       <div class="flex flex-wrap items-center gap-3 text-sm">
         <a class="footer-link" href="../../">Home</a>
         <a class="footer-link" href="../../ai-systems/">AI Systems</a>
         <a class="footer-link" href="../../about/">Profile</a>
-        <a class="footer-link" href="../../en/ai-systems/remote-for-claude/">English</a>
+        <a class="footer-link" href="../../en/ai-systems/deskrelay/">English</a>
       </div>
     </div>
   </footer>
