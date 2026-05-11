@@ -7,9 +7,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
 <title>AI Systems | 홍대기</title>
-<meta name="description" content="홍대기의 kernel + behaviors 아키텍처. Ops-Cure의 state/event kernel과 DeskRelay의 브라우저/모바일-to-PC 로컬 에이전트 실행 SaaS 구현."/>
+<meta name="description" content="홍대기의 kernel + behaviors 아키텍처. Ops-Cure의 state/event kernel과 DeskRelay의 self-host 브라우저/모바일-to-PC 로컬 에이전트 실행 제어면 구현."/>
 <meta property="og:title" content="AI Systems | 홍대기"/>
-<meta property="og:description" content="kernel + behaviors, 그리고 DeskRelay: 사용자 PC의 로컬 에이전트 실행을 브라우저/모바일에서 제어하는 SaaS."/>
+<meta property="og:description" content="kernel + behaviors, 그리고 DeskRelay: 사용자 PC의 로컬 에이전트 실행을 self-host 브라우저/모바일에서 제어하는 제품 표면."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ko/ai-systems/"/>
@@ -104,13 +104,13 @@
             에이전트 시스템만 만든 게 아닙니다. 그것이 돌아가는 커널을 만들었습니다.
           </p>
           <p class="mt-5 max-w-3xl text-sm leading-7 text-[#526178] sm:text-base">
-            Ops-Cure는 Discord 채널/스레드를 상태를 가진 공간으로 취급합니다. DeskRelay는 그 원격 에이전트 패턴을 제품 표면으로 옮긴 작업입니다. 브라우저/모바일 UI, PC connector, Cloudflare Workers relay, behavior runtime이 함께 움직입니다. 두 작업의 기준은 같습니다. 커널은 작게, 실행은 사용자의 머신 가까이에.
+            Ops-Cure는 Discord 채널/스레드를 상태를 가진 공간으로 취급합니다. DeskRelay는 그 원격 에이전트 패턴을 제품 표면으로 옮긴 작업입니다. 브라우저/모바일 UI, self-host site backend, PC connector daemon, 사설 네트워크 기반 디바이스 등록, local behavior runtime이 함께 움직입니다. 두 작업의 기준은 같습니다. 커널은 작게, 실행은 사용자의 머신 가까이에.
           </p>
           <div class="mt-7 flex flex-wrap gap-2.5">
             <span class="pill text-sm">Kernel</span>
             <span class="pill text-sm">Behavior Plugins</span>
             <span class="pill text-sm">Discord Transport</span>
-            <span class="pill text-sm">Browser-to-PC SaaS</span>
+            <span class="pill text-sm">Self-host control plane</span>
             <span class="pill text-sm">Local Runtimes</span>
           </div>
         </div>
@@ -283,9 +283,9 @@
 
     <section id="remote-for-claude" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
       <div class="max-w-3xl">
-        <div class="section-kicker">Production SaaS · Remote Agent Runtime</div>
+        <div class="section-kicker">Self-host Product · Remote Agent Runtime</div>
         <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay — 로컬 에이전트 실행을 위한 브라우저/모바일 제어면</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">사용자가 여러 PC를 페어링하고, 브라우저 또는 Android 앱에서 디바이스를 고른 뒤, PC connector를 통해 로컬 에이전트 CLI를 실행하게 하는 SaaS 플랫폼입니다. 첫 어댑터는 Claude Code를 대상으로 하지만, 제품의 본질은 Claude 전용 래퍼가 아니라 local-first relay/control plane입니다.</p>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">사용자가 직접 site backend를 실행하고, 신뢰 가능한 PC의 connector daemon URL을 등록한 뒤, 브라우저 또는 선택적 모바일 shell에서 디바이스를 골라 로컬 에이전트 CLI를 구동하는 오픈소스 self-host 도구입니다. repo 파일, shell 접근, git 상태, MCP 설정, Anthropic 인증 정보는 daemon이 실행되는 PC에 남습니다.</p>
       </div>
 
       <article class="mt-10 project-card bg-white p-6 sm:p-8 lg:p-10">
@@ -297,18 +297,15 @@
           <div>
             <div class="section-kicker">구현 범위</div>
             <div class="content-prose mt-5">
-              <p><strong>제품 아키텍처.</strong> shared contract, behavior SDK, PC connector daemon/CLI, Cloudflare Workers backend, SolidJS frontend, Capacitor Android packaging까지 한 모노레포로 구성했습니다.</p>
-              <p><strong>디바이스 생명주기.</strong> 페어링 코드, 디바이스 identity, 진단, 기기별 설정, unpair cleanup을 연결했습니다. 해제 시 live relay를 끊고 브라우저/디바이스 로컬 상태를 정리합니다.</p>
-              <p><strong>런타임 경계.</strong> 사이트는 채팅 transcript나 코드를 저장하지 않습니다. alpha에서는 Durable Object를 통해 평문 relay가 지나가며, E2E/WebRTC hardening은 다음 trust-model 단계로 문서화했습니다.</p>
-              <p><strong>릴리즈 표면.</strong> winget/Homebrew 템플릿, Android listing copy, localization source, operator runbook을 코드 옆에 둬서 데모가 아니라 배포 가능한 제품 흐름으로 정리했습니다.</p>
+              <p><strong>제품 아키텍처.</strong> shared contract, behavior SDK, PC connector daemon/CLI, Hono/Bun site backend, SolidJS frontend, 선택적 Capacitor mobile shell까지 한 모노레포로 구성했습니다.</p>
+              <p><strong>Self-host 흐름.</strong> PC server script가 site-backend, local connector daemon, browser UI를 함께 띄우고, README/manual은 site token, localhost 포트, Tailscale/LAN 접속 모델을 문서화합니다.</p>
+              <p><strong>디바이스 생명주기.</strong> 원격 PC는 connector daemon만 실행합니다. Settings -> Devices에서 daemon URL, label, daemon token을 입력하고 /status 검증을 통과하면 사이드바에서 등록된 PC를 전환할 수 있습니다.</p>
+              <p><strong>런타임 경계.</strong> 파일, 셸 명령, git 상태, MCP 설정, Claude 세션, Anthropic 인증 정보는 daemon PC에 남습니다. 문서에는 connector 포트를 공용 인터넷에 노출하지 말라는 경계도 명시했습니다.</p>
             </div>
             <div class="mt-7 flex flex-col gap-3 sm:flex-row">
               <a href="../../ai-systems/remote-for-claude/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
                 케이스 열기
                 <span class="material-symbols-outlined ml-2 text-base">north_east</span>
-              </a>
-              <a href="https://claude-remote-platform-site.semibanbi.workers.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
-                Live alpha
               </a>
               <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
                 GitHub 저장소
