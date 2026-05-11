@@ -8,13 +8,13 @@
 <meta property="og:title" content="DeskRelay | Daeki Hong"/>
 <meta property="og:description" content="Server PC, registered PCs, connector daemons, LAN/Tailscale, and Site token flow summarized from the public GitHub repository."/>
 <meta property="og:type" content="article"/>
-<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-chat-session.png"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/deskrelay/"/>
 <meta property="og:locale" content="en_US"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="DeskRelay | Daeki Hong"/>
 <meta name="twitter:description" content="Self-host browser control for Claude Code running on your own PCs, rebuilt from the public GitHub repository."/>
-<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-chat-session.png"/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
@@ -92,7 +92,7 @@
           <div class="section-kicker">Read in order</div>
           <div class="mt-5 grid gap-3">
             <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Problem</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Local agent work is powerful but tied to one machine.</div></a>
-            <a href="#product-surface" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Product surface</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Chat, device, settings, and diagnostics screenshots.</div></a>
+            <a href="#product-surface" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Product surface</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Mobile chat, sessions, permissions, instructions, and skills.</div></a>
             <a href="#architecture" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Architecture</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Browser UI, site backend, connector daemon, Claude CLI.</div></a>
             <a href="#lifecycle" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Device lifecycle</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Register, validate, switch, diagnose.</div></a>
             <a href="#boundary" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">05</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Trust boundary</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Private-network first, local execution stays local.</div></a>
@@ -114,21 +114,24 @@
       <div class="remote-surface-copy">
         <div class="section-kicker">§ 01 · Product surface</div>
         <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">A real control surface, not only backend plumbing</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">The old portfolio images were removed from this case study. The gallery now uses only manual screenshots committed under <code>docs/assets/screenshots</code> in the public GitHub repository.</p>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">Mobile manual screenshots from <code>docs/assets/screenshots</code> are now the center of the product evidence. The gallery shows chat, sessions, permissions, instructions, and skills as the mobile usage flow.</p>
         <p class="remote-shot-caption mt-5">Source: <code>darkhtk/deskrelay</code> GitHub README and <code>docs/MANUAL.md</code>.</p>
       </div>
       <div class="remote-play-store-grid mt-8">
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay chat session screen" loading="lazy" width="960" height="1032"/>
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-chat.png" alt="DeskRelay mobile chat screen" loading="lazy" width="360" height="780"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../../assets/images/deskrelay-github-new-chat-workspace.png" alt="DeskRelay new chat workspace picker" loading="lazy" width="960" height="1032"/>
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-sessions.png" alt="DeskRelay mobile sessions screen" loading="lazy" width="360" height="780"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../../assets/images/deskrelay-github-settings-diagnostics.png" alt="DeskRelay connection diagnostics settings screen" loading="lazy" width="960" height="1032"/>
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-permissions.png" alt="DeskRelay mobile permissions tab" loading="lazy" width="360" height="780"/>
         </figure>
         <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../../assets/images/deskrelay-github-settings-updates.png" alt="DeskRelay update settings screen" loading="lazy" width="900" height="760"/>
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-instructions.png" alt="DeskRelay mobile instructions tab" loading="lazy" width="360" height="780"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-skills.png" alt="DeskRelay mobile skills tab" loading="lazy" width="360" height="780"/>
         </figure>
       </div>
     </section>

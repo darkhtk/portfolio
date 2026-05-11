@@ -711,8 +711,8 @@ body.menu-open .sticky-nav {
   }
 
   .remote-play-store-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    max-width: 48rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    max-width: 58rem;
   }
 
   .stack-diagram {
