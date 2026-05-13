@@ -4,9 +4,9 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Daeki Hong | Industrial Unity × AI Systems</title>
-<meta name="description" content="Senior Unity engineer with 10 years in industrial XR / BIM / robotics, now shipping AI developer tools — including DeskRelay, a self-host remote-session tool for local Claude Code sessions."/>
+<meta name="description" content="Senior Unity engineer with 10 years in industrial XR / BIM / robotics, now shipping AI systems hands-on. Three case studies: Ops-Cure kernel, GenWorld + Ollama, DeskRelay."/>
 <meta property="og:title" content="Daeki Hong | Industrial Unity × AI Systems"/>
-<meta property="og:description" content="10y industrial Unity → AI systems builder → DeskRelay (self-host AI dev tool)."/>
+<meta property="og:description" content="10y industrial Unity → AI systems case series — Ops-Cure · GenWorld · DeskRelay."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/"/>
@@ -40,7 +40,6 @@
       <a href="./" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
       <nav class="hidden md:flex items-center gap-6">
         <a href="./" class="nav-link is-active">home</a>
-        <a href="ai-systems/deskrelay/" class="nav-link">deskrelay</a>
         <a href="ai-systems/" class="nav-link">ai</a>
         <a href="projects/" class="nav-link">industrial</a>
         <a href="../about/" class="nav-link">profile</a>
@@ -50,8 +49,8 @@
           <a href="../" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
           <span class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</span>
         </div>
-        <a href="ai-systems/deskrelay/" class="hidden lg:inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/40 hover:bg-accent-cyan/10">
-          [ DeskRelay <span aria-hidden="true">↗</span> ]
+        <a href="ai-systems/" class="hidden lg:inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/40 hover:bg-accent-cyan/10">
+          [ AI Systems <span aria-hidden="true">↗</span> ]
         </a>
         <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan">
           <span class="material-symbols-outlined">menu</span>
@@ -65,7 +64,6 @@
       </div>
       <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
         <a href="./" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">home <span>→</span></a>
-        <a href="ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span>→</span></a>
         <a href="ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span>→</span></a>
         <a href="projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span>→</span></a>
         <a href="../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
@@ -86,10 +84,10 @@
             now shipping <span class="text-accent-cyan border-b-4 border-accent-cyan/80 bg-accent-cyan/10 px-2">AI dev tools.</span>
           </h1>
           <p class="font-body text-[15px] sm:text-base text-text-secondary leading-[1.85] max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
-            An engineer who has delivered VR / BIM / robotics simulators to real operating environments has spent the past year building AI systems hands-on. The result is <strong class="text-text-primary font-semibold">DeskRelay</strong> — a developer tool that remotes your local Claude Code sessions to a browser and mobile.
+            An engineer who has delivered VR / BIM / robotics simulators to real operating environments has spent the past year building AI systems hands-on. The result is collected as three case studies — <strong class="text-text-primary font-semibold">Ops-Cure kernel</strong>, <strong class="text-text-primary font-semibold">GenWorld + Ollama</strong>, and <strong class="text-text-primary font-semibold">DeskRelay</strong>.
           </p>
           <div class="flex flex-wrap items-center gap-3">
-            <a href="ai-systems/deskrelay/" class="btn-cyan">Open DeskRelay Case <span aria-hidden="true">→</span></a>
+            <a href="#ch02" class="btn-cyan">Open AI Systems <span aria-hidden="true">↓</span></a>
             <a href="#ch01" class="btn-ghost">Engineering Archive <span aria-hidden="true">↓</span></a>
           </div>
           <div class="ticker mt-2">
@@ -202,13 +200,24 @@
           <h2 class="display-section text-text-primary">Once I fell into AI,<br/>I couldn't stop.</h2>
         </div>
         <div class="lg:col-span-7 lg:pt-2">
-          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl">Over the past year I built generative / local-LLM / agent workflows hands-on. The goal was always to finish in an <em>operable</em> form — not a demo. That trajectory ended at <a href="#ch03" class="text-accent-cyan border-b border-accent-cyan/60">DeskRelay</a>.</p>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl">Over the past year I built generative / local-LLM / agent workflows hands-on. The goal was always to finish in an <em>operable</em> form — not a demo. Each case below was designed and operated end-to-end.</p>
         </div>
       </div>
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         <article class="card card-amber ticks ticks-amber group flex flex-col">
           <span class="tr"></span><span class="bl"></span>
-          <div class="card-bar"><span class="text-accent-amber">MODULE_01</span><span class="text-accent-amber">AGENT · KERNEL</span></div>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_01</span><span class="text-accent-amber">DEVELOPER TOOL</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/deskrelay-chat-ui.png" alt="DeskRelay chat UI"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="chip">Self-host</span><span class="chip">Mobile</span><span class="chip">Multi-PC</span></div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3"><span class="text-accent-amber font-mono">&gt;</span> DeskRelay</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">A self-host developer tool that remotes your local Claude Code sessions to a browser and mobile. Solid + Vite SPA, Hono + Bun backend, Capacitor Android app.</p>
+            <a href="ai-systems/deskrelay/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-amber border border-accent-amber/30 px-3 py-2 w-fit hover:bg-accent-amber/10">read_notes <span>↗</span></a>
+          </div>
+        </article>
+        <article class="card card-amber ticks ticks-amber group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_02</span><span class="text-accent-amber">AGENT · KERNEL</span></div>
           <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/orchestration-v1-loop.png" alt="Ops-Cure"/></div>
           <div class="p-5 flex-1 flex flex-col">
             <div class="flex flex-wrap gap-1.5 mb-4"><span class="chip">Agent</span><span class="chip">Kernel</span><span class="chip">Workflow</span></div>
@@ -219,7 +228,7 @@
         </article>
         <article class="card card-amber ticks ticks-amber group flex flex-col">
           <span class="tr"></span><span class="bl"></span>
-          <div class="card-bar"><span class="text-accent-amber">MODULE_02</span><span class="text-accent-amber">LOCAL LLM</span></div>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_03</span><span class="text-accent-amber">LOCAL LLM</span></div>
           <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/genworld-world.png" alt="GenWorld"/></div>
           <div class="p-5 flex-1 flex flex-col">
             <div class="flex flex-wrap gap-1.5 mb-4"><span class="chip">Local LLM</span><span class="chip">NPC</span><span class="chip">Pipeline</span></div>
@@ -230,7 +239,7 @@
         </article>
         <article class="card ticks group flex flex-col bg-gradient-to-br from-bg-elevated to-bg-primary">
           <span class="tr"></span><span class="bl"></span>
-          <div class="card-bar"><span>MODULE_03</span><span class="text-text-muted">EXPERIMENTS</span></div>
+          <div class="card-bar"><span>MODULE_04</span><span class="text-text-muted">EXPERIMENTS</span></div>
           <div class="p-6 flex-1 flex flex-col gap-4">
             <div class="kicker kicker-cyan">// lab notebook</div>
             <h3 class="font-display font-bold text-lg tracking-tight text-text-primary">Small starts.</h3>
@@ -244,52 +253,11 @@
       </div>
     </section>
 
-    <section id="ch03" class="relative bg-grid-dots">
-      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
-      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-        <div class="chapter-rule mb-14">
-          <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ CH.03 ]</span>
-          <span class="kicker text-accent-cyan">DESKRELAY · CLIMAX</span>
-          <span class="line"></span>
-          <span class="tail text-accent-cyan/80">flagship</span>
-        </div>
-        <div class="card ticks glow-cyan p-6 sm:p-10 lg:p-14 mb-10">
-          <span class="tr"></span><span class="bl"></span>
-          <div class="grid gap-10 lg:gap-14 lg:grid-cols-12 items-center">
-            <div class="lg:col-span-7 flex flex-col gap-7">
-              <div class="kicker kicker-cyan">// flagship — developer tool grade</div>
-              <img src="../assets/images/deskrelay-logo-lockup.png" alt="DeskRelay" class="h-12 sm:h-16 w-auto self-start max-w-full object-contain"/>
-              <p class="text-text-primary text-lg sm:text-xl lg:text-2xl font-display font-bold tracking-tight leading-snug">
-                Remote your local <span class="text-accent-cyan">Claude Code</span> sessions —<br/>from browser and mobile, safely.
-              </p>
-              <div class="grid gap-3 sm:grid-cols-2">
-                <div class="check"><span class="mark">[x]</span><span class="label">self-host</span><span class="desc">— your PC is the server</span></div>
-                <div class="check"><span class="mark">[x]</span><span class="label">mobile</span><span class="desc">— browser + Android app</span></div>
-                <div class="check"><span class="mark">[x]</span><span class="label">multi-pc</span><span class="desc">— switch PCs from one screen</span></div>
-                <div class="check"><span class="mark">[x]</span><span class="label">secure</span><span class="desc">— per-user token / logs</span></div>
-              </div>
-              <div class="flex flex-wrap items-center gap-3 pt-2">
-                <a href="ai-systems/deskrelay/" class="btn-cyan">Open Full Case <span>→</span></a>
-                <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="btn-ghost">GitHub <span>↗</span></a>
-              </div>
-            </div>
-            <div class="lg:col-span-5">
-              <div class="term-window ticks">
-                <span class="tr"></span><span class="bl"></span>
-                <div class="term-bar"><span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span><span class="term-title">deskrelay — chat</span></div>
-                <div class="media-frame frame-contain border-t border-hairline aspect-[3/4]"><img src="../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay chat"/></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="relative border-y border-hairline bg-bg-elevated">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
         <div class="max-w-2xl">
           <div class="kicker kicker-cyan mb-4">// next</div>
-          <h2 class="display-section text-text-primary">For a live DeskRelay demo<br/>or a hiring conversation —<br/>get in touch.</h2>
+          <h2 class="display-section text-text-primary">For a live AI Systems demo<br/>or a hiring conversation —<br/>get in touch.</h2>
         </div>
         <div class="flex flex-wrap gap-3">
           <a href="mailto:darkhtk@gmail.com" class="btn-cyan">darkhtk@gmail.com</a>
@@ -306,7 +274,6 @@
       <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
       <div class="flex flex-wrap gap-x-6 gap-y-2">
         <a href="./" class="hover:text-accent-cyan">home</a>
-        <a href="ai-systems/deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
         <a href="ai-systems/" class="hover:text-accent-cyan">ai</a>
         <a href="projects/" class="hover:text-accent-cyan">industrial</a>
         <a href="../" class="hover:text-accent-cyan">ko</a>

@@ -4,9 +4,9 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AI Systems | 홍대기</title>
-<meta name="description" content="DeskRelay flagship, Ops-Cure 커널, GenWorld + Ollama 로컬 LLM R&D 등 운영 가능한 형태로 마무리한 AI 시스템 모음."/>
+<meta name="description" content="운영 가능한 형태로 마무리한 AI 시스템 케이스 모음. DeskRelay 개발자 도구, Ops-Cure 커널, GenWorld + Ollama 로컬 LLM R&D, 그리고 짧은 실험 노트."/>
 <meta property="og:title" content="AI Systems | 홍대기"/>
-<meta property="og:description" content="DeskRelay flagship, Ops-Cure 커널, GenWorld + Ollama 로컬 LLM R&D 모음."/>
+<meta property="og:description" content="AI 시스템 케이스 시리즈 — DeskRelay · Ops-Cure · GenWorld + Ollama."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ko/ai-systems/"/>
@@ -39,7 +39,6 @@
       <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
       <nav class="hidden md:flex items-center gap-6">
         <a href="../../" class="nav-link">home</a>
-        <a href="../../ai-systems/deskrelay/" class="nav-link">deskrelay</a>
         <a href="./" class="nav-link is-active">ai</a>
         <a href="../projects/" class="nav-link">industrial</a>
         <a href="../about/" class="nav-link">profile</a>
@@ -61,7 +60,6 @@
       </div>
       <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
         <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span>→</span></a>
-        <a href="../../ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span>→</span></a>
         <a href="./" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">ai systems <span>→</span></a>
         <a href="../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span>→</span></a>
         <a href="../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
@@ -79,11 +77,10 @@
           <div class="kicker kicker-cyan border border-accent-cyan/30 bg-accent-cyan/5 px-3 py-1.5 w-fit">// ai systems</div>
           <h1 class="display-hero text-text-primary kr-balance">AI 를<br/>데모로 두지 않습니다.</h1>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
-            산업 현장에서 다져진 엔지니어링을 토대로, 운영 가능한 형태로 끝맺는 AI 시스템을 만듭니다. 도구는 일상 워크플로우에 끼워 써야 의미가 있다고 믿습니다. 그 자세가 가장 선명하게 드러나는 결과물이 <a href="../../ai-systems/deskrelay/" class="text-accent-cyan border-b border-accent-cyan/60">DeskRelay</a> 입니다.
+            산업 현장에서 다져진 엔지니어링을 토대로, 운영 가능한 형태로 끝맺는 AI 시스템을 만듭니다. 도구는 일상 워크플로우에 끼워 써야 의미가 있다고 믿고, 그 자세로 세 가지 케이스 — DeskRelay 개발자 도구, Ops-Cure 커널, GenWorld + Ollama — 를 정리했습니다.
           </p>
           <div class="flex flex-wrap items-center gap-3">
-            <a href="../../ai-systems/deskrelay/" class="btn-cyan">DeskRelay 케이스 <span>→</span></a>
-            <a href="#systems" class="btn-ghost">전체 목록 <span>↓</span></a>
+            <a href="#systems" class="btn-cyan">케이스 보기 <span>↓</span></a>
           </div>
         </div>
         <div class="lg:col-span-5">
@@ -91,7 +88,7 @@
             <span class="tr"></span><span class="bl"></span>
             <div class="kicker mb-4">// at a glance</div>
             <div class="grid gap-px bg-hairline border border-hairline font-mono text-[11px]">
-              <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">flagship</span><span class="text-accent-cyan">DeskRelay v0.0.0</span></div>
+              <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">dev tool</span><span class="text-text-primary">DeskRelay</span></div>
               <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">kernels</span><span class="text-text-primary">Ops-Cure</span></div>
               <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">local llm</span><span class="text-text-primary">GenWorld + Ollama</span></div>
               <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">experiments</span><span class="text-accent-amber">3 · lab notebook</span></div>
@@ -102,56 +99,36 @@
       </div>
     </section>
 
-    <!-- FLAGSHIP -->
+    <!-- AI SYSTEMS GRID -->
     <section id="systems" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
       <div class="chapter-rule mb-14">
-        <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ FLAGSHIP ]</span>
-        <span class="kicker text-accent-cyan">DESKRELAY</span>
-        <span class="line"></span>
-        <span class="tail text-accent-cyan/80">developer tool grade</span>
-      </div>
-
-      <div class="card ticks glow-cyan p-6 sm:p-8 lg:p-10">
-        <span class="tr"></span><span class="bl"></span>
-        <div class="grid gap-8 lg:grid-cols-12 items-center">
-          <div class="lg:col-span-7 flex flex-col gap-5">
-            <div class="kicker kicker-cyan">// flagship · ai dev tool</div>
-            <img src="../../assets/images/deskrelay-logo-lockup.png" alt="DeskRelay" class="h-12 sm:h-14 w-auto self-start max-w-full object-contain"/>
-            <p class="display-section text-text-primary kr-balance">로컬 Claude Code 세션을<br/>모바일·브라우저에서 그대로.</p>
-            <p class="text-text-secondary text-[14px] leading-[1.85] kr-balance max-w-xl">서버 PC 한 대가 site-frontend(<code>:18193</code>), site-backend(<code>:18192</code>), connector daemon(<code>:18191</code>) 을 띄우고, LAN/Tailscale 안의 다른 PC 를 디바이스로 등록해서 씁니다.</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="chip chip-cyan">self-host</span><span class="chip chip-cyan">mobile</span><span class="chip chip-cyan">multi-pc</span><span class="chip chip-cyan">secure</span>
-            </div>
-            <div class="flex flex-wrap items-center gap-3 pt-2">
-              <a href="../../ai-systems/deskrelay/" class="btn-cyan">전체 케이스 <span>→</span></a>
-              <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="btn-ghost">GitHub <span>↗</span></a>
-            </div>
-          </div>
-          <div class="lg:col-span-5">
-            <div class="term-window ticks">
-              <span class="tr"></span><span class="bl"></span>
-              <div class="card-bar"><span>SHOT</span><span class="text-text-muted">CHAT</span></div>
-              <div class="media-frame frame-contain aspect-[3/4]"><img src="../../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay 채팅 세션"/></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AI SYSTEMS GRID -->
-    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
-      <div class="chapter-rule mb-14">
         <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.01 ]</span>
-        <span class="kicker text-text-secondary">SYSTEMS · KERNELS</span>
+        <span class="kicker text-text-secondary">SYSTEMS · CASES</span>
         <span class="line"></span>
-        <span class="tail">2 cases</span>
+        <span class="tail">3 cases</span>
       </div>
 
-      <div class="grid gap-6 md:grid-cols-2">
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 
         <article class="card card-amber ticks ticks-amber group flex flex-col">
           <span class="tr"></span><span class="bl"></span>
-          <div class="card-bar"><span class="text-accent-amber">MODULE_01</span><span class="text-accent-amber">AGENT · KERNEL</span></div>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_01</span><span class="text-accent-amber">DEVELOPER TOOL</span></div>
+          <div class="media-frame aspect-[16/9] border-b border-hairline">
+            <img src="../../assets/images/deskrelay-chat-ui.png" alt="DeskRelay 채팅 UI"/>
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="chip">Self-host</span><span class="chip">Mobile</span><span class="chip">Multi-PC</span>
+            </div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3"><span class="text-accent-amber font-mono">&gt;</span> DeskRelay</h3>
+            <p class="text-[14px] leading-[1.8] text-text-secondary kr-balance flex-1">로컬 Claude Code 세션을 브라우저·모바일에서 안전하게 원격 조작하는 self-host 개발자 도구. Solid + Vite SPA, Hono + Bun backend, Capacitor Android 앱.</p>
+            <a href="../../ai-systems/deskrelay/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-amber border border-accent-amber/30 px-3 py-2 w-fit hover:bg-accent-amber/10">read_notes <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card card-amber ticks ticks-amber group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_02</span><span class="text-accent-amber">AGENT · KERNEL</span></div>
           <div class="media-frame aspect-[16/9] border-b border-hairline">
             <img src="../../assets/images/orchestration-v1-loop.png" alt="Ops-Cure orchestration"/>
           </div>
@@ -167,7 +144,7 @@
 
         <article class="card card-amber ticks ticks-amber group flex flex-col">
           <span class="tr"></span><span class="bl"></span>
-          <div class="card-bar"><span class="text-accent-amber">MODULE_02</span><span class="text-accent-amber">LOCAL LLM · R&amp;D</span></div>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_03</span><span class="text-accent-amber">LOCAL LLM · R&amp;D</span></div>
           <div class="media-frame aspect-[16/9] border-b border-hairline">
             <img src="../../assets/images/genworld-world.png" alt="GenWorld 게임 월드"/>
           </div>
@@ -257,7 +234,6 @@
       <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
       <div class="flex flex-wrap gap-x-6 gap-y-2">
         <a href="../../" class="hover:text-accent-cyan">home</a>
-        <a href="../../ai-systems/deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
         <a href="./" class="hover:text-accent-cyan">ai</a>
         <a href="../projects/" class="hover:text-accent-cyan">industrial</a>
         <a href="../about/" class="hover:text-accent-cyan">profile</a>
