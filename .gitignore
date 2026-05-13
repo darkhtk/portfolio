@@ -15,3 +15,6 @@ desktop.ini
 
 # Local-only notes
 local/
+
+# Personal PDFs (kept locally, not for site)
+resume_saramin.pdf
