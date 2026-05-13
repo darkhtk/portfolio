@@ -15,8 +15,16 @@
     el.style.cursor = "grab";
     el.style.userSelect = "auto";
 
+    el.querySelectorAll("img").forEach(function (img) {
+      img.setAttribute("draggable", "false");
+    });
+    el.addEventListener("dragstart", function (e) { e.preventDefault(); });
+
     el.addEventListener("mousedown", function (e) {
       // 링크/버튼 내부 클릭은 그대로 두기 — 단, 드래그가 시작되면 클릭 차단
+      if (e.target && e.target.tagName === "IMG") {
+        e.preventDefault();
+      }
       isDown = true;
       moved = false;
       startX = e.pageX - el.offsetLeft;

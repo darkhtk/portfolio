@@ -117,6 +117,7 @@ img { display: block; max-width: 100%; }
 .h-scroll::-webkit-scrollbar-track { background: rgba(230,237,243,0.04); }
 .h-scroll::-webkit-scrollbar-thumb { background: rgba(111,227,255,0.24); }
 .h-scroll > * { scroll-snap-align: start; flex: 0 0 auto; }
+.h-scroll img, [data-h-drag] img { -webkit-user-drag: none; user-drag: none; -webkit-user-select: none; user-select: none; }
 
 /* === checklist === */
 .check { display: flex; align-items: baseline; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 13px; letter-spacing: 0.04em; }
