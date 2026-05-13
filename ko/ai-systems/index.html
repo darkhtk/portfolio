@@ -7,9 +7,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
 <title>AI Systems | 홍대기</title>
-<meta name="description" content="홍대기의 kernel + behaviors 아키텍처. Ops-Cure의 state/event kernel과 DeskRelay의 브라우저/모바일-to-PC 로컬 에이전트 실행 SaaS 구현."/>
+<meta name="description" content="홍대기의 kernel + behaviors 아키텍처. Ops-Cure의 state/event kernel과 DeskRelay의 GitHub 기준 Claude Code self-host 브라우저 제어 도구."/>
 <meta property="og:title" content="AI Systems | 홍대기"/>
-<meta property="og:description" content="kernel + behaviors, 그리고 DeskRelay: 사용자 PC의 로컬 에이전트 실행을 브라우저/모바일에서 제어하는 SaaS."/>
+<meta property="og:description" content="kernel + behaviors, 그리고 DeskRelay: 내 PC의 Claude Code를 브라우저에서 제어하는 self-host 제품 표면."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ko/ai-systems/"/>
@@ -40,7 +40,7 @@
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
       <a href="../" class="flex flex-col">
         <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">홍대기</span>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity x AI Systems</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
       </a>
       <nav class="hidden items-center gap-2 md:flex">
         <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../">홈</a>
@@ -104,13 +104,13 @@
             에이전트 시스템만 만든 게 아닙니다. 그것이 돌아가는 커널을 만들었습니다.
           </p>
           <p class="mt-5 max-w-3xl text-sm leading-7 text-[#526178] sm:text-base">
-            Ops-Cure는 Discord 채널/스레드를 상태를 가진 공간으로 취급합니다. DeskRelay는 그 원격 에이전트 패턴을 제품 표면으로 옮긴 작업입니다. 브라우저/모바일 UI, PC connector, Cloudflare Workers relay, behavior runtime이 함께 움직입니다. 두 작업의 기준은 같습니다. 커널은 작게, 실행은 사용자의 머신 가까이에.
+            Ops-Cure는 Discord 채널/스레드를 상태를 가진 공간으로 취급합니다. DeskRelay는 GitHub 저장소 기준의 self-host 증거입니다. 서버 PC가 site-frontend, site-backend, connector daemon을 띄우고, LAN/Tailscale 안의 등록 PC가 각자의 Claude Code CLI를 connector daemon으로 노출합니다.
           </p>
           <div class="mt-7 flex flex-wrap gap-2.5">
             <span class="pill text-sm">Kernel</span>
             <span class="pill text-sm">Behavior Plugins</span>
             <span class="pill text-sm">Discord Transport</span>
-            <span class="pill text-sm">Browser-to-PC SaaS</span>
+            <span class="pill text-sm">Self-host control plane</span>
             <span class="pill text-sm">Local Runtimes</span>
           </div>
         </div>
@@ -128,7 +128,7 @@
               <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Behaviors</div>
               <div class="mt-1 text-sm leading-6 text-[#4f6077]">orchestration · remote_codex · chat.</div>
             </a>
-            <a href="#remote-for-claude" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
+          <a href="#deskrelay" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
               <div class="metric-label">03</div>
               <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">DeskRelay</div>
               <div class="mt-1 text-sm leading-6 text-[#4f6077]">로컬 에이전트 실행을 브라우저/모바일에서 제어.</div>
@@ -281,36 +281,33 @@
       </div>
     </section>
 
-    <section id="remote-for-claude" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+    <section id="deskrelay" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
       <div class="max-w-3xl">
-        <div class="section-kicker">Production SaaS · Remote Agent Runtime</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay — 로컬 에이전트 실행을 위한 브라우저/모바일 제어면</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">사용자가 여러 PC를 페어링하고, 브라우저 또는 Android 앱에서 디바이스를 고른 뒤, PC connector를 통해 로컬 에이전트 CLI를 실행하게 하는 SaaS 플랫폼입니다. 첫 어댑터는 Claude Code를 대상으로 하지만, 제품의 본질은 Claude 전용 래퍼가 아니라 local-first relay/control plane입니다.</p>
+        <div class="section-kicker">Self-host Product · Remote Agent Runtime</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay — 내 PC의 Claude Code를 브라우저에서 제어하는 self-host 도구</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">공개 GitHub 저장소만 기준으로 다시 썼습니다. DeskRelay는 서버 PC에서 <code>:18193</code>의 site-frontend, <code>:18192</code>의 site-backend, <code>:18191</code>의 connector daemon을 띄우고, LAN 또는 Tailscale 안의 등록 PC는 <code>:18091</code> connector port로 연결합니다.</p>
       </div>
 
       <article class="mt-10 project-card bg-white p-6 sm:p-8 lg:p-10">
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
           <figure class="media-frame remote-landing-thumb">
-            <img src="../../assets/images/remote-for-claude-play-store-chat.jpg" alt="컨텍스트 칩과 입력창이 보이는 DeskRelay 모바일 채팅 화면" loading="lazy" width="1080" height="2340"/>
+            <img src="../../assets/images/deskrelay-github-usage-mobile-chat.png" alt="DeskRelay GitHub 매뉴얼 모바일 채팅 스크린샷" loading="lazy" width="360" height="780"/>
           </figure>
 
           <div>
             <div class="section-kicker">구현 범위</div>
             <div class="content-prose mt-5">
-              <p><strong>제품 아키텍처.</strong> shared contract, behavior SDK, PC connector daemon/CLI, Cloudflare Workers backend, SolidJS frontend, Capacitor Android packaging까지 한 모노레포로 구성했습니다.</p>
-              <p><strong>디바이스 생명주기.</strong> 페어링 코드, 디바이스 identity, 진단, 기기별 설정, unpair cleanup을 연결했습니다. 해제 시 live relay를 끊고 브라우저/디바이스 로컬 상태를 정리합니다.</p>
-              <p><strong>런타임 경계.</strong> 사이트는 채팅 transcript나 코드를 저장하지 않습니다. alpha에서는 Durable Object를 통해 평문 relay가 지나가며, E2E/WebRTC hardening은 다음 trust-model 단계로 문서화했습니다.</p>
-              <p><strong>릴리즈 표면.</strong> winget/Homebrew 템플릿, Android listing copy, localization source, operator runbook을 코드 옆에 둬서 데모가 아니라 배포 가능한 제품 흐름으로 정리했습니다.</p>
+              <p><strong>GitHub source.</strong> README는 DeskRelay를 내 PC에서 실행되는 Claude Code를 브라우저에서 제어하는 self-host 개발 도구로 정의합니다.</p>
+              <p><strong>설치 흐름.</strong> Windows/macOS 서버 설치 스크립트는 브라우저 UI를 <code>http://127.0.0.1:18193</code>로 열고, 다른 기기 접속은 <code>#site-token=...</code>이 포함된 URL을 사용할 수 있습니다.</p>
+              <p><strong>디바이스 등록.</strong> 메인 화면의 “다른 PC 등록 명령”을 대상 Windows PC에 붙여넣으면 repo 설치/업데이트, connector 실행, Tailscale/LAN 주소 감지, 서버 접근 검증, 디바이스 등록을 처리합니다.</p>
+              <p><strong>운영 경계.</strong> README는 connector port를 공용 인터넷에 직접 노출하지 말고 외부 접근이 필요하면 Tailscale 같은 사설 네트워크를 쓰라고 명시합니다.</p>
             </div>
             <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href="../../ai-systems/remote-for-claude/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
+              <a href="../../ai-systems/deskrelay/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
                 케이스 열기
                 <span class="material-symbols-outlined ml-2 text-base">north_east</span>
               </a>
-              <a href="https://claude-remote-platform-site.semibanbi.workers.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
-                Live alpha
-              </a>
-              <a href="https://github.com/darkhtk/claude-remote-platform" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
+              <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
                 GitHub 저장소
               </a>
             </div>
@@ -350,7 +347,7 @@
           <div class="max-w-3xl">
             <div class="section-kicker">다음</div>
             <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">산업 납품 작업</h2>
-            <p class="mt-4 text-base leading-7 text-[#4f6077]">포트폴리오의 다른 반쪽 — XR, BIM 런타임 툴링, 로보틱스, 전시 납품.</p>
+            <p class="mt-4 text-base leading-7 text-[#4f6077]">포트폴리오의 실행 기반 — XR, BIM 런타임 툴링, 로보틱스 제어, 전시 납품.</p>
           </div>
           <a href="../projects/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
             프로젝트 열기
@@ -360,6 +357,21 @@
       </div>
     </section>
   </main>
+
+  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div>
+        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
+        <div class="mt-2 text-sm text-[#526178]">AI Systems, kernel and behaviors</div>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 text-sm">
+        <a class="footer-link" href="../">홈</a>
+        <a class="footer-link" href="../projects/">프로젝트</a>
+        <a class="footer-link" href="../about/">프로필</a>
+        <a class="footer-link" href="../../ai-systems/">English</a>
+      </div>
+    </div>
+  </footer>
 </div>
 <script src="../../assets/js/site.js"></script>
 </body>

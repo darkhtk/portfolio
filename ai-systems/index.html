@@ -7,9 +7,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
 <title>AI Systems | Daeki Hong</title>
-<meta name="description" content="Kernel-plus-behaviors architecture by Daeki Hong. Ops-Cure hosts orchestration, remote execution, and dialogue behaviors; DeskRelay turns the remote-agent pattern into a browser/mobile-to-PC SaaS."/>
+<meta name="description" content="Kernel-plus-behaviors architecture by Daeki Hong. Ops-Cure hosts orchestration, remote execution, and dialogue behaviors; DeskRelay is a GitHub-backed self-host browser control tool for Claude Code on your own PCs."/>
 <meta property="og:title" content="AI Systems | Daeki Hong"/>
-<meta property="og:description" content="Kernel + behaviors architecture, plus DeskRelay: a browser/mobile control plane for local agent execution on a user's own PC."/>
+<meta property="og:description" content="Kernel + behaviors architecture, plus DeskRelay: self-host browser control for Claude Code running on your own PCs."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/"/>
@@ -40,7 +40,7 @@
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
       <a href="../" class="flex flex-col">
         <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Industrial Unity x AI Systems</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
       </a>
       <nav class="hidden items-center gap-2 md:flex">
         <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../">Home</a>
@@ -104,13 +104,13 @@
             I didn't just build an agent system. I built the kernel it runs on.
           </p>
           <p class="mt-5 max-w-3xl text-sm leading-7 text-[#526178] sm:text-base">
-            Ops-Cure treats a Discord channel or thread as a stateful space. DeskRelay carries that remote-agent pattern into a product surface: browser/mobile UI, PC connector, Cloudflare Workers relay, and installable behavior runtime. Both use the same bias: keep the kernel small, keep runtime work close to the user's machine.
+            Ops-Cure treats a Discord channel or thread as a stateful space. DeskRelay is the GitHub-backed self-host proof: a server PC runs site-frontend, site-backend, and a connector daemon, while registered PCs on LAN/Tailscale expose their own Claude Code CLI through connector daemons.
           </p>
           <div class="mt-7 flex flex-wrap gap-2.5">
             <span class="pill text-sm">Kernel</span>
             <span class="pill text-sm">Behavior Plugins</span>
             <span class="pill text-sm">Discord Transport</span>
-            <span class="pill text-sm">Browser-to-PC SaaS</span>
+            <span class="pill text-sm">Self-host control plane</span>
             <span class="pill text-sm">Local Runtimes</span>
           </div>
         </div>
@@ -128,7 +128,7 @@
               <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Behaviors</div>
               <div class="mt-1 text-sm leading-6 text-[#4f6077]">Orchestration, remote_codex, chat.</div>
             </a>
-            <a href="#remote-for-claude" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
+          <a href="#deskrelay" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
               <div class="metric-label">03</div>
               <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">DeskRelay</div>
               <div class="mt-1 text-sm leading-6 text-[#4f6077]">Browser/mobile control plane for local agent execution.</div>
@@ -281,36 +281,33 @@
       </div>
     </section>
 
-    <section id="remote-for-claude" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+    <section id="deskrelay" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
       <div class="max-w-3xl">
-        <div class="section-kicker">Production SaaS · Remote Agent Runtime</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay — browser/mobile control plane for local agent execution</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">A SaaS platform that lets a user pair multiple PCs, choose one from the browser or Android app, and drive a local agent CLI through a PC connector. The first adapter targets Claude Code, but the product shape is a local-first relay/control plane rather than a Claude-only wrapper.</p>
+        <div class="section-kicker">Self-host Product · Remote Agent Runtime</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay — self-host browser control for Claude Code on your PCs</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">Rewritten from the public GitHub repository only. DeskRelay runs a server PC with <code>site-frontend</code> on <code>:18193</code>, <code>site-backend</code> on <code>:18192</code>, and a connector daemon on <code>:18191</code>; registered PCs use connector port <code>:18091</code> over LAN or Tailscale.</p>
       </div>
 
       <article class="mt-10 project-card bg-white p-6 sm:p-8 lg:p-10">
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
           <figure class="media-frame remote-landing-thumb">
-            <img src="../assets/images/remote-for-claude-play-store-chat.jpg" alt="DeskRelay mobile chat screen with context chips and composer" loading="lazy" width="1080" height="2340"/>
+            <img src="../assets/images/deskrelay-github-usage-mobile-chat.png" alt="DeskRelay GitHub manual mobile chat screenshot" loading="lazy" width="360" height="780"/>
           </figure>
 
           <div>
             <div class="section-kicker">What I built</div>
             <div class="content-prose mt-5">
-              <p><strong>Product architecture.</strong> A monorepo spanning shared contracts, behavior SDK, PC connector daemon/CLI, Cloudflare Workers backend, SolidJS frontend, and Capacitor Android packaging.</p>
-              <p><strong>Device lifecycle.</strong> Pairing code flow, device identity, diagnostics, per-device settings, and unpair cleanup that closes the live relay and clears local browser/device state.</p>
-              <p><strong>Runtime boundary.</strong> The site does not store chat transcripts or code. In alpha it relays request bodies through a Durable Object; E2E/WebRTC hardening is documented as the next trust-model step.</p>
-              <p><strong>Release surface.</strong> winget/Homebrew templates, Android listing copy, localization source, and operator runbooks sit beside the code so the product can be shipped rather than only demoed.</p>
+              <p><strong>GitHub source.</strong> The README defines DeskRelay as a self-host development tool for controlling Claude Code running on your own PC from a browser.</p>
+              <p><strong>Install flow.</strong> Windows and macOS server scripts open the browser UI at <code>http://127.0.0.1:18193</code>; access from other devices uses generated URLs that can include <code>#site-token=...</code>.</p>
+              <p><strong>Device registration.</strong> The main screen provides a “register another PC” command. The target Windows PC runs it to install/update the repo, start connector, detect Tailscale/LAN address, validate server reachability, and register the device.</p>
+              <p><strong>Operator boundary.</strong> The README warns not to expose connector ports directly to the public internet and recommends Tailscale/private network access for outside use.</p>
             </div>
             <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href="../en/ai-systems/remote-for-claude/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
+              <a href="../en/ai-systems/deskrelay/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
                 Open case study
                 <span class="material-symbols-outlined ml-2 text-base">north_east</span>
               </a>
-              <a href="https://claude-remote-platform-site.semibanbi.workers.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
-                Live alpha
-              </a>
-              <a href="https://github.com/darkhtk/claude-remote-platform" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
+              <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
                 GitHub repo
               </a>
             </div>

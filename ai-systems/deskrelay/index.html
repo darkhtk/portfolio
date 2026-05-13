@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DeskRelay | 홍대기</title>
+<meta name="description" content="DeskRelay는 공개 GitHub README 기준, 내 PC에서 실행되는 Claude Code를 브라우저에서 제어하는 self-host 개발 도구입니다."/>
+<meta property="og:title" content="DeskRelay | 홍대기"/>
+<meta property="og:description" content="서버 PC, 등록 PC, connector daemon, LAN/Tailscale, Site token 흐름을 GitHub 저장소 기준으로 다시 정리한 사례."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/deskrelay/"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="DeskRelay | 홍대기"/>
+<meta name="twitter:description" content="내 PC의 Claude Code를 브라우저에서 제어하는 GitHub 기준 self-host 개발 도구."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config={theme:{extend:{fontFamily:{headline:["Space Grotesk","Noto Sans KR","sans-serif"],body:["Noto Sans KR","sans-serif"],label:["Space Grotesk","Noto Sans KR","sans-serif"]}}}}</script>
+<link rel="stylesheet" href="../../assets/css/site.css"/>
+</head>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<div class="site-shell">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="../../" class="flex flex-col">
+        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
+      </a>
+      <nav class="hidden items-center gap-2 md:flex">
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../">Home</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../projects/">Projects</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../ai-systems/">AI Systems</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../about/">Profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="lang-toggle hidden sm:inline-flex">
+          <a class="lang-link" href="../../en/ai-systems/deskrelay/">EN</a>
+          <a class="lang-link is-active" href="./">KO</a>
+        </div>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="메뉴 닫기"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-3">
+        <a href="../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">포지셔닝과 대표 작업.</div></a>
+        <a href="../../projects/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Projects</div><div class="mt-1 text-sm text-[#526178]">산업 납품 작업.</div></a>
+        <a href="../../ai-systems/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">AI Systems</div><div class="mt-1 text-sm text-[#526178]">커널, behavior, 응용 AI 시스템.</div></a>
+        <a href="../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">경력과 작업 방식.</div></a>
+      </div>
+      <div class="mt-6 flex gap-3">
+        <a href="../../en/ai-systems/deskrelay/" class="lang-link bg-white">EN</a>
+        <a href="./" class="lang-link is-active bg-white">KO</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative">
+    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div class="surface-panel p-6 sm:p-8 lg:p-10">
+          <div class="section-kicker">AI Systems · Product Case Study</div>
+          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay</h1>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">GitHub README 기준 DeskRelay는 내 PC에서 실행되는 Claude Code를 브라우저에서 제어하는 self-host 개발 도구입니다. 서버 PC 한 대가 <code>site-frontend</code>, <code>site-backend</code>, local connector daemon을 띄우고, 같은 LAN 또는 Tailscale 안의 다른 PC를 디바이스로 등록해서 씁니다.</p>
+          <div class="mt-7 flex flex-wrap gap-2.5">
+            <span class="pill text-sm">Self-host Site Backend</span>
+            <span class="pill text-sm">Site Token Login</span>
+            <span class="pill text-sm">Bun Connector</span>
+            <span class="pill text-sm">SolidJS</span>
+            <span class="pill text-sm">Tailscale / LAN</span>
+          </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
+              <span class="material-symbols-outlined mr-2 text-base">open_in_new</span>
+              GitHub README
+            </a>
+            <a href="../../en/ai-systems/deskrelay/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">English version</a>
+          </div>
+        </div>
+        <aside class="feature-panel p-5 sm:p-6">
+          <div class="section-kicker">읽는 순서</div>
+          <div class="mt-5 grid gap-3">
+            <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">문제</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">로컬 에이전트 작업은 강력하지만 한 PC에 묶입니다.</div></a>
+            <a href="#product-surface" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">제품 화면</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">모바일 채팅, 세션, 권한, 지침, 스킬 화면.</div></a>
+            <a href="#architecture" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">아키텍처</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">브라우저 UI, 사이트 백엔드, connector daemon, Claude CLI.</div></a>
+            <a href="#lifecycle" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">디바이스 생명주기</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">등록, 검증, 전환, 진단.</div></a>
+            <a href="#boundary" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">05</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">신뢰 경계</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">private-network 우선, 로컬 실행은 로컬에.</div></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="problem" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="summary-grid">
+        <article class="summary-card"><h3>기준</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">이 페이지는 공개 GitHub 저장소의 README, docs/MANUAL.md, package metadata, manual screenshots만 기준으로 다시 작성했습니다.</p></article>
+        <article class="summary-card"><h3>문제</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">에이전트 작업은 사용자의 repo, shell, token이 있는 PC에서 가장 강합니다. 하지만 그만큼 작업 흐름이 한 키보드에 묶입니다.</p></article>
+        <article class="summary-card"><h3>접근</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">서버 PC를 띄우고 브라우저 UI로 들어간 뒤, 메인 화면의 다른 PC 등록 명령을 대상 Windows PC에 실행해 connector와 device registry를 연결합니다.</p></article>
+        <article class="summary-card"><h3>상태</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">저장소 버전은 v0.0.0입니다. README에는 설치, 접속 URL과 token, 다른 PC 등록, 사용, 업데이트, 중지/제거, 문제 해결 흐름이 문서화되어 있습니다.</p></article>
+      </div>
+    </section>
+
+    <section id="product-surface" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="remote-surface-copy">
+        <div class="section-kicker">§ 01 · Product surface</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">백엔드 배관만이 아니라 실제 제어면까지</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">GitHub 저장소의 <code>docs/assets/screenshots</code>에 포함된 모바일 manual screenshots를 제품 증거의 중심에 배치하고, 기존 데스크톱 제품 캡처도 함께 유지했습니다. 채팅, 세션 목록, 권한, 지침, 스킬 화면을 모바일 사용 흐름 기준으로 먼저 보여줍니다.</p>
+        <p class="remote-shot-caption mt-5">Source: <code>darkhtk/deskrelay</code> GitHub README and <code>docs/MANUAL.md</code>.</p>
+      </div>
+      <div class="remote-play-store-grid mt-8">
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../assets/images/deskrelay-github-usage-mobile-chat.png" alt="DeskRelay 모바일 채팅 화면" loading="lazy" width="360" height="780"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../assets/images/deskrelay-github-usage-mobile-sessions.png" alt="DeskRelay 모바일 세션 목록 화면" loading="lazy" width="360" height="780"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../assets/images/deskrelay-github-usage-mobile-permissions.png" alt="DeskRelay 모바일 권한 탭 화면" loading="lazy" width="360" height="780"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../assets/images/deskrelay-github-usage-mobile-instructions.png" alt="DeskRelay 모바일 지침 탭 화면" loading="lazy" width="360" height="780"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../assets/images/deskrelay-github-usage-mobile-skills.png" alt="DeskRelay 모바일 스킬 탭 화면" loading="lazy" width="360" height="780"/>
+        </figure>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <figure class="remote-product-shot">
+          <img src="../../assets/images/deskrelay-chat-ui.png" alt="DeskRelay 데스크톱 채팅 UI와 결과 화면" loading="lazy" width="1280" height="1392"/>
+        </figure>
+        <figure class="remote-product-shot">
+          <img src="../../assets/images/deskrelay-new-chat-directory.png" alt="DeskRelay 새 채팅 작업 디렉터리 선택 화면" loading="lazy" width="799" height="1095"/>
+        </figure>
+        <figure class="remote-product-shot">
+          <img src="../../assets/images/deskrelay-device-switcher.png" alt="DeskRelay 디바이스 전환 드롭다운" loading="lazy" width="799" height="1095"/>
+        </figure>
+        <figure class="remote-product-shot">
+          <img src="../../assets/images/deskrelay-settings-ui.png" alt="DeskRelay 설정 화면" loading="lazy" width="799" height="1095"/>
+        </figure>
+        <figure class="remote-product-shot md:col-span-2 xl:col-span-2">
+          <img src="../../assets/images/deskrelay-connection-status.png" alt="DeskRelay 연결 상태 진단 화면" loading="lazy" width="1280" height="900"/>
+        </figure>
+      </div>
+    </section>
+
+    <section id="architecture" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 02 · Architecture</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">원격 UI, 로컬 실행</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">사이트는 제품처럼 느껴져야 하지만, 민감한 실행 표면은 사용자의 PC에 남아야 합니다.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div class="media-frame">
+          <div class="stack-diagram stack-diagram--deep sm:aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">End-to-end path</div>
+              <div class="mt-3 stack-diagram__title">Browser → :18193 → :18192 → :18191/:18091 → Claude Code CLI</div>
+              <p class="mt-3 stack-diagram__copy">README 구조도 기준. 서버 PC와 등록 PC의 connector daemon이 각각 로컬 Claude Code CLI를 실행합니다.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>site-frontend</strong><span>Browser UI on :18193</span></div>
+              <div class="stack-diagram__node"><strong>site-backend</strong><span>:18192 and .self-server/state registry</span></div>
+              <div class="stack-diagram__node"><strong>connector</strong><span>server :18191, registered PC :18091</span></div>
+              <div class="stack-diagram__node"><strong>Claude Code</strong><span>CLI logged in on each controlled PC</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>바깥은 제품 shell, 안쪽은 사용자 PC의 runtime authority.</span></div>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">System slices</div>
+          <div class="content-prose mt-5">
+            <p><strong>Frontend.</strong> package metadata 기준 <code>@deskrelay/site-frontend</code>는 Solid + Vite SPA이고, <code>@deskrelay/mobile-app</code>은 Capacitor wrapper입니다.</p>
+            <p><strong>Backend.</strong> <code>@deskrelay/site-backend</code>는 self-host Hono/Bun backend이며 브라우저와 사용자가 등록한 connector daemon URL 사이를 연결합니다.</p>
+            <p><strong>Connector.</strong> <code>@deskrelay/pc-connector-daemon</code>은 private HTTP API로 local Claude Code behaviors를 노출하는 self-host connector daemon입니다.</p>
+            <p><strong>Behavior.</strong> <code>@deskrelay/behavior-remote-claude</code>는 사용자의 PC에서 <code>claude</code> CLI를 실행하고 stream-json output을 kernel events로 흘립니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lifecycle" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 03 · Device lifecycle</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">설치와 등록 흐름이 제품의 뼈대입니다</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">README는 서버 설치, 접속 URL과 token, 다른 PC 등록, 검증 리포트, 업데이트, 문제 해결을 한 흐름으로 설명합니다.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <article class="project-card bg-white p-5">
+          <div class="section-kicker">Install</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">서버 PC에서 시작</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Windows PowerShell 또는 macOS Terminal에서 설치 스크립트를 실행합니다. 설치 후 기본 브라우저는 <code>http://127.0.0.1:18193</code>로 열립니다.</p>
+        </article>
+        <article class="project-card bg-white p-5">
+          <div class="section-kicker">Register</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">다른 PC 등록 명령</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">메인 화면의 등록 명령을 제어하려는 Windows PC PowerShell에 붙여넣으면 repo 설치/업데이트, connector 실행, Tailscale/LAN 주소 감지, 서버 접근 검증, 디바이스 등록을 처리합니다.</p>
+        </article>
+        <article class="project-card bg-white p-5">
+          <div class="section-kicker">Operate</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">디바이스, 세션, 권한, 스킬</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">왼쪽 드롭다운에서 PC를 고르고, 새 채팅의 작업 디렉토리를 선택하며, 권한 탭과 스킬 탭에서 현재 Claude 환경을 확인합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="boundary" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="surface-panel p-6 sm:p-8 lg:p-10">
+        <div class="section-kicker">§ 04 · Trust boundary</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">private-network 우선, 로컬 권한은 로컬에</h2>
+        <div class="content-prose mt-5 max-w-4xl">
+          <p>README는 connector 포트를 공용 인터넷에 직접 노출하지 말고, 외부 접근이 필요하면 Tailscale 같은 사설 네트워크를 쓰라고 명시합니다. 다른 PC 등록 조건도 같은 LAN 또는 같은 Tailscale tailnet입니다.</p>
+          <p>문제 해결도 이 경계 안에서 설명됩니다. 디바이스가 목록에 없으면 서버 URL, 같은 LAN/Tailscale, 대상 PC의 <code>18091</code> 포트, 방화벽, registration report, connector 검증 리포트를 순서대로 확인합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 pt-2 sm:px-6 sm:pb-20 lg:px-8">
+      <div class="surface-panel p-6 sm:p-8 lg:p-10">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div class="max-w-3xl">
+            <div class="section-kicker">Related</div>
+            <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">AI Systems로 돌아가기</h2>
+            <p class="mt-4 text-base leading-7 text-[#4f6077]">DeskRelay는 Ops-Cure 옆에 놓이는 작업입니다. 하나는 kernel-first, 하나는 product-first이고, 둘 다 제품형 제어면이 필요한 local agent runtime을 중심에 둡니다.</p>
+          </div>
+          <a href="../../ai-systems/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
+            AI Systems 열기
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div>
+        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
+        <div class="mt-2 text-sm text-[#526178]">DeskRelay — GitHub README 기준 self-host browser control</div>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 text-sm">
+        <a class="footer-link" href="../../">Home</a>
+        <a class="footer-link" href="../../ai-systems/">AI Systems</a>
+        <a class="footer-link" href="../../about/">Profile</a>
+        <a class="footer-link" href="../../en/ai-systems/deskrelay/">English</a>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

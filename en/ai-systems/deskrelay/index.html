@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DeskRelay | Daeki Hong</title>
+<meta name="description" content="DeskRelay is a self-host development tool for controlling Claude Code running on your own PCs from a browser, rebuilt from the public GitHub repository."/>
+<meta property="og:title" content="DeskRelay | Daeki Hong"/>
+<meta property="og:description" content="Server PC, registered PCs, connector daemons, LAN/Tailscale, and Site token flow summarized from the public GitHub repository."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/deskrelay/"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="DeskRelay | Daeki Hong"/>
+<meta name="twitter:description" content="Self-host browser control for Claude Code running on your own PCs, rebuilt from the public GitHub repository."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config={theme:{extend:{fontFamily:{headline:["Space Grotesk","Noto Sans KR","sans-serif"],body:["Noto Sans KR","sans-serif"],label:["Space Grotesk","Noto Sans KR","sans-serif"]}}}}</script>
+<link rel="stylesheet" href="../../../assets/css/site.css"/>
+</head>
+<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
+<div class="site-shell">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="../../../" class="flex flex-col">
+        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
+      </a>
+      <nav class="hidden items-center gap-2 md:flex">
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../">Home</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../projects/">Projects</a>
+        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../../ai-systems/">AI Systems</a>
+        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../about/">Profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="lang-toggle hidden sm:inline-flex">
+          <a class="lang-link is-active" href="./">EN</a>
+          <a class="lang-link" href="../../../ai-systems/deskrelay/">KO</a>
+        </div>
+        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
+        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="Close menu"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-3">
+        <a href="../../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">Overview and positioning.</div></a>
+        <a href="../../../projects/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Projects</div><div class="mt-1 text-sm text-[#526178]">Industrial delivery work.</div></a>
+        <a href="../../../ai-systems/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">AI Systems</div><div class="mt-1 text-sm text-[#526178]">Kernel, behaviors, and applied AI systems.</div></a>
+        <a href="../../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">Working style and background.</div></a>
+      </div>
+      <div class="mt-6 flex gap-3">
+        <a href="./" class="lang-link is-active bg-white">EN</a>
+        <a href="../../../ai-systems/deskrelay/" class="lang-link bg-white">KO</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative">
+    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div class="surface-panel p-6 sm:p-8 lg:p-10">
+          <div class="section-kicker">AI Systems · Product Case Study</div>
+          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay</h1>
+          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">Based on the public GitHub README, DeskRelay is a self-host development tool for controlling Claude Code running on your own PC from a browser. One server PC runs <code>site-frontend</code>, <code>site-backend</code>, and a local connector daemon; other PCs on the same LAN or Tailscale tailnet can be registered as devices.</p>
+          <div class="mt-7 flex flex-wrap gap-2.5">
+            <span class="pill text-sm">Self-host Site Backend</span>
+            <span class="pill text-sm">Site Token Login</span>
+            <span class="pill text-sm">Bun Connector</span>
+            <span class="pill text-sm">SolidJS</span>
+            <span class="pill text-sm">Tailscale / LAN</span>
+          </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
+              <span class="material-symbols-outlined mr-2 text-base">open_in_new</span>
+              GitHub README
+            </a>
+            <a href="../../../ai-systems/deskrelay/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">Open Korean version</a>
+          </div>
+        </div>
+        <aside class="feature-panel p-5 sm:p-6">
+          <div class="section-kicker">Read in order</div>
+          <div class="mt-5 grid gap-3">
+            <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Problem</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Local agent work is powerful but tied to one machine.</div></a>
+            <a href="#product-surface" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Product surface</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Mobile chat, sessions, permissions, instructions, and skills.</div></a>
+            <a href="#architecture" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Architecture</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Browser UI, site backend, connector daemon, Claude CLI.</div></a>
+            <a href="#lifecycle" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Device lifecycle</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Register, validate, switch, diagnose.</div></a>
+            <a href="#boundary" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">05</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Trust boundary</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">Private-network first, local execution stays local.</div></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="problem" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="summary-grid">
+        <article class="summary-card"><h3>Source</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">This page was rebuilt from the public GitHub repository only: README, docs/MANUAL.md, package metadata, and manual screenshots.</p></article>
+        <article class="summary-card"><h3>Problem</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Agent work is most useful on a machine with the user's repo, shell, and tokens. But that also pins the workflow to one keyboard.</p></article>
+        <article class="summary-card"><h3>Approach</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Start a server PC, open the browser UI, then copy the “register another PC” command from the main screen into the controlled Windows PC.</p></article>
+        <article class="summary-card"><h3>Status</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">The repository is at v0.0.0. README covers install, access URL and token, other-PC registration, usage, update, stop/uninstall, and troubleshooting.</p></article>
+      </div>
+    </section>
+
+    <section id="product-surface" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="remote-surface-copy">
+        <div class="section-kicker">§ 01 · Product surface</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">A real control surface, not only backend plumbing</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">Mobile manual screenshots from <code>docs/assets/screenshots</code> are now the center of the product evidence, while the existing desktop product captures are kept as supporting proof. The gallery first shows chat, sessions, permissions, instructions, and skills as the mobile usage flow.</p>
+        <p class="remote-shot-caption mt-5">Source: <code>darkhtk/deskrelay</code> GitHub README and <code>docs/MANUAL.md</code>.</p>
+      </div>
+      <div class="remote-play-store-grid mt-8">
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-chat.png" alt="DeskRelay mobile chat screen" loading="lazy" width="360" height="780"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-sessions.png" alt="DeskRelay mobile sessions screen" loading="lazy" width="360" height="780"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-permissions.png" alt="DeskRelay mobile permissions tab" loading="lazy" width="360" height="780"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-instructions.png" alt="DeskRelay mobile instructions tab" loading="lazy" width="360" height="780"/>
+        </figure>
+        <figure class="remote-product-shot remote-product-shot--store">
+          <img src="../../../assets/images/deskrelay-github-usage-mobile-skills.png" alt="DeskRelay mobile skills tab" loading="lazy" width="360" height="780"/>
+        </figure>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <figure class="remote-product-shot">
+          <img src="../../../assets/images/deskrelay-chat-ui.png" alt="DeskRelay desktop chat UI and result screen" loading="lazy" width="1280" height="1392"/>
+        </figure>
+        <figure class="remote-product-shot">
+          <img src="../../../assets/images/deskrelay-new-chat-directory.png" alt="DeskRelay new chat directory picker" loading="lazy" width="799" height="1095"/>
+        </figure>
+        <figure class="remote-product-shot">
+          <img src="../../../assets/images/deskrelay-device-switcher.png" alt="DeskRelay device switcher dropdown" loading="lazy" width="799" height="1095"/>
+        </figure>
+        <figure class="remote-product-shot">
+          <img src="../../../assets/images/deskrelay-settings-ui.png" alt="DeskRelay settings screen" loading="lazy" width="799" height="1095"/>
+        </figure>
+        <figure class="remote-product-shot md:col-span-2 xl:col-span-2">
+          <img src="../../../assets/images/deskrelay-connection-status.png" alt="DeskRelay connection diagnostics screen" loading="lazy" width="1280" height="900"/>
+        </figure>
+      </div>
+    </section>
+
+    <section id="architecture" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 02 · Architecture</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Remote UI, local execution</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">The site should feel like a product, but the sensitive execution surface stays on the user's PC.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div class="media-frame">
+          <div class="stack-diagram stack-diagram--deep sm:aspect-[4/3]">
+            <div>
+              <div class="stack-diagram__eyebrow">End-to-end path</div>
+              <div class="mt-3 stack-diagram__title">Browser → :18193 → :18192 → :18191/:18091 → Claude Code CLI</div>
+              <p class="mt-3 stack-diagram__copy">README architecture. The server PC and registered PCs each run connector daemons that control their local Claude Code CLI.</p>
+            </div>
+            <div class="stack-diagram__grid">
+              <div class="stack-diagram__node"><strong>site-frontend</strong><span>Browser UI on :18193</span></div>
+              <div class="stack-diagram__node"><strong>site-backend</strong><span>:18192 and .self-server/state registry</span></div>
+              <div class="stack-diagram__node"><strong>connector</strong><span>server :18191, registered PC :18091</span></div>
+              <div class="stack-diagram__node"><strong>Claude Code</strong><span>CLI logged in on each controlled PC</span></div>
+            </div>
+            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>Product shell outside, runtime authority inside the user's PC.</span></div>
+          </div>
+        </div>
+        <div class="surface-panel p-6 sm:p-8">
+          <div class="section-kicker">System slices</div>
+          <div class="content-prose mt-5">
+            <p><strong>Frontend.</strong> Package metadata describes <code>@deskrelay/site-frontend</code> as a Solid + Vite SPA, while <code>@deskrelay/mobile-app</code> is a Capacitor wrapper.</p>
+            <p><strong>Backend.</strong> <code>@deskrelay/site-backend</code> is a self-host Hono/Bun backend that connects the browser to user-registered connector daemon URLs.</p>
+            <p><strong>Connector.</strong> <code>@deskrelay/pc-connector-daemon</code> is a self-host connector daemon exposing local Claude Code behaviors over a private HTTP API.</p>
+            <p><strong>Behavior.</strong> <code>@deskrelay/behavior-remote-claude</code> runs the <code>claude</code> CLI on the user's PC and streams stream-json output as kernel events.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lifecycle" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="section-kicker">§ 03 · Device lifecycle</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Install and registration form the product spine</h2>
+        <p class="mt-4 text-base leading-7 text-[#4f6077]">The README treats server install, access URL and token, other-PC registration, verification reports, updates, and troubleshooting as one operator flow.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <article class="project-card bg-white p-5">
+          <div class="section-kicker">Install</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Start from the server PC</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Run the Windows PowerShell or macOS Terminal install script. After install, the default browser opens <code>http://127.0.0.1:18193</code>.</p>
+        </article>
+        <article class="project-card bg-white p-5">
+          <div class="section-kicker">Register</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">“Register another PC” command</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Paste the command from the main screen into the controlled Windows PC. It handles repo install/update, connector startup, Tailscale/LAN address detection, server reachability validation, and device registration.</p>
+        </article>
+        <article class="project-card bg-white p-5">
+          <div class="section-kicker">Operate</div>
+          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Devices, sessions, permissions, skills</h3>
+          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Choose a PC from the left device dropdown, start a new chat with a workspace directory, and inspect the current Claude environment through permissions and skills tabs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="boundary" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div class="surface-panel p-6 sm:p-8 lg:p-10">
+        <div class="section-kicker">§ 04 · Trust boundary</div>
+        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Private-network first, local authority stays local</h2>
+        <div class="content-prose mt-5 max-w-4xl">
+          <p>The README explicitly says not to expose connector ports directly to the public internet. For outside access, it recommends a private network such as Tailscale; other-PC registration requires the same LAN or the same Tailscale tailnet.</p>
+          <p>Troubleshooting follows that boundary: check the server URL, same LAN/Tailscale, target PC port <code>18091</code>, firewall rules, registration report, and connector verification report.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 pt-2 sm:px-6 sm:pb-20 lg:px-8">
+      <div class="surface-panel p-6 sm:p-8 lg:p-10">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div class="max-w-3xl">
+            <div class="section-kicker">Related</div>
+            <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Back to AI Systems</h2>
+            <p class="mt-4 text-base leading-7 text-[#4f6077]">DeskRelay sits beside Ops-Cure: one kernel-first, one product-first, both centered on local agent runtimes that need product-grade control surfaces.</p>
+          </div>
+          <a href="../../../ai-systems/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
+            Open AI Systems
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div>
+        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
+        <div class="mt-2 text-sm text-[#526178]">DeskRelay — GitHub README based self-host browser control</div>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 text-sm">
+        <a class="footer-link" href="../../../">Home</a>
+        <a class="footer-link" href="../../../ai-systems/">AI Systems</a>
+        <a class="footer-link" href="../../../about/">Profile</a>
+        <a class="footer-link" href="../../../ai-systems/deskrelay/">한국어</a>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="../../../assets/js/site.js"></script>
+</body>
+</html>
