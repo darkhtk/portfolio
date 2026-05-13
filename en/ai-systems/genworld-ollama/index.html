@@ -1,55 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>GenWorld + Ollama | Daeki Hong</title>
-<meta name="description" content="English case study for GenWorld + Ollama: local LLM R&amp;D for NPC behavior, memory rules, and applied runtime experimentation."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GenWorld + Ollama · Case Study | Daeki Hong</title>
+<meta name="description" content="Porting a Phaser 3 TS RPG to Unity 2D C# while designing and implementing a local Ollama LLM-backed NPC perception &amp; dialogue system. An R&amp;D case study validating offline-first and graceful fallback."/>
+<meta property="og:title" content="GenWorld + Ollama · Case Study"/>
+<meta property="og:description" content="Local-LLM NPC perception · offline-first · graceful fallback, validated."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/genworld-world.png"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/genworld-ollama/"/>
+<meta property="og:locale" content="en_US"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">tailwind.config={theme:{extend:{fontFamily:{headline:["Space Grotesk","Noto Sans KR","sans-serif"],body:["Noto Sans KR","sans-serif"],label:["Space Grotesk","Noto Sans KR","sans-serif"]}}}}</script>
-<link rel="stylesheet" href="../../../assets/css/site.css"/>
+<script id="tailwind-config">
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
+      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573",
+      "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787",
+      "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
+    borderRadius: { DEFAULT: "0.5rem", xs: "0.25rem", sm: "0.375rem", md: "0.5rem", lg: "0.75rem" }
+  } } }
+</script>
+<link rel="stylesheet" href="../../../assets/css/portfolio-dark.css"/>
 </head>
-<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
-<div class="site-shell">
-  <main class="mx-auto max-w-7xl px-4 pb-16 pt-24 sm:px-6 lg:px-8 lg:pt-32">
-    <div class="surface-panel p-6 sm:p-8 lg:p-10">
-      <div class="section-kicker">Applied AI / Local LLM R&amp;D</div>
-      <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">GenWorld + Ollama</h1>
-      <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">A local LLM research track exploring NPC memory, relationship rules, and world interaction structure using Ollama-backed runtime experiments.</p>
-      <div class="mt-7 flex flex-wrap gap-2.5">
-        <span class="pill text-sm">Ollama</span>
-        <span class="pill text-sm">NPC Memory</span>
-        <span class="pill text-sm">Quest Rules</span>
-        <span class="pill text-sm">StreamingAssets Data</span>
+<body class="font-body antialiased">
+<div class="relative">
+
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../deskrelay/" class="nav-link">deskrelay</a>
+        <a href="../" class="nav-link is-active">ai</a>
+        <a href="../../projects/" class="nav-link">industrial</a>
+        <a href="../../../about/" class="nav-link">profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <a href="../../../ai-systems/genworld-ollama/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</span>
+        </div>
+        <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
       </div>
     </div>
-
-    <div class="mt-6 summary-grid">
-      <article class="summary-card"><h3>Role</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Used the R&amp;D project to test how local LLM rules could influence NPC memory, relationship state, and world feedback inside Unity.</p></article>
-      <article class="summary-card"><h3>Question</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Could a local LLM become meaningful gameplay structure instead of a disconnected dialogue gimmick?</p></article>
-      <article class="summary-card"><h3>Outcome</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Established explicit data structures for memory, relationships, and quest interaction that made the experiment easier to inspect and evolve.</p></article>
-      <article class="summary-card"><h3>Why It Matters</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">The project shows how I translate AI ideas into runtime rules and inspectable game structure, even in R&amp;D mode.</p></article>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span>→</span></a>
+        <a href="../deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span>→</span></a>
+        <a href="../" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">ai systems <span>→</span></a>
+        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span>→</span></a>
+        <a href="../../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
+      </div>
     </div>
+  </header>
 
-    <div class="mt-14 grid gap-6 lg:grid-cols-2">
-      <div class="media-frame aspect-[16/10]"><img src="../../../assets/images/genworld-world.png" alt="GenWorld world"/></div>
-      <div class="media-frame aspect-[16/10]"><img src="../../../assets/images/genworld-npc-mood.png" alt="GenWorld NPC mood"/></div>
-    </div>
+  <main class="relative pt-16">
 
-    <div class="mt-14 detail-grid">
-      <div class="detail-note"><strong>R&amp;D angle:</strong> the point was not to claim a finished product, but to validate how local LLM structure could hold up when tied to actual game rules.</div>
-      <div class="detail-note"><strong>Implementation signal:</strong> memory rules, relationship rules, quest hooks, and data layout mattered more than a flashy single prompt.</div>
-      <div class="detail-note"><strong>Roles:</strong> applied AI prototyping, local LLM experimentation, and gameplay-system R&amp;D.</div>
-      <div class="detail-note"><strong>Korean version:</strong> <a href="../../../ai-systems/genworld-ollama/" class="text-[#1a57c7]">open the original Korean case study</a>.</div>
-    </div>
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// ai-systems · local llm · r&amp;d</div>
+          <h1 class="display-hero text-text-primary">GenWorld + Ollama.</h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">local-llm NPC perception / dialogue / world generation</p>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl border-l-2 border-accent-amber/40 pl-5">
+            Ported a Phaser 3 TS-based RPG to Unity 2D C# while designing and implementing a local Ollama LLM-backed NPC perception &amp; dialogue system. An R&amp;D case study validating <strong class="text-text-primary font-semibold">offline-first</strong> and <strong class="text-text-primary font-semibold">graceful fallback</strong>. Not a demo — an operational experiment: the game must keep running even when the LLM cuts out.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#cognition" class="btn-cyan">NPC cognition <span>↓</span></a>
+            <a href="../" class="btn-ghost">AI Systems <span>↗</span></a>
+          </div>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>ollama · local llm</span>
+            <span class="dot"></span><span>unity 2d c#</span>
+            <span class="dot"></span><span>phaser 3 ts → unity port</span>
+            <span class="dot"></span><span>offline-first</span>
+            <span class="dot"></span><span>graceful fallback</span>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>WORLD</span><span class="text-text-muted">GENWORLD</span></div>
+            <div class="media-frame frame-contain aspect-[4/3] border-t border-hairline"><img src="../../../assets/images/genworld-world.png" alt="GenWorld game world"/></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH.01 COGNITION -->
+    <section id="cognition" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.01 ]</span>
+        <span class="kicker text-text-secondary">NPC COGNITION</span>
+        <span class="line"></span>
+        <span class="tail">memory · mood · dialogue · skills</span>
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-12 mb-12">
+        <div class="lg:col-span-5">
+          <div class="kicker mb-4">// npc cognition</div>
+          <h2 class="display-section text-text-primary">Making the NPC<br/>more than a response box.</h2>
+        </div>
+        <div class="lg:col-span-7 lg:pt-2">
+          <p class="text-text-secondary text-[15px] leading-[1.85] max-w-2xl">An NPC cognition structure with memory, mood, and skills as separate axes. The same question yields different responses depending on the NPC's state — and the flow stays intact as LLM availability changes.</p>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>NPC_01</span><span class="text-text-muted">DIALOGUE</span></div>
+          <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/genworld-dialogue.png" alt="GenWorld dialogue"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="kicker kicker-cyan mb-2">// dialogue</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">Dialogue</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">Local Ollama responses combined with NPC cognition context. When the LLM is unavailable, a pre-defined dialogue graph picks up the conversation cleanly.</p>
+          </div>
+        </article>
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>NPC_02</span><span class="text-text-muted">MOOD</span></div>
+          <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/genworld-npc-mood.png" alt="GenWorld NPC mood"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="kicker kicker-cyan mb-2">// mood</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">Mood</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">Per-NPC mood state. Directly shapes response tone, priority, and how likely the NPC is to refuse a request.</p>
+          </div>
+        </article>
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>NPC_03</span><span class="text-text-muted">SKILLS</span></div>
+          <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/genworld-skills.png" alt="GenWorld skills"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="kicker kicker-cyan mb-2">// skills</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">Skills</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">The set of actions an NPC can perform. The layer that turns dialogue outcomes into game-state changes.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CH.02 FALLBACK -->
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14">
+          <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.02 ]</span>
+          <span class="kicker text-text-secondary">FALLBACK · OFFLINE-FIRST</span>
+          <span class="line"></span>
+        </div>
+
+        <div class="card ticks p-6 sm:p-10 lg:p-12">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="grid gap-10 lg:grid-cols-12">
+            <div class="lg:col-span-5">
+              <div class="kicker kicker-cyan mb-4">// fallback</div>
+              <h2 class="display-section text-text-primary">The game keeps running<br/>even when the LLM dies.</h2>
+            </div>
+            <div class="lg:col-span-7 space-y-4 text-text-secondary text-[14px] leading-[1.85]">
+              <p>Even without an LLM response, the NPC has to behave without awkward pauses. Assuming response timeouts, server failures, and offline mode, the game falls back to a pre-defined dialogue graph plus mood-aware static responses, gracefully.</p>
+              <p>Outcome of the experiment: rich dialogue while the LLM is up; a mode close to a traditional RPG dialogue system when it's down. Verified that the same NPC in the same scenario doesn't break its flow in either mode.</p>
+              <div class="grid sm:grid-cols-3 gap-px bg-hairline border border-hairline mt-6 font-mono text-[11px] uppercase tracking-widest">
+                <div class="bg-bg-primary p-4"><div class="text-text-muted">primary path</div><div class="text-accent-cyan mt-1">ollama local</div></div>
+                <div class="bg-bg-primary p-4"><div class="text-text-muted">fallback path</div><div class="text-accent-amber mt-1">dialogue graph</div></div>
+                <div class="bg-bg-primary p-4"><div class="text-text-muted">offline mode</div><div class="text-success-green mt-1">supported</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH.03 SHOTS -->
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ SHOTS ]</span>
+        <span class="kicker text-accent-cyan">WORLD + OBJECTS</span>
+        <span class="line"></span>
+      </div>
+      <div class="h-scroll">
+        <figure class="w-80 sm:w-96">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>S_01</span><span class="text-text-muted">WORLD</span></div>
+            <div class="media-frame frame-contain aspect-[4/3]"><img src="../../../assets/images/genworld-world.png" alt="GenWorld world"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">unity 2d · world</figcaption>
+        </figure>
+        <figure class="w-80 sm:w-96">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>S_02</span><span class="text-text-muted">DIALOGUE</span></div>
+            <div class="media-frame frame-contain aspect-[4/3]"><img src="../../../assets/images/genworld-dialogue.png" alt="dialogue"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">ollama-backed dialogue</figcaption>
+        </figure>
+        <figure class="w-80 sm:w-96">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>S_03</span><span class="text-text-muted">NPC MOOD</span></div>
+            <div class="media-frame frame-contain aspect-[4/3]"><img src="../../../assets/images/genworld-npc-mood.png" alt="npc mood"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">mood state</figcaption>
+        </figure>
+        <figure class="w-80 sm:w-96">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>S_04</span><span class="text-text-muted">SKILLS</span></div>
+            <div class="media-frame frame-contain aspect-[4/3]"><img src="../../../assets/images/genworld-skills.png" alt="skills"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">skill layer</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary">Related work.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="../deskrelay/" class="btn-cyan">DeskRelay <span>→</span></a>
+          <a href="../ops-cure/" class="btn-ghost">Ops-Cure <span>↗</span></a>
+          <a href="../" class="btn-ghost">AI Systems <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../../" class="hover:text-accent-cyan">home</a>
+        <a href="../deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
+        <a href="../" class="hover:text-accent-cyan">ai</a>
+        <a href="../../projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../../../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../../ai-systems/genworld-ollama/" class="hover:text-accent-cyan">ko</a>
+      </div>
+      <div class="text-text-muted">genworld + ollama · local llm r&amp;d · © 2026</div>
+    </div>
+  </footer>
+
 </div>
+<script src="../../../assets/js/site.js"></script>
 </body>
 </html>
