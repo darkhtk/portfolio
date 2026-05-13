@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Daeki Hong | Industrial Unity × AI Systems</title>
+<meta name="description" content="Senior Unity engineer with 10 years in industrial XR / BIM / robotics, now shipping AI developer tools — including DeskRelay, a self-host remote-session tool for local Claude / Codex sessions."/>
+<meta property="og:title" content="Daeki Hong | Industrial Unity × AI Systems"/>
+<meta property="og:description" content="10y industrial Unity → AI systems builder → DeskRelay (self-host AI dev tool)."/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/en/"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
+      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573",
+      "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787",
+      "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
+    borderRadius: { DEFAULT: "0.5rem", xs: "0.25rem", sm: "0.375rem", md: "0.5rem", lg: "0.75rem" }
+  } } }
+</script>
+<link rel="stylesheet" href="../assets/css/portfolio-dark.css"/>
+</head>
+<body class="font-body antialiased">
+<div class="relative">
+
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="./" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="./" class="nav-link is-active">home</a>
+        <a href="ai-systems/deskrelay/" class="nav-link">deskrelay</a>
+        <a href="ai-systems/" class="nav-link">ai</a>
+        <a href="projects/" class="nav-link">industrial</a>
+        <a href="../about/" class="nav-link">profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <a href="../" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</span>
+        </div>
+        <a href="ai-systems/deskrelay/" class="hidden lg:inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/40 hover:bg-accent-cyan/10">
+          [ DeskRelay <span aria-hidden="true">↗</span> ]
+        </a>
+        <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="./" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">home <span>→</span></a>
+        <a href="ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span>→</span></a>
+        <a href="ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span>→</span></a>
+        <a href="projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span>→</span></a>
+        <a href="../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative pt-16">
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-28 grid gap-10 lg:gap-16 lg:grid-cols-12 items-center">
+        <div class="lg:col-span-7 flex flex-col gap-7">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">$ whoami<span class="caret-thin text-accent-amber"></span></div>
+          <div class="font-mono text-[12px] uppercase tracking-widest text-text-secondary"><span class="text-success-green">&gt;</span> daeki.hong — industrial unity → ai systems</div>
+          <h1 class="display-hero text-text-primary max-w-3xl">
+            Ten years of industrial Unity,<br/>
+            now shipping <span class="text-accent-cyan border-b-4 border-accent-cyan/80 bg-accent-cyan/10 px-2">AI dev tools.</span>
+          </h1>
+          <p class="font-body text-[15px] sm:text-base text-text-secondary leading-[1.85] max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
+            An engineer who has delivered VR / BIM / robotics simulators to real operating environments has spent the past year building AI systems hands-on. The result is <strong class="text-text-primary font-semibold">DeskRelay</strong> — a developer tool that remotes your local Claude / Codex sessions to a browser and mobile.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="ai-systems/deskrelay/" class="btn-cyan">Open DeskRelay Case <span aria-hidden="true">→</span></a>
+            <a href="#ch01" class="btn-ghost">Engineering Archive <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>BIFAN selection</span>
+            <span class="dot"></span><span>MSIT Minister Citation</span>
+            <span class="dot"></span><span>Unity 10y</span>
+            <span class="dot"></span><span>Samsung / LG / POSCO delivery</span>
+            <span class="dot"></span><span>Lockheed Martin EN briefing</span>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="term-window ticks scanlines">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="term-bar">
+              <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+              <span class="term-title">bash — deskrelay — 80x24</span>
+            </div>
+            <div class="p-5 font-mono text-[12px] leading-[1.8] text-text-secondary">
+              <div><span class="text-accent-amber">$</span> deskrelay --start</div>
+              <div><span class="text-success-green">&gt;</span> loading modules <span class="text-accent-cyan">[██████████]</span> 100%</div>
+              <div><span class="text-success-green">&gt;</span> registering host pc ............... OK</div>
+              <div><span class="text-success-green">&gt;</span> mounting browser endpoint :18193 .... OK</div>
+              <div><span class="text-success-green">&gt;</span> connector daemon  :18091 ........... OK</div>
+              <div class="text-success-green">&gt; status: shipping · uptime: 24/7 · awaiting input_</div>
+            </div>
+            <div class="px-5 pb-5">
+              <div class="media-frame frame-contain border border-hairline aspect-[4/3]">
+                <img src="../assets/images/deskrelay-chat-ui.png" alt="DeskRelay chat UI" loading="eager"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ch01" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.01 ]</span>
+        <span class="kicker text-text-secondary">INDUSTRIAL UNITY FOUNDATION</span>
+        <span class="line"></span>
+        <span class="tail">10 years</span>
+      </div>
+      <div class="grid gap-10 lg:grid-cols-12 mb-14">
+        <div class="lg:col-span-5">
+          <div class="kicker mb-4">// 10 years · industrial unity</div>
+          <h2 class="display-section text-text-primary">Engineering proof,<br/>field-verified.</h2>
+        </div>
+        <div class="lg:col-span-7 lg:pt-2">
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl">Simulators and tooling I built ran in real exhibitions, factories, and construction sites. Safety, operating cost, and maintainability were the baseline. The AI work sits on top of that foundation.</p>
+        </div>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>OBJ_01</span><span class="text-text-muted">XR / ROBOTICS</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/vr_robot_expo2.png" alt="VR robot teleop"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="chip">XR</span><span class="chip">Robotics</span><span class="chip">IK</span></div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">VR Robot Teleoperation</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">Quest 3 input, Unity runtime, Flask bridge, RoboDK, in-house Jacobian IK — unified into one industrial XR pipeline.</p>
+            <a href="projects/vr-robot/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/30 px-3 py-2 w-fit hover:bg-accent-cyan/10">case_open <span>↗</span></a>
+          </div>
+        </article>
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>OBJ_02</span><span class="text-text-muted">BIM / RUNTIME</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/watchbim_generated_crosssection.png" alt="WatchBIM"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="chip">BIM</span><span class="chip">Runtime</span><span class="chip">Tooling</span></div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">WatchBIM</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">Custom hit engine, cross-section generation, 2D analysis viewer, camera system — all designed in-house for the BIM runtime.</p>
+            <a href="projects/watchbim/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/30 px-3 py-2 w-fit hover:bg-accent-cyan/10">case_open <span>↗</span></a>
+          </div>
+        </article>
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>OBJ_03</span><span class="text-accent-amber">★ AWARDED</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/neostalgia_skybox.png" alt="Neostalgia"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="chip">XR</span><span class="chip">AI Pipeline</span><span class="chip-amber">BIFAN · MSIT</span></div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">Neostalgia</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">An XR experience pipeline that interviews visitors, generates content, and runs as a real exhibition system.</p>
+            <a href="projects/neostalgia/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/30 px-3 py-2 w-fit hover:bg-accent-cyan/10">case_open <span>↗</span></a>
+          </div>
+        </article>
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>OBJ_04</span><span class="text-text-muted">SAFETY / SIM</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/vr_lghaus_safety.png" alt="VR safety"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="chip">Safety</span><span class="chip">Simulation</span><span class="chip">Hardware</span></div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">Industrial Safety XR</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">Multi-unit simulators delivered to Samsung · LG · POSCO safety rooms; the dual-axis scaffold device was designed in-house and shipped.</p>
+            <a href="projects/vr-simulators/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/30 px-3 py-2 w-fit hover:bg-accent-cyan/10">case_open <span>↗</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="ch02" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.02 ]</span>
+        <span class="kicker text-text-secondary">AI EXPERIMENTS</span>
+        <span class="line"></span>
+        <span class="tail">past 12 months</span>
+      </div>
+      <div class="grid gap-10 lg:grid-cols-12 mb-14">
+        <div class="lg:col-span-5">
+          <div class="kicker mb-4">// ai · experiments</div>
+          <h2 class="display-section text-text-primary">Once I fell into AI,<br/>I couldn't stop.</h2>
+        </div>
+        <div class="lg:col-span-7 lg:pt-2">
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl">Over the past year I built generative / local-LLM / agent workflows hands-on. The goal was always to finish in an <em>operable</em> form — not a demo. That trajectory ended at <a href="#ch03" class="text-accent-cyan border-b border-accent-cyan/60">DeskRelay</a>.</p>
+        </div>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <article class="card card-amber ticks ticks-amber group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_01</span><span class="text-accent-amber">AGENT · KERNEL</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/orchestration-v1-loop.png" alt="Ops-Cure"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="chip">Agent</span><span class="chip">Kernel</span><span class="chip">Workflow</span></div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3"><span class="text-accent-amber font-mono">&gt;</span> Ops-Cure</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">A channel-native state/event kernel running three behaviors — orchestration, remote_codex, chat — proving the abstraction is real.</p>
+            <a href="ai-systems/ops-cure/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-amber border border-accent-amber/30 px-3 py-2 w-fit hover:bg-accent-amber/10">read_notes <span>↗</span></a>
+          </div>
+        </article>
+        <article class="card card-amber ticks ticks-amber group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_02</span><span class="text-accent-amber">LOCAL LLM</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/genworld-world.png" alt="GenWorld"/></div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="chip">Local LLM</span><span class="chip">NPC</span><span class="chip">Pipeline</span></div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3"><span class="text-accent-amber font-mono">&gt;</span> GenWorld + Ollama</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">A local-LLM NPC cognition / dialogue / world-generation pipeline. Offline-first with graceful fallback, validated inside Unity 2D.</p>
+            <a href="ai-systems/genworld-ollama/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-amber border border-accent-amber/30 px-3 py-2 w-fit hover:bg-accent-amber/10">read_notes <span>↗</span></a>
+          </div>
+        </article>
+        <article class="card ticks group flex flex-col bg-gradient-to-br from-bg-elevated to-bg-primary">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>MODULE_03</span><span class="text-text-muted">EXPERIMENTS</span></div>
+          <div class="p-6 flex-1 flex flex-col gap-4">
+            <div class="kicker kicker-cyan">// lab notebook</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary">Small starts.</h3>
+            <div class="space-y-3 font-mono text-[12px] flex-1">
+              <div class="flex items-start gap-3 pb-3 border-b border-hairline"><span class="text-text-muted">2025.11</span><div class="flex-1"><div class="text-text-primary">industrial-llm-bridge</div><div class="text-text-muted text-[11px] mt-1 leading-relaxed">internal bridge connecting field data to LLM workflows</div></div></div>
+              <div class="flex items-start gap-3 pb-3 border-b border-hairline"><span class="text-text-muted">2025.09</span><div class="flex-1"><div class="text-text-primary">voice-ops-cure</div><div class="text-text-muted text-[11px] mt-1 leading-relaxed">Whisper + Ollama ops-assist demo</div></div></div>
+              <div class="flex items-start gap-3"><span class="text-text-muted">2025.07</span><div class="flex-1"><div class="text-text-primary">prompt-tooling-cli</div><div class="text-text-muted text-[11px] mt-1 leading-relaxed">a small CLI bundling repeated prompts</div></div></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="ch03" class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <div class="chapter-rule mb-14">
+          <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ CH.03 ]</span>
+          <span class="kicker text-accent-cyan">DESKRELAY · CLIMAX</span>
+          <span class="line"></span>
+          <span class="tail text-accent-cyan/80">flagship</span>
+        </div>
+        <div class="card ticks glow-cyan p-6 sm:p-10 lg:p-14 mb-10">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="grid gap-10 lg:gap-14 lg:grid-cols-12 items-center">
+            <div class="lg:col-span-7 flex flex-col gap-7">
+              <div class="kicker kicker-cyan">// flagship — developer tool grade</div>
+              <img src="../assets/images/deskrelay-logo-lockup.png" alt="DeskRelay" class="h-12 sm:h-16 w-auto self-start max-w-full object-contain"/>
+              <p class="text-text-primary text-lg sm:text-xl lg:text-2xl font-display font-bold tracking-tight leading-snug">
+                Remote your local <span class="text-accent-cyan">Claude / Codex</span> sessions —<br/>from browser and mobile, safely.
+              </p>
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="check"><span class="mark">[x]</span><span class="label">self-host</span><span class="desc">— your PC is the server</span></div>
+                <div class="check"><span class="mark">[x]</span><span class="label">mobile</span><span class="desc">— browser + Android app</span></div>
+                <div class="check"><span class="mark">[x]</span><span class="label">multi-pc</span><span class="desc">— switch PCs from one screen</span></div>
+                <div class="check"><span class="mark">[x]</span><span class="label">secure</span><span class="desc">— per-user token / logs</span></div>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <a href="ai-systems/deskrelay/" class="btn-cyan">Open Full Case <span>→</span></a>
+                <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="btn-ghost">GitHub <span>↗</span></a>
+              </div>
+            </div>
+            <div class="lg:col-span-5">
+              <div class="term-window ticks">
+                <span class="tr"></span><span class="bl"></span>
+                <div class="term-bar"><span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span><span class="term-title">deskrelay — chat</span></div>
+                <div class="media-frame frame-contain border-t border-hairline aspect-[3/4]"><img src="../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay chat"/></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary">For a live DeskRelay demo<br/>or a hiring conversation —<br/>get in touch.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="mailto:darkhtk@gmail.com" class="btn-cyan">darkhtk@gmail.com</a>
+          <a href="https://github.com/darkhtk" target="_blank" rel="noopener" class="btn-ghost">GitHub <span>↗</span></a>
+          <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener" class="btn-ghost">LinkedIn <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="./" class="hover:text-accent-cyan">home</a>
+        <a href="ai-systems/deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
+        <a href="ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../" class="hover:text-accent-cyan">ko</a>
+      </div>
+      <div class="text-text-muted">sys.version: stable.3.0 · © 2026</div>
+    </div>
+  </footer>
+
+</div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

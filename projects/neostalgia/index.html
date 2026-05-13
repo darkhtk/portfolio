@@ -1,549 +1,169 @@
 <!DOCTYPE html>
-<html class="dark" lang="ko">
+<html lang="ko" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
-<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
-<title>너스탤지아 — XR 경험과 AI 파이프라인 · 사례 · 홍대기</title>
-  <meta name="description" content="BIFAN XR Beyond Reality 선정과 과학기술정보통신부 장관 표창으로 이어진 너스탤지아 XR 프로젝트. Whisper, GPT, TTS, Skybox, Meshy와 운영 대시보드를 묶은 사례."/>
-<meta property="og:title" content="너스탤지아 · XR 경험과 AI 파이프라인"/>
-  <meta property="og:description" content="BIFAN XR Beyond Reality 선정과 과학기술정보통신부 장관 표창으로 이어진 XR 경험과 AI 파이프라인 사례."/>
-<meta property="og:type" content="article"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neostalgia · 케이스 스터디 | 홍대기</title>
+<meta name="description" content="관람객 인터뷰 기반 콘텐츠 생성과 실 전시 운영을 함께 책임진 XR 경험 파이프라인. Whisper + GPT + Skybox + Meshy. BIFAN 선정 + 과기정통부 장관 표창."/>
+<meta property="og:title" content="Neostalgia · 케이스 스터디"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/neostalgia_skybox.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/neostalgia/"/>
 <meta property="og:locale" content="ko_KR"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="너스탤지아 · 사례"/>
-  <meta name="twitter:description" content="BIFAN XR Beyond Reality 선정과 과학기술정보통신부 장관 표창으로 이어진 XR 프로젝트 사례."/>
-<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/neostalgia_skybox.png"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          "outline": "#8d90a2", "on-background": "#dce1fb", "primary-fixed-dim": "#b7c4ff",
-          "primary": "#b7c4ff", "tertiary": "#b7c8e1", "on-surface-variant": "#c3c5d9",
-          "primary-fixed": "#dde1ff", "on-primary": "#002682", "primary-container": "#0052ff",
-          "surface-variant": "#2e3447", "secondary-container": "#3f465c", "surface": "#0c1324",
-          "background": "#0c1324", "surface-container-highest": "#2e3447",
-          "surface-container-lowest": "#070d1f", "on-surface": "#dce1fb",
-          "surface-container": "#191f31", "secondary": "#bec6e0",
-          "outline-variant": "#434656", "surface-container-low": "#151b2d"
-        },
-        borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
-        fontFamily: { headline: ["Noto Sans KR"], body: ["Noto Sans KR"], label: ["Noto Sans KR"] }
-      }
-    }
-  }
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] }
+  } } }
 </script>
-<style>
-  html { line-break: strict; }
-  body { background: #f8f9fa; color: #162033; font-family: 'Noto Sans KR', sans-serif; }
-  .display-manual { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; hyphens: none; }
-  .hero-copy { max-inline-size: 34ch; text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
-  .case-hero-title { font-size: 1.65rem; line-height: 1.02; }
-  .case-hero-subtitle { font-size: 0.95rem; line-height: 1.1; }
-  .case-section-title { font-size: 1.4rem; line-height: 1.1; }
-  .case-card-title { font-size: 1.15rem; line-height: 1.14; }
-  .case-mini-title { font-size: 1rem; line-height: 1.16; }
-  .font-headline { font-style: normal !important; }
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  .bg-background, .bg-surface { background-color: #f8f9fa !important; }
-  .bg-surface-container, .bg-surface-container-low, .bg-surface-container-high, .bg-surface-container-highest { background-color: #ffffff !important; box-shadow: 0 16px 44px rgba(25, 96, 163, 0.06); }
-  .bg-surface-container-lowest { background-color: #eef2f6 !important; }
-  .text-primary, .text-primary-fixed, .text-primary-fixed-dim { color: #1960A3 !important; }
-  .bg-primary { background-color: #1960A3 !important; }
-  .bg-primary-container { background-color: #d3e4ff !important; }
-  .text-on-primary { color: #f6f7ff !important; }
-  .text-on-background, .text-on-surface { color: #162033 !important; }
-  .text-on-surface-variant, .text-secondary, .text-slate-400, .text-slate-500 { color: #51607a !important; }
-  .border-outline, .border-outline-variant { border-color: #d6dde8 !important; }
-  nav.fixed { background: rgba(255, 255, 255, 0.82) !important; box-shadow: 0 12px 32px rgba(25, 96, 163, 0.06) !important; }
-  #mobile-menu { background: rgba(248, 249, 250, 0.96) !important; }
-  footer { background: #eef2f6 !important; color: #44506a !important; }
-  footer .text-on-surface, footer .text-on-background, footer .text-on-surface-variant { color: #44506a !important; }
-  .from-primary { --tw-gradient-from: #1960A3 var(--tw-gradient-from-position) !important; --tw-gradient-to: rgb(25 96 163 / 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
-  .to-primary-container { --tw-gradient-to: #d3e4ff var(--tw-gradient-to-position) !important; }
-  .video-frame { position: relative; overflow: hidden; border-radius: 1rem; background: #ffffff; box-shadow: 0 16px 44px rgba(25, 96, 163, 0.08); }
-  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .video-frame--wide { aspect-ratio: 16 / 9; }
-  @media (min-width: 640px) {
-    .hero-copy { max-inline-size: 40ch; }
-    .case-hero-title { font-size: 1.95rem; }
-    .case-hero-subtitle { font-size: 1.1rem; }
-    .case-section-title { font-size: 1.65rem; }
-    .case-card-title { font-size: 1.25rem; }
-    .case-mini-title { font-size: 1.05rem; }
-  }
-  @media (min-width: 1024px) {
-    .hero-copy { max-inline-size: 46ch; }
-    .case-hero-title { font-size: 2.25rem; }
-    .case-hero-subtitle { font-size: 1.2rem; }
-    .case-section-title { font-size: 1.85rem; }
-    .case-card-title { font-size: 1.35rem; }
-    .case-mini-title { font-size: 1.1rem; }
-  }
-</style>
+<link rel="stylesheet" href="../../assets/css/portfolio-dark.css"/>
 </head>
-<body class="bg-background text-on-background">
+<body class="font-body antialiased">
+<div class="relative">
 
-<nav class="fixed top-0 w-full z-50 bg-[#0c1324]/60 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,0,0,0.4)]">
-  <div class="flex justify-between items-center px-4 sm:px-6 md:px-8 py-4 max-w-7xl mx-auto">
-    <a href="../../" class="flex flex-col">
-      <div class="text-xl font-bold tracking-tighter text-primary font-headline">DAEKI HONG</div>
-      <div class="font-label text-[10px] text-slate-500 uppercase tracking-[0.2em]">INDUSTRIAL UNITY REAL-TIME SYSTEMS</div>
-    </a>
-    <div class="hidden md:flex items-center gap-8 font-headline tracking-tight text-sm uppercase">
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../../">홈</a>
-      <a class="text-primary border-b-2 border-primary pb-1" href="../">프로젝트</a>
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../../ai-systems/">AI Systems</a>
-      <a class="text-slate-400 hover:text-primary transition-colors" href="../../about/">프로필</a>
-      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-bold hover:scale-95 active:scale-90 transition-transform">문의</a>
-    </div>
-    <div class="md:hidden flex items-center gap-3">
-      <a href="mailto:darkhtk@gmail.com" class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-2 rounded-md hover:scale-95 active:scale-90 transition-transform" aria-label="문의하기">
-        <span class="material-symbols-outlined text-lg align-middle">mail</span>
-      </a>
-      <button id="mobile-menu-toggle" class="p-2 text-on-surface hover:text-primary transition-colors" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<div id="mobile-menu" class="fixed inset-0 z-[60] hidden flex-col bg-[#f7f9fc]/98 backdrop-blur-xl md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-  <div class="border-b border-[#d9e3f1] px-4 py-4 sm:px-6">
-    <div class="flex items-start justify-between gap-4">
-      <div>
-        <div class="font-label text-[11px] uppercase tracking-[0.24em] text-[#2251b2]">사이트 메뉴</div>
-        <div class="mt-2 font-headline text-2xl font-bold tracking-tight text-[#162033]">Daeki Hong</div>
-      </div>
-      <button id="mobile-menu-close" class="rounded-md border border-[#d9e3f1] bg-white p-2 text-[#16325c]" aria-label="메뉴 닫기">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-    </div>
-  </div>
-  <div class="flex flex-1 flex-col px-4 py-6 sm:px-6">
-    <div class="grid gap-3">
-      <a href="../../" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">홈</div><div class="mt-1 text-sm leading-6 text-[#51607a]">전체 포지셔닝과 핵심 메시지</div></a>
-      <a href="../" class="rounded-2xl border border-[#c7d7f1] bg-[#eaf1ff] px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">프로젝트</div><div class="mt-1 text-sm leading-6 text-[#51607a]">대표 사례와 기반 경험</div></a>
-      <a href="../../ai-systems/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">AI Systems</div><div class="mt-1 text-sm leading-6 text-[#51607a]">커널, behavior, 응용 AI R&amp;D</div></a>
-      <a href="../../about/" class="rounded-2xl border border-[#d9e3f1] bg-white px-5 py-4"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#162033]">프로필</div><div class="mt-1 text-sm leading-6 text-[#51607a]">경력과 협업 기준 보기</div></a>
-      
-      
-    </div>
-    <div class="mt-6 rounded-2xl bg-[#eef2f6] p-5">
-      <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#2251b2]">문의</div>
-      <a href="mailto:darkhtk@gmail.com" class="mt-3 inline-flex items-center gap-2 rounded-md bg-[#2251b2] px-5 py-3 font-headline font-bold text-white"><span class="material-symbols-outlined text-lg">mail</span> darkhtk@gmail.com</a>
-      <div class="mt-4 flex flex-wrap gap-3 text-sm">
-        <a href="https://github.com/darkhtk" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">GitHub</a>
-        <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-4 py-2 text-[#44506a]">LinkedIn</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<main class="pt-24">
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-24 lg:mb-32">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-      <div class="lg:col-span-8">
-        <div class="flex flex-wrap items-center gap-4 mb-6">
-          <span class="px-3 py-1 bg-surface-container-highest text-primary-fixed rounded-md text-xs font-label uppercase tracking-widest">사례 03</span>
-          <span class="text-outline text-xs font-label uppercase tracking-widest">XR 경험 · AI 파이프라인</span>
-          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-primary-fixed/15 text-primary-fixed text-[10px] uppercase tracking-widest font-label">
-            <span class="material-symbols-outlined text-[10px]">festival</span>
-            BIFAN XR Beyond Reality
-          </span>
-          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#fff3d8] text-[#8a5a00] text-[10px] uppercase tracking-widest font-label">
-            <span class="material-symbols-outlined text-[10px]">workspace_premium</span>
-            과기정통부 장관 표창
-          </span>
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../../ai-systems/deskrelay/" class="nav-link">deskrelay</a>
+        <a href="../../ko/ai-systems/" class="nav-link">ai</a>
+        <a href="../../ko/projects/" class="nav-link is-active">industrial</a>
+        <a href="../../ko/about/" class="nav-link">profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">KO</span>
+          <a href="../../en/projects/neostalgia/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">EN</a>
         </div>
-
-        <h1 class="display-manual case-hero-title max-w-4xl font-headline font-bold text-on-surface tracking-tight mb-6">
-          <span class="block text-primary">너스탤지아</span>
-          <span class="case-hero-subtitle mt-2 block text-slate-400">XR 경험과 AI 파이프라인</span>
-        </h1>
-
-        <p class="hero-copy text-base text-on-surface-variant leading-relaxed max-w-3xl">
-          관객 음성을 입력으로 받아 대화, 시각 요소 생성, XR 공간 연출, 운영 대시보드까지 하나의 흐름으로 연결한 프로젝트입니다.
-Whisper, GPT, TTS, Skybox, Meshy를 묶어 실제 체험 가능한 흐름으로 만들었습니다.
-          <span class="mt-3 block text-primary-fixed">BIFAN XR Beyond Reality 선정 및 과학기술정보통신부 장관 표창 수상.</span>
-        </p>
-      </div>
-
-      <div class="lg:col-span-4 flex flex-col gap-6">
-        <a href="https://www.youtube.com/watch?v=wz6HslgOnl8" class="py-4 bg-primary text-on-primary rounded-md flex items-center justify-center gap-2 hover:bg-primary-container transition-all group" target="_blank" rel="noopener noreferrer">
-          <span class="material-symbols-outlined group-hover:scale-110 transition-transform">play_circle</span>
-          <span class="font-label text-sm font-bold tracking-widest uppercase">시연 영상</span>
-        </a>
-        <a href="https://plus.bifan.kr/eng/program/xr_experience_view.asp?actEvent=view&pk_seq=8186&sc_category_seq=0&sc_num=1" class="py-4 bg-surface-container-low rounded-md flex items-center justify-center gap-2 text-on-surface hover:bg-surface-container-highest transition-all group" target="_blank" rel="noopener noreferrer">
-          <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">open_in_new</span>
-          <span class="font-label text-sm font-bold tracking-widest uppercase">BIFAN</span>
-        </a>
-        <a href="https://kr.acrofan.com/detail.php?number=391624" class="py-4 bg-surface-container-low rounded-md flex items-center justify-center gap-2 text-on-surface hover:bg-surface-container-highest transition-all group" target="_blank" rel="noopener noreferrer">
-          <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">article</span>
-          <span class="font-label text-sm font-bold tracking-widest uppercase">기사</span>
-        </a>
+        <button data-mobile-menu-toggle aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
       </div>
     </div>
-
-    <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-5 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">내 역할</div>
-        <p class="text-sm leading-7 text-on-surface-variant">Unity 체험 루프, AI 파이프라인 연결, 세션 저장 구조, 운영 로그를 한 프로젝트 안에 묶었습니다.</p>
-      </article>
-      <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-5 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">문제</div>
-        <p class="text-sm leading-7 text-on-surface-variant">관객 음성을 대화, 시각 생성, XR 장면 연출로 끊기지 않게 연결하면서 실제 전시 운영까지 감당해야 했습니다.</p>
-      </article>
-      <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-5 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">결과</div>
-        <p class="text-sm leading-7 text-on-surface-variant">BIFAN XR Beyond Reality 선정과 과학기술정보통신부 장관 표창으로 이어졌고, 130명 이상 참여, 6회 전시, 약 2,000명 관람 규모로 운영됐습니다.</p>
-      </article>
-      <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-5 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">왜 중요한가</div>
-        <p class="text-sm leading-7 text-on-surface-variant">여러 AI 구성요소를 전시형 XR 경험과 운영 대시보드까지 포함한 실제 서비스 흐름으로 묶어낸 사례입니다.</p>
-      </article>
-    </div>
-
-    <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center">
-      <div class="video-frame video-frame--wide">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/wz6HslgOnl8"
-          title="너스탤지아 시연 영상"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="메뉴 닫기" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
       </div>
-      <div class="rounded-[24px] border border-[#d9e3f1] bg-white p-6 sm:p-8 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-        <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Demo Video</div>
-        <h2 class="case-card-title font-headline font-bold mb-4">시연 영상</h2>
-        <p class="text-sm leading-7 text-on-surface-variant">
-          음성 인터뷰, 생성형 배경, 오브젝트 선물, 운영 로그가 하나의 XR 체험으로 이어지는 장면입니다.
-        </p>
-        <div class="mt-5 flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Whisper</span>
-          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">GPT</span>
-          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">TTS</span>
-          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Skybox</span>
-          <span class="px-2 py-1 bg-surface-container-low rounded font-label text-[10px] uppercase tracking-widest text-primary">Meshy</span>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span>→</span></a>
+        <a href="../../ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span>→</span></a>
+        <a href="../../ko/ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span>→</span></a>
+        <a href="../../ko/projects/" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span>→</span></a>
+        <a href="../../ko/about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative pt-16">
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// industrial · xr · ai pipeline · awarded</div>
+          <h1 class="display-hero text-text-primary kr-balance">Neostalgia.</h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">visitor interview → ai content → live exhibition</p>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
+            관람객 인터뷰 기반 콘텐츠 생성과 실 전시 운영을 함께 책임진 XR 경험 파이프라인. Whisper 로 인터뷰를 받고, GPT 로 서사를 생성하고, Skybox · Meshy 로 시각 자산을 만들어 실시간으로 XR 경험에 배치. <strong class="text-text-primary font-semibold">BIFAN 선정</strong> + <strong class="text-text-primary font-semibold">과기정통부 장관 표창</strong>.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#pipeline" class="btn-cyan">파이프라인 <span>↓</span></a>
+            <a href="../../ko/projects/" class="btn-ghost">Industrial <span>↗</span></a>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip-amber chip">BIFAN Selection</span><span class="chip-amber chip">MSIT 장관표창</span>
+          </div>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>whisper · stt</span>
+            <span class="dot"></span><span>gpt narrative</span>
+            <span class="dot"></span><span>skybox · meshy</span>
+            <span class="dot"></span><span>live exhibition</span>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-surface-container-low py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <div class="lg:col-span-5">
-          <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">프로젝트 개요</div>
-          <h2 class="case-section-title font-headline font-bold mb-8">문제와 적용 방식</h2>
-          <div class="space-y-5 text-on-surface-variant leading-relaxed text-base sm:text-lg">
-            <p>이 프로젝트의 핵심은 관객의 음성 입력을 XR 경험 안에서 끊기지 않게 연결하는 일이었습니다.</p>
-<p>AI는 전면 연출용으로만 쓰지 않고, 음성 인식, 대화 처리, 음성 응답, 360도 배경 생성, 3D 오브젝트 생성처럼 각 단계에 나눠 적용했습니다.</p>
-            <p>중요했던 것은 생성 결과 자체보다, 비동기 처리와 사용자별 저장 구조, 운영 관측까지 포함한 전시용 시스템을 만드는 일이었습니다.</p>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-surface-container-highest rounded-xl overflow-hidden">
-            <img src="../../assets/images/neostalgia_object.png" alt="너스탤지아 XR 오브젝트 상호작용" class="w-full h-72 object-cover"/>
-            <div class="p-4 text-sm text-on-surface-variant">관객 상호작용이 XR 오브젝트와 장면 흐름으로 이어집니다.</div>
-          </div>
-          <div class="bg-surface-container-highest rounded-xl overflow-hidden">
-            <img src="../../assets/images/neostalgia_dialogue.png" alt="너스탤지아 대화 장면" class="w-full h-72 object-cover"/>
-            <div class="p-4 text-sm text-on-surface-variant">대화와 감정선이 XR 장면 안에서 자연스럽게 이어집니다.</div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-surface-container-highest rounded-xl p-6">
-            <h3 class="case-mini-title font-headline font-bold mb-3">Client Runtime</h3>
-            <p class="text-sm text-on-surface-variant leading-relaxed">
-              <code class="text-primary-fixed">FlaskManager</code>, <code class="text-primary-fixed">SequenceManager</code>,
-              <code class="text-primary-fixed">SkyboxGenerator</code>, <code class="text-primary-fixed">MeshyManager</code>,
-              <code class="text-primary-fixed">SessionDataManager</code>가 XR 체험 루프를 담당했습니다.
-            </p>
-          </div>
-          <div class="bg-surface-container-highest rounded-xl p-6">
-            <h3 class="case-mini-title font-headline font-bold mb-3">Flask Backend</h3>
-            <p class="text-sm text-on-surface-variant leading-relaxed">
-              Flask + SocketIO 기반 백엔드에서 <code class="text-primary-fixed">/process_audio</code>,
-              <code class="text-primary-fixed">/process_chat</code>, <code class="text-primary-fixed">/skybox</code>,
-              <code class="text-primary-fixed">/generate_3d</code> 흐름을 묶고 GCP App Engine 2개 서비스로 운영했습니다.
-            </p>
-          </div>
-          <div class="bg-surface-container-highest rounded-xl p-6">
-            <h3 class="case-mini-title font-headline font-bold mb-3">Ops Dashboard</h3>
-            <p class="text-sm text-on-surface-variant leading-relaxed">
-              React 19 + Vite 7 대시보드에서 Google OAuth, GCS 파일 트리, GLB 미리보기, 날짜별 통계, 키워드 추출, raw log 확인까지 지원했습니다.
-            </p>
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>WORLD</span><span class="text-text-muted">SKYBOX</span></div>
+            <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../assets/images/neostalgia_skybox.png" alt="Neostalgia skybox"/></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="max-w-3xl">
-        <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">Representative Systems</div>
-        <h2 class="case-section-title font-headline font-bold mb-6">대표 구현</h2>
-        <p class="text-base sm:text-lg leading-8 text-on-surface-variant">
-          기억 인터뷰, 생성 파이프라인, 운영 관측이 하나의 XR 체험 안에서 이어지도록 만든 프로젝트입니다.
-        </p>
+    <section id="pipeline" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ PIPELINE ]</span>
+        <span class="kicker text-text-secondary">INTERVIEW → CONTENT → XR</span>
+        <span class="line"></span>
       </div>
-
-      <div class="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-6 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-          <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Memory Interview Orchestrator</div>
-          <h3 class="case-card-title font-headline font-bold mb-4">기억 인터뷰 시퀀스 엔진</h3>
-          <p class="text-sm leading-7 text-on-surface-variant">
-            언어 선택, 약속 제스처, 질문 진행, 생성 완료 대기, 엄지척 전환, 브이 포즈 캡처까지 관객 입력과 생성 결과를 조건으로 연결하는 상태 기반 XR 체험 루프를 구현했습니다.
-          </p>
-        </article>
-        <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-6 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-          <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Voice-to-AI Pipeline</div>
-          <h3 class="case-card-title font-headline font-bold mb-4">음성 인터뷰 파이프라인</h3>
-          <p class="text-sm leading-7 text-on-surface-variant">
-            VAD 기반 음성 청크 수집, Whisper STT, GPT function calling, 닉네임 추출, 답변 검증, 감정 기반 BGM 선택까지 이어지는 기억 인터뷰 파이프라인을 구축했습니다.
-          </p>
-        </article>
-        <article class="rounded-[20px] border border-[#d9e3f1] bg-white p-6 shadow-[0_16px_44px_rgba(25,96,163,0.06)]">
-          <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Generative XR Asset Pipeline</div>
-          <h3 class="case-card-title font-headline font-bold mb-4">생성형 XR 자산 흐름</h3>
-          <p class="text-sm leading-7 text-on-surface-variant">
-            대화 로그를 Skybox와 Meshy 생성 흐름으로 변환하고, polling, 다운로드, GLB 임포트, XR 오브젝트 래핑까지 연결해 생성 결과를 실제 체험 자산으로 반영했습니다.
-          </p>
-        </article>
+      <div class="grid gap-3">
+        <div class="lane"><span class="lane-num">01</span><div class="kicker kicker-cyan mb-2">// input</div><div class="font-display font-bold text-lg text-text-primary">Visitor Interview</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">관람객 인터뷰 — 음성으로 회상·기억·장소 수집.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">02</span><div class="kicker kicker-cyan mb-2">// stt</div><div class="font-display font-bold text-lg text-text-primary">Whisper</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">음성 → 텍스트 변환. 실시간 운영 흐름에 끼우기 위한 응답 시간 검증.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">03</span><div class="kicker kicker-cyan mb-2">// narrative</div><div class="font-display font-bold text-lg text-text-primary">GPT</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">관람객 발화에서 서사 시드 추출. 전시 컨텍스트에 맞는 형태로 정제.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">04</span><div class="kicker kicker-cyan mb-2">// visual</div><div class="font-display font-bold text-lg text-text-primary">Skybox + Meshy</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">서사 시드 → 시각 자산 생성. Skybox 환경 + Meshy 오브젝트.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">05</span><div class="kicker kicker-cyan mb-2">// xr</div><div class="font-display font-bold text-lg text-text-primary">Live XR Experience</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">생성된 콘텐츠가 즉시 XR 경험으로 배치. 실 전시 운영자 대시보드로 모니터링.</p></div>
       </div>
+    </section>
 
-      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <article class="rounded-[20px] bg-surface-container-low p-6">
-          <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Session Logging</div>
-          <p class="text-sm leading-7 text-on-surface-variant">
-            사용자별 이름, 언어, 대화 이력, Skybox와 Meshy 프롬프트, 응답 시간, 커스텀 로그를 구조화해 전시 세션 단위로 저장했습니다.
-          </p>
-        </article>
-        <article class="rounded-[20px] bg-surface-container-low p-6">
-          <div class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Operations Dashboard</div>
-          <p class="text-sm leading-7 text-on-surface-variant">
-            GCS 파일 트리, GLB 미리보기, 날짜별 통계, 체험자별 로그, 키워드 추출을 보는 운영 대시보드를 따로 구축했습니다.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">AI가 필요한 이유</div>
-      <h2 class="case-section-title font-headline font-bold mb-10">왜 AI가 필요했는가</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-surface-container-low p-8 rounded-xl">
-          <span class="material-symbols-outlined text-primary text-4xl mb-4">mic</span>
-          <h3 class="case-mini-title font-headline font-bold mb-3">입력 해석</h3>
-<p class="text-sm text-on-surface-variant leading-relaxed">관객 음성을 실시간 흐름 안에서 텍스트와 의미 단위로 나눌 필요가 있었습니다.</p>
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14">
+          <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ SHOTS ]</span>
+          <span class="kicker text-accent-cyan">EXHIBITION SURFACES</span>
+          <span class="line"></span>
         </div>
-        <div class="bg-surface-container-low p-8 rounded-xl">
-          <span class="material-symbols-outlined text-primary text-4xl mb-4">interests</span>
-          <h3 class="case-mini-title font-headline font-bold mb-3">생성 연결</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">대화, 배경, 오브젝트 생성이 따로 놀지 않고 하나의 경험으로 이어져야 했습니다.</p>
-        </div>
-        <div class="bg-surface-container-low p-8 rounded-xl">
-          <span class="material-symbols-outlined text-primary text-4xl mb-4">monitoring</span>
-          <h3 class="case-mini-title font-headline font-bold mb-3">운영 관측</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">전시 환경에서는 결과뿐 아니라 사용자별 기록과 운영 확인 흐름도 필요했습니다.</p>
+        <div class="h-scroll">
+          <figure class="w-80 sm:w-96"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>S_01</span><span class="text-text-muted">SKYBOX</span></div><div class="media-frame aspect-[4/3]"><img src="../../assets/images/neostalgia_skybox.png" alt="skybox"/></div></div><figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">generated skybox</figcaption></figure>
+          <figure class="w-80 sm:w-96"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>S_02</span><span class="text-text-muted">OBJECT</span></div><div class="media-frame aspect-[4/3]"><img src="../../assets/images/neostalgia_object.png" alt="object"/></div></div><figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">meshy object</figcaption></figure>
+          <figure class="w-80 sm:w-96"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>S_03</span><span class="text-text-muted">DIALOGUE</span></div><div class="media-frame aspect-[4/3]"><img src="../../assets/images/neostalgia_dialogue.png" alt="dialogue"/></div></div><figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">narrative dialogue</figcaption></figure>
+          <figure class="w-80 sm:w-96"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>S_04</span><span class="text-text-muted">DRAWING</span></div><div class="media-frame aspect-[4/3]"><img src="../../assets/images/neostalgia_drawing.png" alt="drawing"/></div></div><figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">visitor drawing</figcaption></figure>
         </div>
       </div>
+    </section>
 
-      <div class="mt-12 bg-surface-container p-8 rounded-2xl">
-        <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">처리 흐름</div>
-        <div class="grid grid-cols-1 md:grid-cols-6 gap-4 text-sm">
-          <div class="bg-surface-container-highest rounded-xl p-4">Voice Input</div>
-          <div class="bg-surface-container-highest rounded-xl p-4">Whisper</div>
-          <div class="bg-surface-container-highest rounded-xl p-4">GPT</div>
-          <div class="bg-surface-container-highest rounded-xl p-4">TTS</div>
-          <div class="bg-surface-container-highest rounded-xl p-4">Skybox / Meshy</div>
-          <div class="bg-surface-container-highest rounded-xl p-4">XR / Dashboard</div>
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary kr-balance">관련 작업.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="../vr-robot/" class="btn-ghost">VR Robot <span>↗</span></a>
+          <a href="../watchbim/" class="btn-ghost">WatchBIM <span>↗</span></a>
+          <a href="../../ko/projects/" class="btn-ghost">Industrial <span>↗</span></a>
         </div>
       </div>
+    </section>
 
-      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-surface-container-low rounded-xl p-6">
-          <div class="font-headline text-2xl font-bold text-primary">130명+</div>
-          <div class="mt-2 text-xs font-label uppercase tracking-widest text-slate-500">체험 세션</div>
-        </div>
-        <div class="bg-surface-container-low rounded-xl p-6">
-          <div class="font-headline text-2xl font-bold text-primary">6회</div>
-          <div class="mt-2 text-xs font-label uppercase tracking-widest text-slate-500">국내외 전시</div>
-        </div>
-        <div class="bg-surface-container-low rounded-xl p-6">
-          <div class="font-headline text-2xl font-bold text-primary">2,000명</div>
-          <div class="mt-2 text-xs font-label uppercase tracking-widest text-slate-500">누적 관람</div>
-        </div>
+  </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../../" class="hover:text-accent-cyan">home</a>
+        <a href="../../ai-systems/deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
+        <a href="../../ko/ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="../../ko/projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../../ko/about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../en/projects/neostalgia/" class="hover:text-accent-cyan">en</a>
       </div>
-    </div>
-  </section>
-
-  <section class="bg-surface-container-low py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div class="lg:col-span-7">
-          <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">Control / Validation</div>
-      <h2 class="case-section-title font-headline font-bold mb-8">문제와 대응</h2>
-          <div class="space-y-5 text-on-surface-variant leading-relaxed text-base sm:text-lg">
-            <p><span class="text-on-surface">문제 1.</span> 여러 AI 서비스를 한 번에 쓰면 응답 지연과 비동기 처리 문제가 생깁니다.</p>
-            <p><span class="text-on-surface">대응.</span> Webhook 기반 비동기 처리와 사용자별 저장 구조로 생성 흐름을 분리했습니다.</p>
-            <p><span class="text-on-surface">문제 2.</span> 전시 환경에서는 체험 중 상태를 운영자가 확인할 수 있어야 합니다.</p>
-            <p><span class="text-on-surface">대응.</span> React 대시보드로 사용자별 기록과 생성 결과를 바로 볼 수 있게 했습니다.</p>
-            <p><span class="text-on-surface">문제 3.</span> 생성 결과가 경험 안에서 어색하게 분리되면 전체 체험이 깨집니다.</p>
-<p><span class="text-on-surface">대응.</span> 대화, 환경, 오브젝트 생성 결과를 하나의 흐름으로 이어 XR 경험 안에 붙였습니다.</p>
-          </div>
-        </div>
-
-        <div class="lg:col-span-5 grid grid-cols-1 gap-4">
-          <div class="bg-surface-container-highest rounded-xl overflow-hidden">
-            <img src="../../assets/images/neostalgia_skybox.png" alt="너스탤지아 생성 배경 장면" class="w-full h-72 object-cover"/>
-            <div class="p-4 text-sm text-on-surface-variant">생성된 하늘과 배경을 XR 연출 안에 연결했습니다.</div>
-          </div>
-          <div class="bg-surface-container-highest rounded-xl overflow-hidden">
-            <img src="../../assets/images/neostalgia_drawing.png" alt="너스탤지아 드로잉 장면" class="w-full h-72 object-cover"/>
-            <div class="p-4 text-sm text-on-surface-variant">사용자 반응과 생성 결과가 시각적으로 이어집니다.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        <div class="lg:col-span-5">
-          <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-6">Result</div>
-      <h2 class="case-section-title font-headline font-bold mb-8">결과</h2>
-          <div class="space-y-4 text-on-surface-variant leading-relaxed">
-            <p>BIFAN XR Beyond Reality 섹션에 공식 선정됐습니다.</p>
-            <p>프로젝트 완성도와 전시 가능성을 바탕으로 과학기술정보통신부 장관 표창을 받았습니다.</p>
-            <p>국내외 6회 전시와 130명+ 체험 세션, 누적 관람 2,000명 규모로 운영된 XR 사례가 됐습니다.</p>
-            <p>Flask 백엔드와 React 대시보드까지 포함한 운영 구조를 실제 전시 환경에서 검증했습니다.</p>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 flex flex-col gap-4">
-          <div class="p-8 bg-surface rounded-xl flex justify-between items-center">
-            <div>
-              <h3 class="case-card-title font-headline font-bold text-on-surface">BIFAN 선정</h3>
-              <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">XR Beyond Reality</p>
-            </div>
-            <span class="material-symbols-outlined text-primary text-5xl">movie</span>
-          </div>
-          <div class="p-8 bg-surface rounded-xl flex justify-between items-center">
-            <div>
-              <h3 class="case-card-title font-headline font-bold text-on-surface">과기정통부 장관 표창</h3>
-              <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Recognition</p>
-            </div>
-            <span class="material-symbols-outlined text-primary text-5xl">workspace_premium</span>
-          </div>
-          <div class="p-8 bg-surface rounded-xl flex justify-between items-center">
-            <div>
-              <h3 class="case-card-title font-headline font-bold text-on-surface">AI 파이프라인 연결</h3>
-              <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Whisper · GPT · TTS · Skybox · Meshy</p>
-            </div>
-            <span class="material-symbols-outlined text-primary text-5xl">hub</span>
-          </div>
-          <div class="p-8 bg-surface rounded-xl flex justify-between items-center">
-            <div>
-              <h3 class="case-card-title font-headline font-bold text-on-surface">운영 대시보드</h3>
-              <p class="text-outline text-sm font-label uppercase tracking-widest mt-1">Google OAuth · GCS Tree · GLB Preview</p>
-            </div>
-            <span class="material-symbols-outlined text-primary text-5xl">dashboard</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-      <h3 class="case-card-title font-headline font-bold text-center mb-8">다른 사례</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <a href="../vr-robot/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 01</div>
-            <h4 class="case-card-title font-headline font-bold mb-3">VR 로봇 원격 조종 시스템</h4>
-        <p class="text-sm text-on-surface-variant mb-4">산업용 로봇 제어와 XR 입력 구조를 연결한 사례</p>
-        <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
-      </a>
-      <a href="../dxcenter/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">사례 02</div>
-            <h4 class="case-card-title font-headline font-bold mb-3">DXCenter</h4>
-        <p class="text-sm text-on-surface-variant mb-4">비개발자도 사용하는 Unity 저작도구 사례</p>
-        <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
-      </a>
-      <a href="../../ai-systems/genworld-ollama/" class="p-8 bg-surface-container-low hover:bg-surface-container-highest rounded-xl transition-all group">
-        <div class="font-label text-xs text-primary uppercase tracking-widest mb-2">AI Systems · R&amp;D</div>
-            <h4 class="case-card-title font-headline font-bold mb-3">GenWorld + Ollama</h4>
-        <p class="text-sm text-on-surface-variant mb-4">로컬 LLM과 게임 런타임을 연결한 R&amp;D 사례</p>
-        <span class="text-primary text-xs font-label uppercase tracking-widest group-hover:underline">자세히 →</span>
-      </a>
-    </div>
-  </section>
-
-  <footer class="border-t border-outline-variant/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div>
-        <div class="font-headline font-bold text-primary text-xl mb-2">DAEKI HONG</div>
-        <div class="text-slate-500 font-body text-sm uppercase tracking-widest">© 2026 · INDUSTRIAL UNITY REAL-TIME SYSTEMS</div>
-      </div>
-      <div class="flex gap-6 text-sm font-body text-slate-400">
-        <a href="../" class="hover:text-primary transition-colors">프로젝트</a>
-        <a href="../../about/" class="hover:text-primary transition-colors">프로필</a>
-        <a href="mailto:darkhtk@gmail.com" class="hover:text-primary transition-colors">Contact</a>
-      </div>
+      <div class="text-text-muted">neostalgia · xr ai pipeline · BIFAN · MSIT · © 2026</div>
     </div>
   </footer>
-</main>
 
-<script>
-(function() {
-  const toggle = document.getElementById('mobile-menu-toggle');
-  const close = document.getElementById('mobile-menu-close');
-  const menu = document.getElementById('mobile-menu');
-  if (!toggle || !menu) return;
-  function openMenu() {
-    menu.classList.remove('hidden');
-    menu.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-    toggle.setAttribute('aria-expanded', 'true');
-  }
-  function closeMenu() {
-    menu.classList.add('hidden');
-    menu.classList.remove('flex');
-    document.body.style.overflow = '';
-    toggle.setAttribute('aria-expanded', 'false');
-  }
-  toggle.addEventListener('click', openMenu);
-  if (close) close.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeMenu();
-  });
-  menu.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', closeMenu);
-  });
-})();
-</script>
-<script>
-window.PORTFOLIO_TRACKER_ENDPOINT = 'https://semirain.synology.me:3443/track';
-</script>
-<script src="../../assets/js/tracker.js"></script>
-
+</div>
+<script src="../../assets/js/site.js"></script>
 </body>
 </html>
-

@@ -1,377 +1,272 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Systems | 홍대기</title>
+<meta name="description" content="DeskRelay flagship, Ops-Cure 커널, GenWorld + Ollama 로컬 LLM R&D 등 운영 가능한 형태로 마무리한 AI 시스템 모음."/>
+<meta property="og:title" content="AI Systems | 홍대기"/>
+<meta property="og:description" content="DeskRelay flagship, Ops-Cure 커널, GenWorld + Ollama 로컬 LLM R&D 모음."/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/ko/ai-systems/"/>
+<meta property="og:locale" content="ko_KR"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
-<title>AI Systems | 홍대기</title>
-<meta name="description" content="홍대기의 kernel + behaviors 아키텍처. Ops-Cure의 state/event kernel과 DeskRelay의 GitHub 기준 Claude Code self-host 브라우저 제어 도구."/>
-<meta property="og:title" content="AI Systems | 홍대기"/>
-<meta property="og:description" content="kernel + behaviors, 그리고 DeskRelay: 내 PC의 Claude Code를 브라우저에서 제어하는 self-host 제품 표면."/>
-<meta property="og:type" content="website"/>
-<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
-<meta property="og:url" content="https://darkhtk.github.io/portfolio/ko/ai-systems/"/>
-<meta property="og:locale" content="ko_KR"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
-          body: ["Noto Sans KR", "sans-serif"],
-          label: ["Space Grotesk", "Noto Sans KR", "sans-serif"]
-        }
-      }
-    }
-  }
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
+      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573",
+      "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787",
+      "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
+    borderRadius: { DEFAULT: "0.5rem", xs: "0.25rem", sm: "0.375rem", md: "0.5rem", lg: "0.75rem" }
+  } } }
 </script>
-<link rel="stylesheet" href="../../assets/css/site.css"/>
+<link rel="stylesheet" href="../../assets/css/portfolio-dark.css"/>
 </head>
-<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
-<div class="site-shell">
-  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <a href="../" class="flex flex-col">
-        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">홍대기</span>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
-      </a>
-      <nav class="hidden items-center gap-2 md:flex">
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../">홈</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../projects/">프로젝트</a>
-        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="./">AI Systems</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../about/">프로필</a>
+<body class="font-body antialiased">
+<div class="relative">
+
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../../ai-systems/deskrelay/" class="nav-link">deskrelay</a>
+        <a href="./" class="nav-link is-active">ai</a>
+        <a href="../projects/" class="nav-link">industrial</a>
+        <a href="../about/" class="nav-link">profile</a>
       </nav>
       <div class="flex items-center gap-3">
-        <div class="lang-toggle hidden sm:inline-flex">
-          <a class="lang-link" href="../../ai-systems/">EN</a>
-          <a class="lang-link is-active" href="./">KO</a>
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">KO</span>
+          <a href="../../en/ai-systems/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">EN</a>
         </div>
-        <a href="mailto:darkhtk@gmail.com" class="hidden rounded-full bg-[#1a57c7] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5 sm:inline-flex">문의</a>
-        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+        <button data-mobile-menu-toggle aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan">
           <span class="material-symbols-outlined">menu</span>
         </button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
-        <div>
-          <div class="section-kicker">Menu</div>
-          <div class="mt-3 brand-mark font-headline text-3xl font-bold">홍대기</div>
-        </div>
-        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="메뉴 닫기">
-          <span class="material-symbols-outlined">close</span>
-        </button>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="메뉴 닫기" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
       </div>
-      <div class="mt-6 grid gap-3">
-        <a href="../" class="mobile-nav-link">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">홈</div>
-          <div class="mt-1 text-sm text-[#526178]">포지셔닝과 대표 사례.</div>
-        </a>
-        <a href="../projects/" class="mobile-nav-link">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">프로젝트</div>
-          <div class="mt-1 text-sm text-[#526178]">산업 XR, BIM, 로보틱스, 툴링.</div>
-        </a>
-        <a href="./" class="mobile-nav-link is-active">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">AI Systems</div>
-          <div class="mt-1 text-sm text-[#526178]">커널, behavior, 응용 AI R&amp;D.</div>
-        </a>
-        <a href="../about/" class="mobile-nav-link">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">프로필</div>
-          <div class="mt-1 text-sm text-[#526178]">경력과 작업 방식.</div>
-        </a>
-      </div>
-      <div class="mt-6 flex gap-3">
-        <a href="../../ai-systems/" class="lang-link bg-white">EN</a>
-        <a href="./" class="lang-link is-active bg-white">KO</a>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span>→</span></a>
+        <a href="../../ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span>→</span></a>
+        <a href="./" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">ai systems <span>→</span></a>
+        <a href="../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span>→</span></a>
+        <a href="../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
       </div>
     </div>
   </header>
 
-  <main class="relative">
-    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        <div class="surface-panel p-6 sm:p-8 lg:p-10">
-          <div class="section-kicker">Kernel · Behaviors · Runtimes</div>
-          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">AI Systems</h1>
-          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">
-            에이전트 시스템만 만든 게 아닙니다. 그것이 돌아가는 커널을 만들었습니다.
+  <main class="relative pt-16">
+
+    <!-- HERO -->
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-cyan border border-accent-cyan/30 bg-accent-cyan/5 px-3 py-1.5 w-fit">// ai systems</div>
+          <h1 class="display-hero text-text-primary kr-balance">AI 를<br/>데모로 두지 않습니다.</h1>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
+            산업 현장에서 다져진 엔지니어링을 토대로, 운영 가능한 형태로 끝맺는 AI 시스템을 만듭니다. 도구는 일상 워크플로우에 끼워 써야 의미가 있다고 믿습니다. 그 자세가 가장 선명하게 드러나는 결과물이 <a href="../../ai-systems/deskrelay/" class="text-accent-cyan border-b border-accent-cyan/60">DeskRelay</a> 입니다.
           </p>
-          <p class="mt-5 max-w-3xl text-sm leading-7 text-[#526178] sm:text-base">
-            Ops-Cure는 Discord 채널/스레드를 상태를 가진 공간으로 취급합니다. DeskRelay는 GitHub 저장소 기준의 self-host 증거입니다. 서버 PC가 site-frontend, site-backend, connector daemon을 띄우고, LAN/Tailscale 안의 등록 PC가 각자의 Claude Code CLI를 connector daemon으로 노출합니다.
-          </p>
-          <div class="mt-7 flex flex-wrap gap-2.5">
-            <span class="pill text-sm">Kernel</span>
-            <span class="pill text-sm">Behavior Plugins</span>
-            <span class="pill text-sm">Discord Transport</span>
-            <span class="pill text-sm">Self-host control plane</span>
-            <span class="pill text-sm">Local Runtimes</span>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="../../ai-systems/deskrelay/" class="btn-cyan">DeskRelay 케이스 <span>→</span></a>
+            <a href="#systems" class="btn-ghost">전체 목록 <span>↓</span></a>
           </div>
         </div>
-
-        <aside class="feature-panel p-5 sm:p-6">
-          <div class="section-kicker">읽는 순서</div>
-          <div class="mt-5 grid gap-3">
-            <a href="#kernel" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
-              <div class="metric-label">01</div>
-              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Ops-Cure Kernel</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">채널 단위 state/event 기반.</div>
-            </a>
-            <a href="#behaviors" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
-              <div class="metric-label">02</div>
-              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Behaviors</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">orchestration · remote_codex · chat.</div>
-            </a>
-          <a href="#deskrelay" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
-              <div class="metric-label">03</div>
-              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">DeskRelay</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">로컬 에이전트 실행을 브라우저/모바일에서 제어.</div>
-            </a>
-            <a href="#applied" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
-              <div class="metric-label">04</div>
-              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">응용 AI R&amp;D</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">커널 밖의 로컬 LLM 실험.</div>
-            </a>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="kernel" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
-        <div class="section-kicker">커널</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Ops-Cure — 채널 단위 state/event 커널</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">채널은 단순한 메시지 파이프가 아닙니다. 액터와 이벤트가 흐르는 상태 공간입니다. Ops-Cure는 그 해석을 명시화해서, behavior는 꽂히고 transport는 맞춰지고 runtime은 실행합니다.</p>
-      </div>
-
-      <article class="mt-10 project-card bg-white p-6 sm:p-8 lg:p-10">
-        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-          <div class="stack-diagram stack-diagram--deep sm:aspect-[4/3]">
-            <div>
-              <div class="stack-diagram__eyebrow">Channel-native kernel</div>
-              <div class="mt-3 stack-diagram__title">Space · Actor · Event · Behavior</div>
-              <p class="mt-3 stack-diagram__copy">커널은 범용으로 유지합니다. 도메인 시맨틱은 behavior 안에, 머신 별 실행 세부는 runtime 안에.</p>
-            </div>
-            <div class="stack-diagram__grid">
-              <div class="stack-diagram__node"><strong>Kernel</strong><span>Space / Actor / Event / Behavior</span></div>
-              <div class="stack-diagram__node"><strong>Behaviors</strong><span>orchestration · remote_codex · chat</span></div>
-              <div class="stack-diagram__node"><strong>Transport</strong><span>Discord 봇, 스레드, presenter</span></div>
-              <div class="stack-diagram__node"><strong>Runtimes</strong><span>pc_launcher · remote_executor · chat_participant</span></div>
-            </div>
-            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>커널이 제품, behavior는 플러그인.</span></div>
-          </div>
-
-          <div>
-            <div class="section-kicker">Core vocabulary</div>
-            <div class="content-prose mt-5">
-              <p><strong>Space.</strong> 상태를 가진 방 — 시간 축으로 자체 상태를 누적하는 Discord 채널, 스레드, 세션.</p>
-              <p><strong>Actor.</strong> 참여자 — 사람, AI 워커, 봇, 시스템.</p>
-              <p><strong>Event.</strong> 공간 안에 기록되는 사실. Transport 독립적, 저장/재생 가능.</p>
-              <p><strong>Behavior.</strong> 커널 위에서 이벤트를 해석하고 도메인 상태를 관리하는 도메인 로직.</p>
-            </div>
-            <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href="../../ai-systems/ops-cure/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
-                커널 케이스 열기
-                <span class="material-symbols-outlined ml-2 text-base">north_east</span>
-              </a>
-              <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
-                GitHub 저장소
-              </a>
+        <div class="lg:col-span-5">
+          <div class="card ticks p-5">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="kicker mb-4">// at a glance</div>
+            <div class="grid gap-px bg-hairline border border-hairline font-mono text-[11px]">
+              <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">flagship</span><span class="text-accent-cyan">DeskRelay v0.0.0</span></div>
+              <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">kernels</span><span class="text-text-primary">Ops-Cure</span></div>
+              <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">local llm</span><span class="text-text-primary">GenWorld + Ollama</span></div>
+              <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">experiments</span><span class="text-accent-amber">3 · lab notebook</span></div>
+              <div class="bg-bg-primary p-3 flex justify-between"><span class="text-text-muted uppercase tracking-widest">status</span><span class="text-success-green flex items-center gap-2"><span class="w-1.5 h-1.5 bg-success-green rounded-full"></span>shipping</span></div>
             </div>
           </div>
         </div>
-      </article>
+      </div>
     </section>
 
-    <section id="behaviors" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="max-w-3xl">
-        <div class="section-kicker">Behaviors</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">하나의 커널, 세 개의 behavior</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">같은 Space/Actor/Event 기반 위에서 프로덕션급 멀티에이전트 워크플로, 브라우저 기반 원격 실행 면, Codex끼리 나누는 대화방이 돌아갑니다. 서로 완전히 다른 도메인이 같은 커널을 쓴다는 것 — 추상화가 실제로 성립한다는 증거입니다.</p>
+    <!-- FLAGSHIP -->
+    <section id="systems" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ FLAGSHIP ]</span>
+        <span class="kicker text-accent-cyan">DESKRELAY</span>
+        <span class="line"></span>
+        <span class="tail text-accent-cyan/80">developer tool grade</span>
       </div>
 
-      <div class="mt-10 grid gap-6 lg:grid-cols-3">
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="overflow-hidden rounded-[24px] bg-[var(--surface-muted)] sm:aspect-[4/3]">
-            <div class="stack-diagram h-full">
+      <div class="card ticks glow-cyan p-6 sm:p-8 lg:p-10">
+        <span class="tr"></span><span class="bl"></span>
+        <div class="grid gap-8 lg:grid-cols-12 items-center">
+          <div class="lg:col-span-7 flex flex-col gap-5">
+            <div class="kicker kicker-cyan">// flagship · ai dev tool</div>
+            <img src="../../assets/images/deskrelay-logo-lockup.png" alt="DeskRelay" class="h-12 sm:h-14 w-auto self-start max-w-full object-contain"/>
+            <p class="display-section text-text-primary kr-balance">로컬 Claude·Codex 세션을<br/>모바일·브라우저에서 그대로.</p>
+            <p class="text-text-secondary text-[14px] leading-[1.85] kr-balance max-w-xl">서버 PC 한 대가 site-frontend(<code>:18193</code>), site-backend(<code>:18192</code>), connector daemon(<code>:18191</code>) 을 띄우고, LAN/Tailscale 안의 다른 PC 를 디바이스로 등록해서 씁니다.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">self-host</span><span class="chip chip-cyan">mobile</span><span class="chip chip-cyan">multi-pc</span><span class="chip chip-cyan">secure</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <a href="../../ai-systems/deskrelay/" class="btn-cyan">전체 케이스 <span>→</span></a>
+              <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="btn-ghost">GitHub <span>↗</span></a>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="term-window ticks">
+              <span class="tr"></span><span class="bl"></span>
+              <div class="card-bar"><span>SHOT</span><span class="text-text-muted">CHAT</span></div>
+              <div class="media-frame frame-contain aspect-[3/4]"><img src="../../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay 채팅 세션"/></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI SYSTEMS GRID -->
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.01 ]</span>
+        <span class="kicker text-text-secondary">SYSTEMS · KERNELS</span>
+        <span class="line"></span>
+        <span class="tail">2 cases</span>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+
+        <article class="card card-amber ticks ticks-amber group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_01</span><span class="text-accent-amber">AGENT · KERNEL</span></div>
+          <div class="media-frame aspect-[16/9] border-b border-hairline">
+            <img src="../../assets/images/orchestration-v1-loop.png" alt="Ops-Cure orchestration"/>
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="chip">Channel-native</span><span class="chip">Behaviors × 3</span><span class="chip">Kernel</span>
+            </div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3"><span class="text-accent-amber font-mono">&gt;</span> Ops-Cure</h3>
+            <p class="text-[14px] leading-[1.8] text-text-secondary kr-balance flex-1">채널 단위 state/event 커널. orchestration · remote_codex · chat 세 behavior 가 같은 Space/Actor/Event 위에 돌아간다 — 추상화가 실체라는 가장 직접적 증거.</p>
+            <a href="../../ai-systems/ops-cure/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-amber border border-accent-amber/30 px-3 py-2 w-fit hover:bg-accent-amber/10">read_notes <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card card-amber ticks ticks-amber group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-amber">MODULE_02</span><span class="text-accent-amber">LOCAL LLM · R&amp;D</span></div>
+          <div class="media-frame aspect-[16/9] border-b border-hairline">
+            <img src="../../assets/images/genworld-world.png" alt="GenWorld 게임 월드"/>
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="chip">Ollama</span><span class="chip">NPC</span><span class="chip">Offline-first</span>
+            </div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3"><span class="text-accent-amber font-mono">&gt;</span> GenWorld + Ollama</h3>
+            <p class="text-[14px] leading-[1.8] text-text-secondary kr-balance flex-1">Phaser 3 TS RPG → Unity 2D C# 포팅과 함께 로컬 Ollama LLM 기반 NPC 인지·대화 시스템을 설계. 오프라인 우선과 graceful fallback 구조를 검증.</p>
+            <a href="../../ai-systems/genworld-ollama/" class="mt-5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-accent-amber border border-accent-amber/30 px-3 py-2 w-fit hover:bg-accent-amber/10">read_notes <span>↗</span></a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- LAB NOTEBOOK -->
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-40"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14">
+          <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ LAB ]</span>
+          <span class="kicker text-text-secondary">EXPERIMENTS</span>
+          <span class="line"></span>
+          <span class="tail">2025</span>
+        </div>
+
+        <div class="grid gap-10 lg:grid-cols-12 mb-10">
+          <div class="lg:col-span-5">
+            <div class="kicker mb-4">// lab notebook</div>
+            <h2 class="display-section text-text-primary kr-balance">작게 시작한 것들.</h2>
+          </div>
+          <div class="lg:col-span-7 lg:pt-2">
+            <p class="text-text-secondary text-[15px] leading-[1.85] kr-balance max-w-2xl">전체 케이스가 되지 않은 짧은 실험들. 데모로 끝낼 의도가 아니라, 가설을 빨리 검증하고 본 작업에 연결하기 위한 작은 단위.</p>
+          </div>
+        </div>
+
+        <div class="card ticks">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>LOG</span><span class="text-text-muted">EXPERIMENTS · 2025</span></div>
+          <div class="divide-y divide-hairline font-mono">
+            <div class="grid grid-cols-[6.5rem_1fr] gap-4 p-5 hover:bg-accent-cyan/5">
+              <span class="text-text-muted">2025.11</span>
               <div>
-                <div class="stack-diagram__eyebrow">Behavior 01</div>
-                <div class="mt-3 stack-diagram__title">orchestration</div>
-                <p class="mt-3 stack-diagram__copy text-sm">planner · curator · coder · verifier · reviewer 가 Discord 스레드 안에서 canonical task와 handoff 위에 협업합니다.</p>
-              </div>
-              <div class="stack-diagram__grid">
-                <div class="stack-diagram__node"><strong>Tasks</strong><span>canonical + handoffs</span></div>
-                <div class="stack-diagram__node"><strong>Runtime</strong><span>pc_launcher</span></div>
+                <div class="text-text-primary text-[13px]">industrial-llm-bridge</div>
+                <div class="text-text-muted text-[12px] mt-1 leading-relaxed">현장 데이터를 LLM 워크플로우에 연결한 사내 실험. 운영자 시나리오에서 LLM 응답을 검증하는 작은 브리지.</div>
               </div>
             </div>
-          </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Production</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">Planner</span>
-            <span class="project-chip">Coder</span>
-            <span class="project-chip">Reviewer</span>
-          </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">orchestration</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Discord-native 멀티에이전트 워크플로. 역할 분리, self-claim 스케줄링, 마크다운 워크스페이스 투영.</p>
-          <a href="../../ai-systems/ops-cure/#orchestration" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">커널 케이스에서 읽기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
-
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="overflow-hidden rounded-[24px] bg-[var(--surface-muted)] sm:aspect-[4/3]">
-            <div class="stack-diagram h-full">
+            <div class="grid grid-cols-[6.5rem_1fr] gap-4 p-5 hover:bg-accent-cyan/5">
+              <span class="text-text-muted">2025.09</span>
               <div>
-                <div class="stack-diagram__eyebrow">Behavior 02</div>
-                <div class="mt-3 stack-diagram__title">remote_codex</div>
-                <p class="mt-3 stack-diagram__copy text-sm">브라우저 중심 원격 Codex 실행. canonical task · evidence · approval 상태는 bridge 가 소유합니다.</p>
-              </div>
-              <div class="stack-diagram__grid">
-                <div class="stack-diagram__node"><strong>Browser</strong><span>codex-remote 사이트</span></div>
-                <div class="stack-diagram__node"><strong>Runtime</strong><span>remote_executor</span></div>
+                <div class="text-text-primary text-[13px]">voice-ops-cure</div>
+                <div class="text-text-muted text-[12px] mt-1 leading-relaxed">Whisper + Ollama 로 운영 보조 데모. 음성 → 명령 → 워크플로우 호출 경로를 검증.</div>
               </div>
             </div>
-          </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Live · Opscure 가 canonical</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">Browser</span>
-            <span class="project-chip">Evidence</span>
-            <span class="project-chip">Approval</span>
-          </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">remote_codex</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">원격 Codex 작업 모델 — heartbeat, evidence, approval 상태. bridge 가 canonical truth 를 갖고, codex-remote 사이트는 proxy 전용 모드로 그 위에 붙는다.</p>
-          <a href="../../ai-systems/ops-cure/#remote-codex" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">커널 케이스에서 읽기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
-
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="overflow-hidden rounded-[24px] bg-[var(--surface-muted)] sm:aspect-[4/3]">
-            <div class="stack-diagram h-full">
+            <div class="grid grid-cols-[6.5rem_1fr] gap-4 p-5 hover:bg-accent-cyan/5">
+              <span class="text-text-muted">2025.07</span>
               <div>
-                <div class="stack-diagram__eyebrow">Behavior 03</div>
-                <div class="mt-3 stack-diagram__title">chat</div>
-                <p class="mt-3 stack-diagram__copy text-sm">Codex 끼리의 대화방 — 태스크도 handoff도 없이, 커널이 범용임을 증명하는 순수 dialogue.</p>
+                <div class="text-text-primary text-[13px]">prompt-tooling-cli</div>
+                <div class="text-text-muted text-[12px] mt-1 leading-relaxed">반복 프롬프트를 CLI 로 묶은 작은 도구. 일상 작업 자동화의 한 조각.</div>
               </div>
-              <div class="stack-diagram__grid">
-                <div class="stack-diagram__node"><strong>Rooms</strong><span>thread 기반</span></div>
-                <div class="stack-diagram__node"><strong>Runtime</strong><span>chat_participant</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Live · 커널 범용성 증명</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">Codex-to-Codex</span>
-            <span class="project-chip">Dialogue</span>
-            <span class="project-chip">No Tasks</span>
-          </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">chat</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">AI 에이전트끼리의 대화 전용 방. 참여자, heartbeat, 메시지 전송 — 워크플로 시맨틱 없이. 워크플로 외 도메인에서도 Space/Actor/Event 가 성립한다는 증거.</p>
-          <a href="../../ai-systems/ops-cure/#chat" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">커널 케이스에서 읽기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
-      </div>
-
-      <div class="mt-10 surface-panel p-6 sm:p-8">
-        <div class="section-kicker">왜 세 개가 중요한가</div>
-        <p class="mt-4 max-w-4xl text-base leading-7 text-[#4f6077]">
-          behavior 하나는 기능입니다. 근본적으로 다른 behavior 세 개 — 구조화된 워크플로, 승인이 붙은 원격 실행, 자유 대화 — 가 같은 커널 위에서 돌아간다는 건 추상화가 실체라는 주장입니다. 각각이 다른 축을 검증합니다: <strong>orchestration</strong> 은 상태/태스크 모델, <strong>remote_codex</strong> 는 분산 runtime 아래의 canonical evidence, <strong>chat</strong> 은 태스크 시맨틱 없는 방의 범용성.
-        </p>
-      </div>
-    </section>
-
-    <section id="deskrelay" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="max-w-3xl">
-        <div class="section-kicker">Self-host Product · Remote Agent Runtime</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay — 내 PC의 Claude Code를 브라우저에서 제어하는 self-host 도구</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">공개 GitHub 저장소만 기준으로 다시 썼습니다. DeskRelay는 서버 PC에서 <code>:18193</code>의 site-frontend, <code>:18192</code>의 site-backend, <code>:18191</code>의 connector daemon을 띄우고, LAN 또는 Tailscale 안의 등록 PC는 <code>:18091</code> connector port로 연결합니다.</p>
-      </div>
-
-      <article class="mt-10 project-card bg-white p-6 sm:p-8 lg:p-10">
-        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-          <figure class="media-frame remote-landing-thumb">
-            <img src="../../assets/images/deskrelay-github-usage-mobile-chat.png" alt="DeskRelay GitHub 매뉴얼 모바일 채팅 스크린샷" loading="lazy" width="360" height="780"/>
-          </figure>
-
-          <div>
-            <div class="section-kicker">구현 범위</div>
-            <div class="content-prose mt-5">
-              <p><strong>GitHub source.</strong> README는 DeskRelay를 내 PC에서 실행되는 Claude Code를 브라우저에서 제어하는 self-host 개발 도구로 정의합니다.</p>
-              <p><strong>설치 흐름.</strong> Windows/macOS 서버 설치 스크립트는 브라우저 UI를 <code>http://127.0.0.1:18193</code>로 열고, 다른 기기 접속은 <code>#site-token=...</code>이 포함된 URL을 사용할 수 있습니다.</p>
-              <p><strong>디바이스 등록.</strong> 메인 화면의 “다른 PC 등록 명령”을 대상 Windows PC에 붙여넣으면 repo 설치/업데이트, connector 실행, Tailscale/LAN 주소 감지, 서버 접근 검증, 디바이스 등록을 처리합니다.</p>
-              <p><strong>운영 경계.</strong> README는 connector port를 공용 인터넷에 직접 노출하지 말고 외부 접근이 필요하면 Tailscale 같은 사설 네트워크를 쓰라고 명시합니다.</p>
-            </div>
-            <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href="../../ai-systems/deskrelay/" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
-                케이스 열기
-                <span class="material-symbols-outlined ml-2 text-base">north_east</span>
-              </a>
-              <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">
-                GitHub 저장소
-              </a>
             </div>
           </div>
         </div>
-      </article>
-    </section>
-
-    <section id="applied" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="max-w-3xl">
-        <div class="section-kicker">관련 응용 AI R&amp;D</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">커널 밖의 작업</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">AI Systems 관점에 영향을 주지만 Ops-Cure 커널 밖에 있는 작업 — 로컬 LLM 실험, 프롬프트 구조, NPC 기억 규칙.</p>
-      </div>
-
-      <div class="mt-10 grid gap-6 lg:grid-cols-2">
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
-            <img src="../../assets/images/genworld-world.png" alt="GenWorld 세계"/>
-          </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Local LLM R&amp;D</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">Ollama</span>
-            <span class="project-chip">NPC</span>
-            <span class="project-chip">Memory Rules</span>
-          </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">GenWorld + Ollama</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">NPC 행동, 기억 규칙, 월드 상호작용 설계를 위한 로컬 LLM 실험. 독립 R&amp;D 트랙, 커널 behavior 아님.</p>
-          <a href="../../ai-systems/genworld-ollama/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">케이스 열기<span class="material-symbols-outlined text-base">north_east</span></a>
-        </article>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 pb-16 pt-2 sm:px-6 sm:pb-20 lg:px-8">
-      <div class="surface-panel p-6 sm:p-8 lg:p-10">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-          <div class="max-w-3xl">
-            <div class="section-kicker">다음</div>
-            <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">산업 납품 작업</h2>
-            <p class="mt-4 text-base leading-7 text-[#4f6077]">포트폴리오의 실행 기반 — XR, BIM 런타임 툴링, 로보틱스 제어, 전시 납품.</p>
-          </div>
-          <a href="../projects/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
-            프로젝트 열기
-            <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </a>
+    <!-- CTA BAND -->
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary kr-balance">AI 직군 채용·데모 미팅이<br/>필요하시면 바로 연결합니다.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="mailto:darkhtk@gmail.com" class="btn-cyan">darkhtk@gmail.com</a>
+          <a href="https://github.com/darkhtk" target="_blank" rel="noopener" class="btn-ghost">GitHub <span>↗</span></a>
+          <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener" class="btn-ghost">LinkedIn <span>↗</span></a>
         </div>
       </div>
     </section>
+
   </main>
 
-  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
-    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-      <div>
-        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
-        <div class="mt-2 text-sm text-[#526178]">AI Systems, kernel and behaviors</div>
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../../" class="hover:text-accent-cyan">home</a>
+        <a href="../../ai-systems/deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
+        <a href="./" class="hover:text-accent-cyan">ai</a>
+        <a href="../projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../en/ai-systems/" class="hover:text-accent-cyan">en</a>
       </div>
-      <div class="flex flex-wrap items-center gap-3 text-sm">
-        <a class="footer-link" href="../">홈</a>
-        <a class="footer-link" href="../projects/">프로젝트</a>
-        <a class="footer-link" href="../about/">프로필</a>
-        <a class="footer-link" href="../../ai-systems/">English</a>
-      </div>
+      <div class="text-text-muted">sys.version: stable.3.0 · © 2026</div>
     </div>
   </footer>
+
 </div>
 <script src="../../assets/js/site.js"></script>
 </body>
