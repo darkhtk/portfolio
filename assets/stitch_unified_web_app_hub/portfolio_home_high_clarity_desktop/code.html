@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daeki Hong | Portfolio</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "inverse-surface": "#dee3e5",
+                "on-primary-fixed-variant": "#004e5c",
+                "on-tertiary": "#3f2e00",
+                "background": "#0f1416",
+                "secondary-container": "#775300",
+                "secondary-fixed": "#ffdeab",
+                "bg-elevated": "#11161D",
+                "on-surface-variant": "#bcc9cd",
+                "tertiary-container": "#ffcd5b",
+                "outline": "#879397",
+                "bg-primary": "#0B0F14",
+                "primary": "#d6f5ff",
+                "surface-container-lowest": "#0a0f11",
+                "on-secondary-fixed-variant": "#5f4100",
+                "text-muted": "#5B6573",
+                "surface-container-highest": "#303637",
+                "tertiary-fixed": "#ffdf9e",
+                "inverse-primary": "#00687a",
+                "surface-dim": "#0f1416",
+                "surface": "#0f1416",
+                "text-primary": "#E6EDF3",
+                "secondary-fixed-dim": "#f1be68",
+                "surface-variant": "#303637",
+                "on-error-container": "#ffdad6",
+                "surface-container-high": "#252b2d",
+                "surface-container": "#1b2022",
+                "on-secondary-container": "#fcc971",
+                "tertiary-fixed-dim": "#f0c04f",
+                "on-tertiary-fixed-variant": "#5b4300",
+                "on-primary-fixed": "#001f26",
+                "on-surface": "#dee3e5",
+                "primary-fixed-dim": "#60d6f1",
+                "error-container": "#93000a",
+                "bg-grid": "#0E141B",
+                "on-tertiary-fixed": "#261a00",
+                "on-primary": "#003640",
+                "on-background": "#dee3e5",
+                "inverse-on-surface": "#2c3133",
+                "on-error": "#690005",
+                "surface-bright": "#353a3c",
+                "text-secondary": "#8A94A6",
+                "surface-container-low": "#171c1e",
+                "primary-fixed": "#abedff",
+                "tertiary": "#ffeed2",
+                "secondary": "#f1be68",
+                "border-hairline": "rgba(230,237,243,0.08)",
+                "outline-variant": "#3d494c",
+                "on-tertiary-container": "#755600",
+                "error": "#ffb4ab",
+                "on-primary-container": "#006475",
+                "on-secondary": "#422c00",
+                "primary-container": "#6fe3ff",
+                "success-green": "#6EE787",
+                "surface-tint": "#60d6f1",
+                "on-secondary-fixed": "#271900",
+                "accent-cyan": "#6FE3FF",
+                "accent-amber": "#F5C26B"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "section-gap": "160px",
+                "element-gap": "24px",
+                "gutter-mobile": "24px",
+                "gutter-desktop": "96px",
+                "max-width": "1440px"
+        },
+        "fontFamily": {
+                "mono-ui": [
+                        "JetBrains Mono"
+                ],
+                "hero-display-mobile": [
+                        "Space Grotesk"
+                ],
+                "body-kr": [
+                        "Noto Sans KR"
+                ],
+                "mono-label": [
+                        "JetBrains Mono"
+                ],
+                "hero-display": [
+                        "Space Grotesk"
+                ],
+                "card-title": [
+                        "Space Grotesk"
+                ],
+                "section-title": [
+                        "Space Grotesk"
+                ]
+        },
+        "fontSize": {
+                "mono-ui": [
+                        "14px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "500"
+                        }
+                ],
+                "hero-display-mobile": [
+                        "44px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.03em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-kr": [
+                        "16px",
+                        {
+                                "lineHeight": "1.7",
+                                "fontWeight": "400"
+                        }
+                ],
+                "mono-label": [
+                        "12px",
+                        {
+                                "lineHeight": "1.0",
+                                "letterSpacing": "0.12em",
+                                "fontWeight": "500",
+                                "textTransform": "uppercase"
+                        }
+                ],
+                "hero-display": [
+                        "80px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.03em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "card-title": [
+                        "22px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "700"
+                        }
+                ],
+                "section-title": [
+                        "44px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.03em",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Aggressive Grid background pattern */
+        .bg-pattern {
+            background-image: linear-gradient(rgba(111, 227, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(111, 227, 255, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+            background-position: center center;
+        }
+        /* Custom Caret Blink */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .caret-blink {
+            animation: blink 1s step-end infinite;
+        }
+        /* Scanlines */
+        .scanlines::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 50;
+            pointer-events: none;
+        }
+        /* Corner Ticks */
+        .corner-ticks {
+            position: relative;
+        }
+        .corner-ticks::before, .corner-ticks::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-color: #6FE3FF;
+            border-style: solid;
+        }
+        .corner-ticks::before {
+            top: -1px;
+            left: -1px;
+            border-width: 1px 0 0 1px;
+        }
+        .corner-ticks::after {
+            bottom: -1px;
+            right: -1px;
+            border-width: 0 1px 1px 0;
+        }
+    </style>
+</head>
+<body class="bg-bg-primary text-text-primary font-body-kr min-h-screen flex flex-col antialiased selection:bg-accent-cyan selection:text-bg-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-bg-primary border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-gutter-mobile md:px-gutter-desktop h-16 max-w-max-width mx-auto">
+<!-- Brand -->
+<div class="font-mono-ui text-mono-ui font-bold text-accent-cyan flex items-center">
+                daeki.hong<span class="caret-blink">_</span>
+</div>
+<!-- Links (Desktop) -->
+<div class="hidden md:flex space-x-8">
+<a class="font-mono-ui text-mono-ui text-accent-cyan border-b border-accent-cyan pb-1 cursor-pointer active:opacity-70 hover:text-accent-cyan transition-colors duration-200 uppercase tracking-widest" href="#ch01">CH.01</a>
+<a class="font-mono-ui text-mono-ui text-text-muted cursor-pointer active:opacity-70 hover:text-accent-cyan transition-colors duration-200 uppercase tracking-widest" href="#ch02">CH.02</a>
+<a class="font-mono-ui text-mono-ui text-text-muted cursor-pointer active:opacity-70 hover:text-accent-cyan transition-colors duration-200 uppercase tracking-widest" href="#ch03">CH.03</a>
+<a class="font-mono-ui text-mono-ui text-text-muted cursor-pointer active:opacity-70 hover:text-accent-cyan transition-colors duration-200 uppercase tracking-widest" href="#stack">STACK</a>
+<a class="font-mono-ui text-mono-ui text-text-muted cursor-pointer active:opacity-70 hover:text-accent-cyan transition-colors duration-200 uppercase tracking-widest" href="#contact">CONTACT</a>
+</div>
+<!-- Trailing Action -->
+<a class="hidden md:inline-flex px-4 py-2 bg-transparent text-accent-cyan font-mono-label text-mono-label border border-accent-cyan/30 hover:border-accent-cyan hover:bg-accent-cyan/10 transition-colors duration-200 corner-ticks uppercase" href="#">
+                [ RESUME.PDF ]
+            </a>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden text-accent-cyan">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-section-gap px-gutter-mobile md:px-gutter-desktop max-w-max-width mx-auto w-full bg-pattern relative">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-element-gap items-center mb-section-gap pt-16 relative z-10">
+<div class="md:col-span-8 flex flex-col items-start gap-8 z-20">
+<div class="font-mono-label text-mono-label text-accent-amber flex items-center gap-2 border border-accent-amber/30 px-3 py-1 bg-accent-amber/5">
+<span class="text-accent-amber opacity-50">&gt;</span> root@whoami:~#
+                </div>
+<h1 class="font-hero-display-mobile md:font-hero-display text-hero-display-mobile md:text-hero-display text-text-primary leading-tight">
+                    산업 현장에서 다져진 10년의 Unity,<br/>
+                    이제 <span class="text-accent-cyan bg-accent-cyan/10 px-2 border-b-4 border-accent-cyan">AI 개발자 도구</span>로 출고합니다.
+                </h1>
+<p class="font-body-kr text-body-kr text-text-secondary max-w-2xl mt-4 border-l-2 border-outline-variant pl-4">
+                    산업용 VR, 로보틱스 시뮬레이터부터 AI 기반 업무 자동화 시스템까지. 복잡한 문제를 안정적이고 확장 가능한 아키텍처로 해결하는 엔지니어 홍대기입니다.
+                </p>
+<div class="mt-8 flex gap-4">
+<a class="px-6 py-3 bg-accent-cyan text-bg-primary font-mono-ui text-mono-ui font-bold flex items-center gap-2 hover:bg-white transition-colors corner-ticks uppercase" href="#ch03">
+                        DeskRelay 열기 <span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
+</a>
+<a class="px-6 py-3 bg-transparent border border-outline-variant text-text-primary font-mono-ui text-mono-ui flex items-center gap-2 hover:border-accent-cyan hover:text-accent-cyan transition-colors corner-ticks uppercase" href="#contact">
+                        Contact
+                    </a>
+</div>
+<!-- Interactive Metrics Strip -->
+<div class="mt-12 flex items-center gap-6 text-accent-cyan font-mono-label text-mono-label border-y border-outline-variant py-3 w-full max-w-2xl uppercase tracking-widest">
+<div class="flex items-center gap-2"><div class="w-2 h-2 bg-success-green animate-pulse"></div> SYS_STATUS: ONLINE</div>
+<div class="h-4 w-px bg-outline-variant"></div>
+<div>UPTIME: 10Y_EXP</div>
+<div class="h-4 w-px bg-outline-variant"></div>
+<div>ENV: PROD_READY</div>
+</div>
+</div>
+<div class="md:col-span-6 md:-ml-32 mt-12 md:mt-0 relative z-10 scanlines">
+<div class="aspect-[4/5] bg-bg-primary border border-outline-variant relative overflow-hidden flex flex-col group shadow-2xl">
+<!-- Fake Terminal Window Chrome -->
+<div class="h-10 bg-surface-container border-b border-outline-variant flex items-center px-4 gap-4">
+<div class="flex gap-2">
+<div class="w-3 h-3 bg-outline-variant"></div>
+<div class="w-3 h-3 bg-outline-variant"></div>
+<div class="w-3 h-3 bg-outline-variant"></div>
+</div>
+<div class="font-mono-label text-xs text-text-muted mx-auto tracking-widest uppercase">/bin/bash - deskrelay_init</div>
+</div>
+<!-- Terminal Content -->
+<div class="flex-grow p-6 font-mono-ui text-mono-ui text-text-secondary flex flex-col gap-2 bg-bg-elevated">
+<div class="text-accent-cyan">&gt; initializing DeskRelay_Engine...</div>
+<div>&gt; loading modules [██████████] 100%</div>
+<div>&gt; mounting virtual environment... OK</div>
+<div>&gt; establishing socket connection... OK</div>
+<div class="text-success-green">&gt; system active. awaiting input_</div>
+<div class="mt-4 opacity-70 relative h-full w-full border border-outline-variant/30 p-1">
+<img alt="Terminal code execution" class="w-full h-full object-cover opacity-60 mix-blend-screen grayscale contrast-150" data-alt="A dark terminal console screen displaying complex lines of code and technical data metrics. The screen is illuminated by glowing green and cyan text against a deep black background, conveying a high-tech, developer-centric atmosphere. Subtle scanlines and a slight glow effect enhance the modern CLI terminal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrOMt6L-axEDwYtoedfgYemMNcIZne1ukRu80-qldBY-XOPRneuuKSCbeAxqqjIMguplK5HEwGV6rO37hjI8lV_ATeT5WO7xGcdpAF8lAjJp7AZQNgtuX8jPl1-VAVDV6rqMrHUEp1Qa0UTmem20zBEySt5t1y8a7lfa4ScG01Qyt4EZSObEm-XjQM--IRvBTsXc6da9Cvx4IoLeJKoSfaNPUrgUFL7r4NfIVCerWOCY5PRID06ZovR4AuVLwo3rBtsmAp_a5gjeg"/>
+</div>
+</div>
+<!-- Corner Accent -->
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-accent-cyan pointer-events-none"></div>
+</div>
+</div>
+</section>
+<!-- Chapter Marker -->
+<div class="flex items-center w-full mb-16" id="ch01">
+<div class="font-mono-label text-mono-label text-accent-amber mr-4 bg-accent-amber/10 px-4 py-2 border border-accent-amber/30 uppercase tracking-widest">
+                [ CH.01 ]
+            </div>
+<div class="h-px bg-outline-variant flex-grow relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 font-mono-label text-text-muted uppercase text-[10px]">SECTION_START</div>
+</div>
+</div>
+<!-- Ch.01 Industrial Unity -->
+<section class="mb-section-gap relative">
+<!-- Decorative side metadata -->
+<div class="absolute -left-12 top-0 h-full w-4 hidden lg:flex flex-col items-center py-4 border-r border-outline-variant/30">
+<span class="writing-vertical-rl font-mono-label text-[10px] text-text-muted tracking-widest uppercase rotate-180">INDUSTRIAL_SECTOR // UNITY_ENGINE</span>
+</div>
+<h2 class="font-section-title text-section-title text-text-primary mb-12 font-bold tracking-tight">Industrial Unity</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1 -->
+<article class="bg-bg-primary border border-outline-variant overflow-hidden group hover:border-accent-cyan transition-colors duration-300 flex flex-col corner-ticks">
+<!-- Window Title Bar -->
+<div class="h-8 bg-surface-container border-b border-outline-variant flex justify-between items-center px-4">
+<span class="font-mono-label text-[10px] text-text-muted uppercase tracking-widest">OBJ_01</span>
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 bg-outline-variant"></div>
+<div class="w-1.5 h-1.5 bg-outline-variant"></div>
+</div>
+</div>
+<div class="aspect-[4/3] bg-bg-elevated relative overflow-hidden p-1 border-b border-outline-variant/50">
+<img alt="VR Robot Simulation" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 grayscale group-hover:grayscale-0" data-alt="A high-tech industrial robotic arm operating in a simulated dark environment. The robot is illuminated by sharp, cool cyan lighting, highlighting its metallic joints and precision engineering. The background is a deep, near-black void, creating a brutalist and minimalist developer-tool aesthetic that emphasizes industrial scale and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWiBMMoAMzG_iaDhHKdWXKj6ZSAU_kCXRJuzN4GjRnmO7rh4V-Kh_v5vESCG2fsIRshH3Vjx8OgWU9pr_KYqMCpeaEMp2b0ijCVL8aNqF1qeKDspWr22fIKTwWWNfEvQ5CT_QftuMbYYa-RlbzsUzU3xUTgvXIVe7PvPBFPXZ6plj5wxwiQZStcsRmMj1DNrdHgxEPb4JHUyeZyvMJitQC4EZb6mu6G9lIXphZrIwzihDk5TjjSkQO-qaIvRF2gFwBitUlGAHYAEg"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-2 py-1 bg-bg-primary border border-outline-variant font-mono-label text-[10px] text-text-primary uppercase tracking-widest">UNITY 3D</span>
+<span class="px-2 py-1 bg-bg-primary border border-outline-variant font-mono-label text-[10px] text-text-primary uppercase tracking-widest">VR</span>
+</div>
+</div>
+<div class="p-6 flex-grow flex flex-col bg-bg-primary">
+<h3 class="font-card-title text-card-title text-text-primary mb-4 font-bold">VR Robot Simulator</h3>
+<p class="font-body-kr text-body-kr text-text-secondary mb-8 flex-grow">
+                            산업 현장의 로봇 제어 시스템을 가상 환경에서 사전 검증하기 위한 고정밀 VR 시뮬레이터 개발.
+                        </p>
+<a class="font-mono-label text-mono-label text-accent-cyan flex items-center gap-2 hover:text-white transition-colors w-fit border border-accent-cyan/30 px-4 py-2 hover:bg-accent-cyan/10 uppercase tracking-widest" href="#">
+                            VIEW_DETAILS <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-bg-primary border border-outline-variant overflow-hidden group hover:border-accent-amber transition-colors duration-300 flex flex-col corner-ticks">
+<!-- Window Title Bar -->
+<div class="h-8 bg-surface-container border-b border-outline-variant flex justify-between items-center px-4">
+<span class="font-mono-label text-[10px] text-text-muted uppercase tracking-widest">OBJ_02</span>
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 bg-outline-variant"></div>
+<div class="w-1.5 h-1.5 bg-outline-variant"></div>
+</div>
+</div>
+<div class="aspect-[4/3] bg-bg-elevated relative overflow-hidden p-1 border-b border-outline-variant/50">
+<img alt="WatchBIM Interface" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 grayscale group-hover:grayscale-0" data-alt="A detailed digital twin and BIM (Building Information Modeling) software interface displayed on a dark monitor. Wireframe architectural structures glow with subtle amber and cyan accents against a deep charcoal background. The composition is technical and precise, embodying a sophisticated industrial software tool aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPcuWac9wjGlrypICItJ7dr6i_1WKdaWBP4vnJkve_vFBrdFD7G_ZvI8Pg04n46zP75rtFcbABbxZEiMKv94cXZ2Si24HkSV-r9mKPkFzGCuVpPpYcnvGkFuLIjw-g8LV52pft7Yq_NOFZtkkf8ZgMzNDfw9DQ-ZmSRTC4-NrpnbtyWSr1vO3XrT72ReqvbD1bYKe23Qyzzd8WpT5olH-KsTv0ZR-Urd6yMdr1Jp6TZON89TzZrSaGQlXJUrstcxm76hfClq8fYgs"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-2 py-1 bg-bg-primary border border-outline-variant font-mono-label text-[10px] text-text-primary uppercase tracking-widest">BIM</span>
+<span class="px-2 py-1 bg-bg-primary border border-outline-variant font-mono-label text-[10px] text-text-primary uppercase tracking-widest">DATA VISUALIZATION</span>
+</div>
+</div>
+<div class="p-6 flex-grow flex flex-col bg-bg-primary">
+<h3 class="font-card-title text-card-title text-text-primary mb-4 font-bold">WatchBIM</h3>
+<p class="font-body-kr text-body-kr text-text-secondary mb-8 flex-grow">
+                            건축 정보 모델(BIM) 데이터를 실시간으로 시각화하고 모니터링하는 통합 관제 솔루션.
+                        </p>
+<a class="font-mono-label text-mono-label text-accent-amber flex items-center gap-2 hover:text-white transition-colors w-fit border border-accent-amber/30 px-4 py-2 hover:bg-accent-amber/10 uppercase tracking-widest" href="#">
+                            VIEW_DETAILS <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant w-full py-12">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-gutter-mobile md:px-gutter-desktop max-w-max-width mx-auto gap-8">
+<div class="font-mono-label text-mono-label text-accent-cyan uppercase tracking-widest">
+                daeki.hong<span class="caret-blink">_</span>
+</div>
+<div class="flex space-x-8">
+<a class="font-mono-label text-mono-label text-text-muted hover:text-accent-cyan transition-all duration-300 uppercase tracking-widest" href="#">GITHUB</a>
+<a class="font-mono-label text-mono-label text-text-muted hover:text-accent-cyan transition-all duration-300 uppercase tracking-widest" href="#">LINKEDIN</a>
+<a class="font-mono-label text-mono-label text-text-muted hover:text-accent-cyan transition-all duration-300 uppercase tracking-widest" href="#">TWITTER</a>
+<a class="font-mono-label text-mono-label text-text-muted hover:text-accent-cyan transition-all duration-300 uppercase tracking-widest" href="#">EMAIL</a>
+</div>
+<div class="font-mono-label text-[10px] text-text-muted uppercase tracking-widest">
+                SYS_VER: STABLE.2.0 | ©2024 DAEKI.HONG_ ALL RIGHTS RESERVED.
+            </div>
+</div>
+</footer>
+</body></html>

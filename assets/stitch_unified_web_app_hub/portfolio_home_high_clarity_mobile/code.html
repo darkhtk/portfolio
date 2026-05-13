@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DAEKI.HONG_ | STABLE.2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;family=Space+Grotesk:wght@500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#1b2022",
+                        "on-primary": "#003640",
+                        "surface-container-high": "#252b2d",
+                        "surface-container-low": "#171c1e",
+                        "tertiary-container": "#ffcd5b",
+                        "bg-elevated": "#11161D",
+                        "outline-variant": "#3d494c",
+                        "surface-bright": "#353a3c",
+                        "on-primary-fixed-variant": "#004e5c",
+                        "text-secondary": "#8A94A6",
+                        "tertiary-fixed": "#ffdf9e",
+                        "surface-variant": "#303637",
+                        "on-surface-variant": "#bcc9cd",
+                        "text-primary": "#E6EDF3",
+                        "primary": "#00E5FF", // Sharper cyan
+                        "on-primary-container": "#006475",
+                        "surface-tint": "#00E5FF",
+                        "on-secondary-fixed": "#271900",
+                        "inverse-surface": "#dee3e5",
+                        "surface-dim": "#0f1416",
+                        "primary-fixed-dim": "#60d6f1",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#0f1416",
+                        "border-hairline": "rgba(230,237,243,0.12)", // slightly more visible
+                        "background": "#070A0D", // Darker background for contrast
+                        "bg-grid": "#0E141B",
+                        "text-muted": "#5B6573",
+                        "on-primary-fixed": "#001f26",
+                        "inverse-on-surface": "#2c3133",
+                        "secondary": "#FFB300", // Brighter amber
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-tertiary": "#3f2e00",
+                        "secondary-fixed-dim": "#f1be68",
+                        "surface-container-lowest": "#0a0f11",
+                        "success-green": "#39FF14", // Neon green
+                        "primary-container": "#6fe3ff",
+                        "inverse-primary": "#00687a",
+                        "secondary-fixed": "#ffdeab",
+                        "surface-container-highest": "#303637",
+                        "secondary-container": "#775300",
+                        "on-secondary": "#422c00",
+                        "on-tertiary-fixed": "#261a00",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "primary-fixed": "#abedff",
+                        "on-background": "#dee3e5",
+                        "bg-primary": "#05080A", // Very dark
+                        "tertiary-fixed-dim": "#f0c04f",
+                        "on-surface": "#dee3e5",
+                        "on-secondary-container": "#fcc971",
+                        "on-secondary-fixed-variant": "#5f4100",
+                        "on-tertiary-container": "#755600",
+                        "tertiary": "#ffeed2",
+                        "outline": "#879397"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0", // sharper edges
+                        "lg": "4px",
+                        "xl": "8px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "160px",
+                        "gutter-desktop": "96px",
+                        "gutter-mobile": "24px",
+                        "element-gap": "24px",
+                        "max-width": "1440px"
+                    },
+                    "fontFamily": {
+                        "mono-label": ["JetBrains Mono"],
+                        "body-kr": ["Noto Sans KR"],
+                        "hero-display-mobile": ["Space Grotesk"],
+                        "mono-ui": ["JetBrains Mono"],
+                        "card-title": ["Space Grotesk"],
+                        "section-title": ["Space Grotesk"],
+                        "hero-display": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "mono-label": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.12em", "fontWeight": "700" }], // bolder
+                        "body-kr": ["16px", { "lineHeight": "1.8", "fontWeight": "400" }],
+                        "hero-display-mobile": ["56px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "900" }], // Much larger and bolder
+                        "mono-ui": ["14px", { "lineHeight": "1.5", "fontWeight": "700" }],
+                        "card-title": ["24px", { "lineHeight": "1.4", "fontWeight": "700" }],
+                        "section-title": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.03em", "fontWeight": "900" }],
+                        "hero-display": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "900" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .bg-dotted-grid {
+            background-image: radial-gradient(rgba(0, 229, 255, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .glow-under {
+            box-shadow: 0 0 120px 30px rgba(0, 229, 255, 0.1);
+        }
+        .terminal-border {
+            border: 1px solid theme('colors.outline-variant');
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        /* UI Chrome Corners */
+        .corner-tl {
+            position: absolute; top: -1px; left: -1px; width: 8px; height: 8px; border-top: 2px solid theme('colors.primary'); border-left: 2px solid theme('colors.primary');
+        }
+        .corner-tr {
+            position: absolute; top: -1px; right: -1px; width: 8px; height: 8px; border-top: 2px solid theme('colors.primary'); border-right: 2px solid theme('colors.primary');
+        }
+        .corner-bl {
+            position: absolute; bottom: -1px; left: -1px; width: 8px; height: 8px; border-bottom: 2px solid theme('colors.primary'); border-left: 2px solid theme('colors.primary');
+        }
+        .corner-br {
+            position: absolute; bottom: -1px; right: -1px; width: 8px; height: 8px; border-bottom: 2px solid theme('colors.primary'); border-right: 2px solid theme('colors.primary');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-bg-primary text-on-surface antialiased bg-dotted-grid overflow-x-hidden min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-gutter-mobile md:px-gutter-desktop h-16">
+<div class="font-mono-ui text-mono-ui font-bold text-primary flex items-center gap-2">
+<span class="w-2 h-2 bg-primary"></span>
+        daeki.hong_
+    </div>
+<div class="md:hidden text-primary cursor-pointer active:opacity-70 transition-colors duration-200 flex items-center border border-outline-variant p-2 hover:border-primary hover:bg-primary/10">
+<span class="material-symbols-outlined">menu</span>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-mono-ui text-mono-ui text-on-surface-variant hover:text-primary transition-colors duration-200 cursor-pointer active:opacity-70" href="#">CH.01</a>
+<a class="font-mono-ui text-mono-ui text-on-surface-variant hover:text-primary transition-colors duration-200 cursor-pointer active:opacity-70" href="#">CH.02</a>
+<a class="font-mono-ui text-mono-ui text-on-surface-variant hover:text-primary transition-colors duration-200 cursor-pointer active:opacity-70" href="#">CH.03</a>
+<a class="font-mono-ui text-mono-ui text-on-surface-variant hover:text-primary transition-colors duration-200 cursor-pointer active:opacity-70" href="#">STACK</a>
+<a class="font-mono-ui text-mono-ui text-on-surface-variant hover:text-primary transition-colors duration-200 cursor-pointer active:opacity-70" href="#">CONTACT</a>
+<button class="bg-primary/10 text-primary border border-primary font-mono-ui text-mono-ui px-4 py-2 hover:bg-primary hover:text-on-primary transition-all duration-300 ml-4">
+            [ RESUME.PDF ]
+        </button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-32 pb-40 px-gutter-mobile w-full flex flex-col gap-32 max-w-[800px] mx-auto">
+<!-- Hero Section -->
+<section class="flex flex-col gap-16 pt-12 relative">
+<div class="absolute top-0 right-0 font-mono-label text-mono-label text-secondary opacity-50 text-right">
+        [SYS.STABLE]<br/>
+        v2.0.44
+    </div>
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-[150px] -z-10 w-full h-full mx-auto"></div>
+<div class="flex flex-col gap-8 relative z-10 border-l-2 border-primary pl-6 py-2">
+<div class="font-mono-label text-mono-label text-secondary tracking-widest uppercase">
+            &gt; SYS.INIT: 2014 --&gt; 2024
+        </div>
+<h1 class="font-hero-display-mobile text-hero-display-mobile text-text-primary leading-[1.05] uppercase">
+                    Engineering<br/>
+<span class="text-primary">Intelligent</span><br/>
+                    Systems.
+                </h1>
+<p class="font-body-kr text-body-kr text-text-secondary max-w-md mt-4 border border-outline-variant bg-surface/50 p-4 relative terminal-border">
+<span class="absolute top-0 left-0 w-2 h-2 bg-primary"></span>
+                    10년간의 산업용 Unity 3D 엔지니어링 경험을 바탕으로, 이제는 AI 기반 데스크탑 자동화 시스템(DeskRelay)과 고도화된 소프트웨어 아키텍처를 설계합니다.
+                </p>
+<div class="flex gap-4 pt-6">
+<button class="bg-primary text-bg-primary font-mono-ui text-mono-ui font-bold px-8 py-4 flex items-center gap-3 hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all border border-primary relative group">
+                        VIEW PROJECTS
+                        <span class="material-symbols-outlined text-lg group-hover:translate-y-1 transition-transform">arrow_downward</span>
+<span class="corner-tl border-bg-primary"></span>
+<span class="corner-br border-bg-primary"></span>
+</button>
+</div>
+</div>
+<!-- Hero Image Mockup (Terminal Style) -->
+<div class="relative w-full aspect-[4/5] bg-bg-elevated border border-outline-variant overflow-hidden flex flex-col mt-12 terminal-border shadow-2xl">
+<!-- Terminal Header -->
+<div class="h-8 bg-surface border-b border-outline-variant flex items-center px-4 justify-between">
+<div class="flex gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-success-green"></span>
+</div>
+<span class="font-mono-label text-[10px] text-text-muted">bash -- 80x24</span>
+</div>
+<div class="relative flex-1 bg-[#05080A]">
+<img alt="Mockup" class="w-full h-full object-cover opacity-60 mix-blend-screen" data-alt="A highly detailed close-up shot of a dark mode developer terminal interface on a high-resolution curved monitor. Code snippets in cyan and amber glow against a near-black background. The scene is illuminated by soft, moody, high-tech cyan bias lighting from behind the screen. Minimalist industrial design with sharp edges and a brutalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMrZf3vV-afkmh15ZwuLx-9LG8EwBOd-P9DHnuZOICTJqyXXKzlh2BCi0jFPBpNDGWlvM4wCAceKnekEwRbY3zomaVIbp1U0QLH9UBEKG3X2fBbKkuKcwTuKc3wo3d_kQaZ8DO1gM9_Q-APJWa16tbb7VTqRSYypZk9I3xQ1AKhnEn7tAS5D1c3UkbF3xdSXhZeS45I0I_8L-VCMVFkYM8Sq37QiJ9ZMRY1BDD7ExR-2ypby37vJhG4_45G0Tvpmekdatmvq91OwY"/>
+<div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-bg-primary to-transparent">
+<div class="flex justify-between items-end border border-primary/30 bg-background/80 backdrop-blur p-4 terminal-border">
+<div class="flex flex-col gap-1">
+<span class="font-mono-label text-mono-label text-primary">&gt; PROJECT_MAIN</span>
+<span class="font-mono-ui text-mono-ui text-text-primary font-bold">DeskRelay.exe</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-success-green animate-pulse"></span>
+<span class="font-mono-label text-mono-label text-success-green">ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+<span class="corner-tl"></span>
+<span class="corner-tr"></span>
+<span class="corner-bl"></span>
+<span class="corner-br"></span>
+</div>
+<div class="flex gap-6 items-center border border-outline-variant bg-surface/30 p-4 mt-8 overflow-x-auto whitespace-nowrap scrollbar-hide terminal-border">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+<span class="font-mono-label text-mono-label text-primary">v: stable.2.0</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-secondary"></span>
+<span class="font-mono-label text-mono-label text-secondary">up: 99.9%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-success-green"></span>
+<span class="font-mono-label text-mono-label text-success-green">stat: OK</span>
+</div>
+</div>
+</section>
+<!-- Chapter 01 -->
+<section class="flex flex-col gap-16 w-full pt-16">
+<div class="w-full relative">
+<div class="font-mono-label text-mono-label text-primary mb-4 flex items-center gap-4">
+<span>[ CH.01 ]</span>
+<div class="flex-1 h-[1px] bg-gradient-to-r from-primary/50 to-transparent"></div>
+</div>
+<h2 class="font-section-title text-section-title text-text-primary uppercase">
+            AI &amp;<br/><span class="text-outline">Automation</span>
+</h2>
+<p class="font-body-kr text-body-kr text-text-secondary mt-6 border-l-2 border-outline-variant pl-4 max-w-md">
+                    AI 모델을 활용한 자동화 파이프라인 구축 및 데스크탑 제어 시스템. 복잡한 워크플로우를 간소화합니다.
+                </p>
+</div>
+<!-- Project Card 1 (Terminal Module) -->
+<div class="group flex flex-col border border-outline-variant bg-bg-elevated hover:border-primary transition-colors duration-300 relative terminal-border">
+<!-- Card Header -->
+<div class="h-10 border-b border-outline-variant bg-surface flex items-center justify-between px-4 group-hover:border-primary transition-colors">
+<div class="font-mono-label text-mono-label text-text-muted group-hover:text-primary transition-colors">MODULE_01</div>
+<div class="flex items-center gap-2 font-mono-label text-[10px] text-primary border border-primary/30 px-2 py-0.5 bg-primary/5">
+                LLM / PYTHON
+            </div>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<div class="w-full aspect-[4/3] bg-[#000] border border-outline-variant overflow-hidden relative">
+<img alt="DeskRelay" class="w-full h-full object-cover opacity-50 group-hover:opacity-90 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700" data-alt="A sleek, futuristic mobile phone displaying a dark mode productivity dashboard. The interface features minimalist geometric widgets, tiny monospaced text, and cyan accents. The phone rests on a matte black metallic surface with a subtle reflection. Moody studio lighting highlights the sharp edges of the device, creating a premium developer-focused aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmF7-6AMws2GEUi0XjPKVst2eRubhkAWl1s9MLegRyCg6p911C2pYgphDqE14csoavu17IOngtJCzU3gAC9gQNF5xgXtEd6aSgu5SsTXVCPeU0-Xw3GFG-2GVNzGysDkv32-w6reKxPh5gtuoDgQwW0A9l76g2fdfXcFcYitjPajiR_HXwQcxSza39qfUOF-Bur0Nh_qSgZbpF5SeMSk80MavsHI8TE8MDOMeagyWByqYqTqwVmEUnlKhvJjYbEg7K0t4Dh_UVyrI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#000] via-transparent to-transparent"></div>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="font-card-title text-card-title text-text-primary flex items-center gap-2">
+<span class="text-primary font-mono-ui">&gt;</span> DeskRelay
+                    </h3>
+<p class="font-body-kr text-body-kr text-text-secondary text-sm">
+                        LLM 기반 지능형 데스크탑 에이전트. 사용자의 자연어 명령을 분석하여 복잡한 시스템 제어 및 워크플로우를 자동화합니다.
+                    </p>
+</div>
+<div class="flex flex-wrap gap-3 pt-2">
+<span class="px-3 py-1.5 bg-transparent border border-outline-variant font-mono-label text-mono-label text-text-primary group-hover:border-primary/50 transition-colors">OpenAI_API</span>
+<span class="px-3 py-1.5 bg-transparent border border-outline-variant font-mono-label text-mono-label text-text-primary group-hover:border-primary/50 transition-colors">PyAutoGUI</span>
+</div>
+</div>
+<span class="corner-tl"></span>
+<span class="corner-tr"></span>
+<span class="corner-bl"></span>
+<span class="corner-br"></span>
+</div>
+</section>
+<!-- Chapter 02 -->
+<section class="flex flex-col gap-16 w-full pt-16">
+<div class="w-full relative">
+<div class="font-mono-label text-mono-label text-secondary mb-4 flex items-center gap-4">
+<span>[ CH.02 ]</span>
+<div class="flex-1 h-[1px] bg-gradient-to-r from-secondary/50 to-transparent"></div>
+</div>
+<h2 class="font-section-title text-section-title text-text-primary uppercase">
+            Industrial<br/><span class="text-outline">XR</span>
+</h2>
+<p class="font-body-kr text-body-kr text-text-secondary mt-6 border-l-2 border-outline-variant pl-4 max-w-md">
+                    제조업 및 산업 현장을 위한 고정밀 3D 시뮬레이션 및 XR 솔루션 아키텍처.
+                </p>
+</div>
+<!-- Project Card 2 (Terminal Module) -->
+<div class="group flex flex-col border border-outline-variant bg-bg-elevated hover:border-secondary transition-colors duration-300 relative terminal-border">
+<!-- Card Header -->
+<div class="h-10 border-b border-outline-variant bg-surface flex items-center justify-between px-4 group-hover:border-secondary transition-colors">
+<div class="font-mono-label text-mono-label text-text-muted group-hover:text-secondary transition-colors">MODULE_02</div>
+<div class="flex items-center gap-2 font-mono-label text-[10px] text-secondary border border-secondary/30 px-2 py-0.5 bg-secondary/5">
+                UNITY / C#
+            </div>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<div class="w-full aspect-[4/3] bg-[#000] border border-outline-variant overflow-hidden relative">
+<img alt="Factory XR" class="w-full h-full object-cover opacity-50 group-hover:opacity-90 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700" data-alt="An abstract visualization of a high-tech factory digital twin. Glowing amber and cyan wireframe structures overlay dark, brutalist industrial machinery. The scene is rendered in an isometric perspective with deep black backgrounds and sharp contrast. The mood is industrial, precise, and highly advanced, evoking a sense of complex engineering simulations." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdhVNyHTW3cLPopMt0aLPpr5qbuYd6oeWvrZ8iawIlauuK29kwR6i4MTy6HgOXzO50n23qzqt39P_RtNdteUmM1TPwInpbUwUXox7OWGcHOwxJUHF5IRY0iL67zDMmbsTpvOyQ5z7VfoSaC1C1ZDSBO0wAtwb12FGN0JSerKt4rrANn7PjNnRfZAhF2bwfOSJHcqX8kFRjXttI7SrdLyaghwLUykf0jizszqT-6wnZQyw-0BzZs4nE6voP9qZIaE-PC_eJuj0BINw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#000] via-transparent to-transparent"></div>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="font-card-title text-card-title text-text-primary flex items-center gap-2">
+<span class="text-secondary font-mono-ui">&gt;</span> Smart Factory XR
+                    </h3>
+<p class="font-body-kr text-body-kr text-text-secondary text-sm">
+                        실시간 데이터 연동형 공장 디지털 트윈 관제 시스템. 대규모 3D 렌더링 최적화 및 안정성 확보.
+                    </p>
+</div>
+<div class="flex flex-wrap gap-3 pt-2">
+<span class="px-3 py-1.5 bg-transparent border border-outline-variant font-mono-label text-mono-label text-text-primary group-hover:border-secondary/50 transition-colors">Digital_Twin</span>
+<span class="px-3 py-1.5 bg-transparent border border-outline-variant font-mono-label text-mono-label text-text-primary group-hover:border-secondary/50 transition-colors">URP</span>
+</div>
+</div>
+<!-- Corner Chrome -->
+<div class="absolute top-[-1px] left-[-1px] w-2 h-2 border-t-2 border-l-2 border-outline-variant group-hover:border-secondary transition-colors"></div>
+<div class="absolute top-[-1px] right-[-1px] w-2 h-2 border-t-2 border-r-2 border-outline-variant group-hover:border-secondary transition-colors"></div>
+<div class="absolute bottom-[-1px] left-[-1px] w-2 h-2 border-b-2 border-l-2 border-outline-variant group-hover:border-secondary transition-colors"></div>
+<div class="absolute bottom-[-1px] right-[-1px] w-2 h-2 border-b-2 border-r-2 border-outline-variant group-hover:border-secondary transition-colors"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 bg-surface-container-lowest border-t border-outline-variant flex flex-col items-center px-gutter-mobile gap-10 mt-16 terminal-border border-b-0 border-l-0 border-r-0">
+<div class="font-mono-label text-mono-label text-primary text-lg flex items-center gap-2">
+<span class="w-3 h-3 bg-primary"></span>
+        daeki.hong_
+    </div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+<a class="font-mono-label text-mono-label text-text-muted hover:text-primary border-b border-transparent hover:border-primary transition-all duration-300 pb-1" href="#">[ GITHUB ]</a>
+<a class="font-mono-label text-mono-label text-text-muted hover:text-primary border-b border-transparent hover:border-primary transition-all duration-300 pb-1" href="#">[ LINKEDIN ]</a>
+<a class="font-mono-label text-mono-label text-text-muted hover:text-primary border-b border-transparent hover:border-primary transition-all duration-300 pb-1" href="#">[ TWITTER ]</a>
+<a class="font-mono-label text-mono-label text-text-muted hover:text-primary border-b border-transparent hover:border-primary transition-all duration-300 pb-1" href="#">[ EMAIL ]</a>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="font-mono-label text-mono-label text-text-muted text-center max-w-[280px]">©2024 DAEKI.HONG_ ALL RIGHTS RESERVED.</div>
+<div class="font-mono-label text-[10px] text-text-muted bg-surface px-3 py-1 border border-outline-variant">SYS.VERSION: STABLE.2.0</div>
+</div>
+</footer>
+</body></html>
