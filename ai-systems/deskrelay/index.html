@@ -1,262 +1,769 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DeskRelay | 홍대기</title>
-<meta name="description" content="DeskRelay는 공개 GitHub README 기준, 내 PC에서 실행되는 Claude Code를 브라우저에서 제어하는 self-host 개발 도구입니다."/>
-<meta property="og:title" content="DeskRelay | 홍대기"/>
-<meta property="og:description" content="서버 PC, 등록 PC, connector daemon, LAN/Tailscale, Site token 흐름을 GitHub 저장소 기준으로 다시 정리한 사례."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DeskRelay · 케이스 스터디 | 홍대기</title>
+<meta name="description" content="DeskRelay 는 내 PC 에서 실행되는 Claude Code 세션을 브라우저·모바일에서 안전하게 원격으로 조작하는 self-host 개발자 도구입니다. 아키텍처, 디바이스 생명주기, 신뢰 경계를 정리한 케이스 스터디."/>
+<meta property="og:title" content="DeskRelay · 케이스 스터디 | 홍대기"/>
+<meta property="og:description" content="서버 PC + 등록 PC + connector daemon + LAN/Tailscale 흐름을 다룬 self-host AI 개발자 도구 케이스 스터디."/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/deskrelay/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="DeskRelay | 홍대기"/>
-<meta name="twitter:description" content="내 PC의 Claude Code를 브라우저에서 제어하는 GitHub 기준 self-host 개발 도구."/>
+<meta name="twitter:title" content="DeskRelay · 케이스 스터디"/>
+<meta name="twitter:description" content="로컬 Claude/Codex 세션을 모바일·웹에서 원격 조작하는 AI 개발자 도구."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">tailwind.config={theme:{extend:{fontFamily:{headline:["Space Grotesk","Noto Sans KR","sans-serif"],body:["Noto Sans KR","sans-serif"],label:["Space Grotesk","Noto Sans KR","sans-serif"]}}}}</script>
-<link rel="stylesheet" href="../../assets/css/site.css"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "bg-primary": "#0B0F14",
+          "bg-elevated": "#11161D",
+          "bg-grid": "#0E141B",
+          "text-primary": "#E6EDF3",
+          "text-secondary": "#8A94A6",
+          "text-muted": "#5B6573",
+          "accent-cyan": "#6FE3FF",
+          "accent-amber": "#F5C26B",
+          "success-green": "#6EE787",
+          "danger-red": "#FF7B72",
+          "hairline": "rgba(230,237,243,0.08)",
+          "hairline-strong": "rgba(230,237,243,0.16)"
+        },
+        fontFamily: {
+          display: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
+          body: ["Noto Sans KR", "sans-serif"],
+          mono: ["JetBrains Mono", "ui-monospace", "monospace"]
+        },
+        borderRadius: { DEFAULT: "0.5rem", xs: "0.25rem", sm: "0.375rem", md: "0.5rem", lg: "0.75rem" }
+      }
+    }
+  }
+</script>
+<style>
+  :root { color-scheme: dark; }
+  html { scroll-behavior: smooth; }
+  body { background-color: #0B0F14; color: #E6EDF3; word-break: keep-all; overflow-wrap: anywhere; font-feature-settings: "ss01" on, "ss02" on; }
+  body.menu-open { overflow: hidden; touch-action: none; }
+  img { display: block; max-width: 100%; }
+
+  .bg-grid-dots { background-color: #0B0F14; background-image: radial-gradient(rgba(111,227,255,0.10) 1px, transparent 1px); background-size: 24px 24px; background-position: 0 0; }
+  .bg-grid-lines { background-image: linear-gradient(rgba(111,227,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(111,227,255,0.04) 1px, transparent 1px); background-size: 32px 32px; }
+
+  @keyframes blink { 0%, 60% { opacity: 1; } 60.01%, 100% { opacity: 0; } }
+  .caret { display: inline-block; width: 0.6ch; background: currentColor; animation: blink 1.05s steps(2, end) infinite; margin-left: 2px; }
+  .caret-thin { display: inline-block; width: 1px; height: 1em; background: currentColor; animation: blink 1.05s steps(2, end) infinite; vertical-align: middle; margin-left: 4px; }
+
+  .ticks { position: relative; }
+  .ticks::before, .ticks::after, .ticks > .tl, .ticks > .tr, .ticks > .bl, .ticks > .br { position: absolute; width: 10px; height: 10px; border-color: #6FE3FF; border-style: solid; pointer-events: none; transition: width 200ms ease, height 200ms ease, border-color 200ms ease; }
+  .ticks::before { content: ""; top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+  .ticks::after { content: ""; bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+  .ticks > .tr { top: -1px; right: -1px; border-width: 1px 1px 0 0; }
+  .ticks > .bl { bottom: -1px; left: -1px; border-width: 0 0 1px 1px; }
+  .ticks-amber::before, .ticks-amber::after, .ticks-amber > .tr, .ticks-amber > .bl { border-color: #F5C26B; }
+  .group:hover .ticks::before, .group:hover .ticks::after, .group:hover .ticks > .tr, .group:hover .ticks > .bl { width: 14px; height: 14px; }
+
+  .scanlines { position: relative; }
+  .scanlines::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 4; background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.22) 50%); background-size: 100% 3px; }
+
+  .term-window { border: 1px solid rgba(230,237,243,0.12); background: #0E141B; box-shadow: 0 30px 120px rgba(0,229,255,0.06), inset 0 0 0 1px rgba(0,0,0,0.4); }
+  .term-bar { display: flex; align-items: center; gap: 10px; padding: 0 14px; height: 32px; border-bottom: 1px solid rgba(230,237,243,0.10); background: rgba(17, 22, 29, 0.8); }
+  .term-dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(230,237,243,0.24); }
+  .term-dot.r { background: #FF7B72; }
+  .term-dot.y { background: #F5C26B; }
+  .term-dot.g { background: #6EE787; }
+  .term-title { margin-left: auto; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #5B6573; }
+
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #E6EDF3; border: 1px solid rgba(230,237,243,0.16); background: rgba(17, 22, 29, 0.6); border-radius: 2px; }
+  .chip-cyan { color: #6FE3FF; border-color: rgba(111,227,255,0.32); background: rgba(111,227,255,0.06); }
+  .chip-amber { color: #F5C26B; border-color: rgba(245,194,107,0.32); background: rgba(245,194,107,0.06); }
+
+  .kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6573; }
+  .kicker-cyan { color: #6FE3FF; }
+  .kicker-amber { color: #F5C26B; }
+
+  .chapter-rule { display: flex; align-items: center; gap: 16px; }
+  .chapter-rule .tag { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; padding: 6px 12px; border: 1px solid; }
+  .chapter-rule .line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(230,237,243,0.24), rgba(230,237,243,0.04)); }
+  .chapter-rule .tail { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6573; }
+
+  .card { border: 1px solid rgba(230,237,243,0.08); background: #11161D; transition: border-color 200ms ease, transform 200ms ease; }
+  .card:hover { border-color: rgba(111,227,255,0.32); }
+  .card-amber:hover { border-color: rgba(245,194,107,0.32); }
+
+  .display-hero { font-family: "Space Grotesk", "Noto Sans KR", sans-serif; font-weight: 700; letter-spacing: -0.03em; }
+  .display-section { font-family: "Space Grotesk", "Noto Sans KR", sans-serif; font-weight: 700; letter-spacing: -0.03em; }
+  /* font-size cap 35px */
+  .display-hero { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.1875rem); line-height: 1.15; }
+  .display-section { font-size: clamp(1.25rem, 2vw + 0.4rem, 1.75rem); line-height: 1.2; }
+
+  .kr-balance { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
+
+  .btn-cyan { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; background: #6FE3FF; color: #0B0F14; font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid #6FE3FF; transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease; }
+  .btn-cyan:hover { background: #ABEDFF; box-shadow: 0 12px 32px rgba(111,227,255,0.24); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; background: transparent; color: #E6EDF3; font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(230,237,243,0.16); transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease; }
+  .btn-ghost:hover { border-color: rgba(111,227,255,0.48); color: #6FE3FF; background: rgba(111,227,255,0.04); }
+
+  .nav-link { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A94A6; padding: 8px 4px; border-bottom: 1px solid transparent; transition: color 160ms ease, border-color 160ms ease; }
+  .nav-link:hover { color: #6FE3FF; }
+  .nav-link.is-active { color: #6FE3FF; border-bottom-color: #6FE3FF; }
+
+  .ticker { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A94A6; padding-top: 14px; padding-bottom: 14px; border-top: 1px solid rgba(230,237,243,0.08); border-bottom: 1px solid rgba(230,237,243,0.08); }
+  .ticker .dot { width: 4px; height: 4px; background: #6FE3FF; border-radius: 999px; }
+
+  .card-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 14px; height: 28px; border-bottom: 1px solid rgba(230,237,243,0.08); background: rgba(17, 22, 29, 0.9); font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6573; }
+
+  .media-frame { position: relative; overflow: hidden; background: #0B0F14; }
+  .media-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 320ms ease, filter 320ms ease; filter: grayscale(0.4) contrast(1.05); }
+  .group:hover .media-frame img { transform: scale(1.03); filter: grayscale(0) contrast(1.1); }
+  .media-frame.frame-contain { background: #07090C; }
+  .media-frame.frame-contain img { object-fit: contain; padding: 12px; filter: none; }
+
+  .h-scroll { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+  .h-scroll::-webkit-scrollbar { height: 8px; }
+  .h-scroll::-webkit-scrollbar-track { background: rgba(230,237,243,0.04); }
+  .h-scroll::-webkit-scrollbar-thumb { background: rgba(111,227,255,0.24); }
+  .h-scroll > * { scroll-snap-align: start; flex: 0 0 auto; }
+
+  .check { display: flex; align-items: baseline; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 13px; letter-spacing: 0.04em; }
+  .check .mark { color: #6FE3FF; }
+  .check .mark-pending { color: #5B6573; }
+  .check .label { color: #E6EDF3; }
+  .check .label-pending { color: #8A94A6; }
+  .check .desc { color: #8A94A6; }
+
+  .sticky-nav { backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); background: rgba(11,15,20,0.72); border-bottom: 1px solid rgba(230,237,243,0.08); }
+  .mobile-drawer { display: flex; min-height: 100dvh; overflow-y: auto; background: #0B0F14 !important; }
+
+  ::selection { background: #6FE3FF; color: #0B0F14; }
+  :focus-visible { outline: 2px solid #6FE3FF; outline-offset: 2px; }
+
+  .glow-cyan { box-shadow: 0 60px 180px -40px rgba(111,227,255,0.18), inset 0 0 0 1px rgba(111,227,255,0.10); }
+
+  /* architecture diagram lanes */
+  .lane { border: 1px solid rgba(230,237,243,0.08); padding: 20px; background: rgba(17,22,29,0.6); transition: border-color 200ms ease; position: relative; }
+  .lane:hover { border-color: rgba(111,227,255,0.32); }
+  .lane .lane-num { position: absolute; top: 12px; right: 12px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; color: #5B6573; }
+  .lane-flow { display: grid; gap: 0; position: relative; }
+  .lane-arrow { display: flex; align-items: center; justify-content: center; padding: 8px 0; color: #6FE3FF; font-family: "JetBrains Mono", monospace; font-size: 14px; }
+
+  code { font-family: "JetBrains Mono", monospace; font-size: 0.92em; color: #6FE3FF; background: rgba(111,227,255,0.06); padding: 1px 6px; border: 1px solid rgba(111,227,255,0.18); }
+
+  /* pullquote */
+  .pullquote { font-family: "Space Grotesk", "Noto Sans KR", sans-serif; font-style: italic; font-size: clamp(1rem, 1.6vw + 0.4rem, 1.5rem); line-height: 1.4; color: #E6EDF3; border-left: 2px solid #6FE3FF; padding-left: 20px; }
+  .pullquote .colon { color: #6FE3FF; font-weight: 700; font-size: 1.4em; line-height: 0; vertical-align: -0.1em; margin-right: 4px; }
+</style>
 </head>
-<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
-<div class="site-shell">
-  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <a href="../../" class="flex flex-col">
-        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
+<body class="font-body antialiased">
+<div class="relative">
+
+  <!-- NAV -->
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">
+        daeki.hong<span class="caret"></span>
       </a>
-      <nav class="hidden items-center gap-2 md:flex">
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../">Home</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../projects/">Projects</a>
-        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../ai-systems/">AI Systems</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../about/">Profile</a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="./" class="nav-link is-active">deskrelay</a>
+        <a href="../../ko/ai-systems/" class="nav-link">ai</a>
+        <a href="../../ko/projects/" class="nav-link">industrial</a>
+        <a href="../../ko/about/" class="nav-link">profile</a>
       </nav>
       <div class="flex items-center gap-3">
-        <div class="lang-toggle hidden sm:inline-flex">
-          <a class="lang-link" href="../../en/ai-systems/deskrelay/">EN</a>
-          <a class="lang-link is-active" href="./">KO</a>
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">KO</span>
+          <a href="../../en/ai-systems/deskrelay/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">EN</a>
         </div>
-        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+        <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="hidden lg:inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/40 hover:bg-accent-cyan/10">
+          [ GitHub <span aria-hidden="true">↗</span> ]
+        </a>
+        <button data-mobile-menu-toggle aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
-        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
-        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="메뉴 닫기"><span class="material-symbols-outlined">close</span></button>
+
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div>
+          <div class="kicker">// menu</div>
+          <div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div>
+        </div>
+        <button data-mobile-menu-close aria-label="메뉴 닫기" class="p-2 border border-hairline-strong text-accent-cyan">
+          <span class="material-symbols-outlined">close</span>
+        </button>
       </div>
-      <div class="mt-6 grid gap-3">
-        <a href="../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">포지셔닝과 대표 작업.</div></a>
-        <a href="../../projects/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Projects</div><div class="mt-1 text-sm text-[#526178]">산업 납품 작업.</div></a>
-        <a href="../../ai-systems/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">AI Systems</div><div class="mt-1 text-sm text-[#526178]">커널, behavior, 응용 AI 시스템.</div></a>
-        <a href="../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">경력과 작업 방식.</div></a>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">→</span></a>
+        <a href="./" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">deskrelay <span aria-hidden="true">→</span></a>
+        <a href="../../ko/ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">→</span></a>
+        <a href="../../ko/projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span aria-hidden="true">→</span></a>
+        <a href="../../ko/about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
       </div>
-      <div class="mt-6 flex gap-3">
-        <a href="../../en/ai-systems/deskrelay/" class="lang-link bg-white">EN</a>
-        <a href="./" class="lang-link is-active bg-white">KO</a>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <span class="px-3 py-2 text-bg-primary bg-accent-cyan">KO</span>
+        <a href="../../en/ai-systems/deskrelay/" class="px-3 py-2 text-text-secondary border border-hairline">EN</a>
+      </div>
+      <div class="mt-auto pt-6 border-t border-hairline">
+        <div class="kicker">// connect</div>
+        <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="mt-3 block btn-cyan w-full justify-center">GitHub README ↗</a>
       </div>
     </div>
   </header>
 
-  <main class="relative">
-    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        <div class="surface-panel p-6 sm:p-8 lg:p-10">
-          <div class="section-kicker">AI Systems · Product Case Study</div>
-          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DeskRelay</h1>
-          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">GitHub README 기준 DeskRelay는 내 PC에서 실행되는 Claude Code를 브라우저에서 제어하는 self-host 개발 도구입니다. 서버 PC 한 대가 <code>site-frontend</code>, <code>site-backend</code>, local connector daemon을 띄우고, 같은 LAN 또는 Tailscale 안의 다른 PC를 디바이스로 등록해서 씁니다.</p>
-          <div class="mt-7 flex flex-wrap gap-2.5">
-            <span class="pill text-sm">Self-host Site Backend</span>
-            <span class="pill text-sm">Site Token Login</span>
-            <span class="pill text-sm">Bun Connector</span>
-            <span class="pill text-sm">SolidJS</span>
-            <span class="pill text-sm">Tailscale / LAN</span>
+  <main class="relative pt-16">
+
+    <!-- HERO -->
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid gap-10 lg:gap-16 lg:grid-cols-12 items-center">
+
+        <div class="lg:col-span-7 flex flex-col gap-7">
+          <div class="kicker kicker-cyan border border-accent-cyan/30 bg-accent-cyan/5 px-3 py-1.5 w-fit">// ai dev tool · shipping</div>
+
+          <img src="../../assets/images/deskrelay-logo-lockup.png" alt="DeskRelay 로고 락업" class="h-12 sm:h-16 w-auto" loading="eager"/>
+
+          <p class="display-hero text-text-primary kr-balance max-w-3xl">
+            노트북을 열지 않고도,<br/>
+            로컬 <span class="text-accent-cyan">Claude·Codex</span> 세션을<br/>
+            그대로 이어 갑니다.
+          </p>
+
+          <p class="font-body text-[15px] sm:text-base text-text-secondary leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
+            DeskRelay 는 내 PC 에서 실행되는 Claude Code 세션을 브라우저·모바일에서 안전하게 원격으로 조작하는 <strong class="text-text-primary font-semibold">self-host 개발자 도구</strong>입니다. 서버 PC 한 대가 <code>site-frontend</code>, <code>site-backend</code>, local connector daemon 을 띄우고, 같은 LAN 또는 Tailscale 안의 다른 PC 를 디바이스로 등록해서 씁니다.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="btn-cyan">GitHub README <span aria-hidden="true">↗</span></a>
+            <a href="#architecture" class="btn-ghost">Architecture <span aria-hidden="true">↓</span></a>
           </div>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-[#1a57c7] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_36px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5">
-              <span class="material-symbols-outlined mr-2 text-base">open_in_new</span>
-              GitHub README
-            </a>
-            <a href="../../en/ai-systems/deskrelay/" class="inline-flex items-center justify-center rounded-full border border-[rgba(16,31,61,0.12)] bg-white px-6 py-3.5 text-sm font-semibold text-[#122033] hover:border-[rgba(26,87,199,0.24)] hover:text-[#1a57c7]">English version</a>
+
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>v0.0.0 · self-host</span>
+            <span class="dot"></span><span>solid + vite SPA</span>
+            <span class="dot"></span><span>hono + bun backend</span>
+            <span class="dot"></span><span>capacitor android app</span>
+            <span class="dot"></span><span>tailscale / LAN</span>
           </div>
         </div>
-        <aside class="feature-panel p-5 sm:p-6">
-          <div class="section-kicker">읽는 순서</div>
-          <div class="mt-5 grid gap-3">
-            <a href="#problem" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">문제</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">로컬 에이전트 작업은 강력하지만 한 PC에 묶입니다.</div></a>
-            <a href="#product-surface" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">제품 화면</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">모바일 채팅, 세션, 권한, 지침, 스킬 화면.</div></a>
-            <a href="#architecture" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">아키텍처</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">브라우저 UI, 사이트 백엔드, connector daemon, Claude CLI.</div></a>
-            <a href="#lifecycle" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">04</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">디바이스 생명주기</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">등록, 검증, 전환, 진단.</div></a>
-            <a href="#boundary" class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">05</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">신뢰 경계</div><div class="mt-1 text-sm leading-6 text-[#4f6077]">private-network 우선, 로컬 실행은 로컬에.</div></a>
-          </div>
-        </aside>
-      </div>
-    </section>
 
-    <section id="problem" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div class="summary-grid">
-        <article class="summary-card"><h3>기준</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">이 페이지는 공개 GitHub 저장소의 README, docs/MANUAL.md, package metadata, manual screenshots만 기준으로 다시 작성했습니다.</p></article>
-        <article class="summary-card"><h3>문제</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">에이전트 작업은 사용자의 repo, shell, token이 있는 PC에서 가장 강합니다. 하지만 그만큼 작업 흐름이 한 키보드에 묶입니다.</p></article>
-        <article class="summary-card"><h3>접근</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">서버 PC를 띄우고 브라우저 UI로 들어간 뒤, 메인 화면의 다른 PC 등록 명령을 대상 Windows PC에 실행해 connector와 device registry를 연결합니다.</p></article>
-        <article class="summary-card"><h3>상태</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">저장소 버전은 v0.0.0입니다. README에는 설치, 접속 URL과 token, 다른 PC 등록, 사용, 업데이트, 중지/제거, 문제 해결 흐름이 문서화되어 있습니다.</p></article>
-      </div>
-    </section>
-
-    <section id="product-surface" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="remote-surface-copy">
-        <div class="section-kicker">§ 01 · Product surface</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">백엔드 배관만이 아니라 실제 제어면까지</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">GitHub 저장소의 <code>docs/assets/screenshots</code>에 포함된 모바일 manual screenshots를 제품 증거의 중심에 배치하고, 기존 데스크톱 제품 캡처도 함께 유지했습니다. 채팅, 세션 목록, 권한, 지침, 스킬 화면을 모바일 사용 흐름 기준으로 먼저 보여줍니다.</p>
-        <p class="remote-shot-caption mt-5">Source: <code>darkhtk/deskrelay</code> GitHub README and <code>docs/MANUAL.md</code>.</p>
-      </div>
-      <div class="remote-play-store-grid mt-8">
-        <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/deskrelay-github-usage-mobile-chat.png" alt="DeskRelay 모바일 채팅 화면" loading="lazy" width="360" height="780"/>
-        </figure>
-        <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/deskrelay-github-usage-mobile-sessions.png" alt="DeskRelay 모바일 세션 목록 화면" loading="lazy" width="360" height="780"/>
-        </figure>
-        <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/deskrelay-github-usage-mobile-permissions.png" alt="DeskRelay 모바일 권한 탭 화면" loading="lazy" width="360" height="780"/>
-        </figure>
-        <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/deskrelay-github-usage-mobile-instructions.png" alt="DeskRelay 모바일 지침 탭 화면" loading="lazy" width="360" height="780"/>
-        </figure>
-        <figure class="remote-product-shot remote-product-shot--store">
-          <img src="../../assets/images/deskrelay-github-usage-mobile-skills.png" alt="DeskRelay 모바일 스킬 탭 화면" loading="lazy" width="360" height="780"/>
-        </figure>
-      </div>
-      <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        <figure class="remote-product-shot">
-          <img src="../../assets/images/deskrelay-chat-ui.png" alt="DeskRelay 데스크톱 채팅 UI와 결과 화면" loading="lazy" width="1280" height="1392"/>
-        </figure>
-        <figure class="remote-product-shot">
-          <img src="../../assets/images/deskrelay-new-chat-directory.png" alt="DeskRelay 새 채팅 작업 디렉터리 선택 화면" loading="lazy" width="799" height="1095"/>
-        </figure>
-        <figure class="remote-product-shot">
-          <img src="../../assets/images/deskrelay-device-switcher.png" alt="DeskRelay 디바이스 전환 드롭다운" loading="lazy" width="799" height="1095"/>
-        </figure>
-        <figure class="remote-product-shot">
-          <img src="../../assets/images/deskrelay-settings-ui.png" alt="DeskRelay 설정 화면" loading="lazy" width="799" height="1095"/>
-        </figure>
-        <figure class="remote-product-shot md:col-span-2 xl:col-span-2">
-          <img src="../../assets/images/deskrelay-connection-status.png" alt="DeskRelay 연결 상태 진단 화면" loading="lazy" width="1280" height="900"/>
-        </figure>
-      </div>
-    </section>
-
-    <section id="architecture" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="max-w-3xl">
-        <div class="section-kicker">§ 02 · Architecture</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">원격 UI, 로컬 실행</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">사이트는 제품처럼 느껴져야 하지만, 민감한 실행 표면은 사용자의 PC에 남아야 합니다.</p>
-      </div>
-
-      <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-        <div class="media-frame">
-          <div class="stack-diagram stack-diagram--deep sm:aspect-[4/3]">
-            <div>
-              <div class="stack-diagram__eyebrow">End-to-end path</div>
-              <div class="mt-3 stack-diagram__title">Browser → :18193 → :18192 → :18191/:18091 → Claude Code CLI</div>
-              <p class="mt-3 stack-diagram__copy">README 구조도 기준. 서버 PC와 등록 PC의 connector daemon이 각각 로컬 Claude Code CLI를 실행합니다.</p>
+        <!-- Hero device composition -->
+        <div class="lg:col-span-5">
+          <div class="grid gap-3">
+            <!-- desktop window -->
+            <div class="term-window ticks scanlines">
+              <span class="tr"></span><span class="bl"></span>
+              <div class="term-bar">
+                <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+                <span class="term-title">deskrelay &mdash; chat ui</span>
+              </div>
+              <div class="media-frame frame-contain border-t border-hairline aspect-[16/11]">
+                <img src="../../assets/images/deskrelay-chat-ui.png" alt="DeskRelay 데스크톱 채팅 UI"/>
+              </div>
             </div>
-            <div class="stack-diagram__grid">
-              <div class="stack-diagram__node"><strong>site-frontend</strong><span>Browser UI on :18193</span></div>
-              <div class="stack-diagram__node"><strong>site-backend</strong><span>:18192 and .self-server/state registry</span></div>
-              <div class="stack-diagram__node"><strong>connector</strong><span>server :18191, registered PC :18091</span></div>
-              <div class="stack-diagram__node"><strong>Claude Code</strong><span>CLI logged in on each controlled PC</span></div>
+            <!-- mobile + meta strip -->
+            <div class="grid grid-cols-5 gap-3">
+              <div class="col-span-2 term-window ticks">
+                <span class="tr"></span><span class="bl"></span>
+                <div class="card-bar"><span>SHOT</span><span class="text-text-muted">MOBILE</span></div>
+                <div class="media-frame frame-contain aspect-[3/5]">
+                  <img src="../../assets/images/deskrelay-github-usage-mobile-chat.png" alt="DeskRelay 모바일 채팅 화면"/>
+                </div>
+              </div>
+              <div class="col-span-3 flex flex-col gap-3">
+                <div class="grid grid-cols-2 gap-px bg-hairline border border-hairline font-mono text-[10px] uppercase tracking-widest">
+                  <div class="bg-bg-primary p-3"><span class="text-text-muted">v:</span> <span class="text-accent-cyan">0.0.0</span></div>
+                  <div class="bg-bg-primary p-3"><span class="text-text-muted">auth:</span> <span class="text-accent-amber">site token</span></div>
+                  <div class="bg-bg-primary p-3"><span class="text-text-muted">app:</span> <span class="text-text-primary">capacitor</span></div>
+                  <div class="bg-bg-primary p-3 flex items-center gap-2"><span class="w-1.5 h-1.5 bg-success-green rounded-full animate-pulse"></span><span class="text-success-green">running</span></div>
+                </div>
+                <div class="term-window p-4 flex-1 font-mono text-[11px] leading-relaxed">
+                  <div><span class="text-accent-amber">$</span> deskrelay --status</div>
+                  <div class="text-text-secondary">site-frontend  :18193  <span class="text-success-green">OK</span></div>
+                  <div class="text-text-secondary">site-backend   :18192  <span class="text-success-green">OK</span></div>
+                  <div class="text-text-secondary">connector srv  :18191  <span class="text-success-green">OK</span></div>
+                  <div class="text-text-secondary">connector pc   :18091  <span class="text-success-green">OK</span></div>
+                  <div class="text-success-green mt-1">&gt; 2 devices registered_</div>
+                </div>
+              </div>
             </div>
-            <div class="stack-diagram__footer"><span class="material-symbols-outlined text-base">hub</span><span>바깥은 제품 shell, 안쪽은 사용자 PC의 runtime authority.</span></div>
-          </div>
-        </div>
-        <div class="surface-panel p-6 sm:p-8">
-          <div class="section-kicker">System slices</div>
-          <div class="content-prose mt-5">
-            <p><strong>Frontend.</strong> package metadata 기준 <code>@deskrelay/site-frontend</code>는 Solid + Vite SPA이고, <code>@deskrelay/mobile-app</code>은 Capacitor wrapper입니다.</p>
-            <p><strong>Backend.</strong> <code>@deskrelay/site-backend</code>는 self-host Hono/Bun backend이며 브라우저와 사용자가 등록한 connector daemon URL 사이를 연결합니다.</p>
-            <p><strong>Connector.</strong> <code>@deskrelay/pc-connector-daemon</code>은 private HTTP API로 local Claude Code behaviors를 노출하는 self-host connector daemon입니다.</p>
-            <p><strong>Behavior.</strong> <code>@deskrelay/behavior-remote-claude</code>는 사용자의 PC에서 <code>claude</code> CLI를 실행하고 stream-json output을 kernel events로 흘립니다.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="lifecycle" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="max-w-3xl">
-        <div class="section-kicker">§ 03 · Device lifecycle</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">설치와 등록 흐름이 제품의 뼈대입니다</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">README는 서버 설치, 접속 URL과 token, 다른 PC 등록, 검증 리포트, 업데이트, 문제 해결을 한 흐름으로 설명합니다.</p>
+    <!-- CH.01 — WHAT IT DOES -->
+    <section id="capabilities" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.01 ]</span>
+        <span class="kicker text-text-secondary">WHAT IT DOES</span>
+        <span class="line"></span>
+        <span class="tail">3 capabilities</span>
       </div>
 
-      <div class="mt-10 grid gap-6 lg:grid-cols-3">
-        <article class="project-card bg-white p-5">
-          <div class="section-kicker">Install</div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">서버 PC에서 시작</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Windows PowerShell 또는 macOS Terminal에서 설치 스크립트를 실행합니다. 설치 후 기본 브라우저는 <code>http://127.0.0.1:18193</code>로 열립니다.</p>
-        </article>
-        <article class="project-card bg-white p-5">
-          <div class="section-kicker">Register</div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">다른 PC 등록 명령</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">메인 화면의 등록 명령을 제어하려는 Windows PC PowerShell에 붙여넣으면 repo 설치/업데이트, connector 실행, Tailscale/LAN 주소 감지, 서버 접근 검증, 디바이스 등록을 처리합니다.</p>
-        </article>
-        <article class="project-card bg-white p-5">
-          <div class="section-kicker">Operate</div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">디바이스, 세션, 권한, 스킬</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">왼쪽 드롭다운에서 PC를 고르고, 새 채팅의 작업 디렉토리를 선택하며, 권한 탭과 스킬 탭에서 현재 Claude 환경을 확인합니다.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="boundary" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="surface-panel p-6 sm:p-8 lg:p-10">
-        <div class="section-kicker">§ 04 · Trust boundary</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">private-network 우선, 로컬 권한은 로컬에</h2>
-        <div class="content-prose mt-5 max-w-4xl">
-          <p>README는 connector 포트를 공용 인터넷에 직접 노출하지 말고, 외부 접근이 필요하면 Tailscale 같은 사설 네트워크를 쓰라고 명시합니다. 다른 PC 등록 조건도 같은 LAN 또는 같은 Tailscale tailnet입니다.</p>
-          <p>문제 해결도 이 경계 안에서 설명됩니다. 디바이스가 목록에 없으면 서버 URL, 같은 LAN/Tailscale, 대상 PC의 <code>18091</code> 포트, 방화벽, registration report, connector 검증 리포트를 순서대로 확인합니다.</p>
+      <div class="grid gap-10 lg:grid-cols-12 mb-14">
+        <div class="lg:col-span-5">
+          <div class="kicker mb-4">// product · capabilities</div>
+          <h2 class="display-section text-text-primary kr-balance">매일 쓰는 자리에,<br/>그대로 끼워 씁니다.</h2>
+        </div>
+        <div class="lg:col-span-7 lg:pt-2">
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl">
+            데모용 컨트롤러가 아니라, 본인 워크플로우에 끼워 쓰는 도구로 설계했습니다. 모바일·셀프 호스트·멀티 PC 세 축을 같은 무게로 다룹니다.
+          </p>
         </div>
       </div>
-    </section>
 
-    <section class="mx-auto max-w-7xl px-4 pb-16 pt-2 sm:px-6 sm:pb-20 lg:px-8">
-      <div class="surface-panel p-6 sm:p-8 lg:p-10">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-          <div class="max-w-3xl">
-            <div class="section-kicker">Related</div>
-            <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">AI Systems로 돌아가기</h2>
-            <p class="mt-4 text-base leading-7 text-[#4f6077]">DeskRelay는 Ops-Cure 옆에 놓이는 작업입니다. 하나는 kernel-first, 하나는 product-first이고, 둘 다 제품형 제어면이 필요한 local agent runtime을 중심에 둡니다.</p>
+      <div class="grid gap-6 md:grid-cols-3">
+
+        <!-- 01 Mobile -->
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-cyan">CAP_01</span><span class="text-text-muted">MOBILE</span></div>
+          <div class="media-frame frame-contain aspect-[4/5] border-b border-hairline">
+            <img src="../../assets/images/deskrelay-github-usage-mobile-chat.png" alt="DeskRelay 모바일 채팅"/>
           </div>
-          <a href="../../ai-systems/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
-            AI Systems 열기
-            <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </a>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="kicker mb-2">// 01 · mobile</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">출퇴근 중에도 같은 세션.</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary kr-balance flex-1">Android Capacitor 앱과 모바일 브라우저에서 동일한 세션을 그대로 이어 받습니다. 채팅·세션·권한·지침·스킬 탭이 모바일 사용 흐름에 맞게 정렬됩니다.</p>
+          </div>
+        </article>
+
+        <!-- 02 Self-host -->
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-cyan">CAP_02</span><span class="text-text-muted">SELF-HOST</span></div>
+          <div class="media-frame frame-contain aspect-[4/5] border-b border-hairline">
+            <img src="../../assets/images/deskrelay-connection-status.png" alt="DeskRelay 연결 상태"/>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="kicker mb-2">// 02 · self-host</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">내 PC 가 서버입니다.</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary kr-balance flex-1">별도 서버 없이 본인 데스크톱이 <code>site-frontend(:18193)</code>, <code>site-backend(:18192)</code>, connector daemon 을 함께 띄웁니다. 외부 서비스에 토큰이나 키를 위탁할 필요가 없습니다.</p>
+          </div>
+        </article>
+
+        <!-- 03 Multi-PC -->
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-cyan">CAP_03</span><span class="text-text-muted">MULTI-PC</span></div>
+          <div class="media-frame frame-contain aspect-[4/5] border-b border-hairline">
+            <img src="../../assets/images/deskrelay-device-switcher.png" alt="DeskRelay 디바이스 전환"/>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="kicker mb-2">// 03 · multi-pc</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">여러 PC, 한 화면.</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary kr-balance flex-1">Tailscale 또는 같은 LAN 안의 Windows PC 를 디바이스로 등록해서, 한 브라우저 UI 에서 전환합니다. 각 PC 는 자체 <code>:18091</code> connector daemon 으로 동작합니다.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CH.02 — ARCHITECTURE -->
+    <section id="architecture" class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+
+        <div class="chapter-rule mb-14">
+          <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.02 ]</span>
+          <span class="kicker text-text-secondary">ARCHITECTURE</span>
+          <span class="line"></span>
+          <span class="tail">4 layers</span>
+        </div>
+
+        <div class="grid gap-10 lg:grid-cols-12 mb-12">
+          <div class="lg:col-span-5">
+            <div class="kicker mb-4">// architecture</div>
+            <h2 class="display-section text-text-primary kr-balance">개발자 도구로<br/>설계했습니다.</h2>
+          </div>
+          <div class="lg:col-span-7 lg:pt-2">
+            <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl">
+              브라우저에서 시작해 사용자의 PC 안에서 끝나는 흐름. 바깥은 제품 shell, 안쪽은 사용자 PC 의 runtime authority. 민감한 실행 표면은 절대 외부로 새지 않습니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- Layered architecture diagram -->
+        <div class="grid gap-6 lg:grid-cols-12">
+
+          <!-- 4 vertical lanes -->
+          <div class="lg:col-span-7 grid gap-3">
+            <div class="lane">
+              <span class="lane-num">01</span>
+              <div class="kicker kicker-cyan mb-2">// site-frontend</div>
+              <div class="font-display font-bold text-lg text-text-primary">Browser SPA &middot; <code>:18193</code></div>
+              <p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">Solid + Vite 로 빌드된 단일 페이지 앱. 사용자가 처음 보는 표면.</p>
+            </div>
+            <div class="lane-arrow">↓</div>
+            <div class="lane">
+              <span class="lane-num">02</span>
+              <div class="kicker kicker-cyan mb-2">// site-backend</div>
+              <div class="font-display font-bold text-lg text-text-primary">Hono + Bun &middot; <code>:18192</code></div>
+              <p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">브라우저와 사용자가 등록한 connector daemon URL 사이를 잇는 self-host backend. <code>.self-server/state</code> registry 보관.</p>
+            </div>
+            <div class="lane-arrow">↓</div>
+            <div class="lane">
+              <span class="lane-num">03</span>
+              <div class="kicker kicker-cyan mb-2">// connector daemon</div>
+              <div class="font-display font-bold text-lg text-text-primary">pc-connector-daemon &middot; <code>:18191</code> / <code>:18091</code></div>
+              <p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">private HTTP API 로 local Claude Code 동작을 노출. 서버 PC 와 등록 PC 각각에서 동작.</p>
+            </div>
+            <div class="lane-arrow">↓</div>
+            <div class="lane">
+              <span class="lane-num">04</span>
+              <div class="kicker kicker-cyan mb-2">// behavior-remote-claude</div>
+              <div class="font-display font-bold text-lg text-text-primary">Claude Code CLI</div>
+              <p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">사용자 PC 에서 <code>claude</code> CLI 를 실행하고 stream-json output 을 kernel events 로 흘립니다.</p>
+            </div>
+          </div>
+
+          <!-- Engineering decisions -->
+          <div class="lg:col-span-5">
+            <div class="card p-6 lg:p-7 h-full">
+              <div class="kicker kicker-amber mb-4">// engineering decisions</div>
+              <div class="space-y-5 font-mono text-[13px]">
+                <div>
+                  <div class="text-accent-amber">[t] transport</div>
+                  <div class="text-text-secondary text-[12px] mt-1.5 leading-relaxed">사설망 우선. LAN 또는 Tailscale tailnet 안에서만 동작하도록 설계.</div>
+                </div>
+                <div class="border-t border-hairline pt-4">
+                  <div class="text-accent-amber">[s] session</div>
+                  <div class="text-text-secondary text-[12px] mt-1.5 leading-relaxed">site token 기반 로그인. <code>.self-server/state</code> 에 디바이스 등록 정보 보관.</div>
+                </div>
+                <div class="border-t border-hairline pt-4">
+                  <div class="text-accent-amber">[r] registration</div>
+                  <div class="text-text-secondary text-[12px] mt-1.5 leading-relaxed">메인 화면의 등록 명령을 대상 PC PowerShell 에 실행하면 repo 설치, connector 실행, 주소 감지, 검증, 디바이스 등록까지 자동.</div>
+                </div>
+                <div class="border-t border-hairline pt-4">
+                  <div class="text-accent-amber">[l] logging</div>
+                  <div class="text-text-secondary text-[12px] mt-1.5 leading-relaxed">로컬 connector 검증 리포트. 외부로 송신하지 않음.</div>
+                </div>
+                <div class="border-t border-hairline pt-4">
+                  <div class="text-accent-amber">[u] update</div>
+                  <div class="text-text-secondary text-[12px] mt-1.5 leading-relaxed">self-host release channel 로 사용자가 직접 업데이트. Play Store 와 별개 채널.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CH.03 — DEVICE LIFECYCLE -->
+    <section id="lifecycle" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.03 ]</span>
+        <span class="kicker text-text-secondary">DEVICE LIFECYCLE</span>
+        <span class="line"></span>
+        <span class="tail">install → register → operate</span>
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-12 mb-12">
+        <div class="lg:col-span-5">
+          <div class="kicker mb-4">// device lifecycle</div>
+          <h2 class="display-section text-text-primary kr-balance">설치와 등록 흐름이<br/>제품의 뼈대입니다.</h2>
+        </div>
+        <div class="lg:col-span-7 lg:pt-2">
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl">
+            README 는 서버 설치, 접속 URL 과 token, 다른 PC 등록, 검증 리포트, 업데이트, 문제 해결을 한 흐름으로 설명합니다. 설치부터 일상 운영까지 30분 이내 완결을 목표로 했습니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-cyan">STEP_01</span><span class="text-text-muted">INSTALL</span></div>
+          <div class="p-6 flex-1 flex flex-col gap-4">
+            <div class="kicker">// 서버 PC 에서 시작</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary">설치 스크립트 한 줄.</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary kr-balance flex-1">Windows PowerShell 또는 macOS Terminal 에서 설치 스크립트를 실행합니다. 설치 후 기본 브라우저는 <code>http://127.0.0.1:18193</code> 로 자동으로 열립니다.</p>
+            <div class="font-mono text-[11px] text-success-green border-l-2 border-success-green/40 pl-3 leading-relaxed">$ curl -L ... | sh<br/>&gt; opened http://127.0.0.1:18193</div>
+          </div>
+        </article>
+
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-cyan">STEP_02</span><span class="text-text-muted">REGISTER</span></div>
+          <div class="p-6 flex-1 flex flex-col gap-4">
+            <div class="kicker">// 다른 PC 등록</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary">한 명령으로 끝.</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary kr-balance flex-1">메인 화면의 등록 명령을 제어하려는 Windows PC PowerShell 에 붙여넣습니다. repo 설치/업데이트, connector 실행, Tailscale/LAN 주소 감지, 서버 접근 검증, 디바이스 등록을 한 번에 처리합니다.</p>
+            <div class="font-mono text-[11px] text-accent-cyan border-l-2 border-accent-cyan/40 pl-3 leading-relaxed">&gt; registering PC...<br/>&gt; connector :18091 OK<br/>&gt; device added_</div>
+          </div>
+        </article>
+
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span class="text-accent-cyan">STEP_03</span><span class="text-text-muted">OPERATE</span></div>
+          <div class="p-6 flex-1 flex flex-col gap-4">
+            <div class="kicker">// 디바이스 · 세션 · 권한 · 스킬</div>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary">일상 운영.</h3>
+            <p class="text-[13px] leading-[1.75] text-text-secondary kr-balance flex-1">좌측 드롭다운에서 PC 를 고르고, 새 채팅의 작업 디렉토리를 선택하며, 권한 탭과 스킬 탭에서 현재 Claude 환경을 확인합니다.</p>
+            <div class="font-mono text-[11px] text-text-muted border-l-2 border-hairline-strong pl-3 leading-relaxed">device &middot; session &middot; perms &middot; skills</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CH.04 — TRUST BOUNDARY -->
+    <section id="boundary" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.04 ]</span>
+        <span class="kicker text-text-secondary">TRUST BOUNDARY</span>
+        <span class="line"></span>
+        <span class="tail">private-network first</span>
+      </div>
+
+      <div class="card ticks p-6 sm:p-10 lg:p-12">
+        <span class="tr"></span><span class="bl"></span>
+        <div class="grid gap-10 lg:grid-cols-12 items-start">
+          <div class="lg:col-span-5">
+            <div class="kicker kicker-cyan mb-4">// trust boundary</div>
+            <h2 class="display-section text-text-primary kr-balance">private-network 우선,<br/>로컬 권한은 로컬에.</h2>
+          </div>
+          <div class="lg:col-span-7 space-y-5 text-text-secondary text-[14px] leading-[1.85] kr-balance">
+            <p>README 는 connector 포트를 공용 인터넷에 직접 노출하지 말고, 외부 접근이 필요하면 Tailscale 같은 사설 네트워크를 쓰라고 명시합니다. 다른 PC 등록 조건도 같은 LAN 또는 같은 Tailscale tailnet 입니다.</p>
+            <p>문제 해결도 이 경계 안에서 설명됩니다. 디바이스가 목록에 없으면 서버 URL, 같은 LAN/Tailscale, 대상 PC 의 <code>18091</code> 포트, 방화벽, registration report, connector 검증 리포트를 순서대로 확인합니다.</p>
+            <div class="grid sm:grid-cols-3 gap-px bg-hairline border border-hairline mt-6 font-mono text-[11px] uppercase tracking-widest">
+              <div class="bg-bg-primary p-4"><div class="text-text-muted">expose to public</div><div class="text-danger-red mt-1">never</div></div>
+              <div class="bg-bg-primary p-4"><div class="text-text-muted">required network</div><div class="text-accent-cyan mt-1">LAN / Tailscale</div></div>
+              <div class="bg-bg-primary p-4"><div class="text-text-muted">token scope</div><div class="text-accent-amber mt-1">per-user</div></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- SCREENSHOT GALLERY -->
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ SHOTS ]</span>
+        <span class="kicker text-accent-cyan">PRODUCT SCREENSHOTS</span>
+        <span class="line"></span>
+        <span class="tail">scroll →</span>
+      </div>
+
+      <div class="h-scroll">
+        <figure class="w-64 sm:w-72">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>M_01</span><span class="text-text-muted">CHAT</span></div>
+            <div class="media-frame frame-contain aspect-[3/5]"><img src="../../assets/images/deskrelay-github-usage-mobile-chat.png" alt="모바일 채팅"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">mobile · chat</figcaption>
+        </figure>
+        <figure class="w-64 sm:w-72">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>M_02</span><span class="text-text-muted">SESSIONS</span></div>
+            <div class="media-frame frame-contain aspect-[3/5]"><img src="../../assets/images/deskrelay-github-usage-mobile-sessions.png" alt="모바일 세션 목록"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">mobile · sessions</figcaption>
+        </figure>
+        <figure class="w-64 sm:w-72">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>M_03</span><span class="text-text-muted">PERMISSIONS</span></div>
+            <div class="media-frame frame-contain aspect-[3/5]"><img src="../../assets/images/deskrelay-github-usage-mobile-permissions.png" alt="모바일 권한 탭"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">mobile · permissions</figcaption>
+        </figure>
+        <figure class="w-64 sm:w-72">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>M_04</span><span class="text-text-muted">INSTRUCTIONS</span></div>
+            <div class="media-frame frame-contain aspect-[3/5]"><img src="../../assets/images/deskrelay-github-usage-mobile-instructions.png" alt="모바일 지침 탭"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">mobile · instructions</figcaption>
+        </figure>
+        <figure class="w-64 sm:w-72">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>M_05</span><span class="text-text-muted">SKILLS</span></div>
+            <div class="media-frame frame-contain aspect-[3/5]"><img src="../../assets/images/deskrelay-github-usage-mobile-skills.png" alt="모바일 스킬 탭"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">mobile · skills</figcaption>
+        </figure>
+        <figure class="w-72 sm:w-80">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>D_01</span><span class="text-text-muted">CHAT UI</span></div>
+            <div class="media-frame frame-contain aspect-[4/3]"><img src="../../assets/images/deskrelay-chat-ui.png" alt="데스크톱 채팅 UI"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">desktop · chat</figcaption>
+        </figure>
+        <figure class="w-72 sm:w-80">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>D_02</span><span class="text-text-muted">NEW CHAT DIR</span></div>
+            <div class="media-frame frame-contain aspect-[4/3]"><img src="../../assets/images/deskrelay-new-chat-directory.png" alt="새 채팅 디렉토리 선택"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">desktop · new chat dir</figcaption>
+        </figure>
+        <figure class="w-72 sm:w-80">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>D_03</span><span class="text-text-muted">DEVICE SWITCH</span></div>
+            <div class="media-frame frame-contain aspect-[4/3]"><img src="../../assets/images/deskrelay-device-switcher.png" alt="디바이스 전환"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">desktop · device switch</figcaption>
+        </figure>
+        <figure class="w-72 sm:w-80">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>D_04</span><span class="text-text-muted">SETTINGS</span></div>
+            <div class="media-frame frame-contain aspect-[4/3]"><img src="../../assets/images/deskrelay-settings-ui.png" alt="설정 화면"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">desktop · settings</figcaption>
+        </figure>
+        <figure class="w-72 sm:w-80">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>D_05</span><span class="text-text-muted">CONNECTION</span></div>
+            <div class="media-frame frame-contain aspect-[4/3]"><img src="../../assets/images/deskrelay-connection-status.png" alt="연결 상태 진단"/></div>
+          </div>
+          <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">desktop · connection status</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ENGINEERING NOTES -->
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ NOTES ]</span>
+        <span class="kicker text-text-secondary">ENGINEERING DEPTH</span>
+        <span class="line"></span>
+        <span class="tail">why dev-tool grade</span>
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-12">
+        <div class="lg:col-span-7 space-y-5 text-text-secondary text-[15px] leading-[1.9] kr-balance">
+          <div class="kicker mb-2">// notes</div>
+          <h2 class="display-section text-text-primary kr-balance">왜 도구 수준까지<br/>끌어올렸나.</h2>
+          <p>처음에는 작은 원격 컨트롤러였습니다. 그러나 매일 본인 워크플로우에 쓰다 보니, 안정성·복구·인증·로그처럼 도구를 도구답게 만드는 부분이 곧 본문이 되었습니다.</p>
+          <p>Android 앱은 Capacitor wrapper 로 빌드하면서 권한 모델·서명·릴리스 채널을 정리했고, 셀프 호스트는 비개발자도 30분 안에 띄울 수 있도록 가이드를 완성했습니다.</p>
+          <p>결과적으로 DeskRelay 는 시연용 데모가 아니라, 일상 워크플로우에 끼워 쓰는 개발자 도구가 되었습니다. 같은 도구를 만들어 보고 운영해 본 경험이, 다음 직장에서도 같은 자세로 일할 수 있다는 가장 직접적인 증거라고 생각합니다.</p>
+        </div>
+        <div class="lg:col-span-5 lg:pt-12">
+          <blockquote class="pullquote">
+            <span class="colon">&ldquo;</span>데모가 아니라<br/>매일 쓰는 도구.
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP / STATUS -->
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ STATUS ]</span>
+        <span class="kicker text-text-secondary">ROADMAP</span>
+        <span class="line"></span>
+        <span class="tail">v0.0.0</span>
+      </div>
+
+      <div class="card ticks p-6 sm:p-8 lg:p-10">
+        <span class="tr"></span><span class="bl"></span>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <div class="check"><span class="mark">[x]</span><span class="label">site-frontend</span><span class="desc">— Solid + Vite SPA · shipping</span></div>
+          <div class="check"><span class="mark">[x]</span><span class="label">site-backend</span><span class="desc">— Hono + Bun · shipping</span></div>
+          <div class="check"><span class="mark">[x]</span><span class="label">connector daemon</span><span class="desc">— private API · shipping</span></div>
+          <div class="check"><span class="mark">[x]</span><span class="label">android capacitor app</span><span class="desc">— shipping</span></div>
+          <div class="check"><span class="mark">[x]</span><span class="label">device registration</span><span class="desc">— one-command flow · shipping</span></div>
+          <div class="check"><span class="mark">[x]</span><span class="label">self-host guide</span><span class="desc">— README + docs/MANUAL · shipping</span></div>
+          <div class="check"><span class="mark mark-pending">[&middot;]</span><span class="label label-pending">team sessions</span><span class="desc">— planned</span></div>
+          <div class="check"><span class="mark mark-pending">[&middot;]</span><span class="label label-pending">desktop overlay</span><span class="desc">— planned</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary kr-balance">DeskRelay 를 한 번 써 보시면,<br/>이력서보다 명확합니다.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="btn-cyan">GitHub README <span aria-hidden="true">↗</span></a>
+          <a href="mailto:darkhtk@gmail.com" class="btn-ghost">darkhtk@gmail.com</a>
+          <a href="https://www.linkedin.com/in/daeki-hong-041947182" target="_blank" rel="noopener" class="btn-ghost">LinkedIn <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div class="kicker mb-6">// related</div>
+      <div class="grid gap-4 md:grid-cols-3">
+        <a href="../ops-cure/" class="card ticks group flex items-center justify-between p-5">
+          <span class="tr"></span><span class="bl"></span>
+          <div>
+            <div class="font-mono text-[11px] text-accent-amber uppercase tracking-widest">// ai-systems</div>
+            <div class="mt-2 font-display font-bold text-text-primary">Ops-Cure</div>
+            <div class="text-[12px] text-text-secondary mt-1">운영형 LLM 커널</div>
+          </div>
+          <span class="font-mono text-accent-cyan">↗</span>
+        </a>
+        <a href="../genworld-ollama/" class="card ticks group flex items-center justify-between p-5">
+          <span class="tr"></span><span class="bl"></span>
+          <div>
+            <div class="font-mono text-[11px] text-accent-amber uppercase tracking-widest">// ai-systems</div>
+            <div class="mt-2 font-display font-bold text-text-primary">GenWorld + Ollama</div>
+            <div class="text-[12px] text-text-secondary mt-1">로컬 LLM NPC 파이프라인</div>
+          </div>
+          <span class="font-mono text-accent-cyan">↗</span>
+        </a>
+        <a href="../../ko/projects/" class="card ticks group flex items-center justify-between p-5">
+          <span class="tr"></span><span class="bl"></span>
+          <div>
+            <div class="font-mono text-[11px] text-text-muted uppercase tracking-widest">// industrial</div>
+            <div class="mt-2 font-display font-bold text-text-primary">10년 산업 Unity</div>
+            <div class="text-[12px] text-text-secondary mt-1">XR · BIM · 로보틱스</div>
+          </div>
+          <span class="font-mono text-accent-cyan">↗</span>
+        </a>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
-    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-      <div>
-        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
-        <div class="mt-2 text-sm text-[#526178]">DeskRelay — GitHub README 기준 self-host browser control</div>
+  <!-- FOOTER -->
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3">
+        <span class="text-accent-cyan">daeki.hong<span class="caret"></span></span>
+        <span class="text-text-muted">· 2026</span>
       </div>
-      <div class="flex flex-wrap items-center gap-3 text-sm">
-        <a class="footer-link" href="../../">Home</a>
-        <a class="footer-link" href="../../ai-systems/">AI Systems</a>
-        <a class="footer-link" href="../../about/">Profile</a>
-        <a class="footer-link" href="../../en/ai-systems/deskrelay/">English</a>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../../" class="hover:text-accent-cyan">home</a>
+        <a href="./" class="hover:text-accent-cyan">deskrelay</a>
+        <a href="../../ko/ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="../../ko/projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../../ko/about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../en/ai-systems/deskrelay/" class="hover:text-accent-cyan">en</a>
+      </div>
+      <div class="text-text-muted">
+        sys.version: deskrelay v0.0.0 &middot; © 2026
       </div>
     </div>
   </footer>
+
 </div>
 <script src="../../assets/js/site.js"></script>
 </body>
