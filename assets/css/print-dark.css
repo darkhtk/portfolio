@@ -1,0 +1,189 @@
+/* Print pages — screen-only dark dev-console override.
+ * Load AFTER print-docs.css. Inside @media print, this file does nothing,
+ * so the light tokens in print-docs.css remain authoritative for actual paper.
+ */
+
+@media screen {
+  :root {
+    --ink: #E6EDF3;
+    --muted: #8A94A6;
+    --soft: rgba(230,237,243,0.04);
+    --soft-strong: rgba(230,237,243,0.08);
+    --line: rgba(230,237,243,0.10);
+    --accent: #6FE3FF;
+    --accent-deep: #6FE3FF;
+    --accent-soft: rgba(111,227,255,0.10);
+    --shadow: 0 30px 120px rgba(0,229,255,0.06), inset 0 0 0 1px rgba(0,0,0,0.4);
+  }
+
+  html, body {
+    background: #0B0F14;
+    font-feature-settings: "ss01" on, "ss02" on;
+  }
+
+  /* === card surfaces — override hard-coded #fff in print-docs.css === */
+  .page,
+  .panel,
+  .stat,
+  .proof-card,
+  .mini-card,
+  .program-card,
+  .career-item,
+  .snapshot {
+    background: #11161D;
+  }
+
+  .panel--soft {
+    background: rgba(230,237,243,0.04);
+  }
+
+  .panel--accent {
+    background: linear-gradient(180deg, rgba(111,227,255,0.08) 0%, #11161D 100%);
+  }
+
+  .closing-card {
+    background: linear-gradient(180deg, rgba(230,237,243,0.04) 0%, #11161D 100%);
+  }
+
+  /* === page header band — cyan→amber instead of navy gradient === */
+  .page::before {
+    background: linear-gradient(90deg, #6FE3FF 0%, #F5C26B 62%, #F5C26B 100%);
+  }
+
+  /* === cover-page glow circle === */
+  .page--cover::after {
+    background: radial-gradient(circle, rgba(111,227,255,0.16) 0%, rgba(111,227,255,0) 72%);
+  }
+
+  /* === screen toolbar — match dev-console sticky-nav === */
+  .screen-toolbar {
+    background: rgba(11,15,20,0.85);
+    border-bottom-color: rgba(230,237,243,0.10);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .screen-toolbar__title {
+    color: #6FE3FF;
+    font-family: "JetBrains Mono", "Space Grotesk", monospace;
+    letter-spacing: 0.14em;
+  }
+
+  .screen-toolbar__meta {
+    color: #8A94A6;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .screen-toolbar__button,
+  .screen-toolbar__link {
+    background: #11161D;
+    border-color: rgba(230,237,243,0.16);
+    color: #E6EDF3;
+    border-radius: 2px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .screen-toolbar__button:hover,
+  .screen-toolbar__link:hover {
+    border-color: rgba(111,227,255,0.48);
+    color: #6FE3FF;
+    background: rgba(111,227,255,0.04);
+  }
+
+  .screen-toolbar__button--primary {
+    background: #6FE3FF;
+    color: #0B0F14;
+    border-color: #6FE3FF;
+  }
+
+  .screen-toolbar__button--primary:hover {
+    background: #ABEDFF;
+  }
+
+  /* === mono labels — JetBrains Mono dev-console tone === */
+  .eyebrow,
+  .section-label,
+  .panel__eyebrow,
+  .proof-card__eyebrow,
+  .mini-card__eyebrow,
+  .stat__label,
+  .career-item__period,
+  .project-kicker,
+  .snapshot__label {
+    font-family: "JetBrains Mono", "Space Grotesk", monospace;
+    letter-spacing: 0.18em;
+  }
+
+  /* === tokens — chip style === */
+  .token,
+  .token--accent {
+    border-radius: 2px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(17, 22, 29, 0.6);
+    color: #E6EDF3;
+    border: 1px solid rgba(230,237,243,0.16);
+    padding: 4px 10px;
+  }
+
+  .token--accent {
+    color: #6FE3FF;
+    background: rgba(111,227,255,0.08);
+    border-color: rgba(111,227,255,0.32);
+  }
+
+  /* === note strip — amber call-out === */
+  .note-strip {
+    background: rgba(245,194,107,0.08);
+    color: #F5C26B;
+    border: 1px solid rgba(245,194,107,0.24);
+  }
+
+  /* === page foot — muted hairline === */
+  .page__foot {
+    border-top-color: rgba(230,237,243,0.10);
+    color: #5B6573;
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0.10em;
+  }
+
+  /* === project image / snapshot frame — dev-console media-frame === */
+  .project-image,
+  .snapshot {
+    background: #0B0F14;
+    border-color: rgba(230,237,243,0.10);
+  }
+
+  .project-image img,
+  .snapshot img {
+    filter: grayscale(0.4) contrast(1.05);
+    transition: filter 320ms ease;
+  }
+
+  .project-image:hover img,
+  .snapshot:hover img {
+    filter: grayscale(0) contrast(1.1);
+  }
+
+  /* === inline code, if any (project-list / panel__copy) === */
+  code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.92em;
+    color: #6FE3FF;
+    background: rgba(111,227,255,0.06);
+    padding: 1px 6px;
+    border: 1px solid rgba(111,227,255,0.18);
+    border-radius: 2px;
+  }
+
+  /* === border colors using --line are inherited automatically === */
+
+  /* === selection / focus === */
+  ::selection { background: #6FE3FF; color: #0B0F14; }
+  :focus-visible { outline: 2px solid #6FE3FF; outline-offset: 2px; }
+}
