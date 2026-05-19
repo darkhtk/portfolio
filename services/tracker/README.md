@@ -34,7 +34,8 @@ GitHub Pages 포트폴리오 방문을 NAS에서 직접 집계하는 경량 추�
 2. `TRACKER_BASE_URL`, `DASHBOARD_PASSWORD`, 필요 시 `ALERT_WEBHOOK_URL`을 수정합니다.
 3. Synology NAS의 `/volume1/docker/portfolio-tracker` 경로에 배치합니다.
 4. `docker compose up -d --build`로 재빌드합니다.
-5. `curl -sk https://127.0.0.1:3443/health`로 `version: server-v2`, `storage: sqlite`를 확인합니다.
+5. Synology nginx에 `synology-nginx/www.portfolio-tracker.conf`를 `/usr/local/etc/nginx/conf.d/www.portfolio-tracker.conf`로 배치해 `/track`, `/health`, `/dashboard`, `/api/`를 `127.0.0.1:3080`으로 프록시합니다.
+6. `curl -s https://semirain.synology.me/health`로 `version: server-v2`, `storage: sqlite`를 확인합니다.
 
 ## 주의
 

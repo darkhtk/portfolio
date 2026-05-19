@@ -2,7 +2,7 @@ const { test, expect, chromium } = require("@playwright/test");
 
 const chromePath = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const siteUrl = process.env.PORTFOLIO_TEST_URL || "https://darkhtk.github.io/portfolio/";
-const trackerEndpoint = "https://semirain.synology.me:3443/track";
+const trackerEndpoint = "https://semirain.synology.me/track";
 
 test("live page sends a tracker request", async () => {
   const testId = `playwright-${Date.now()}`;

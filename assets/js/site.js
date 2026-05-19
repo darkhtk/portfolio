@@ -128,7 +128,7 @@
 
 // === 포트폴리오 방문 추적 ===
 (function () {
-  var endpoint = "https://semirain.synology.me:3443/track";
+  var endpoint = "https://semirain.synology.me/track";
   var productionHost = "darkhtk.github.io";
   var params = new URLSearchParams(window.location.search || "");
   var debug = params.get("tracker_debug") === "1";
