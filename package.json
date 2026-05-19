@@ -1,0 +1,12 @@
+{
+  "name": "daeki-portfolio",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "test": "playwright test",
+    "test:tracker": "playwright test tests/tracker-live.spec.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0"
+  }
+}

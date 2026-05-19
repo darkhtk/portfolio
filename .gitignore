@@ -12,6 +12,12 @@ desktop.ini
 
 # Logs
 *.log
+npm-debug.log*
+
+# Node tooling
+node_modules/
+test-results/
+playwright-report/
 
 # Local-only notes
 local/
