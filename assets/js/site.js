@@ -10,6 +10,8 @@
     var startX = 0;
     var startScroll = 0;
     var moved = false;
+    var wheelTarget = el.scrollLeft;
+    var wheelFrame = 0;
     var DRAG_THRESHOLD = 5; // px
 
     el.style.cursor = "grab";
@@ -29,12 +31,18 @@
       moved = false;
       startX = e.pageX - el.offsetLeft;
       startScroll = el.scrollLeft;
+      wheelTarget = el.scrollLeft;
+      if (wheelFrame) {
+        window.cancelAnimationFrame(wheelFrame);
+        wheelFrame = 0;
+      }
       el.style.cursor = "grabbing";
     });
 
     function endDrag() {
       if (!isDown) return;
       isDown = false;
+      wheelTarget = el.scrollLeft;
       el.style.cursor = "grab";
     }
 
@@ -50,6 +58,7 @@
         el.style.userSelect = "none";
       }
       el.scrollLeft = startScroll - walk;
+      wheelTarget = el.scrollLeft;
     });
 
     // 드래그로 이동한 직후의 click 은 무효화 (figure 안의 a 태그가 의도치 않게 열리는 것 방지)
@@ -61,12 +70,41 @@
       }
     }, true);
 
+    el.addEventListener("scroll", function () {
+      if (!wheelFrame && !isDown) {
+        wheelTarget = el.scrollLeft;
+      }
+    });
+
     // 휠 수직 스크롤을 수평 스크롤로 매핑 (Shift 없이도 동작) — 데스크톱 편의성
     el.addEventListener("wheel", function (e) {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        el.scrollLeft += e.deltaY;
-        e.preventDefault();
+      var horizontalDelta = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (!horizontalDelta) return;
+
+      var maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll <= 0) return;
+      if ((wheelTarget <= 0 && horizontalDelta < 0) || (wheelTarget >= maxScroll && horizontalDelta > 0)) {
+        return;
       }
+
+      wheelTarget = Math.max(0, Math.min(maxScroll, wheelTarget + horizontalDelta));
+
+      if (!wheelFrame) {
+        wheelFrame = window.requestAnimationFrame(function step() {
+          var distance = wheelTarget - el.scrollLeft;
+
+          if (Math.abs(distance) < 0.5) {
+            el.scrollLeft = wheelTarget;
+            wheelFrame = 0;
+            return;
+          }
+
+          el.scrollLeft += distance * 0.28;
+          wheelFrame = window.requestAnimationFrame(step);
+        });
+      }
+
+      e.preventDefault();
     }, { passive: false });
   });
 })();

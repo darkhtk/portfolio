@@ -112,11 +112,20 @@ img { display: block; max-width: 100%; }
 .media-frame.frame-contain img { object-fit: contain; padding: 12px; filter: none; }
 
 /* === horizontal scroller === */
-.h-scroll { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+.h-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding-bottom: 12px;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  -webkit-overflow-scrolling: touch;
+}
 .h-scroll::-webkit-scrollbar { height: 8px; }
 .h-scroll::-webkit-scrollbar-track { background: rgba(230,237,243,0.04); }
 .h-scroll::-webkit-scrollbar-thumb { background: rgba(111,227,255,0.24); }
-.h-scroll > * { scroll-snap-align: start; flex: 0 0 auto; }
+.h-scroll > * { scroll-snap-align: none; flex: 0 0 auto; }
 .h-scroll img, [data-h-drag] img { -webkit-user-drag: none; user-drag: none; -webkit-user-select: none; user-select: none; }
 
 /* === checklist === */
