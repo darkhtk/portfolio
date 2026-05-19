@@ -306,11 +306,22 @@ function getVisitStats() {
   const hoursSinceLastVisit = row.hoursSinceLastVisit === null || row.hoursSinceLastVisit === undefined
     ? null
     : Number(row.hoursSinceLastVisit);
+  const alertState = loadAlertState();
+  const lastResetAt = alertState.lastResetAt || "";
+  const resetTime = lastResetAt ? Date.parse(lastResetAt) : NaN;
+  const hoursSinceReset = Number.isFinite(resetTime)
+    ? (Date.now() - resetTime) / 36e5
+    : null;
+  const stale = visits
+    ? hoursSinceLastVisit !== null && hoursSinceLastVisit >= NO_VISIT_ALERT_HOURS
+    : hoursSinceReset === null || hoursSinceReset >= NO_VISIT_ALERT_HOURS;
   return {
     visits,
     lastVisitAt: row.lastVisitAt || "",
     hoursSinceLastVisit,
-    stale: !visits || (hoursSinceLastVisit !== null && hoursSinceLastVisit >= NO_VISIT_ALERT_HOURS)
+    lastResetAt,
+    hoursSinceReset,
+    stale
   };
 }
 
@@ -980,6 +991,12 @@ function dashboardTemplate(summary) {
             <button class="button" type="button" onclick="addExcludedVisitor()">방문자 ID 추가</button>
             <p class="muted">포트폴리오 사이트에서 <code>?tracker_exclude=1</code>을 붙이면 해당 브라우저를 추적 제외할 수 있습니다. 다시 켜려면 <code>?tracker_exclude=0</code>을 사용하세요.</p>
           </div>
+          <div class="stack">
+            <h3>기록 초기화</h3>
+            <p class="muted">방문 기록과 제외 요청 로그를 비웁니다. 제외 IP와 제외 방문자 ID 설정은 유지됩니다.</p>
+            <button class="button danger" type="button" onclick="resetRecords()">기록 초기화</button>
+            <div class="alert">위 작업은 확인 문구 <code>RESET_VISIT_RECORDS</code>를 정확히 입력해야 실행됩니다.</div>
+          </div>
         </div>
       </article>
     </section>
@@ -1225,6 +1242,20 @@ function dashboardTemplate(summary) {
       refreshStats();
     }
 
+    async function resetRecords() {
+      const confirmed = window.prompt('방문 기록과 제외 요청 로그를 초기화하려면 RESET_VISIT_RECORDS 를 정확히 입력하세요.');
+      if (confirmed !== 'RESET_VISIT_RECORDS') {
+        return;
+      }
+      const payload = await request('/api/records/reset', {
+        method: 'POST',
+        body: JSON.stringify({ confirm: 'RESET_VISIT_RECORDS' })
+      });
+      const deleted = payload.deleted || {};
+      alert('기록을 초기화했습니다. 삭제된 방문 기록: ' + (deleted.visits || 0) + '건, 제외 요청 로그: ' + (deleted.excludedRequests || 0) + '건');
+      refreshStats();
+    }
+
     setInterval(refreshMetricTotals, 60 * 60 * 1000);
   </script>
 </body>
@@ -1238,6 +1269,31 @@ function writeVisit(visit) {
 function writeExcludedRequest(entry) {
   insertInto("excluded_requests", entry);
   fs.appendFileSync(EXCLUDED_REQUESTS_FILE, JSON.stringify(entry) + "\n", "utf8");
+}
+
+function resetRecords() {
+  const visitRow = querySql("SELECT COUNT(*) AS count FROM visits;")[0] || {};
+  const excludedRow = querySql("SELECT COUNT(*) AS count FROM excluded_requests;")[0] || {};
+  const deleted = {
+    visits: Number(visitRow.count || 0),
+    excludedRequests: Number(excludedRow.count || 0)
+  };
+  const resetAt = new Date().toISOString();
+
+  runSql(`
+    DELETE FROM visits;
+    DELETE FROM excluded_requests;
+  `);
+  fs.writeFileSync(DATA_FILE, "", "utf8");
+  fs.writeFileSync(EXCLUDED_REQUESTS_FILE, "", "utf8");
+  saveAlertState({
+    ...loadAlertState(),
+    lastResetAt: resetAt,
+    lastNoVisitAlertAt: "",
+    lastRecoveredAt: ""
+  });
+
+  return { deleted, resetAt };
 }
 
 function makeVisit(req, payload) {
@@ -1321,6 +1377,8 @@ async function requestHandler(req, res) {
       visits: stats.visits,
       lastVisitAt: stats.lastVisitAt,
       hoursSinceLastVisit: stats.hoursSinceLastVisit,
+      lastResetAt: stats.lastResetAt,
+      hoursSinceReset: stats.hoursSinceReset,
       stale: stats.stale,
       alertThresholdHours: NO_VISIT_ALERT_HOURS,
       alert
@@ -1410,6 +1468,21 @@ async function requestHandler(req, res) {
       const payload = readJsonBody(await readBody(req));
       const excludedVisitorIds = writeExclusions("visitor", req.method === "DELETE" ? "remove" : "add", String(payload.value || "").trim());
       json(res, 200, { ok: true, excludedVisitorIds });
+    } catch (error) {
+      json(res, 400, { ok: false, error: error.message });
+    }
+    return;
+  }
+
+  if (pathname === "/api/records/reset" && req.method === "POST") {
+    if (!requireAuth(req, res)) return;
+    try {
+      const payload = readJsonBody(await readBody(req));
+      if (payload.confirm !== "RESET_VISIT_RECORDS") {
+        json(res, 400, { ok: false, error: "확인 문구가 필요합니다" });
+        return;
+      }
+      json(res, 200, { ok: true, ...resetRecords() });
     } catch (error) {
       json(res, 400, { ok: false, error: error.message });
     }
