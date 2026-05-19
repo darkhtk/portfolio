@@ -1374,6 +1374,17 @@ async function requestHandler(req, res) {
     return;
   }
 
+  if (pathname === "/track" && req.method === "GET") {
+    json(res, 200, {
+      ok: true,
+      endpoint: "/track",
+      accepts: "POST",
+      message: "방문 추적 수신 대기 중입니다. 브라우저에서 직접 열면 이 상태 안내만 표시됩니다.",
+      version: TRACKER_VERSION
+    }, headers);
+    return;
+  }
+
   if (pathname === "/track" && req.method === "POST") {
     if (!isAllowedOrigin(origin)) {
       writeExcludedRequest({

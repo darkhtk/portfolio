@@ -4,6 +4,7 @@ GitHub Pages 포트폴리오 방문을 NAS에서 직접 집계하는 경량 추�
 
 ## 기능
 
+- `GET /track`: 브라우저 직접 확인용 상태 안내
 - `POST /track`: 페이지 조회 기록 저장
 - `GET /health`: 서버 버전, 저장소 상태, 최근 방문, 무방문 알림 상태 확인
 - `GET /dashboard`: Basic Auth로 보호되는 한국어 집계 화면
