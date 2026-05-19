@@ -126,7 +126,7 @@
   });
 })();
 
-// === Portfolio analytics ===
+// === 포트폴리오 방문 추적 ===
 (function () {
   var endpoint = "https://semirain.synology.me:3443/track";
   var productionHost = "darkhtk.github.io";
@@ -152,22 +152,22 @@
 
   if (params.get("tracker_exclude") === "1") {
     window.localStorage.setItem(excludeKey, "true");
-    log("browser excluded");
+    log("현재 브라우저 추적 제외");
     return;
   }
 
   if (params.get("tracker_exclude") === "0") {
     window.localStorage.removeItem(excludeKey);
-    log("browser included");
+    log("현재 브라우저 추적 재개");
   }
 
   if (window.localStorage.getItem(excludeKey) === "true") {
-    log("skip: local exclusion");
+    log("건너뜀: 현재 브라우저가 제외됨");
     return;
   }
 
   if (window.sessionStorage.getItem(sessionKey) === "1") {
-    log("skip: already sent this session");
+    log("건너뜀: 이 세션에서 이미 전송됨");
     return;
   }
 
@@ -191,7 +191,7 @@
       language: navigator.language || "",
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
       testId: testId,
-      reason: reason || "load",
+      reason: reason || "페이지 로드",
       clientVersion: "site-v2"
     };
   }
@@ -203,7 +203,7 @@
   function send(reason) {
     if (window.sessionStorage.getItem(sessionKey) === "1") return Promise.resolve();
     var payload = makePayload(reason);
-    log("sending", payload);
+    log("전송 중", payload);
 
     return window.fetch(endpoint, {
       method: "POST",
@@ -219,17 +219,17 @@
       return response.json().catch(function () { return { ok: true }; });
     }).then(function (body) {
       if (!body || body.ok !== true) {
-        throw new Error("Tracker rejected payload");
+        throw new Error("추적 서버가 요청을 거부함");
       }
       markSent();
-      log("recorded", body);
+      log("기록 완료", body);
     }).catch(function (error) {
-      log("failed", error && error.message ? error.message : error);
+      log("기록 실패", error && error.message ? error.message : error);
     });
   }
 
   function schedule() {
-    window.setTimeout(function () { send("load"); }, 400);
+    window.setTimeout(function () { send("페이지 로드"); }, 400);
   }
 
   if (document.readyState === "loading") {
