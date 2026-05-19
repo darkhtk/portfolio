@@ -978,7 +978,6 @@ function dashboardTemplate(summary) {
               <button class="button danger" type="button" onclick="excludeCurrentIp()">현재 IP 제외</button>
               <button class="button secondary" type="button" onclick="refreshStats()">새로고침</button>
             </div>
-            <div class="alert">위 작업은 확인 문구 <code>EXCLUDE_CURRENT_IP</code>를 정확히 입력해야 실행됩니다.</div>
           </div>
           <div class="stack">
             <h3>제외 IP 추가</h3>
@@ -993,9 +992,8 @@ function dashboardTemplate(summary) {
           </div>
           <div class="stack">
             <h3>기록 초기화</h3>
-            <p class="muted">방문 기록과 제외 요청 로그를 비웁니다. 제외 IP와 제외 방문자 ID 설정은 유지됩니다.</p>
+            <p class="muted">버튼을 누르면 방문 기록과 제외 요청 로그를 즉시 비웁니다. 제외 IP와 제외 방문자 ID 설정은 유지됩니다.</p>
             <button class="button danger" type="button" onclick="resetRecords()">기록 초기화</button>
-            <div class="alert">위 작업은 확인 문구 <code>RESET_VISIT_RECORDS</code>를 정확히 입력해야 실행됩니다.</div>
           </div>
         </div>
       </article>
@@ -1194,13 +1192,8 @@ function dashboardTemplate(summary) {
     }
 
     async function excludeCurrentIp() {
-      const confirmed = window.prompt('현재 공개 IP를 제외하려면 EXCLUDE_CURRENT_IP 를 정확히 입력하세요.');
-      if (confirmed !== 'EXCLUDE_CURRENT_IP') {
-        return;
-      }
       const payload = await request('/api/exclusions/current-ip', {
-        method: 'POST',
-        body: JSON.stringify({ confirm: 'EXCLUDE_CURRENT_IP' })
+        method: 'POST'
       });
       alert('현재 공개 IP를 제외했습니다: ' + payload.value);
       refreshStats();
@@ -1243,13 +1236,8 @@ function dashboardTemplate(summary) {
     }
 
     async function resetRecords() {
-      const confirmed = window.prompt('방문 기록과 제외 요청 로그를 초기화하려면 RESET_VISIT_RECORDS 를 정확히 입력하세요.');
-      if (confirmed !== 'RESET_VISIT_RECORDS') {
-        return;
-      }
       const payload = await request('/api/records/reset', {
-        method: 'POST',
-        body: JSON.stringify({ confirm: 'RESET_VISIT_RECORDS' })
+        method: 'POST'
       });
       const deleted = payload.deleted || {};
       alert('기록을 초기화했습니다. 삭제된 방문 기록: ' + (deleted.visits || 0) + '건, 제외 요청 로그: ' + (deleted.excludedRequests || 0) + '건');
@@ -1434,16 +1422,6 @@ async function requestHandler(req, res) {
 
   if (pathname === "/api/exclusions/current-ip" && req.method === "POST") {
     if (!requireAuth(req, res)) return;
-    try {
-      const payload = readJsonBody(await readBody(req));
-      if (payload.confirm !== "EXCLUDE_CURRENT_IP") {
-        json(res, 400, { ok: false, error: "Confirmation required" });
-        return;
-      }
-    } catch (error) {
-      json(res, 400, { ok: false, error: error.message });
-      return;
-    }
     const value = normalizeIp(getIp(req));
     const excludedIps = writeExclusions("ip", "add", value);
     json(res, 200, { ok: true, value, excludedIps });
@@ -1477,11 +1455,6 @@ async function requestHandler(req, res) {
   if (pathname === "/api/records/reset" && req.method === "POST") {
     if (!requireAuth(req, res)) return;
     try {
-      const payload = readJsonBody(await readBody(req));
-      if (payload.confirm !== "RESET_VISIT_RECORDS") {
-        json(res, 400, { ok: false, error: "확인 문구가 필요합니다" });
-        return;
-      }
       json(res, 200, { ok: true, ...resetRecords() });
     } catch (error) {
       json(res, 400, { ok: false, error: error.message });

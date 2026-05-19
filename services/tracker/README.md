@@ -20,7 +20,7 @@ GitHub Pages 포트폴리오 방문을 NAS에서 직접 집계하는 경량 추�
 - 기본 저장소는 `data/tracker.sqlite3`입니다.
 - 기존 `data/visits.jsonl`, `data/excluded-requests.jsonl` 데이터는 최초 실행 시 SQLite로 마이그레이션합니다.
 - 신규 방문과 제외 요청은 SQLite에 기록하고, 백업/감사용으로 JSONL 파일에도 계속 append합니다.
-- 대시보드의 기록 초기화는 방문 기록과 제외 요청 로그만 비우며, 제외 IP/방문자 설정은 유지합니다.
+- 대시보드의 기록 초기화는 버튼 클릭 즉시 방문 기록과 제외 요청 로그를 비우며, 제외 IP/방문자 설정은 유지합니다.
 
 ## 알림
 
