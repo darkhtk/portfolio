@@ -765,6 +765,53 @@ function dashboardTemplate(summary) {
       margin: 0 0 12px;
       font-size: 16px;
     }
+    .log-details {
+      padding: 0;
+    }
+    .panel-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      cursor: pointer;
+      list-style: none;
+    }
+    .panel-summary::-webkit-details-marker {
+      display: none;
+    }
+    .summary-title {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .summary-subtitle {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .summary-chevron::after {
+      content: "펼치기";
+      display: inline-flex;
+      align-items: center;
+      min-width: 64px;
+      justify-content: center;
+      border-radius: 999px;
+      background: #e8eef7;
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    details[open] .summary-chevron::after {
+      content: "접기";
+    }
+    .details-body {
+      padding: 0 24px 22px;
+    }
     .span-6 { grid-column: span 6; }
     .span-12 { grid-column: span 12; }
     table {
@@ -1134,8 +1181,18 @@ function dashboardTemplate(summary) {
     </section>
 
     <section class="panel-grid">
-      <article class="panel span-12">
-        <h2>제외 요청 로그</h2>
+      <details class="panel span-12 log-details">
+        <summary class="panel-summary">
+          <span>
+            <span class="summary-title">제외 요청 로그</span>
+            <span class="summary-subtitle">최근 ${escapeHtml((summary.excludedRecent || []).length)}건만 표시합니다. 기본으로 접혀 있습니다.</span>
+          </span>
+          <span class="summary-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="details-body">
+          <div class="toolbar">
+            <button class="button danger" type="button" onclick="clearExcludedRequestLog()">제외 요청 로그 삭제</button>
+          </div>
         <table>
           <thead><tr><th>시간</th><th>경로</th><th>제외 기준</th><th>값</th><th>원본 IP</th><th>전달된 IP</th><th>소켓 IP</th></tr></thead>
           <tbody>
@@ -1153,7 +1210,8 @@ function dashboardTemplate(summary) {
           </tbody>
         </table>
         <p class="footer">이 패널은 추적 서버에는 도달했지만 제외 규칙과 일치해 집계되지 않은 요청을 보여줍니다.</p>
-      </article>
+        </div>
+      </details>
     </section>
 
     <p class="footer">공개 IP는 네트워크 수준의 단서일 뿐입니다. NAT, VPN, 모바일망, 프라이빗 릴레이 서비스 때문에 여러 사람이 같은 주소로 합쳐지거나 실제 사람이 가려질 수 있습니다.</p>
@@ -1244,6 +1302,15 @@ function dashboardTemplate(summary) {
       refreshStats();
     }
 
+    async function clearExcludedRequestLog() {
+      const payload = await request('/api/excluded-requests', {
+        method: 'DELETE'
+      });
+      const deleted = payload.deleted || {};
+      alert('제외 요청 로그를 삭제했습니다: ' + (deleted.excludedRequests || 0) + '건');
+      refreshStats();
+    }
+
     setInterval(refreshMetricTotals, 60 * 60 * 1000);
   </script>
 </body>
@@ -1257,6 +1324,18 @@ function writeVisit(visit) {
 function writeExcludedRequest(entry) {
   insertInto("excluded_requests", entry);
   fs.appendFileSync(EXCLUDED_REQUESTS_FILE, JSON.stringify(entry) + "\n", "utf8");
+}
+
+function clearExcludedRequests() {
+  const excludedRow = querySql("SELECT COUNT(*) AS count FROM excluded_requests;")[0] || {};
+  const deleted = {
+    excludedRequests: Number(excludedRow.count || 0)
+  };
+
+  runSql("DELETE FROM excluded_requests;");
+  fs.writeFileSync(EXCLUDED_REQUESTS_FILE, "", "utf8");
+
+  return { deleted };
 }
 
 function resetRecords() {
@@ -1467,6 +1546,16 @@ async function requestHandler(req, res) {
     if (!requireAuth(req, res)) return;
     try {
       json(res, 200, { ok: true, ...resetRecords() });
+    } catch (error) {
+      json(res, 400, { ok: false, error: error.message });
+    }
+    return;
+  }
+
+  if (pathname === "/api/excluded-requests" && req.method === "DELETE") {
+    if (!requireAuth(req, res)) return;
+    try {
+      json(res, 200, { ok: true, ...clearExcludedRequests() });
     } catch (error) {
       json(res, 400, { ok: false, error: error.message });
     }
