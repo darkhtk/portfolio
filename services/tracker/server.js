@@ -765,6 +765,53 @@ function dashboardTemplate(summary) {
       margin: 0 0 12px;
       font-size: 16px;
     }
+    .log-details {
+      padding: 0;
+    }
+    .panel-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      cursor: pointer;
+      list-style: none;
+    }
+    .panel-summary::-webkit-details-marker {
+      display: none;
+    }
+    .summary-title {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .summary-subtitle {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .summary-chevron::after {
+      content: "펼치기";
+      display: inline-flex;
+      align-items: center;
+      min-width: 64px;
+      justify-content: center;
+      border-radius: 999px;
+      background: #e8eef7;
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    details[open] .summary-chevron::after {
+      content: "접기";
+    }
+    .details-body {
+      padding: 0 24px 22px;
+    }
     .span-6 { grid-column: span 6; }
     .span-12 { grid-column: span 12; }
     table {
@@ -804,6 +851,13 @@ function dashboardTemplate(summary) {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 16px;
+    }
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
     }
     .stack {
       display: flex;
@@ -866,6 +920,37 @@ function dashboardTemplate(summary) {
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 10px;
+    }
+    .toolbar.tight {
+      margin-top: 0;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .tab-button {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: #fff;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .tab-button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
     }
     .network-cell {
       min-width: 220px;
@@ -948,7 +1033,7 @@ function dashboardTemplate(summary) {
     <section class="topbar">
       <div>
         <div class="eyebrow">포트폴리오 방문 추적</div>
-        <h1>GitHub Pages 방문 추적 대시보드</h1>
+        <h1>Tracker</h1>
         <p class="sub">포트폴리오 사이트의 페이지 조회를 기록하고 공개 IP, reverse DNS, ASN/ISP, 위치, 제외 이력, 최근 제외 요청을 함께 보여줍니다. 실제 방문으로 보이는 흐름과 스캐너, 봇, 수동 제외 트래픽을 구분하는 용도입니다.</p>
       </div>
       <div class="hint">추적 서버: ${escapeHtml(TRACKER_BASE_URL || "설정되지 않음")}</div>
@@ -968,35 +1053,43 @@ function dashboardTemplate(summary) {
     </section>
 
     <section class="panel-grid">
-      <article class="panel span-12">
-        <h2>제외 설정</h2>
-        <div class="actions">
-          <div class="stack">
-            <h3>현재 공개 IP 제외</h3>
-            <p class="muted">현재 사용 중인 네트워크를 집계에서 빼고 싶을 때만 사용하세요. 같은 공개 IP 뒤에 있는 다른 방문까지 함께 숨겨질 수 있습니다.</p>
-            <div class="toolbar">
-              <button class="button danger" type="button" onclick="excludeCurrentIp()">현재 IP 제외</button>
-              <button class="button secondary" type="button" onclick="refreshStats()">새로고침</button>
+      <details class="panel span-12" id="settings-panel">
+        <summary class="panel-summary">
+          <span>
+            <span class="summary-title">설정</span>
+            <span class="summary-subtitle">제외 IP, 제외 방문자 ID, 현재 IP 제외, 기록 초기화는 버튼을 눌렀을 때만 펼쳐집니다.</span>
+          </span>
+          <span class="summary-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="details-body">
+          <div class="actions">
+            <div class="stack">
+              <h3>현재 공개 IP 제외</h3>
+              <p class="muted">현재 사용 중인 네트워크를 집계에서 빼고 싶을 때만 사용하세요. 같은 공개 IP 뒤에 있는 다른 방문까지 함께 숨겨질 수 있습니다.</p>
+              <div class="toolbar">
+                <button class="button danger" type="button" onclick="excludeCurrentIp()">현재 IP 제외</button>
+                <button class="button secondary" type="button" onclick="refreshStats()">새로고침</button>
+              </div>
+            </div>
+            <div class="stack">
+              <h3>제외 IP 추가</h3>
+              <input id="ip-input" class="field" type="text" placeholder="예: 221.146.72.221">
+              <button class="button" type="button" onclick="addExcludedIp()">IP 추가</button>
+            </div>
+            <div class="stack">
+              <h3>제외 방문자 ID 추가</h3>
+              <input id="visitor-input" class="field" type="text" placeholder="portfolio_tracker_visitor_id">
+              <button class="button" type="button" onclick="addExcludedVisitor()">방문자 ID 추가</button>
+              <p class="muted">포트폴리오 사이트에서 <code>?tracker_exclude=1</code>을 붙이면 해당 브라우저를 추적 제외할 수 있습니다. 다시 켜려면 <code>?tracker_exclude=0</code>을 사용하세요.</p>
+            </div>
+            <div class="stack">
+              <h3>기록 초기화</h3>
+              <p class="muted">버튼을 누르면 방문 기록과 제외 요청 로그를 즉시 비웁니다. 제외 IP와 제외 방문자 ID 설정은 유지됩니다.</p>
+              <button class="button danger" type="button" onclick="resetRecords()">기록 초기화</button>
             </div>
           </div>
-          <div class="stack">
-            <h3>제외 IP 추가</h3>
-            <input id="ip-input" class="field" type="text" placeholder="예: 221.146.72.221">
-            <button class="button" type="button" onclick="addExcludedIp()">IP 추가</button>
-          </div>
-          <div class="stack">
-            <h3>제외 방문자 ID 추가</h3>
-            <input id="visitor-input" class="field" type="text" placeholder="portfolio_tracker_visitor_id">
-            <button class="button" type="button" onclick="addExcludedVisitor()">방문자 ID 추가</button>
-            <p class="muted">포트폴리오 사이트에서 <code>?tracker_exclude=1</code>을 붙이면 해당 브라우저를 추적 제외할 수 있습니다. 다시 켜려면 <code>?tracker_exclude=0</code>을 사용하세요.</p>
-          </div>
-          <div class="stack">
-            <h3>기록 초기화</h3>
-            <p class="muted">버튼을 누르면 방문 기록과 제외 요청 로그를 즉시 비웁니다. 제외 IP와 제외 방문자 ID 설정은 유지됩니다.</p>
-            <button class="button danger" type="button" onclick="resetRecords()">기록 초기화</button>
-          </div>
         </div>
-      </article>
+      </details>
     </section>
 
     <section class="panel-grid">
@@ -1041,21 +1134,6 @@ function dashboardTemplate(summary) {
       </article>
 
       <article class="panel span-6">
-        <h2>상위 방문자 ID</h2>
-        <table>
-          <thead><tr><th>방문자 ID</th><th>조회수</th></tr></thead>
-          <tbody>
-            ${listRows(summary.topVisitors, (item) => `
-              <tr>
-                <td class="mono">${escapeHtml(item.visitorId)}</td>
-                <td>${escapeHtml(item.views)}</td>
-              </tr>
-            `, 2)}
-          </tbody>
-        </table>
-      </article>
-
-      <article class="panel span-6">
         <h2>최근 방문</h2>
         <table>
           <thead><tr><th>시간</th><th>페이지</th><th>IP</th><th>네트워크</th></tr></thead>
@@ -1083,59 +1161,93 @@ function dashboardTemplate(summary) {
     </section>
 
     <section class="panel-grid">
-      <article class="panel span-6">
-        <h2>제외된 IP</h2>
-        <div>
-          ${summary.exclusions.excludedIps.length
-            ? summary.exclusions.excludedIps.map((ip) => `
-                <span class="pill mono">
-                  ${escapeHtml(ip)}
-                  <button class="inline-button" type="button" onclick="removeExcludedIp('${escapeHtml(ip)}')">삭제</button>
-                </span>
-              `).join("")
-            : '<div class="empty-cell">제외된 IP가 없습니다.</div>'}
+      <article class="panel span-12">
+        <div class="panel-head">
+          <h2>기타 정보</h2>
+          <div class="toolbar tight">
+            <button class="button secondary" type="button" data-open-settings>설정</button>
+          </div>
         </div>
-      </article>
+        <div class="tabs" role="tablist" aria-label="기타 정보 탭">
+          <button class="tab-button active" type="button" role="tab" aria-selected="true" data-tab-target="top-visitors">상위 방문자 ID</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-target="excluded-ips">제외된 IP</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-target="excluded-visitors">제외된 방문자 ID</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-target="raw-ip-log">원본 IP 로그</button>
+        </div>
 
-      <article class="panel span-6">
-        <h2>제외된 방문자 ID</h2>
-        <div>
-          ${summary.exclusions.excludedVisitorIds.length
-            ? summary.exclusions.excludedVisitorIds.map((visitorId) => `
-                <span class="pill mono">
-                  ${escapeHtml(visitorId)}
-                  <button class="inline-button" type="button" onclick="removeExcludedVisitor('${escapeHtml(visitorId)}')">삭제</button>
-                </span>
-              `).join("")
-            : '<div class="empty-cell">제외된 방문자 ID가 없습니다.</div>'}
+        <div class="tab-panel active" data-tab-panel="top-visitors">
+          <table>
+            <thead><tr><th>방문자 ID</th><th>조회수</th></tr></thead>
+            <tbody>
+              ${listRows(summary.topVisitors, (item) => `
+                <tr>
+                  <td class="mono">${escapeHtml(item.visitorId)}</td>
+                  <td>${escapeHtml(item.views)}</td>
+                </tr>
+              `, 2)}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tab-panel" data-tab-panel="excluded-ips">
+          <div>
+            ${summary.exclusions.excludedIps.length
+              ? summary.exclusions.excludedIps.map((ip) => `
+                  <span class="pill mono">
+                    ${escapeHtml(ip)}
+                    <button class="inline-button" type="button" onclick="removeExcludedIp('${escapeHtml(ip)}')">삭제</button>
+                  </span>
+                `).join("")
+              : '<div class="empty-cell">제외된 IP가 없습니다.</div>'}
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab-panel="excluded-visitors">
+          <div>
+            ${summary.exclusions.excludedVisitorIds.length
+              ? summary.exclusions.excludedVisitorIds.map((visitorId) => `
+                  <span class="pill mono">
+                    ${escapeHtml(visitorId)}
+                    <button class="inline-button" type="button" onclick="removeExcludedVisitor('${escapeHtml(visitorId)}')">삭제</button>
+                  </span>
+                `).join("")
+              : '<div class="empty-cell">제외된 방문자 ID가 없습니다.</div>'}
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab-panel="raw-ip-log">
+          <table>
+            <thead><tr><th>시간</th><th>경로</th><th>원본 IP</th><th>전달된 IP</th><th>소켓 IP</th></tr></thead>
+            <tbody>
+              ${listRows(summary.recent, (item) => `
+                <tr>
+                  <td>${escapeHtml(item.createdAt)}</td>
+                  <td class="mono">${escapeHtml(item.path)}</td>
+                  <td class="mono">${escapeHtml(item.rawIp || item.ip || "-")}</td>
+                  <td class="mono">${escapeHtml(item.forwardedFor || "-")}</td>
+                  <td class="mono">${escapeHtml(item.socketIp || "-")}</td>
+                </tr>
+              `, 5)}
+            </tbody>
+          </table>
+          <p class="footer">집계와 제외 판정에는 정규화된 IP를 사용합니다. 이 패널은 추적 서버가 요청에서 받은 원본 값을 보여줍니다.</p>
         </div>
       </article>
     </section>
 
     <section class="panel-grid">
-      <article class="panel span-12">
-        <h2>원본 IP 로그</h2>
-        <table>
-          <thead><tr><th>시간</th><th>경로</th><th>원본 IP</th><th>전달된 IP</th><th>소켓 IP</th></tr></thead>
-          <tbody>
-            ${listRows(summary.recent, (item) => `
-              <tr>
-                <td>${escapeHtml(item.createdAt)}</td>
-                <td class="mono">${escapeHtml(item.path)}</td>
-                <td class="mono">${escapeHtml(item.rawIp || item.ip || "-")}</td>
-                <td class="mono">${escapeHtml(item.forwardedFor || "-")}</td>
-                <td class="mono">${escapeHtml(item.socketIp || "-")}</td>
-              </tr>
-            `, 5)}
-          </tbody>
-        </table>
-        <p class="footer">집계와 제외 판정에는 정규화된 IP를 사용합니다. 이 패널은 추적 서버가 요청에서 받은 원본 값을 보여줍니다.</p>
-      </article>
-    </section>
-
-    <section class="panel-grid">
-      <article class="panel span-12">
-        <h2>제외 요청 로그</h2>
+      <details class="panel span-12 log-details">
+        <summary class="panel-summary">
+          <span>
+            <span class="summary-title">제외 요청 로그</span>
+            <span class="summary-subtitle">최근 ${escapeHtml((summary.excludedRecent || []).length)}건만 표시합니다. 기본으로 접혀 있습니다.</span>
+          </span>
+          <span class="summary-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="details-body">
+          <div class="toolbar">
+            <button class="button danger" type="button" onclick="clearExcludedRequestLog()">제외 요청 로그 삭제</button>
+          </div>
         <table>
           <thead><tr><th>시간</th><th>경로</th><th>제외 기준</th><th>값</th><th>원본 IP</th><th>전달된 IP</th><th>소켓 IP</th></tr></thead>
           <tbody>
@@ -1153,7 +1265,8 @@ function dashboardTemplate(summary) {
           </tbody>
         </table>
         <p class="footer">이 패널은 추적 서버에는 도달했지만 제외 규칙과 일치해 집계되지 않은 요청을 보여줍니다.</p>
-      </article>
+        </div>
+      </details>
     </section>
 
     <p class="footer">공개 IP는 네트워크 수준의 단서일 뿐입니다. NAT, VPN, 모바일망, 프라이빗 릴레이 서비스 때문에 여러 사람이 같은 주소로 합쳐지거나 실제 사람이 가려질 수 있습니다.</p>
@@ -1244,6 +1357,48 @@ function dashboardTemplate(summary) {
       refreshStats();
     }
 
+    async function clearExcludedRequestLog() {
+      const payload = await request('/api/excluded-requests', {
+        method: 'DELETE'
+      });
+      const deleted = payload.deleted || {};
+      alert('제외 요청 로그를 삭제했습니다: ' + (deleted.excludedRequests || 0) + '건');
+      refreshStats();
+    }
+
+    function setupTabs() {
+      const buttons = Array.from(document.querySelectorAll('[data-tab-target]'));
+      const panels = Array.from(document.querySelectorAll('[data-tab-panel]'));
+      if (!buttons.length || !panels.length) return;
+
+      buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          const target = button.getAttribute('data-tab-target');
+          buttons.forEach(function(item) {
+            const active = item === button;
+            item.classList.toggle('active', active);
+            item.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+          panels.forEach(function(panel) {
+            panel.classList.toggle('active', panel.getAttribute('data-tab-panel') === target);
+          });
+        });
+      });
+    }
+
+    function setupSettingsButton() {
+      const settingsPanel = document.getElementById('settings-panel');
+      const settingsButton = document.querySelector('[data-open-settings]');
+      if (!settingsPanel || !settingsButton) return;
+
+      settingsButton.addEventListener('click', function() {
+        settingsPanel.open = true;
+        settingsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    setupTabs();
+    setupSettingsButton();
     setInterval(refreshMetricTotals, 60 * 60 * 1000);
   </script>
 </body>
@@ -1257,6 +1412,18 @@ function writeVisit(visit) {
 function writeExcludedRequest(entry) {
   insertInto("excluded_requests", entry);
   fs.appendFileSync(EXCLUDED_REQUESTS_FILE, JSON.stringify(entry) + "\n", "utf8");
+}
+
+function clearExcludedRequests() {
+  const excludedRow = querySql("SELECT COUNT(*) AS count FROM excluded_requests;")[0] || {};
+  const deleted = {
+    excludedRequests: Number(excludedRow.count || 0)
+  };
+
+  runSql("DELETE FROM excluded_requests;");
+  fs.writeFileSync(EXCLUDED_REQUESTS_FILE, "", "utf8");
+
+  return { deleted };
 }
 
 function resetRecords() {
@@ -1467,6 +1634,16 @@ async function requestHandler(req, res) {
     if (!requireAuth(req, res)) return;
     try {
       json(res, 200, { ok: true, ...resetRecords() });
+    } catch (error) {
+      json(res, 400, { ok: false, error: error.message });
+    }
+    return;
+  }
+
+  if (pathname === "/api/excluded-requests" && req.method === "DELETE") {
+    if (!requireAuth(req, res)) return;
+    try {
+      json(res, 200, { ok: true, ...clearExcludedRequests() });
     } catch (error) {
       json(res, 400, { ok: false, error: error.message });
     }
