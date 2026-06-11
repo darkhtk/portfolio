@@ -11,6 +11,10 @@
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/genworld-world.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/genworld-ollama/"/>
 <meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="GenWorld + Ollama · Case Study"/>
+<meta name="twitter:description" content="Local-LLM NPC perception · offline-first · graceful fallback, validated."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/genworld-world.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
@@ -52,17 +56,17 @@
         <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true">
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
       <div class="flex items-start justify-between pb-4 border-b border-hairline">
         <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
         <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
       </div>
       <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
-        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span>→</span></a>
-        <a href="../deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span>→</span></a>
-        <a href="../" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">ai systems <span>→</span></a>
-        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span>→</span></a>
-        <a href="../../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">→</span></a>
+        <a href="../deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span aria-hidden="true">→</span></a>
+        <a href="../" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">ai systems <span aria-hidden="true">→</span></a>
+        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span aria-hidden="true">→</span></a>
+        <a href="../../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </header>
@@ -80,8 +84,8 @@
             Ported a Phaser 3 TS-based RPG to Unity 2D C# while designing and implementing a local Ollama LLM-backed NPC perception &amp; dialogue system. An R&amp;D case study validating <strong class="text-text-primary font-semibold">offline-first</strong> and <strong class="text-text-primary font-semibold">graceful fallback</strong>. Not a demo — an operational experiment: the game must keep running even when the LLM cuts out.
           </p>
           <div class="flex flex-wrap items-center gap-3">
-            <a href="#cognition" class="btn-cyan">NPC cognition <span>↓</span></a>
-            <a href="../" class="btn-ghost">AI Systems <span>↗</span></a>
+            <a href="#cognition" class="btn-cyan">NPC cognition <span aria-hidden="true">↓</span></a>
+            <a href="../" class="btn-ghost">AI Systems <span aria-hidden="true">↗</span></a>
           </div>
           <div class="ticker mt-2">
             <span class="dot"></span><span>ollama · local llm</span>
@@ -232,9 +236,9 @@
           <h2 class="display-section text-text-primary">Related work.</h2>
         </div>
         <div class="flex flex-wrap gap-3">
-          <a href="../deskrelay/" class="btn-cyan">DeskRelay <span>→</span></a>
-          <a href="../ops-cure/" class="btn-ghost">Ops-Cure <span>↗</span></a>
-          <a href="../" class="btn-ghost">AI Systems <span>↗</span></a>
+          <a href="../deskrelay/" class="btn-cyan">DeskRelay <span aria-hidden="true">→</span></a>
+          <a href="../ops-cure/" class="btn-ghost">Ops-Cure <span aria-hidden="true">↗</span></a>
+          <a href="../" class="btn-ghost">AI Systems <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
