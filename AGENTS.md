@@ -28,32 +28,34 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 - **Material Symbols Outlined** (Google Fonts)
 - **Font**: Space Grotesk (display/headline), Noto Sans KR (body), JetBrains Mono (mono)
 - **빌드 시스템 없음** — Tailwind CDN이 런타임 처리
-- **Theme**: dark 기본 (`<html class="dark">` + `assets/css/portfolio-dark.css`) — 단 `projects/` 랜딩과 `en/projects/<case>/` 는 light (`assets/css/site.css`)
-- **언어**: KO / EN 이중 운영 — KO 루트 + `en/` 미러, 페이지별 헤더에 KO/EN 토글 (예외: `en/projects/neostalgia/`, `en/projects/vr-simulators/` 는 헤더·토글 없이 본문 하단 'Korean version' 링크만 보유)
+- **Theme**: 전 페이지 dark (`<html class="dark">` + `assets/css/portfolio-dark.css`) — light 용 `assets/css/site.css` 는 redirect stub(`resume/`, `ko/resume/`, `cover-letter/`)에만 잔존
+- **언어**: 루트 트리 = 한국어 디폴트, `en/` 트리 = 영어 미러. print 페이지와 redirect stub 을 제외한 모든 페이지 헤더에 KO/EN 토글
 
 ## Page Structure
 
-루트(다크) nav 는 앵커 기반 4항목 `home | ai | industrial | profile` (`#ch02` / `#ch01` / `#profile`). 다크 케이스 스터디 페이지는 같은 라벨로 루트 앵커를 가리키고, light 페이지(`projects/` 랜딩, `en/projects/<case>/`)는 pill 형 `Home | Projects | AI Systems | Profile` nav 를 사용 — 단 `en/projects/neostalgia/` 와 `en/projects/vr-simulators/` 는 header/nav/토글이 전혀 없는 본문 전용 페이지(리뉴얼 대기). 그 외 페이지는 헤더에 KO/EN 토글 보유.
+전 페이지 공통 4항목 nav `home | ai | industrial | profile`. KO 홈(`index.html`)은 앵커 기반(`#ch02` / `#ch01` / `#profile`), 케이스 스터디 페이지는 같은 라벨로 루트 앵커를, 랜딩·프로필 페이지와 EN 홈은 디렉터리 페이지(`ai-systems/`, `projects/`, `about/` 와 `en/` 미러)를 가리킨다. print 페이지와 redirect stub 을 제외한 모든 페이지가 헤더에 KO/EN 토글 보유.
 
 | 파일 | 역할 | 테마 |
 |---|---|---|
 | `index.html` | Home (KO — `#ch01` 산업 / `#ch02` AI / `#profile` 앵커 섹션) | dark |
 | `en/index.html` | Home (EN 미러) | dark |
-| `about/index.html` | Profile (EN) | dark |
-| `ko/about/index.html` | Profile (KO) | dark |
-| `projects/index.html` | Projects 랜딩 (KO/EN 공용, `lang="en"`) | light |
+| `about/index.html` | Profile (KO) | dark |
+| `en/about/index.html` | Profile (EN) | dark |
+| `projects/index.html` | 산업 프로젝트 아카이브 (KO) | dark |
+| `en/projects/index.html` | 산업 프로젝트 아카이브 (EN) | dark |
+| `ai-systems/index.html` | AI Systems 허브 (KO) | dark |
 | `en/ai-systems/index.html` | AI Systems 허브 (EN) | dark |
 | `ai-systems/<case>/index.html` | AI 케이스 KO — ops-cure, genworld-ollama, deskrelay | dark |
 | `en/ai-systems/<case>/index.html` | AI 케이스 EN — ops-cure, genworld-ollama, deskrelay | dark |
 | `projects/<case>/index.html` | 산업 케이스 KO — vr-robot, watchbim, dxcenter, neostalgia, vr-simulators | dark |
-| `en/projects/<case>/index.html` | 산업 케이스 EN — 동일 5종 | light |
+| `en/projects/<case>/index.html` | 산업 케이스 EN — 동일 5종 | dark |
 | `print/portfolio/`, `print/ko-portfolio/`, `print/resume/` | A4 인쇄용 (EN/KO 포트폴리오 + EN 이력서) | print CSS |
 
-**Redirect stub** (`<meta http-equiv="refresh">` + JS replace): `ai-systems/index.html` → `en/ai-systems/`, `en/projects/index.html` → `projects/`, `resume/` → `about/`, `cover-letter/` → `ko/about/`, `ko/index.html` → `/`, `ko/resume/` → `ko/about/`. `ko/ai-systems/`, `ko/projects/` 디렉터리는 존재하지 않음.
+**Redirect stub** (`<meta http-equiv="refresh">` + JS replace): `ko/about/` → `about/`, `resume/` → `en/about/`, `ko/resume/` → `about/`, `cover-letter/` → `about/`, `ko/index.html` → `/`. `ko/ai-systems/`, `ko/projects/` 디렉터리는 존재하지 않음.
 
 ## Nav & Mobile Menu (공용 구현)
 
-**print 페이지와 header 없는 2종(`en/projects/neostalgia/`, `en/projects/vr-simulators/`)을 제외한 모든 페이지가 `header[data-mobile-menu-root]` 마크업 + 공용 `assets/js/site.js` 조합 사용** — 페이지별 IIFE 없음. 새 페이지 추가 시 아래 data-attribute 마크업을 복사하고 `site.js` 를 로드하면 동작.
+**print 페이지와 redirect stub 을 제외한 모든 페이지가 `header[data-mobile-menu-root]` 마크업 + 공용 `assets/js/site.js` 조합 사용** — 페이지별 IIFE 없음. 새 페이지 추가 시 아래 data-attribute 마크업을 복사하고 `site.js` 를 로드하면 동작.
 
 ```html
 <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
@@ -73,9 +75,7 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 
 **`site.js` 동작**: 토글 클릭 open/close (`body.menu-open` 클래스 토글), Escape 닫기, 드로어 내 링크 클릭 시 닫기, viewport ≥ 768px 리사이즈 시 자동 닫기. 가로 스크롤 드래그 지원(`.h-scroll`, `[data-h-drag]`)도 같은 파일에 포함.
 
-**Active link 표시**:
-- Dark 페이지 desktop nav: `nav-link is-active`
-- Light(pill) nav: 현재 페이지 링크에 흰 배경 pill 클래스
+**Active link 표시**: desktop nav 현재 페이지 링크에 `nav-link is-active`
 
 ## Mobile Responsive Tokens (mobile-responsive-redesign 작업 결과)
 
@@ -100,12 +100,12 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 
 ## Design System (Tailwind config)
 
-다크 페이지는 head 의 `<script id="tailwind-config">` 에 아래 토큰을 동일하게 정의하고 공용 `assets/css/portfolio-dark.css` 를 로드. light 페이지(`projects/` 랜딩, `en/projects/<case>/`)는 `assets/css/site.css` 기반. 변경 시 같은 테마를 쓰는 모든 페이지 동기화.
+모든 실페이지가 head 의 `<script id="tailwind-config">` 에 아래 토큰을 동일하게 정의하고 공용 `assets/css/portfolio-dark.css` 를 로드. 변경 시 모든 페이지 동기화.
 
 ```js
 colors: {
   "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
-  "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573",
+  "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F",
   "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B",
   "success-green": "#6EE787", "danger-red": "#FF7B72",
   "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)"
@@ -121,7 +121,7 @@ colors: {
 | 위치 | 내용 |
 |---|---|
 | `assets/` (루트) | `profile.jpg`, `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png` |
-| `assets/css/` | `portfolio-dark.css` (다크 공용), `site.css` (light 공용), `print-docs.css`, `print-dark.css` |
+| `assets/css/` | `portfolio-dark.css` (다크 공용), `site.css` (redirect stub 전용 잔존), `print-docs.css`, `print-dark.css` |
 | `assets/js/` | `site.js` (모바일 메뉴 + 가로 스크롤 드래그) |
 | `assets/images/` | 케이스 스크린샷 약 60개 — `deskrelay-*`, `remote-for-claude-*`, `ops-cure-discord-*`, `orchestration-v1-loop.png`, `genworld-*` (`genworld-skills.png` 포함 — genworld-ollama 케이스에서 사용 중), `ik_*`, `vr_robot_expo*`, `vr_construction_*` / `vr_lcm_*` / `vr_lghaus_*`, `watchbim_*`, `neostalgia_*`, `v2_*`, `customeditor.png` (DXCenter 케이스), `milk-and-cereal.png` |
 

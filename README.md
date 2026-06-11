@@ -28,8 +28,8 @@ GitHub Pages 배포: [https://darkhtk.github.io/portfolio/](https://darkhtk.gith
 
 - [`index.html`](./index.html) — KO 홈 · [`en/`](./en/) — EN 홈
 - [`ai-systems/`](./ai-systems/) (KO) · [`en/ai-systems/`](./en/ai-systems/) (EN) — AI Systems 케이스 3종
-- [`projects/`](./projects/) — 산업 케이스 5종 (KO) + 프로젝트 아카이브 인덱스 · [`en/projects/`](./en/projects/) — 산업 케이스 (EN, 인덱스는 루트 `projects/` 로 redirect)
-- [`about/`](./about/) — EN 프로필 · [`ko/about/`](./ko/about/) — KO 프로필
+- [`projects/`](./projects/) — 산업 케이스 5종 + 아카이브 인덱스 (KO) · [`en/projects/`](./en/projects/) — 산업 케이스 5종 + 아카이브 인덱스 (EN)
+- [`about/`](./about/) — KO 프로필 · [`en/about/`](./en/about/) — EN 프로필
 - [`resume/`](./resume/) · [`ko/resume/`](./ko/resume/) · [`cover-letter/`](./cover-letter/) — 이력서·커버레터 redirect
 - [`print/portfolio/`](./print/portfolio/) · [`print/ko-portfolio/`](./print/ko-portfolio/) · [`print/resume/`](./print/resume/) — A4 인쇄용
 

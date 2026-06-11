@@ -25,7 +25,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
   tailwind.config = { darkMode: "class", theme: { extend: {
-    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
     fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
     borderRadius: { DEFAULT: "0.5rem" }
   } } }
@@ -107,7 +107,7 @@
     <section id="features" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
       <div class="chapter-rule mb-14">
         <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ FEATURES ]</span>
-        <span class="kicker text-text-secondary">4 SUBSYSTEMS</span>
+        <span class="kicker text-text-secondary">5 SUBSYSTEMS</span>
         <span class="line"></span>
       </div>
       <div class="grid gap-6 md:grid-cols-2">
@@ -130,6 +130,10 @@
           <div class="card-bar"><span>SUB_04</span><span class="text-text-muted">VERTICAL GRAPH</span></div>
           <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../assets/images/watchbim_verticalgraph.png" alt="vertical graph"/></div>
           <div class="p-5"><div class="kicker kicker-cyan mb-2">// 04 · graph</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">수직 그래프 분석</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">고도·구조 분포를 수직 그래프로 분석. 운영자가 한눈에 패턴을 잡을 수 있는 형태.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SUB_05</span><span class="text-text-muted">CAMERA SYSTEM</span></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 05 · camera</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">커스텀 카메라 시스템</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">BIM 모델 탐색을 위한 마우스 기반 시점 제어. HMMouseController 컴포넌트로 직접 구현.</p><div class="mt-3 font-mono text-[11px] text-text-muted">component: <span class="text-accent-cyan">HMMouseController</span></div></div>
         </article>
       </div>
     </section>
