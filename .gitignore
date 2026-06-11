@@ -22,5 +22,12 @@ playwright-report/
 # Local-only notes
 local/
 
-# Personal PDFs (kept locally, not for site)
+# Personal documents (kept locally, never publish)
 resume_saramin.pdf
+___.pdf
+portfolio_0521.pdf
+resume_0521.pdf
+resume_0521_.pdf
+한국항공대학교_성적증명서제출용.pdf
+홍대기_이력카드.docx
+*.docx
