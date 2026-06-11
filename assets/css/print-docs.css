@@ -13,7 +13,7 @@
 
 @page {
   size: A4;
-  margin: 0;
+  margin: 12mm 0;
 }
 
 html,
@@ -164,7 +164,7 @@ img {
 .display-name {
   margin: 0;
   font-family: "Space Grotesk", "Noto Sans KR", sans-serif;
-  font-size: 36px;
+  font-size: 35px;
   line-height: 0.98;
   letter-spacing: -0.06em;
 }

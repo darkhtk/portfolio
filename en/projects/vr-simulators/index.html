@@ -1,57 +1,248 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>VR Simulator Collection | Daeki Hong</title>
-<meta name="description" content="English overview of legacy VR simulators across naval, construction, and factory safety training contexts."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VR Safety Simulators · Case Study | Daeki Hong</title>
+<meta name="description" content="A suite of VR training simulators for naval, construction, and factory safety education. Delivered to Samsung, LG, and POSCO safety experience centers — dual-axis scaffold rig designed in-house."/>
+<meta property="og:title" content="VR Safety Simulators · Case Study"/>
+<meta property="og:description" content="A suite of VR training simulators for naval, construction, and factory safety education. Delivered to Samsung, LG, and POSCO safety experience centers — dual-axis scaffold rig designed in-house."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/vr_lghaus_safety.png"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/en/projects/vr-simulators/"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="VR Safety Simulators · Case Study"/>
+<meta name="twitter:description" content="A suite of VR training simulators for naval, construction, and factory safety education. Delivered to Samsung, LG, and POSCO safety experience centers — dual-axis scaffold rig designed in-house."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/vr_lghaus_safety.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">tailwind.config={theme:{extend:{fontFamily:{headline:["Space Grotesk","Noto Sans KR","sans-serif"],body:["Noto Sans KR","sans-serif"],label:["Space Grotesk","Noto Sans KR","sans-serif"]}}}}</script>
-<link rel="stylesheet" href="../../../assets/css/site.css"/>
+<script id="tailwind-config">
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] }
+  } } }
+</script>
+<link rel="stylesheet" href="../../../assets/css/portfolio-dark.css"/>
 </head>
-<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
-<div class="site-shell">
-  <main class="mx-auto max-w-7xl px-4 pb-16 pt-24 sm:px-6 lg:px-8 lg:pt-32">
-    <div class="surface-panel p-6 sm:p-8 lg:p-10">
-      <div class="section-kicker">Safety XR / Training Simulators</div>
-      <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">VR Simulator Collection</h1>
-      <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">A grouped view of earlier VR simulator work across naval, construction, and factory safety contexts. These projects matter because they built the field-delivery habits behind the later industrial XR work.</p>
-    </div>
+<body class="font-body antialiased">
+<div class="relative">
 
-    <div class="mt-10 grid gap-6 xl:grid-cols-3">
-      <article class="project-card bg-white p-4 sm:p-5">
-        <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/2B9dkIrQQGA" title="Landing ship VR" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-        <h2 class="page-card-title mt-5 font-headline font-bold tracking-[-0.04em] text-[#122033]">Landing Ship VR</h2>
-        <p class="mt-3 text-sm leading-7 text-[#4f6077]">A simulator delivered in a defense-related context, showing early work in immersive training flow and hardware-linked setup.</p>
-        <a href="https://www.youtube.com/watch?v=2B9dkIrQQGA" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Open on YouTube<span class="material-symbols-outlined text-base">north_east</span></a>
-      </article>
-      <article class="project-card bg-white p-4 sm:p-5">
-        <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/wXEKO1hqaUQ" title="Construction site VR 4D" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-        <h2 class="page-card-title mt-5 font-headline font-bold tracking-[-0.04em] text-[#122033]">Construction Site VR 4D</h2>
-        <p class="mt-3 text-sm leading-7 text-[#4f6077]">A safety-training simulator tied closely to real site conditions, repeated assembly, and operator education flow.</p>
-        <a href="https://www.youtube.com/watch?v=wXEKO1hqaUQ" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Open on YouTube<span class="material-symbols-outlined text-base">north_east</span></a>
-      </article>
-      <article class="project-card bg-white p-4 sm:p-5">
-        <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/mvcWCmhqc4Q" title="LG Hausys VR 4D" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-        <h2 class="page-card-title mt-5 font-headline font-bold tracking-[-0.04em] text-[#122033]">LG Hausys Factory VR 4D</h2>
-        <p class="mt-3 text-sm leading-7 text-[#4f6077]">Factory safety and process education work that pushed the simulator pipeline into more practical industrial delivery conditions.</p>
-        <a href="https://www.youtube.com/watch?v=mvcWCmhqc4Q" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Open on YouTube<span class="material-symbols-outlined text-base">north_east</span></a>
-      </article>
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../../ai-systems/deskrelay/" class="nav-link">deskrelay</a>
+        <a href="../../ai-systems/" class="nav-link">ai</a>
+        <a href="../../projects/" class="nav-link is-active">industrial</a>
+        <a href="../../about/" class="nav-link">profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <a href="../../../projects/vr-simulators/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
+          <a href="./" class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</a>
+        </div>
+        <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
+      </div>
     </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">→</span></a>
+        <a href="../../ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span aria-hidden="true">→</span></a>
+        <a href="../../ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">→</span></a>
+        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span aria-hidden="true">→</span></a>
+        <a href="../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <a href="../../../projects/vr-simulators/" class="px-3 py-2 text-text-secondary border border-hairline">KO</a>
+        <a href="./" class="px-3 py-2 text-bg-primary bg-accent-cyan">EN</a>
+      </div>
+    </div>
+  </header>
 
-    <div class="mt-14 detail-grid">
-      <div class="detail-note"><strong>Field delivery:</strong> this is where repeated exhibition setup, teardown, hardware handling, and field communication became part of how I approach XR delivery.</div>
-      <div class="detail-note"><strong>Roles:</strong> safety XR, industrial training simulators, and field-delivered immersive systems.</div>
-      <div class="detail-note"><strong>Korean version:</strong> <a href="../../../projects/vr-simulators/" class="text-[#1a57c7]">open the original Korean case study</a>.</div>
-    </div>
+  <main class="relative pt-16">
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// industrial · safety · simulation</div>
+          <h1 class="display-hero text-text-primary kr-balance">VR Safety Simulators.</h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">naval · construction · factory · multi-unit</p>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
+            A suite of training simulators built for naval, construction, and factory safety education. <strong class="text-text-primary font-semibold">Delivered to Samsung · LG · POSCO safety experience centers</strong>. Four cycles of simulator install, operation, and teardown — made possible by designing the dual-axis scaffold rig in-house.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#sims" class="btn-cyan">Simulator line <span aria-hidden="true">↓</span></a>
+            <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>samsung · lg · posco</span>
+            <span class="dot"></span><span>4 delivery cycles</span>
+            <span class="dot"></span><span>dual-axis scaffold</span>
+            <span class="dot"></span><span>safety training</span>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>SCENE</span><span class="text-text-muted">SAFETY</span></div>
+            <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../../assets/images/vr_lghaus_safety.png" alt="VR safety"/></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sims" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ LINEUP ]</span>
+        <span class="kicker text-text-secondary">SIMULATOR LINE</span>
+        <span class="line"></span>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SIM_01</span><span class="text-text-muted">LG HAUSYS · SAFETY</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/vr_lghaus_safety.png" alt="LG Hausys safety"/></div>
+          <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">LG Hausys Safety Experience</h3><p class="text-[13px] text-text-secondary leading-relaxed">Training simulator for electrical and gas accident scenarios.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SIM_02</span><span class="text-text-muted">LG HAUSYS · ACCIDENT</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/vr_lghaus_accident.png" alt="LG Hausys accident"/></div>
+          <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">LG Hausys Accident Response</h3><p class="text-[13px] text-text-secondary leading-relaxed">Training for response procedures right after an accident.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SIM_03</span><span class="text-text-muted">LG HAUSYS · MAINTENANCE</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/vr_lghaus_maintenance.png" alt="LG Hausys maintenance"/></div>
+          <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">Equipment Maintenance</h3><p class="text-[13px] text-text-secondary leading-relaxed">Simulation of scheduled maintenance procedures.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SIM_04</span><span class="text-text-muted">LG HAUSYS · PRINTER</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/vr_lghaus_printer.png" alt="LG Hausys printer"/></div>
+          <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">Equipment Operation</h3><p class="text-[13px] text-text-secondary leading-relaxed">Training on the operation interface of large-scale equipment.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SIM_05</span><span class="text-text-muted">CONSTRUCTION · SCAFFOLD</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/vr_construction_scaffold.png" alt="construction scaffold"/></div>
+          <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">Scaffold Work Safety</h3><p class="text-[13px] text-text-secondary leading-relaxed">Construction scaffold work training. Dual-axis scaffold rig hardware designed in-house.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SIM_06</span><span class="text-text-muted">CONSTRUCTION · FALL</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/vr_construction_falling.png" alt="construction fall"/></div>
+          <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">Fall Accident Scenario</h3><p class="text-[13px] text-text-secondary leading-relaxed">Fall-risk awareness training for work at height.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SIM_07</span><span class="text-text-muted">CONSTRUCTION · STANDBY</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/vr_construction_standby.png" alt="construction standby"/></div>
+          <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">Standby Scenario</h3><p class="text-[13px] text-text-secondary leading-relaxed">Safety training for work standby and movement paths.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SIM_08</span><span class="text-text-muted">LCM · COCKPIT</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/vr_lcm_cockpit.png" alt="LCM cockpit"/></div>
+          <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">LCM Cockpit</h3><p class="text-[13px] text-text-secondary leading-relaxed">Naval cockpit simulator. Owned hardware-to-Unity input sync and operator safety logic.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SIM_09</span><span class="text-text-muted">LCM · STEERING</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/vr_lcm_steering.png" alt="LCM steering"/></div>
+          <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">LCM Steering</h3><p class="text-[13px] text-text-secondary leading-relaxed">Steering interface training.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ MEDIA ]</span>
+        <span class="kicker text-accent-cyan">PUBLIC VIDEOS</span>
+        <span class="line"></span>
+      </div>
+      <div class="grid gap-8 lg:grid-cols-2">
+        <article class="card ticks p-4 sm:p-5"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>VIDEO_01</span><span class="text-text-muted">LCM</span></div>
+          <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/2B9dkIrQQGA" title="Landing ship VR simulator video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <h3 class="mt-4 font-display font-bold text-lg text-text-primary">Landing Ship VR</h3>
+        </article>
+        <article class="card ticks p-4 sm:p-5"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>VIDEO_02</span><span class="text-text-muted">CONSTRUCTION 4D</span></div>
+          <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/wXEKO1hqaUQ" title="Construction site VR 4D video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <h3 class="mt-4 font-display font-bold text-lg text-text-primary">Construction Site VR 4D</h3>
+        </article>
+        <article class="card ticks p-4 sm:p-5 lg:col-span-2"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>VIDEO_03</span><span class="text-text-muted">LG HAUSYS</span></div>
+          <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/mvcWCmhqc4Q" title="LG Hausys factory VR 4D video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <h3 class="mt-4 font-display font-bold text-lg text-text-primary">LG Hausys Factory VR 4D</h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14">
+          <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ DELIVERY ]</span>
+          <span class="kicker text-text-secondary">DUAL-AXIS SCAFFOLD HARDWARE</span>
+          <span class="line"></span>
+        </div>
+        <div class="card ticks p-6 sm:p-10">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="grid gap-8 lg:grid-cols-12">
+            <div class="lg:col-span-5">
+              <div class="kicker kicker-cyan mb-4">// hardware</div>
+              <h2 class="display-section text-text-primary kr-balance">Where software alone<br/>can't deliver the training.</h2>
+            </div>
+            <div class="lg:col-span-7 space-y-4 text-text-secondary text-[14px] leading-[1.85] kr-balance">
+              <p>Shaking a scaffold inside VR and making fall risk register required a platform that actually moves. The dual-axis scaffold rig is hardware we designed and built in-house to meet that requirement.</p>
+              <p>It then shipped alongside the simulators to Samsung, LG, and POSCO safety experience centers. The delivery-unit way of working — owning software, hardware, and operations as one package — was established here.</p>
+              <div class="grid sm:grid-cols-3 gap-px bg-hairline border border-hairline mt-6 font-mono text-[11px] uppercase tracking-widest">
+                <div class="bg-bg-primary p-4"><div class="text-text-muted">delivery cycles</div><div class="text-accent-cyan mt-1">4 rounds</div></div>
+                <div class="bg-bg-primary p-4"><div class="text-text-muted">clients</div><div class="text-accent-amber mt-1">samsung · lg · posco</div></div>
+                <div class="bg-bg-primary p-4"><div class="text-text-muted">hardware</div><div class="text-success-green mt-1">dual-axis scaffold</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary kr-balance">Related work.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="../vr-robot/" class="btn-ghost">VR Robot <span aria-hidden="true">↗</span></a>
+          <a href="../dxcenter/" class="btn-ghost">DX Center <span aria-hidden="true">↗</span></a>
+          <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../../" class="hover:text-accent-cyan">home</a>
+        <a href="../../ai-systems/deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
+        <a href="../../ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="../../projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../../projects/vr-simulators/" class="hover:text-accent-cyan">ko</a>
+      </div>
+      <div class="text-text-muted">vr safety simulators · samsung · lg · posco · © 2026</div>
+    </div>
+  </footer>
+
 </div>
 <script src="../../../assets/js/site.js"></script>
 </body>

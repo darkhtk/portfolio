@@ -15,6 +15,9 @@
 <meta name="twitter:title" content="홍대기 | Industrial Unity × AI Systems"/>
 <meta name="twitter:description" content="10년 산업 Unity → AI 시스템 케이스 시리즈 — Ops-Cure · GenWorld · DeskRelay."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
+<link rel="canonical" href="https://darkhtk.github.io/portfolio/"/>
+<link rel="alternate" hreflang="ko" href="https://darkhtk.github.io/portfolio/"/>
+<link rel="alternate" hreflang="en" href="https://darkhtk.github.io/portfolio/en/"/>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
@@ -34,7 +37,7 @@
           "bg-grid": "#0E141B",
           "text-primary": "#E6EDF3",
           "text-secondary": "#8A94A6",
-          "text-muted": "#5B6573",
+          "text-muted": "#76818F",
           "accent-cyan": "#6FE3FF",
           "accent-amber": "#F5C26B",
           "success-green": "#6EE787",
@@ -116,32 +119,30 @@
   .term-dot.r { background: #FF7B72; }
   .term-dot.y { background: #F5C26B; }
   .term-dot.g { background: #6EE787; }
-  .term-title { margin-left: auto; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #5B6573; }
+  .term-title { margin-left: auto; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #76818F; }
 
   /* chip / pill */
   .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #E6EDF3; border: 1px solid rgba(230,237,243,0.16); background: rgba(17, 22, 29, 0.6); border-radius: 2px; }
-  .chip-cyan { color: #6FE3FF; border-color: rgba(111,227,255,0.32); background: rgba(111,227,255,0.06); }
   .chip-amber { color: #F5C26B; border-color: rgba(245,194,107,0.32); background: rgba(245,194,107,0.06); }
 
   /* mono kicker / label */
-  .kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6573; }
+  .kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #76818F; }
   .kicker-cyan { color: #6FE3FF; }
-  .kicker-amber { color: #F5C26B; }
 
   /* chapter rule */
   .chapter-rule { display: flex; align-items: center; gap: 16px; }
   .chapter-rule .tag { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; padding: 6px 12px; border: 1px solid; }
   .chapter-rule .line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(230,237,243,0.24), rgba(230,237,243,0.04)); }
-  .chapter-rule .tail { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6573; }
+  .chapter-rule .tail { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #76818F; }
 
   /* card hover border */
   .card { border: 1px solid rgba(230,237,243,0.08); background: #11161D; transition: border-color 200ms ease, transform 200ms ease; }
   .card:hover { border-color: rgba(111,227,255,0.32); }
   .card-amber:hover { border-color: rgba(245,194,107,0.32); }
 
-  /* display headlines */
-  .display-hero { font-family: "Space Grotesk", "Noto Sans KR", sans-serif; font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
-  .display-section { font-family: "Space Grotesk", "Noto Sans KR", sans-serif; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+  /* display headlines — font-size cap: Hero 35px / Section 28px 상한 */
+  .display-hero { font-family: "Space Grotesk", "Noto Sans KR", sans-serif; font-weight: 700; letter-spacing: -0.03em; font-size: clamp(1.5rem, 3vw + 0.5rem, 2.1875rem); line-height: 1.15; }   /* 24 → 35 */
+  .display-section { font-family: "Space Grotesk", "Noto Sans KR", sans-serif; font-weight: 700; letter-spacing: -0.03em; font-size: clamp(1.25rem, 2vw + 0.4rem, 1.75rem); line-height: 1.2; }  /* 20 → 28 */
 
   /* KR body wrap */
   .kr-balance { text-wrap: pretty; word-break: keep-all; overflow-wrap: normal; }
@@ -162,7 +163,7 @@
   .ticker .dot { width: 4px; height: 4px; background: #6FE3FF; border-radius: 999px; }
 
   /* card window title bar */
-  .card-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 14px; height: 28px; border-bottom: 1px solid rgba(230,237,243,0.08); background: rgba(17, 22, 29, 0.9); font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6573; }
+  .card-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 14px; height: 28px; border-bottom: 1px solid rgba(230,237,243,0.08); background: rgba(17, 22, 29, 0.9); font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #76818F; }
 
   /* media frame with corner tick highlight */
   .media-frame { position: relative; overflow: hidden; background: #0B0F14; }
@@ -170,28 +171,6 @@
   .group:hover .media-frame img { transform: scale(1.03); filter: grayscale(0) contrast(1.1); }
   .media-frame.frame-contain { background: #07090C; }
   .media-frame.frame-contain img { object-fit: contain; padding: 12px; filter: none; }
-
-  /* DeskRelay screenshot scroller */
-  .h-scroll {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    padding-bottom: 12px;
-    scroll-behavior: auto;
-    scroll-snap-type: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .h-scroll::-webkit-scrollbar { height: 8px; }
-  .h-scroll::-webkit-scrollbar-track { background: rgba(230,237,243,0.04); }
-  .h-scroll::-webkit-scrollbar-thumb { background: rgba(111,227,255,0.24); }
-  .h-scroll > * { scroll-snap-align: none; flex: 0 0 auto; }
-
-  /* checklist item */
-  .check { display: flex; align-items: baseline; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 13px; letter-spacing: 0.04em; }
-  .check .mark { color: #6FE3FF; }
-  .check .label { color: #E6EDF3; }
-  .check .desc { color: #8A94A6; }
 
   /* sticky nav blur */
   .sticky-nav { backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); background: rgba(11,15,20,0.72); border-bottom: 1px solid rgba(230,237,243,0.08); }
@@ -204,16 +183,6 @@
 
   /* focus rings */
   :focus-visible { outline: 2px solid #6FE3FF; outline-offset: 2px; }
-
-  /* font-size cap — 35px 상한, 위계는 Hero > Section > DeskRelay positioning */
-  .display-hero { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.1875rem); line-height: 1.15; }   /* 24 → 35 */
-  .display-section { font-size: clamp(1.25rem, 2vw + 0.4rem, 1.75rem); line-height: 1.2; }  /* 20 → 28 */
-
-  /* utility — vertical hairline on left */
-  .v-rail { border-left: 1px solid rgba(230,237,243,0.08); }
-
-  /* deskrelay glow */
-  .glow-cyan { box-shadow: 0 60px 180px -40px rgba(111,227,255,0.18), inset 0 0 0 1px rgba(111,227,255,0.10); }
 </style>
 </head>
 <body class="font-body antialiased">
@@ -240,7 +209,7 @@
           [ AI Systems <span aria-hidden="true">↗</span> ]
         </a>
         <button data-mobile-menu-toggle aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan">
-          <span class="material-symbols-outlined">menu</span>
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
         </button>
       </div>
     </div>
@@ -253,7 +222,7 @@
           <div class="mt-3 font-mono text-xl text-accent-cyan">daeki.hong<span class="caret"></span></div>
         </div>
         <button data-mobile-menu-close aria-label="메뉴 닫기" class="p-2 border border-hairline-strong text-accent-cyan">
-          <span class="material-symbols-outlined">close</span>
+          <span class="material-symbols-outlined" aria-hidden="true">close</span>
         </button>
       </div>
       <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
@@ -474,7 +443,7 @@
       <div class="grid gap-10 lg:grid-cols-12 mb-14">
         <div class="lg:col-span-5">
           <div class="kicker mb-4">// ai &middot; experiments</div>
-          <h2 class="display-section text-text-primary kr-balance">AI 한 번 빠지자,<br/>멈출 수 없었습니다.</h2>
+          <h2 class="display-section text-text-primary kr-balance">AI에 한 번 빠지자,<br/>멈출 수 없었습니다.</h2>
         </div>
         <div class="lg:col-span-7 lg:pt-2">
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl">
@@ -586,10 +555,10 @@
           <div class="kicker mb-4">// profile</div>
           <h2 class="display-section text-text-primary kr-balance mb-5">현장에 납품하던 손으로<br/>AI 도구를 만듭니다.</h2>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl">
-            Unity 10년차. XR·BIM·로보틱스·전시 시스템을 현장 납품 단위로 책임져 왔으며, 지금은 AI 시스템과 개발자 도구를 직접 빌드하는 데 몰두하고 있습니다. AI 직군 채용을 찾고 있습니다.
+            Unity 10년차. XR·BIM·로보틱스·전시 시스템을 현장 납품 단위로 책임져 왔으며, 지금은 AI 시스템과 개발자 도구를 직접 빌드하는 데 몰두하고 있습니다. AI 직군 포지션을 찾고 있습니다.
           </p>
           <div class="mt-7 flex flex-wrap gap-3">
-            <a href="ko/about/" class="btn-ghost">전체 프로필 <span aria-hidden="true">→</span></a>
+            <a href="about/" class="btn-ghost">전체 프로필 <span aria-hidden="true">→</span></a>
             <a href="mailto:darkhtk@gmail.com" class="btn-ghost">연락 <span aria-hidden="true">↗</span></a>
           </div>
         </div>

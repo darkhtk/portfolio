@@ -6,9 +6,15 @@
 <title>WatchBIM · 케이스 스터디 | 홍대기</title>
 <meta name="description" content="대용량 BIM 상호작용, 단면 생성, 2D 분석 뷰어, 커스텀 카메라 시스템을 직접 구현한 Unity BIM 런타임 사례."/>
 <meta property="og:title" content="WatchBIM · BIM Runtime"/>
+<meta property="og:description" content="대용량 BIM 상호작용, 단면 생성, 2D 분석 뷰어, 커스텀 카메라 시스템을 직접 구현한 Unity BIM 런타임 사례."/>
+<meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/watchbim_generated_crosssection.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/watchbim/"/>
 <meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="WatchBIM · BIM Runtime"/>
+<meta name="twitter:description" content="대용량 BIM 상호작용, 단면 생성, 2D 분석 뷰어, 커스텀 카메라 시스템을 직접 구현한 Unity BIM 런타임 사례."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/watchbim_generated_crosssection.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
@@ -19,7 +25,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
   tailwind.config = { darkMode: "class", theme: { extend: {
-    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
     fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
     borderRadius: { DEFAULT: "0.5rem" }
   } } }
@@ -47,7 +53,7 @@
         <button data-mobile-menu-toggle aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden">
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
       <div class="flex items-start justify-between pb-4 border-b border-hairline">
         <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
         <button data-mobile-menu-close aria-label="메뉴 닫기" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
@@ -58,6 +64,10 @@
         <a href="../../#ch02" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span>→</span></a>
         <a href="../../#ch01" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span>→</span></a>
         <a href="../../#profile" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
+      </div>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <span class="px-3 py-2 text-bg-primary bg-accent-cyan">KO</span>
+        <a href="../../en/projects/watchbim/" class="px-3 py-2 text-text-secondary border border-hairline">EN</a>
       </div>
     </div>
   </header>
@@ -97,7 +107,7 @@
     <section id="features" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
       <div class="chapter-rule mb-14">
         <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ FEATURES ]</span>
-        <span class="kicker text-text-secondary">4 SUBSYSTEMS</span>
+        <span class="kicker text-text-secondary">5 SUBSYSTEMS</span>
         <span class="line"></span>
       </div>
       <div class="grid gap-6 md:grid-cols-2">
@@ -120,6 +130,10 @@
           <div class="card-bar"><span>SUB_04</span><span class="text-text-muted">VERTICAL GRAPH</span></div>
           <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../assets/images/watchbim_verticalgraph.png" alt="vertical graph"/></div>
           <div class="p-5"><div class="kicker kicker-cyan mb-2">// 04 · graph</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">수직 그래프 분석</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">고도·구조 분포를 수직 그래프로 분석. 운영자가 한눈에 패턴을 잡을 수 있는 형태.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SUB_05</span><span class="text-text-muted">CAMERA SYSTEM</span></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 05 · camera</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">커스텀 카메라 시스템</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">BIM 모델 탐색을 위한 마우스 기반 시점 제어. HMMouseController 컴포넌트로 직접 구현.</p><div class="mt-3 font-mono text-[11px] text-text-muted">component: <span class="text-accent-cyan">HMMouseController</span></div></div>
         </article>
       </div>
     </section>

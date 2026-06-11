@@ -8,13 +8,13 @@
 <meta property="og:title" content="DeskRelay · Case Study | Daeki Hong"/>
 <meta property="og:description" content="Server PC + registered PCs + connector daemon + LAN/Tailscale — self-host AI developer tool case study."/>
 <meta property="og:type" content="article"/>
-<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-connection-status.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/deskrelay/"/>
 <meta property="og:locale" content="en_US"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="DeskRelay · Case Study"/>
 <meta name="twitter:description" content="Remote your local Claude Code sessions from browser and mobile, safely. Codex adapter is in prototype, shipping soon."/>
-<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-connection-status.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
@@ -26,7 +26,7 @@
 <script id="tailwind-config">
   tailwind.config = { darkMode: "class", theme: { extend: {
     colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
-      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573",
+      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F",
       "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787",
       "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
     fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
@@ -49,7 +49,7 @@
         <a href="./" class="nav-link is-active">deskrelay</a>
         <a href="../" class="nav-link">ai</a>
         <a href="../../projects/" class="nav-link">industrial</a>
-        <a href="../../../about/" class="nav-link">profile</a>
+        <a href="../../about/" class="nav-link">profile</a>
       </nav>
       <div class="flex items-center gap-3">
         <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
@@ -80,7 +80,7 @@
         <a href="./" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">deskrelay <span aria-hidden="true">→</span></a>
         <a href="../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">→</span></a>
         <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span aria-hidden="true">→</span></a>
-        <a href="../../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
+        <a href="../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
       </div>
       <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
         <a href="../../../ai-systems/deskrelay/" class="px-3 py-2 text-text-secondary border border-hairline">KO</a>
@@ -105,11 +105,11 @@
 
           <img src="../../../assets/images/deskrelay-logo-lockup.png" alt="DeskRelay logo" class="h-12 sm:h-16 w-auto self-start max-w-full object-contain" loading="eager"/>
 
-          <p class="display-hero text-text-primary max-w-3xl">
+          <h1 class="display-hero text-text-primary max-w-3xl">
             Don't open the laptop —<br/>
             resume your local <span class="text-accent-cyan">Claude Code</span> sessions<br/>
             right where you left off.
-          </p>
+          </h1>
 
           <p class="font-body text-[15px] sm:text-base text-text-secondary leading-[1.85] max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
             DeskRelay is a <strong class="text-text-primary font-semibold">self-host developer tool</strong> that remotes Claude Code sessions running on your own PC to a browser or mobile, safely. A single server PC runs <code>site-frontend</code>, <code>site-backend</code>, and a local connector daemon. Other PCs in the same LAN or Tailscale tailnet register as devices.
@@ -626,7 +626,7 @@
         <a href="./" class="hover:text-accent-cyan">deskrelay</a>
         <a href="../" class="hover:text-accent-cyan">ai</a>
         <a href="../../projects/" class="hover:text-accent-cyan">industrial</a>
-        <a href="../../../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../about/" class="hover:text-accent-cyan">profile</a>
         <a href="../../../ai-systems/deskrelay/" class="hover:text-accent-cyan">ko</a>
       </div>
       <div class="text-text-muted">

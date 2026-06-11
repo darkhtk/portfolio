@@ -1,118 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DXCenter | Daeki Hong</title>
-<meta name="description" content="English case study for DXCenter: nine EditorWindow tools, authoring pipeline design, and operating structure for digital-twin style simulator workflows."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DX Center · Case Study | Daeki Hong</title>
+<meta name="description" content="Nine Unity EditorWindow tools built so non-developers can create and operate content directly. Data mapping, digital twin operations, and the exhibition pipeline unified."/>
+<meta property="og:title" content="DX Center · Case Study"/>
+<meta property="og:description" content="Nine Unity EditorWindow tools built so non-developers can create and operate content directly. Data mapping, digital twin operations, and the exhibition pipeline unified."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/customeditor.png"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/en/projects/dxcenter/"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="DX Center · Case Study"/>
+<meta name="twitter:description" content="Nine Unity EditorWindow tools built so non-developers can create and operate content directly. Data mapping, digital twin operations, and the exhibition pipeline unified."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/customeditor.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
-  tailwind.config = { theme: { extend: { fontFamily: { headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], label: ["Space Grotesk", "Noto Sans KR", "sans-serif"] } } } }
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] }
+  } } }
 </script>
-<link rel="stylesheet" href="../../../assets/css/site.css"/>
+<link rel="stylesheet" href="../../../assets/css/portfolio-dark.css"/>
 </head>
-<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
-<div class="site-shell">
-  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <a href="../../../" class="flex flex-col">
-        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
-      </a>
-      <nav class="hidden items-center gap-2 md:flex">
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../">Home</a>
-        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../../projects/">Projects</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../ai-systems/">AI Systems</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../about/">Profile</a>
+<body class="font-body antialiased">
+<div class="relative">
+
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../../ai-systems/deskrelay/" class="nav-link">deskrelay</a>
+        <a href="../../ai-systems/" class="nav-link">ai</a>
+        <a href="../../projects/" class="nav-link is-active">industrial</a>
+        <a href="../../about/" class="nav-link">profile</a>
       </nav>
       <div class="flex items-center gap-3">
-        <div class="lang-toggle hidden sm:inline-flex">
-          <a class="lang-link is-active" href="./">EN</a>
-          <a class="lang-link" href="../../../projects/dxcenter/">KO</a>
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <a href="../../../projects/dxcenter/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</span>
         </div>
-        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+        <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
-      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
-        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
-        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="Close menu"><span class="material-symbols-outlined">close</span></button>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
       </div>
-      <div class="mt-6 grid gap-3">
-        <a href="../../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">Overview and positioning.</div></a>
-        <a href="../../../projects/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">Projects</div><div class="mt-1 text-sm text-[#526178]">Industrial delivery work.</div></a>
-        <a href="../../ai-systems/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">AI Systems</div><div class="mt-1 text-sm text-[#526178]">Kernel, behaviors, applied R&amp;D.</div></a>
-        <a href="../../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">Working style and background.</div></a>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">→</span></a>
+        <a href="../../ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span aria-hidden="true">→</span></a>
+        <a href="../../ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">→</span></a>
+        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span aria-hidden="true">→</span></a>
+        <a href="../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
       </div>
-      <div class="mt-6 flex gap-3">
-        <a href="./" class="lang-link is-active bg-white">EN</a>
-        <a href="../../../projects/dxcenter/" class="lang-link bg-white">KO</a>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <a href="../../../projects/dxcenter/" class="px-3 py-2 text-text-secondary border border-hairline">KO</a>
+        <a href="./" class="px-3 py-2 text-bg-primary bg-accent-cyan">EN</a>
       </div>
     </div>
   </header>
 
-  <main class="relative">
-    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <div class="surface-panel p-6 sm:p-8 lg:p-10">
-          <div class="section-kicker">Simulation Tooling</div>
-          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">DXCenter</h1>
-          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">A Unity authoring environment for digital-twin style workflows, built around nine EditorWindow tools and an operating structure that reduced repeated manual setup for non-developer teams.</p>
-          <div class="mt-7 flex flex-wrap gap-2.5">
-            <span class="pill text-sm">Unity 6 LTS</span>
-            <span class="pill text-sm">EditorWindow</span>
-            <span class="pill text-sm">UI Toolkit</span>
-            <span class="pill text-sm">Authoring Flow</span>
+  <main class="relative pt-16">
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// industrial · tooling · pipeline</div>
+          <h1 class="display-hero text-text-primary kr-balance">DX Center.</h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">9 editor windows · data mapping · digital twin</p>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
+            Nine Unity EditorWindow tools built so non-developers — content creators and operators — can create and run the product themselves. Data mapping, digital twin operations, and the exhibition content lineup are unified into one pipeline. <strong class="text-text-primary font-semibold">Keeping the team from re-solving the same problem by hand</strong> is the core value of the tooling.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#tools" class="btn-cyan">9 tools <span aria-hidden="true">↓</span></a>
+            <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>unity editor</span>
+            <span class="dot"></span><span>9 editor windows</span>
+            <span class="dot"></span><span>data mapping</span>
+            <span class="dot"></span><span>digital twin ops</span>
           </div>
         </div>
-        <aside class="feature-panel p-5 sm:p-6">
-          <div class="section-kicker">Repository Signal</div>
-          <p class="mt-5 text-sm leading-7 text-[#4f6077]">The project includes 23 editor-side C# files and 20 runtime-side files tied together by shared data and operating conventions.</p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div class="summary-grid">
-        <article class="summary-card"><h3>Role</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Designed the authoring structure, implemented the tool windows, and tied data mapping and runtime behavior into one editable workflow.</p></article>
-        <article class="summary-card"><h3>Problem</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Teams were paying repeated cost whenever content structure, mapping, and validation had to be rebuilt manually.</p></article>
-        <article class="summary-card"><h3>Outcome</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Created an editor environment with consistent windows, reusable mapping rules, and a runtime path that non-developer teams could actually use.</p></article>
-        <article class="summary-card"><h3>Why It Matters</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">This is strong proof of tooling ownership: not just runtime development, but reducing operational friction for the people who maintain the content.</p></article>
-      </div>
-    </section>
-
-    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]">
-        <div class="media-frame aspect-[16/10]">
-          <img src="../../../assets/images/customeditor.png" alt="DXCenter editor interface"/>
-        </div>
-        <div class="surface-panel p-6 sm:p-8">
-          <div class="section-kicker">Before / After</div>
-          <h2 class="page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Turning repeated setup into a stable operating flow</h2>
-          <div class="content-prose mt-5">
-            <p>The value of DXCenter is not just the number of windows. It is the fact that those windows formalize how data, endpoints, topics, and UI mapping move through the authoring flow.</p>
-            <p>The result is a system where repeated setup work becomes a tool-guided process instead of a fragile manual chain. That is the difference between a one-off editor and a real production tool.</p>
+        <div class="lg:col-span-5">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>EDITOR</span><span class="text-text-muted">CUSTOM WINDOW</span></div>
+            <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../../assets/images/customeditor.png" alt="Custom EditorWindow"/></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
-      <div class="detail-grid">
-        <div class="detail-note"><strong>Named tool surface:</strong> the editor stack is built around nine windows rather than a single overloaded inspector flow.</div>
-        <div class="detail-note"><strong>Mapping logic:</strong> DataMappingWindow is a good example of the project’s value because it turns protocol, endpoint, topic, and UI mapping into an explicit structure.</div>
-        <div class="detail-note"><strong>Operating safety:</strong> the tool is meaningful because it lowers the chance that content changes break the runtime in hidden ways.</div>
-        <div class="detail-note"><strong>Roles:</strong> simulation tooling, editor platform, digital twin, and authoring workflow.</div>
+    <section id="tools" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ TOOLS ]</span>
+        <span class="kicker text-text-secondary">9 EDITOR WINDOWS</span>
+        <span class="line"></span>
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-12 mb-10">
+        <div class="lg:col-span-5">
+          <div class="kicker mb-4">// design intent</div>
+          <h2 class="display-section text-text-primary kr-balance">Cutting repeated cost<br/>with tools.</h2>
+        </div>
+        <div class="lg:col-span-7 lg:pt-2">
+          <p class="text-text-secondary text-[15px] leading-[1.85] kr-balance max-w-2xl">The principle: content creators should be able to operate the product without touching code. Data mapping, asset registration, digital twin monitoring, content lineup management, operator alerts — nine EditorWindows cover the entire workflow.</p>
+        </div>
+      </div>
+
+      <div class="card ticks p-6 sm:p-8">
+        <span class="tr"></span><span class="bl"></span>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-hairline border border-hairline">
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// tool 01</div><div class="font-display font-bold text-text-primary">Data Mapper</div><div class="text-[12px] text-text-secondary mt-1.5 leading-relaxed">Maps external data → Unity objects.</div></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// tool 02</div><div class="font-display font-bold text-text-primary">Asset Registry</div><div class="text-[12px] text-text-secondary mt-1.5 leading-relaxed">Registers and validates content assets.</div></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// tool 03</div><div class="font-display font-bold text-text-primary">Twin Monitor</div><div class="text-[12px] text-text-secondary mt-1.5 leading-relaxed">Real-time digital twin status checks.</div></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// tool 04</div><div class="font-display font-bold text-text-primary">Content Lineup</div><div class="text-[12px] text-text-secondary mt-1.5 leading-relaxed">Edits and deploys the exhibition content lineup.</div></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// tool 05</div><div class="font-display font-bold text-text-primary">Scene Composer</div><div class="text-[12px] text-text-secondary mt-1.5 leading-relaxed">Scene composition done by non-developers, directly.</div></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// tool 06</div><div class="font-display font-bold text-text-primary">Event Recorder</div><div class="text-[12px] text-text-secondary mt-1.5 leading-relaxed">Records and replays operational events.</div></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// tool 07</div><div class="font-display font-bold text-text-primary">Operator Alerts</div><div class="text-[12px] text-text-secondary mt-1.5 leading-relaxed">On-site operator alerts and handoff.</div></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// tool 08</div><div class="font-display font-bold text-text-primary">Build Validator</div><div class="text-[12px] text-text-secondary mt-1.5 leading-relaxed">Automated pre-release validation.</div></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// tool 09</div><div class="font-display font-bold text-text-primary">Delivery Bundler</div><div class="text-[12px] text-text-secondary mt-1.5 leading-relaxed">Bundles on-site delivery packages.</div></div>
+        </div>
       </div>
     </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary kr-balance">Related work.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="../watchbim/" class="btn-ghost">WatchBIM <span aria-hidden="true">↗</span></a>
+          <a href="../vr-simulators/" class="btn-ghost">VR Simulators <span aria-hidden="true">↗</span></a>
+          <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../../" class="hover:text-accent-cyan">home</a>
+        <a href="../../ai-systems/deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
+        <a href="../../ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="../../projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../../projects/dxcenter/" class="hover:text-accent-cyan">ko</a>
+      </div>
+      <div class="text-text-muted">dx center · 9 editor windows · © 2026</div>
+    </div>
+  </footer>
+
 </div>
 <script src="../../../assets/js/site.js"></script>
 </body>

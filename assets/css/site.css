@@ -668,7 +668,7 @@ body.menu-open .sticky-nav {
   }
 
   .page-section-title {
-    font-size: 1.8rem;
+    font-size: 28px;
   }
 
   .page-block-title {
@@ -725,11 +725,11 @@ body.menu-open .sticky-nav {
 
   .page-hero-title {
     max-inline-size: 15ch;
-    font-size: 2.35rem;
+    font-size: 35px;
   }
 
   .page-section-title {
-    font-size: 2rem;
+    font-size: 28px;
   }
 
   .page-block-title {

@@ -4,11 +4,17 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>DX Center · 케이스 스터디 | 홍대기</title>
-<meta name="description" content="비개발자가 직접 제작·운영할 수 있도록 만든 9 개의 Unity EditorWindow 도구. 데이터 매핑·디지털 트윈·전시 운영 파이프라인 통합."/>
+<meta name="description" content="비개발자가 직접 제작·운영할 수 있도록 만든 9개의 Unity EditorWindow 도구. 데이터 매핑·디지털 트윈·전시 운영 파이프라인 통합."/>
 <meta property="og:title" content="DX Center · 케이스 스터디"/>
+<meta property="og:description" content="비개발자가 직접 제작·운영할 수 있도록 만든 9개의 Unity EditorWindow 도구. 데이터 매핑·디지털 트윈·전시 운영 파이프라인 통합."/>
+<meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/customeditor.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/dxcenter/"/>
 <meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="DX Center · 케이스 스터디"/>
+<meta name="twitter:description" content="비개발자가 직접 제작·운영할 수 있도록 만든 9개의 Unity EditorWindow 도구. 데이터 매핑·디지털 트윈·전시 운영 파이프라인 통합."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/customeditor.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
@@ -19,7 +25,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
   tailwind.config = { darkMode: "class", theme: { extend: {
-    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
     fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] }
   } } }
 </script>
@@ -46,7 +52,7 @@
         <button data-mobile-menu-toggle aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden">
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
       <div class="flex items-start justify-between pb-4 border-b border-hairline">
         <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
         <button data-mobile-menu-close aria-label="메뉴 닫기" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
@@ -57,6 +63,10 @@
         <a href="../../#ch02" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span>→</span></a>
         <a href="../../#ch01" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span>→</span></a>
         <a href="../../#profile" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
+      </div>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <span class="px-3 py-2 text-bg-primary bg-accent-cyan">KO</span>
+        <a href="../../en/projects/dxcenter/" class="px-3 py-2 text-text-secondary border border-hairline">EN</a>
       </div>
     </div>
   </header>
@@ -71,10 +81,10 @@
           <h1 class="display-hero text-text-primary kr-balance">DX Center.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">9 editor windows · data mapping · digital twin</p>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
-            비개발자(콘텐츠 제작자·운영자)가 직접 제작·운영할 수 있도록 만든 9 개의 Unity EditorWindow 도구. 데이터 매핑, 디지털 트윈 운영, 전시 콘텐츠 라인업을 한 파이프라인으로 통합. <strong class="text-text-primary font-semibold">팀이 같은 문제를 반복 수작업하지 않도록</strong> 만드는 것이 도구의 핵심 가치.
+            비개발자(콘텐츠 제작자·운영자)가 직접 제작·운영할 수 있도록 만든 9개의 Unity EditorWindow 도구. 데이터 매핑, 디지털 트윈 운영, 전시 콘텐츠 라인업을 한 파이프라인으로 통합. <strong class="text-text-primary font-semibold">팀이 같은 문제를 반복 수작업하지 않도록</strong> 만드는 것이 도구의 핵심 가치.
           </p>
           <div class="flex flex-wrap items-center gap-3">
-            <a href="#tools" class="btn-cyan">9 개 도구 <span>↓</span></a>
+            <a href="#tools" class="btn-cyan">9개 도구 <span>↓</span></a>
             <a href="../../#ch01" class="btn-ghost">Industrial <span>↗</span></a>
           </div>
           <div class="ticker mt-2">
@@ -106,7 +116,7 @@
           <h2 class="display-section text-text-primary kr-balance">반복 비용을<br/>도구로 줄입니다.</h2>
         </div>
         <div class="lg:col-span-7 lg:pt-2">
-          <p class="text-text-secondary text-[15px] leading-[1.85] kr-balance max-w-2xl">콘텐츠 제작자가 코드를 만지지 않고도 제품을 운영할 수 있어야 한다는 원칙. 데이터 매핑, 자산 등록, 디지털 트윈 모니터링, 콘텐츠 라인업 관리, 운영자 알림 — 9 개의 EditorWindow 로 워크플로 전체를 덮음.</p>
+          <p class="text-text-secondary text-[15px] leading-[1.85] kr-balance max-w-2xl">콘텐츠 제작자가 코드를 만지지 않고도 제품을 운영할 수 있어야 한다는 원칙. 데이터 매핑, 자산 등록, 디지털 트윈 모니터링, 콘텐츠 라인업 관리, 운영자 알림 — 9개의 EditorWindow로 워크플로 전체를 덮음.</p>
         </div>
       </div>
 

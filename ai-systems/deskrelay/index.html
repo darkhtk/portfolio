@@ -8,13 +8,13 @@
 <meta property="og:title" content="DeskRelay · 케이스 스터디 | 홍대기"/>
 <meta property="og:description" content="서버 PC + 등록 PC + connector daemon + LAN/Tailscale 흐름을 다룬 self-host AI 개발자 도구 케이스 스터디."/>
 <meta property="og:type" content="article"/>
-<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-connection-status.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/deskrelay/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="DeskRelay · 케이스 스터디"/>
 <meta name="twitter:description" content="로컬 Claude Code 세션을 모바일·웹에서 원격 조작하는 AI 개발자 도구. Codex 어댑터는 프로토타입 단계, 곧 통합 예정."/>
-<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-connection-status.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
@@ -34,7 +34,7 @@
           "bg-grid": "#0E141B",
           "text-primary": "#E6EDF3",
           "text-secondary": "#8A94A6",
-          "text-muted": "#5B6573",
+          "text-muted": "#76818F",
           "accent-cyan": "#6FE3FF",
           "accent-amber": "#F5C26B",
           "success-green": "#6EE787",
@@ -84,20 +84,20 @@
   .term-dot.r { background: #FF7B72; }
   .term-dot.y { background: #F5C26B; }
   .term-dot.g { background: #6EE787; }
-  .term-title { margin-left: auto; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #5B6573; }
+  .term-title { margin-left: auto; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #76818F; }
 
   .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #E6EDF3; border: 1px solid rgba(230,237,243,0.16); background: rgba(17, 22, 29, 0.6); border-radius: 2px; }
   .chip-cyan { color: #6FE3FF; border-color: rgba(111,227,255,0.32); background: rgba(111,227,255,0.06); }
   .chip-amber { color: #F5C26B; border-color: rgba(245,194,107,0.32); background: rgba(245,194,107,0.06); }
 
-  .kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6573; }
+  .kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #76818F; }
   .kicker-cyan { color: #6FE3FF; }
   .kicker-amber { color: #F5C26B; }
 
   .chapter-rule { display: flex; align-items: center; gap: 16px; }
   .chapter-rule .tag { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; padding: 6px 12px; border: 1px solid; }
   .chapter-rule .line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(230,237,243,0.24), rgba(230,237,243,0.04)); }
-  .chapter-rule .tail { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6573; }
+  .chapter-rule .tail { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #76818F; }
 
   .card { border: 1px solid rgba(230,237,243,0.08); background: #11161D; transition: border-color 200ms ease, transform 200ms ease; }
   .card:hover { border-color: rgba(111,227,255,0.32); }
@@ -123,7 +123,7 @@
   .ticker { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A94A6; padding-top: 14px; padding-bottom: 14px; border-top: 1px solid rgba(230,237,243,0.08); border-bottom: 1px solid rgba(230,237,243,0.08); }
   .ticker .dot { width: 4px; height: 4px; background: #6FE3FF; border-radius: 999px; }
 
-  .card-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 14px; height: 28px; border-bottom: 1px solid rgba(230,237,243,0.08); background: rgba(17, 22, 29, 0.9); font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6573; }
+  .card-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 14px; height: 28px; border-bottom: 1px solid rgba(230,237,243,0.08); background: rgba(17, 22, 29, 0.9); font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #76818F; }
 
   .media-frame { position: relative; overflow: hidden; background: #0B0F14; }
   .media-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 320ms ease, filter 320ms ease; filter: grayscale(0.4) contrast(1.05); }
@@ -148,7 +148,7 @@
 
   .check { display: flex; align-items: baseline; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 13px; letter-spacing: 0.04em; }
   .check .mark { color: #6FE3FF; }
-  .check .mark-pending { color: #5B6573; }
+  .check .mark-pending { color: #76818F; }
   .check .label { color: #E6EDF3; }
   .check .label-pending { color: #8A94A6; }
   .check .desc { color: #8A94A6; }
@@ -164,7 +164,7 @@
   /* architecture diagram lanes */
   .lane { border: 1px solid rgba(230,237,243,0.08); padding: 20px; background: rgba(17,22,29,0.6); transition: border-color 200ms ease; position: relative; }
   .lane:hover { border-color: rgba(111,227,255,0.32); }
-  .lane .lane-num { position: absolute; top: 12px; right: 12px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; color: #5B6573; }
+  .lane .lane-num { position: absolute; top: 12px; right: 12px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; color: #76818F; }
   .lane-flow { display: grid; gap: 0; position: relative; }
   .lane-arrow { display: flex; align-items: center; justify-content: center; padding: 8px 0; color: #6FE3FF; font-family: "JetBrains Mono", monospace; font-size: 14px; }
 
@@ -245,11 +245,11 @@
 
           <img src="../../assets/images/deskrelay-logo-lockup.png" alt="DeskRelay 로고 락업" class="h-12 sm:h-16 w-auto self-start max-w-full object-contain" loading="eager"/>
 
-          <p class="display-hero text-text-primary kr-balance max-w-3xl">
+          <h1 class="display-hero text-text-primary kr-balance max-w-3xl">
             노트북을 열지 않고도,<br/>
             로컬 <span class="text-accent-cyan">Claude Code</span> 세션을<br/>
             그대로 이어 갑니다.
-          </p>
+          </h1>
 
           <p class="font-body text-[15px] sm:text-base text-text-secondary leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
             DeskRelay 는 내 PC 에서 실행되는 Claude Code 세션을 브라우저·모바일에서 안전하게 원격으로 조작하는 <strong class="text-text-primary font-semibold">self-host 개발자 도구</strong>입니다. 서버 PC 한 대가 <code>site-frontend</code>, <code>site-backend</code>, local connector daemon 을 띄우고, 같은 LAN 또는 Tailscale 안의 다른 PC 를 디바이스로 등록해서 씁니다.

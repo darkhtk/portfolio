@@ -26,90 +26,56 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 - **HTML5** + **Tailwind CSS CDN** (`?plugins=forms,container-queries`)
 - **Vanilla JavaScript** (필터, 모바일 nav 토글 등)
 - **Material Symbols Outlined** (Google Fonts)
-- **Font**: Space Grotesk (headline), Inter (body), Manrope (label)
+- **Font**: Space Grotesk (display/headline), Noto Sans KR (body), JetBrains Mono (mono)
 - **빌드 시스템 없음** — Tailwind CDN이 런타임 처리
-- **Dark theme 고정** (`<html class="dark">`)
-- **언어**: ko (한국어 + 영문 키워드 혼용)
+- **Theme**: 전 페이지 dark (`<html class="dark">` + `assets/css/portfolio-dark.css`) — light 용 `assets/css/site.css` 는 redirect stub(`resume/`, `ko/resume/`, `cover-letter/`)에만 잔존
+- **언어**: 루트 트리 = 한국어 디폴트, `en/` 트리 = 영어 미러. print 페이지와 redirect stub 을 제외한 모든 페이지 헤더에 KO/EN 토글
 
 ## Page Structure
 
-Nav is 4-item (`Home | Projects | AI Systems | Profile`) as of 2026-04-24. AI work is in its own top-level category.
+전 페이지 공통 4항목 nav `home | ai | industrial | profile`. KO 홈(`index.html`)은 앵커 기반(`#ch02` / `#ch01` / `#profile`), 케이스 스터디 페이지는 같은 라벨로 루트 앵커를, 랜딩·프로필 페이지와 EN 홈은 디렉터리 페이지(`ai-systems/`, `projects/`, `about/` 와 `en/` 미러)를 가리킨다. print 페이지와 redirect stub 을 제외한 모든 페이지가 헤더에 KO/EN 토글 보유.
 
-| 파일 | 역할 | nav 패턴 |
+| 파일 | 역할 | 테마 |
 |---|---|---|
-| `index.html` | Home (Hero + 3 Focus tiles + Featured Project) | A |
-| `projects/index.html` | Projects landing (non-AI industrial work) | A |
-| `ai-systems/index.html` | AI Systems landing (kernel + behaviors + R&D) | A |
-| `about/index.html` | About + Tech Ecosystem | A-variant |
-| `resume/index.html` | Resume redirect → Profile | redirect page |
-| `cover-letter/index.html` | Cover letter redirect → Profile | redirect page |
-| `en/ai-systems/ops-cure/index.html` | Ops-Cure Kernel case study (kernel + 3 behaviors) | B (light) |
-| `en/ai-systems/genworld-ollama/index.html` | GenWorld + Ollama R&D (EN, minimal) | content-only |
-| `en/projects/vr-robot/index.html` | VR Robot + IK solver | B (light) |
-| `en/projects/watchbim/index.html` | WatchBIM | B (light) |
-| `en/projects/dxcenter/index.html` | DXCenter LG에너지솔루션 | B (light) |
-| `en/projects/neostalgia/index.html` | Neostalgia (EN, minimal) | content-only |
-| `en/projects/vr-simulators/index.html` | VR Simulator Collection (EN, minimal) | content-only |
-| `ko/ai-systems/index.html` | AI Systems landing (KO) | A |
-| `ko/projects/index.html` | Projects landing (KO) | A |
-| `ai-systems/ops-cure/index.html` | Ops-Cure Kernel (KO, light theme) | B (light) |
-| `ai-systems/genworld-ollama/index.html` | GenWorld + Ollama (KO, old dark theme) | B (dark legacy) |
-| `projects/<case>/index.html` | KO case studies (old dark theme: vr-robot, watchbim, dxcenter, neostalgia, vr-simulators) | B (dark legacy) |
+| `index.html` | Home (KO — `#ch01` 산업 / `#ch02` AI / `#profile` 앵커 섹션) | dark |
+| `en/index.html` | Home (EN 미러) | dark |
+| `about/index.html` | Profile (KO) | dark |
+| `en/about/index.html` | Profile (EN) | dark |
+| `projects/index.html` | 산업 프로젝트 아카이브 (KO) | dark |
+| `en/projects/index.html` | 산업 프로젝트 아카이브 (EN) | dark |
+| `ai-systems/index.html` | AI Systems 허브 (KO) | dark |
+| `en/ai-systems/index.html` | AI Systems 허브 (EN) | dark |
+| `ai-systems/<case>/index.html` | AI 케이스 KO — ops-cure, genworld-ollama, deskrelay | dark |
+| `en/ai-systems/<case>/index.html` | AI 케이스 EN — ops-cure, genworld-ollama, deskrelay | dark |
+| `projects/<case>/index.html` | 산업 케이스 KO — vr-robot, watchbim, dxcenter, neostalgia, vr-simulators | dark |
+| `en/projects/<case>/index.html` | 산업 케이스 EN — 동일 5종 | dark |
+| `print/portfolio/`, `print/ko-portfolio/`, `print/resume/` | A4 인쇄용 (EN/KO 포트폴리오 + EN 이력서) | print CSS |
 
-**Note on inconsistency**: existing KO case studies at top-level `projects/<case>/` still link their nav to EN root pages (legacy from pre-restructure). New AI Systems KO landing (`ko/ai-systems/`) and new KO kernel case (`ai-systems/ops-cure/`) link correctly inside EN nav tree. Fix is out of scope for the AI Systems category work.
+**Redirect stub** (`<meta http-equiv="refresh">` + JS replace): `ko/about/` → `about/`, `resume/` → `en/about/`, `ko/resume/` → `about/`, `cover-letter/` → `about/`, `ko/index.html` → `/`. `ko/ai-systems/`, `ko/projects/` 디렉터리는 존재하지 않음.
 
-## Nav Patterns (4 variants)
+## Nav & Mobile Menu (공용 구현)
 
-**모든 페이지에 햄버거 메뉴 + 모바일 overlay 적용됨** (mobile-responsive-redesign 작업 결과). 새 case study 추가 시 처음부터 모바일 패턴 포함해야 함.
-
-- **Pattern A** (index, projects, cover-letter):
-  - Connect 버튼이 desktop nav 밖, 별도 `<div class="flex items-center gap-3">` 안
-  - 모바일 햄버거 + Connect 메일 아이콘이 같은 div 안
-- **Pattern A-variant** (about):
-  - Pattern A와 동일하지만 `space-x-*`가 아닌 `gap-*` 사용 (mobile redesign에서 마이그레이션됨)
-  - Connect 버튼이 `hero-gradient` 커스텀 CSS 클래스 유지
-- **Pattern B** (3 case studies):
-  - Connect 버튼이 desktop nav 안 (`<div class="hidden md:flex">` 안의 마지막 항목)
-  - 모바일용 별도 `<div class="md:hidden flex items-center gap-3">` 안에 mail 아이콘 + 햄버거
-- **Pattern C** (resume/index.html — 특수):
-  - `<aside>` SideNavBar (`hidden lg:flex w-64 fixed`) + `<header>` TopAppBar
-  - 햄버거는 TopAppBar 우측에 위치 (`md:hidden`)
-  - 사이드바는 lg+ 에서만, 데스크톱 nav는 md+ 에서, 햄버거는 md 미만에서
-
-### Mobile Menu Component (모든 페이지 동일)
+**print 페이지와 redirect stub 을 제외한 모든 페이지가 `header[data-mobile-menu-root]` 마크업 + 공용 `assets/js/site.js` 조합 사용** — 페이지별 IIFE 없음. 새 페이지 추가 시 아래 data-attribute 마크업을 복사하고 `site.js` 를 로드하면 동작.
 
 ```html
-<!-- Hamburger button (in nav) -->
-<button id="mobile-menu-toggle" class="md:hidden ..." aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
-  <span class="material-symbols-outlined">menu</span>
-</button>
-
-<!-- Overlay (after </nav>) -->
-<div id="mobile-menu" class="fixed inset-0 z-[60] bg-[#0c1324]/95 backdrop-blur-2xl hidden flex-col md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-  <!-- 5 nav links + Connect CTA + GitHub/LinkedIn social -->
-</div>
-
-<!-- IIFE (before </body>) -->
-<script>
-(function() {
-  const toggle = document.getElementById('mobile-menu-toggle');
-  const close  = document.getElementById('mobile-menu-close');
-  const menu   = document.getElementById('mobile-menu');
-  if (!toggle || !menu) return;
-  function openMenu() { menu.classList.remove('hidden'); menu.classList.add('flex'); document.body.style.overflow = 'hidden'; toggle.setAttribute('aria-expanded', 'true'); }
-  function closeMenu() { menu.classList.add('hidden'); menu.classList.remove('flex'); document.body.style.overflow = ''; toggle.setAttribute('aria-expanded', 'false'); }
-  toggle.addEventListener('click', openMenu);
-  if (close) close.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
-  menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
-})();
-</script>
+<header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+  <nav class="hidden md:flex items-center gap-6">
+    <a href="./" class="nav-link is-active">home</a>
+    <!-- ai / industrial / profile -->
+  </nav>
+  <button data-mobile-menu-toggle aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden ...">
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+  <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col ... md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+    <button data-mobile-menu-close aria-label="메뉴 닫기">...</button>
+    <!-- nav links -->
+  </div>
+</header>
 ```
 
-**Active link 표시**:
-- Desktop nav: `text-primary border-b-2 border-primary pb-1`
-- Mobile overlay: `text-primary border-l-4 border-primary pl-3`
-- Case study 페이지는 모두 PROJECTS 가 active (sub-page)
+**`site.js` 동작**: 토글 클릭 open/close (`body.menu-open` 클래스 토글), Escape 닫기, 드로어 내 링크 클릭 시 닫기, viewport ≥ 768px 리사이즈 시 자동 닫기. 가로 스크롤 드래그 지원(`.h-scroll`, `[data-h-drag]`)도 같은 파일에 포함.
+
+**Active link 표시**: desktop nav 현재 페이지 링크에 `nav-link is-active`
 
 ## Mobile Responsive Tokens (mobile-responsive-redesign 작업 결과)
 
@@ -134,74 +100,41 @@ Nav is 4-item (`Home | Projects | AI Systems | Profile`) as of 2026-04-24. AI wo
 
 ## Design System (Tailwind config)
 
-모든 페이지 head 안의 `<script id="tailwind-config">` 에 동일하게 정의됨. 변경 시 8개 페이지 모두 동기화.
+모든 실페이지가 head 의 `<script id="tailwind-config">` 에 아래 토큰을 동일하게 정의하고 공용 `assets/css/portfolio-dark.css` 를 로드. 변경 시 모든 페이지 동기화.
 
 ```js
 colors: {
-  "primary": "#b7c4ff", "primary-fixed": "#dde1ff", "primary-fixed-dim": "#b7c4ff",
-  "primary-container": "#0052ff", "on-primary": "#002682",
-  "on-surface": "#dce1fb", "on-surface-variant": "#c3c5d9",
-  "on-background": "#dce1fb",
-  "surface": "#0c1324", "background": "#0c1324",
-  "surface-container": "#191f31", "surface-container-low": "#151b2d",
-  "surface-container-high": "#23293c", "surface-container-highest": "#2e3447",
-  "surface-container-lowest": "#070d1f",
-  "secondary": "#bec6e0", "secondary-container": "#3f465c",
-  "tertiary": "#b7c8e1", "tertiary-container": "#57677e",
-  "outline": "#8d90a2", "outline-variant": "#434656",
-  "surface-variant": "#2e3447"
+  "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
+  "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F",
+  "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B",
+  "success-green": "#6EE787", "danger-red": "#FF7B72",
+  "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)"
 }
 ```
 
-## Code Block CSS (KO legacy case studies using old dark theme)
+## Code Block CSS (retired)
 
-코드 스니펫이 있는 case study는 head `<style>` 블록에 `.code-block` CSS 정의. 모바일 미디어쿼리 포함.
-
-```css
-.code-block {
-  font-family: 'Consolas', 'D2Coding', monospace;
-  font-size: 12px;
-  line-height: 1.6;
-  background: #070d1f;
-  border-radius: 8px;
-  padding: 20px;
-  overflow-x: auto;
-  white-space: pre;
-  color: #c3c5d9;
-}
-.code-block .kw { color: #b7c4ff; font-weight: 600; }
-.code-block .str { color: #dde1ff; }
-.code-block .com { color: #8d90a2; font-style: italic; }
-.code-block .num { color: #b7c8e1; }
-@media (max-width: 640px) {
-  .code-block { padding: 12px; font-size: 11px; line-height: 1.5; }
-}
-```
+`.code-block` 클래스는 현재 어떤 페이지에서도 사용되지 않음 — 구 M3 dark legacy 케이스 스터디가 현행 테마로 리뉴얼되면서 함께 제거됨.
 
 ## Assets
 
-`assets/images/` 위주로 사용:
-
-| 파일 | 용도 |
+| 위치 | 내용 |
 |---|---|
-| `vr_robot_expo1.png`, `vr_robot_expo2.png` | VR Robot 케이스 + index Hero |
-| `dxcenter*.png` | DXCenter 케이스 |
-| `genworld-world.png` | GenWorld 게임 월드 (case study 04 Hero) |
-| `genworld-npc-mood.png` | NPC 대화 + Mood/Relationship UI (§ 5) |
-| `genworld-dialogue.png` | 사냥꾼 다중 턴 대화 (§ 2) |
-| `genworld-skills.png` | 스킬 트리 (미사용, future case study용 보관) |
-| `profile.jpg` | 프로필 사진 |
-| `favicon-*.png`, `apple-touch-icon.png` | 파비콘 |
+| `assets/` (루트) | `profile.jpg`, `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png` |
+| `assets/css/` | `portfolio-dark.css` (다크 공용), `site.css` (redirect stub 전용 잔존), `print-docs.css`, `print-dark.css` |
+| `assets/js/` | `site.js` (모바일 메뉴 + 가로 스크롤 드래그) |
+| `assets/images/` | 케이스 스크린샷 약 60개 — `deskrelay-*`, `remote-for-claude-*`, `ops-cure-discord-*`, `orchestration-v1-loop.png`, `genworld-*` (`genworld-skills.png` 포함 — genworld-ollama 케이스에서 사용 중), `ik_*`, `vr_robot_expo*`, `vr_construction_*` / `vr_lcm_*` / `vr_lghaus_*`, `watchbim_*`, `neostalgia_*`, `v2_*`, `customeditor.png` (DXCenter 케이스), `milk-and-cereal.png` |
 
 ## Spec / Plan Documentation
 
-레포 내부: `docs/specs/` (design spec) + `docs/plans/` (implementation plan).
+레포 내부: `docs/specs/` (design spec) + `docs/plans/` (implementation plan) + `docs/design/` (디자인 프롬프트/레퍼런스).
 
 **기존 문서**:
 - `docs/specs/2026-04-11-mobile-first-responsive-renewal-design.md`
 - `docs/plans/2026-04-11-mobile-first-responsive-renewal.md`
 - `docs/specs/2026-04-24-ai-systems-category-design.md`
 - `docs/plans/2026-04-24-ai-systems-category.md`
+- `docs/design/2026-05-13-stitch-prompts.md`
 
 새 작업도 같은 경로 패턴 (`YYYY-MM-DD-<topic>-design.md` / `YYYY-MM-DD-<topic>.md`) 으로 저장.
 
@@ -240,7 +173,7 @@ colors: {
 
 1. **큰 작업은 brainstorm → spec → plan → subagent-driven 패턴 사용** (superpowers skills)
 2. **Feature branch 생성 후 작업**, main에서 직접 안 함
-3. **마무리: feature branch push → main fast-forward merge → main push** → GitHub Pages 자동 배포
+3. **커밋·푸시는 수동** — 자동 commit+push hook 은 2026-06-11 기준 비활성. 마무리: feature branch push → main merge → main push → GitHub Pages 자동 배포. 이 저장소는 여러 환경에서 커밋되므로 작업 시작 전 `git fetch` 로 분기 상태 확인 필수
 4. **새 case study 추가 시 8 파일 변경 패턴**: 신규 case study + projects 카드 + cover-letter 단락 + resume 항목 + README + 기존 case study 3개 cross-ref
 5. **Cross-ref grid**: case study 추가 시 기존 grid `md:grid-cols-2` → `md:grid-cols-2 lg:grid-cols-3` 변경 (3 카드 노출)
 6. **commit 메시지**: 한국어 본문 + Co-Authored-By 라인. `feat:`, `docs:`, `feat(scope):` 형식.
@@ -248,9 +181,10 @@ colors: {
 ## Active Branches
 
 - `main` — production (origin/main 동기화)
-- `mobile-responsive-redesign` — 보존 (mobile redesign 작업 history)
-- `genworld-ollama-case-study` — 보존 (case study 04 작업 history)
-- `ai-systems-category` — AI Systems 카테고리 분리 작업 (2026-04-24)
+- `ai-systems-category` / `mobile-responsive-redesign`(origin) / `genworld-ollama-case-study`(origin) — 보존된 작업 history
+- `codex/*` — copy pass · print · 언어팩 등 작업 브랜치 다수 (로컬 + origin)
+- `audit-mechanical-fixes` — 감사 기계적 수정 작업 (2026-06-11)
+- `backup/pre-sync-20260611` — origin/main 동기화 전 백업
 
 ## External References
 

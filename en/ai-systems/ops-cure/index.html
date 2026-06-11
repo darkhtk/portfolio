@@ -11,6 +11,10 @@
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/orchestration-v1-loop.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/ops-cure/"/>
 <meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Ops-Cure Kernel · Case Study"/>
+<meta name="twitter:description" content="Channel-native state/event kernel + 3 behaviors on the same abstraction."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/orchestration-v1-loop.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
@@ -22,7 +26,7 @@
 <script id="tailwind-config">
   tailwind.config = { darkMode: "class", theme: { extend: {
     colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
-      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573",
+      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F",
       "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787",
       "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
     fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
@@ -42,7 +46,7 @@
         <a href="../deskrelay/" class="nav-link">deskrelay</a>
         <a href="../" class="nav-link is-active">ai</a>
         <a href="../../projects/" class="nav-link">industrial</a>
-        <a href="../../../about/" class="nav-link">profile</a>
+        <a href="../../about/" class="nav-link">profile</a>
       </nav>
       <div class="flex items-center gap-3">
         <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
@@ -53,17 +57,21 @@
         <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true">
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
       <div class="flex items-start justify-between pb-4 border-b border-hairline">
         <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
         <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
       </div>
       <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
-        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span>→</span></a>
-        <a href="../deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span>→</span></a>
-        <a href="../" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">ai systems <span>→</span></a>
-        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span>→</span></a>
-        <a href="../../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">→</span></a>
+        <a href="../deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span aria-hidden="true">→</span></a>
+        <a href="../" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">ai systems <span aria-hidden="true">→</span></a>
+        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span aria-hidden="true">→</span></a>
+        <a href="../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <a href="../../../ai-systems/ops-cure/" class="px-3 py-2 text-text-secondary border border-hairline">KO</a>
+        <span class="px-3 py-2 text-bg-primary bg-accent-cyan">EN</span>
       </div>
     </div>
   </header>
@@ -82,8 +90,8 @@
             Channels aren't just message pipes — they're state spaces where actors and events flow. Ops-Cure makes that reading explicit: behaviors plug in, transports get adapted, runtimes execute. Three completely different behaviors — <code>orchestration</code> · <code>remote_codex</code> · <code>chat</code> — running on the same Space / Actor / Event substrate is the proof the abstraction is real.
           </p>
           <div class="flex flex-wrap items-center gap-3">
-            <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener" class="btn-cyan">GitHub <span>↗</span></a>
-            <a href="#kernel" class="btn-ghost">Kernel vocabulary <span>↓</span></a>
+            <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener" class="btn-cyan">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="#kernel" class="btn-ghost">Kernel vocabulary <span aria-hidden="true">↓</span></a>
           </div>
           <div class="ticker mt-2">
             <span class="dot"></span><span>kernel · behaviors × 3</span>
@@ -166,7 +174,7 @@
             <h2 class="display-section text-text-primary">One kernel,<br/>three behaviors.</h2>
           </div>
           <div class="lg:col-span-7 lg:pt-2">
-            <p class="text-text-secondary text-[15px] leading-[1.85] max-w-2xl">On the same Space / Actor / Event substrate: a multi-agent workflow (production), a browser-driven remote execution surface (remote_codex), and a Codex-to-Codex dialogue room (chat). Three completely different domains sharing one kernel — that's the abstraction made concrete.</p>
+            <p class="text-text-secondary text-[15px] leading-[1.85] max-w-2xl">On the same Space / Actor / Event substrate: a multi-agent workflow (orchestration), a browser-driven remote execution surface (remote_codex), and a Codex-to-Codex dialogue room (chat). Three completely different domains sharing one kernel — that's the abstraction made concrete.</p>
           </div>
         </div>
 
@@ -278,9 +286,9 @@
           <h2 class="display-section text-text-primary">DeskRelay is product-first.<br/>Ops-Cure is kernel-first.</h2>
         </div>
         <div class="flex flex-wrap gap-3">
-          <a href="../deskrelay/" class="btn-cyan">DeskRelay Case <span>→</span></a>
-          <a href="../genworld-ollama/" class="btn-ghost">GenWorld <span>↗</span></a>
-          <a href="../" class="btn-ghost">AI Systems <span>↗</span></a>
+          <a href="../deskrelay/" class="btn-cyan">DeskRelay Case <span aria-hidden="true">→</span></a>
+          <a href="../genworld-ollama/" class="btn-ghost">GenWorld <span aria-hidden="true">↗</span></a>
+          <a href="../" class="btn-ghost">AI Systems <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -295,7 +303,7 @@
         <a href="../deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
         <a href="../" class="hover:text-accent-cyan">ai</a>
         <a href="../../projects/" class="hover:text-accent-cyan">industrial</a>
-        <a href="../../../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../about/" class="hover:text-accent-cyan">profile</a>
         <a href="../../../ai-systems/ops-cure/" class="hover:text-accent-cyan">ko</a>
       </div>
       <div class="text-text-muted">ops-cure · channel-native kernel · © 2026</div>
