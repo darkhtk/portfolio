@@ -1,153 +1,250 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>VR Robot Teleoperation | Daeki Hong</title>
-<meta name="description" content="English case study for VR Robot Teleoperation: Quest 3, Unity runtime, Flask bridge, RoboDK, safety logic, and in-house Jacobian IK expansion."/>
-<meta property="og:title" content="VR Robot Teleoperation | Daeki Hong"/>
-<meta property="og:description" content="English case study for VR Robot Teleoperation: Quest 3, Unity runtime, Flask bridge, RoboDK, safety logic, and in-house Jacobian IK expansion."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VR Robot Teleoperation · Case Study | Daeki Hong</title>
+<meta name="description" content="Real-time teleoperation of a Doosan A0912 industrial robot with a Meta Quest 3. Unity VR, Flask bridge, RoboDK, safety logic, and an in-house Jacobian IK extension."/>
+<meta property="og:title" content="VR Robot Teleoperation · Case Study"/>
+<meta property="og:description" content="Quest 3 + Doosan A0912 industrial robot teleoperation. Live demo at BEXCO, Busan."/>
 <meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/vr_robot_expo2.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/projects/vr-robot/"/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="VR Robot Teleoperation | Daeki Hong"/>
-<meta name="twitter:description" content="English case study for VR Robot Teleoperation: Quest 3, Unity runtime, Flask bridge, RoboDK, safety logic, and in-house Jacobian IK expansion."/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="VR Robot Teleoperation · Case Study"/>
+<meta name="twitter:description" content="Quest 3 + Doosan A0912 industrial robot teleoperation. Live demo at BEXCO, Busan."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/vr_robot_expo2.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
-  tailwind.config = { theme: { extend: { fontFamily: { headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], label: ["Space Grotesk", "Noto Sans KR", "sans-serif"] } } } }
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
+      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573",
+      "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787",
+      "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
+    borderRadius: { DEFAULT: "0.5rem", xs: "0.25rem", sm: "0.375rem", md: "0.5rem", lg: "0.75rem" }
+  } } }
 </script>
-<link rel="stylesheet" href="../../../assets/css/site.css"/>
+<link rel="stylesheet" href="../../../assets/css/portfolio-dark.css"/>
 </head>
-<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
-<div class="site-shell">
-  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <a href="../../" class="flex flex-col">
-        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
-      </a>
-      <nav class="hidden items-center gap-2 md:flex">
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../">Home</a>
-        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../../projects/">Projects</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../ai-systems/">AI Systems</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../about/">Profile</a>
+<body class="font-body antialiased">
+<div class="relative">
+
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../../ai-systems/deskrelay/" class="nav-link">deskrelay</a>
+        <a href="../../ai-systems/" class="nav-link">ai</a>
+        <a href="../../projects/" class="nav-link is-active">industrial</a>
+        <a href="../../../about/" class="nav-link">profile</a>
       </nav>
       <div class="flex items-center gap-3">
-        <div class="lang-toggle hidden sm:inline-flex">
-          <a class="lang-link is-active" href="./">EN</a>
-          <a class="lang-link" href="../../../projects/vr-robot/">KO</a>
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <a href="../../../projects/vr-robot/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</span>
         </div>
-        <a href="mailto:darkhtk@gmail.com" class="hidden rounded-full bg-[#1a57c7] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(26,87,199,0.24)] sm:inline-flex">Connect</a>
-        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+        <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
-      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
-        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
-        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="Close menu"><span class="material-symbols-outlined">close</span></button>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
       </div>
-      <div class="mt-6 grid gap-3">
-        <a href="../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">Overview and positioning.</div></a>
-        <a href="../../../projects/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">Projects</div><div class="mt-1 text-sm text-[#526178]">Industrial delivery work.</div></a>
-        <a href="../../ai-systems/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">AI Systems</div><div class="mt-1 text-sm text-[#526178]">Kernel, behaviors, applied R&amp;D.</div></a>
-        <a href="../../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">Working style and background.</div></a>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">→</span></a>
+        <a href="../../ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span aria-hidden="true">→</span></a>
+        <a href="../../ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">→</span></a>
+        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span aria-hidden="true">→</span></a>
+        <a href="../../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <a href="../../../projects/vr-robot/" class="px-3 py-2 text-text-secondary border border-hairline">KO</a>
+        <span class="px-3 py-2 text-bg-primary bg-accent-cyan">EN</span>
       </div>
     </div>
   </header>
 
-  <main class="relative">
-    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <div class="surface-panel p-6 sm:p-8 lg:p-10">
-          <div class="section-kicker">Industrial XR x Robotics</div>
-          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">VR Robot Teleoperation</h1>
-          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077]">A working pipeline that connects Quest 3 controller input to a Doosan A0912 robot through Unity, Flask, RoboDK, safety logic, and later an in-house Jacobian IK extension.</p>
-          <div class="mt-7 flex flex-wrap gap-2.5">
-            <span class="pill text-sm">Quest 3</span>
-            <span class="pill text-sm">Flask</span>
-            <span class="pill text-sm">RoboDK</span>
-            <span class="pill text-sm">In-house IK</span>
+  <main class="relative pt-16">
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// industrial · xr · robotics</div>
+          <h1 class="display-hero text-text-primary kr-balance">VR Robot Teleoperation.</h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">quest 3 → unity → flask → robodk → doosan a0912</p>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
+            Real-time teleoperation of the industrial robot Doosan A0912 with a Meta Quest 3. Unity VR, a Flask bridge, RoboDK, safety logic, all the way to a <strong class="text-text-primary font-semibold">live demo at BEXCO</strong> in Busan. Follow-up R&amp;D extended the stack with an in-house Jacobian IK algorithm that reduces the RoboDK dependency.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#pipeline" class="btn-cyan">Pipeline <span aria-hidden="true">↓</span></a>
+            <a href="https://github.com/darkhtk/MetaArm" target="_blank" rel="noopener noreferrer" class="btn-ghost">MetaArm repo <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/darkhtk/ik_meta" target="_blank" rel="noopener noreferrer" class="btn-ghost">ik_meta repo <span aria-hidden="true">↗</span></a>
+            <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>quest 3 · openxr</span>
+            <span class="dot"></span><span>unity vr</span>
+            <span class="dot"></span><span>flask bridge</span>
+            <span class="dot"></span><span>robodk</span>
+            <span class="dot"></span><span>doosan a0912</span>
+            <span class="dot"></span><span>jacobian ik</span>
           </div>
         </div>
-        <aside class="feature-panel p-5 sm:p-6">
-          <div class="section-kicker">Links</div>
-          <div class="mt-5 grid gap-3">
-            <a class="rounded-[20px] bg-white px-4 py-4 text-sm font-semibold text-[#122033]" href="https://github.com/darkhtk/MetaArm" target="_blank" rel="noopener noreferrer">MetaArm repository</a>
-            <a class="rounded-[20px] bg-white px-4 py-4 text-sm font-semibold text-[#122033]" href="https://github.com/darkhtk/ik_meta" target="_blank" rel="noopener noreferrer">ik_meta repository</a>
-            <a class="rounded-[20px] bg-white px-4 py-4 text-sm font-semibold text-[#122033]" href="https://www.mof.go.kr/doc/ko/selectDoc.do?bbsSeq=10&amp;docSeq=63898" target="_blank" rel="noopener noreferrer">MOF official article</a>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div class="summary-grid">
-        <article class="summary-card"><h3>Role</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Built the Unity runtime, Flask / UDP bridge, safety logic, calibration flow, and the Jacobian-based IK extension.</p></article>
-        <article class="summary-card"><h3>Problem</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">XR input had to map cleanly to a real industrial robot while handling latency, safety, and future expansion.</p></article>
-        <article class="summary-card"><h3>Outcome</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Delivered a public demo pipeline from Quest 3 to Doosan A0912 and later expanded the structure from myCobot 280 to industrial hardware.</p></article>
-        <article class="summary-card"><h3>Why It Matters</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">This is a direct proof of industrial XR that survived control constraints, safety logic, and real-world demonstration.</p></article>
-      </div>
-    </section>
-
-    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-        <div class="media-frame video">
-          <iframe src="https://www.youtube-nocookie.com/embed/Z6EnF1AfZWA" title="VR Robot Teleoperation demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-        <div class="surface-panel p-6 sm:p-8">
-          <div class="section-kicker">Pipeline</div>
-          <h2 class="page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Quest 3 -> Unity -> Flask -> RoboDK -> Robot</h2>
-          <div class="content-prose mt-5">
-            <p>The project started as a VR interface for remote robot control and later grew into a more independent robotics stack. I kept the runtime stable while adding EMA filtering, safety boxes, deadman switch behavior, and calibration steps that reduced control drift.</p>
-            <p>After the first demo pipeline was proven, I extended the work into a Jacobian-based IK solver so the stack would not stay dependent on RoboDK alone.</p>
+        <div class="lg:col-span-5">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>EXPO</span><span class="text-text-muted">BEXCO LIVE DEMO</span></div>
+            <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../../assets/images/vr_robot_expo2.png" alt="VR robot teleop BEXCO"/></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="max-w-3xl">
-        <div class="section-kicker">More Videos / Official Record</div>
-        <h2 class="page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Robot control proof clips</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">The public clips below cover the Doosan demo, IK teaching, multi-robot control, damping behavior, and TCP tracking.</p>
+    <section id="pipeline" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.01 ]</span>
+        <span class="kicker text-text-secondary">PIPELINE</span>
+        <span class="line"></span>
       </div>
-      <div class="mt-8 grid gap-6 md:grid-cols-2">
-        <article class="project-card bg-white p-4 sm:p-5">
+
+      <div class="grid gap-3">
+        <div class="lane"><span class="lane-num">01</span><div class="kicker kicker-cyan mb-2">// input</div><div class="font-display font-bold text-lg text-text-primary">Meta Quest 3</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">Controller 6DOF input plus hand tracking. Visualizes operator safety distance and the working envelope.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">02</span><div class="kicker kicker-cyan mb-2">// runtime</div><div class="font-display font-bold text-lg text-text-primary">Unity VR</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">Real-time coordinate transforms, safety logic, and calibration. First-pass filtering so invalid commands never flow to the robot.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">03</span><div class="kicker kicker-cyan mb-2">// bridge</div><div class="font-display font-bold text-lg text-text-primary">Flask Bridge</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">Communication bridge between Unity and RoboDK. HTTP-based command channel.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">04</span><div class="kicker kicker-cyan mb-2">// kinematics</div><div class="font-display font-bold text-lg text-text-primary">RoboDK + In-house Jacobian IK</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">RoboDK simulation, plus an in-house Jacobian IK solver from follow-up R&amp;D that reduces the RoboDK dependency.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">05</span><div class="kicker kicker-cyan mb-2">// hardware</div><div class="font-display font-bold text-lg text-text-primary">Doosan A0912</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">A real industrial 6-axis robot. Stops automatically when the safety zone is breached.</p></div>
+      </div>
+    </section>
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14">
+          <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.02 ]</span>
+          <span class="kicker text-text-secondary">IK R&amp;D</span>
+          <span class="line"></span>
+          <span class="tail">jacobian solver</span>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>IK_01</span><span class="text-text-muted">TCP TRACKING</span></div>
+            <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/ik_tcp_tracking.png" alt="IK TCP tracking"/></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary">TCP Tracking</h3><p class="text-[13px] text-text-secondary mt-2 leading-relaxed">End-effector tracking that follows a target point.</p></div>
+          </article>
+          <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>IK_02</span><span class="text-text-muted">DAMPING</span></div>
+            <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/ik_damping_physics.png" alt="IK damping"/></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary">Damping Physics</h3><p class="text-[13px] text-text-secondary mt-2 leading-relaxed">Stable solver behavior even near singularities.</p></div>
+          </article>
+          <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>IK_03</span><span class="text-text-muted">VR CONTROL</span></div>
+            <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/ik_vr_control.png" alt="IK VR control"/></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary">VR Control</h3><p class="text-[13px] text-text-secondary mt-2 leading-relaxed">Maps VR controller 6DOF input directly to IK input.</p></div>
+          </article>
+          <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>IK_04</span><span class="text-text-muted">DEBUG UI</span></div>
+            <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/ik_debug_ui.png" alt="IK debug UI"/></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary">Debug UI</h3><p class="text-[13px] text-text-secondary mt-2 leading-relaxed">Real-time visualization of joints, angles, and error.</p></div>
+          </article>
+          <article class="card ticks group flex flex-col md:col-span-2 xl:col-span-1"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>IK_05</span><span class="text-text-muted">MULTI ROBOT</span></div>
+            <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../../assets/images/ik_multi_robot.png" alt="IK multi robot"/></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary">Multi Robot</h3><p class="text-[13px] text-text-secondary mt-2 leading-relaxed">Verified simultaneous control of multiple robots.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ MEDIA ]</span>
+        <span class="kicker text-accent-cyan">VIDEOS / OFFICIAL ARTICLE</span>
+        <span class="line"></span>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-2">
+        <article class="card ticks p-4 sm:p-5"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>VIDEO_01</span><span class="text-text-muted">BEXCO DEMO</span></div>
+          <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/Z6EnF1AfZWA" title="VR robot teleoperation BEXCO demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <h3 class="mt-4 font-display font-bold text-lg text-text-primary">Expo demo / HMD view</h3>
+        </article>
+        <article class="card ticks p-4 sm:p-5"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>VIDEO_02</span><span class="text-text-muted">IK + TEACHING</span></div>
           <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/PuKlRUS_AKY" title="IK and teaching VR robot demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-          <h3 class="mt-4 text-base font-semibold text-[#122033]">IK + Teaching</h3>
+          <h3 class="mt-4 font-display font-bold text-lg text-text-primary">IK + Teaching</h3>
         </article>
-        <article class="project-card bg-white p-4 sm:p-5">
+        <article class="card ticks p-4 sm:p-5"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>VIDEO_03</span><span class="text-text-muted">MULTI ROBOT</span></div>
           <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/pGh_t7gy27I" title="Multi robot VR control demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-          <h3 class="mt-4 text-base font-semibold text-[#122033]">Multi-robot VR control</h3>
+          <h3 class="mt-4 font-display font-bold text-lg text-text-primary">Multi-robot VR control</h3>
         </article>
-        <article class="project-card bg-white p-4 sm:p-5">
+        <article class="card ticks p-4 sm:p-5"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>VIDEO_04</span><span class="text-text-muted">DAMPING</span></div>
           <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/B_E7O60NLO4" title="Custom IK damping physics demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-          <h3 class="mt-4 text-base font-semibold text-[#122033]">Custom IK + damping physics</h3>
+          <h3 class="mt-4 font-display font-bold text-lg text-text-primary">Custom IK + damping physics</h3>
         </article>
-        <article class="project-card bg-white p-4 sm:p-5">
+        <article class="card ticks p-4 sm:p-5"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>VIDEO_05</span><span class="text-text-muted">TCP TRACKING</span></div>
           <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/rUuPAdEcB7o" title="TCP IK tracking robot demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-          <h3 class="mt-4 text-base font-semibold text-[#122033]">TCP IK tracking</h3>
+          <h3 class="mt-4 font-display font-bold text-lg text-text-primary">TCP IK tracking</h3>
+        </article>
+        <article class="card ticks p-5 sm:p-6 flex flex-col justify-between"><span class="tr"></span><span class="bl"></span>
+          <div>
+            <div class="card-bar -mx-5 -mt-5 sm:-mx-6 sm:-mt-6 mb-5"><span>ARTICLE</span><span class="text-text-muted">MOF</span></div>
+            <div class="kicker kicker-amber mb-4">// official record</div>
+            <h3 class="font-display font-bold text-xl text-text-primary">MOF official article</h3>
+            <p class="mt-3 text-[14px] leading-7 text-text-secondary kr-balance">Official record from the Ministry of Oceans and Fisheries for the event where the VR robot teleoperation demo was exhibited.</p>
+          </div>
+          <a href="https://www.mof.go.kr/doc/ko/selectDoc.do?bbsSeq=10&amp;docSeq=63898" target="_blank" rel="noopener noreferrer" class="btn-ghost mt-6 w-fit">Open article <span aria-hidden="true">↗</span></a>
         </article>
       </div>
-      <a href="https://www.mof.go.kr/doc/ko/selectDoc.do?bbsSeq=10&amp;docSeq=63898" target="_blank" rel="noopener noreferrer" class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Open MOF official article<span class="material-symbols-outlined text-base">north_east</span></a>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
-      <div class="detail-grid">
-        <div class="detail-note"><strong>Safety and failure handling:</strong> deadman switch, safe box constraints, and posture protection were treated as part of the core control loop, not optional polish.</div>
-        <div class="detail-note"><strong>Verification target:</strong> control latency and response stability were measured around a practical demo threshold so the system could be shown in public without feeling fragile.</div>
-        <div class="detail-note"><strong>Technical expansion:</strong> the later IK work was not a separate toy project. It was the continuation of the same control problem under tighter ownership.</div>
-        <div class="detail-note"><strong>Roles:</strong> industrial XR, robotics interface, and real-time control workflows.</div>
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary kr-balance">Related work.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="../watchbim/" class="btn-ghost">WatchBIM <span aria-hidden="true">↗</span></a>
+          <a href="../neostalgia/" class="btn-ghost">Neostalgia <span aria-hidden="true">↗</span></a>
+          <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </section>
+
   </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../../" class="hover:text-accent-cyan">home</a>
+        <a href="../../ai-systems/deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
+        <a href="../../ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="../../projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../../../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../../projects/vr-robot/" class="hover:text-accent-cyan">ko</a>
+      </div>
+      <div class="text-text-muted">vr robot teleop · doosan a0912 · © 2026</div>
+    </div>
+  </footer>
+
 </div>
 <script src="../../../assets/js/site.js"></script>
 </body>

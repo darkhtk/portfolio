@@ -1,130 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>WatchBIM | Daeki Hong</title>
-<meta name="description" content="English case study for WatchBIM: BIM hit engine, cross-section generation, 2D analysis viewer, and custom camera system in Unity."/>
-<meta property="og:title" content="WatchBIM | Daeki Hong"/>
-<meta property="og:description" content="English case study for WatchBIM: BIM hit engine, cross-section generation, 2D analysis viewer, and custom camera system in Unity."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WatchBIM · Case Study | Daeki Hong</title>
+<meta name="description" content="A Unity BIM runtime case study: large-model BIM interaction, cross-section generation, a 2D analysis viewer, and a custom camera system built in-house."/>
+<meta property="og:title" content="WatchBIM · BIM Runtime"/>
+<meta property="og:description" content="A Unity BIM runtime case study: large-model BIM interaction, cross-section generation, a 2D analysis viewer, and a custom camera system built in-house."/>
 <meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/watchbim_generated_crosssection.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/projects/watchbim/"/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="WatchBIM | Daeki Hong"/>
-<meta name="twitter:description" content="English case study for WatchBIM: BIM hit engine, cross-section generation, 2D analysis viewer, and custom camera system in Unity."/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="WatchBIM · BIM Runtime"/>
+<meta name="twitter:description" content="A Unity BIM runtime case study: large-model BIM interaction, cross-section generation, a 2D analysis viewer, and a custom camera system built in-house."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/watchbim_generated_crosssection.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
-  tailwind.config = { theme: { extend: { fontFamily: { headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], label: ["Space Grotesk", "Noto Sans KR", "sans-serif"] } } } }
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
+    borderRadius: { DEFAULT: "0.5rem" }
+  } } }
 </script>
-<link rel="stylesheet" href="../../../assets/css/site.css"/>
+<link rel="stylesheet" href="../../../assets/css/portfolio-dark.css"/>
 </head>
-<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
-<div class="site-shell">
-  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <a href="../../" class="flex flex-col">
-        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
-      </a>
-      <nav class="hidden items-center gap-2 md:flex">
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../">Home</a>
-        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="../../../projects/">Projects</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../ai-systems/">AI Systems</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../../../about/">Profile</a>
+<body class="font-body antialiased">
+<div class="relative">
+
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../../ai-systems/deskrelay/" class="nav-link">deskrelay</a>
+        <a href="../../ai-systems/" class="nav-link">ai</a>
+        <a href="../../projects/" class="nav-link is-active">industrial</a>
+        <a href="../../../about/" class="nav-link">profile</a>
       </nav>
       <div class="flex items-center gap-3">
-        <div class="lang-toggle hidden sm:inline-flex">
-          <a class="lang-link is-active" href="./">EN</a>
-          <a class="lang-link" href="../../../projects/watchbim/">KO</a>
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <a href="../../../projects/watchbim/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</span>
         </div>
-        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined">menu</span></button>
+        <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
-      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
-        <div><div class="section-kicker">Menu</div><div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div></div>
-        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="Close menu"><span class="material-symbols-outlined">close</span></button>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
       </div>
-      <div class="mt-6 grid gap-3">
-        <a href="../../" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div><div class="mt-1 text-sm text-[#526178]">Overview and positioning.</div></a>
-        <a href="../../../projects/" class="mobile-nav-link is-active"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">Projects</div><div class="mt-1 text-sm text-[#526178]">Industrial delivery work.</div></a>
-        <a href="../../ai-systems/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">AI Systems</div><div class="mt-1 text-sm text-[#526178]">Kernel, behaviors, applied R&amp;D.</div></a>
-        <a href="../../../about/" class="mobile-nav-link"><div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div><div class="mt-1 text-sm text-[#526178]">Working style and background.</div></a>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">→</span></a>
+        <a href="../../ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span aria-hidden="true">→</span></a>
+        <a href="../../ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">→</span></a>
+        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span aria-hidden="true">→</span></a>
+        <a href="../../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
       </div>
-      <div class="mt-6 flex gap-3">
-        <a href="./" class="lang-link is-active bg-white">EN</a>
-        <a href="../../../projects/watchbim/" class="lang-link bg-white">KO</a>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <a href="../../../projects/watchbim/" class="px-3 py-2 text-text-secondary border border-hairline">KO</a>
+        <a href="./" class="px-3 py-2 text-bg-primary bg-accent-cyan">EN</a>
       </div>
     </div>
   </header>
 
-  <main class="relative">
-    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <div class="surface-panel p-6 sm:p-8 lg:p-10">
-          <div class="section-kicker">BIM Runtime Tooling</div>
-          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">WatchBIM</h1>
-          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077]">A Unity BIM runtime built around a custom hit engine, cross-section generation, a 2D analysis viewer, and a camera system designed for heavy geometry interaction.</p>
-          <div class="mt-7 flex flex-wrap gap-2.5">
-            <span class="pill text-sm">BIM Hit Engine</span>
-            <span class="pill text-sm">Cross Section</span>
-            <span class="pill text-sm">2D Viewer</span>
-            <span class="pill text-sm">Tool Camera</span>
+  <main class="relative pt-16">
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// industrial · bim · runtime</div>
+          <h1 class="display-hero text-text-primary kr-balance">WatchBIM.</h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">unity bim runtime · custom hit engine · cross-section · 2d viewer</p>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
+            A Unity BIM runtime with self-designed large-model BIM interaction, cross-section generation, a 2D analysis viewer, and a custom camera system. A case of directly implementing the operational needs external BIM tools could not cover — runtime section generation, real-time analysis, and a tool camera.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#features" class="btn-cyan">Features <span aria-hidden="true">↓</span></a>
+            <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>unity bim runtime</span>
+            <span class="dot"></span><span>custom hit engine</span>
+            <span class="dot"></span><span>cross-section generation</span>
+            <span class="dot"></span><span>2d analysis viewer</span>
           </div>
         </div>
-        <aside class="feature-panel p-5 sm:p-6">
-          <div class="section-kicker">Proof</div>
-          <div class="mt-5 grid gap-3">
-            <div class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">Top 01</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Cross-section generation</div></div>
-            <div class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">Top 02</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">BIM hit and interaction engine</div></div>
-            <div class="rounded-[20px] bg-white px-4 py-4"><div class="metric-label">Top 03</div><div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">Custom 3D camera system</div></div>
+        <div class="lg:col-span-5">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>VIEWER</span><span class="text-text-muted">CROSS-SECTION</span></div>
+            <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../../assets/images/watchbim_generated_crosssection.png" alt="WatchBIM cross-section"/></div>
           </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div class="summary-grid">
-        <article class="summary-card"><h3>Role</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Implemented the interaction engine, camera logic, cross-section generation flow, analysis viewer, and job-based geometry helpers.</p></article>
-        <article class="summary-card"><h3>Problem</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Large BIM scenes needed accurate selection, stable inspection movement, and cross-section analysis inside one usable runtime tool.</p></article>
-        <article class="summary-card"><h3>Outcome</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Delivered a BIM runtime that could inspect heavy models, generate sections, transform them to 2D, and expose domain-facing analysis behavior.</p></article>
-        <article class="summary-card"><h3>Why It Matters</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">The value is not just visualization. It is direct ownership of geometry kernels, interaction systems, and analysis tooling inside Unity.</p></article>
-      </div>
-    </section>
-
-    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-        <div class="media-frame video">
-          <iframe src="https://www.youtube-nocookie.com/embed/ajJKPro7008" title="WatchBIM demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-        <div class="surface-panel p-6 sm:p-8">
-          <div class="section-kicker">Core Engineering</div>
-          <h2 class="page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">From geometry kernel to analysis viewer</h2>
-          <div class="content-prose mt-5">
-            <p>The strongest part of WatchBIM is that it does not stop at "showing BIM in Unity." The project includes a custom hit engine, station-based cross-section generation, segment grouping, 3D to 2D transformation, slope labeling, and a 2D viewer that turns that data into a practical tool.</p>
-            <p>The camera system and runtime interaction logic also matter here. Heavy geometry only becomes useful when the user can move through it reliably and inspect it without fighting the controls.</p>
-          </div>
-          <a href="https://youtu.be/ajJKPro7008" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Open on YouTube<span class="material-symbols-outlined text-base">north_east</span></a>
         </div>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
-      <div class="detail-grid">
-        <div class="detail-note"><strong>Cross-section generation:</strong> plane creation, mesh-plane intersection, segment grouping, and 2D conversion make this the flagship feature.</div>
-        <div class="detail-note"><strong>Interaction engine:</strong> triangle caching, bounds filtering, and runtime hit handling were built to cope with heavy BIM scenes.</div>
-        <div class="detail-note"><strong>Camera system:</strong> pivot rotation, free / ground / fly-through movement, and analysis focus behavior were designed as a real tool camera rather than a default viewer camera.</div>
-        <div class="detail-note"><strong>Roles:</strong> BIM tooling, simulation runtime, geometry processing, and industrial viewer work.</div>
+    <section id="features" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ FEATURES ]</span>
+        <span class="kicker text-text-secondary">4 SUBSYSTEMS</span>
+        <span class="line"></span>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SUB_01</span><span class="text-text-muted">HIT ENGINE</span></div>
+          <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/watchbim_clipping.png" alt="WatchBIM clipping"/></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 01 · hit engine</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">Custom hit engine</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">Stable operator picking, hover, and selection on large BIM models. Directly handles the cases the standard Unity Raycast cannot.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SUB_02</span><span class="text-text-muted">CROSS-SECTION</span></div>
+          <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/watchbim_crosssection_highlight.png" alt="cross-section highlight"/></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 02 · cross-section</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">Cross-section generation</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">Generates sections from arbitrary planes at runtime. Section results are highlighted so operators can verify them intuitively.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SUB_03</span><span class="text-text-muted">2D VIEWER</span></div>
+          <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/watchbim_crosssection_Runtime2D.png" alt="2D viewer"/></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 03 · 2d viewer</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">2D analysis viewer</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">Measure and analyze section results in a dedicated 2D viewer. The 3D and 2D views stay linked on the same data model.</p></div>
+        </article>
+        <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>SUB_04</span><span class="text-text-muted">VERTICAL GRAPH</span></div>
+          <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/watchbim_verticalgraph.png" alt="vertical graph"/></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 04 · graph</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">Vertical graph analysis</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">Analyzes elevation and structural distribution as a vertical graph — a format that lets operators catch patterns at a glance.</p></div>
+        </article>
       </div>
     </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ MEDIA ]</span>
+        <span class="kicker text-accent-cyan">DEMO VIDEO</span>
+        <span class="line"></span>
+      </div>
+      <div class="grid gap-8">
+        <div class="media-frame video order-2 mx-auto w-full max-w-6xl">
+          <iframe src="https://www.youtube-nocookie.com/embed/ajJKPro7008" title="WatchBIM demo video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="card ticks order-1 p-6 sm:p-8"><span class="tr"></span><span class="bl"></span>
+          <div class="kicker kicker-cyan mb-4">// proof</div>
+          <h2 class="display-section text-text-primary kr-balance">WatchBIM demo video.</h2>
+          <p class="mt-4 text-[14px] leading-7 text-text-secondary kr-balance">A public demo recording walking through the large-model BIM viewer, cross-section generation, and 2D analysis viewer flow.</p>
+          <a href="https://youtu.be/ajJKPro7008" target="_blank" rel="noopener noreferrer" class="btn-ghost mt-6 w-fit">Open YouTube <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary kr-balance">Related work.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="../vr-robot/" class="btn-ghost">VR Robot <span aria-hidden="true">↗</span></a>
+          <a href="../dxcenter/" class="btn-ghost">DX Center <span aria-hidden="true">↗</span></a>
+          <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../../" class="hover:text-accent-cyan">home</a>
+        <a href="../../ai-systems/deskrelay/" class="hover:text-accent-cyan">deskrelay</a>
+        <a href="../../ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="../../projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../../../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../../projects/watchbim/" class="hover:text-accent-cyan">ko</a>
+      </div>
+      <div class="text-text-muted">watchbim · bim runtime · © 2026</div>
+    </div>
+  </footer>
+
 </div>
 <script src="../../../assets/js/site.js"></script>
 </body>

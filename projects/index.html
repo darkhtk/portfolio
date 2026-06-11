@@ -1,11 +1,8 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
-<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Projects | Daeki Hong</title>
 <meta name="description" content="English project archive for Daeki Hong across AI products, agent workflows, local-LLM R&amp;D, robotics control, and industrial runtime systems."/>
 <meta property="og:title" content="Projects | Daeki Hong"/>
@@ -18,282 +15,300 @@
 <meta name="twitter:title" content="Projects | Daeki Hong"/>
 <meta name="twitter:description" content="AI products, agent workflows, local-LLM R&amp;D, robotics control, and industrial runtime systems."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/profile.jpg"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="canonical" href="https://darkhtk.github.io/portfolio/projects/"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          headline: ["Space Grotesk", "Noto Sans KR", "sans-serif"],
-          body: ["Noto Sans KR", "sans-serif"],
-          label: ["Space Grotesk", "Noto Sans KR", "sans-serif"]
-        }
-      }
-    }
-  }
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
+      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573",
+      "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787",
+      "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
+    borderRadius: { DEFAULT: "0.5rem", xs: "0.25rem", sm: "0.375rem", md: "0.5rem", lg: "0.75rem" }
+  } } }
 </script>
-<link rel="stylesheet" href="../assets/css/site.css"/>
+<link rel="stylesheet" href="../assets/css/portfolio-dark.css"/>
 </head>
-<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
-<div class="site-shell">
-  <header data-mobile-menu-root class="sticky-nav fixed top-0 z-50 w-full">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <a href="../" class="flex flex-col">
-        <span class="brand-mark font-headline text-2xl font-bold sm:text-3xl">Daeki Hong</span>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-[#6b7890]">Applied AI Systems x Product Delivery</span>
-      </a>
-      <nav class="hidden items-center gap-2 md:flex">
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../">Home</a>
-        <a class="rounded-full border border-[rgba(16,31,61,0.08)] bg-white/80 px-4 py-2 text-sm font-medium text-[#122033]" href="./">Projects</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../ai-systems/">AI Systems</a>
-        <a class="rounded-full px-4 py-2 text-sm font-medium text-[#526178] hover:bg-white/80 hover:text-[#1a57c7]" href="../about/">Profile</a>
+<body class="overflow-x-hidden font-body antialiased">
+<div class="relative">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <a href="../en/" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../en/" class="nav-link">home</a>
+        <a href="../en/ai-systems/" class="nav-link">ai</a>
+        <a href="./" class="nav-link is-active">industrial</a>
+        <a href="../about/" class="nav-link">profile</a>
       </nav>
       <div class="flex items-center gap-3">
-        <div class="lang-toggle hidden sm:inline-flex">
-          <a class="lang-link is-active" href="./">EN</a>
-          <a class="lang-link" href="../#ch01">KO</a>
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <a href="../#ch01" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
+          <a href="./" class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</a>
         </div>
-        <a href="mailto:darkhtk@gmail.com" class="hidden rounded-full bg-[#1a57c7] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(26,87,199,0.24)] transition-transform hover:-translate-y-0.5 sm:inline-flex">Connect</a>
-        <button data-mobile-menu-toggle class="inline-flex rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <a href="mailto:darkhtk@gmail.com" class="hidden lg:inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/40 hover:bg-accent-cyan/10">
+          [ Connect <span aria-hidden="true">&nearr;</span> ]
+        </a>
+        <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan">
           <span class="material-symbols-outlined" aria-hidden="true">menu</span>
         </button>
       </div>
     </div>
-    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col bg-[rgba(247,249,252,0.98)] px-4 pb-6 pt-4 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
-      <div class="flex items-start justify-between gap-4 border-b border-[rgba(16,31,61,0.08)] pb-4">
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
         <div>
-          <div class="section-kicker">Menu</div>
-          <div class="mt-3 brand-mark font-headline text-3xl font-bold">Daeki Hong</div>
+          <div class="kicker">// menu</div>
+          <div class="mt-3 font-mono text-xl text-accent-cyan">daeki.hong<span class="caret"></span></div>
         </div>
-        <button data-mobile-menu-close class="rounded-full border border-[rgba(16,31,61,0.12)] bg-white p-2 text-[#122033]" aria-label="Close menu">
-          <span class="material-symbols-outlined" aria-hidden="true">close</span>
-        </button>
+        <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
       </div>
-      <div class="mt-6 grid gap-3">
-        <a href="../" class="mobile-nav-link">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Home</div>
-          <div class="mt-1 text-sm text-[#526178]">Positioning and featured proof.</div>
-        </a>
-        <a href="./" class="mobile-nav-link is-active">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#1a57c7]">Projects</div>
-          <div class="mt-1 text-sm text-[#526178]">Industrial XR, BIM, robotics, and tooling.</div>
-        </a>
-        <a href="../ai-systems/" class="mobile-nav-link">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">AI Systems</div>
-          <div class="mt-1 text-sm text-[#526178]">Kernel, behaviors, and applied AI R&amp;D.</div>
-        </a>
-        <a href="../about/" class="mobile-nav-link">
-          <div class="font-label text-[11px] uppercase tracking-[0.18em] text-[#122033]">Profile</div>
-          <div class="mt-1 text-sm text-[#526178]">Experience and working style.</div>
-        </a>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../en/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">&rarr;</span></a>
+        <a href="../en/ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">&rarr;</span></a>
+        <a href="./" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span aria-hidden="true">&rarr;</span></a>
+        <a href="../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">&rarr;</span></a>
       </div>
-      <div class="mt-6 flex gap-3">
-        <a href="./" class="lang-link is-active bg-white">EN</a>
-        <a href="../#ch01" class="lang-link bg-white">KO</a>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <a href="../#ch01" class="px-3 py-2 text-text-secondary border border-hairline">KO</a>
+        <a href="./" class="px-3 py-2 text-bg-primary bg-accent-cyan">EN</a>
+      </div>
+      <div class="mt-auto pt-6 border-t border-hairline">
+        <div class="kicker">// connect</div>
+        <a href="mailto:darkhtk@gmail.com" class="mt-3 block btn-cyan w-full justify-center">darkhtk@gmail.com</a>
       </div>
     </div>
   </header>
 
-  <main class="relative">
-    <section class="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-8 lg:pb-18 lg:pt-32">
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        <div class="order-2 surface-panel p-6 sm:p-8 lg:order-1 lg:p-10">
-          <div class="section-kicker">Selected Work</div>
-          <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Projects</h1>
-          <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077] sm:text-lg">
+  <main class="relative pt-16">
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8 lg:py-24">
+        <div class="min-w-0 lg:col-span-7 flex flex-col gap-7">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// selected work</div>
+          <h1 class="display-hero max-w-3xl text-text-primary">Projects</h1>
+          <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base">
             Start with the AI systems work: remote AI products, agent workflows, and local-LLM R&amp;D. The industrial XR and tooling cases show the delivery base underneath them.
           </p>
-          <div class="mt-7 flex flex-wrap gap-2.5">
-            <span class="pill text-sm">AI Product Platform</span>
-            <span class="pill text-sm">Agent Workflow</span>
-            <span class="pill text-sm">Local LLM R&amp;D</span>
-            <span class="pill text-sm">Industrial XR</span>
-            <span class="pill text-sm">BIM Runtime</span>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip chip-cyan">AI Product Platform</span>
+            <span class="chip">Agent Workflow</span>
+            <span class="chip">Local LLM R&amp;D</span>
+            <span class="chip">Industrial XR</span>
+            <span class="chip">BIM Runtime</span>
           </div>
         </div>
 
-        <aside class="order-1 feature-panel p-5 sm:p-6 lg:order-2">
-          <div class="section-kicker">Recommended Cases</div>
-          <div class="mt-5 grid gap-3">
-          <a href="../en/ai-systems/deskrelay/" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
-              <div class="metric-label">01</div>
-              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">DeskRelay</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Remote Claude Code product surface.</div>
-            </a>
-            <a href="../en/ai-systems/genworld-ollama/" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
-              <div class="metric-label">02</div>
-              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">GenWorld + Ollama</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Local-LLM behavior and fallback R&amp;D.</div>
-            </a>
-            <a href="../en/projects/vr-robot/" class="rounded-[20px] bg-white px-4 py-4 transition-colors hover:border-[rgba(26,87,199,0.2)] hover:text-[#1a57c7]">
-              <div class="metric-label">03</div>
-              <div class="mt-2 text-sm font-semibold leading-6 text-[#122033]">VR Robot Teleoperation</div>
-              <div class="mt-1 text-sm leading-6 text-[#4f6077]">Industrial XR and robotics control.</div>
-            </a>
+        <aside class="min-w-0 lg:col-span-5">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="term-bar">
+              <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+              <span class="term-title">recommended cases</span>
+            </div>
+            <div class="grid gap-3 p-4 sm:p-5">
+              <a href="../en/ai-systems/deskrelay/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// 01</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">DeskRelay</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary">Remote Claude Code product surface.</div>
+              </a>
+              <a href="../en/ai-systems/genworld-ollama/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// 02</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">GenWorld + Ollama</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary">Local-LLM behavior and fallback R&amp;D.</div>
+              </a>
+              <a href="../en/projects/vr-robot/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// 03</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">VR Robot Teleoperation</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary">Industrial XR and robotics control.</div>
+              </a>
+            </div>
           </div>
         </aside>
       </div>
     </section>
 
-    <section id="core-proof" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <section id="core-proof" class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div class="chapter-rule mb-10">
+        <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ CORE PROOF ]</span>
+        <span class="line"></span>
+        <span class="tail">ai first / delivery base</span>
+      </div>
       <div class="max-w-3xl">
-        <div class="section-kicker">Core Proof</div>
-        <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">AI systems first, delivery systems underneath</h2>
-        <p class="mt-4 text-base leading-7 text-[#4f6077]">The top row shows where AI is now visible as product and behavior. The rest shows the execution base that made that shift credible.</p>
+        <h2 class="display-section text-text-primary">AI systems first, delivery systems underneath</h2>
+        <p class="mt-4 text-[15px] leading-8 text-text-secondary">The top row shows where AI is now visible as product and behavior. The rest shows the execution base that made that shift credible.</p>
       </div>
 
-      <div class="mt-10 grid gap-6 xl:grid-cols-3">
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
+      <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>deskrelay</span><span class="text-text-muted">ai product platform</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline">
             <img src="../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay GitHub manual chat session screenshot" style="object-position:left top;"/>
           </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">AI Product Platform</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">Self-host</span>
-            <span class="project-chip">LAN · Tailscale</span>
-            <span class="project-chip">Connector</span>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">Self-host</span>
+              <span class="chip">LAN · Tailscale</span>
+              <span class="chip">Connector</span>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">DeskRelay</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">A GitHub-backed self-host browser control tool for Claude Code running on your own server PC and registered PCs.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">AI Product / Self-host Dev Tool</div>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="chip">:18193 UI</span>
+              <span class="chip">:18091 connector</span>
+              <span class="chip">Manual screenshots</span>
+            </div>
+            <a href="../en/ai-systems/deskrelay/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">DeskRelay</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A GitHub-backed self-host browser control tool for Claude Code running on your own server PC and registered PCs.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">AI Product / Self-host Dev Tool</div>
-          <div class="mt-3 flex flex-wrap gap-2 text-xs text-[#4f6077]">
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">:18193 UI</span>
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">:18091 connector</span>
-            <span class="rounded-full bg-[#edf2f8] px-3 py-2">Manual screenshots</span>
-          </div>
-          <a href="../en/ai-systems/deskrelay/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base" aria-hidden="true">north_east</span></a>
         </article>
 
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>genworld</span><span class="text-text-muted">local llm r&amp;d</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline">
             <img src="../assets/images/genworld-world.png" alt="GenWorld + Ollama world"/>
           </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Local LLM R&amp;D</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">R&amp;D</span>
-            <span class="project-chip">Local LLM</span>
-            <span class="project-chip">NPC Systems</span>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">R&amp;D</span>
+              <span class="chip">Local LLM</span>
+              <span class="chip">NPC Systems</span>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">GenWorld + Ollama</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">A local-LLM runtime experiment around NPC cognition, dialogue flow, and graceful fallback.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Applied AI / Local LLM R&amp;D</div>
+            <a href="../en/ai-systems/genworld-ollama/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">GenWorld + Ollama</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A local-LLM runtime experiment around NPC cognition, dialogue flow, and graceful fallback.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Applied AI / Local LLM R&amp;D</div>
-          <a href="../en/ai-systems/genworld-ollama/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base" aria-hidden="true">north_east</span></a>
         </article>
 
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>vr-robot</span><span class="text-text-muted">industrial xr</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline">
             <img src="../assets/images/vr_robot_expo1.png" alt="VR robot teleoperation"/>
           </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Industrial XR</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">XR</span>
-            <span class="project-chip">Robotics</span>
-            <span class="project-chip">IK</span>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">XR</span>
+              <span class="chip">Robotics</span>
+              <span class="chip">IK</span>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">VR Robot Teleoperation</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">Quest 3 to Doosan A0912 control pipeline with safety logic, calibration, and in-house IK extension.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Industrial XR / Robotics</div>
+            <a href="../en/projects/vr-robot/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">VR Robot Teleoperation</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Quest 3 to Doosan A0912 control pipeline with safety logic, calibration, and in-house IK extension.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Industrial XR / Robotics</div>
-          <a href="../en/projects/vr-robot/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base" aria-hidden="true">north_east</span></a>
         </article>
 
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>dxcenter</span><span class="text-text-muted">tooling</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline">
             <img src="../assets/images/customeditor.png" alt="DXCenter editor"/>
           </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Tooling</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">Editor</span>
-            <span class="project-chip">Pipeline</span>
-            <span class="project-chip">Operations</span>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">Editor</span>
+              <span class="chip">Pipeline</span>
+              <span class="chip">Operations</span>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">DXCenter</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">Nine EditorWindow tools for non-developer authoring, data mapping, and digital twin operations.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Simulation Tooling / Digital Twin</div>
+            <a href="../en/projects/dxcenter/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">DXCenter</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">Nine EditorWindow tools for non-developer authoring, data mapping, and digital twin operations.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Simulation Tooling / Digital Twin</div>
-          <a href="../en/projects/dxcenter/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base" aria-hidden="true">north_east</span></a>
         </article>
 
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>neostalgia</span><span class="text-text-muted">interactive xr</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline">
             <img src="../assets/images/neostalgia_skybox.png" alt="Neostalgia XR"/>
           </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Interactive XR</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">XR</span>
-            <span class="project-chip">Generative AI</span>
-            <span class="project-chip">Exhibition</span>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">XR</span>
+              <span class="chip">Generative AI</span>
+              <span class="chip">Exhibition</span>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">Neostalgia</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">An XR exhibition system that interviews visitors, generates content, and runs with a real operations dashboard.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Interactive XR / Applied AI</div>
+            <a href="../en/projects/neostalgia/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">Neostalgia</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">An XR exhibition system that interviews visitors, generates content, and runs with a real operations dashboard.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Interactive XR / Applied AI</div>
-          <a href="../en/projects/neostalgia/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base" aria-hidden="true">north_east</span></a>
         </article>
 
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>vr-simulators</span><span class="text-text-muted">safety xr</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline">
             <img src="../assets/images/vr_construction_scaffold.png" alt="Legacy VR simulators"/>
           </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">Safety XR</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">VR 4D</span>
-            <span class="project-chip">Training</span>
-            <span class="project-chip">Delivery</span>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">VR 4D</span>
+              <span class="chip">Training</span>
+              <span class="chip">Delivery</span>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">VR Simulator Collection</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">A set of training simulators covering naval, construction, and factory safety contexts.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Safety XR / Training Simulators</div>
+            <a href="../en/projects/vr-simulators/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">VR Simulator Collection</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A set of training simulators covering naval, construction, and factory safety contexts.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Safety XR / Training Simulators</div>
-          <a href="../en/projects/vr-simulators/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base" aria-hidden="true">north_east</span></a>
         </article>
 
-        <article class="project-card bg-white p-4 sm:p-5">
-          <div class="project-media aspect-[4/3]">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>watchbim</span><span class="text-text-muted">bim runtime</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline">
             <img src="../assets/images/watchbim_generated_crosssection.png" alt="WatchBIM cross section"/>
           </div>
-          <div class="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1a57c7]">BIM Runtime</div>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="project-chip">BIM</span>
-            <span class="project-chip">Cross-section</span>
-            <span class="project-chip">Viewer</span>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">BIM</span>
+              <span class="chip">Cross-section</span>
+              <span class="chip">Viewer</span>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">WatchBIM</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">A Unity BIM runtime with custom geometry tooling, interaction logic, and cross-section analysis.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Simulation Tooling / BIM Systems</div>
+            <a href="../en/projects/watchbim/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
-          <h3 class="page-card-title mt-4 font-headline font-bold tracking-[-0.04em] text-[#122033]">WatchBIM</h3>
-          <p class="mt-3 text-sm leading-7 text-[#4f6077]">A Unity BIM runtime with custom geometry tooling, interaction logic, and cross-section analysis.</p>
-          <div class="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#51607a]">Simulation Tooling / BIM Systems</div>
-          <a href="../en/projects/watchbim/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">Read case study<span class="material-symbols-outlined text-base" aria-hidden="true">north_east</span></a>
         </article>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 pb-16 pt-2 sm:px-6 sm:pb-20 lg:px-8">
-      <div class="surface-panel p-6 sm:p-8 lg:p-10">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-          <div class="max-w-3xl">
-            <div class="section-kicker">Background</div>
-            <h2 class="heading-balance page-section-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Field context behind the portfolio</h2>
-            <p class="mt-4 text-base leading-7 text-[#4f6077]">My work is shaped by installation, factory visits, hardware assembly, public demos, and the practical cost of keeping systems running in front of real users.</p>
-          </div>
-          <a href="../about/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7] hover:text-[#10264e]">
-            Read profile
-            <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
-          </a>
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8 lg:py-20">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// background</div>
+          <h2 class="display-section text-text-primary">Field context behind the portfolio</h2>
+          <p class="mt-4 text-[15px] leading-8 text-text-secondary">My work is shaped by installation, factory visits, hardware assembly, public demos, and the practical cost of keeping systems running in front of real users.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="../about/" class="btn-ghost">Read profile <span aria-hidden="true">&nearr;</span></a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="border-t border-[rgba(16,31,61,0.08)] bg-white/70">
-    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-      <div>
-        <div class="brand-mark font-headline text-2xl font-bold">DAEKI HONG</div>
-        <div class="mt-2 text-sm text-[#526178]">Project archive</div>
+  <footer class="border-t border-hairline">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 font-mono text-[11px] uppercase tracking-widest text-text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span>project archive</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../en/" class="hover:text-accent-cyan">home</a>
+        <a href="../en/ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../#ch01" class="hover:text-accent-cyan">ko</a>
       </div>
-      <div class="flex flex-wrap items-center gap-3 text-sm">
-        <a class="footer-link" href="../">Home</a>
-        <a class="footer-link" href="../about/">Profile</a>
-        <a class="footer-link" href="../#ch01">한국어</a>
-      </div>
+      <div>sys.version: projects.dark.1</div>
     </div>
   </footer>
 </div>

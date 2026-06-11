@@ -1,80 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Neostalgia | Daeki Hong</title>
-<meta name="description" content="English case study for Neostalgia: XR experience orchestration, voice-to-AI pipeline, generative asset flow, and exhibition operations."/>
-<meta property="og:title" content="Neostalgia | Daeki Hong"/>
-<meta property="og:description" content="English case study for Neostalgia: XR experience orchestration, voice-to-AI pipeline, generative asset flow, and exhibition operations."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neostalgia · Case Study | Daeki Hong</title>
+<meta name="description" content="An XR experience pipeline responsible for both visitor-interview-driven content generation and live exhibition operations. Whisper + GPT + Skybox + Meshy. BIFAN selection + MSIT Minister Citation."/>
+<meta property="og:title" content="Neostalgia · Case Study"/>
+<meta property="og:description" content="An XR experience pipeline responsible for both visitor-interview-driven content generation and live exhibition operations. Whisper + GPT + Skybox + Meshy. BIFAN selection + MSIT Minister Citation."/>
 <meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/neostalgia_skybox.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/projects/neostalgia/"/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Neostalgia | Daeki Hong"/>
-<meta name="twitter:description" content="English case study for Neostalgia: XR experience orchestration, voice-to-AI pipeline, generative asset flow, and exhibition operations."/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Neostalgia · Case Study"/>
+<meta name="twitter:description" content="An XR experience pipeline responsible for both visitor-interview-driven content generation and live exhibition operations. Whisper + GPT + Skybox + Meshy. BIFAN selection + MSIT Minister Citation."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/neostalgia_skybox.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon.png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">tailwind.config={theme:{extend:{fontFamily:{headline:["Space Grotesk","Noto Sans KR","sans-serif"],body:["Noto Sans KR","sans-serif"],label:["Space Grotesk","Noto Sans KR","sans-serif"]}}}}</script>
-<link rel="stylesheet" href="../../../assets/css/site.css"/>
+<script id="tailwind-config">
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#5B6573", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] }
+  } } }
+</script>
+<link rel="stylesheet" href="../../../assets/css/portfolio-dark.css"/>
 </head>
-<body class="font-body selection:bg-[#d8e6ff] selection:text-[#122033]">
-<div class="site-shell">
-  <main class="mx-auto max-w-7xl px-4 pb-16 pt-24 sm:px-6 lg:px-8 lg:pt-32">
-    <div class="surface-panel p-6 sm:p-8 lg:p-10">
-      <div class="flex flex-wrap items-center gap-3">
-        <span class="section-kicker">Interactive XR x Generative AI</span>
-        <span class="rounded-full bg-[#e7efff] px-3 py-2 text-[11px] font-semibold text-[#1a57c7]">BIFAN Selection</span>
-        <span class="rounded-full bg-[#fff3d8] px-3 py-2 text-[11px] font-semibold text-[#8a5a00]">MSIT Minister Citation</span>
-      </div>
-      <h1 class="display-manual page-hero-title mt-4 font-headline font-bold tracking-[-0.05em] text-[#122033]">Neostalgia</h1>
-      <p class="hero-copy mt-5 max-w-3xl text-base leading-8 text-[#4f6077]">An XR exhibition system that interviews visitors about memory, generates visual assets from the conversation, and keeps the whole experience operable through logging and a dashboard.</p>
-      <div class="mt-7 flex flex-wrap gap-2.5">
-        <span class="pill text-sm">Whisper</span>
-        <span class="pill text-sm">GPT</span>
-        <span class="pill text-sm">Skybox AI</span>
-        <span class="pill text-sm">Meshy</span>
-        <span class="pill text-sm">Dashboard</span>
-      </div>
-    </div>
+<body class="font-body antialiased">
+<div class="relative">
 
-    <div class="mt-6 summary-grid">
-      <article class="summary-card"><h3>Role</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">Connected the Unity experience loop, AI pipeline, session logging, and operating dashboard into one exhibition-ready flow.</p></article>
-      <article class="summary-card"><h3>Top Feature 01</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">A memory interview orchestrator where visitor gestures, voice input, and generated results decide the next state of the XR experience.</p></article>
-      <article class="summary-card"><h3>Top Feature 02</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">A voice-to-AI conversation pipeline using VAD recording, STT, GPT function-calling, nickname extraction, and emotion-aware response handling.</p></article>
-      <article class="summary-card"><h3>Top Feature 03</h3><p class="mt-3 text-sm leading-7 text-[#4f6077]">A generative asset pipeline that turns conversation logs into skyboxes and 3D objects that can be experienced inside XR.</p></article>
-    </div>
-
-    <div class="mt-14 grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-      <div class="media-frame video">
-        <iframe src="https://www.youtube-nocookie.com/embed/wz6HslgOnl8" title="Neostalgia demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-      <div class="surface-panel p-6 sm:p-8">
-        <div class="section-kicker">Outcome</div>
-        <div class="content-prose mt-4">
-          <p>Neostalgia matters because it is not just an AI-connected XR prototype. It earned BIFAN XR Beyond Reality official selection, received the MSIT Minister Citation, and operated in front of real exhibition traffic.</p>
-          <p>The project reached beyond content generation: it included telemetry, cloud logging, asset retrieval, and an operations dashboard for looking back at sessions.</p>
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../../ai-systems/" class="nav-link">ai</a>
+        <a href="../../projects/" class="nav-link is-active">industrial</a>
+        <a href="../../../about/" class="nav-link">profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <a href="../../../projects/neostalgia/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
+          <a href="./" class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</a>
         </div>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a href="https://plus.bifan.kr/eng/program/xr_experience_view.asp?actEvent=view&amp;pk_seq=818" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">BIFAN XR<span class="material-symbols-outlined text-base">north_east</span></a>
-          <a href="https://zdnet.co.kr/view/?no=20251210163700" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">ZDNet article<span class="material-symbols-outlined text-base">north_east</span></a>
-          <a href="https://www.youtube.com/watch?v=wz6HslgOnl8" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1a57c7]">YouTube<span class="material-symbols-outlined text-base">north_east</span></a>
-        </div>
+        <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button>
       </div>
     </div>
-
-    <div class="mt-14 detail-grid">
-      <div class="detail-note"><strong>Operations scale:</strong> 130+ direct participants, six exhibition rounds, and roughly 2,000 visitors across the event footprint.</div>
-      <div class="detail-note"><strong>Why it is senior-level:</strong> the hard part was orchestration: handling async generation, visitor flow, XR timing, and operational observability together.</div>
-      <div class="detail-note"><strong>Roles:</strong> interactive XR, creative AI systems, exhibition technology, and applied AI experience.</div>
-      <div class="detail-note"><strong>Korean version:</strong> <a href="../../../projects/neostalgia/" class="text-[#1a57c7]">open the original Korean case study</a>.</div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">→</span></a>
+        <a href="../../ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">→</span></a>
+        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span aria-hidden="true">→</span></a>
+        <a href="../../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <a href="../../../projects/neostalgia/" class="px-3 py-2 text-text-secondary border border-hairline">KO</a>
+        <a href="./" class="px-3 py-2 text-bg-primary bg-accent-cyan">EN</a>
+      </div>
     </div>
+  </header>
+
+  <main class="relative pt-16">
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// industrial · xr · ai pipeline · awarded</div>
+          <h1 class="display-hero text-text-primary kr-balance">Neostalgia.</h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">visitor interview → ai content → live exhibition</p>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
+            An XR experience pipeline responsible for both visitor-interview-driven content generation and live exhibition operations. Whisper captures the interview, GPT generates the narrative, and Skybox · Meshy produce the visual assets placed into the XR experience in real time. <strong class="text-text-primary font-semibold">BIFAN selection</strong> + <strong class="text-text-primary font-semibold">MSIT Minister Citation</strong>.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#pipeline" class="btn-cyan">Pipeline <span aria-hidden="true">↓</span></a>
+            <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip-amber chip">BIFAN Selection</span><span class="chip-amber chip">MSIT Minister Citation</span>
+          </div>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>whisper · stt</span>
+            <span class="dot"></span><span>gpt narrative</span>
+            <span class="dot"></span><span>skybox · meshy</span>
+            <span class="dot"></span><span>live exhibition</span>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>WORLD</span><span class="text-text-muted">SKYBOX</span></div>
+            <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../../assets/images/neostalgia_skybox.png" alt="Neostalgia skybox"/></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pipeline" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ PIPELINE ]</span>
+        <span class="kicker text-text-secondary">INTERVIEW → CONTENT → XR</span>
+        <span class="line"></span>
+      </div>
+      <div class="grid gap-3">
+        <div class="lane"><span class="lane-num">01</span><div class="kicker kicker-cyan mb-2">// input</div><div class="font-display font-bold text-lg text-text-primary">Visitor Interview</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">Visitor interviews — collecting recollections, memories, and places by voice.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">02</span><div class="kicker kicker-cyan mb-2">// stt</div><div class="font-display font-bold text-lg text-text-primary">Whisper</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">Voice → text conversion. Response time validated to fit the live operations flow.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">03</span><div class="kicker kicker-cyan mb-2">// narrative</div><div class="font-display font-bold text-lg text-text-primary">GPT</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">Extracts narrative seeds from visitor speech. Refines them into a form that fits the exhibition context.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">04</span><div class="kicker kicker-cyan mb-2">// visual</div><div class="font-display font-bold text-lg text-text-primary">Skybox + Meshy</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">Narrative seed → generated visual assets. Skybox environments + Meshy objects.</p></div>
+        <div class="lane-arrow">↓</div>
+        <div class="lane"><span class="lane-num">05</span><div class="kicker kicker-cyan mb-2">// xr</div><div class="font-display font-bold text-lg text-text-primary">Live XR Experience</div><p class="mt-2 text-[13px] text-text-secondary leading-relaxed">Generated content is placed into the XR experience immediately, monitored through the live exhibition operator dashboard.</p></div>
+      </div>
+    </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14">
+        <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ MEDIA ]</span>
+        <span class="kicker text-accent-cyan">DEMO / ARTICLES</span>
+        <span class="line"></span>
+      </div>
+      <div class="grid gap-8">
+        <div class="media-frame video order-2 mx-auto w-full max-w-6xl">
+          <iframe src="https://www.youtube-nocookie.com/embed/wz6HslgOnl8" title="Neostalgia demo video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="card ticks order-1 p-6 sm:p-8"><span class="tr"></span><span class="bl"></span>
+          <div class="kicker kicker-amber mb-4">// public records</div>
+          <h2 class="display-section text-text-primary kr-balance">Official selection and press.</h2>
+          <p class="mt-4 text-[14px] leading-7 text-text-secondary kr-balance">The official BIFAN XR selection page and the press article on the MSIT Minister Citation are linked together here.</p>
+          <p class="mt-3 text-[14px] leading-7 text-text-secondary kr-balance">The piece ran in front of real exhibition traffic: 130+ direct participants across six exhibition rounds, and roughly 2,000 visitors across the event footprint.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="https://plus.bifan.kr/eng/program/xr_experience_view.asp?actEvent=view&amp;pk_seq=818" target="_blank" rel="noopener noreferrer" class="btn-ghost">BIFAN XR <span aria-hidden="true">↗</span></a>
+            <a href="https://zdnet.co.kr/view/?no=20251210163700" target="_blank" rel="noopener noreferrer" class="btn-ghost">ZDNet article <span aria-hidden="true">↗</span></a>
+            <a href="https://www.youtube.com/watch?v=wz6HslgOnl8" target="_blank" rel="noopener noreferrer" class="btn-ghost">YouTube <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14">
+          <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ SHOTS ]</span>
+          <span class="kicker text-accent-cyan">EXHIBITION SURFACES</span>
+          <span class="line"></span>
+        </div>
+        <div class="h-scroll">
+          <figure class="w-80 sm:w-96"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>S_01</span><span class="text-text-muted">SKYBOX</span></div><div class="media-frame aspect-[4/3]"><img src="../../../assets/images/neostalgia_skybox.png" alt="skybox"/></div></div><figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">generated skybox</figcaption></figure>
+          <figure class="w-80 sm:w-96"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>S_02</span><span class="text-text-muted">OBJECT</span></div><div class="media-frame aspect-[4/3]"><img src="../../../assets/images/neostalgia_object.png" alt="object"/></div></div><figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">meshy object</figcaption></figure>
+          <figure class="w-80 sm:w-96"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>S_03</span><span class="text-text-muted">DIALOGUE</span></div><div class="media-frame aspect-[4/3]"><img src="../../../assets/images/neostalgia_dialogue.png" alt="dialogue"/></div></div><figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">narrative dialogue</figcaption></figure>
+          <figure class="w-80 sm:w-96"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>S_04</span><span class="text-text-muted">DRAWING</span></div><div class="media-frame aspect-[4/3]"><img src="../../../assets/images/neostalgia_drawing.png" alt="drawing"/></div></div><figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">visitor drawing</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary kr-balance">Related work.</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="../vr-robot/" class="btn-ghost">VR Robot <span aria-hidden="true">↗</span></a>
+          <a href="../watchbim/" class="btn-ghost">WatchBIM <span aria-hidden="true">↗</span></a>
+          <a href="../../projects/" class="btn-ghost">Industrial <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span class="text-text-muted">· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../../" class="hover:text-accent-cyan">home</a>
+        <a href="../../ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="../../projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../../../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../../projects/neostalgia/" class="hover:text-accent-cyan">ko</a>
+      </div>
+      <div class="text-text-muted">neostalgia · xr ai pipeline · BIFAN · MSIT · © 2026</div>
+    </div>
+  </footer>
+
 </div>
 <script src="../../../assets/js/site.js"></script>
 </body>
