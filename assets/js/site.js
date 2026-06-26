@@ -283,3 +283,28 @@
     includeThisBrowser: function () { window.localStorage.removeItem(excludeKey); }
   };
 })();
+
+// === Engineering 페이지 — Overview / Deep 모드 토글 ===
+// head 인라인 스크립트가 flash 방지용으로 html[data-eng-mode] 를 먼저 설정한다.
+// 여기서는 버튼 표시 동기화 + 클릭 처리 + localStorage 저장만 담당.
+(function () {
+  var group = document.querySelector("[data-mode-toggle]");
+  if (!group) return;
+
+  var STORAGE_KEY = "eng-mode";
+  var buttons = group.querySelectorAll("button[data-mode]");
+
+  function apply(mode) {
+    document.documentElement.setAttribute("data-eng-mode", mode);
+    buttons.forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode));
+    });
+    try { window.localStorage.setItem(STORAGE_KEY, mode); } catch (e) {}
+  }
+
+  apply(document.documentElement.getAttribute("data-eng-mode") || "overview");
+
+  buttons.forEach(function (b) {
+    b.addEventListener("click", function () { apply(b.getAttribute("data-mode")); });
+  });
+})();
