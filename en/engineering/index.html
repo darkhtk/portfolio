@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Engineering · Hardest Modules | Daeki Hong</title>
+<meta name="description" content="The hardest modules I had to solve directly inside Unity projects — an in-house Jacobian IK solver, BIM runtime cross-section generation, custom EditorWindow tooling, and hardware-Unity sync. Switch depth with OVERVIEW / DEEP modes."/>
+<meta property="og:title" content="Engineering · Hardest Modules"/>
+<meta property="og:description" content="In-house Jacobian IK, BIM runtime cross-section, EditorWindow tooling, hardware sync — the hard modules I designed myself, in OVERVIEW / DEEP."/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/ik_tcp_tracking.png"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/en/engineering/"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Engineering · Hardest Modules"/>
+<meta name="twitter:description" content="In-house Jacobian IK, BIM runtime cross-section, EditorWindow tooling, hardware sync — switch OVERVIEW / DEEP modes."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/ik_tcp_tracking.png"/>
+<link rel="canonical" href="https://darkhtk.github.io/portfolio/en/engineering/"/>
+<link rel="alternate" hreflang="ko" href="https://darkhtk.github.io/portfolio/engineering/"/>
+<link rel="alternate" hreflang="en" href="https://darkhtk.github.io/portfolio/en/engineering/"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
+      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F",
+      "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787",
+      "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
+    borderRadius: { DEFAULT: "0.5rem", xs: "0.25rem", sm: "0.375rem", md: "0.5rem", lg: "0.75rem" }
+  } } }
+</script>
+<link rel="stylesheet" href="../../assets/css/portfolio-dark.css"/>
+<!-- mode init (pre-paint, flash 방지). JS 없으면 속성 미설정 → DEEP 포함 전체 표시. -->
+<script>
+  (function () {
+    try { document.documentElement.setAttribute("data-eng-mode", localStorage.getItem("eng-mode") || "overview"); }
+    catch (e) { document.documentElement.setAttribute("data-eng-mode", "overview"); }
+  })();
+</script>
+<style>
+  /* === mode visibility — OVERVIEW 일 때만 DEEP 숨김 (속성 없으면 = no-JS = 전체 표시) === */
+  html[data-eng-mode="overview"] [data-deep] { display: none; }
+  /* === segmented mode toggle === */
+  .seg { display: inline-flex; border: 1px solid rgba(230,237,243,0.16); background: rgba(17,22,29,0.6); }
+  .seg button { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 7px 16px; color: #8A94A6; background: transparent; border: 0; cursor: pointer; transition: color 160ms ease, background-color 160ms ease; }
+  .seg button[aria-pressed="true"] { color: #0B0F14; background: #6FE3FF; font-weight: 700; }
+  .seg button:not([aria-pressed="true"]):hover { color: #6FE3FF; }
+  /* === sticky mode bar (nav 64px 아래) === */
+  .mode-bar { position: sticky; top: 64px; z-index: 40; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); background: rgba(11,15,20,0.82); border-bottom: 1px solid rgba(230,237,243,0.08); }
+  /* === code / formula blocks === */
+  .code-block { font-family: "JetBrains Mono", monospace; font-size: 12.5px; line-height: 1.75; color: #C7D2D6; background: #0B0F14; border: 1px solid rgba(230,237,243,0.10); padding: 16px 18px; overflow-x: auto; white-space: pre; }
+  .code-block .c { color: #5B6573; }
+  .code-block .k { color: #6FE3FF; }
+  .code-block .s { color: #F5C26B; }
+  .formula { font-family: "JetBrains Mono", monospace; color: #E6EDF3; background: rgba(111,227,255,0.06); border: 1px solid rgba(111,227,255,0.18); padding: 14px 18px; font-size: 14px; line-height: 1.6; overflow-x: auto; }
+  .deep-label { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6FE3FF; }
+  .deep-block + .deep-block { margin-top: 22px; padding-top: 22px; border-top: 1px solid rgba(230,237,243,0.08); }
+  /* DEEP 전개 시 부드러운 진입 (모션 선호 사용자만) */
+  @media (prefers-reduced-motion: no-preference) {
+    html[data-eng-mode="deep"] [data-deep] { animation: deepin 240ms ease both; }
+  }
+  @keyframes deepin { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  /* DEEP 모드에서만 보이는 안내 텍스트 토글 */
+  html[data-eng-mode="deep"] .when-overview { display: none; }
+  html[data-eng-mode="overview"] .when-deep { display: none; }
+</style>
+</head>
+<body class="overflow-x-hidden font-body antialiased">
+<div class="relative">
+
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <a href="../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../" class="nav-link">home</a>
+        <a href="../ai-systems/" class="nav-link">ai</a>
+        <a href="../projects/" class="nav-link">industrial</a>
+        <a href="./" class="nav-link is-active">engineering</a>
+        <a href="../about/" class="nav-link">profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <a href="../../engineering/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">KO</a>
+          <a href="./" class="px-2 py-1 text-bg-primary bg-accent-cyan">EN</a>
+        </div>
+        <a href="mailto:darkhtk@gmail.com" class="hidden lg:inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/40 hover:bg-accent-cyan/10">
+          [ Connect <span aria-hidden="true">&nearr;</span> ]
+        </a>
+        <button data-mobile-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan">
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div>
+          <div class="kicker">// menu</div>
+          <div class="mt-3 font-mono text-xl text-accent-cyan">daeki.hong<span class="caret"></span></div>
+        </div>
+        <button data-mobile-menu-close aria-label="Close menu" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">&rarr;</span></a>
+        <a href="../ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">&rarr;</span></a>
+        <a href="../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span aria-hidden="true">&rarr;</span></a>
+        <a href="./" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">engineering <span aria-hidden="true">&rarr;</span></a>
+        <a href="../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <a href="../../engineering/" class="px-3 py-2 text-text-secondary border border-hairline">KO</a>
+        <a href="./" class="px-3 py-2 text-bg-primary bg-accent-cyan">EN</a>
+      </div>
+      <div class="mt-auto pt-6 border-t border-hairline">
+        <div class="kicker">// connect</div>
+        <a href="mailto:darkhtk@gmail.com" class="mt-3 block btn-cyan w-full justify-center">darkhtk@gmail.com</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- === STICKY MODE BAR === -->
+  <div class="mode-bar mt-16">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="kicker hidden sm:inline">// view</span>
+        <div class="seg" role="group" aria-label="Toggle explanation depth mode" data-mode-toggle>
+          <button type="button" data-mode="overview" aria-pressed="true">Overview</button>
+          <button type="button" data-mode="deep" aria-pressed="false">Deep</button>
+        </div>
+      </div>
+      <p class="hidden sm:block font-mono text-[11px] uppercase tracking-widest text-text-muted truncate">
+        <span class="when-overview">Recruiter summary · switch to DEEP for the full story &rarr;</span>
+        <span class="when-deep text-accent-cyan">$ render --mode=deep · problem · approach · math · code</span>
+      </p>
+    </div>
+  </div>
+
+  <main class="relative">
+
+    <!-- === HERO === -->
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8 lg:py-20">
+        <div class="min-w-0 lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// engineering · deep-dive</div>
+          <h1 class="display-hero max-w-3xl text-text-primary kr-balance">The hardest modules.</h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">jacobian ik · bim cross-section · editor tooling · hardware sync</p>
+          <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base kr-balance">
+            Behind the project cards are the hard modules I had to solve myself. This collects only the parts that off-the-shelf tools could not handle, or that I had to design from scratch. Use the <span class="text-accent-cyan font-medium">OVERVIEW / DEEP</span> toggle above to move between the summary and the deeper explanation.
+          </p>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>jacobian ik solver</span>
+            <span class="dot"></span><span>bim runtime section</span>
+            <span class="dot"></span><span>editor tooling</span>
+            <span class="dot"></span><span>hardware sync</span>
+          </div>
+        </div>
+        <aside class="min-w-0 lg:col-span-5">
+          <div class="term-window ticks">
+            <span class="tr"></span><span class="bl"></span>
+            <div class="term-bar">
+              <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+              <span class="term-title">hard modules · index</span>
+            </div>
+            <div class="grid gap-3 p-4 sm:p-5">
+              <a href="#mod-ik" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// mod.01</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">In-house Jacobian IK solver</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">Stable real-time inverse kinematics, even at singularities.</div>
+              </a>
+              <a href="#mod-bim" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// mod.02</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">BIM runtime cross-section</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">Slice the mesh with any plane, down to 2D analysis.</div>
+              </a>
+              <a href="#mod-editor" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// mod.03</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">Custom EditorWindow tooling</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">A toolset non-developers run without code.</div>
+              </a>
+              <a href="#mod-hardware" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// mod.04</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">Hardware-Unity sync</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">A self-built motion rig and safety interlock.</div>
+              </a>
+              <a href="#mod-neostalgia" class="block border border-accent-amber/30 bg-accent-amber/5 p-4 transition-colors hover:border-accent-amber/60">
+                <div class="kicker kicker-amber">// mod.05 &#9733; awarded</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">Neostalgia · Generative-AI exhibition</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">Minister's Citation · BIFAN. A live generative pipeline.</div>
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MOD.01 — JACOBIAN IK SOLVER                                   -->
+    <!-- ============================================================ -->
+    <section id="mod-ik" class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20 scroll-mt-28">
+      <div class="chapter-rule mb-12">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ MOD.01 ]</span>
+        <span class="kicker text-text-secondary">JACOBIAN IK</span>
+        <span class="line"></span>
+        <span class="tail">vr robot · robotics</span>
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
+        <div class="min-w-0 lg:col-span-5">
+          <div class="term-window ticks lg:sticky lg:top-32"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>IK_SOLVER</span><span class="text-text-muted">TCP TRACKING</span></div>
+            <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../assets/images/ik_tcp_tracking.png" alt="Jacobian IK TCP tracking"/></div>
+          </div>
+        </div>
+
+        <div class="min-w-0 lg:col-span-7 flex flex-col gap-5">
+          <div class="kicker kicker-cyan">// jacobian ik solver</div>
+          <h2 class="display-section text-text-primary kr-balance">In-house Jacobian IK solver.</h2>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip chip-cyan">Robotics</span>
+            <span class="chip">Damped Least Squares</span>
+            <span class="chip">6-DOF</span>
+            <span class="chip">Realtime</span>
+          </div>
+          <p class="text-[15px] leading-[1.85] text-text-secondary kr-balance">
+            An inverse-kinematics solver for controlling an industrial 6-axis robot in real time from 6-DOF VR controller input. I built stable behavior that does not diverge near singularities, while reducing the dependency on RoboDK.
+          </p>
+          <a href="../projects/vr-robot/" class="inline-flex w-fit font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Related case · VR Robot <span aria-hidden="true" class="ml-2">&nearr;</span></a>
+
+          <div class="mt-1">
+            <div class="kicker kicker-cyan mb-3">// demo <span class="text-text-muted">— live demo footage</span></div>
+            <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/B_E7O60NLO4" title="Custom IK + damping physics demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+            <div data-deep class="mt-4 grid gap-4 sm:grid-cols-2">
+              <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/rUuPAdEcB7o" title="TCP IK tracking" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+              <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/PuKlRUS_AKY" title="IK + teaching" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+              <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/pGh_t7gy27I" title="Multi-robot VR control" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+              <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/Z6EnF1AfZWA" title="BEXCO expo demo / HMD view" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+            </div>
+          </div>
+
+          <!-- DEEP -->
+          <div data-deep class="mt-2 border-l border-accent-cyan/30 pl-5 sm:pl-6">
+            <div class="deep-block">
+              <div class="deep-label">// problem</div>
+              <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                Given a target pose (TCP), you have to solve backward for each joint angle — but the solution may be multiple or non-existent. Especially near a <strong class="text-text-primary font-medium">singularity</strong>, where the arm stretches into a straight line, a pure matrix-inverse approach makes joint velocities blow up and the robot jerks. Depending on an external solver (RoboDK) every frame also hurt real-time performance and portability.
+              </p>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label">// approach</div>
+              <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                I solved it with <strong class="text-text-primary font-medium">Damped Least Squares</strong> rather than the Jacobian transpose. As the configuration approaches a singularity, I raise the damping, trading a little accuracy so the solution does not diverge. VR input maps directly to the solver's target pose, and invalid commands are filtered out before they reach the robot.
+              </p>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label">// live <span class="text-text-muted">— drag the canvas · the solver is actually running</span></div>
+              <figure class="mt-3" data-ik-demo>
+                <div class="relative border border-hairline bg-bg-primary">
+                  <canvas data-ik-canvas class="block w-full" style="aspect-ratio:16/9;touch-action:none;cursor:crosshair"></canvas>
+                  <div data-ik-readout class="absolute left-3 top-3 font-mono text-[10px] uppercase tracking-widest text-text-muted"></div>
+                </div>
+                <figcaption class="mt-2 flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-text-muted">
+                  <button type="button" data-ik-damping aria-pressed="true" class="px-2 py-1 border border-hairline-strong text-accent-cyan hover:bg-accent-cyan/10">damping: on</button>
+                  <span>3-link planar arm · jacobian ik solver</span>
+                  <span class="text-text-secondary">damping off → unstable at singularities</span>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label">// result</div>
+              <ul class="mt-3 grid gap-2 text-[14px] leading-relaxed text-text-secondary">
+                <li class="check"><span class="mark">[x]</span><span class="label">Stable tracking near singularities, without divergence</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">Ported to an in-house solver that reduces RoboDK dependency</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">VR 6-DOF · TCP tracking · validated on multiple robots</span></li>
+              </ul>
+              <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <figure class="card ticks group"><span class="tr"></span><span class="bl"></span>
+                  <div class="media-frame aspect-square"><img src="../../assets/images/ik_damping_physics.png" alt="IK damping physics"/></div>
+                  <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">damping</figcaption>
+                </figure>
+                <figure class="card ticks group"><span class="tr"></span><span class="bl"></span>
+                  <div class="media-frame aspect-square"><img src="../../assets/images/ik_vr_control.png" alt="IK VR control"/></div>
+                  <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">vr control</figcaption>
+                </figure>
+                <figure class="card ticks group"><span class="tr"></span><span class="bl"></span>
+                  <div class="media-frame aspect-square"><img src="../../assets/images/ik_debug_ui.png" alt="IK debug UI"/></div>
+                  <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">debug ui</figcaption>
+                </figure>
+                <figure class="card ticks group"><span class="tr"></span><span class="bl"></span>
+                  <div class="media-frame aspect-square"><img src="../../assets/images/ik_multi_robot.png" alt="IK multi robot"/></div>
+                  <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">multi robot</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MOD.02 — BIM RUNTIME CROSS-SECTION                            -->
+    <!-- ============================================================ -->
+    <section id="mod-bim" class="relative bg-grid-dots scroll-mt-28">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div class="chapter-rule mb-12">
+          <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ MOD.02 ]</span>
+          <span class="kicker text-text-secondary">BIM CROSS-SECTION</span>
+          <span class="line"></span>
+          <span class="tail">watchbim · runtime geometry</span>
+        </div>
+
+        <div class="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
+          <div class="min-w-0 lg:col-span-7 flex flex-col gap-5 lg:order-2">
+            <div class="kicker kicker-cyan">// bim runtime cross-section</div>
+            <h2 class="display-section text-text-primary kr-balance">Runtime cross-section engine.</h2>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">Computational Geometry</span>
+              <span class="chip">Mesh Slicing</span>
+              <span class="chip">Custom Hit Engine</span>
+              <span class="chip">2D Viewer</span>
+            </div>
+            <p class="text-[15px] leading-[1.85] text-text-secondary kr-balance">
+              An operational need that off-the-shelf BIM tools could not meet — I built the ability to generate a cross-section from any plane at runtime and to measure and analyze the result in a 2D viewer. For picking and hover on large models, I used a custom hit engine instead of the standard Raycast.
+            </p>
+            <a href="../projects/watchbim/" class="inline-flex w-fit font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Related case · WatchBIM <span aria-hidden="true" class="ml-2">&nearr;</span></a>
+
+            <div class="mt-1">
+              <div class="kicker kicker-cyan mb-3">// demo <span class="text-text-muted">— live demo footage</span></div>
+              <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/ajJKPro7008" title="WatchBIM demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+            </div>
+
+            <!-- DEEP -->
+            <div data-deep class="mt-2 border-l border-accent-cyan/30 pl-5 sm:pl-6">
+              <div class="deep-block">
+                <div class="deep-label">// problem</div>
+                <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                  Operators say, "I want to cut here, see the cross-section, and measure dimensions," but ordinary BIM viewers do not provide runtime cross-section generation or real-time 2D analysis. On top of that, on large models reliable selection was hard with the standard <code>Physics.Raycast</code> alone.
+                </p>
+              </div>
+              <div class="deep-block">
+                <div class="deep-label">// approach</div>
+                <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                  Off-the-shelf BIM tools fell short here, so I wrote the geometry I needed. The 2D segment-intersection test is implemented with an <strong class="text-text-primary font-medium">orientation (cross-product sign)</strong> method, and mesh cutting/clipping is built on a computational-geometry library (Habrador — cut-mesh-with-plane · polygon clipping · ear-clipping triangulation). Large vertex passes are parallelized with the Unity Job System and Burst, and the 3D model and 2D viewer share one data model.
+                </p>
+              </div>
+              <div class="deep-block">
+                <div class="deep-label">// live <span class="text-text-muted">— drag the canvas · cross-section concept</span></div>
+                <figure class="mt-3" data-sec-demo>
+                  <div class="relative border border-hairline bg-bg-primary">
+                    <canvas data-sec-canvas class="block w-full" style="aspect-ratio:16/9;touch-action:none;cursor:crosshair"></canvas>
+                    <div data-sec-readout class="absolute left-3 top-3 font-mono text-[10px] uppercase tracking-widest text-text-muted"></div>
+                  </div>
+                  <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">building section · concept illustration</figcaption>
+                </figure>
+              </div>
+              <div class="deep-block">
+                <div class="deep-label">// code <span class="text-text-muted">— based on actual implementation (WBExtensions)</span></div>
+<pre class="code-block mt-3"><span class="c">// 2D segment-intersection test — orientation (cross-product sign)</span>
+<span class="k">int</span> Orient(Pt p, Pt q, Pt r) {
+    <span class="k">float</span> v = (q.Y - p.Y) * (r.X - q.X) - (q.X - p.X) * (r.Y - q.Y);
+    <span class="k">return</span> v == 0 ? 0 : (v &gt; 0 ? 1 : 2);     <span class="c">// collinear / CW / CCW</span>
+}
+<span class="k">bool</span> IsIntersect(Pt p1, Pt q1, Pt p2, Pt q2) {
+    <span class="k">int</span> o1 = Orient(p1,q1,p2), o2 = Orient(p1,q1,q2);
+    <span class="k">int</span> o3 = Orient(p2,q2,p1), o4 = Orient(p2,q2,q1);
+    <span class="k">return</span> o1 != o2 &amp;&amp; o3 != o4;              <span class="c">// (+ collinear special cases)</span>
+}
+<span class="c">// mesh cut &amp; triangulation: Habrador (cut-mesh-with-plane, ear-clipping)</span>
+<span class="c">// large vertex passes: Unity Job System + Burst</span></pre>
+              </div>
+              <div class="deep-block">
+                <div class="deep-label">// result</div>
+                <ul class="mt-3 grid gap-2 text-[14px] leading-relaxed text-text-secondary">
+                  <li class="check"><span class="mark">[x]</span><span class="label">Runtime cross-section on any plane + highlight</span></li>
+                  <li class="check"><span class="mark">[x]</span><span class="label">Linked 3D ↔ 2D viewer for measurement and analysis</span></li>
+                  <li class="check"><span class="mark">[x]</span><span class="label">Custom hit engine · vertical graph · <code>HMMouseController</code> camera</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="min-w-0 lg:col-span-5 lg:order-1">
+            <div class="term-window ticks lg:sticky lg:top-32"><span class="tr"></span><span class="bl"></span>
+              <div class="card-bar"><span>VIEWER</span><span class="text-text-muted">GENERATED SECTION</span></div>
+              <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../assets/images/watchbim_generated_crosssection.png" alt="Generated BIM cross-section"/></div>
+            </div>
+            <div data-deep class="mt-3 grid grid-cols-3 gap-3">
+              <figure class="card ticks group"><span class="tr"></span><span class="bl"></span>
+                <div class="media-frame aspect-square"><img src="../../assets/images/watchbim_clipping.png" alt="BIM clipping"/></div>
+                <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">clip</figcaption>
+              </figure>
+              <figure class="card ticks group"><span class="tr"></span><span class="bl"></span>
+                <div class="media-frame aspect-square"><img src="../../assets/images/watchbim_crosssection_Runtime2D.png" alt="Runtime 2D viewer"/></div>
+                <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">2d view</figcaption>
+              </figure>
+              <figure class="card ticks group"><span class="tr"></span><span class="bl"></span>
+                <div class="media-frame aspect-square"><img src="../../assets/images/watchbim_verticalgraph.png" alt="Vertical graph analysis"/></div>
+                <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">graph</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MOD.03 — CUSTOM EDITOR TOOLING                                -->
+    <!-- ============================================================ -->
+    <section id="mod-editor" class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20 scroll-mt-28">
+      <div class="chapter-rule mb-12">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ MOD.03 ]</span>
+        <span class="kicker text-text-secondary">EDITOR TOOLING</span>
+        <span class="line"></span>
+        <span class="tail">dx center · pipeline</span>
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
+        <div class="min-w-0 lg:col-span-5">
+          <div class="term-window ticks lg:sticky lg:top-32"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>EDITOR</span><span class="text-text-muted">CUSTOM WINDOW</span></div>
+            <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../assets/images/customeditor.png" alt="Custom EditorWindow"/></div>
+          </div>
+        </div>
+
+        <div class="min-w-0 lg:col-span-7 flex flex-col gap-5">
+          <div class="kicker kicker-cyan">// custom editor tooling</div>
+          <h2 class="display-section text-text-primary kr-balance">Tooling for non-developers.</h2>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip chip-cyan">Editor Scripting</span>
+            <span class="chip">9 EditorWindows</span>
+            <span class="chip">Data Mapping</span>
+            <span class="chip">Digital Twin</span>
+          </div>
+          <p class="text-[15px] leading-[1.85] text-text-secondary kr-balance">
+            The hardest part was not the algorithm but letting content authors and operators run the product <strong class="text-text-primary font-medium">without touching code</strong>. I bundled data mapping, asset registration, digital-twin monitoring, and validation into nine EditorWindows, absorbing the cost of repetition into the tooling.
+          </p>
+          <a href="../projects/dxcenter/" class="inline-flex w-fit font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Related case · DX Center <span aria-hidden="true" class="ml-2">&nearr;</span></a>
+
+          <!-- DEEP -->
+          <div data-deep class="mt-2 border-l border-accent-cyan/30 pl-5 sm:pl-6">
+            <div class="deep-block">
+              <div class="deep-label">// problem</div>
+              <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                In exhibition and digital-twin operations, the same manual work (data mapping, asset registration, lineup swaps) kept repeating, and a developer had to step in every time. If operators cannot do it themselves, it is not a tool but a bottleneck.
+              </p>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label">// approach</div>
+              <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                I turned the whole workflow into a GUI through Unity editor extensions. With <code>EditorWindow</code>, <code>SerializedObject</code>, and custom inspectors, external data is mapped onto scene objects, and validation before apply plus <code>Undo</code> registration are handled inside the tool. A form where non-developers can finish repetitive work safely.
+              </p>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label">// viz <span class="text-text-muted">— external data → scene-object mapping and validation flow</span></div>
+              <figure class="mt-3" data-editor-demo>
+                <div class="relative border border-hairline bg-bg-primary">
+                  <canvas data-editor-canvas class="block w-full" style="aspect-ratio:16/9"></canvas>
+                </div>
+                <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">editor window · data mapping (schematic)</figcaption>
+              </figure>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label">// code <span class="text-text-muted">— illustrative code (core pattern)</span></div>
+<pre class="code-block mt-3"><span class="c">// core pattern of a non-developer EditorWindow</span>
+<span class="k">public class</span> DataMapperWindow : EditorWindow {
+    [<span class="k">MenuItem</span>(<span class="s">"DXCenter/Data Mapper"</span>)]
+    <span class="k">static void</span> Open() =&gt; GetWindow&lt;DataMapperWindow&gt;(<span class="s">"Data Mapper"</span>);
+
+    <span class="k">void</span> OnGUI() {
+        <span class="k">foreach</span> (var row <span class="k">in</span> mapping)                 <span class="c">// external data → scene object</span>
+            row.target = (GameObject)EditorGUILayout.ObjectField(
+                row.key, row.target, <span class="k">typeof</span>(GameObject), <span class="k">true</span>);
+
+        <span class="k">if</span> (GUILayout.Button(<span class="s">"Validate &amp; Apply"</span>) &amp;&amp; Validate(mapping)) {
+            Undo.RecordObjects(Targets(mapping), <span class="s">"Apply Mapping"</span>);
+            Apply(mapping);                          <span class="c">// serialize · save</span>
+        }
+    }
+}</pre>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label">// result</div>
+              <ul class="mt-3 grid gap-2 text-[14px] leading-relaxed text-text-secondary">
+                <li class="check"><span class="mark">[x]</span><span class="label">Nine EditorWindows cover the full operations workflow</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">Content authors create and operate without code</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">Validation, bundling, and delivery turned into a pipeline</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MOD.04 — HARDWARE ↔ UNITY SYNC                                -->
+    <!-- ============================================================ -->
+    <section id="mod-hardware" class="relative bg-grid-dots scroll-mt-28">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div class="chapter-rule mb-12">
+          <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ MOD.04 ]</span>
+          <span class="kicker text-text-secondary">HARDWARE SYNC</span>
+          <span class="line"></span>
+          <span class="tail">vr simulators · co-design</span>
+        </div>
+
+        <div class="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
+          <div class="min-w-0 lg:col-span-7 flex flex-col gap-5 lg:order-2">
+            <div class="kicker kicker-cyan">// hardware ↔ unity sync</div>
+            <h2 class="display-section text-text-primary kr-balance">Moving platform, safety interlock.</h2>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-cyan">HW/SW Co-design</span>
+              <span class="chip">Motion Platform</span>
+              <span class="chip">Safety Interlock</span>
+              <span class="chip">Delivery</span>
+            </div>
+            <p class="text-[15px] leading-[1.85] text-text-secondary kr-balance">
+              To shake a scaffold inside VR and make the fall hazard felt, we needed a platform that actually moves. I designed and built a <strong class="text-text-primary font-medium">dual-axis scaffold rig</strong> myself, synchronized its motion with Unity input, and owned the operator safety interlock as well.
+            </p>
+            <a href="../projects/vr-simulators/" class="inline-flex w-fit font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Related case · VR Simulators <span aria-hidden="true" class="ml-2">&nearr;</span></a>
+
+            <div class="mt-1">
+              <div class="kicker kicker-cyan mb-3">// demo <span class="text-text-muted">— live demo footage</span></div>
+              <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/wXEKO1hqaUQ" title="Construction site VR 4D" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+              <div data-deep class="mt-4 grid gap-4 sm:grid-cols-2">
+                <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/2B9dkIrQQGA" title="Landing-ship VR simulator · LCM" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/mvcWCmhqc4Q" title="LG Hausys factory VR 4D" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+              </div>
+            </div>
+
+            <!-- DEEP -->
+            <div data-deep class="mt-2 border-l border-accent-cyan/30 pl-5 sm:pl-6">
+              <div class="deep-block">
+                <div class="deep-label">// problem</div>
+                <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                  Software alone cannot train "shaking" and "the sense of losing balance." But once you add a physical rig, the moment the hardware motion and the VR view drift apart, motion sickness and accident risk appear. We needed to align the two precisely and to stop instantly when something goes wrong.
+                </p>
+              </div>
+              <div class="deep-block">
+                <div class="deep-label">// approach</div>
+                <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                  I designed a 2-axis motion platform and synchronized the hardware sensors/actuators with the Unity simulation in a single loop. The view and the platform tilt move on the same timeline, and I added a safety interlock that stops from both software and hardware when the operating range is exceeded.
+                </p>
+              </div>
+              <div class="deep-block">
+                <div class="deep-label">// loop <span class="text-text-muted">— sync · safety flow</span></div>
+                <div class="mt-3 grid gap-2">
+                  <div class="lane"><span class="lane-num">01</span><div class="kicker kicker-cyan mb-1">// hardware</div><div class="font-display font-bold text-text-primary">Dual-axis platform</div><p class="mt-1 text-[13px] text-text-secondary leading-relaxed kr-balance">Two-axis tilt sensor + actuator. Designed and built in-house.</p></div>
+                  <div class="lane-arrow">↓ ↑</div>
+                  <div class="lane"><span class="lane-num">02</span><div class="kicker kicker-cyan mb-1">// unity</div><div class="font-display font-bold text-text-primary">View · physics sync</div><p class="mt-1 text-[13px] text-text-secondary leading-relaxed kr-balance">Platform tilt ↔ VR view aligned on the same timeline.</p></div>
+                  <div class="lane-arrow">↓</div>
+                  <div class="lane"><span class="lane-num">03</span><div class="kicker kicker-cyan mb-1">// safety</div><div class="font-display font-bold text-text-primary">Safety interlock</div><p class="mt-1 text-[13px] text-text-secondary leading-relaxed kr-balance">Stops instantly from both SW and HW when the operating range is exceeded.</p></div>
+                </div>
+              </div>
+              <div class="deep-block">
+                <div class="deep-label">// viz <span class="text-text-muted">— platform tilt ↔ VR horizon sync + out-of-range interlock</span></div>
+                <figure class="mt-3" data-hw-demo>
+                  <div class="relative border border-hairline bg-bg-primary">
+                    <canvas data-hw-canvas class="block w-full" style="aspect-ratio:16/9"></canvas>
+                  </div>
+                  <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">hardware ↔ unity sync · safety interlock (schematic)</figcaption>
+                </figure>
+              </div>
+              <div class="deep-block">
+                <div class="deep-label">// result</div>
+                <ul class="mt-3 grid gap-2 text-[14px] leading-relaxed text-text-secondary">
+                  <li class="check"><span class="mark">[x]</span><span class="label">Delivered to Samsung · LG · POSCO safety experience centers</span></li>
+                  <li class="check"><span class="mark">[x]</span><span class="label">Established a delivery unit of SW + HW + operations combined (4 cycles)</span></li>
+                  <li class="check"><span class="mark">[x]</span><span class="label">Extended to hardware-input sync such as the LCM cockpit</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="min-w-0 lg:col-span-5 lg:order-1">
+            <div class="term-window ticks lg:sticky lg:top-32"><span class="tr"></span><span class="bl"></span>
+              <div class="card-bar"><span>SCAFFOLD</span><span class="text-text-muted">DUAL-AXIS</span></div>
+              <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../assets/images/vr_construction_scaffold.png" alt="Dual-axis scaffold simulator"/></div>
+            </div>
+            <div data-deep class="mt-3 grid grid-cols-2 gap-3">
+              <figure class="card ticks group"><span class="tr"></span><span class="bl"></span>
+                <div class="media-frame aspect-[4/3]"><img src="../../assets/images/vr_lcm_cockpit.png" alt="LCM cockpit"/></div>
+                <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">lcm cockpit</figcaption>
+              </figure>
+              <figure class="card ticks group"><span class="tr"></span><span class="bl"></span>
+                <div class="media-frame aspect-[4/3]"><img src="../../assets/images/vr_construction_falling.png" alt="Fall scenario"/></div>
+                <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">fall scenario</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MOD.05 — NEOSTALGIA · AWARDED (HIGHLIGHT)                     -->
+    <!-- ============================================================ -->
+    <section id="mod-neostalgia" class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20 scroll-mt-28">
+      <div class="chapter-rule mb-12">
+        <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ MOD.05 &#9733; ]</span>
+        <span class="kicker text-accent-amber">NEOSTALGIA · AWARDED</span>
+        <span class="line"></span>
+        <span class="tail">generative xr pipeline</span>
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
+        <div class="min-w-0 lg:col-span-5">
+          <div class="term-window ticks ticks-amber lg:sticky lg:top-32"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>NEOSTALGIA</span><span class="text-text-muted">GENERATED WORLD</span></div>
+            <div class="media-frame aspect-[4/3] border-t border-hairline"><img src="../../assets/images/neostalgia_skybox.png" alt="Neostalgia generated skybox"/></div>
+          </div>
+          <div data-deep class="mt-3 grid grid-cols-3 gap-3">
+            <figure class="card ticks ticks-amber group"><span class="tr"></span><span class="bl"></span>
+              <div class="media-frame aspect-square"><img src="../../assets/images/neostalgia_object.png" alt="Meshy-generated object"/></div>
+              <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">object</figcaption>
+            </figure>
+            <figure class="card ticks ticks-amber group"><span class="tr"></span><span class="bl"></span>
+              <div class="media-frame aspect-square"><img src="../../assets/images/neostalgia_dialogue.png" alt="Narrative dialogue"/></div>
+              <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">dialogue</figcaption>
+            </figure>
+            <figure class="card ticks ticks-amber group"><span class="tr"></span><span class="bl"></span>
+              <div class="media-frame aspect-square"><img src="../../assets/images/neostalgia_drawing.png" alt="Visitor drawing"/></div>
+              <figcaption class="p-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">drawing</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="min-w-0 lg:col-span-7 flex flex-col gap-5">
+          <div class="kicker kicker-amber">// generative xr pipeline · awarded</div>
+          <h2 class="display-section text-text-primary kr-balance">Live generative-AI exhibition pipeline.</h2>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip chip-amber">BIFAN Selection</span>
+            <span class="chip chip-amber">MSIT Minister's Citation</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip chip-cyan">Generative Pipeline</span>
+            <span class="chip">Whisper STT</span>
+            <span class="chip">GPT</span>
+            <span class="chip">Skybox · Meshy</span>
+          </div>
+          <p class="text-[15px] leading-[1.85] text-text-secondary kr-balance">
+            A generative-AI pipeline that ran live on the exhibition floor — it interviews visitors, builds a narrative on the spot, generates visual assets, and places them into the XR experience. It was not a demo but a fully operated system, and it led to <strong class="text-text-primary font-semibold">BIFAN selection</strong> and the <strong class="text-text-primary font-semibold">MSIT Minister's Citation</strong>.
+          </p>
+          <a href="../projects/neostalgia/" class="inline-flex w-fit font-mono text-[11px] uppercase tracking-widest text-accent-amber hover:text-accent-cyan">Related case · Neostalgia <span aria-hidden="true" class="ml-2">&nearr;</span></a>
+
+          <div class="mt-1">
+            <div class="kicker kicker-amber mb-3">// demo <span class="text-text-muted">— live demo footage</span></div>
+            <div class="media-frame video"><iframe src="https://www.youtube-nocookie.com/embed/wz6HslgOnl8" title="Neostalgia demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          </div>
+
+          <!-- DEEP -->
+          <div data-deep class="mt-2 border-l border-accent-amber/30 pl-5 sm:pl-6">
+            <div class="deep-block">
+              <div class="deep-label" style="color:#F5C26B">// problem</div>
+              <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                A live exhibition cannot keep visitors waiting and must never stop. Yet generative AI is slow, produces different results every time, and occasionally fails. Fitting "slow, uncertain generation" inside "uninterrupted exhibition operation" was the core challenge.
+              </p>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label" style="color:#F5C26B">// approach</div>
+              <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
+                I put a <strong class="text-text-primary font-medium">time budget</strong> and <strong class="text-text-primary font-medium">graceful fallback</strong> on a staged asynchronous pipeline. If a stage cannot finish within its response time, it falls back to pre-generated assets or a default narrative, so the visitor experience always completes. Operators monitor every stage from a dashboard.
+              </p>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label" style="color:#F5C26B">// pipeline <span class="text-text-muted">— interview → content → xr</span></div>
+              <div class="mt-3 grid gap-2">
+                <div class="lane"><span class="lane-num">01</span><div class="kicker kicker-cyan mb-1">// input</div><div class="font-display font-bold text-text-primary">Visitor interview</div><p class="mt-1 text-[13px] text-text-secondary leading-relaxed kr-balance">Collects memories, recollections, and places by voice.</p></div>
+                <div class="lane-arrow">↓</div>
+                <div class="lane"><span class="lane-num">02</span><div class="kicker kicker-cyan mb-1">// stt → narrative</div><div class="font-display font-bold text-text-primary">Whisper → GPT</div><p class="mt-1 text-[13px] text-text-secondary leading-relaxed kr-balance">Voice → text → narrative seed. Includes response-time checks and fallback.</p></div>
+                <div class="lane-arrow">↓</div>
+                <div class="lane"><span class="lane-num">03</span><div class="kicker kicker-cyan mb-1">// visual</div><div class="font-display font-bold text-text-primary">Skybox + Meshy</div><p class="mt-1 text-[13px] text-text-secondary leading-relaxed kr-balance">Narrative seed → generates environment and object visual assets.</p></div>
+                <div class="lane-arrow">↓</div>
+                <div class="lane"><span class="lane-num">04</span><div class="kicker kicker-cyan mb-1">// xr</div><div class="font-display font-bold text-text-primary">Live XR + ops dashboard</div><p class="mt-1 text-[13px] text-text-secondary leading-relaxed kr-balance">Generated content placed instantly, monitored live by operators.</p></div>
+              </div>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label" style="color:#F5C26B">// viz <span class="text-text-muted">— per-stage token flow · fallback branch on timeout</span></div>
+              <figure class="mt-3" data-pipe-demo>
+                <div class="relative border border-hairline bg-bg-primary">
+                  <canvas data-pipe-canvas class="block w-full" style="aspect-ratio:16/9"></canvas>
+                </div>
+                <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-widest text-text-muted">generative pipeline · time-budget fallback (schematic)</figcaption>
+              </figure>
+            </div>
+            <div class="deep-block">
+              <div class="deep-label" style="color:#F5C26B">// result</div>
+              <ul class="mt-3 grid gap-2 text-[14px] leading-relaxed text-text-secondary">
+                <li class="check"><span class="mark" style="color:#F5C26B">[★]</span><span class="label">MSIT Minister's Citation</span></li>
+                <li class="check"><span class="mark" style="color:#F5C26B">[★]</span><span class="label">Official BIFAN XR selection</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">Ran without interruption in a real exhibition (not a demo)</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === CLOSING BAND === -->
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8 lg:py-20">
+        <div class="max-w-2xl">
+          <div class="kicker kicker-cyan mb-4">// next</div>
+          <h2 class="display-section text-text-primary kr-balance">The full cases behind the modules.</h2>
+          <p class="mt-4 text-[15px] leading-8 text-text-secondary kr-balance">The projects where each module actually ran, and the demo videos, are on the case pages.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="../projects/" class="btn-cyan">Industrial archive <span aria-hidden="true">&nearr;</span></a>
+          <a href="../about/" class="btn-ghost">Profile <span aria-hidden="true">&nearr;</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 font-mono text-[11px] uppercase tracking-widest text-text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span>engineering · hard modules</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="../" class="hover:text-accent-cyan">home</a>
+        <a href="../ai-systems/" class="hover:text-accent-cyan">ai</a>
+        <a href="../projects/" class="hover:text-accent-cyan">industrial</a>
+        <a href="../about/" class="hover:text-accent-cyan">profile</a>
+        <a href="../../engineering/" class="hover:text-accent-cyan">ko</a>
+      </div>
+      <div>sys.version: engineering.dark.1</div>
+    </div>
+  </footer>
+</div>
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/engineering-demos.js"></script>
+</body>
+</html>
