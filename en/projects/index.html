@@ -45,9 +45,9 @@
       <a href="../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
       <nav class="hidden md:flex items-center gap-6">
         <a href="../" class="nav-link">home</a>
-        <a href="../ai-systems/" class="nav-link">ai</a>
         <a href="./" class="nav-link is-active">industrial</a>
         <a href="../engineering/" class="nav-link">engineering</a>
+        <a href="../ai-systems/" class="nav-link">ai</a>
         <a href="../about/" class="nav-link">profile</a>
       </nav>
       <div class="flex items-center gap-3">
@@ -73,9 +73,9 @@
       </div>
       <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
         <a href="../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">&rarr;</span></a>
-        <a href="../ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">&rarr;</span></a>
         <a href="./" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span aria-hidden="true">&rarr;</span></a>
         <a href="../engineering/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">engineering <span aria-hidden="true">&rarr;</span></a>
+        <a href="../ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span aria-hidden="true">&rarr;</span></a>
         <a href="../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
@@ -97,14 +97,14 @@
           <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// selected work</div>
           <h1 class="display-hero max-w-3xl text-text-primary">Projects</h1>
           <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base">
-            Start with the AI systems work: remote AI products, agent workflows, and local-LLM R&amp;D. The industrial XR and tooling cases show the delivery base underneath them.
+            Start with the industrial Unity work delivered to the field — VR, robotics, BIM runtime, and tooling cases come first, with the AI systems I built over the past year layered on top.
           </p>
           <div class="flex flex-wrap gap-2">
-            <span class="chip chip-cyan">AI Product Platform</span>
-            <span class="chip">Agent Workflow</span>
-            <span class="chip">Local LLM R&amp;D</span>
-            <span class="chip">Industrial XR</span>
+            <span class="chip chip-cyan">Industrial XR</span>
+            <span class="chip">Robotics · IK</span>
             <span class="chip">BIM Runtime</span>
+            <span class="chip">Editor Tooling</span>
+            <span class="chip">AI Systems</span>
           </div>
         </div>
 
@@ -116,20 +116,20 @@
               <span class="term-title">recommended cases</span>
             </div>
             <div class="grid gap-3 p-4 sm:p-5">
-              <a href="../ai-systems/deskrelay/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
-                <div class="kicker kicker-cyan">// 01</div>
-                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">DeskRelay</div>
-                <div class="mt-1 text-sm leading-6 text-text-secondary">Remote Claude Code product surface.</div>
-              </a>
-              <a href="../ai-systems/genworld-ollama/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
-                <div class="kicker kicker-cyan">// 02</div>
-                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">GenWorld + Ollama</div>
-                <div class="mt-1 text-sm leading-6 text-text-secondary">Local-LLM behavior and fallback R&amp;D.</div>
-              </a>
               <a href="./vr-robot/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
-                <div class="kicker kicker-cyan">// 03</div>
+                <div class="kicker kicker-cyan">// 01</div>
                 <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">VR Robot Teleoperation</div>
-                <div class="mt-1 text-sm leading-6 text-text-secondary">Industrial XR and robotics control.</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary">Industrial XR · robotics · in-house IK.</div>
+              </a>
+              <a href="../engineering/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// 02</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">Engineering — hardest modules</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary">IK · BIM section · tooling · hardware sync.</div>
+              </a>
+              <a href="../ai-systems/deskrelay/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// 03</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">DeskRelay</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary">AI product — remote Claude Code control.</div>
               </a>
             </div>
           </div>
@@ -141,57 +141,14 @@
       <div class="chapter-rule mb-10">
         <span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ CORE PROOF ]</span>
         <span class="line"></span>
-        <span class="tail">ai first / delivery base</span>
+        <span class="tail">delivery first / ai on top</span>
       </div>
       <div class="max-w-3xl">
-        <h2 class="display-section text-text-primary">AI systems first, delivery systems underneath</h2>
-        <p class="mt-4 text-[15px] leading-8 text-text-secondary">The top row shows where AI is now visible as product and behavior. The rest shows the execution base that made that shift credible.</p>
+        <h2 class="display-section text-text-primary">Field delivery first, AI on top</h2>
+        <p class="mt-4 text-[15px] leading-8 text-text-secondary">The front is industrial Unity work proven in exhibitions, factories, and construction sites. On top of it sits the AI systems I built over the past year.</p>
       </div>
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        <article class="card ticks group flex flex-col">
-          <span class="tr"></span><span class="bl"></span>
-          <div class="card-bar"><span>deskrelay</span><span class="text-text-muted">ai product platform</span></div>
-          <div class="media-frame aspect-[4/3] border-b border-hairline">
-            <img src="../../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay GitHub manual chat session screenshot" style="object-position:left top;"/>
-          </div>
-          <div class="flex flex-1 flex-col p-5">
-            <div class="flex flex-wrap gap-2">
-              <span class="chip chip-cyan">Self-host</span>
-              <span class="chip">LAN · Tailscale</span>
-              <span class="chip">Connector</span>
-            </div>
-            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">DeskRelay</h3>
-            <p class="mt-3 text-sm leading-7 text-text-secondary">A GitHub-backed self-host browser control tool for Claude Code running on your own server PC and registered PCs.</p>
-            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">AI Product / Self-host Dev Tool</div>
-            <div class="mt-3 flex flex-wrap gap-2">
-              <span class="chip">:18193 UI</span>
-              <span class="chip">:18091 connector</span>
-              <span class="chip">Manual screenshots</span>
-            </div>
-            <a href="../ai-systems/deskrelay/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
-          </div>
-        </article>
-
-        <article class="card ticks group flex flex-col">
-          <span class="tr"></span><span class="bl"></span>
-          <div class="card-bar"><span>genworld</span><span class="text-text-muted">local llm r&amp;d</span></div>
-          <div class="media-frame aspect-[4/3] border-b border-hairline">
-            <img src="../../assets/images/genworld-world.png" alt="GenWorld + Ollama world"/>
-          </div>
-          <div class="flex flex-1 flex-col p-5">
-            <div class="flex flex-wrap gap-2">
-              <span class="chip chip-cyan">R&amp;D</span>
-              <span class="chip">Local LLM</span>
-              <span class="chip">NPC Systems</span>
-            </div>
-            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">GenWorld + Ollama</h3>
-            <p class="mt-3 text-sm leading-7 text-text-secondary">A local-LLM runtime experiment around NPC cognition, dialogue flow, and graceful fallback.</p>
-            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Applied AI / Local LLM R&amp;D</div>
-            <a href="../ai-systems/genworld-ollama/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
-          </div>
-        </article>
-
         <article class="card ticks group flex flex-col">
           <span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>vr-robot</span><span class="text-text-muted">industrial xr</span></div>
@@ -286,6 +243,44 @@
             <a href="./watchbim/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
         </article>
+
+        <article class="card card-amber ticks ticks-amber group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>deskrelay</span><span class="text-accent-amber">ai · sub</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline">
+            <img src="../../assets/images/deskrelay-github-chat-session.png" alt="DeskRelay GitHub manual chat session screenshot" style="object-position:left top;"/>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-amber">Self-host</span>
+              <span class="chip">LAN · Tailscale</span>
+              <span class="chip">Connector</span>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">DeskRelay</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">A GitHub-backed self-host browser control tool for Claude Code running on your own server PC and registered PCs.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">AI Product / Self-host Dev Tool</div>
+            <a href="../ai-systems/deskrelay/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-amber hover:text-accent-cyan">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
+          </div>
+        </article>
+
+        <article class="card card-amber ticks ticks-amber group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>genworld</span><span class="text-accent-amber">ai · sub</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline">
+            <img src="../../assets/images/genworld-world.png" alt="GenWorld + Ollama world"/>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip chip-amber">R&amp;D</span>
+              <span class="chip">Local LLM</span>
+              <span class="chip">NPC Systems</span>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">GenWorld + Ollama</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">A local-LLM runtime experiment around NPC cognition, dialogue flow, and graceful fallback.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Applied AI / Local LLM R&amp;D</div>
+            <a href="../ai-systems/genworld-ollama/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-amber hover:text-accent-cyan">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -308,6 +303,8 @@
       <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span>project archive</span></div>
       <div class="flex flex-wrap gap-x-6 gap-y-2">
         <a href="../" class="hover:text-accent-cyan">home</a>
+        <a href="./" class="hover:text-accent-cyan">industrial</a>
+        <a href="../engineering/" class="hover:text-accent-cyan">engineering</a>
         <a href="../ai-systems/" class="hover:text-accent-cyan">ai</a>
         <a href="../about/" class="hover:text-accent-cyan">profile</a>
         <a href="../../projects/" class="hover:text-accent-cyan">ko</a>
