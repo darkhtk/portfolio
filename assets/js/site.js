@@ -177,9 +177,10 @@
   var storageKey = "portfolio_tracker_visitor_id";
   var excludeKey = "portfolio_tracker_exclude";
   var testId = params.get("tracker_test") || "";
+  var trackedPath = "/portfolio";
   var sessionKey = [
     "portfolio_tracker_sent_v2",
-    window.location.pathname,
+    trackedPath,
     testId
   ].join(":");
 
@@ -221,8 +222,8 @@
 
   function makePayload(reason) {
     return {
-      path: window.location.pathname + window.location.search,
-      title: document.title || "",
+      path: trackedPath,
+      title: "Portfolio",
       referrer: document.referrer || "",
       visitorId: getVisitorId(),
       screen: window.screen ? window.screen.width + "x" + window.screen.height : "",

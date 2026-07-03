@@ -429,7 +429,11 @@ async function enrichIp(ip) {
       isp: "",
       organization: "",
       country: "",
-      city: ""
+      region: "",
+      city: "",
+      hosting: false,
+      proxy: false,
+      mobile: false
     };
   }
 
@@ -442,11 +446,15 @@ async function enrichIp(ip) {
   let isp = "";
   let organization = "";
   let country = "";
+  let region = "";
   let city = "";
   let reverseDns = "";
+  let hosting = false;
+  let proxy = false;
+  let mobile = false;
 
   try {
-    const response = await fetch(`http://ip-api.com/json/${encodeURIComponent(normalizedIp)}?fields=status,message,country,city,isp,org,as,reverse,query`);
+    const response = await fetch(`http://ip-api.com/json/${encodeURIComponent(normalizedIp)}?fields=status,message,country,regionName,city,isp,org,as,reverse,mobile,proxy,hosting,query`);
     if (response.ok) {
       const payload = await response.json();
       if (payload && payload.status === "success") {
@@ -455,7 +463,11 @@ async function enrichIp(ip) {
         isp = payload.isp || "";
         organization = payload.org || "";
         country = payload.country || "";
+        region = payload.regionName || "";
         city = payload.city || "";
+        hosting = Boolean(payload.hosting);
+        proxy = Boolean(payload.proxy);
+        mobile = Boolean(payload.mobile);
       }
     }
   } catch (error) {}
@@ -467,7 +479,11 @@ async function enrichIp(ip) {
     isp,
     organization,
     country,
-    city
+    region,
+    city,
+    hosting,
+    proxy,
+    mobile
   };
 
   cache[normalizedIp] = enriched;
@@ -485,7 +501,11 @@ function getCachedEnrichment(ip) {
       isp: "",
       organization: "",
       country: "",
-      city: ""
+      region: "",
+      city: "",
+      hosting: false,
+      proxy: false,
+      mobile: false
     };
   }
 
@@ -497,7 +517,11 @@ function getCachedEnrichment(ip) {
     isp: "",
     organization: "",
     country: "",
-    city: ""
+    region: "",
+    city: "",
+    hosting: false,
+    proxy: false,
+    mobile: false
   };
 }
 
@@ -543,7 +567,8 @@ async function summarizeVisits(visits) {
   const ipSet = new Set();
 
   for (const visit of visits) {
-    pageCounts.set(visit.path, (pageCounts.get(visit.path) || 0) + 1);
+    const normalizedPath = normalizeTrackedPath(visit.path);
+    pageCounts.set(normalizedPath, (pageCounts.get(normalizedPath) || 0) + 1);
     ipCounts.set(visit.ip, (ipCounts.get(visit.ip) || 0) + 1);
     visitorCounts.set(visit.visitorId, (visitorCounts.get(visit.visitorId) || 0) + 1);
     const day = String(visit.createdAt || "").slice(0, 10);
@@ -625,6 +650,12 @@ function classifyNetwork(enrichment) {
   return { label: "기타", tone: "neutral" };
 }
 
+function normalizeTrackedPath(pathValue) {
+  const value = String(pathValue || "").trim();
+  if (!value) return "/portfolio";
+  return "/portfolio";
+}
+
 function escapeHtml(value) {
   return String(value || "")
     .replace(/&/g, "&amp;")
@@ -636,7 +667,7 @@ function escapeHtml(value) {
 
 function dashboardTemplate(summary) {
   const metricCard = (key, label, value) => `
-    <article class="metric-card" data-metric="${escapeHtml(key)}">
+    <article class="metric-inline" data-metric="${escapeHtml(key)}">
       <div class="metric-label">${escapeHtml(label)}</div>
       <div class="metric-value">${escapeHtml(value)}</div>
     </article>
@@ -648,16 +679,34 @@ function dashboardTemplate(summary) {
       : `<tr><td colspan="${colspan}" class="empty-cell">아직 데이터가 없습니다.</td></tr>`;
 
   const maxDailyViews = Math.max(...summary.dailySeries.map((item) => item.views), 1);
-  const dailyBars = summary.dailySeries.length
-    ? summary.dailySeries.map((item) => `
-        <div class="bar-col">
-          <div class="bar-value">${escapeHtml(item.views)}</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="height:${Math.max(16, Math.round((item.views / maxDailyViews) * 140))}px"></div>
+  const dailyPoints = summary.dailySeries.map((item, index) => {
+    const x = 48 + (index * 96);
+    const y = 220 - Math.round((item.views / maxDailyViews) * 176);
+    return { item, x, y };
+  });
+  const chartWidth = Math.max(720, dailyPoints.length > 1 ? ((dailyPoints.length - 1) * 96) + 96 : 720);
+  const chartPath = dailyPoints.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
+  const dailyLineChart = summary.dailySeries.length
+    ? `
+        <div class="daily-chart-scroll">
+          <div class="daily-chart-stage" style="width:${chartWidth}px">
+            <div class="daily-chart-grid"><span></span><span></span><span></span><span></span></div>
+            <svg class="daily-chart-svg" viewBox="0 0 ${chartWidth} 248" preserveAspectRatio="none" aria-hidden="true">
+              <path class="daily-chart-area" d="${chartPath} L ${dailyPoints[dailyPoints.length - 1].x} 220 L 48 220 Z"></path>
+              <path class="daily-chart-line" d="${chartPath}"></path>
+              ${dailyPoints.map((point) => `<circle class="daily-chart-dot" cx="${point.x}" cy="${point.y}" r="5"></circle>`).join("")}
+            </svg>
+            <div class="daily-chart-points">
+              ${dailyPoints.map((point) => `
+                <div class="daily-point" style="left:${point.x}px; top:${point.y}px;">
+                  <div class="daily-point-value">${escapeHtml(point.item.views)}</div>
+                  <div class="daily-point-label">${escapeHtml(point.item.date.slice(5))}</div>
+                </div>
+              `).join("")}
+            </div>
           </div>
-          <div class="bar-label">${escapeHtml(item.date.slice(5))}</div>
         </div>
-      `).join("")
+      `
     : '<div class="empty-cell">아직 일별 방문 기록이 없습니다.</div>';
 
   return `<!DOCTYPE html>
@@ -719,33 +768,41 @@ function dashboardTemplate(summary) {
       color: var(--muted);
       font-size: 14px;
     }
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin: 28px 0;
-    }
-    .metric-card, .panel {
+    .panel {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 20px;
       box-shadow: 0 18px 42px rgba(25, 96, 163, 0.06);
     }
-    .metric-card {
-      padding: 22px 24px;
+    .metric-stack {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+    .metric-inline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 4px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .metric-inline:last-child {
+      border-bottom: 0;
     }
     .metric-label {
-      font-size: 12px;
-      letter-spacing: 0.18em;
+      font-size: 13px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
       font-weight: 700;
     }
     .metric-value {
-      margin-top: 12px;
-      font-size: 36px;
+      margin-top: 0;
+      font-size: 28px;
       font-weight: 800;
       line-height: 1;
+      text-align: right;
     }
     .panel-grid {
       display: grid;
@@ -952,6 +1009,103 @@ function dashboardTemplate(summary) {
     .tab-panel.active {
       display: block;
     }
+    .tab-panel.active.tab-panel-grid {
+      display: grid;
+    }
+    .daily-summary-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .daily-chart-panel {
+      min-width: 0;
+    }
+    .daily-chart-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 6px;
+    }
+    .daily-chart-stage {
+      position: relative;
+      min-height: 248px;
+      padding: 12px 24px 0;
+    }
+    .daily-chart-grid {
+      position: absolute;
+      inset: 24px 24px 28px 24px;
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+      pointer-events: none;
+    }
+    .daily-chart-grid span {
+      border-top: 1px dashed #d8e2ef;
+    }
+    .daily-chart-svg {
+      display: block;
+      width: 100%;
+      height: 248px;
+      overflow: visible;
+    }
+    .daily-chart-line {
+      fill: none;
+      stroke: #1f63a9;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .daily-chart-area {
+      fill: rgba(31, 99, 169, 0.12);
+    }
+    .daily-chart-dot {
+      fill: #1f63a9;
+      stroke: #fff;
+      stroke-width: 2;
+    }
+    .daily-chart-points {
+      position: absolute;
+      inset: 0 24px 0 24px;
+      pointer-events: none;
+    }
+    .daily-point {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .daily-point-value {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 208px;
+      min-width: 24px;
+    }
+    .daily-point-label {
+      position: absolute;
+      top: 192px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .analysis-panel {
+      height: 960px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .analysis-content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .analysis-content > .tab-panel.active {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
     .network-cell {
       min-width: 220px;
     }
@@ -969,43 +1123,23 @@ function dashboardTemplate(summary) {
     .badge.company { background: #edf8f0; color: #237a46; }
     .badge.org { background: #fff3e5; color: #9a5b00; }
     .badge.neutral { background: #eef2f6; color: #51607a; }
-    .bar-chart {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
-      gap: 10px;
-      align-items: end;
-      min-height: 220px;
-    }
-    .bar-col {
+    .meta-badges {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
+      margin-top: 8px;
     }
-    .bar-value {
-      font-size: 12px;
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: #eef3f8;
       color: var(--muted);
-      min-height: 18px;
-    }
-    .bar-track {
-      width: 100%;
-      max-width: 36px;
-      height: 150px;
-      border-radius: 999px;
-      background: #edf2f7;
-      display: flex;
-      align-items: end;
-      overflow: hidden;
-    }
-    .bar-fill {
-      width: 100%;
-      background: linear-gradient(180deg, #7cb0ff 0%, #1f63a9 100%);
-      border-radius: 999px;
-    }
-    .bar-label {
+      padding: 4px 10px;
       font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
     .alert {
       margin-top: 12px;
@@ -1024,7 +1158,9 @@ function dashboardTemplate(summary) {
     @media (max-width: 900px) {
       .span-6, .span-12 { grid-column: span 12; }
       .shell { padding: 24px 14px 40px; }
-      .panel, .metric-card { border-radius: 16px; padding: 18px; }
+      .panel { border-radius: 16px; padding: 18px; }
+      .daily-summary-layout { grid-template-columns: 1fr; }
+      .analysis-panel { height: 720px; }
     }
   </style>
 </head>
@@ -1039,29 +1175,206 @@ function dashboardTemplate(summary) {
       <div class="hint">추적 서버: ${escapeHtml(TRACKER_BASE_URL || "설정되지 않음")}</div>
     </section>
 
-    <section class="metric-grid">
-      ${metricCard("views", "전체 조회수", summary.totals.views)}
-      ${metricCard("uniqueIps", "고유 공개 IP", summary.totals.uniqueIps)}
-      ${metricCard("uniqueVisitors", "고유 방문자 ID", summary.totals.uniqueVisitors)}
-    </section>
-
     <section class="panel-grid">
       <article class="panel span-12">
         <h2>일별 조회수</h2>
-        <div class="bar-chart">${dailyBars}</div>
+        <div class="daily-summary-layout">
+          <div class="daily-chart-panel">${dailyLineChart}</div>
+          <div class="metric-stack">
+            ${metricCard("views", "전체 조회수", summary.totals.views)}
+            ${metricCard("uniqueIps", "고유 공개 IP", summary.totals.uniqueIps)}
+            ${metricCard("uniqueVisitors", "고유 방문자 ID", summary.totals.uniqueVisitors)}
+          </div>
+        </div>
       </article>
     </section>
 
     <section class="panel-grid">
-      <details class="panel span-12" id="settings-panel">
-        <summary class="panel-summary">
-          <span>
-            <span class="summary-title">설정</span>
-            <span class="summary-subtitle">제외 IP, 제외 방문자 ID, 현재 IP 제외, 기록 초기화는 버튼을 눌렀을 때만 펼쳐집니다.</span>
-          </span>
-          <span class="summary-chevron" aria-hidden="true"></span>
-        </summary>
-        <div class="details-body">
+      <article class="panel span-12 analysis-panel">
+        <div class="panel-head">
+          <h2>방문 분석</h2>
+        </div>
+        <div class="tabs" role="tablist" aria-label="방문 분석 탭">
+          <button class="tab-button active" type="button" role="tab" aria-selected="true" data-tab-group="overview" data-tab-target="top-pages">상위 페이지</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-group="overview" data-tab-target="top-ips">상위 공개 IP</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-group="overview" data-tab-target="recent-visits">최근 방문</button>
+        </div>
+        <div class="analysis-content">
+          <div class="tab-panel active" data-tab-group-panel="overview" data-tab-panel="top-pages">
+            <table>
+              <thead><tr><th>페이지</th><th>조회수</th></tr></thead>
+              <tbody>
+                ${listRows(summary.topPages, (item) => `
+                  <tr>
+                    <td class="mono">${escapeHtml(item.path)}</td>
+                    <td>${escapeHtml(item.views)}</td>
+                  </tr>
+                `, 2)}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-panel" data-tab-group-panel="overview" data-tab-panel="top-ips">
+            <table>
+              <thead><tr><th>IP</th><th>네트워크</th><th>조회수</th></tr></thead>
+              <tbody>
+                ${listRows(summary.topIps, (item) => `
+                  ${(() => {
+                    const badge = classifyNetwork(item.enrichment || {});
+                    const location = [
+                      item.enrichment.country,
+                      item.enrichment.region,
+                      item.enrichment.city
+                    ].filter(Boolean).join(" / ");
+                    const flags = [
+                      item.enrichment.hosting ? "hosting" : "",
+                      item.enrichment.proxy ? "proxy" : "",
+                      item.enrichment.mobile ? "mobile" : ""
+                    ].filter(Boolean);
+                    return `
+                  <tr>
+                    <td class="mono">${escapeHtml(item.enrichment.normalizedIp || item.ip)}</td>
+                    <td class="network-cell">
+                      <div class="badge ${escapeHtml(badge.tone)}">${escapeHtml(badge.label)}</div>
+                      <div>${escapeHtml(item.enrichment.organization || item.enrichment.isp || item.enrichment.reverseDns || "-")}</div>
+                      <div class="muted">${escapeHtml(item.enrichment.asn || "-")}</div>
+                      <div class="muted">${escapeHtml(item.enrichment.reverseDns || item.enrichment.isp || "-")}</div>
+                      <div class="muted">${escapeHtml(location || "-")}</div>
+                      ${flags.length ? `<div class="meta-badges">${flags.map((flag) => `<span class="meta-chip">${escapeHtml(flag)}</span>`).join("")}</div>` : ""}
+                    </td>
+                    <td>${escapeHtml(item.views)}</td>
+                  </tr>
+                `;
+                  })()}
+                `, 3)}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-panel" data-tab-group-panel="overview" data-tab-panel="recent-visits">
+            <table>
+              <thead><tr><th>시간</th><th>페이지</th><th>IP</th><th>네트워크</th></tr></thead>
+              <tbody>
+                ${listRows(summary.recent, (item) => `
+                  ${(() => {
+                    const badge = classifyNetwork(item.enrichment || {});
+                    return `
+                  <tr>
+                    <td>${escapeHtml(item.createdAt)}</td>
+                    <td class="mono">${escapeHtml(item.path)}</td>
+                    <td class="mono">${escapeHtml(item.enrichment.normalizedIp || item.ip)}</td>
+                    <td class="network-cell">
+                      <div class="badge ${escapeHtml(badge.tone)}">${escapeHtml(badge.label)}</div>
+                      <div>${escapeHtml(item.enrichment.reverseDns || item.enrichment.isp || item.enrichment.organization || "-")}</div>
+                      <div class="muted">${escapeHtml([item.enrichment.asn, item.enrichment.country, item.enrichment.city].filter(Boolean).join(" / ") || "-")}</div>
+                    </td>
+                  </tr>
+                `;
+                  })()}
+                `, 4)}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel-grid">
+      <article class="panel span-12">
+        <div class="panel-head">
+          <h2>기타 정보</h2>
+        </div>
+        <div class="tabs" role="tablist" aria-label="기타 정보 탭">
+          <button class="tab-button active" type="button" role="tab" aria-selected="true" data-tab-group="details" data-tab-target="top-visitors">상위 방문자 ID</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-group="details" data-tab-target="excluded-ips">제외된 IP</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-group="details" data-tab-target="excluded-visitors">제외된 방문자 ID</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-group="details" data-tab-target="raw-ip-log">원본 IP 로그</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-group="details" data-tab-target="excluded-request-log">제외 요청 로그</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-group="details" data-tab-target="settings">설정</button>
+        </div>
+
+        <div class="tab-panel active" data-tab-group-panel="details" data-tab-panel="top-visitors">
+          <table>
+            <thead><tr><th>방문자 ID</th><th>조회수</th></tr></thead>
+            <tbody>
+              ${listRows(summary.topVisitors, (item) => `
+                <tr>
+                  <td class="mono">${escapeHtml(item.visitorId)}</td>
+                  <td>${escapeHtml(item.views)}</td>
+                </tr>
+              `, 2)}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tab-panel" data-tab-group-panel="details" data-tab-panel="excluded-ips">
+          <div>
+            ${summary.exclusions.excludedIps.length
+              ? summary.exclusions.excludedIps.map((ip) => `
+                  <span class="pill mono">
+                    ${escapeHtml(ip)}
+                    <button class="inline-button" type="button" onclick="removeExcludedIp('${escapeHtml(ip)}')">삭제</button>
+                  </span>
+                `).join("")
+              : '<div class="empty-cell">제외된 IP가 없습니다.</div>'}
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab-group-panel="details" data-tab-panel="excluded-visitors">
+          <div>
+            ${summary.exclusions.excludedVisitorIds.length
+              ? summary.exclusions.excludedVisitorIds.map((visitorId) => `
+                  <span class="pill mono">
+                    ${escapeHtml(visitorId)}
+                    <button class="inline-button" type="button" onclick="removeExcludedVisitor('${escapeHtml(visitorId)}')">삭제</button>
+                  </span>
+                `).join("")
+              : '<div class="empty-cell">제외된 방문자 ID가 없습니다.</div>'}
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab-group-panel="details" data-tab-panel="raw-ip-log">
+          <table>
+            <thead><tr><th>시간</th><th>경로</th><th>원본 IP</th><th>전달된 IP</th><th>소켓 IP</th></tr></thead>
+            <tbody>
+              ${listRows(summary.recent, (item) => `
+                <tr>
+                  <td>${escapeHtml(item.createdAt)}</td>
+                  <td class="mono">${escapeHtml(item.path)}</td>
+                  <td class="mono">${escapeHtml(item.rawIp || item.ip || "-")}</td>
+                  <td class="mono">${escapeHtml(item.forwardedFor || "-")}</td>
+                  <td class="mono">${escapeHtml(item.socketIp || "-")}</td>
+                </tr>
+              `, 5)}
+            </tbody>
+          </table>
+          <p class="footer">집계와 제외 판정에는 정규화된 IP를 사용합니다. 이 패널은 추적 서버가 요청에서 받은 원본 값을 보여줍니다.</p>
+        </div>
+
+        <div class="tab-panel" data-tab-group-panel="details" data-tab-panel="excluded-request-log">
+          <div class="toolbar">
+            <button class="button danger" type="button" onclick="clearExcludedRequestLog()">제외 요청 로그 삭제</button>
+          </div>
+          <table>
+            <thead><tr><th>시간</th><th>경로</th><th>제외 기준</th><th>값</th><th>원본 IP</th><th>전달된 IP</th><th>소켓 IP</th></tr></thead>
+            <tbody>
+              ${listRows(summary.excludedRecent || [], (item) => `
+                <tr>
+                  <td>${escapeHtml(item.createdAt)}</td>
+                  <td class="mono">${escapeHtml(item.path || "-")}</td>
+                  <td>${escapeHtml(item.excludedBy || "-")}</td>
+                  <td class="mono">${escapeHtml(item.excludedValue || "-")}</td>
+                  <td class="mono">${escapeHtml(item.rawIp || item.ip || "-")}</td>
+                  <td class="mono">${escapeHtml(item.forwardedFor || "-")}</td>
+                  <td class="mono">${escapeHtml(item.socketIp || "-")}</td>
+                </tr>
+              `, 7)}
+            </tbody>
+          </table>
+          <p class="footer">이 패널은 추적 서버에는 도달했지만 제외 규칙과 일치해 집계되지 않은 요청을 보여줍니다. 최근 ${escapeHtml((summary.excludedRecent || []).length)}건만 표시합니다.</p>
+        </div>
+
+        <div class="tab-panel" data-tab-group-panel="details" data-tab-panel="settings">
           <div class="actions">
             <div class="stack">
               <h3>현재 공개 IP 제외</h3>
@@ -1089,184 +1402,7 @@ function dashboardTemplate(summary) {
             </div>
           </div>
         </div>
-      </details>
-    </section>
-
-    <section class="panel-grid">
-      <article class="panel span-6">
-        <h2>상위 페이지</h2>
-        <table>
-          <thead><tr><th>페이지</th><th>조회수</th></tr></thead>
-          <tbody>
-            ${listRows(summary.topPages, (item) => `
-              <tr>
-                <td class="mono">${escapeHtml(item.path)}</td>
-                <td>${escapeHtml(item.views)}</td>
-              </tr>
-            `, 2)}
-          </tbody>
-        </table>
       </article>
-
-      <article class="panel span-6">
-        <h2>상위 공개 IP</h2>
-        <table>
-          <thead><tr><th>IP</th><th>네트워크</th><th>조회수</th></tr></thead>
-          <tbody>
-            ${listRows(summary.topIps, (item) => `
-              ${(() => {
-                const badge = classifyNetwork(item.enrichment || {});
-                return `
-              <tr>
-                <td class="mono">${escapeHtml(item.enrichment.normalizedIp || item.ip)}</td>
-                <td class="network-cell">
-                  <div class="badge ${escapeHtml(badge.tone)}">${escapeHtml(badge.label)}</div>
-                  <div>${escapeHtml(item.enrichment.reverseDns || item.enrichment.isp || item.enrichment.organization || "-")}</div>
-                  <div class="muted">${escapeHtml([item.enrichment.asn, item.enrichment.country, item.enrichment.city].filter(Boolean).join(" / ") || "-")}</div>
-                </td>
-                <td>${escapeHtml(item.views)}</td>
-              </tr>
-            `;
-              })()}
-            `, 3)}
-          </tbody>
-        </table>
-      </article>
-
-      <article class="panel span-6">
-        <h2>최근 방문</h2>
-        <table>
-          <thead><tr><th>시간</th><th>페이지</th><th>IP</th><th>네트워크</th></tr></thead>
-          <tbody>
-            ${listRows(summary.recent, (item) => `
-              ${(() => {
-                const badge = classifyNetwork(item.enrichment || {});
-                return `
-              <tr>
-                <td>${escapeHtml(item.createdAt)}</td>
-                <td class="mono">${escapeHtml(item.path)}</td>
-                <td class="mono">${escapeHtml(item.enrichment.normalizedIp || item.ip)}</td>
-                <td class="network-cell">
-                  <div class="badge ${escapeHtml(badge.tone)}">${escapeHtml(badge.label)}</div>
-                  <div>${escapeHtml(item.enrichment.reverseDns || item.enrichment.isp || item.enrichment.organization || "-")}</div>
-                  <div class="muted">${escapeHtml([item.enrichment.asn, item.enrichment.country, item.enrichment.city].filter(Boolean).join(" / ") || "-")}</div>
-                </td>
-              </tr>
-            `;
-              })()}
-            `, 4)}
-          </tbody>
-        </table>
-      </article>
-    </section>
-
-    <section class="panel-grid">
-      <article class="panel span-12">
-        <div class="panel-head">
-          <h2>기타 정보</h2>
-          <div class="toolbar tight">
-            <button class="button secondary" type="button" data-open-settings>설정</button>
-          </div>
-        </div>
-        <div class="tabs" role="tablist" aria-label="기타 정보 탭">
-          <button class="tab-button active" type="button" role="tab" aria-selected="true" data-tab-target="top-visitors">상위 방문자 ID</button>
-          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-target="excluded-ips">제외된 IP</button>
-          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-target="excluded-visitors">제외된 방문자 ID</button>
-          <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab-target="raw-ip-log">원본 IP 로그</button>
-        </div>
-
-        <div class="tab-panel active" data-tab-panel="top-visitors">
-          <table>
-            <thead><tr><th>방문자 ID</th><th>조회수</th></tr></thead>
-            <tbody>
-              ${listRows(summary.topVisitors, (item) => `
-                <tr>
-                  <td class="mono">${escapeHtml(item.visitorId)}</td>
-                  <td>${escapeHtml(item.views)}</td>
-                </tr>
-              `, 2)}
-            </tbody>
-          </table>
-        </div>
-
-        <div class="tab-panel" data-tab-panel="excluded-ips">
-          <div>
-            ${summary.exclusions.excludedIps.length
-              ? summary.exclusions.excludedIps.map((ip) => `
-                  <span class="pill mono">
-                    ${escapeHtml(ip)}
-                    <button class="inline-button" type="button" onclick="removeExcludedIp('${escapeHtml(ip)}')">삭제</button>
-                  </span>
-                `).join("")
-              : '<div class="empty-cell">제외된 IP가 없습니다.</div>'}
-          </div>
-        </div>
-
-        <div class="tab-panel" data-tab-panel="excluded-visitors">
-          <div>
-            ${summary.exclusions.excludedVisitorIds.length
-              ? summary.exclusions.excludedVisitorIds.map((visitorId) => `
-                  <span class="pill mono">
-                    ${escapeHtml(visitorId)}
-                    <button class="inline-button" type="button" onclick="removeExcludedVisitor('${escapeHtml(visitorId)}')">삭제</button>
-                  </span>
-                `).join("")
-              : '<div class="empty-cell">제외된 방문자 ID가 없습니다.</div>'}
-          </div>
-        </div>
-
-        <div class="tab-panel" data-tab-panel="raw-ip-log">
-          <table>
-            <thead><tr><th>시간</th><th>경로</th><th>원본 IP</th><th>전달된 IP</th><th>소켓 IP</th></tr></thead>
-            <tbody>
-              ${listRows(summary.recent, (item) => `
-                <tr>
-                  <td>${escapeHtml(item.createdAt)}</td>
-                  <td class="mono">${escapeHtml(item.path)}</td>
-                  <td class="mono">${escapeHtml(item.rawIp || item.ip || "-")}</td>
-                  <td class="mono">${escapeHtml(item.forwardedFor || "-")}</td>
-                  <td class="mono">${escapeHtml(item.socketIp || "-")}</td>
-                </tr>
-              `, 5)}
-            </tbody>
-          </table>
-          <p class="footer">집계와 제외 판정에는 정규화된 IP를 사용합니다. 이 패널은 추적 서버가 요청에서 받은 원본 값을 보여줍니다.</p>
-        </div>
-      </article>
-    </section>
-
-    <section class="panel-grid">
-      <details class="panel span-12 log-details">
-        <summary class="panel-summary">
-          <span>
-            <span class="summary-title">제외 요청 로그</span>
-            <span class="summary-subtitle">최근 ${escapeHtml((summary.excludedRecent || []).length)}건만 표시합니다. 기본으로 접혀 있습니다.</span>
-          </span>
-          <span class="summary-chevron" aria-hidden="true"></span>
-        </summary>
-        <div class="details-body">
-          <div class="toolbar">
-            <button class="button danger" type="button" onclick="clearExcludedRequestLog()">제외 요청 로그 삭제</button>
-          </div>
-        <table>
-          <thead><tr><th>시간</th><th>경로</th><th>제외 기준</th><th>값</th><th>원본 IP</th><th>전달된 IP</th><th>소켓 IP</th></tr></thead>
-          <tbody>
-            ${listRows(summary.excludedRecent || [], (item) => `
-              <tr>
-                <td>${escapeHtml(item.createdAt)}</td>
-                <td class="mono">${escapeHtml(item.path || "-")}</td>
-                <td>${escapeHtml(item.excludedBy || "-")}</td>
-                <td class="mono">${escapeHtml(item.excludedValue || "-")}</td>
-                <td class="mono">${escapeHtml(item.rawIp || item.ip || "-")}</td>
-                <td class="mono">${escapeHtml(item.forwardedFor || "-")}</td>
-                <td class="mono">${escapeHtml(item.socketIp || "-")}</td>
-              </tr>
-            `, 7)}
-          </tbody>
-        </table>
-        <p class="footer">이 패널은 추적 서버에는 도달했지만 제외 규칙과 일치해 집계되지 않은 요청을 보여줍니다.</p>
-        </div>
-      </details>
     </section>
 
     <p class="footer">공개 IP는 네트워크 수준의 단서일 뿐입니다. NAT, VPN, 모바일망, 프라이빗 릴레이 서비스 때문에 여러 사람이 같은 주소로 합쳐지거나 실제 사람이 가려질 수 있습니다.</p>
@@ -1368,37 +1504,30 @@ function dashboardTemplate(summary) {
 
     function setupTabs() {
       const buttons = Array.from(document.querySelectorAll('[data-tab-target]'));
-      const panels = Array.from(document.querySelectorAll('[data-tab-panel]'));
-      if (!buttons.length || !panels.length) return;
+      if (!buttons.length) return;
 
       buttons.forEach(function(button) {
         button.addEventListener('click', function() {
+          const group = button.getAttribute('data-tab-group') || 'default';
           const target = button.getAttribute('data-tab-target');
-          buttons.forEach(function(item) {
+          const groupButtons = buttons.filter(function(item) {
+            return (item.getAttribute('data-tab-group') || 'default') === group;
+          });
+          const groupPanels = Array.from(document.querySelectorAll('[data-tab-group-panel="' + group + '"]'));
+
+          groupButtons.forEach(function(item) {
             const active = item === button;
             item.classList.toggle('active', active);
             item.setAttribute('aria-selected', active ? 'true' : 'false');
           });
-          panels.forEach(function(panel) {
+          groupPanels.forEach(function(panel) {
             panel.classList.toggle('active', panel.getAttribute('data-tab-panel') === target);
           });
         });
       });
     }
 
-    function setupSettingsButton() {
-      const settingsPanel = document.getElementById('settings-panel');
-      const settingsButton = document.querySelector('[data-open-settings]');
-      if (!settingsPanel || !settingsButton) return;
-
-      settingsButton.addEventListener('click', function() {
-        settingsPanel.open = true;
-        settingsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    }
-
     setupTabs();
-    setupSettingsButton();
     setInterval(refreshMetricTotals, 60 * 60 * 1000);
   </script>
 </body>
@@ -1462,8 +1591,8 @@ function makeVisit(req, payload) {
     rawIp,
     forwardedFor,
     socketIp,
-    path: payload.path || "/",
-    title: payload.title || "",
+    path: normalizeTrackedPath(payload.path),
+    title: payload.title || "Portfolio",
     referrer: payload.referrer || "",
     userAgent: req.headers["user-agent"] || "",
     visitorId: payload.visitorId || "",
