@@ -37,7 +37,7 @@
   } } }
 </script>
 <link rel="stylesheet" href="../../assets/css/portfolio-dark.css"/>
-<!-- mode init (pre-paint, flash 방지). JS 없으면 속성 미설정 → DEEP 포함 전체 표시. -->
+<!-- mode init: pre-paint setup to avoid a flash; without JS, all DEEP content remains visible. -->
 <script>
   (function () {
     try { document.documentElement.setAttribute("data-eng-mode", localStorage.getItem("eng-mode") || "overview"); }
@@ -45,14 +45,14 @@
   })();
 </script>
 <style>
-  /* === mode visibility — OVERVIEW 일 때만 DEEP 숨김 (속성 없으면 = no-JS = 전체 표시) === */
+  /* === mode visibility: hide DEEP only in OVERVIEW; no attribute means no-JS and shows everything === */
   html[data-eng-mode="overview"] [data-deep] { display: none; }
   /* === segmented mode toggle === */
   .seg { display: inline-flex; border: 1px solid rgba(230,237,243,0.16); background: rgba(17,22,29,0.6); }
   .seg button { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 7px 16px; color: #8A94A6; background: transparent; border: 0; cursor: pointer; transition: color 160ms ease, background-color 160ms ease; }
   .seg button[aria-pressed="true"] { color: #0B0F14; background: #6FE3FF; font-weight: 700; }
   .seg button:not([aria-pressed="true"]):hover { color: #6FE3FF; }
-  /* === sticky mode bar (nav 64px 아래) === */
+  /* === sticky mode bar below the 64px nav === */
   .mode-bar { position: sticky; top: 64px; z-index: 40; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); background: rgba(11,15,20,0.82); border-bottom: 1px solid rgba(230,237,243,0.08); }
   /* === code / formula blocks === */
   .code-block { font-family: "JetBrains Mono", monospace; font-size: 12.5px; line-height: 1.75; color: #C7D2D6; background: #0B0F14; border: 1px solid rgba(230,237,243,0.10); padding: 16px 18px; overflow-x: auto; white-space: pre; }
@@ -62,12 +62,12 @@
   .formula { font-family: "JetBrains Mono", monospace; color: #E6EDF3; background: rgba(111,227,255,0.06); border: 1px solid rgba(111,227,255,0.18); padding: 14px 18px; font-size: 14px; line-height: 1.6; overflow-x: auto; }
   .deep-label { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6FE3FF; }
   .deep-block + .deep-block { margin-top: 22px; padding-top: 22px; border-top: 1px solid rgba(230,237,243,0.08); }
-  /* DEEP 전개 시 부드러운 진입 (모션 선호 사용자만) */
+  /* Smooth DEEP reveal for users without reduced-motion preference. */
   @media (prefers-reduced-motion: no-preference) {
     html[data-eng-mode="deep"] [data-deep] { animation: deepin 240ms ease both; }
   }
   @keyframes deepin { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-  /* DEEP 모드에서만 보이는 안내 텍스트 토글 */
+  /* Toggle helper text by active mode. */
   html[data-eng-mode="deep"] .when-overview { display: none; }
   html[data-eng-mode="overview"] .when-deep { display: none; }
 </style>
