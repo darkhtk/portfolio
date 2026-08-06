@@ -3,24 +3,157 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>홍대기 - 이력서</title>
-  <meta name="description" content="홍대기의 A4 출력용 이력서. Unity/XR 산업 개발, BIM 런타임, 로보틱스, EditorWindow 툴링, 현장 납품을 중심으로 정리했습니다."/>
+  <title>홍대기 - 한국어 이력서</title>
+  <meta name="description" content="프로젝트 설명과 스크린샷을 함께 정리한 홍대기 한국어 이력서."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/css/print-docs.css"/>
   <link rel="stylesheet" href="../../assets/css/print-dark.css"/>
+  <style>
+    .screen-toolbar__notice {
+      color: var(--accent);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .resume-summary-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .project-page-title,
+    .screenshot-page-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .project-hero {
+      display: grid;
+      gap: 8mm;
+      grid-template-columns: 78mm minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .project-hero__image {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--soft);
+    }
+
+    .project-hero__image img {
+      height: 66mm;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .project-hero__copy {
+      display: grid;
+      gap: 7px;
+    }
+
+    .evidence-list {
+      margin: 0;
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 10.5px;
+      line-height: 1.7;
+    }
+
+    .evidence-list li + li {
+      margin-top: 4px;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .screenshot-card {
+      break-inside: avoid;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .screenshot-card img {
+      height: 42mm;
+      object-fit: cover;
+      object-position: top center;
+      background: var(--soft);
+    }
+
+    .screenshot-card__body {
+      display: grid;
+      gap: 4px;
+      padding: 8px 10px 9px;
+    }
+
+    .screenshot-card__label {
+      color: var(--accent-deep);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .screenshot-card__name {
+      margin: 0;
+      color: var(--muted);
+      font-size: 9.5px;
+      line-height: 1.45;
+    }
+
+    @media screen {
+      .project-hero__image,
+      .screenshot-card {
+        background: #11161D;
+      }
+    }
+
+    @media print {
+      .resume-summary-grid {
+        gap: 6px;
+      }
+
+      .screenshot-grid {
+        gap: 6px;
+      }
+
+      .project-hero {
+        gap: 6mm;
+        grid-template-columns: 66mm minmax(0, 1fr);
+      }
+
+      .project-hero__image img {
+        height: 53mm;
+      }
+
+      .screenshot-card img {
+        height: 39mm;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="screen-toolbar">
     <div>
-      <div class="screen-toolbar__title">Print Resume</div>
-      <div class="screen-toolbar__meta">A4 한국어 이력서. 100% 배율로 인쇄하거나 PDF로 저장하세요.</div>
+      <div class="screen-toolbar__title">한국어 이력서</div>
+      <div class="screen-toolbar__meta">A4 이력서. 프로젝트 설명과 스크린샷 포함.</div>
     </div>
     <div class="screen-toolbar__actions">
-      <a class="screen-toolbar__link" href="../ko-portfolio/">포트폴리오 출력본</a>
-      <a class="screen-toolbar__link" href="../../about/">사이트 프로필</a>
-      <button class="screen-toolbar__button screen-toolbar__button--primary" type="button" onclick="window.print()">인쇄 / PDF 저장</button>
+      <a class="screen-toolbar__link" href="../resume-en/">English resume</a>
+      <a class="screen-toolbar__link" href="../../about/">프로필</a>
     </div>
   </div>
 
@@ -32,7 +165,7 @@
           <h1 class="display-name">홍대기</h1>
           <p class="display-title">10년차 Unity/XR 시스템 엔지니어</p>
           <p class="lead">
-            산업 Unity/XR, BIM 런타임, 디지털 트윈 저작 도구, 로보틱스 인터페이스, VR 시뮬레이터를 현장에 납품해 온 C# 개발자입니다. 중심은 Unity 실행력과 현장 납품입니다. 무거운 지오메트리, 실시간 입력, 하드웨어 연동, 비개발자용 툴링, 운영자 인계를 끝까지 다뤄 왔습니다.
+            산업 XR, BIM 런타임 시각화, 디지털 트윈 저작 도구, 로보틱스 인터페이스, VR 시뮬레이터를 현장 납품 기준으로 만들어 온 Unity C# 개발자입니다. 무거운 지오메트리, 실시간 입력, 하드웨어 동기화, 비개발자용 툴링, 설치와 디버깅, 운영자 인계처럼 실제 환경에서 문제가 되는 부분을 중요하게 봅니다.
           </p>
           <div class="token-list">
             <span class="token token--accent">Unity C# Runtime</span>
@@ -40,64 +173,62 @@
             <span class="token token--accent">BIM Geometry</span>
             <span class="token">Robotics / IK</span>
             <span class="token">Editor Tooling</span>
-            <span class="token">Field Delivery</span>
+            <span class="token">현장 납품</span>
           </div>
         </div>
 
         <aside class="panel panel--accent">
-          <div class="panel__eyebrow">Contact</div>
+          <div class="panel__eyebrow">연락처</div>
           <div class="contact-list">
-            <div><strong>Phone</strong> 010-6617-2645</div>
-            <div><strong>Email</strong> <a href="mailto:darkhtk@gmail.com">darkhtk@gmail.com</a></div>
+            <div><strong>전화</strong> 010-6617-2645</div>
+            <div><strong>이메일</strong> <a href="mailto:darkhtk@gmail.com">darkhtk@gmail.com</a></div>
             <div><strong>GitHub</strong> <a href="https://github.com/darkhtk">github.com/darkhtk</a></div>
             <div><strong>LinkedIn</strong> <a href="https://www.linkedin.com/in/daeki-hong-041947182">linkedin.com/in/daeki-hong-041947182</a></div>
-            <div><strong>Portfolio</strong> <a href="https://darkhtk.github.io/portfolio/">darkhtk.github.io/portfolio/</a></div>
-            <div><strong>Location</strong> Seoul, Korea</div>
+            <div><strong>포트폴리오</strong> <a href="https://darkhtk.github.io/portfolio/">darkhtk.github.io/portfolio/</a></div>
+            <div><strong>거주지</strong> 서울, 대한민국</div>
           </div>
           <div class="rule"></div>
-          <div class="panel__eyebrow">Best fit</div>
-          <p class="panel__copy">
-            Unity 기반 산업 시뮬레이션, XR 교육/훈련, BIM/디지털 트윈 런타임, 로봇 제어 인터페이스, 에디터 툴링, 현장 납품형 소프트웨어.
-          </p>
+          <div class="panel__eyebrow">적합한 역할</div>
+          <p class="panel__copy">산업 Unity 시뮬레이션, XR 교육/훈련, BIM/디지털 트윈 런타임, 로보틱스 제어 인터페이스, EditorWindow 툴링, 현장 납품형 소프트웨어.</p>
           <div class="rule"></div>
-          <div class="panel__eyebrow">Education</div>
+          <div class="panel__eyebrow">학력</div>
           <p class="panel__copy">한국항공대학교 소프트웨어학과 학사.</p>
         </aside>
       </div>
 
       <div class="note-strip">
-        포지셔닝: 이 문서는 Unity 산업 개발 중심입니다. XR, BIM, 로보틱스, EditorWindow 툴링, 현장 납품 경험을 빠르게 검토할 수 있도록 구성했습니다.
+        직접 설명할 수 있는 작업만 중심에 뒀습니다. 납품된 Unity 시스템, 현장 도구, ERP 업무 화면, 그리고 각 프로젝트에서 제가 안정화한 부분을 스크린샷과 함께 정리했습니다.
       </div>
 
       <section class="stack-md">
-        <div class="section-label">Core proof</div>
+        <div class="section-label">주요 작업</div>
         <div class="proof-grid">
           <article class="proof-card">
-            <div class="proof-card__eyebrow">Unity Industrial Delivery</div>
+            <div class="proof-card__eyebrow">Unity 산업 납품</div>
             <h3 class="proof-card__title">VR Robot / DXCenter</h3>
-            <p class="proof-card__copy">Quest 3, Unity, Flask, RoboDK, Doosan A0912를 잇는 로봇 원격 조작과 Unity 6 URP/WebGL 디지털 트윈 저작 도구. 안전 로직, 캘리브레이션, 비개발자용 EditorWindow 툴링까지 담당.</p>
+            <p class="proof-card__copy">Quest 3 - Unity - Flask - RoboDK - Doosan A0912 원격 조작 흐름과 Unity 6 URP/WebGL 기반 디지털 트윈 저작 도구를 만들었습니다. 안전 로직, 캘리브레이션, 검증, 비개발자용 EditorWindow 도구까지 맡았습니다.</p>
           </article>
           <article class="proof-card">
-            <div class="proof-card__eyebrow">Hard Engineering Modules</div>
+            <div class="proof-card__eyebrow">직접 풀어낸 모듈</div>
             <h3 class="proof-card__title">IK / BIM / Hardware Sync</h3>
-            <p class="proof-card__copy">사내 Jacobian IK 솔버, 런타임 BIM 단면 생성, 9개 EditorWindow 워크플로, 하드웨어-Unity 동기화. 외부 도구가 커버하지 못한 납품 제약을 직접 구현.</p>
+            <p class="proof-card__copy">기성 도구로 납품 조건을 맞추기 어려운 부분에서 Jacobian IK 솔버, 런타임 BIM 단면, 9개 EditorWindow 흐름, 하드웨어-Unity 동기화를 직접 구현했습니다.</p>
           </article>
           <article class="proof-card">
             <div class="proof-card__eyebrow">BIM Runtime</div>
             <h3 class="proof-card__title">WatchBIM / Unity-CrossSection</h3>
-            <p class="proof-card__copy">대용량 도로 BIM 데이터를 대상으로 custom hit engine, mesh optimization, auto LOD, 단면 생성, 2D 분석 뷰어, slope label, minimap, camera tooling을 구현.</p>
+            <p class="proof-card__copy">대용량 도로 BIM 데이터를 대상으로 커스텀 히트 판정, 메시 최적화, 자동 LOD, 런타임 단면, 2D 분석 뷰, 경사 라벨, 미니맵, 카메라 도구를 납품했습니다.</p>
           </article>
           <article class="proof-card">
-            <div class="proof-card__eyebrow">Field Delivery</div>
+            <div class="proof-card__eyebrow">현장 납품</div>
             <h3 class="proof-card__title">VR Simulator Collection</h3>
-            <p class="proof-card__copy">건설/공장/해군 안전 훈련 VR, FPS 안전 교육, AR 교육 앱, RS232 장비 연동, multiplayer mission flow, 현장 설치, 운영, 철수, operator handoff 경험.</p>
+            <p class="proof-card__copy">건설, 공장, 해군, FPS 안전, AR 교육 앱을 만들고 하드웨어 연동, 멀티플레이 미션 흐름, 설치, 운영, 철수, 운영자 인계까지 경험했습니다.</p>
           </article>
         </div>
       </section>
 
       <div class="page__foot">
-        <span>홍대기 - Unity 중심 이력서</span>
-        <span>Page 1 / 2</span>
+        <span>홍대기 - 한국어 이력서</span>
+        <span>페이지 1</span>
       </div>
     </section>
 
@@ -105,7 +236,7 @@
       <div class="stack-lg">
         <div>
           <div class="eyebrow">Experience</div>
-          <h2 class="section-title">Unity 산업 개발과 현장 납품 경험</h2>
+          <h2 class="section-title">Unity 엔지니어링과 현장 납품</h2>
         </div>
 
         <div class="career-list">
@@ -114,11 +245,11 @@
               <div class="career-item__company">YMX - Senior Engineer, Client Team 2</div>
               <div class="career-item__period">2024.12 - Present</div>
             </div>
-            <div class="career-item__role">Unity 산업 개발: 디지털 트윈 저작 도구, 로보틱스 인터페이스, 전시형 콘텐츠.</div>
+            <div class="career-item__role">산업 Unity 개발: 디지털 트윈 저작 도구, 로보틱스 인터페이스, 전시형 시스템.</div>
             <ul class="bullet-list">
-              <li>Unity 6 URP/WebGL 기반 DXCenter 저작 환경을 구축했습니다. 9개 EditorWindow, ScriptableObject 데이터 흐름, Service Locator, EventBus, Strategy 기반 상태 효과, adapter식 장비 연동, 검증 흐름, 비개발자용 런타임 준비를 포함합니다.</li>
-              <li>Quest 3 - Unity - Flask - RoboDK - Doosan A0912 원격 조작 흐름을 만들고, 좌표 변환, smoothing, 속도/가속도 제한, TCP/HTTP 통신, 캘리브레이션, 안전 처리, BEXCO 공개 시연 대응까지 수행했습니다.</li>
-              <li>후속 R&D로 RoboDK 의존을 줄이는 사내 Jacobian IK 솔버를 구현했습니다. 6-DOF tracking, 특이점 근처 damping, debug UI, 다중 로봇 검증을 다뤘습니다.</li>
+              <li>Unity 6 URP/WebGL 기반 DXCenter 저작 환경을 만들었습니다. 9개 EditorWindow 도구, ScriptableObject 데이터 흐름, Service Locator, EventBus, Strategy 기반 상태 효과, adapter식 장비 연동, 검증 흐름, 런타임 준비를 포함합니다.</li>
+              <li>Quest 3 - Unity - Flask - RoboDK - Doosan A0912 원격 조작 파이프라인을 만들었습니다. 좌표 변환, smoothing, 속도/가속도 제한, TCP/HTTP 통신, 캘리브레이션, 안전 처리, BEXCO 공개 데모 지원까지 담당했습니다.</li>
+              <li>RoboDK 의존도를 줄이기 위해 사내 Jacobian IK 솔버를 구현했습니다. 6축 추적, singularity 근처 damping, 디버그 UI, 다중 로봇 검증을 함께 진행했습니다.</li>
             </ul>
           </article>
 
@@ -127,11 +258,11 @@
               <div class="career-item__company">Jangheon Industrial - Seoul Office</div>
               <div class="career-item__period">2020.06 - 2024.12</div>
             </div>
-            <div class="career-item__role">BIM 시각화, geometry tooling, 도면 자동화, 엔지니어링 소프트웨어.</div>
+            <div class="career-item__role">BIM 시각화, 지오메트리 도구, 도면 작성 도구, 엔지니어링 소프트웨어.</div>
             <ul class="bullet-list">
-              <li>WatchBIM에서 고속도로 BIM 런타임 기능을 개발했습니다. custom hit engine, mesh optimization, auto LOD, runtime cross-section, 2D analysis viewer, slope label, minimap, camera tool을 포함합니다.</li>
-              <li>Unity-CrossSection을 재사용 가능한 C# 모듈로 구현했습니다. coroutine, NativeArray, Burst-compatible jobs, progress/cancel flow, mesh-plane intersection, caching, shader visualization을 사용했습니다.</li>
-              <li>WPF/MVVM, MySQL, CAD entity generation 기반 도로 설계 도면 자동화 도구를 개발했습니다.</li>
+              <li>고속도로 BIM 데이터를 위한 WatchBIM 런타임 기능을 개발했습니다. 커스텀 히트 엔진, 메시 최적화, 자동 LOD, 런타임 단면, 2D 분석 뷰어, 경사 라벨, 미니맵, 카메라 도구가 포함됩니다.</li>
+              <li>Unity-CrossSection을 재사용 가능한 C# 모듈로 만들었습니다. Coroutine, NativeArray, Burst 호환 Job, 진행/취소 흐름, mesh-plane intersection, 캐싱, 셰이더 시각화를 사용했습니다.</li>
+              <li>WPF/MVVM, MySQL, CAD entity 생성을 사용해 도로 설계 도면 작성 도구를 개발했습니다.</li>
             </ul>
           </article>
 
@@ -140,46 +271,331 @@
               <div class="career-item__company">Mline Studio / Saltworks / Swink</div>
               <div class="career-item__period">2015 - 2019</div>
             </div>
-            <div class="career-item__role">Unity gameplay, VR simulator, Android AR 안전 교육, RS232 장비 연동, multiplayer mission flow, 현장 설치, 운영, 철수, operator handoff.</div>
+            <div class="career-item__role">Unity gameplay, VR 시뮬레이터, Android AR 안전 교육, RS232 장비 연동, 멀티플레이 미션 흐름, 현장 설치, 운영, 철수, 운영자 인계.</div>
             <ul class="bullet-list">
-              <li>건설/공장/해군 안전 훈련 VR, FPS 안전 교육, AR 교육 앱, 하드웨어 연동형 XR 콘텐츠를 개발하고 고객사 현장 납품과 운영 인계를 경험했습니다.</li>
+              <li>건설, 공장, 해군 안전 교육 VR, FPS 안전 교육, AR 교육 앱, 하드웨어 연동 XR 콘텐츠를 개발하고 고객 현장 납품과 운영자 인계를 지원했습니다.</li>
             </ul>
           </article>
-
-          <section class="stack-md">
-            <div class="section-label">Unity focus</div>
-            <div class="proof-grid">
-              <article class="proof-card">
-                <div class="proof-card__eyebrow">Runtime</div>
-                <h3 class="proof-card__title">C# / Unity Runtime</h3>
-                <p class="proof-card__copy">실시간 입력, 좌표 변환, 상태 흐름, 카메라 제어, 시뮬레이션 루프, 운영자용 피드백을 Unity 런타임 안에서 구성.</p>
-              </article>
-              <article class="proof-card">
-                <div class="proof-card__eyebrow">Tooling</div>
-                <h3 class="proof-card__title">EditorWindow Workflow</h3>
-                <p class="proof-card__copy">비개발자가 코드 없이 데이터 매핑, 검증, 자산 등록, 런타임 준비를 반복할 수 있도록 에디터 도구화.</p>
-              </article>
-              <article class="proof-card">
-                <div class="proof-card__eyebrow">Geometry</div>
-                <h3 class="proof-card__title">BIM / Mesh Processing</h3>
-                <p class="proof-card__copy">대용량 BIM 선택, mesh-plane intersection, NativeArray, Burst-compatible jobs, 단면/2D 분석 뷰어 구현.</p>
-              </article>
-              <article class="proof-card">
-                <div class="proof-card__eyebrow">Delivery</div>
-                <h3 class="proof-card__title">Hardware / Field</h3>
-                <p class="proof-card__copy">RS232, 로봇/장비 연동, 설치, 시연, 안전 처리, 운영자 인계까지 현장 납품 단위로 마무리.</p>
-              </article>
-            </div>
-          </section>
         </div>
+
+        <section class="stack-md">
+          <div class="section-label">Unity 중심 역량</div>
+          <div class="resume-summary-grid">
+            <article class="proof-card">
+              <div class="proof-card__eyebrow">Runtime</div>
+              <h3 class="proof-card__title">C# / Unity Runtime</h3>
+              <p class="proof-card__copy">Unity 런타임 안에서 실시간 입력, 좌표 변환, 상태 흐름, 카메라 제어, 시뮬레이션 루프, 운영자 피드백을 구성합니다.</p>
+            </article>
+            <article class="proof-card">
+              <div class="proof-card__eyebrow">Tooling</div>
+              <h3 class="proof-card__title">EditorWindow Workflow</h3>
+              <p class="proof-card__copy">코드 변경 없이 데이터 매핑, 검증, 에셋 등록, 런타임 준비를 반복할 수 있는 EditorWindow 도구를 만듭니다.</p>
+            </article>
+            <article class="proof-card">
+              <div class="proof-card__eyebrow">Delivery</div>
+              <h3 class="proof-card__title">Hardware / Field</h3>
+              <p class="proof-card__copy">RS232, 로봇/장비 연동, 설치, 데모, 안전 처리, 운영자 인계를 납품 범위 안에서 처리합니다.</p>
+            </article>
+          </div>
+        </section>
       </div>
 
       <div class="page__foot">
-        <span>Live portfolio - https://darkhtk.github.io/portfolio/</span>
-        <span>Page 2 / 2</span>
+        <span>포트폴리오 - https://darkhtk.github.io/portfolio/</span>
+        <span>페이지 2</span>
       </div>
     </section>
+
+    <div id="appendix-pages"></div>
   </div>
-<script src="../../assets/js/site.js"></script>
+
+  <script>
+    const projects = [
+      {
+        key: "dxcenter",
+        title: "DXCenter",
+        kicker: "Unity 6 URP / WebGL / EditorWindow 툴링",
+        summary: "비개발자가 반복해서 해야 하는 데이터 매핑, 검증, 장비 설정, 런타임 준비를 Unity EditorWindow 흐름으로 묶은 디지털 트윈 저작 환경입니다.",
+        contribution: [
+          "데이터 매핑, 검증, 에셋 등록, 런타임 준비를 중심으로 9개의 EditorWindow 도구를 설계했습니다.",
+          "ScriptableObject 데이터 흐름, Service Locator, EventBus, Strategy 기반 상태 효과, adapter식 장비 연동을 사용했습니다.",
+          "운영자가 코드 없이 콘텐츠를 준비할 수 있는 에디터 화면을 맡았습니다."
+        ],
+        images: [
+          ["customeditor.png", "DXCenter 저작 파이프라인에서 데이터 매핑, 검증, 런타임 준비를 처리하는 커스텀 EditorWindow 화면."]
+        ]
+      },
+      {
+        key: "sems-erp",
+        title: "SEMS ERP",
+        kicker: "모바일 우선 ERP / Fastify TypeScript / MySQL / GCP",
+        summary: "중소 제조업 현장의 수주, BOM, 자재, 생산, 외주, 재고, 승인, 출고, 로그와 보고를 하나의 실행 흐름으로 연결한 역할 기반 ERP입니다. 데스크톱 표를 그대로 줄이는 대신, 현장 담당자가 휴대폰에서 다음 행동을 끝낼 수 있게 구성했습니다.",
+        contribution: [
+          "관리자, 자재관리자, 생산관리자, 파트장, 작업자, 영업 담당자의 역할별 업무 흐름을 정리했습니다.",
+          "각 역할이 다음 행동을 먼저 볼 수 있도록 모바일 중심 작업 화면을 설계했습니다.",
+          "Fastify/TypeScript, MySQL/Kysely, Zod 검증, Identity Platform 인증, Cloud Run, Cloud SQL, Cloud Storage, 테스트와 모바일/PC 화면 검수까지 구성했습니다."
+        ],
+        images: [
+          ["sems-00-demo-role-login-mobile.png", "데모 역할 선택 화면. 하나의 ERP가 관리자, 자재, 생산, 파트장, 작업자, 영업 담당자에게 다른 작업대로 열리도록 구성했습니다."],
+          ["sems-01-admin-dashboard-mobile.png", "관리자 모바일 홈. 매출 현황, 출고 대기, 납기 위험, 생산 위험, 구매 대기, 자재 출고 작업을 역할별 판단으로 묶었습니다."],
+          ["sems-03-material-dashboard-mobile.png", "자재관리자 홈. 불필요한 메뉴를 줄이고 입고 대기와 자재 출고 작업에 집중하게 했습니다."],
+          ["sems-05-production-dashboard-mobile.png", "생산관리자 홈. 수주 진행률과 생산 납기 위험을 먼저 보여주고 작업, 생산, 재고 업무로 이어지게 했습니다."],
+          ["sems-09-sales-dashboard-mobile.png", "영업 홈. 수주 등록, 생산, 재고, 출고 현황, 고객 납기 위험을 한 화면에서 확인합니다."],
+          ["sems-10-sales-shipping-mobile.png", "모바일 출고 목록. 출고 가능 주문, 지연 배지, 바로 실행 버튼을 보여주어 데스크톱 표 없이도 처리할 수 있게 했습니다."],
+          ["sems-11-sales-dashboard-desktop.png", "영업 데스크톱 대시보드. 넓은 화면에서는 출고 대기, 재고 정합성, 작업 현황, 자재 부족, 재고 이동 추이를 분석용으로 배치했습니다."],
+          ["sems-12-sales-shipping-desktop.png", "데스크톱 출고 화면. 기간, 상태, 출고 가능 필터, 검색, D+ 지연 표시, 출고 실행을 배치 작업에 맞게 묶었습니다."],
+          ["sems-13-admin-dashboard-desktop.png", "관리자 데스크톱 대시보드. 부족 알림, 미입고 구매, 구매/매출 요약, 재고 정합성, 작업 현황, 권한별 메뉴를 통합했습니다."]
+        ]
+      },
+      {
+        key: "vr-robot",
+        title: "VR Robot Teleoperation",
+        kicker: "Quest 3 / Unity VR / Flask / RoboDK / Doosan A0912",
+        summary: "Meta Quest 3로 산업용 로봇을 실시간 원격 조작하는 프로젝트입니다. Unity VR 입력, 안전 필터링, Python 브리지, RoboDK 연동, 이후 사내 IK R&D까지 이어졌습니다.",
+        contribution: [
+          "6DOF VR 컨트롤러 입력을 좌표 변환, smoothing, 안전 제한을 거쳐 로봇 target command로 매핑했습니다.",
+          "BEXCO 공개 데모에서 필요한 Unity 쪽 피드백 루프와 브리지 전제를 만들었습니다.",
+          "외부 의존도를 줄이고 solver 동작을 직접 볼 수 있도록 Jacobian IK 솔버로 확장했습니다."
+        ],
+        images: [
+          ["vr_robot_expo1.png", "Doosan A0912 원격 조작 흐름을 시연한 공개 데모 현장 화면."],
+          ["vr_robot_expo2.png", "로봇과 운영자 환경이 함께 보이는 전시 측 원격 조작 시나리오."],
+          ["ik_vr_control.png", "VR 컨트롤러 입력을 IK target에 연결해 손 움직임으로 end-effector를 구동한 화면."],
+          ["ik_tcp_tracking.png", "end-effector target 추적과 solver 응답을 확인하는 TCP tracking 화면."],
+          ["ik_damping_physics.png", "singularity 근처에서도 solver가 무너지지 않도록 damping 동작을 확인한 화면."],
+          ["ik_debug_ui.png", "관절, 각도, target error, solver 상태를 튜닝 중 확인하는 디버그 UI."],
+          ["ik_multi_robot.png", "제어 모델이 단일 로봇에 고정되지 않았는지 확인한 다중 로봇 검증 장면."]
+        ]
+      },
+      {
+        key: "watchbim",
+        title: "WatchBIM",
+        kicker: "Unity BIM 런타임 / 지오메트리 도구 / 분석 뷰어",
+        summary: "대용량 도로 BIM 모델을 Unity 런타임에서 조작하고, 단면을 자르고, 2D로 분석하고, 카메라 도구로 확인하는 시스템입니다. 핵심은 무거운 지오메트리를 운영자가 실제로 쓸 수 있게 만드는 일이었습니다.",
+        contribution: [
+          "대용량 BIM 데이터를 위한 커스텀 히트 판정, 메시 최적화, 자동 LOD, 모델 조작 흐름을 만들었습니다.",
+          "운영자가 확인할 수 있도록 런타임 단면과 연결된 2D 분석 뷰를 구현했습니다.",
+          "BIM 모델을 실무에서 이동하고 검사할 수 있도록 카메라, 미니맵, 그래프 도구를 추가했습니다."
+        ],
+        images: [
+          ["watchbim_generated_crosssection.png", "선택한 평면으로 만든 런타임 단면과 검사 대상 하이라이트."],
+          ["watchbim_clipping.png", "외부 저작 도구에 의존하지 않고 대용량 BIM 모델을 탐색하는 clipping/selection 흐름."],
+          ["watchbim_crosssection_highlight.png", "런타임 컷을 명확하게 보이도록 표시한 단면 지오메트리."],
+          ["watchbim_crosssection_Runtime2D.png", "런타임 단면 결과와 연결된 2D 분석 뷰어."],
+          ["watchbim_verticalgraph.png", "고도와 구조 분포를 빠르게 확인하기 위한 vertical graph 분석 화면."]
+        ]
+      },
+      {
+        key: "vr-sim",
+        title: "VR Simulator Collection",
+        kicker: "건설 / 공장 / 해군 교육 시스템",
+        summary: "건설, 공장, 해군 시나리오에서 납품한 VR/AR 교육 프로젝트입니다. 설치, 장비 처리, scripted training flow, 운영자 인계까지 포함된 현장형 작업입니다.",
+        contribution: [
+          "Unity에서 안전 교육 장면, 미션 진행, 이벤트 트리거, 피드백 루프를 구현했습니다.",
+          "설치, 운영, 철수, 고객 인계 같은 현장 제약과 장비 연동을 함께 처리했습니다.",
+          "화려한 장식보다 타이밍, 공간 인지, 교육 목적이 더 중요한 시나리오를 만들었습니다."
+        ],
+        images: [
+          ["vr_construction_standby.png", "건설 안전 시뮬레이터 대기 상태. 사고 예방 교육 시퀀스 진입 전 화면입니다."],
+          ["vr_construction_falling.png", "건설 현장 추락 사고 위험을 다루는 교육 시나리오."],
+          ["vr_construction_scaffold.png", "비계 작업에서 공간 인지와 위험 작업 식별을 다루는 장면."],
+          ["vr_lcm_cockpit.png", "상륙정 cockpit 시뮬레이터. 운영자 조작과 훈련 계기 화면이 함께 구성되어 있습니다."],
+          ["vr_lcm_steering.png", "해군 시뮬레이터 조작 훈련을 위한 steering interface."],
+          ["vr_lghaus_safety.png", "LG하우시스 공장 안전 교육 장면. 작업자 인지를 중심으로 구성했습니다."],
+          ["vr_lghaus_accident.png", "위험 대응과 절차 기억을 훈련하기 위한 공장 사고 시나리오."],
+          ["vr_lghaus_maintenance.png", "장비 상태와 절차 cue를 함께 보여주는 maintenance 교육 화면."],
+          ["vr_lghaus_printer.png", "산업 교육 환경을 보여주는 printer/equipment 시나리오."]
+        ]
+      },
+      {
+        key: "neostalgia",
+        title: "Neostalgia",
+        kicker: "XR 전시 / 관람객 기억 파이프라인 / 공식 선정",
+        summary: "BIFAN XR Beyond Reality 선정과 과기정통부 장관 표창을 받은 XR 전시 시스템입니다. 관람객 입력, 시각 재료, 전시 운영용 Unity 런타임을 연결했습니다.",
+        contribution: [
+          "전시 운영에 필요한 Unity XR 경험 파이프라인과 presentation flow를 만들었습니다.",
+          "관람객 기억, drawing/object asset, dialogue, skybox presentation을 하나의 경험으로 연결했습니다.",
+          "스크린샷은 입력 재료와 최종 immersive runtime 화면을 함께 보여줍니다."
+        ],
+        images: [
+          ["neostalgia_skybox.png", "최종 XR 기억 환경으로 사용한 immersive skybox 결과."],
+          ["neostalgia_dialogue.png", "관람객 기억을 수집하고 전시 흐름을 만드는 dialogue/input 화면."],
+          ["neostalgia_drawing.png", "기억 기반 전시 파이프라인에서 사용한 관람객 drawing 재료."],
+          ["neostalgia_object.png", "XR 장면 구성에 배치된 3D object asset."]
+        ]
+      },
+      {
+        key: "oracluna",
+        title: "Oracluna Tarot",
+        kicker: "모바일 퍼스트 웹앱 / 78장 선택 UX / Qdrant RAG / Docker",
+        summary: "질문을 정하고 카드를 섞고 자른 뒤, 78장 중 원하는 카드를 직접 고르고 해석·저장·공유까지 이어지는 모바일 타로 리딩 웹앱입니다. 한 화면에는 한 가지 행동만 남겨 카드가 컨트롤보다 먼저 보이게 했습니다.",
+        contribution: [
+          "원호형 덱의 끝 카드 접근과 좌표 불안정 문제를 반복 검수한 뒤, 78장 전체를 예측 가능한 위치에서 고르는 모바일 매트릭스로 전환했습니다.",
+          "질문, 배열 위치, 카드, 정·역방향과 검색 지식을 결합하는 Qdrant 기반 RAG 파이프라인을 만들고, 로컬 Ollama와 배포용 OpenAI API를 공급자 어댑터로 분리했습니다.",
+          "78 PNG, 78 SVG, 78 metadata, 170개 검색 레코드를 자동 검증하고, iOS Web Audio, 공유 포스터 사전 생성, Docker/NAS 배포까지 마무리했습니다."
+        ],
+        images: [
+          ["oracluna-question.jpg", "질문과 1·3·7장 배열을 정하는 시작 화면. 현재 단계에 필요한 선택만 남겼습니다."],
+          ["oracluna-cut.jpg", "셔플 뒤 세 묶음 중 하나를 직접 고르는 3분할 컷 화면."],
+          ["oracluna-deck-matrix.jpg", "78장 전체를 한 화면에서 탐색하고 직접 선택하는 모바일 카드 매트릭스."],
+          ["oracluna-seven-card-reveal.jpg", "배열 위치와 정·역방향을 확인하며 일곱 장을 공개한 결과 화면."],
+          ["oracluna-save-share.jpg", "카드별 근거를 확인하고 리딩을 저장·공유하는 완결 화면."]
+        ]
+      },
+      {
+        key: "genworld",
+        title: "GenWorld",
+        kicker: "Unity 2D / NPC 상태 시스템 / 오프라인 플레이",
+        summary: "NPC 상태, 대화, 스킬, 오프라인에서도 유지되는 동작을 중심으로 만든 Unity 2D RPG 프로토타입입니다. 선택 서비스가 없어도 게임이 계속 돌아가게 만든 점을 중요하게 봤습니다.",
+        contribution: [
+          "선택 런타임 서비스가 없어도 게임이 동작하도록 dialogue path를 설계했습니다.",
+          "NPC mood, dialogue, skill, world state를 Unity 런타임 시스템으로 모델링했습니다.",
+          "결정적 규칙과 런타임 상태 확인을 사용해 오프라인에서도 플레이 가능한 프로토타입으로 유지했습니다."
+        ],
+        images: [
+          ["genworld-world.png", "실제 게임 런타임 안에서 NPC 동작을 검증한 Unity 2D world view."],
+          ["genworld-dialogue.png", "local context와 runtime rule에 따라 NPC 응답이 바뀌는 dialogue flow."],
+          ["genworld-npc-mood.png", "NPC mood/state 변화를 확인하는 상태 화면."],
+          ["genworld-skills.png", "규칙 기반 NPC 행동을 확인하기 위한 skill/behavior 화면."]
+        ]
+      },
+      {
+        key: "deskrelay",
+        title: "DeskRelay",
+        kicker: "내부 운영 도구 / 브라우저와 모바일 제어 화면",
+        summary: "브라우저와 모바일에서 로컬 작업 세션을 제어하기 위한 도구입니다. 장비 등록, 세션 유지, 진단, 권한, 업데이트, 모바일 UX까지 다룹니다.",
+        contribution: [
+          "여러 장비, 로컬 권한, 진단, 반복적인 일상 사용을 기준으로 제어 화면을 설계했습니다.",
+          "채팅, workspace 선택, 장비 전환, 설정, 권한, 업데이트 화면을 데스크톱과 모바일 양쪽으로 만들었습니다.",
+          "메인 채팅 화면에서 끝내지 않고, 매일 쓰는 데 필요한 운영 설정까지 챙겼습니다."
+        ],
+        images: [
+          ["deskrelay-github-chat-session.png", "실제 workspace 대화에서 캡처한 DeskRelay 세션 화면."],
+          ["deskrelay-github-new-chat-workspace.png", "새 작업을 시작할 때 로컬 workspace와 허용 경로를 지정하는 시작 화면."],
+          ["deskrelay-new-chat-directory.png", "로컬 프로젝트를 안전하게 선택하기 위한 directory picker 흐름."],
+          ["deskrelay-device-switcher.png", "하나의 UI에서 여러 등록 장비로 제어 대상을 바꾸는 device switcher."],
+          ["deskrelay-connection-status.png", "로컬 서버와 장비 채널이 정상인지 확인하는 connection status 화면."],
+          ["deskrelay-settings-ui.png", "제품 UI 안에서 런타임 동작을 관리하는 settings 화면."],
+          ["deskrelay-github-settings-diagnostics.png", "로그를 먼저 열지 않고 실패 원인을 확인할 수 있는 diagnostics 화면."],
+          ["deskrelay-github-settings-updates.png", "일상 운영과 유지보수를 위한 update settings 화면."],
+          ["deskrelay-github-usage-mobile-chat.png", "책상 밖에서도 같은 코딩 세션을 이어가는 모바일 채팅 흐름."],
+          ["deskrelay-github-usage-mobile-instructions.png", "프로젝트 지침을 계속 확인하기 위한 모바일 instructions 탭."],
+          ["deskrelay-github-usage-mobile-permissions.png", "신뢰 범위와 기능 경계를 확인하는 모바일 permissions 화면."],
+          ["deskrelay-github-usage-mobile-sessions.png", "작업 context를 바꾸기 위한 모바일 session 목록."],
+          ["deskrelay-github-usage-mobile-skills.png", "사용 가능한 기능을 확인하는 모바일 skills/tooling 화면."]
+        ]
+      },
+      {
+        key: "ops-remote",
+        title: "Ops-Cure Workflow",
+        kicker: "Discord 운영 / 작업 상태 / workflow loop",
+        summary: "계획, 작업 상태, 실행 메모, 인계를 Discord thread에서 보이게 유지하는 workflow 시스템입니다. 도구를 만들 때 과정을 추적 가능하고 복구 가능하게 두는 습관을 보여주는 작업이라 짧게 포함했습니다.",
+        contribution: [
+          "작업이 thread를 따라 이동해도 context를 잃지 않도록 task state를 모델링했습니다.",
+          "계획, 작업, 확인, 인계 상태가 명확히 보이도록 구성했습니다.",
+          "Discord thread를 운영 화면으로 사용해 상태와 복구 경로를 읽을 수 있게 했습니다."
+        ],
+        images: [
+          ["orchestration-v1-loop.png", "계획, 구현, 확인, 인계가 어떻게 연결되는지 보여주는 workflow loop diagram."],
+          ["ops-cure-discord-thread.jpg", "작업 상태, 메시지, 확인 과정을 운영 화면으로 사용한 Discord thread."]
+        ]
+      }
+    ];
+
+    const appendixRoot = document.getElementById("appendix-pages");
+    let pageNumber = 3;
+    const totalImageCount = projects.reduce((total, project) => total + project.images.length, 0);
+
+    const imagePath = (file) => `./assets/${file.replace(/\.[^.]+$/, ".jpg")}`;
+
+    function renderShot([file, caption]) {
+      return `
+        <figure class="screenshot-card">
+          <img src="${imagePath(file)}" alt="${caption}" loading="eager"/>
+          <figcaption class="screenshot-card__body">
+            <span class="screenshot-card__label">스크린샷</span>
+            <p class="screenshot-card__name">${caption}</p>
+          </figcaption>
+        </figure>
+      `;
+    }
+
+    function renderProjectIntro(project, page, totalPages) {
+      const [featured, ...supporting] = project.images;
+      const supportCards = supporting.slice(0, 4).map(renderShot).join("");
+      return `
+        <section class="page page--project" data-project="${project.key}">
+          <div class="stack-lg">
+            <div class="project-page-title">
+              <div>
+                <div class="eyebrow">프로젝트 설명</div>
+                <h2 class="section-title">${project.title}</h2>
+              </div>
+              <div class="section-label">${project.images.length}개 스크린샷</div>
+            </div>
+            <div class="project-hero">
+              <figure class="project-hero__image">
+                <img src="${imagePath(featured[0])}" alt="${featured[1]}" loading="eager"/>
+              </figure>
+              <div class="project-hero__copy">
+                <div class="project-kicker">${project.kicker}</div>
+                <p class="project-summary">${project.summary}</p>
+                <ul class="evidence-list">
+                  ${project.contribution.map((item) => `<li>${item}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+            ${supportCards ? `<div class="screenshot-grid">${supportCards}</div>` : ""}
+          </div>
+          <div class="page__foot">
+            <span>${project.title} - 프로젝트 설명과 스크린샷</span>
+            <span>페이지 ${page} / ${totalPages}</span>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderProjectContinuation(project, images, page, totalPages, part) {
+      return `
+        <section class="page page--project" data-project="${project.key}">
+          <div class="stack-lg">
+            <div class="screenshot-page-title">
+              <div>
+                <div class="eyebrow">프로젝트 설명 계속</div>
+                <h2 class="section-title">${project.title} - 추가 스크린샷 ${part}</h2>
+              </div>
+              <div class="section-label">${project.images.length}개 스크린샷</div>
+            </div>
+            <p class="project-summary">${project.summary}</p>
+            <div class="screenshot-grid">${images.map(renderShot).join("")}</div>
+          </div>
+          <div class="page__foot">
+            <span>${project.title} - 추가 프로젝트 스크린샷</span>
+            <span>페이지 ${page} / ${totalPages}</span>
+          </div>
+        </section>
+      `;
+    }
+
+    function projectPageCount(project) {
+      return 1 + Math.ceil(Math.max(project.images.length - 5, 0) / 6);
+    }
+
+    const totalPages = 2 + projects.reduce((total, project) => total + projectPageCount(project), 0);
+
+    for (const project of projects) {
+      appendixRoot.insertAdjacentHTML("beforeend", renderProjectIntro(project, pageNumber, totalPages));
+      pageNumber += 1;
+
+      const remaining = project.images.slice(5);
+      for (let offset = 0; offset < remaining.length; offset += 6) {
+        const part = `${offset + 1}-${Math.min(offset + 6, remaining.length)} / ${remaining.length}`;
+        appendixRoot.insertAdjacentHTML("beforeend", renderProjectContinuation(project, remaining.slice(offset, offset + 6), pageNumber, totalPages, part));
+        pageNumber += 1;
+      }
+    }
+
+    document.documentElement.dataset.screenshotCount = String(totalImageCount);
+  </script>
 </body>
 </html>

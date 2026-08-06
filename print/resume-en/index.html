@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daeki Hong - English Resume</title>
+  <meta name="description" content="A4 English resume for Daeki Hong, with selected project notes and screenshots."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../assets/css/print-docs.css"/>
+  <link rel="stylesheet" href="../../assets/css/print-dark.css"/>
+  <style>
+    .screen-toolbar__notice {
+      color: var(--accent);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .resume-summary-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .project-page-title,
+    .screenshot-page-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .project-hero {
+      display: grid;
+      gap: 8mm;
+      grid-template-columns: 78mm minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .project-hero__image {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--soft);
+    }
+
+    .project-hero__image img {
+      height: 66mm;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .project-hero__copy {
+      display: grid;
+      gap: 7px;
+    }
+
+    .evidence-list {
+      margin: 0;
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 10.5px;
+      line-height: 1.7;
+    }
+
+    .evidence-list li + li {
+      margin-top: 4px;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .screenshot-card {
+      break-inside: avoid;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .screenshot-card img {
+      height: 42mm;
+      object-fit: cover;
+      object-position: top center;
+      background: var(--soft);
+    }
+
+    .screenshot-card__body {
+      display: grid;
+      gap: 4px;
+      padding: 8px 10px 9px;
+    }
+
+    .screenshot-card__label {
+      color: var(--accent-deep);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .screenshot-card__name {
+      margin: 0;
+      color: var(--muted);
+      font-size: 9.5px;
+      line-height: 1.45;
+    }
+
+    @media screen {
+      .project-hero__image,
+      .screenshot-card {
+        background: #11161D;
+      }
+    }
+
+    @media print {
+      .resume-summary-grid {
+        gap: 6px;
+      }
+
+      .screenshot-grid {
+        gap: 6px;
+      }
+
+      .project-hero {
+        gap: 6mm;
+        grid-template-columns: 66mm minmax(0, 1fr);
+      }
+
+      .project-hero__image img {
+        height: 53mm;
+      }
+
+      .screenshot-card img {
+        height: 39mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="screen-toolbar">
+    <div>
+      <div class="screen-toolbar__title">English Resume</div>
+      <div class="screen-toolbar__meta">A4 resume with selected project notes and screenshots.</div>
+    </div>
+    <div class="screen-toolbar__actions">
+      <a class="screen-toolbar__link" href="../resume/">Korean resume</a>
+      <a class="screen-toolbar__link" href="../../en/about/">Profile</a>
+    </div>
+  </div>
+
+  <div class="document">
+    <section class="page page--cover">
+      <div class="hero-grid">
+        <div class="stack-lg">
+          <div class="eyebrow">Resume</div>
+          <h1 class="display-name">Daeki Hong</h1>
+          <p class="display-title">Senior Unity/XR Systems Engineer</p>
+          <p class="lead">
+            Unity C# engineer with 10 years of delivery experience across industrial XR, BIM runtime visualization, digital-twin authoring tools, robotics interfaces, and VR simulators. I focus on systems that survive real operating environments: heavy geometry, real-time input, hardware sync, non-developer tooling, installation, debugging, and operator handoff.
+          </p>
+          <div class="token-list">
+            <span class="token token--accent">Unity C# Runtime</span>
+            <span class="token token--accent">Industrial XR</span>
+            <span class="token token--accent">BIM Geometry</span>
+            <span class="token">Robotics / IK</span>
+            <span class="token">Editor Tooling</span>
+            <span class="token">Field Delivery</span>
+          </div>
+        </div>
+
+        <aside class="panel panel--accent">
+          <div class="panel__eyebrow">Contact</div>
+          <div class="contact-list">
+            <div><strong>Phone</strong> 010-6617-2645</div>
+            <div><strong>Email</strong> <a href="mailto:darkhtk@gmail.com">darkhtk@gmail.com</a></div>
+            <div><strong>GitHub</strong> <a href="https://github.com/darkhtk">github.com/darkhtk</a></div>
+            <div><strong>LinkedIn</strong> <a href="https://www.linkedin.com/in/daeki-hong-041947182">linkedin.com/in/daeki-hong-041947182</a></div>
+            <div><strong>Portfolio</strong> <a href="https://darkhtk.github.io/portfolio/">darkhtk.github.io/portfolio/</a></div>
+            <div><strong>Location</strong> Seoul, Korea</div>
+          </div>
+          <div class="rule"></div>
+          <div class="panel__eyebrow">Best fit</div>
+          <p class="panel__copy">Industrial Unity simulation, XR training, BIM/digital-twin runtime, robotics control interfaces, EditorWindow tooling, and field-delivered software.</p>
+          <div class="rule"></div>
+          <div class="panel__eyebrow">Education</div>
+          <p class="panel__copy">B.S. in Software Engineering, Korea Aerospace University.</p>
+        </aside>
+      </div>
+
+      <div class="note-strip">
+        I keep this resume focused on work I can explain directly: shipped Unity systems, field tools, ERP workflow screens, and the parts of each project I personally made reliable.
+      </div>
+
+      <section class="stack-md">
+        <div class="section-label">Selected work</div>
+        <div class="proof-grid">
+          <article class="proof-card">
+            <div class="proof-card__eyebrow">Unity Industrial Delivery</div>
+            <h3 class="proof-card__title">VR Robot / DXCenter</h3>
+            <p class="proof-card__copy">Built a Quest 3 - Unity - Flask - RoboDK - Doosan A0912 remote operation flow and a Unity 6 URP/WebGL digital-twin authoring tool, including safety logic, calibration, validation, and non-developer EditorWindow tooling.</p>
+          </article>
+          <article class="proof-card">
+            <div class="proof-card__eyebrow">Hard Engineering Modules</div>
+            <h3 class="proof-card__title">IK / BIM / Hardware Sync</h3>
+            <p class="proof-card__copy">Implemented a Jacobian IK solver, runtime BIM section cuts, nine EditorWindow workflows, and hardware-to-Unity synchronization where off-the-shelf tools did not cover delivery constraints.</p>
+          </article>
+          <article class="proof-card">
+            <div class="proof-card__eyebrow">BIM Runtime</div>
+            <h3 class="proof-card__title">WatchBIM / Unity-CrossSection</h3>
+            <p class="proof-card__copy">Delivered custom hit detection, mesh optimization, auto LOD, runtime cross-sections, 2D analysis views, slope labels, minimap, and camera tooling for large road BIM data.</p>
+          </article>
+          <article class="proof-card">
+            <div class="proof-card__eyebrow">Field Delivery</div>
+            <h3 class="proof-card__title">VR Simulator Collection</h3>
+            <p class="proof-card__copy">Built construction, factory, naval, FPS safety, and AR training applications with hardware integration, multiplayer mission flow, installation, operation, removal, and operator handoff.</p>
+          </article>
+        </div>
+      </section>
+
+      <div class="page__foot">
+        <span>Daeki Hong - English resume</span>
+        <span>Page 1</span>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="stack-lg">
+        <div>
+          <div class="eyebrow">Experience</div>
+          <h2 class="section-title">Unity Engineering and Field Delivery</h2>
+        </div>
+
+        <div class="career-list">
+          <article class="career-item">
+            <div class="career-item__top">
+              <div class="career-item__company">YMX - Senior Engineer, Client Team 2</div>
+              <div class="career-item__period">2024.12 - Present</div>
+            </div>
+            <div class="career-item__role">Industrial Unity development: digital-twin authoring tools, robotics interfaces, and exhibition systems.</div>
+            <ul class="bullet-list">
+              <li>Built a Unity 6 URP/WebGL DXCenter authoring environment with nine EditorWindow tools, ScriptableObject data flow, Service Locator, EventBus, strategy-based state effects, adapter-style device integration, validation flow, and runtime preparation for non-developers.</li>
+              <li>Built a Quest 3 - Unity - Flask - RoboDK - Doosan A0912 remote operation pipeline covering coordinate conversion, smoothing, speed/acceleration limits, TCP/HTTP communication, calibration, safety handling, and BEXCO public demo support.</li>
+              <li>Implemented an internal Jacobian IK solver to reduce RoboDK dependency, including 6-DOF tracking, damping near singularities, debug UI, and multi-robot validation.</li>
+            </ul>
+          </article>
+
+          <article class="career-item">
+            <div class="career-item__top">
+              <div class="career-item__company">Jangheon Industrial - Seoul Office</div>
+              <div class="career-item__period">2020.06 - 2024.12</div>
+            </div>
+            <div class="career-item__role">BIM visualization, geometry tooling, drawing tools, and engineering software.</div>
+            <ul class="bullet-list">
+              <li>Developed WatchBIM runtime features for highway BIM data, including custom hit engine, mesh optimization, auto LOD, runtime cross-section, 2D analysis viewer, slope label, minimap, and camera tools.</li>
+              <li>Built Unity-CrossSection as a reusable C# module using coroutines, NativeArray, Burst-compatible jobs, progress/cancel flow, mesh-plane intersection, caching, and shader visualization.</li>
+              <li>Developed road-design drawing tools with WPF/MVVM, MySQL, and CAD entity creation.</li>
+            </ul>
+          </article>
+
+          <article class="career-item">
+            <div class="career-item__top">
+              <div class="career-item__company">Mline Studio / Saltworks / Swink</div>
+              <div class="career-item__period">2015 - 2019</div>
+            </div>
+            <div class="career-item__role">Unity gameplay, VR simulators, Android AR safety training, RS232 device integration, multiplayer mission flow, field installation, operation, removal, and operator handoff.</div>
+            <ul class="bullet-list">
+              <li>Developed construction, factory, and naval safety training VR, FPS safety education, AR education apps, and hardware-linked XR content, then supported customer-site delivery and operator handoff.</li>
+            </ul>
+          </article>
+        </div>
+
+        <section class="stack-md">
+          <div class="section-label">Unity focus</div>
+          <div class="resume-summary-grid">
+            <article class="proof-card">
+              <div class="proof-card__eyebrow">Runtime</div>
+              <h3 class="proof-card__title">C# / Unity Runtime</h3>
+              <p class="proof-card__copy">Real-time input, coordinate conversion, state flow, camera control, simulation loops, and operator feedback inside Unity runtime.</p>
+            </article>
+            <article class="proof-card">
+              <div class="proof-card__eyebrow">Tooling</div>
+              <h3 class="proof-card__title">EditorWindow Workflow</h3>
+              <p class="proof-card__copy">Editor tooling for data mapping, validation, asset registration, and runtime preparation without requiring code changes.</p>
+            </article>
+            <article class="proof-card">
+              <div class="proof-card__eyebrow">Delivery</div>
+              <h3 class="proof-card__title">Hardware / Field</h3>
+              <p class="proof-card__copy">RS232, robot/device links, installation, demos, safety handling, and operator handoff included in the delivery scope.</p>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <div class="page__foot">
+        <span>Live portfolio - https://darkhtk.github.io/portfolio/</span>
+        <span>Page 2</span>
+      </div>
+    </section>
+
+    <div id="appendix-pages"></div>
+  </div>
+
+  <script>
+    const projects = [
+      {
+        key: "dxcenter",
+        title: "DXCenter",
+        kicker: "Unity 6 URP / WebGL / EditorWindow tooling",
+        summary: "A digital-twin authoring environment for non-developers. The work packages repeated data mapping, validation, device setup, and runtime preparation into Unity EditorWindow workflows.",
+        contribution: [
+          "Designed nine EditorWindow tools around data mapping, validation, asset registration, and runtime readiness.",
+          "Used ScriptableObject data flow, Service Locator, EventBus, strategy-based state effects, and adapter-style device integration.",
+          "I built the editor surface that operators use to prepare content without code."
+        ],
+        images: [
+          ["customeditor.png", "Custom EditorWindow workflow for mapping, validation, and runtime preparation in the DXCenter authoring pipeline."]
+        ]
+      },
+      {
+        key: "sems-erp",
+        title: "SEMS ERP",
+        kicker: "Mobile-first ERP / Fastify TypeScript / MySQL / GCP",
+        summary: "A role-based ERP for small manufacturing teams that connects sales orders, BOM, materials, production, outsourcing, inventory, approvals, shipping, logs, and reporting into one execution flow. The design favors mobile actions over dense desktop tables so field users can complete work from the shop floor.",
+        contribution: [
+          "Structured manufacturing workflows around roles: admin, material manager, production manager, part leader, shop-floor user, and sales.",
+          "Designed mobile-first task surfaces so each role sees the next action first.",
+          "Implemented the system around Fastify/TypeScript, MySQL/Kysely, Zod validation, Identity Platform auth, Cloud Run, Cloud SQL, Cloud Storage, tests, and mobile/desktop screenshot checks."
+        ],
+        images: [
+          ["sems-00-demo-role-login-mobile.png", "Demo role selection screen showing that one ERP becomes a different workbench for admin, materials, production, part leader, shop-floor user, and sales."],
+          ["sems-01-admin-dashboard-mobile.png", "Admin mobile home gathers sales status, shipping wait, due-date risk, production risk, pending purchases, and material issue work into role-specific decisions."],
+          ["sems-03-material-dashboard-mobile.png", "Material manager home removes unrelated menus and focuses on pending receipts and material issue work."],
+          ["sems-05-production-dashboard-mobile.png", "Production manager home surfaces order progress and production due-date risk before moving into work, production, and inventory tasks."],
+          ["sems-09-sales-dashboard-mobile.png", "Sales home connects order registration with production, inventory, shipping status, and customer due-date risk."],
+          ["sems-10-sales-shipping-mobile.png", "Mobile shipping list shows shippable orders, delay badges, and direct action buttons without forcing a desktop-style table."],
+          ["sems-11-sales-dashboard-desktop.png", "Sales desktop dashboard uses the wider screen for analysis: shipping wait, inventory reconciliation, work status, material shortages, and stock movement trends."],
+          ["sems-12-sales-shipping-desktop.png", "Desktop shipping view combines date range, status, shippable filter, search, D+ delay indicators, and direct shipping actions for batch work."],
+          ["sems-13-admin-dashboard-desktop.png", "Admin desktop dashboard integrates shortage alerts, unreceived purchases, purchase/sales summaries, inventory reconciliation, work status, and role-authorized menus."]
+        ]
+      },
+      {
+        key: "vr-robot",
+        title: "VR Robot Teleoperation",
+        kicker: "Quest 3 / Unity VR / Flask / RoboDK / Doosan A0912",
+        summary: "Real-time teleoperation of an industrial robot with a Meta Quest 3. The project combines Unity VR input, safety filtering, a Python bridge, RoboDK integration, and follow-up in-house IK R&D.",
+        contribution: [
+          "Mapped 6DOF VR controller input into robot target commands with coordinate conversion, smoothing, and safety limits.",
+          "Built the Unity-side feedback loop and bridge assumptions needed for a live BEXCO demonstration.",
+          "Extended the stack with a Jacobian IK solver to reduce external dependency and inspect solver behavior directly."
+        ],
+        images: [
+          ["vr_robot_expo1.png", "Public demo context: operator-facing VR robot teleoperation setup for the Doosan A0912 workflow."],
+          ["vr_robot_expo2.png", "Expo-side view of the remote operation scenario, including the robot and operator environment."],
+          ["ik_vr_control.png", "VR controller input mapped into the IK target so hand motion can drive the robot end-effector."],
+          ["ik_tcp_tracking.png", "TCP tracking view showing end-effector target following and solver response."],
+          ["ik_damping_physics.png", "Damping behavior around unstable poses, used to keep the solver usable near singularities."],
+          ["ik_debug_ui.png", "Debug UI for inspecting joints, angles, target error, and solver state during tuning."],
+          ["ik_multi_robot.png", "Multi-robot validation scene, proving the control model is not hard-coded to a single arm."]
+        ]
+      },
+      {
+        key: "watchbim",
+        title: "WatchBIM",
+        kicker: "Unity BIM runtime / geometry tooling / analysis viewer",
+        summary: "A Unity BIM runtime for large road-model interaction, section cutting, 2D analysis, and camera tooling. The hard part was making heavy geometry usable for operators at runtime.",
+        contribution: [
+          "Built custom hit detection, mesh optimization, auto LOD, and model interaction flows for large BIM data.",
+          "Implemented runtime cross-sections and linked 2D analysis views for operator checks.",
+          "Added camera/minimap/graph tooling so the BIM model could be navigated and inspected in practice."
+        ],
+        images: [
+          ["watchbim_generated_crosssection.png", "Runtime cross-section made from a selected plane and highlighted for inspection."],
+          ["watchbim_clipping.png", "Clipping and selection workflow for navigating large BIM models without relying on external authoring tools."],
+          ["watchbim_crosssection_highlight.png", "Highlighted section geometry used to make runtime cuts visually clear."],
+          ["watchbim_crosssection_Runtime2D.png", "2D analysis viewer linked to the runtime section result for measurement and review."],
+          ["watchbim_verticalgraph.png", "Vertical graph analysis surface for checking elevation and structural distribution at a glance."]
+        ]
+      },
+      {
+        key: "vr-sim",
+        title: "VR Simulator Collection",
+        kicker: "Construction / factory / naval training systems",
+        summary: "Field-delivered VR and AR training projects across construction, factory, and naval scenarios. These projects show installation work, device handling, scripted training flow, and operator handoff.",
+        contribution: [
+          "Implemented safety training scenes, mission progression, event triggers, and feedback loops in Unity.",
+          "Handled device integration and field constraints such as installation, operation, teardown, and customer handoff.",
+          "Built scenarios where timing, spatial clarity, and training intent mattered more than visual decoration."
+        ],
+        images: [
+          ["vr_construction_standby.png", "Construction safety simulator standby state, used before entering the accident-prevention training sequence."],
+          ["vr_construction_falling.png", "Falling accident scenario for construction-site hazard training."],
+          ["vr_construction_scaffold.png", "Scaffold scenario focused on spatial awareness and unsafe-work recognition."],
+          ["vr_lcm_cockpit.png", "Landing craft cockpit simulator view with operator controls and training instrumentation."],
+          ["vr_lcm_steering.png", "Steering interface training for naval simulator operation."],
+          ["vr_lghaus_safety.png", "Factory safety training scene for LG Hausys, centered on operator awareness."],
+          ["vr_lghaus_accident.png", "Factory accident scenario used to teach hazard response and procedure memory."],
+          ["vr_lghaus_maintenance.png", "Maintenance training context with equipment-state and procedure cues."],
+          ["vr_lghaus_printer.png", "Printer/equipment scenario showing the industrial training environment."]
+        ]
+      },
+      {
+        key: "neostalgia",
+        title: "Neostalgia",
+        kicker: "XR exhibition / visitor memory pipeline / official selection",
+        summary: "An XR exhibition system selected by BIFAN XR Beyond Reality and recognized with an MSIT citation. It connected visitor input, visual material, and exhibition-grade runtime delivery.",
+        contribution: [
+          "Built the Unity-side XR experience pipeline and presentation flow for exhibition operation.",
+          "Connected visitor memory, drawing/object assets, dialogue, and skybox presentation into a coherent experience.",
+          "The screenshots show both the generative material and the final immersive runtime surface."
+        ],
+        images: [
+          ["neostalgia_skybox.png", "Immersive skybox result used as the final XR memory environment."],
+          ["neostalgia_dialogue.png", "Dialogue/input surface for collecting visitor memory and shaping the exhibition flow."],
+          ["neostalgia_drawing.png", "Visitor drawing material used as part of the memory-based exhibition pipeline."],
+          ["neostalgia_object.png", "3D object asset placed into the XR scene composition."]
+        ]
+      },
+      {
+        key: "oracluna",
+        title: "Oracluna Tarot",
+        kicker: "Mobile-first web app / 78-card UX / Qdrant RAG / Docker",
+        summary: "A mobile tarot reading product that carries a user from question, shuffle, and cut through direct selection from all 78 cards, interpretation, saving, and sharing. Each screen keeps one primary action so the cards remain the focus.",
+        contribution: [
+          "Replaced an unstable radial deck after repeated mobile QA with a full 78-card matrix that keeps every card reachable at a predictable position.",
+          "Built a Qdrant-backed RAG pipeline combining the question, spread position, card, orientation, and retrieved knowledge, with provider adapters for local Ollama development and OpenAI API deployment.",
+          "Automated checks for 78 PNGs, 78 SVGs, 78 metadata files, and 170 retrieval records, then completed iOS Web Audio handling, pre-generated share posters, and Docker/NAS deployment."
+        ],
+        images: [
+          ["oracluna-question.jpg", "Opening screen for the question and one-, three-, or seven-card spread, with only the current decisions visible."],
+          ["oracluna-cut.jpg", "Three-way cut after shuffling, preserving the physical rhythm without slowing the mobile flow."],
+          ["oracluna-deck-matrix.jpg", "Full 78-card mobile matrix for direct, predictable selection."],
+          ["oracluna-seven-card-reveal.jpg", "Seven-card reveal showing spread positions and upright or reversed orientation."],
+          ["oracluna-save-share.jpg", "Completed reading with card evidence, saving, and sharing actions."]
+        ]
+      },
+      {
+        key: "genworld",
+        title: "GenWorld",
+        kicker: "Unity 2D / NPC state system / offline play",
+        summary: "A Unity 2D RPG prototype focused on NPC state, dialogue, skills, and offline-safe behavior. The important engineering point is that the game keeps running even when an optional service is unavailable.",
+        contribution: [
+          "Designed the dialogue path so the game still works when optional runtime services are unavailable.",
+          "Modeled NPC mood, dialogue, skills, and world state as runtime systems inside Unity.",
+          "Used deterministic rules and runtime state inspection to keep the prototype playable offline."
+        ],
+        images: [
+          ["genworld-world.png", "Unity 2D world view used to validate NPC behavior inside an actual game runtime."],
+          ["genworld-dialogue.png", "Dialogue flow where NPC response is driven by local context and runtime rules."],
+          ["genworld-npc-mood.png", "NPC mood/state surface used to inspect behavior changes."],
+          ["genworld-skills.png", "Skill and behavior surface for checking rule-backed NPC actions."]
+        ]
+      },
+      {
+        key: "deskrelay",
+        title: "DeskRelay",
+        kicker: "Internal operations tool / browser and mobile control surface",
+        summary: "A tool for controlling local work sessions from browser and mobile surfaces. It covers device registration, session continuity, diagnostics, permissions, updates, and mobile UX.",
+        contribution: [
+          "Designed the control surface around multiple devices, local authority, diagnostics, and repeatable daily usage.",
+          "Built both desktop and mobile flows: chat, workspace selection, device switching, settings, permissions, and update surfaces.",
+          "I worked past the main chat screen into the operational settings that make the tool usable day to day."
+        ],
+        images: [
+          ["deskrelay-chat-ui.png", "Desktop chat UI for controlling a local coding session through the browser surface."],
+          ["deskrelay-github-chat-session.png", "Session screen captured from a working workspace conversation."],
+          ["deskrelay-new-chat-directory.png", "Directory picker flow for choosing a local project safely."],
+          ["deskrelay-device-switcher.png", "Device switcher showing how one UI can route control to multiple registered machines."],
+          ["deskrelay-connection-status.png", "Connection status surface for checking whether the local server and device channel are healthy."],
+          ["deskrelay-settings-ui.png", "Settings surface for managing runtime behavior from the product UI."],
+          ["deskrelay-github-settings-diagnostics.png", "Diagnostics screen for checking failures without diving into logs first."],
+          ["deskrelay-github-settings-updates.png", "Update settings surface for daily operation and maintenance."],
+          ["deskrelay-github-usage-mobile-chat.png", "Mobile chat flow for continuing the same coding session away from the desk."],
+          ["deskrelay-github-usage-mobile-instructions.png", "Mobile instructions tab for keeping project guidance visible."],
+          ["deskrelay-github-usage-mobile-permissions.png", "Mobile permissions surface for trust and capability boundaries."],
+          ["deskrelay-github-usage-mobile-sessions.png", "Mobile session list for switching work contexts."],
+          ["deskrelay-github-usage-mobile-skills.png", "Mobile skills/tooling surface for checking available capabilities."]
+        ]
+      },
+      {
+        key: "ops-remote",
+        title: "Ops-Cure Workflow",
+        kicker: "Discord operations / task state / workflow loop",
+        summary: "A workflow system that keeps planning, task state, execution notes, and handoff visible through Discord threads. I include it briefly because it shows the same habit I bring to tools: make the process inspectable and recoverable.",
+        contribution: [
+          "Modeled task state so work can move through visible threads without losing context.",
+          "Kept planning, work, checks, and handoff states explicit.",
+          "Used the Discord thread as an operational surface, so state and recovery paths stay readable."
+        ],
+        images: [
+          ["orchestration-v1-loop.png", "Workflow loop diagram showing how planning, implementation, checks, and handoff connect."],
+          ["ops-cure-discord-thread.jpg", "Discord thread used as an operational surface for task state, messages, and checks."]
+        ]
+      }
+    ];
+
+    const appendixRoot = document.getElementById("appendix-pages");
+    let pageNumber = 3;
+    const totalImageCount = projects.reduce((total, project) => total + project.images.length, 0);
+
+    const imagePath = (file) => `./assets/${file.replace(/\.[^.]+$/, ".jpg")}`;
+
+    function renderShot([file, caption]) {
+      return `
+        <figure class="screenshot-card">
+          <img src="${imagePath(file)}" alt="${caption}" loading="eager"/>
+          <figcaption class="screenshot-card__body">
+            <span class="screenshot-card__label">Screenshot</span>
+            <p class="screenshot-card__name">${caption}</p>
+          </figcaption>
+        </figure>
+      `;
+    }
+
+    function renderProjectIntro(project, page, totalPages) {
+      const [featured, ...supporting] = project.images;
+      const supportCards = supporting.slice(0, 4).map(renderShot).join("");
+      return `
+        <section class="page page--project" data-project="${project.key}">
+          <div class="stack-lg">
+            <div class="project-page-title">
+              <div>
+                <div class="eyebrow">Project notes</div>
+                <h2 class="section-title">${project.title}</h2>
+              </div>
+              <div class="section-label">${project.images.length} screenshots</div>
+            </div>
+            <div class="project-hero">
+              <figure class="project-hero__image">
+                <img src="${imagePath(featured[0])}" alt="${featured[1]}" loading="eager"/>
+              </figure>
+              <div class="project-hero__copy">
+                <div class="project-kicker">${project.kicker}</div>
+                <p class="project-summary">${project.summary}</p>
+                <ul class="evidence-list">
+                  ${project.contribution.map((item) => `<li>${item}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+            ${supportCards ? `<div class="screenshot-grid">${supportCards}</div>` : ""}
+          </div>
+          <div class="page__foot">
+            <span>${project.title} - project notes and screenshots</span>
+            <span>Page ${page} / ${totalPages}</span>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderProjectContinuation(project, images, page, totalPages, part) {
+      return `
+        <section class="page page--project" data-project="${project.key}">
+          <div class="stack-lg">
+            <div class="screenshot-page-title">
+              <div>
+                <div class="eyebrow">Project notes continued</div>
+                <h2 class="section-title">${project.title} - additional screenshots ${part}</h2>
+              </div>
+              <div class="section-label">${project.images.length} screenshots</div>
+            </div>
+            <p class="project-summary">${project.summary}</p>
+            <div class="screenshot-grid">${images.map(renderShot).join("")}</div>
+          </div>
+          <div class="page__foot">
+            <span>${project.title} - additional project screenshots</span>
+            <span>Page ${page} / ${totalPages}</span>
+          </div>
+        </section>
+      `;
+    }
+
+    function projectPageCount(project) {
+      return 1 + Math.ceil(Math.max(project.images.length - 5, 0) / 6);
+    }
+
+    const totalPages = 2 + projects.reduce((total, project) => total + projectPageCount(project), 0);
+
+    for (const project of projects) {
+      appendixRoot.insertAdjacentHTML("beforeend", renderProjectIntro(project, pageNumber, totalPages));
+      pageNumber += 1;
+
+      const remaining = project.images.slice(5);
+      for (let offset = 0; offset < remaining.length; offset += 6) {
+        const part = `${offset + 1}-${Math.min(offset + 6, remaining.length)} of ${remaining.length}`;
+        appendixRoot.insertAdjacentHTML("beforeend", renderProjectContinuation(project, remaining.slice(offset, offset + 6), pageNumber, totalPages, part));
+        pageNumber += 1;
+      }
+    }
+
+    document.documentElement.dataset.screenshotCount = String(totalImageCount);
+  </script>
+</body>
+</html>

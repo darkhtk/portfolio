@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Oracluna Tarot · 모바일 RAG 제품 | 홍대기</title>
+<meta name="description" content="질문, 셔플, 컷, 78장 선택, 해석, 저장과 공유를 하나의 모바일 흐름으로 만든 Oracluna Tarot 케이스 스터디."/>
+<meta property="og:title" content="Oracluna Tarot · 모바일 RAG 제품"/>
+<meta property="og:description" content="78장 카드 선택 UX와 질문 중심 RAG 해석, 저장·공유까지 직접 설계하고 구현한 모바일 타로 리딩 웹앱."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/oracluna-seven-card-reveal.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/oracluna-tarot/"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Oracluna Tarot · 모바일 RAG 제품"/>
+<meta name="twitter:description" content="질문부터 카드 선택, 근거 기반 해석, 저장과 공유까지 연결한 모바일 타로 리딩 경험."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/oracluna-seven-card-reveal.jpg"/>
+<link rel="canonical" href="https://darkhtk.github.io/portfolio/ai-systems/oracluna-tarot/"/>
+<link rel="alternate" hreflang="ko" href="https://darkhtk.github.io/portfolio/ai-systems/oracluna-tarot/"/>
+<link rel="alternate" hreflang="en" href="https://darkhtk.github.io/portfolio/en/ai-systems/oracluna-tarot/"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "bg-grid": "#0E141B",
+      "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F",
+      "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787",
+      "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] },
+    borderRadius: { DEFAULT: "0.5rem", xs: "0.25rem", sm: "0.375rem", md: "0.5rem", lg: "0.75rem" }
+  } } }
+</script>
+<link rel="stylesheet" href="../../assets/css/portfolio-dark.css"/>
+</head>
+<body class="overflow-x-hidden font-body antialiased">
+<div class="relative">
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../../projects/" class="nav-link">industrial</a>
+        <a href="../../engineering/" class="nav-link">engineering</a>
+        <a href="../" class="nav-link is-active">ai</a>
+        <a href="../../about/" class="nav-link">profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">KO</span>
+          <a href="../../en/ai-systems/oracluna-tarot/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">EN</a>
+        </div>
+        <a href="https://tarot.it-some.com/" target="_blank" rel="noopener noreferrer" class="hidden lg:inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/40 hover:bg-accent-cyan/10">[ Live service <span aria-hidden="true">&nearr;</span> ]</a>
+        <button data-mobile-menu-toggle aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="메뉴 닫기" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span aria-hidden="true">&rarr;</span></a>
+        <a href="../../projects/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">industrial <span aria-hidden="true">&rarr;</span></a>
+        <a href="../../engineering/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">engineering <span aria-hidden="true">&rarr;</span></a>
+        <a href="../" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">ai systems <span aria-hidden="true">&rarr;</span></a>
+        <a href="../../about/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <span class="px-3 py-2 text-bg-primary bg-accent-cyan">KO</span>
+        <a href="../../en/ai-systems/oracluna-tarot/" class="px-3 py-2 text-text-secondary border border-hairline">EN</a>
+      </div>
+      <div class="mt-auto pt-6 border-t border-hairline"><a href="https://tarot.it-some.com/" target="_blank" rel="noopener noreferrer" class="btn-cyan w-full justify-center">서비스 열기 <span aria-hidden="true">&nearr;</span></a></div>
+    </div>
+  </header>
+
+  <main class="relative pt-16">
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8 lg:py-24">
+        <div class="lg:col-span-7 flex flex-col gap-7">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// ai product · mobile web · rag · live</div>
+          <h1 class="display-hero text-text-primary kr-balance">Oracluna Tarot.</h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">question → ritual → 78-card selection → grounded reading</p>
+          <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base kr-balance">
+            질문을 정하고, 카드를 섞고 자른 뒤, 78장 중 원하는 카드를 직접 고릅니다. 선택한 카드의 배열 위치와 정·역방향, 검색된 타로 지식을 함께 사용해 질문에 답하고 저장과 공유까지 이어지는 모바일 리딩 웹앱입니다.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="https://tarot.it-some.com/" target="_blank" rel="noopener noreferrer" class="btn-cyan">서비스 열기 <span aria-hidden="true">&nearr;</span></a>
+            <a href="#experience" class="btn-ghost">사용 흐름 <span aria-hidden="true">&darr;</span></a>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip chip-cyan">Mobile-first</span><span class="chip">Vanilla JavaScript</span><span class="chip">Qdrant RAG</span><span class="chip">Ollama / OpenAI</span><span class="chip">Docker · NAS</span>
+          </div>
+        </div>
+        <div class="min-w-0 lg:col-span-5">
+          <div class="term-window ticks mx-auto max-w-[360px]"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>READING_07</span><span class="text-success-green">LIVE</span></div>
+            <div class="media-frame aspect-[504/828] border-t border-hairline"><img src="../../assets/images/oracluna-seven-card-reveal.jpg" alt="Oracluna Tarot 7장 카드 공개 화면" loading="eager"/></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+      <div class="chapter-rule mb-14"><span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ 01 · EXPERIENCE ]</span><span class="line"></span><span class="tail">one action at a time</span></div>
+      <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-7">
+          <div class="kicker kicker-cyan">// 시작 화면</div>
+          <h2 class="display-section mt-4 text-text-primary kr-balance">한 단계에는 한 가지 행동만 남겼습니다.</h2>
+          <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary kr-balance">질문 단계에서는 질문과 배열만, 선택 단계에서는 카드만, 결과 단계에서는 해석과 저장·공유만 보여줍니다. 내부 모델명이나 벡터 검색 같은 기술어는 사용자 화면에서 숨기고, 지금 할 수 있는 행동이 먼저 보이게 했습니다.</p>
+          <div class="mt-8 grid gap-px border border-hairline bg-hairline sm:grid-cols-3 font-mono text-[11px] uppercase tracking-widest">
+            <div class="bg-bg-primary p-4"><div class="text-text-muted">spread</div><div class="mt-1 text-accent-cyan">1 · 3 · 7 cards</div></div>
+            <div class="bg-bg-primary p-4"><div class="text-text-muted">target viewport</div><div class="mt-1 text-accent-cyan">390 × 844</div></div>
+            <div class="bg-bg-primary p-4"><div class="text-text-muted">horizontal overflow</div><div class="mt-1 text-success-green">0</div></div>
+          </div>
+        </div>
+        <figure class="lg:col-span-5 mx-auto w-full max-w-[330px]">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_01</span><span class="text-text-muted">QUESTION</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-question.jpg" alt="질문과 배열을 선택하는 Oracluna 시작 화면"/></div></div>
+          <figcaption class="mt-3 text-sm leading-6 text-text-secondary kr-balance">질문과 1·3·7장 배열을 정하는 시작점. 카드보다 먼저 필요한 선택만 남겼습니다.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-50"></div>
+      <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+        <div class="chapter-rule mb-14"><span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ 02 · RITUAL ]</span><span class="line"></span><span class="tail">shuffle / cut / choose</span></div>
+        <div class="grid gap-10 lg:grid-cols-2">
+          <article class="grid gap-6 sm:grid-cols-[minmax(0,260px)_1fr] sm:items-center">
+            <figure class="mx-auto w-full max-w-[260px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_03</span><span class="text-text-muted">CUT</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-cut.jpg" alt="세 묶음 중 하나를 고르는 카드 컷 화면"/></div></div></figure>
+            <div><div class="kicker kicker-amber">// three-way cut</div><h2 class="mt-3 font-display text-2xl font-bold text-text-primary kr-balance">버튼 한 번으로 넘기지 않은 이유.</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">셔플 뒤 세 묶음 중 하나를 직접 고르게 했습니다. 입력 과정은 짧게 유지하면서도 실제 카드를 다루는 리듬은 남겼습니다.</p></div>
+          </article>
+          <article class="grid gap-6 sm:grid-cols-[minmax(0,260px)_1fr] sm:items-center">
+            <figure class="mx-auto w-full max-w-[260px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_04</span><span class="text-text-muted">78 CARDS</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-deck-matrix.jpg" alt="78장 전체를 보여주는 카드 선택 매트릭스"/></div></div></figure>
+            <div><div class="kicker kicker-cyan">// deck matrix</div><h2 class="mt-3 font-display text-2xl font-bold text-text-primary kr-balance">78장을 한 화면에서 직접 고릅니다.</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">초기 원호형 덱은 끝 카드 접근과 좌표 안정성이 떨어졌습니다. 반복 QA 뒤 전체 매트릭스로 바꿔 카드 위치를 예측 가능하게 만들었습니다.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+      <div class="chapter-rule mb-14"><span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ 03 · PROBLEMS ]</span><span class="line"></span><span class="tail">직접 풀어낸 문제들</span></div>
+      <div class="grid gap-5 md:grid-cols-3">
+        <article class="card ticks p-6"><span class="tr"></span><span class="bl"></span><div class="font-mono text-2xl text-accent-cyan">01</div><h2 class="mt-4 font-display text-xl font-bold text-text-primary kr-balance">애니메이션과 상태를 분리</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">셔플·컷·선택·공개를 명시적인 단계로 관리하고, 이동 중인 카드와 원본 카드의 생명주기를 분리했습니다. 모션이 끝나지 않으면 watchdog이 잔류 레이어를 정리합니다.</p></article>
+        <article class="card ticks p-6"><span class="tr"></span><span class="bl"></span><div class="font-mono text-2xl text-accent-cyan">02</div><h2 class="mt-4 font-display text-xl font-bold text-text-primary kr-balance">공유 지연을 앞에서 처리</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">공유 버튼을 누른 뒤 포스터를 만들면 모바일의 사용자 제스처 유효 시간이 끝날 수 있었습니다. 결과가 완성될 때 제한된 크기의 Blob을 미리 만들어 즉시 전달합니다.</p></article>
+        <article class="card ticks p-6"><span class="tr"></span><span class="bl"></span><div class="font-mono text-2xl text-accent-cyan">03</div><h2 class="mt-4 font-display text-xl font-bold text-text-primary kr-balance">iOS 오디오 정책 대응</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">첫 사용자 제스처에서 AudioContext를 활성화하고 동작별 재생과 중복 방지 시간을 나눴습니다. 셔플과 카드 공개 피드백이 iOS에서도 끊기지 않게 했습니다.</p></article>
+      </div>
+    </section>
+
+    <section id="rag" class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-8 lg:py-24">
+        <div class="lg:col-span-7">
+          <div class="chapter-rule mb-10"><span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ 04 · RAG ]</span><span class="line"></span></div>
+          <h2 class="display-section text-text-primary kr-balance">카드 이름만 보내지 않습니다.</h2>
+          <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary kr-balance">질문, 주제, 배열 위치, 카드, 정·역방향과 검색된 지식을 구조화해 같은 파이프라인에 넣습니다. 여러 출처의 중복 근거를 합친 뒤, 확정적인 예언보다 지금의 선택과 다음 행동을 설명하도록 출력 규칙을 정했습니다.</p>
+          <div class="mt-8 grid gap-3">
+            <div class="lane"><span class="lane-num">01</span><div class="kicker kicker-cyan">context</div><div class="mt-2 font-display font-bold text-text-primary">질문 · 주제 · 배열 위치 · 정역방향</div></div>
+            <div class="lane-arrow">↓</div>
+            <div class="lane"><span class="lane-num">02</span><div class="kicker kicker-cyan">retrieval</div><div class="mt-2 font-display font-bold text-text-primary">Qdrant 카드 지식 검색과 중복 근거 병합</div></div>
+            <div class="lane-arrow">↓</div>
+            <div class="lane"><span class="lane-num">03</span><div class="kicker kicker-cyan">provider</div><div class="mt-2 font-display font-bold text-text-primary">로컬 Ollama 개발 · OpenAI API 배포</div></div>
+          </div>
+        </div>
+        <figure class="lg:col-span-5 mx-auto w-full max-w-[350px]">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>RESULT</span><span class="text-text-muted">QUESTION-GROUNDED</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-rag-reading.jpg" alt="질문과 카드 근거를 반영한 Oracluna 해석 결과"/></div></div>
+          <figcaption class="mt-3 text-sm leading-6 text-text-secondary kr-balance">카드 일반론을 나열하지 않고 사용자의 질문에 답하도록 구성한 결과 화면입니다.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+      <div class="chapter-rule mb-14"><span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ 05 · DELIVERY ]</span><span class="line"></span><span class="tail">save / restore / share / verify</span></div>
+      <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
+        <figure class="lg:col-span-5 mx-auto w-full max-w-[350px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>COMPLETE</span><span class="text-success-green">SAVE · SHARE</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-save-share.jpg" alt="해석을 저장하고 공유하는 Oracluna 결과 화면"/></div></div></figure>
+        <div class="lg:col-span-7">
+          <div class="kicker kicker-cyan">// complete reading cycle</div>
+          <h2 class="display-section mt-4 text-text-primary kr-balance">해석에서 끝내지 않고 제품 사이클을 닫았습니다.</h2>
+          <p class="mt-5 text-[15px] leading-8 text-text-secondary kr-balance">브라우저 저장, 리딩 복원과 삭제, Canvas 포스터 생성, Web Share까지 연결했습니다. Node 서버는 요청 검증과 제한, 정적 캐시, health endpoint를 담당하고 Docker와 NAS 리버스 프록시로 공개 운영합니다.</p>
+          <div class="mt-8 grid grid-cols-2 gap-px border border-hairline bg-hairline sm:grid-cols-4">
+            <div class="bg-bg-primary p-4"><div class="font-mono text-2xl text-accent-cyan">78</div><div class="mt-2 text-xs text-text-muted">카드 카탈로그</div></div>
+            <div class="bg-bg-primary p-4"><div class="font-mono text-2xl text-accent-cyan">156</div><div class="mt-2 text-xs text-text-muted">정·역방향 지식 행</div></div>
+            <div class="bg-bg-primary p-4"><div class="font-mono text-2xl text-accent-cyan">170</div><div class="mt-2 text-xs text-text-muted">검색 레코드</div></div>
+            <div class="bg-bg-primary p-4"><div class="font-mono text-2xl text-success-green">0</div><div class="mt-2 text-xs text-text-muted">누락 카드 자산</div></div>
+          </div>
+          <p class="mt-5 font-mono text-[11px] uppercase tracking-widest text-text-muted">78 png · 78 svg · 78 metadata · data validation · api/ui smoke test</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div class="max-w-2xl"><div class="kicker kicker-cyan mb-4">// next</div><h2 class="display-section text-text-primary kr-balance">관련 작업.</h2></div>
+        <div class="flex flex-wrap gap-3"><a href="../genworld-ollama/" class="btn-cyan">GenWorld + Ollama <span aria-hidden="true">&rarr;</span></a><a href="../ops-cure/" class="btn-ghost">Ops-Cure <span aria-hidden="true">&nearr;</span></a><a href="../" class="btn-ghost">AI Systems <span aria-hidden="true">&nearr;</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 font-mono text-[11px] uppercase tracking-widest text-text-muted">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span>· 2026</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2"><a href="../../" class="hover:text-accent-cyan">home</a><a href="../../projects/" class="hover:text-accent-cyan">industrial</a><a href="../" class="hover:text-accent-cyan">ai</a><a href="../../about/" class="hover:text-accent-cyan">profile</a><a href="../../en/ai-systems/oracluna-tarot/" class="hover:text-accent-cyan">en</a></div>
+      <div>oracluna tarot · mobile rag product · © 2026</div>
+    </div>
+  </footer>
+</div>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

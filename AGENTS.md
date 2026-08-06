@@ -45,11 +45,11 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 | `en/projects/index.html` | 산업 프로젝트 아카이브 (EN) | dark |
 | `ai-systems/index.html` | AI Systems 허브 (KO) | dark |
 | `en/ai-systems/index.html` | AI Systems 허브 (EN) | dark |
-| `ai-systems/<case>/index.html` | AI 케이스 KO — ops-cure, genworld-ollama, deskrelay | dark |
-| `en/ai-systems/<case>/index.html` | AI 케이스 EN — ops-cure, genworld-ollama, deskrelay | dark |
+| `ai-systems/<case>/index.html` | AI 케이스 KO — ops-cure, genworld-ollama, deskrelay, oracluna-tarot | dark |
+| `en/ai-systems/<case>/index.html` | AI 케이스 EN — ops-cure, genworld-ollama, deskrelay, oracluna-tarot | dark |
 | `projects/<case>/index.html` | 산업 케이스 KO — vr-robot, watchbim, dxcenter, neostalgia, vr-simulators | dark |
 | `en/projects/<case>/index.html` | 산업 케이스 EN — 동일 5종 | dark |
-| `print/portfolio/`, `print/ko-portfolio/`, `print/resume/` | A4 인쇄용 (EN/KO 포트폴리오 + EN 이력서) | print CSS |
+| `print/portfolio/`, `print/ko-portfolio/`, `print/resume/`, `print/resume-en/` | A4 인쇄용 (EN/KO 포트폴리오 + KO/EN 이력서) | print CSS |
 
 **Redirect stub** (`<meta http-equiv="refresh">` + JS replace): `ko/about/` → `about/`, `resume/` → `en/about/`, `ko/resume/` → `about/`, `cover-letter/` → `about/`, `ko/index.html` → `/`. `ko/ai-systems/`, `ko/projects/` 디렉터리는 존재하지 않음.
 
@@ -123,7 +123,7 @@ colors: {
 | `assets/` (루트) | `profile.jpg`, `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png` |
 | `assets/css/` | `portfolio-dark.css` (다크 공용), `site.css` (redirect stub 전용 잔존), `print-docs.css`, `print-dark.css` |
 | `assets/js/` | `site.js` (모바일 메뉴 + 가로 스크롤 드래그) |
-| `assets/images/` | 케이스 스크린샷 약 60개 — `deskrelay-*`, `remote-for-claude-*`, `ops-cure-discord-*`, `orchestration-v1-loop.png`, `genworld-*` (`genworld-skills.png` 포함 — genworld-ollama 케이스에서 사용 중), `ik_*`, `vr_robot_expo*`, `vr_construction_*` / `vr_lcm_*` / `vr_lghaus_*`, `watchbim_*`, `neostalgia_*`, `v2_*`, `customeditor.png` (DXCenter 케이스), `milk-and-cereal.png` |
+| `assets/images/` | 케이스 스크린샷 약 60개 — `deskrelay-*`, `remote-for-claude-*`, `ops-cure-discord-*`, `orchestration-v1-loop.png`, `genworld-*` (`genworld-skills.png` 포함 — genworld-ollama 케이스에서 사용 중), `oracluna-*` (모바일 녹화 추출 6장), `ik_*`, `vr_robot_expo*`, `vr_construction_*` / `vr_lcm_*` / `vr_lghaus_*`, `watchbim_*`, `neostalgia_*`, `v2_*`, `customeditor.png` (DXCenter 케이스), `milk-and-cereal.png` |
 
 ## Spec / Plan Documentation
 
@@ -140,6 +140,12 @@ colors: {
 
 ## Recent Work History
 
+### 2026-08-06: Oracluna Tarot Case Study
+- `ai-systems/oracluna-tarot/`, `en/ai-systems/oracluna-tarot/` 신규 생성.
+- 질문 설정 → 3분할 컷 → 78장 매트릭스 → 카드 공개 → RAG 해석 → 저장·공유 흐름을 프로젝트 녹화에서 추출한 6개 프레임으로 구성.
+- AI Systems KO/EN 허브 카드와 DeskRelay·Ops-Cure·GenWorld 관련 작업 링크, README 케이스 수를 함께 갱신.
+- 홈에는 노출하지 않고 AI 카테고리 안에서만 연결.
+- KO/EN 스크린샷 이력서에 Oracluna 프로젝트를 추가하고, 각 59개 이미지·17페이지 PDF를 10MB 이하로 갱신.
 ### 2026-04-08: Mobile Responsive Redesign (1차 작업)
 - 8 페이지 모두 햄버거 nav 컴포넌트 + 토큰 T1/T2/T3 적용
 - 4가지 nav 패턴 (A, A-variant, B, C) 정리

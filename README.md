@@ -6,11 +6,11 @@
 
 ## 산업 Unity 10년 → AI Systems
 
-산업 현장에서 다져진 10년의 Unity 엔지니어가, 지난 1년간 직접 빌드한 AI 시스템 케이스들을 정리한 포트폴리오 사이트다. VR·BIM·로보틱스 시뮬레이터와 제조 ERP를 실제 운영 환경 기준으로 다뤄 온 경험 위에, 데모로 끝내지 않고 운용 가능한 형태로 마무리한 AI 케이스 세 가지를 올렸다.
+산업 현장에서 다져진 10년의 Unity 엔지니어가, 지난 1년간 직접 빌드한 AI 시스템 케이스들을 정리한 포트폴리오 사이트다. VR·BIM·로보틱스 시뮬레이터와 제조 ERP를 실제 운영 환경 기준으로 다뤄 온 경험 위에, 데모로 끝내지 않고 운용 가능한 형태로 마무리한 AI 케이스 네 가지를 올렸다.
 
-## AI Systems — 3 cases
+## AI Systems — 4 cases
 
-- **Ops-Cure 커널** — 에이전트가 다이얼로그와 워크플로우를 함께 다루는 운영형 LLM 커널. 실제 사용 시나리오에서 자체 루프를 검증했다.
+- **Oracluna Tarot** — 질문, 셔플, 컷, 78장 직접 선택, 질문 중심 RAG 해석, 저장과 공유를 하나의 모바일 리딩 흐름으로 구현한 공개 웹앱.
 - **GenWorld + Ollama** — 로컬 LLM 기반 NPC 다이얼로그·스킬·월드 생성 파이프라인. Unity 게임 런타임 안에서 offline-first 동작을 검증했다.
 - **DeskRelay** — 로컬 Claude Code 세션을 브라우저·모바일에서 안전하게 원격 조작하는 self-host 개발자 도구. Solid + Vite SPA, Hono + Bun backend, Capacitor Android 앱.
 
@@ -28,11 +28,11 @@
 GitHub Pages 배포: [https://darkhtk.github.io/portfolio/](https://darkhtk.github.io/portfolio/)
 
 - [`index.html`](./index.html) — KO 홈 · [`en/`](./en/) — EN 홈
-- [`ai-systems/`](./ai-systems/) (KO) · [`en/ai-systems/`](./en/ai-systems/) (EN) — AI Systems 케이스 3종
+- [`ai-systems/`](./ai-systems/) (KO) · [`en/ai-systems/`](./en/ai-systems/) (EN) — AI Systems 케이스 4종
 - [`projects/`](./projects/) — 산업 케이스 6종 + 아카이브 인덱스 (KO) · [`en/projects/`](./en/projects/) — 산업 케이스 6종 + 아카이브 인덱스 (EN)
 - [`about/`](./about/) — KO 프로필 · [`en/about/`](./en/about/) — EN 프로필
 - [`resume/`](./resume/) · [`ko/resume/`](./ko/resume/) · [`cover-letter/`](./cover-letter/) — 이력서·커버레터 redirect
-- [`print/portfolio/`](./print/portfolio/) · [`print/ko-portfolio/`](./print/ko-portfolio/) · [`print/resume/`](./print/resume/) — A4 인쇄용
+- [`print/portfolio/`](./print/portfolio/) · [`print/ko-portfolio/`](./print/ko-portfolio/) — A4 포트폴리오 · [`print/resume/`](./print/resume/) — 한국어 이력서 · [`print/resume-en/`](./print/resume-en/) — English resume
 
 ## Contact
 
