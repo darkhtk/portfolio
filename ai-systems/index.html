@@ -4,16 +4,16 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AI Systems | 홍대기</title>
-<meta name="description" content="홍대기의 AI 시스템 포트폴리오: 모바일 RAG 제품 Oracluna Tarot, self-host 개발자 도구 DeskRelay, 운영형 LLM 커널 Ops-Cure, 로컬 LLM R&amp;D GenWorld + Ollama."/>
+<meta name="description" content="홍대기의 AI 프로젝트: Oracluna Tarot, DeskRelay, Ops-Cure, GenWorld + Ollama에서 구현한 화면, 상태 저장, 오류 처리, 복구 기능."/>
 <meta property="og:title" content="AI Systems | 홍대기"/>
-<meta property="og:description" content="Oracluna Tarot, DeskRelay, Ops-Cure, GenWorld + Ollama — 제품 판단, 운영자 UX, 런타임 아키텍처로 빌드한 AI 시스템."/>
+<meta property="og:description" content="DeskRelay, Oracluna, Ops-Cure, GenWorld에서 화면과 런타임 기능을 함께 개발했습니다."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="AI Systems | 홍대기"/>
-<meta name="twitter:description" content="홍대기의 AI 시스템 · self-host 런타임 · 에이전트 워크플로우 설계."/>
+<meta name="twitter:description" content="DeskRelay, Oracluna Tarot, Ops-Cure, GenWorld에서 직접 구현한 기능."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
 <link rel="canonical" href="https://darkhtk.github.io/portfolio/ai-systems/"/>
 <link rel="alternate" hreflang="ko" href="https://darkhtk.github.io/portfolio/ai-systems/"/>
@@ -95,11 +95,11 @@
           <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">$ ai-systems --index<span class="caret-thin text-accent-amber"></span></div>
           <div class="font-mono text-[12px] uppercase tracking-widest text-text-secondary"><span class="text-success-green">&gt;</span> deskrelay / oracluna / ops-cure / genworld</div>
           <h1 class="display-hero text-text-primary kr-balance max-w-3xl">
-            AI 를 코드 생성기가 아니라,<br/>
-            <span class="text-accent-cyan border-b-4 border-accent-cyan/80 bg-accent-cyan/10 px-2">돌아가는 시스템</span>으로 다룹니다.
+            AI 기능을 만든 뒤,<br/>
+            <span class="text-accent-cyan border-b-4 border-accent-cyan/80 bg-accent-cyan/10 px-2">설치·오류 처리·로그·복구</span>까지 직접 운영했습니다.
           </h1>
           <p class="font-body text-[15px] sm:text-base text-text-secondary leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
-            이 섹션은 포트폴리오의 AI 사이드를 모았습니다. self-host 개발자 도구 DeskRelay, 모바일 RAG 제품 Oracluna Tarot, 운영형 LLM 커널 Ops-Cure, 로컬 LLM behavior R&amp;D GenWorld를 제품 흐름과 운영 기준으로 정리했습니다.
+            DeskRelay, Oracluna Tarot, Ops-Cure, GenWorld에서 제가 만든 화면과 런타임 기능을 프로젝트별로 정리했습니다.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="#deskrelay" class="btn-cyan">DeskRelay 케이스 <span aria-hidden="true">&rarr;</span></a>
@@ -145,9 +145,9 @@
       <div class="mt-8 grid gap-8 lg:grid-cols-12 lg:items-start">
         <div class="lg:col-span-5">
           <div class="kicker kicker-cyan">DeskRelay</div>
-          <h2 class="display-section mt-3 text-text-primary kr-balance">로컬 Claude Code 세션을 브라우저에서 조작하는 self-host 컨트롤 서피스.</h2>
+          <h2 class="display-section mt-3 text-text-primary kr-balance">여러 PC의 Claude Code 세션을 브라우저와 휴대폰에서 관리하는 self-host 도구.</h2>
           <p class="mt-5 text-[15px] leading-8 text-text-secondary kr-balance">
-            DeskRelay 는 지금 제 AI 작업 방식을 가장 선명하게 보여주는 예입니다. Claude Code full-vibe coding 으로 빌드했지만, 중요한 건 그 주변의 운영 모델입니다 — 매니저·워커 역할 분리, 프로젝트 지침, 상태 보드, 실패 복구, UX 언어, 그리고 실사용에 대한 반복 검증.
+            요즘 가장 자주 쓰는 작업은 DeskRelay입니다. 여러 PC의 Claude Code 세션을 브라우저와 휴대폰에서 관리하려고 만들었고, 역할 분리, 프로젝트 지침, 상태 보드, 오류 복구까지 계속 손보고 있습니다.
           </p>
           <div class="mt-6 flex flex-wrap gap-2">
             <span class="chip chip-cyan">Claude Code</span>
@@ -214,7 +214,7 @@
             </div>
             <div class="mt-5 kicker kicker-cyan">mobile rag reading</div>
             <h3 class="mt-3 font-display text-xl font-bold text-text-primary">Oracluna Tarot</h3>
-            <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">질문, 셔플, 컷, 78장 직접 선택, 질문 중심 해석, 저장과 공유를 하나의 모바일 리딩 흐름으로 연결했습니다.</p>
+            <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">tarot.it-some.com에서 질문을 입력하고 카드를 섞고 자른 뒤, 78장 중 카드를 골라 해석을 저장하거나 공유할 수 있습니다.</p>
             <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] tracking-wide">
               <a href="./oracluna-tarot/" class="uppercase tracking-widest text-accent-cyan hover:text-accent-amber">케이스 보기 <span aria-hidden="true" class="ml-2">&nearr;</span></a>
               <a href="https://tarot.it-some.com/" target="_blank" rel="noopener noreferrer" class="text-text-secondary hover:text-accent-cyan">tarot.it-some.com <span aria-hidden="true">&nearr;</span></a>
@@ -229,7 +229,7 @@
             </div>
             <div class="mt-5 kicker kicker-amber">agent operations</div>
             <h3 class="mt-3 font-display text-xl font-bold text-text-primary">Ops-Cure</h3>
-            <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">orchestration · 원격 실행 · 대화방을 위한 커널 + behavior 아키텍처. 재사용 가능한 상태, 소유권, lease, 리뷰 게이트가 그 증거입니다.</p>
+            <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">orchestration은 작업 상태를, remote_codex는 승인과 실행 기록을, chat은 일반 대화를 같은 커널에 저장합니다.</p>
             <a href="./ops-cure/" class="mt-5 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-amber hover:text-accent-cyan">케이스 보기 <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
         </article>
@@ -259,22 +259,22 @@
         <article class="card p-5">
           <div class="font-mono text-2xl text-accent-cyan">01</div>
           <h3 class="mt-4 font-display text-lg font-bold text-text-primary kr-balance">역할 경계</h3>
-          <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">매니저·워커·리뷰어·운영자 책임을 분리해서, AI 출력이 통제된 워크플로우의 일부가 되게 합니다.</p>
+          <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">매니저, 워커, 리뷰어, 운영자의 역할과 권한을 나눴습니다.</p>
         </article>
         <article class="card p-5">
           <div class="font-mono text-2xl text-accent-cyan">02</div>
-          <h3 class="mt-4 font-display text-lg font-bold text-text-primary kr-balance">해피패스 압박</h3>
-          <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">설치, 등록, 네트워크 상태, 업데이트 흐름, 복구가 이상적인 경로를 벗어나면 어떻게 되는지 계속 묻습니다.</p>
+          <h3 class="mt-4 font-display text-lg font-bold text-text-primary kr-balance">설치·복구 확인</h3>
+          <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">설치, PC 등록, 네트워크, 업데이트, 복구가 실패하는 경우를 각각 확인했습니다.</p>
         </article>
         <article class="card p-5">
           <div class="font-mono text-2xl text-accent-cyan">03</div>
-          <h3 class="mt-4 font-display text-lg font-bold text-text-primary kr-balance">폴리싱보다 UX</h3>
-          <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">모든 상태가 조치 가능한지, 문구가 실제로 유용한지, 모바일 운영자가 시스템을 빠르게 이해할 수 있는지 검토합니다.</p>
+          <h3 class="mt-4 font-display text-lg font-bold text-text-primary kr-balance">문구·모바일 화면 확인</h3>
+          <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">오류 문구에 다음 조치가 적혀 있는지, 휴대폰에서 상태와 실행 버튼이 바로 보이는지 확인했습니다.</p>
         </article>
         <article class="card p-5">
           <div class="font-mono text-2xl text-accent-cyan">04</div>
-          <h3 class="mt-4 font-display text-lg font-bold text-text-primary kr-balance">패치보다 구조</h3>
-          <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">표면 버그가 보이면 아키텍처 차원으로 끌어올립니다 — 진단, 상태 모델, 신뢰 경계, 테스트 루프, 설치 흐름.</p>
+          <h3 class="mt-4 font-display text-lg font-bold text-text-primary kr-balance">반복 오류의 원인 수정</h3>
+          <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">같은 오류가 반복되면 진단 화면, 상태 저장 방식, 권한 처리, 설치 과정부터 다시 확인했습니다.</p>
         </article>
       </div>
     </section>
@@ -283,9 +283,9 @@
       <div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-12 lg:px-8 lg:py-16">
         <div class="lg:col-span-7">
           <div class="kicker kicker-amber">// bridge</div>
-          <h2 class="display-section mt-3 text-text-primary kr-balance">산업 사이드가 여전히 기본 레이어입니다.</h2>
+          <h2 class="display-section mt-3 text-text-primary kr-balance">산업 프로젝트에서 쓰던 기준을 그대로 적용했습니다.</h2>
           <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary kr-balance">
-            여기 있는 AI 시스템들은 10년의 Unity/XR 납품 위에 얹혀 있습니다 — 로보틱스 제어 인터페이스, BIM 런타임 툴링, 무거운 지오메트리 인터랙션, 운영자 대상 시뮬레이션. 그 배경 덕분에 AI 출력도 설치, 관측 가능성, 복구, 실사용 기준으로 판단합니다.
+            로보틱스 제어, BIM 런타임 도구, 대용량 지오메트리, 운영자용 시뮬레이터를 납품하며 익힌 방식대로 AI 프로젝트도 설치, 로그, 장애 복구, 실제 사용 여부를 확인했습니다.
           </p>
         </div>
         <div class="lg:col-span-5 flex items-end lg:justify-end">

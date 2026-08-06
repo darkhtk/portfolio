@@ -207,7 +207,7 @@
       </div>
 
       <div class="note-strip">
-        I keep this resume focused on work I can explain directly: shipped Unity systems, field tools, ERP workflow screens, and the parts of each project I personally made reliable.
+        This resume shows the Unity, ERP, and AI features I built, with screenshots of the resulting interfaces.
       </div>
 
       <section class="stack-md">
@@ -219,7 +219,7 @@
             <p class="proof-card__copy">Built a Quest 3 - Unity - Flask - RoboDK - Doosan A0912 remote operation flow and a Unity 6 URP/WebGL digital-twin authoring tool, including safety logic, calibration, validation, and non-developer EditorWindow tooling.</p>
           </article>
           <article class="proof-card">
-            <div class="proof-card__eyebrow">Hard Engineering Modules</div>
+            <div class="proof-card__eyebrow">Problems Solved Directly</div>
             <h3 class="proof-card__title">IK / BIM / Hardware Sync</h3>
             <p class="proof-card__copy">Implemented a Jacobian IK solver, runtime BIM section cuts, nine EditorWindow workflows, and hardware-to-Unity synchronization where off-the-shelf tools did not cover delivery constraints.</p>
           </article>
@@ -329,7 +329,7 @@
         contribution: [
           "Designed nine EditorWindow tools around data mapping, validation, asset registration, and runtime readiness.",
           "Used ScriptableObject data flow, Service Locator, EventBus, strategy-based state effects, and adapter-style device integration.",
-          "I built the editor surface that operators use to prepare content without code."
+          "I built EditorWindow tools so operators could prepare content without writing code."
         ],
         images: [
           ["customeditor.png", "Custom EditorWindow workflow for mapping, validation, and runtime preparation in the DXCenter authoring pipeline."]
@@ -342,14 +342,14 @@
         summary: "A role-based ERP for small manufacturing teams that connects sales orders, BOM, materials, production, outsourcing, inventory, approvals, shipping, logs, and reporting into one execution flow. The design favors mobile actions over dense desktop tables so field users can complete work from the shop floor.",
         contribution: [
           "Structured manufacturing workflows around roles: admin, material manager, production manager, part leader, shop-floor user, and sales.",
-          "Designed mobile-first task surfaces so each role sees the next action first.",
+          "Built mobile task screens that show each role its next action first.",
           "Implemented the system around Fastify/TypeScript, MySQL/Kysely, Zod validation, Identity Platform auth, Cloud Run, Cloud SQL, Cloud Storage, tests, and mobile/desktop screenshot checks."
         ],
         images: [
           ["sems-00-demo-role-login-mobile.png", "Demo role selection screen showing that one ERP becomes a different workbench for admin, materials, production, part leader, shop-floor user, and sales."],
           ["sems-01-admin-dashboard-mobile.png", "Admin mobile home gathers sales status, shipping wait, due-date risk, production risk, pending purchases, and material issue work into role-specific decisions."],
           ["sems-03-material-dashboard-mobile.png", "Material manager home removes unrelated menus and focuses on pending receipts and material issue work."],
-          ["sems-05-production-dashboard-mobile.png", "Production manager home surfaces order progress and production due-date risk before moving into work, production, and inventory tasks."],
+          ["sems-05-production-dashboard-mobile.png", "Production manager home showing order progress and due-date risk before work, production, and inventory tasks."],
           ["sems-09-sales-dashboard-mobile.png", "Sales home connects order registration with production, inventory, shipping status, and customer due-date risk."],
           ["sems-10-sales-shipping-mobile.png", "Mobile shipping list shows shippable orders, delay badges, and direct action buttons without forcing a desktop-style table."],
           ["sems-11-sales-dashboard-desktop.png", "Sales desktop dashboard uses the wider screen for analysis: shipping wait, inventory reconciliation, work status, material shortages, and stock movement trends."],
@@ -381,7 +381,7 @@
         key: "watchbim",
         title: "WatchBIM",
         kicker: "Unity BIM runtime / geometry tooling / analysis viewer",
-        summary: "A Unity BIM runtime for large road-model interaction, section cutting, 2D analysis, and camera tooling. The hard part was making heavy geometry usable for operators at runtime.",
+        summary: "A Unity BIM runtime where operators select large models, cut sections, inspect linked 2D views, and navigate with custom camera tools.",
         contribution: [
           "Built custom hit detection, mesh optimization, auto LOD, and model interaction flows for large BIM data.",
           "Implemented runtime cross-sections and linked 2D analysis views for operator checks.",
@@ -392,7 +392,7 @@
           ["watchbim_clipping.png", "Clipping and selection workflow for navigating large BIM models without relying on external authoring tools."],
           ["watchbim_crosssection_highlight.png", "Highlighted section geometry used to make runtime cuts visually clear."],
           ["watchbim_crosssection_Runtime2D.png", "2D analysis viewer linked to the runtime section result for measurement and review."],
-          ["watchbim_verticalgraph.png", "Vertical graph analysis surface for checking elevation and structural distribution at a glance."]
+          ["watchbim_verticalgraph.png", "Vertical graph view for checking elevation and structural distribution."]
         ]
       },
       {
@@ -424,12 +424,12 @@
         summary: "An XR exhibition system selected by BIFAN XR Beyond Reality and recognized with an MSIT citation. It connected visitor input, visual material, and exhibition-grade runtime delivery.",
         contribution: [
           "Built the Unity-side XR experience pipeline and presentation flow for exhibition operation.",
-          "Connected visitor memory, drawing/object assets, dialogue, and skybox presentation into a coherent experience.",
-          "The screenshots show both the generative material and the final immersive runtime surface."
+          "Connected visitor memory, drawing and object assets, dialogue, and skybox presentation in the exhibition runtime.",
+          "The screenshots show the generated material and the finished immersive scene."
         ],
         images: [
           ["neostalgia_skybox.png", "Immersive skybox result used as the final XR memory environment."],
-          ["neostalgia_dialogue.png", "Dialogue/input surface for collecting visitor memory and shaping the exhibition flow."],
+          ["neostalgia_dialogue.png", "Dialogue and input screen for collecting visitor memories during the exhibition."],
           ["neostalgia_drawing.png", "Visitor drawing material used as part of the memory-based exhibition pipeline."],
           ["neostalgia_object.png", "3D object asset placed into the XR scene composition."]
         ]
@@ -440,7 +440,7 @@
         kicker: "Mobile-first web app / 78-card UX / Qdrant RAG / Docker",
         url: "https://tarot.it-some.com/",
         urlLabel: "tarot.it-some.com",
-        summary: "A mobile tarot reading product that carries a user from question, shuffle, and cut through direct selection from all 78 cards, interpretation, saving, and sharing. Each screen keeps one primary action so the cards remain the focus.",
+        summary: "At tarot.it-some.com, users enter a question, select cards from the full 78-card deck, receive an interpretation, and save or share the result.",
         contribution: [
           "Replaced an unstable radial deck after repeated mobile QA with a full 78-card matrix that keeps every card reachable at a predictable position.",
           "Built a Qdrant-backed RAG pipeline combining the question, spread position, card, orientation, and retrieved knowledge, with provider adapters for local Ollama development and OpenAI API deployment.",
@@ -458,58 +458,58 @@
         key: "genworld",
         title: "GenWorld",
         kicker: "Unity 2D / NPC state system / offline play",
-        summary: "A Unity 2D RPG prototype focused on NPC state, dialogue, skills, and offline-safe behavior. The important engineering point is that the game keeps running even when an optional service is unavailable.",
+        summary: "A Unity 2D RPG prototype with NPC state, dialogue, skills, and offline play. GenWorld falls back to its rule-based dialogue graph when the optional LLM service is unavailable.",
         contribution: [
-          "Designed the dialogue path so the game still works when optional runtime services are unavailable.",
+          "Connected LLM dialogue to a rule-based graph that takes over when the optional service is unavailable.",
           "Modeled NPC mood, dialogue, skills, and world state as runtime systems inside Unity.",
           "Used deterministic rules and runtime state inspection to keep the prototype playable offline."
         ],
         images: [
           ["genworld-world.png", "Unity 2D world view used to validate NPC behavior inside an actual game runtime."],
           ["genworld-dialogue.png", "Dialogue flow where NPC response is driven by local context and runtime rules."],
-          ["genworld-npc-mood.png", "NPC mood/state surface used to inspect behavior changes."],
-          ["genworld-skills.png", "Skill and behavior surface for checking rule-backed NPC actions."]
+          ["genworld-npc-mood.png", "NPC mood and state view used to check behavior changes."],
+          ["genworld-skills.png", "Skill and behavior view for checking rule-based NPC actions."]
         ]
       },
       {
         key: "deskrelay",
         title: "DeskRelay",
-        kicker: "Internal operations tool / browser and mobile control surface",
-        summary: "A tool for controlling local work sessions from browser and mobile surfaces. It covers device registration, session continuity, diagnostics, permissions, updates, and mobile UX.",
+        kicker: "Internal tool / browser and mobile controls",
+        summary: "A tool for controlling local work sessions from a browser or phone. It includes device registration, session continuity, diagnostics, permissions, and updates.",
         contribution: [
-          "Designed the control surface around multiple devices, local authority, diagnostics, and repeatable daily usage.",
-          "Built both desktop and mobile flows: chat, workspace selection, device switching, settings, permissions, and update surfaces.",
-          "I worked past the main chat screen into the operational settings that make the tool usable day to day."
+          "Built the controls for multiple devices, local execution, connection diagnostics, and daily use.",
+          "Built desktop and mobile screens for chat, workspace selection, device switching, settings, permissions, and updates.",
+          "I also built the connection and update settings needed to use it every day."
         ],
         images: [
-          ["deskrelay-chat-ui.png", "Desktop chat UI for controlling a local coding session through the browser surface."],
+          ["deskrelay-chat-ui.png", "Desktop chat UI for controlling a local coding session from the browser."],
           ["deskrelay-github-chat-session.png", "Session screen captured from a working workspace conversation."],
           ["deskrelay-new-chat-directory.png", "Directory picker flow for choosing a local project safely."],
           ["deskrelay-device-switcher.png", "Device switcher showing how one UI can route control to multiple registered machines."],
-          ["deskrelay-connection-status.png", "Connection status surface for checking whether the local server and device channel are healthy."],
-          ["deskrelay-settings-ui.png", "Settings surface for managing runtime behavior from the product UI."],
+          ["deskrelay-connection-status.png", "Connection status screen for checking the local server and device channel."],
+          ["deskrelay-settings-ui.png", "Settings screen for changing runtime behavior."],
           ["deskrelay-github-settings-diagnostics.png", "Diagnostics screen for checking failures without diving into logs first."],
-          ["deskrelay-github-settings-updates.png", "Update settings surface for daily operation and maintenance."],
+          ["deskrelay-github-settings-updates.png", "Update settings used for daily maintenance."],
           ["deskrelay-github-usage-mobile-chat.png", "Mobile chat flow for continuing the same coding session away from the desk."],
           ["deskrelay-github-usage-mobile-instructions.png", "Mobile instructions tab for keeping project guidance visible."],
-          ["deskrelay-github-usage-mobile-permissions.png", "Mobile permissions surface for trust and capability boundaries."],
+          ["deskrelay-github-usage-mobile-permissions.png", "Mobile permissions screen showing allowed capabilities."],
           ["deskrelay-github-usage-mobile-sessions.png", "Mobile session list for switching work contexts."],
-          ["deskrelay-github-usage-mobile-skills.png", "Mobile skills/tooling surface for checking available capabilities."]
+          ["deskrelay-github-usage-mobile-skills.png", "Mobile skills screen showing available tools."]
         ]
       },
       {
         key: "ops-remote",
         title: "Ops-Cure Workflow",
         kicker: "Discord operations / task state / workflow loop",
-        summary: "A workflow system that keeps planning, task state, execution notes, and handoff visible through Discord threads. I include it briefly because it shows the same habit I bring to tools: make the process inspectable and recoverable.",
+        summary: "Discord threads store the plan, execution notes, current status, and handoff for each task.",
         contribution: [
-          "Modeled task state so work can move through visible threads without losing context.",
-          "Kept planning, work, checks, and handoff states explicit.",
-          "Used the Discord thread as an operational surface, so state and recovery paths stay readable."
+          "Stored task state and ownership so progress remains visible when work moves between threads.",
+          "Displayed planning, work, checks, and handoff as named states in Discord.",
+          "The Discord thread shows task state, messages, approvals, and checks."
         ],
         images: [
-          ["orchestration-v1-loop.png", "Workflow loop diagram showing how planning, implementation, checks, and handoff connect."],
-          ["ops-cure-discord-thread.jpg", "Discord thread used as an operational surface for task state, messages, and checks."]
+          ["orchestration-v1-loop.png", "Workflow loop diagram showing planning, implementation, checks, and handoff in order."],
+          ["ops-cure-discord-thread.jpg", "Discord thread showing task state, messages, approvals, and checks."]
         ]
       }
     ];

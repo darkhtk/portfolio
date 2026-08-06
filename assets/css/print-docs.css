@@ -130,7 +130,7 @@ img {
   content: "";
   position: absolute;
   top: 16mm;
-  right: -22mm;
+  right: 0;
   width: 92mm;
   height: 92mm;
   border-radius: 50%;
@@ -353,6 +353,10 @@ img {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.proof-grid--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .mini-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -518,6 +522,12 @@ img {
 .project-image img {
   height: 67mm;
   object-fit: cover;
+}
+
+.project-image--contain img,
+.snapshot--contain img {
+  background: #0b0f14;
+  object-fit: contain;
 }
 
 .project-copy {
@@ -702,6 +712,28 @@ img {
   .program-grid,
   .snapshot-grid {
     gap: 6px;
+  }
+
+  .page--cover .proof-grid--four .proof-card {
+    gap: 3px;
+    min-width: 0;
+    padding: 8px 9px;
+    border-radius: 12px;
+  }
+
+  .page--cover .proof-grid--four .proof-card__eyebrow {
+    font-size: 8px;
+    line-height: 1.3;
+  }
+
+  .page--cover .proof-grid--four .proof-card__title {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .page--cover .proof-grid--four .proof-card__copy,
+  .page--cover > .note-strip {
+    display: none;
   }
 
   .project-feature {

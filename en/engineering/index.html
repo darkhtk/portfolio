@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Engineering · Hardest Modules | Daeki Hong</title>
-<meta name="description" content="The hardest modules I had to solve directly inside Unity projects — an in-house Jacobian IK solver, BIM runtime cross-section generation, custom EditorWindow tooling, and hardware-Unity sync. Switch depth with OVERVIEW / DEEP modes."/>
-<meta property="og:title" content="Engineering · Hardest Modules"/>
-<meta property="og:description" content="In-house Jacobian IK, BIM runtime cross-section, EditorWindow tooling, hardware sync — the hard modules I designed myself, in OVERVIEW / DEEP."/>
+<title>Engineering · Problems Solved Directly | Daeki Hong</title>
+<meta name="description" content="Unity engineering problems I solved directly: an in-house Jacobian IK solver, BIM runtime cross-sections, EditorWindow tools, and hardware-Unity sync."/>
+<meta property="og:title" content="Engineering · Problems Solved Directly"/>
+<meta property="og:description" content="In-house Jacobian IK, BIM runtime cross-sections, EditorWindow tooling, and hardware sync implemented directly."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/ik_tcp_tracking.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/engineering/"/>
 <meta property="og:locale" content="en_US"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Engineering · Hardest Modules"/>
+<meta name="twitter:title" content="Engineering · Problems Solved Directly"/>
 <meta name="twitter:description" content="In-house Jacobian IK, BIM runtime cross-section, EditorWindow tooling, hardware sync — switch OVERVIEW / DEEP modes."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/ik_tcp_tracking.png"/>
 <link rel="canonical" href="https://darkhtk.github.io/portfolio/en/engineering/"/>
@@ -149,7 +149,7 @@
       <div class="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8 lg:py-20">
         <div class="min-w-0 lg:col-span-7 flex flex-col gap-6">
           <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// engineering · deep-dive</div>
-          <h1 class="display-hero max-w-3xl text-text-primary kr-balance">The hardest modules.</h1>
+          <h1 class="display-hero max-w-3xl text-text-primary kr-balance">Problems I solved directly.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">jacobian ik · bim cross-section · editor tooling · hardware sync</p>
           <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base kr-balance">
             Behind the project cards are the hard modules I had to solve myself. This collects only the parts that off-the-shelf tools could not handle, or that I had to design from scratch. Use the <span class="text-accent-cyan font-medium">OVERVIEW / DEEP</span> toggle above to move between the summary and the deeper explanation.
@@ -646,7 +646,7 @@
             <span class="chip">Skybox · Meshy</span>
           </div>
           <p class="text-[15px] leading-[1.85] text-text-secondary kr-balance">
-            A generative-AI pipeline that ran live on the exhibition floor — it interviews visitors, builds a narrative on the spot, generates visual assets, and places them into the XR experience. It was not a demo but a fully operated system, and it led to <strong class="text-text-primary font-semibold">BIFAN selection</strong> and the <strong class="text-text-primary font-semibold">MSIT Minister's Citation</strong>.
+            I connected visitor interviews, Whisper/GPT narrative generation, visual asset generation, and XR placement in the exhibition system. The project received an <strong class="text-text-primary font-semibold">Official BIFAN XR Selection</strong> and the <strong class="text-text-primary font-semibold">MSIT Minister's Citation</strong>.
           </p>
           <a href="../projects/neostalgia/" class="inline-flex w-fit font-mono text-[11px] uppercase tracking-widest text-accent-amber hover:text-accent-cyan">Related case · Neostalgia <span aria-hidden="true" class="ml-2">&nearr;</span></a>
 
@@ -666,7 +666,7 @@
             <div class="deep-block">
               <div class="deep-label" style="color:#F5C26B">// approach</div>
               <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
-                I put a <strong class="text-text-primary font-medium">time budget</strong> and <strong class="text-text-primary font-medium">graceful fallback</strong> on a staged asynchronous pipeline. If a stage cannot finish within its response time, it falls back to pre-generated assets or a default narrative, so the visitor experience always completes. Operators monitor every stage from a dashboard.
+                I set a response deadline for each stage and added pre-generated assets and a default narrative. If generation times out, the next stage uses those assets while the dashboard records progress and errors for the operator.
               </p>
             </div>
             <div class="deep-block">
@@ -695,7 +695,7 @@
               <ul class="mt-3 grid gap-2 text-[14px] leading-relaxed text-text-secondary">
                 <li class="check"><span class="mark" style="color:#F5C26B">[★]</span><span class="label">MSIT Minister's Citation</span></li>
                 <li class="check"><span class="mark" style="color:#F5C26B">[★]</span><span class="label">Official BIFAN XR selection</span></li>
-                <li class="check"><span class="mark">[x]</span><span class="label">Ran without interruption in a real exhibition (not a demo)</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">Exhibition operation with more than 130 direct participants</span></li>
               </ul>
             </div>
           </div>

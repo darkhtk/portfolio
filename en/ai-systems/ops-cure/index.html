@@ -4,16 +4,16 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ops-Cure Kernel · Case Study | Daeki Hong</title>
-<meta name="description" content="Ops-Cure is a channel-native state/event kernel. Direct proof that three behaviors — orchestration · remote_codex · chat — share the same Space/Actor/Event substrate."/>
+<meta name="description" content="Ops-Cure stores orchestration, remote_codex, and chat state and events through the same Space/Actor/Event model."/>
 <meta property="og:title" content="Ops-Cure Kernel · Case Study"/>
-<meta property="og:description" content="Channel-native state/event kernel + 3 behaviors on the same abstraction."/>
+<meta property="og:description" content="orchestration, remote_codex, and chat store state and events through the same Space/Actor/Event model."/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/orchestration-v1-loop.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/ops-cure/"/>
 <meta property="og:locale" content="en_US"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Ops-Cure Kernel · Case Study"/>
-<meta name="twitter:description" content="Channel-native state/event kernel + 3 behaviors on the same abstraction."/>
+<meta name="twitter:description" content="orchestration, remote_codex, and chat store state and events through the same Space/Actor/Event model."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/orchestration-v1-loop.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
@@ -89,7 +89,7 @@
           <h1 class="display-hero text-text-primary">Ops-Cure.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">channel-native state/event kernel</p>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl border-l-2 border-accent-amber/40 pl-5">
-            Channels aren't just message pipes — they're state spaces where actors and events flow. Ops-Cure makes that reading explicit: behaviors plug in, transports get adapted, runtimes execute. Three completely different behaviors — <code>orchestration</code> · <code>remote_codex</code> · <code>chat</code> — running on the same Space / Actor / Event substrate is the proof the abstraction is real.
+            Ops-Cure stores state and events by channel, then connects behaviors, transports, and runtimes as separate parts. <code>orchestration</code>, <code>remote_codex</code>, and <code>chat</code> use the same Space / Actor / Event model.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener" class="btn-cyan">GitHub <span aria-hidden="true">↗</span></a>
@@ -176,7 +176,7 @@
             <h2 class="display-section text-text-primary">One kernel,<br/>three behaviors.</h2>
           </div>
           <div class="lg:col-span-7 lg:pt-2">
-            <p class="text-text-secondary text-[15px] leading-[1.85] max-w-2xl">On the same Space / Actor / Event substrate: a multi-agent workflow (orchestration), a browser-driven remote execution surface (remote_codex), and a Codex-to-Codex dialogue room (chat). Three completely different domains sharing one kernel — that's the abstraction made concrete.</p>
+            <p class="text-text-secondary text-[15px] leading-[1.85] max-w-2xl">Orchestration stores task state, remote_codex stores approvals and execution records, and chat stores general dialogue through the same Space / Actor / Event model.</p>
           </div>
         </div>
 
@@ -215,7 +215,7 @@
             <div class="p-6 flex-1 flex flex-col gap-4">
               <div class="kicker kicker-amber">// behavior 03</div>
               <h3 class="font-display font-bold text-lg tracking-tight text-text-primary"><span class="text-accent-amber font-mono">&gt;</span> chat</h3>
-              <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">A Codex-to-Codex dialogue room — no tasks, no handoffs. Pure dialogue, proving the kernel is general. Participants, heartbeat, and message transport are all it needs.</p>
+              <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">A Codex-to-Codex chat room with no tasks or handoffs. It uses participants, heartbeat, and message transport only.</p>
               <div class="flex flex-wrap gap-1.5">
                 <span class="chip">Codex-to-Codex</span><span class="chip">Dialogue</span><span class="chip">No Tasks</span>
               </div>
@@ -229,11 +229,11 @@
           <div class="grid gap-8 lg:grid-cols-12">
             <div class="lg:col-span-5">
               <div class="kicker kicker-cyan mb-3">// why three matters</div>
-              <h3 class="display-section text-text-primary">One behavior is a feature.<br/>Three is a claim.</h3>
+              <h3 class="display-section text-text-primary">Three behaviors run different work<br/>on the same kernel.</h3>
             </div>
             <div class="lg:col-span-7">
               <p class="text-text-secondary text-[14px] leading-[1.85]">
-                Three fundamentally different behaviors — structured workflow / remote execution with approval / free-form dialogue — running on the same kernel is a claim that the abstraction is real. Each one validates a different axis: <strong class="text-text-primary">orchestration</strong> tests the state/task model, <strong class="text-text-primary">remote_codex</strong> tests canonical evidence under distributed runtime, <strong class="text-text-primary">chat</strong> tests room generality without task semantics.
+                The three behaviors cover workflow state, approved remote execution, and free-form chat. <strong class="text-text-primary">orchestration</strong> handles task state, <strong class="text-text-primary">remote_codex</strong> records approvals and execution evidence, and <strong class="text-text-primary">chat</strong> handles general dialogue.
               </p>
             </div>
           </div>

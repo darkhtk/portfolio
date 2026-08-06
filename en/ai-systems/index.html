@@ -6,14 +6,14 @@
 <title>AI Systems | Daeki Hong</title>
 <meta name="description" content="AI systems portfolio by Daeki Hong: Oracluna Tarot, DeskRelay, Ops-Cure, and GenWorld + Ollama, covering mobile RAG products, self-host runtimes, and practical validation."/>
 <meta property="og:title" content="AI Systems | Daeki Hong"/>
-<meta property="og:description" content="Oracluna Tarot, DeskRelay, Ops-Cure, and GenWorld + Ollama: AI systems built with product judgment, operator UX, and runtime architecture."/>
+<meta property="og:description" content="Screens and runtime features built for DeskRelay, Oracluna Tarot, Ops-Cure, and GenWorld + Ollama."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/"/>
 <meta property="og:locale" content="en_US"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="AI Systems | Daeki Hong"/>
-<meta name="twitter:description" content="AI systems, self-host runtimes, and agent workflow design by Daeki Hong."/>
+<meta name="twitter:description" content="Screens, state handling, errors, and recovery built for DeskRelay, Oracluna Tarot, Ops-Cure, and GenWorld."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/deskrelay-github-usage-mobile-chat.png"/>
 <link rel="canonical" href="https://darkhtk.github.io/portfolio/en/ai-systems/"/>
 <link rel="alternate" hreflang="ko" href="https://darkhtk.github.io/portfolio/ai-systems/"/>
@@ -95,11 +95,11 @@
           <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">$ ai-systems --index<span class="caret-thin text-accent-amber"></span></div>
           <div class="font-mono text-[12px] uppercase tracking-widest text-text-secondary"><span class="text-success-green">&gt;</span> deskrelay / oracluna / ops-cure / genworld</div>
           <h1 class="display-hero text-text-primary max-w-3xl">
-            AI as a working system,<br/>
-            not just a <span class="text-accent-cyan border-b-4 border-accent-cyan/80 bg-accent-cyan/10 px-2">code generator.</span>
+            I built the AI features,<br/>
+            then handled <span class="text-accent-cyan border-b-4 border-accent-cyan/80 bg-accent-cyan/10 px-2">setup, errors, logs, and recovery.</span>
           </h1>
           <p class="font-body text-[15px] sm:text-base text-text-secondary leading-[1.85] max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
-            This section collects the AI side of my portfolio: DeskRelay as a self-host developer control surface, Oracluna Tarot as a mobile RAG product, Ops-Cure as an agent operations kernel, and GenWorld as local LLM behavior R&amp;D.
+            These case studies show the screens and runtime features I built for DeskRelay, Oracluna Tarot, Ops-Cure, and GenWorld.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="#deskrelay" class="btn-cyan">DeskRelay case <span aria-hidden="true">&rarr;</span></a>
@@ -145,9 +145,9 @@
       <div class="mt-8 grid gap-8 lg:grid-cols-12 lg:items-start">
         <div class="lg:col-span-5">
           <div class="kicker kicker-cyan">DeskRelay</div>
-          <h2 class="display-section mt-3 text-text-primary">A self-host browser control surface for local Claude Code sessions.</h2>
+          <h2 class="display-section mt-3 text-text-primary">A self-host tool for managing Claude Code sessions across multiple PCs from a browser or phone.</h2>
           <p class="mt-5 text-[15px] leading-8 text-text-secondary">
-            DeskRelay is the clearest example of my current AI work style. I built it through Claude Code full-vibe coding, but the important part is the operating model around it: manager and worker roles, project instructions, state boards, failure recovery, UX language, and repeated validation against real use.
+            DeskRelay is the tool I use most often. I built it to manage Claude Code sessions across my PCs from a browser or phone, then kept adding role separation, project instructions, status boards, and recovery handling.
           </p>
           <div class="mt-6 flex flex-wrap gap-2">
             <span class="chip chip-cyan">Claude Code</span>
@@ -214,7 +214,7 @@
             </div>
             <div class="mt-5 kicker kicker-cyan">mobile rag reading</div>
             <h3 class="mt-3 font-display text-xl font-bold text-text-primary">Oracluna Tarot</h3>
-            <p class="mt-3 text-sm leading-7 text-text-secondary">A mobile reading flow connecting a question, shuffle, cut, direct selection from all 78 cards, grounded interpretation, saving, and sharing.</p>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">At tarot.it-some.com, users enter a question, shuffle and cut the deck, select from all 78 cards, then save or share the reading.</p>
             <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] tracking-wide">
               <a href="./oracluna-tarot/" class="uppercase tracking-widest text-accent-cyan hover:text-accent-amber">read case <span aria-hidden="true" class="ml-2">&nearr;</span></a>
               <a href="https://tarot.it-some.com/" target="_blank" rel="noopener noreferrer" class="text-text-secondary hover:text-accent-cyan">tarot.it-some.com <span aria-hidden="true">&nearr;</span></a>
@@ -229,7 +229,7 @@
             </div>
             <div class="mt-5 kicker kicker-amber">agent operations</div>
             <h3 class="mt-3 font-display text-xl font-bold text-text-primary">Ops-Cure</h3>
-            <p class="mt-3 text-sm leading-7 text-text-secondary">A kernel-plus-behaviors architecture for orchestration, remote execution, and dialogue rooms. The proof is reusable state, ownership, leases, and review gates.</p>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">Orchestration stores task state, remote execution stores approvals and evidence, and chat stores general dialogue through the same kernel.</p>
             <a href="./ops-cure/" class="mt-5 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-amber hover:text-accent-cyan">read case <span aria-hidden="true" class="ml-2">&nearr;</span></a>
           </div>
         </article>
@@ -259,22 +259,22 @@
         <article class="card p-5">
           <div class="font-mono text-2xl text-accent-cyan">01</div>
           <h3 class="mt-4 font-display text-lg font-bold text-text-primary">Role boundaries</h3>
-          <p class="mt-3 text-sm leading-7 text-text-secondary">I separate manager, worker, reviewer, and operator responsibilities so AI output becomes part of a controlled workflow.</p>
+          <p class="mt-3 text-sm leading-7 text-text-secondary">I separated the roles and permissions of managers, workers, reviewers, and operators.</p>
         </article>
         <article class="card p-5">
           <div class="font-mono text-2xl text-accent-cyan">02</div>
-          <h3 class="mt-4 font-display text-lg font-bold text-text-primary">Happy-path pressure</h3>
-          <p class="mt-3 text-sm leading-7 text-text-secondary">I keep asking what happens when setup, registration, network state, update flow, or recovery does not follow the ideal path.</p>
+          <h3 class="mt-4 font-display text-lg font-bold text-text-primary">Setup and recovery checks</h3>
+          <p class="mt-3 text-sm leading-7 text-text-secondary">I tested failures in setup, PC registration, network access, updates, and recovery.</p>
         </article>
         <article class="card p-5">
           <div class="font-mono text-2xl text-accent-cyan">03</div>
-          <h3 class="mt-4 font-display text-lg font-bold text-text-primary">UX before polish</h3>
-          <p class="mt-3 text-sm leading-7 text-text-secondary">I review whether every state is actionable, whether wording is useful, and whether mobile operators can understand the system quickly.</p>
+          <h3 class="mt-4 font-display text-lg font-bold text-text-primary">Copy and mobile checks</h3>
+          <p class="mt-3 text-sm leading-7 text-text-secondary">I checked that error messages name the next action and that status and run controls remain visible on phones.</p>
         </article>
         <article class="card p-5">
           <div class="font-mono text-2xl text-accent-cyan">04</div>
-          <h3 class="mt-4 font-display text-lg font-bold text-text-primary">Structure over patches</h3>
-          <p class="mt-3 text-sm leading-7 text-text-secondary">When a surface bug appears, I pull it into architecture: diagnostics, status models, trust boundaries, test loops, and install flow.</p>
+          <h3 class="mt-4 font-display text-lg font-bold text-text-primary">Fix repeated error sources</h3>
+          <p class="mt-3 text-sm leading-7 text-text-secondary">When the same error repeats, I check diagnostics, stored state, permissions, tests, and the install path.</p>
         </article>
       </div>
     </section>
@@ -283,9 +283,9 @@
       <div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-12 lg:px-8 lg:py-16">
         <div class="lg:col-span-7">
           <div class="kicker kicker-amber">// bridge</div>
-          <h2 class="display-section mt-3 text-text-primary">The industrial side is still the base layer.</h2>
+          <h2 class="display-section mt-3 text-text-primary">I use the same checks from my industrial projects.</h2>
           <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary">
-            The AI systems here sit on top of a decade of Unity/XR delivery: robotics control interfaces, BIM runtime tooling, heavy geometry interaction, and operator-facing simulation. That background is why I keep judging AI output by setup, observability, recovery, and real use.
+            I use the same checks from my robotics, BIM, and simulator work here: installation, logs, failure recovery, and whether the feature works in daily use.
           </p>
         </div>
         <div class="lg:col-span-5 flex items-end lg:justify-end">

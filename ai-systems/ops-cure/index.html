@@ -4,16 +4,16 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ops-Cure 커널 · 케이스 스터디 | 홍대기</title>
-<meta name="description" content="Ops-Cure 는 channel-native state/event 커널. orchestration · remote_codex · chat 세 behavior 가 같은 Space/Actor/Event 위에 돌아간다는 직접적 증거."/>
+<meta name="description" content="Ops-Cure는 orchestration, remote_codex, chat의 상태와 이벤트를 같은 Space/Actor/Event 모델로 저장하는 커널입니다."/>
 <meta property="og:title" content="Ops-Cure 커널 · 케이스 스터디"/>
-<meta property="og:description" content="채널 단위 state/event 커널 + 3개의 behavior 가 같은 추상화 위에 돌아간다."/>
+<meta property="og:description" content="orchestration, remote_codex, chat이 같은 Space/Actor/Event 모델에 상태와 이벤트를 저장합니다."/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/orchestration-v1-loop.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/ops-cure/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Ops-Cure 커널 · 케이스 스터디"/>
-<meta name="twitter:description" content="채널 단위 state/event 커널 + 3개의 behavior 가 같은 추상화 위에 돌아간다."/>
+<meta name="twitter:description" content="orchestration, remote_codex, chat이 같은 Space/Actor/Event 모델에 상태와 이벤트를 저장합니다."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/orchestration-v1-loop.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
@@ -89,7 +89,7 @@
           <h1 class="display-hero text-text-primary kr-balance">Ops-Cure.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">channel-native state/event kernel</p>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
-            채널은 단순한 메시지 파이프가 아닙니다 — 액터와 이벤트가 흐르는 상태 공간입니다. Ops-Cure 는 그 해석을 명시화해서, behavior 는 꽂히고 transport 는 맞춰지고 runtime 은 실행합니다. 세 개의 서로 다른 behavior — <code>orchestration</code> · <code>remote_codex</code> · <code>chat</code> — 가 같은 Space / Actor / Event 위에서 동작한다는 것이 추상화가 실체라는 증거입니다.
+            Ops-Cure는 채널별 상태와 이벤트를 저장하고 behavior, transport, runtime을 분리해 연결합니다. <code>orchestration</code>, <code>remote_codex</code>, <code>chat</code>은 같은 Space / Actor / Event 모델을 사용합니다.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="https://github.com/darkhtk/ops-cure" target="_blank" rel="noopener" class="btn-cyan">GitHub <span aria-hidden="true">↗</span></a>
@@ -176,7 +176,7 @@
             <h2 class="display-section text-text-primary kr-balance">하나의 커널,<br/>세 개의 behavior.</h2>
           </div>
           <div class="lg:col-span-7 lg:pt-2">
-            <p class="text-text-secondary text-[15px] leading-[1.85] kr-balance max-w-2xl">같은 Space / Actor / Event 위에서 멀티에이전트 워크플로(orchestration), 브라우저 기반 원격 실행(remote_codex), Codex 끼리의 대화방(chat) — 서로 완전히 다른 도메인이 같은 커널을 쓴다는 것이 추상화의 실체.</p>
+            <p class="text-text-secondary text-[15px] leading-[1.85] kr-balance max-w-2xl">orchestration은 작업 상태를, remote_codex는 승인과 실행 기록을, chat은 일반 대화를 같은 Space / Actor / Event 모델에 저장합니다.</p>
           </div>
         </div>
 
@@ -215,7 +215,7 @@
             <div class="p-6 flex-1 flex flex-col gap-4">
               <div class="kicker kicker-amber">// behavior 03</div>
               <h3 class="font-display font-bold text-lg tracking-tight text-text-primary"><span class="text-accent-amber font-mono">&gt;</span> chat</h3>
-              <p class="text-[13px] leading-[1.75] text-text-secondary kr-balance flex-1">Codex 끼리의 대화방 — 태스크도 handoff 도 없이, 커널이 범용임을 증명하는 순수 dialogue. 참여자·heartbeat·메시지 전송만으로 성립.</p>
+              <p class="text-[13px] leading-[1.75] text-text-secondary kr-balance flex-1">Codex끼리 자유롭게 대화하는 방입니다. 태스크와 handoff 없이 참여자, heartbeat, 메시지 전송만 사용합니다.</p>
               <div class="flex flex-wrap gap-1.5">
                 <span class="chip">Codex-to-Codex</span><span class="chip">Dialogue</span><span class="chip">No Tasks</span>
               </div>
@@ -229,11 +229,11 @@
           <div class="grid gap-8 lg:grid-cols-12">
             <div class="lg:col-span-5">
               <div class="kicker kicker-cyan mb-3">// why three matters</div>
-              <h3 class="display-section text-text-primary kr-balance">behavior 하나는 기능,<br/>세 개는 주장.</h3>
+              <h3 class="display-section text-text-primary kr-balance">세 behavior로 서로 다른 작업을<br/>같은 커널에서 실행했습니다.</h3>
             </div>
             <div class="lg:col-span-7">
               <p class="text-text-secondary text-[14px] leading-[1.85] kr-balance">
-                근본적으로 다른 behavior 세 개 — 구조화된 워크플로 / 승인이 붙은 원격 실행 / 자유 대화 — 가 같은 커널 위에 돌아간다는 건 추상화가 실체라는 주장입니다. 각각이 다른 축을 검증합니다: <strong class="text-text-primary">orchestration</strong> 은 상태·태스크 모델, <strong class="text-text-primary">remote_codex</strong> 는 분산 runtime 아래의 canonical evidence, <strong class="text-text-primary">chat</strong> 은 태스크 시맨틱 없는 방의 범용성.
+                세 behavior로 작업 상태, 승인 원격 실행, 자유 대화를 각각 시험했습니다. <strong class="text-text-primary">orchestration</strong>은 작업 상태를, <strong class="text-text-primary">remote_codex</strong>는 승인과 실행 기록을, <strong class="text-text-primary">chat</strong>은 일반 대화를 담당합니다.
               </p>
             </div>
           </div>

@@ -4,16 +4,16 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>GenWorld + Ollama · Case Study | Daeki Hong</title>
-<meta name="description" content="Porting a Phaser 3 TS RPG to Unity 2D C# while designing and implementing a local Ollama LLM-backed NPC perception &amp; dialogue system. An R&amp;D case study validating offline-first and graceful fallback."/>
+<meta name="description" content="A Phaser 3 RPG ported to Unity 2D C# with local Ollama dialogue and a rule-based fallback graph."/>
 <meta property="og:title" content="GenWorld + Ollama · Case Study"/>
-<meta property="og:description" content="Local-LLM NPC perception · offline-first · graceful fallback, validated."/>
+<meta property="og:description" content="NPC dialogue that switches between local Ollama and a rule-based graph."/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/genworld-world.png"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/en/ai-systems/genworld-ollama/"/>
 <meta property="og:locale" content="en_US"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="GenWorld + Ollama · Case Study"/>
-<meta name="twitter:description" content="Local-LLM NPC perception · offline-first · graceful fallback, validated."/>
+<meta name="twitter:description" content="NPC dialogue that switches between local Ollama and a rule-based graph."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/genworld-world.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/favicon-16.png"/>
@@ -87,7 +87,7 @@
           <h1 class="display-hero text-text-primary">GenWorld + Ollama.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">local-llm NPC perception / dialogue / world generation</p>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl border-l-2 border-accent-amber/40 pl-5">
-            Ported a Phaser 3 TS-based RPG to Unity 2D C# while designing and implementing a local Ollama LLM-backed NPC perception &amp; dialogue system. An R&amp;D case study validating <strong class="text-text-primary font-semibold">offline-first</strong> and <strong class="text-text-primary font-semibold">graceful fallback</strong>. Not a demo — an operational experiment: the game must keep running even when the LLM cuts out.
+            I ported a Phaser 3 TypeScript RPG to Unity 2D C# and added local Ollama dialogue. When the LLM does not respond, the same NPC switches to a rule-based dialogue graph and the game continues.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="#cognition" class="btn-cyan">NPC cognition <span aria-hidden="true">↓</span></a>
@@ -97,8 +97,8 @@
             <span class="dot"></span><span>ollama · local llm</span>
             <span class="dot"></span><span>unity 2d c#</span>
             <span class="dot"></span><span>phaser 3 ts → unity port</span>
-            <span class="dot"></span><span>offline-first</span>
-            <span class="dot"></span><span>graceful fallback</span>
+            <span class="dot"></span><span>offline mode</span>
+            <span class="dot"></span><span>rule-based fallback</span>
           </div>
         </div>
         <div class="lg:col-span-5">
@@ -123,10 +123,10 @@
       <div class="grid gap-10 lg:grid-cols-12 mb-12">
         <div class="lg:col-span-5">
           <div class="kicker mb-4">// npc cognition</div>
-          <h2 class="display-section text-text-primary">Making the NPC<br/>more than a response box.</h2>
+          <h2 class="display-section text-text-primary">Memory, mood, and skills<br/>are stored per NPC.</h2>
         </div>
         <div class="lg:col-span-7 lg:pt-2">
-          <p class="text-text-secondary text-[15px] leading-[1.85] max-w-2xl">An NPC cognition structure with memory, mood, and skills as separate axes. The same question yields different responses depending on the NPC's state — and the flow stays intact as LLM availability changes.</p>
+          <p class="text-text-secondary text-[15px] leading-[1.85] max-w-2xl">Each NPC stores memory, mood, and skill values. Those values change the response, and the rule-based dialogue graph takes over when the LLM is unavailable.</p>
         </div>
       </div>
 
@@ -138,7 +138,7 @@
           <div class="p-5 flex-1 flex flex-col">
             <div class="kicker kicker-cyan mb-2">// dialogue</div>
             <h3 class="font-display font-bold text-lg tracking-tight text-text-primary mb-3">Dialogue</h3>
-            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">Local Ollama responses combined with NPC cognition context. When the LLM is unavailable, a pre-defined dialogue graph picks up the conversation cleanly.</p>
+            <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">The prompt includes the NPC state. When Ollama does not respond, the game uses a pre-defined dialogue graph.</p>
           </div>
         </article>
         <article class="card ticks group flex flex-col">
@@ -170,7 +170,7 @@
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
         <div class="chapter-rule mb-14">
           <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ CH.02 ]</span>
-          <span class="kicker text-text-secondary">FALLBACK · OFFLINE-FIRST</span>
+          <span class="kicker text-text-secondary">LLM TIMEOUT · OFFLINE</span>
           <span class="line"></span>
         </div>
 
@@ -179,11 +179,11 @@
           <div class="grid gap-10 lg:grid-cols-12">
             <div class="lg:col-span-5">
               <div class="kicker kicker-cyan mb-4">// fallback</div>
-              <h2 class="display-section text-text-primary">The game keeps running<br/>even when the LLM dies.</h2>
+              <h2 class="display-section text-text-primary">If the LLM does not respond,<br/>the game uses rule-based dialogue.</h2>
             </div>
             <div class="lg:col-span-7 space-y-4 text-text-secondary text-[14px] leading-[1.85]">
-              <p>Even without an LLM response, the NPC has to behave without awkward pauses. Assuming response timeouts, server failures, and offline mode, the game falls back to a pre-defined dialogue graph plus mood-aware static responses, gracefully.</p>
-              <p>Outcome of the experiment: rich dialogue while the LLM is up; a mode close to a traditional RPG dialogue system when it's down. Verified that the same NPC in the same scenario doesn't break its flow in either mode.</p>
+              <p>On a response timeout, server failure, or offline mode, the game uses a pre-defined dialogue graph and static responses selected from the NPC's mood value.</p>
+              <p>When Ollama is available, the NPC uses generated dialogue. When it is unavailable, the same NPC switches to the rule-based graph.</p>
               <div class="grid sm:grid-cols-3 gap-px bg-hairline border border-hairline mt-6 font-mono text-[11px] uppercase tracking-widest">
                 <div class="bg-bg-primary p-4"><div class="text-text-muted">primary path</div><div class="text-accent-cyan mt-1">ollama local</div></div>
                 <div class="bg-bg-primary p-4"><div class="text-text-muted">fallback path</div><div class="text-accent-amber mt-1">dialogue graph</div></div>

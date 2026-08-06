@@ -193,7 +193,7 @@
         </div>
         <div class="lg:col-span-7 lg:pt-2">
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl">
-            Not a demo controller — a tool designed to plug into a real daily workflow. Mobile, self-host, and multi-PC are treated as first-class concerns, not afterthoughts.
+            The tool supports mobile use, self-hosting, and multiple PCs.
           </p>
         </div>
       </div>
@@ -264,7 +264,7 @@
           </div>
           <div class="lg:col-span-7 lg:pt-2">
             <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl">
-              A flow that starts in the browser and ends inside the user's PC. The outside is the product shell; the inside is the user's PC runtime authority. The sensitive execution surface never leaks outward.
+              Browser requests pass through the connector and run on a registered PC. Repositories and tokens remain on that PC and are not sent to an external server.
             </p>
           </div>
         </div>
@@ -278,7 +278,7 @@
               <span class="lane-num">01</span>
               <div class="kicker kicker-cyan mb-2">// site-frontend</div>
               <div class="font-display font-bold text-lg text-text-primary">Browser SPA &middot; <code>:18193</code></div>
-              <p class="mt-2 text-[13px] text-text-secondary leading-relaxed">Single-page app built with Solid + Vite. The first surface the user sees.</p>
+              <p class="mt-2 text-[13px] text-text-secondary leading-relaxed">Solid + Vite screens for chat, sessions, devices, and settings.</p>
             </div>
             <div class="lane-arrow">↓</div>
             <div class="lane">
@@ -352,7 +352,7 @@
         </div>
         <div class="lg:col-span-7 lg:pt-2">
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl">
-            The README walks through server install, access URL &amp; token, registering other PCs, validation reports, updates, and troubleshooting in a single flow. Goal: end-to-end in under 30 minutes.
+            The README covers server installation, the access URL and token, PC registration, validation reports, updates, and troubleshooting. The setup guide targets a first successful connection within 30 minutes.
           </p>
         </div>
       </div>
@@ -374,7 +374,7 @@
           <div class="card-bar"><span class="text-accent-cyan">STEP_02</span><span class="text-text-muted">REGISTER</span></div>
           <div class="p-6 flex-1 flex flex-col gap-4">
             <div class="kicker">// register another PC</div>
-            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary">One command, done.</h3>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary">Install and connect with the registration command</h3>
             <p class="text-[13px] leading-[1.75] text-text-secondary flex-1">Paste the registration command from the main screen into the target Windows PC's PowerShell. Repo install/update, connector launch, Tailscale/LAN address detection, server reachability check, and device registration happen in one shot.</p>
             <div class="font-mono text-[11px] text-accent-cyan border-l-2 border-accent-cyan/40 pl-3 leading-relaxed">&gt; registering PC...<br/>&gt; connector :18091 OK<br/>&gt; device added_</div>
           </div>
@@ -521,20 +521,20 @@
         <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ NOTES ]</span>
         <span class="kicker text-text-secondary">ENGINEERING DEPTH</span>
         <span class="line"></span>
-        <span class="tail">why dev-tool grade</span>
+        <span class="tail">daily-use changes</span>
       </div>
 
       <div class="grid gap-10 lg:grid-cols-12">
         <div class="lg:col-span-7 space-y-5 text-text-secondary text-[15px] leading-[1.9]">
           <div class="kicker mb-2">// notes</div>
-          <h2 class="display-section text-text-primary">Why push it<br/>to tool-grade.</h2>
-          <p>It started as a small remote controller. But once I was using it daily in my own workflow, the parts that make a tool feel like a tool — stability, recovery, auth, logging — quickly became the main story.</p>
+          <h2 class="display-section text-text-primary">What daily use<br/>made me add.</h2>
+          <p>It started as a small remote controller. Daily use led me to add authentication, logging, recovery, and update handling.</p>
           <p>The Android app was built as a Capacitor wrapper while I worked out the permissions model, signing, and release channels. The self-host path was tightened so a non-developer can get it running in under 30 minutes.</p>
-          <p>The result isn't a portfolio demo — it's a developer tool I rely on every day. Having built and operated this kind of tool first-hand is the most direct evidence I can offer that I would carry the same posture into the next role.</p>
+          <p>I use DeskRelay in my own work and maintain it as an everyday tool for checking and controlling sessions across my PCs.</p>
         </div>
         <div class="lg:col-span-5 lg:pt-12">
           <blockquote class="pullquote">
-            <span class="colon">&ldquo;</span>Not a demo —<br/>a tool I use every day.
+            <span class="colon">&ldquo;</span>I use it every day<br/>across my PCs.
           </blockquote>
         </div>
       </div>
@@ -570,7 +570,7 @@
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
         <div class="max-w-2xl">
           <div class="kicker kicker-cyan mb-4">// next</div>
-          <h2 class="display-section text-text-primary">Try DeskRelay once<br/>and it explains more than a résumé.</h2>
+          <h2 class="display-section text-text-primary">Install DeskRelay<br/>and connect one PC.</h2>
         </div>
         <div class="flex flex-wrap gap-3">
           <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="btn-cyan">GitHub README <span aria-hidden="true">↗</span></a>
