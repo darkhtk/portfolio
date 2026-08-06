@@ -59,6 +59,16 @@
       gap: 7px;
     }
 
+    .project-live-url {
+      width: fit-content;
+      color: var(--accent-deep);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
     .evidence-list {
       margin: 0;
       padding-left: 16px;
@@ -428,6 +438,8 @@
         key: "oracluna",
         title: "Oracluna Tarot",
         kicker: "Mobile-first web app / 78-card UX / Qdrant RAG / Docker",
+        url: "https://tarot.it-some.com/",
+        urlLabel: "tarot.it-some.com",
         summary: "A mobile tarot reading product that carries a user from question, shuffle, and cut through direct selection from all 78 cards, interpretation, saving, and sharing. Each screen keeps one primary action so the cards remain the focus.",
         contribution: [
           "Replaced an unstable radial deck after repeated mobile QA with a full 78-card matrix that keeps every card reachable at a predictable position.",
@@ -539,6 +551,7 @@
               </figure>
               <div class="project-hero__copy">
                 <div class="project-kicker">${project.kicker}</div>
+                ${project.url ? `<a class="project-live-url" href="${project.url}" target="_blank" rel="noopener noreferrer">${project.urlLabel}</a>` : ""}
                 <p class="project-summary">${project.summary}</p>
                 <ul class="evidence-list">
                   ${project.contribution.map((item) => `<li>${item}</li>`).join("")}

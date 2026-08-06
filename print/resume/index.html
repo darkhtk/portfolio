@@ -59,6 +59,16 @@
       gap: 7px;
     }
 
+    .project-live-url {
+      width: fit-content;
+      color: var(--accent-deep);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
     .evidence-list {
       margin: 0;
       padding-left: 16px;
@@ -428,6 +438,8 @@
         key: "oracluna",
         title: "Oracluna Tarot",
         kicker: "모바일 퍼스트 웹앱 / 78장 선택 UX / Qdrant RAG / Docker",
+        url: "https://tarot.it-some.com/",
+        urlLabel: "tarot.it-some.com",
         summary: "질문을 정하고 카드를 섞고 자른 뒤, 78장 중 원하는 카드를 직접 고르고 해석·저장·공유까지 이어지는 모바일 타로 리딩 웹앱입니다. 한 화면에는 한 가지 행동만 남겨 카드가 컨트롤보다 먼저 보이게 했습니다.",
         contribution: [
           "원호형 덱의 끝 카드 접근과 좌표 불안정 문제를 반복 검수한 뒤, 78장 전체를 예측 가능한 위치에서 고르는 모바일 매트릭스로 전환했습니다.",
@@ -539,6 +551,7 @@
               </figure>
               <div class="project-hero__copy">
                 <div class="project-kicker">${project.kicker}</div>
+                ${project.url ? `<a class="project-live-url" href="${project.url}" target="_blank" rel="noopener noreferrer">${project.urlLabel}</a>` : ""}
                 <p class="project-summary">${project.summary}</p>
                 <ul class="evidence-list">
                   ${project.contribution.map((item) => `<li>${item}</li>`).join("")}
