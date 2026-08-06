@@ -13,7 +13,7 @@
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Oracluna Tarot · 모바일 RAG 제품"/>
-<meta name="twitter:description" content="질문부터 카드 선택, 근거 기반 해석, 저장과 공유까지 연결한 모바일 타로 리딩 경험."/>
+<meta name="twitter:description" content="질문 입력, 카드 선택, 질문과 카드 정보를 반영한 해석, 저장과 공유를 제공하는 모바일 타로 웹앱."/>
 <meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/oracluna-seven-card-reveal.jpg"/>
 <link rel="canonical" href="https://darkhtk.github.io/portfolio/ai-systems/oracluna-tarot/"/>
 <link rel="alternate" hreflang="ko" href="https://darkhtk.github.io/portfolio/ai-systems/oracluna-tarot/"/>
@@ -84,9 +84,9 @@
       <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
       <div class="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8 lg:py-24">
         <div class="lg:col-span-7 flex flex-col gap-7">
-          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// ai product · mobile web · rag · live</div>
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// mobile tarot web app · rag · live</div>
           <h1 class="display-hero text-text-primary kr-balance">Oracluna Tarot.</h1>
-          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">question → ritual → 78-card selection → grounded reading</p>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">question → cut → 78 cards → save / share</p>
           <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base kr-balance">
             질문을 정하고, 카드를 섞고 자른 뒤, 78장 중 원하는 카드를 직접 고릅니다. 선택한 카드의 배열 위치와 정·역방향, 검색된 타로 지식을 함께 사용해 질문에 답하고 저장과 공유까지 이어지는 모바일 리딩 웹앱입니다.
           </p>
@@ -112,8 +112,8 @@
       <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
         <div class="lg:col-span-7">
           <div class="kicker kicker-cyan">// 시작 화면</div>
-          <h2 class="display-section mt-4 text-text-primary kr-balance">한 단계에는 한 가지 행동만 남겼습니다.</h2>
-          <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary kr-balance">질문 단계에서는 질문과 배열만, 선택 단계에서는 카드만, 결과 단계에서는 해석과 저장·공유만 보여줍니다. 내부 모델명이나 벡터 검색 같은 기술어는 사용자 화면에서 숨기고, 지금 할 수 있는 행동이 먼저 보이게 했습니다.</p>
+          <h2 class="display-section mt-4 text-text-primary kr-balance">질문 입력, 카드 선택, 결과 확인을 다른 화면으로 나눴습니다.</h2>
+          <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary kr-balance">질문 화면에는 질문과 배열만, 카드 화면에는 선택할 카드만 표시했습니다. 해석, 저장, 공유 기능은 카드 공개 뒤에 보여 줍니다.</p>
           <div class="mt-8 grid gap-px border border-hairline bg-hairline sm:grid-cols-3 font-mono text-[11px] uppercase tracking-widest">
             <div class="bg-bg-primary p-4"><div class="text-text-muted">spread</div><div class="mt-1 text-accent-cyan">1 · 3 · 7 cards</div></div>
             <div class="bg-bg-primary p-4"><div class="text-text-muted">target viewport</div><div class="mt-1 text-accent-cyan">390 × 844</div></div>
@@ -134,7 +134,7 @@
         <div class="grid gap-10 lg:grid-cols-2">
           <article class="grid gap-6 sm:grid-cols-[minmax(0,260px)_1fr] sm:items-center">
             <figure class="mx-auto w-full max-w-[260px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_03</span><span class="text-text-muted">CUT</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-cut.jpg" alt="세 묶음 중 하나를 고르는 카드 컷 화면"/></div></div></figure>
-            <div><div class="kicker kicker-amber">// three-way cut</div><h2 class="mt-3 font-display text-2xl font-bold text-text-primary kr-balance">버튼 한 번으로 넘기지 않은 이유.</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">셔플 뒤 세 묶음 중 하나를 직접 고르게 했습니다. 입력 과정은 짧게 유지하면서도 실제 카드를 다루는 리듬은 남겼습니다.</p></div>
+            <div><div class="kicker kicker-amber">// three-way cut</div><h2 class="mt-3 font-display text-2xl font-bold text-text-primary kr-balance">셔플이 끝나면 세 묶음 중 하나를 고릅니다.</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">셔플 뒤 세 묶음 중 하나를 직접 고르게 했습니다. 입력 과정은 짧게 유지하면서도 실제 카드를 다루는 리듬은 남겼습니다.</p></div>
           </article>
           <article class="grid gap-6 sm:grid-cols-[minmax(0,260px)_1fr] sm:items-center">
             <figure class="mx-auto w-full max-w-[260px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_04</span><span class="text-text-muted">78 CARDS</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-deck-matrix.jpg" alt="78장 전체를 보여주는 카드 선택 매트릭스"/></div></div></figure>
@@ -157,8 +157,8 @@
       <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-8 lg:py-24">
         <div class="lg:col-span-7">
           <div class="chapter-rule mb-10"><span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ 04 · RAG ]</span><span class="line"></span></div>
-          <h2 class="display-section text-text-primary kr-balance">카드 이름만 보내지 않습니다.</h2>
-          <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary kr-balance">질문, 주제, 배열 위치, 카드, 정·역방향과 검색된 지식을 구조화해 같은 파이프라인에 넣습니다. 여러 출처의 중복 근거를 합친 뒤, 확정적인 예언보다 지금의 선택과 다음 행동을 설명하도록 출력 규칙을 정했습니다.</p>
+          <h2 class="display-section text-text-primary kr-balance">질문과 카드 정보를 함께 전달합니다.</h2>
+          <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary kr-balance">모델에 질문, 배열 위치, 카드, 정·역방향, 검색된 카드 정보를 함께 전달합니다. 중복된 검색 결과는 합치고, 현재 선택과 다음 행동을 설명하도록 출력 규칙을 정했습니다.</p>
           <div class="mt-8 grid gap-3">
             <div class="lane"><span class="lane-num">01</span><div class="kicker kicker-cyan">context</div><div class="mt-2 font-display font-bold text-text-primary">질문 · 주제 · 배열 위치 · 정역방향</div></div>
             <div class="lane-arrow">↓</div>
@@ -168,7 +168,7 @@
           </div>
         </div>
         <figure class="lg:col-span-5 mx-auto w-full max-w-[350px]">
-          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>RESULT</span><span class="text-text-muted">QUESTION-GROUNDED</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-rag-reading.jpg" alt="질문과 카드 근거를 반영한 Oracluna 해석 결과"/></div></div>
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>RESULT</span><span class="text-text-muted">QUESTION + CARD DATA</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-rag-reading.jpg" alt="질문과 카드 근거를 반영한 Oracluna 해석 결과"/></div></div>
           <figcaption class="mt-3 text-sm leading-6 text-text-secondary kr-balance">카드 일반론을 나열하지 않고 사용자의 질문에 답하도록 구성한 결과 화면입니다.</figcaption>
         </figure>
       </div>
@@ -180,8 +180,8 @@
         <figure class="lg:col-span-5 mx-auto w-full max-w-[350px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>COMPLETE</span><span class="text-success-green">SAVE · SHARE</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-save-share.jpg" alt="해석을 저장하고 공유하는 Oracluna 결과 화면"/></div></div></figure>
         <div class="lg:col-span-7">
           <div class="kicker kicker-cyan">// complete reading cycle</div>
-          <h2 class="display-section mt-4 text-text-primary kr-balance">해석에서 끝내지 않고 제품 사이클을 닫았습니다.</h2>
-          <p class="mt-5 text-[15px] leading-8 text-text-secondary kr-balance">브라우저 저장, 리딩 복원과 삭제, Canvas 포스터 생성, Web Share까지 연결했습니다. Node 서버는 요청 검증과 제한, 정적 캐시, health endpoint를 담당하고 Docker와 NAS 리버스 프록시로 공개 운영합니다.</p>
+          <h2 class="display-section mt-4 text-text-primary kr-balance">결과를 저장하고 다시 열거나 공유할 수 있습니다.</h2>
+          <p class="mt-5 text-[15px] leading-8 text-text-secondary kr-balance">해석 결과를 저장하고 다시 열거나 삭제할 수 있으며, 이미지로 공유할 수도 있습니다. Node 서버는 요청 검증, 속도 제한, 정적 캐시, health endpoint를 담당하고 Docker와 NAS 리버스 프록시에서 실행합니다.</p>
           <div class="mt-8 grid grid-cols-2 gap-px border border-hairline bg-hairline sm:grid-cols-4">
             <div class="bg-bg-primary p-4"><div class="font-mono text-2xl text-accent-cyan">78</div><div class="mt-2 text-xs text-text-muted">카드 카탈로그</div></div>
             <div class="bg-bg-primary p-4"><div class="font-mono text-2xl text-accent-cyan">156</div><div class="mt-2 text-xs text-text-muted">정·역방향 지식 행</div></div>

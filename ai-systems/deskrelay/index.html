@@ -333,7 +333,7 @@
         </div>
         <div class="lg:col-span-7 lg:pt-2">
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl">
-            데모용 컨트롤러가 아니라, 본인 워크플로우에 끼워 쓰는 도구로 설계했습니다. 모바일·셀프 호스트·멀티 PC 세 축을 같은 무게로 다룹니다.
+            휴대폰에서 여러 PC의 세션을 확인하고, 직접 설치한 서버에서 실행하도록 만들었습니다.
           </p>
         </div>
       </div>
@@ -404,7 +404,7 @@
           </div>
           <div class="lg:col-span-7 lg:pt-2">
             <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl">
-              브라우저에서 시작해 사용자의 PC 안에서 끝나는 흐름. 바깥은 제품 shell, 안쪽은 사용자 PC 의 runtime authority. 민감한 실행 표면은 절대 외부로 새지 않습니다.
+              브라우저 요청은 connector를 거쳐 등록된 PC에서 실행됩니다. 사용자 저장소와 token은 해당 PC에 남고 외부 서버로 보내지 않습니다.
             </p>
           </div>
         </div>
@@ -418,7 +418,7 @@
               <span class="lane-num">01</span>
               <div class="kicker kicker-cyan mb-2">// site-frontend</div>
               <div class="font-display font-bold text-lg text-text-primary">Browser SPA &middot; <code>:18193</code></div>
-              <p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">Solid + Vite 로 빌드된 단일 페이지 앱. 사용자가 처음 보는 표면.</p>
+              <p class="mt-2 text-[13px] text-text-secondary leading-relaxed kr-balance">Solid + Vite로 만든 채팅, 세션, 기기, 설정 화면.</p>
             </div>
             <div class="lane-arrow">↓</div>
             <div class="lane">
@@ -492,7 +492,7 @@
         </div>
         <div class="lg:col-span-7 lg:pt-2">
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl">
-            README 는 서버 설치, 접속 URL 과 token, 다른 PC 등록, 검증 리포트, 업데이트, 문제 해결을 한 흐름으로 설명합니다. 설치부터 일상 운영까지 30분 이내 완결을 목표로 했습니다.
+            README에는 서버 설치, 접속 URL과 token, 다른 PC 등록, 검증 리포트, 업데이트, 문제 해결 순서를 적었습니다. 처음 설치부터 기본 동작 확인까지 30분 안에 끝나는 것을 목표로 했습니다.
           </p>
         </div>
       </div>
@@ -514,7 +514,7 @@
           <div class="card-bar"><span class="text-accent-cyan">STEP_02</span><span class="text-text-muted">REGISTER</span></div>
           <div class="p-6 flex-1 flex flex-col gap-4">
             <div class="kicker">// 다른 PC 등록</div>
-            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary">한 명령으로 끝.</h3>
+            <h3 class="font-display font-bold text-lg tracking-tight text-text-primary">등록 명령으로 설치와 연결</h3>
             <p class="text-[13px] leading-[1.75] text-text-secondary kr-balance flex-1">메인 화면의 등록 명령을 제어하려는 Windows PC PowerShell 에 붙여넣습니다. repo 설치/업데이트, connector 실행, Tailscale/LAN 주소 감지, 서버 접근 검증, 디바이스 등록을 한 번에 처리합니다.</p>
             <div class="font-mono text-[11px] text-accent-cyan border-l-2 border-accent-cyan/40 pl-3 leading-relaxed">&gt; registering PC...<br/>&gt; connector :18091 OK<br/>&gt; device added_</div>
           </div>
@@ -661,20 +661,20 @@
         <span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ NOTES ]</span>
         <span class="kicker text-text-secondary">ENGINEERING DEPTH</span>
         <span class="line"></span>
-        <span class="tail">why dev-tool grade</span>
+        <span class="tail">daily-use changes</span>
       </div>
 
       <div class="grid gap-10 lg:grid-cols-12">
         <div class="lg:col-span-7 space-y-5 text-text-secondary text-[15px] leading-[1.9] kr-balance">
           <div class="kicker mb-2">// notes</div>
-          <h2 class="display-section text-text-primary kr-balance">왜 도구 수준까지<br/>끌어올렸나.</h2>
-          <p>처음에는 작은 원격 컨트롤러였습니다. 그러나 매일 본인 워크플로우에 쓰다 보니, 안정성·복구·인증·로그처럼 도구를 도구답게 만드는 부분이 곧 본문이 되었습니다.</p>
+          <h2 class="display-section text-text-primary kr-balance">매일 쓰면서<br/>추가한 기능.</h2>
+          <p>처음에는 작은 원격 컨트롤러였습니다. 매일 사용하면서 인증, 로그, 업데이트, 장애 복구 기능을 계속 추가했습니다.</p>
           <p>Android 앱은 Capacitor wrapper 로 빌드하면서 권한 모델·서명·릴리스 채널을 정리했고, 셀프 호스트는 비개발자도 30분 안에 띄울 수 있도록 가이드를 완성했습니다.</p>
-          <p>결과적으로 DeskRelay 는 시연용 데모가 아니라, 일상 워크플로우에 끼워 쓰는 개발자 도구가 되었습니다. 같은 도구를 만들어 보고 운영해 본 경험이, 다음 직장에서도 같은 자세로 일할 수 있다는 가장 직접적인 증거라고 생각합니다.</p>
+          <p>DeskRelay는 제가 실제 작업에 사용하고 유지보수하는 도구입니다. 여러 PC의 작업 세션을 확인하고 제어할 때 사용합니다.</p>
         </div>
         <div class="lg:col-span-5 lg:pt-12">
           <blockquote class="pullquote">
-            <span class="colon">&ldquo;</span>데모가 아니라<br/>매일 쓰는 도구.
+            <span class="colon">&ldquo;</span>여러 PC의 세션을<br/>매일 확인하는 도구.
           </blockquote>
         </div>
       </div>
@@ -709,7 +709,7 @@
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
         <div class="max-w-2xl">
           <div class="kicker kicker-cyan mb-4">// next</div>
-          <h2 class="display-section text-text-primary kr-balance">DeskRelay 를 한 번 써 보시면,<br/>이력서보다 명확합니다.</h2>
+          <h2 class="display-section text-text-primary kr-balance">DeskRelay를 설치하고<br/>PC 한 대를 연결해 볼 수 있습니다.</h2>
         </div>
         <div class="flex flex-wrap gap-3">
           <a href="https://github.com/darkhtk/deskrelay" target="_blank" rel="noopener" class="btn-cyan">GitHub README <span aria-hidden="true">↗</span></a>
@@ -728,7 +728,7 @@
           <div>
             <div class="font-mono text-[11px] text-accent-amber uppercase tracking-widest">// ai-systems</div>
             <div class="mt-2 font-display font-bold text-text-primary">Ops-Cure</div>
-            <div class="text-[12px] text-text-secondary mt-1">운영형 LLM 커널</div>
+            <div class="text-[12px] text-text-secondary mt-1">상태·이벤트 기반 LLM 커널</div>
           </div>
           <span class="font-mono text-accent-cyan">↗</span>
         </a>
