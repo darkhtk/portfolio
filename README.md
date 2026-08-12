@@ -10,7 +10,7 @@
 
 ## AI Systems — 4 cases
 
-- **Oracluna Tarot** — 질문, 셔플, 컷, 78장 직접 선택, 질문 중심 RAG 해석, 저장과 공유를 하나의 모바일 리딩 흐름으로 구현한 공개 웹앱. 서비스: [tarot.it-some.com](https://tarot.it-some.com/)
+- **Oracluna Tarot** — 질문, 셔플, 컷, 78장 직접 선택, 질문 중심 RAG 해석, 저장과 공유를 하나의 모바일 리딩 흐름으로 구현한 공개 웹앱. 서비스: [oracluna.com](https://oracluna.com/)
 - **GenWorld + Ollama** — 로컬 LLM 기반 NPC 다이얼로그·스킬·월드 생성 파이프라인. Unity 게임 런타임 안에서 offline-first 동작을 검증했다.
 - **DeskRelay** — 로컬 Claude Code 세션을 브라우저·모바일에서 안전하게 원격 조작하는 self-host 개발자 도구. Solid + Vite SPA, Hono + Bun backend, Capacitor Android 앱.
 
