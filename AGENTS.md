@@ -140,6 +140,11 @@ colors: {
 
 ## Recent Work History
 
+### 2026-08-13: Oracluna Screenshot Refresh
+- `녹화_2026_08_11_14_38_37_734.mp4` 를 구간별로 검수해 고민 선택, 3분할 컷 재결합, 78장 카드 휠, 3장 공개, 카드별 해석, 저장·공유 장면을 새 스크린샷으로 반영.
+- 구형 `oracluna-deck-matrix.jpg`, `oracluna-seven-card-reveal.jpg` 를 `oracluna-card-wheel.jpg`, `oracluna-three-card-reveal.jpg` 로 교체하고 KO/EN 케이스, AI 허브, 인쇄 포트폴리오, KO/EN 이력서 캡션과 설명을 현재 제품 흐름에 맞춤.
+- Oracluna 케이스를 390px / 1280px, 인쇄 포트폴리오와 두 이력서를 1280px에서 검수. 깨진 이미지와 가로 overflow 0.
+
 ### 2026-08-06: Oracluna Tarot Case Study
 - `ai-systems/oracluna-tarot/`, `en/ai-systems/oracluna-tarot/` 신규 생성.
 - 질문 설정 → 3분할 컷 → 78장 매트릭스 → 카드 공개 → RAG 해석 → 저장·공유 흐름을 프로젝트 녹화에서 추출한 6개 프레임으로 구성.

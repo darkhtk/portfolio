@@ -437,21 +437,21 @@
       {
         key: "oracluna",
         title: "Oracluna Tarot",
-        kicker: "Mobile-first web app / 78-card UX / Qdrant RAG / Docker",
+        kicker: "Mobile-first web app / 78-card wheel / Qdrant RAG / Docker",
         url: "https://oracluna.com/",
         urlLabel: "oracluna.com",
-        summary: "At oracluna.com, users enter a question, select cards from the full 78-card deck, receive an interpretation, and save or share the result.",
+        summary: "At oracluna.com, users choose a concern, shuffle and cut the deck, pick from a 78-card wheel, receive an interpretation, and save or share the result. The flow uses one, three, or seven cards according to the concern.",
         contribution: [
-          "Replaced an unstable radial deck after repeated mobile QA with a full 78-card matrix that keeps every card reachable at a predictable position.",
+          "Built a draggable 78-card wheel with direct card selection and separate slots for chosen cards. Card spacing and scale are calculated so one-, three-, and seven-card spreads stay inside the mobile viewport.",
           "Built a Qdrant-backed RAG pipeline combining the question, spread position, card, orientation, and retrieved knowledge, with provider adapters for local Ollama development and OpenAI API deployment.",
           "Automated checks for 78 PNGs, 78 SVGs, 78 metadata files, and 170 retrieval records, then completed iOS Web Audio handling, pre-generated share posters, and Docker/NAS deployment."
         ],
         images: [
-          ["oracluna-question.jpg", "Opening screen for the question and one-, three-, or seven-card spread, with only the current decisions visible."],
-          ["oracluna-cut.jpg", "Three-way cut after shuffling, preserving the physical rhythm without slowing the mobile flow."],
-          ["oracluna-deck-matrix.jpg", "Full 78-card mobile matrix for direct, predictable selection."],
-          ["oracluna-seven-card-reveal.jpg", "Seven-card reveal showing spread positions and upright or reversed orientation."],
-          ["oracluna-save-share.jpg", "Completed reading with card evidence, saving, and sharing actions."]
+          ["oracluna-question.jpg", "Opening screen for choosing today's, monthly, other, or deeper concerns."],
+          ["oracluna-cut.jpg", "Three cut piles recombining from the pile selected by the user."],
+          ["oracluna-card-wheel.jpg", "Draggable 78-card wheel with direct selection from the card faces."],
+          ["oracluna-three-card-reveal.jpg", "Three-card monthly reading showing upright and reversed orientation."],
+          ["oracluna-save-share.jpg", "Completed reading with save, share, and restart actions."]
         ]
       },
       {

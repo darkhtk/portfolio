@@ -8,13 +8,13 @@
 <meta property="og:title" content="Oracluna Tarot · 모바일 RAG 제품"/>
 <meta property="og:description" content="78장 카드 선택 UX와 질문 중심 RAG 해석, 저장·공유까지 직접 설계하고 구현한 모바일 타로 리딩 웹앱."/>
 <meta property="og:type" content="article"/>
-<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/oracluna-seven-card-reveal.jpg"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/oracluna-three-card-reveal.jpg"/>
 <meta property="og:url" content="https://darkhtk.github.io/portfolio/ai-systems/oracluna-tarot/"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Oracluna Tarot · 모바일 RAG 제품"/>
 <meta name="twitter:description" content="질문 입력, 카드 선택, 질문과 카드 정보를 반영한 해석, 저장과 공유를 제공하는 모바일 타로 웹앱."/>
-<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/oracluna-seven-card-reveal.jpg"/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/oracluna-three-card-reveal.jpg"/>
 <link rel="canonical" href="https://darkhtk.github.io/portfolio/ai-systems/oracluna-tarot/"/>
 <link rel="alternate" hreflang="ko" href="https://darkhtk.github.io/portfolio/ai-systems/oracluna-tarot/"/>
 <link rel="alternate" hreflang="en" href="https://darkhtk.github.io/portfolio/en/ai-systems/oracluna-tarot/"/>
@@ -86,9 +86,9 @@
         <div class="lg:col-span-7 flex flex-col gap-7">
           <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// mobile tarot web app · rag · live</div>
           <h1 class="display-hero text-text-primary kr-balance">Oracluna Tarot.</h1>
-          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">question → cut → 78 cards → save / share</p>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">concern → cut → 78-card wheel → save / share</p>
           <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base kr-balance">
-            질문을 정하고, 카드를 섞고 자른 뒤, 78장 중 원하는 카드를 직접 고릅니다. 선택한 카드의 배열 위치와 정·역방향, 검색된 타로 지식을 함께 사용해 질문에 답하고 저장과 공유까지 이어지는 모바일 리딩 웹앱입니다.
+            고민의 종류를 고르고, 카드를 섞고 자른 뒤, 78장 카드 휠에서 원하는 카드를 직접 고릅니다. 선택한 카드의 배열 위치와 정·역방향, 검색된 타로 지식을 함께 사용해 질문에 답하고 저장과 공유까지 이어지는 모바일 리딩 웹앱입니다.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="https://oracluna.com/" target="_blank" rel="noopener noreferrer" class="btn-cyan normal-case tracking-normal">oracluna.com <span aria-hidden="true">&nearr;</span></a>
@@ -101,8 +101,8 @@
         </div>
         <div class="min-w-0 lg:col-span-5">
           <div class="term-window ticks mx-auto max-w-[360px]"><span class="tr"></span><span class="bl"></span>
-            <div class="card-bar"><span>READING_07</span><span class="text-success-green">LIVE</span></div>
-            <div class="media-frame aspect-[504/828] border-t border-hairline"><img src="../../assets/images/oracluna-seven-card-reveal.jpg" alt="Oracluna Tarot 7장 카드 공개 화면" loading="eager"/></div>
+            <div class="card-bar"><span>READING_03</span><span class="text-success-green">LIVE</span></div>
+            <div class="media-frame aspect-[456/856] border-t border-hairline"><img src="../../assets/images/oracluna-three-card-reveal.jpg" alt="Oracluna Tarot 3장 카드 공개 화면" loading="eager"/></div>
           </div>
         </div>
       </div>
@@ -134,8 +134,8 @@
       <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
         <div class="lg:col-span-7">
           <div class="kicker kicker-cyan">// 시작 화면</div>
-          <h2 class="display-section mt-4 text-text-primary kr-balance">질문 입력, 카드 선택, 결과 확인을 다른 화면으로 나눴습니다.</h2>
-          <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary kr-balance">질문 화면에는 질문과 배열만, 카드 화면에는 선택할 카드만 표시했습니다. 해석, 저장, 공유 기능은 카드 공개 뒤에 보여 줍니다.</p>
+          <h2 class="display-section mt-4 text-text-primary kr-balance">고민을 먼저 고르면 필요한 질문과 카드 수가 이어집니다.</h2>
+          <p class="mt-5 max-w-2xl text-[15px] leading-8 text-text-secondary kr-balance">오늘·이달 운세는 바로 리딩을 시작하고, 다른 고민과 깊은 고민은 짧은 질문을 받은 뒤 1·3·7장 배열로 이어집니다. 한 화면에는 지금 필요한 선택만 남겼습니다.</p>
           <div class="mt-8 grid gap-px border border-hairline bg-hairline sm:grid-cols-3 font-mono text-[11px] uppercase tracking-widest">
             <div class="bg-bg-primary p-4"><div class="text-text-muted">spread</div><div class="mt-1 text-accent-cyan">1 · 3 · 7 cards</div></div>
             <div class="bg-bg-primary p-4"><div class="text-text-muted">target viewport</div><div class="mt-1 text-accent-cyan">390 × 844</div></div>
@@ -143,8 +143,8 @@
           </div>
         </div>
         <figure class="lg:col-span-5 mx-auto w-full max-w-[330px]">
-          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_01</span><span class="text-text-muted">QUESTION</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-question.jpg" alt="질문과 배열을 선택하는 Oracluna 시작 화면"/></div></div>
-          <figcaption class="mt-3 text-sm leading-6 text-text-secondary kr-balance">질문과 1·3·7장 배열을 정하는 시작점. 카드보다 먼저 필요한 선택만 남겼습니다.</figcaption>
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_01</span><span class="text-text-muted">CONCERN</span></div><div class="media-frame aspect-[456/856]"><img src="../../assets/images/oracluna-question.jpg" alt="오늘·이달·다른 고민·깊은 고민을 고르는 Oracluna 시작 화면"/></div></div>
+          <figcaption class="mt-3 text-sm leading-6 text-text-secondary kr-balance">오늘의 운세, 이달의 운세, 다른 고민, 깊은 고민 중 하나를 고르면 알맞은 배열로 이어집니다.</figcaption>
         </figure>
       </div>
     </section>
@@ -155,12 +155,12 @@
         <div class="chapter-rule mb-14"><span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ 02 · RITUAL ]</span><span class="line"></span><span class="tail">shuffle / cut / choose</span></div>
         <div class="grid gap-10 lg:grid-cols-2">
           <article class="grid gap-6 sm:grid-cols-[minmax(0,260px)_1fr] sm:items-center">
-            <figure class="mx-auto w-full max-w-[260px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_03</span><span class="text-text-muted">CUT</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-cut.jpg" alt="세 묶음 중 하나를 고르는 카드 컷 화면"/></div></div></figure>
-            <div><div class="kicker kicker-amber">// three-way cut</div><h2 class="mt-3 font-display text-2xl font-bold text-text-primary kr-balance">셔플이 끝나면 세 묶음 중 하나를 고릅니다.</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">셔플 뒤 세 묶음 중 하나를 직접 고르게 했습니다. 입력 과정은 짧게 유지하면서도 실제 카드를 다루는 리듬은 남겼습니다.</p></div>
+            <figure class="mx-auto w-full max-w-[260px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_03</span><span class="text-text-muted">CUT</span></div><div class="media-frame aspect-[456/856]"><img src="../../assets/images/oracluna-cut.jpg" alt="선택한 묶음부터 다시 쌓는 3분할 카드 컷 화면"/></div></div></figure>
+            <div><div class="kicker kicker-amber">// three-way cut</div><h2 class="mt-3 font-display text-2xl font-bold text-text-primary kr-balance">고른 묶음부터 세 묶음을 다시 쌓습니다.</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">세 묶음 중 하나를 고르면 선택한 묶음부터 차례로 재결합합니다. 화면에 놓인 카드를 그대로 이어 움직여 셔플과 선택 단계가 갑자기 끊기지 않게 했습니다.</p></div>
           </article>
           <article class="grid gap-6 sm:grid-cols-[minmax(0,260px)_1fr] sm:items-center">
-            <figure class="mx-auto w-full max-w-[260px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_04</span><span class="text-text-muted">78 CARDS</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-deck-matrix.jpg" alt="78장 전체를 보여주는 카드 선택 매트릭스"/></div></div></figure>
-            <div><div class="kicker kicker-cyan">// deck matrix</div><h2 class="mt-3 font-display text-2xl font-bold text-text-primary kr-balance">78장을 한 화면에서 직접 고릅니다.</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">초기 원호형 덱은 끝 카드 접근과 좌표 안정성이 떨어졌습니다. 반복 QA 뒤 전체 매트릭스로 바꿔 카드 위치를 예측 가능하게 만들었습니다.</p></div>
+            <figure class="mx-auto w-full max-w-[260px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>STEP_04</span><span class="text-text-muted">CARD WHEEL</span></div><div class="media-frame aspect-[456/856]"><img src="../../assets/images/oracluna-card-wheel.jpg" alt="78장을 부채꼴로 펼친 Oracluna 카드 휠"/></div></div></figure>
+            <div><div class="kicker kicker-cyan">// draggable card wheel</div><h2 class="mt-3 font-display text-2xl font-bold text-text-primary kr-balance">78장을 부채꼴 휠에서 직접 고릅니다.</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">손가락으로 휠을 돌리고 카드 자체를 누르면 앞으로 빠져나와 선택 칸에 놓입니다. 카드 수가 달라져도 같은 조작을 유지하도록 휠의 회전 범위와 선택 위치를 함께 맞췄습니다.</p></div>
           </article>
         </div>
       </div>
@@ -169,7 +169,7 @@
     <section class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
       <div class="chapter-rule mb-14"><span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ 03 · PROBLEMS ]</span><span class="line"></span><span class="tail">직접 풀어낸 문제들</span></div>
       <div class="grid gap-5 md:grid-cols-3">
-        <article class="card ticks p-6"><span class="tr"></span><span class="bl"></span><div class="font-mono text-2xl text-accent-cyan">01</div><h2 class="mt-4 font-display text-xl font-bold text-text-primary kr-balance">애니메이션과 상태를 분리</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">셔플·컷·선택·공개를 명시적인 단계로 관리하고, 이동 중인 카드와 원본 카드의 생명주기를 분리했습니다. 모션이 끝나지 않으면 watchdog이 잔류 레이어를 정리합니다.</p></article>
+        <article class="card ticks p-6"><span class="tr"></span><span class="bl"></span><div class="font-mono text-2xl text-accent-cyan">01</div><h2 class="mt-4 font-display text-xl font-bold text-text-primary kr-balance">애니메이션과 상태를 분리</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">셔플·컷·휠 선택·공개를 명시적인 단계로 관리하고, 이동 중인 카드와 원본 카드의 생명주기를 분리했습니다. 모션이 끝나지 않으면 watchdog이 잔류 레이어를 정리합니다.</p></article>
         <article class="card ticks p-6"><span class="tr"></span><span class="bl"></span><div class="font-mono text-2xl text-accent-cyan">02</div><h2 class="mt-4 font-display text-xl font-bold text-text-primary kr-balance">공유 지연을 앞에서 처리</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">공유 버튼을 누른 뒤 포스터를 만들면 모바일의 사용자 제스처 유효 시간이 끝날 수 있었습니다. 결과가 완성될 때 제한된 크기의 Blob을 미리 만들어 즉시 전달합니다.</p></article>
         <article class="card ticks p-6"><span class="tr"></span><span class="bl"></span><div class="font-mono text-2xl text-accent-cyan">03</div><h2 class="mt-4 font-display text-xl font-bold text-text-primary kr-balance">iOS 오디오 정책 대응</h2><p class="mt-4 text-sm leading-7 text-text-secondary kr-balance">첫 사용자 제스처에서 AudioContext를 활성화하고 동작별 재생과 중복 방지 시간을 나눴습니다. 셔플과 카드 공개 피드백이 iOS에서도 끊기지 않게 했습니다.</p></article>
       </div>
@@ -190,7 +190,7 @@
           </div>
         </div>
         <figure class="lg:col-span-5 mx-auto w-full max-w-[350px]">
-          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>RESULT</span><span class="text-text-muted">QUESTION + CARD DATA</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-rag-reading.jpg" alt="질문과 카드 근거를 반영한 Oracluna 해석 결과"/></div></div>
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>RESULT</span><span class="text-text-muted">QUESTION + CARD DATA</span></div><div class="media-frame aspect-[456/856]"><img src="../../assets/images/oracluna-rag-reading.jpg" alt="질문과 카드 근거를 반영한 Oracluna 카드별 해석 화면"/></div></div>
           <figcaption class="mt-3 text-sm leading-6 text-text-secondary kr-balance">카드 일반론을 나열하지 않고 사용자의 질문에 답하도록 구성한 결과 화면입니다.</figcaption>
         </figure>
       </div>
@@ -199,7 +199,7 @@
     <section class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
       <div class="chapter-rule mb-14"><span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ 05 · DELIVERY ]</span><span class="line"></span><span class="tail">save / restore / share / verify</span></div>
       <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
-        <figure class="lg:col-span-5 mx-auto w-full max-w-[350px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>COMPLETE</span><span class="text-success-green">SAVE · SHARE</span></div><div class="media-frame aspect-[504/828]"><img src="../../assets/images/oracluna-save-share.jpg" alt="해석을 저장하고 공유하는 Oracluna 결과 화면"/></div></div></figure>
+        <figure class="lg:col-span-5 mx-auto w-full max-w-[350px]"><div class="term-window ticks"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>COMPLETE</span><span class="text-success-green">SAVE · SHARE</span></div><div class="media-frame aspect-[456/856]"><img src="../../assets/images/oracluna-save-share.jpg" alt="저장하기·공유하기·처음으로 동작이 보이는 Oracluna 결과 화면"/></div></div></figure>
         <div class="lg:col-span-7">
           <div class="kicker kicker-cyan">// complete reading cycle</div>
           <h2 class="display-section mt-4 text-text-primary kr-balance">결과를 저장하고 다시 열거나 공유할 수 있습니다.</h2>
