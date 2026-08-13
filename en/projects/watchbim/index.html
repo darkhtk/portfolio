@@ -84,7 +84,7 @@
           <h1 class="display-hero text-text-primary kr-balance">WatchBIM.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">unity bim runtime · custom hit engine · cross-section · 2d viewer</p>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
-            A Unity BIM runtime with self-designed large-model BIM interaction, cross-section generation, a 2D analysis viewer, and a custom camera system. A case of directly implementing the operational needs external BIM tools could not cover — runtime section generation, real-time analysis, and a tool camera.
+            I built runtime selection and arbitrary-plane section cutting for large BIM models, with the result linked to a 2D analysis view. A custom hit engine handles picks missed by the standard Raycast, and I added camera tools for on-site review.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="#features" class="btn-cyan">Features <span aria-hidden="true">↓</span></a>
@@ -116,12 +116,12 @@
         <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>SUB_01</span><span class="text-text-muted">HIT ENGINE</span></div>
           <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/watchbim_clipping.png" alt="WatchBIM clipping"/></div>
-          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 01 · hit engine</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">Custom hit engine</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">Stable operator picking, hover, and selection on large BIM models. Directly handles the cases the standard Unity Raycast cannot.</p></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 01 · hit engine</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">Custom hit engine</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">I calculate hover and selection on large BIM models directly. Triangle-level tests handle picks missed by the standard Unity Raycast.</p></div>
         </article>
         <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>SUB_02</span><span class="text-text-muted">CROSS-SECTION</span></div>
           <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/watchbim_crosssection_highlight.png" alt="cross-section highlight"/></div>
-          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 02 · cross-section</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">Cross-section generation</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">Generates sections from arbitrary planes at runtime. Section results are highlighted so operators can verify them intuitively.</p></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 02 · cross-section</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">Cross-section generation</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">I cut the model with an arbitrary runtime plane and highlight the new edges so operators can locate the section.</p></div>
         </article>
         <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>SUB_03</span><span class="text-text-muted">2D VIEWER</span></div>
@@ -131,7 +131,7 @@
         <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>SUB_04</span><span class="text-text-muted">VERTICAL GRAPH</span></div>
           <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../../assets/images/watchbim_verticalgraph.png" alt="vertical graph"/></div>
-          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 04 · graph</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">Vertical graph analysis</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">Analyzes elevation and structural distribution as a vertical graph — a format that lets operators catch patterns at a glance.</p></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 04 · graph</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">Vertical graph analysis</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">The vertical graph plots elevation and structural distribution so operators can compare sections.</p></div>
         </article>
         <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>SUB_05</span><span class="text-text-muted">CAMERA SYSTEM</span></div>
@@ -153,7 +153,7 @@
         <div class="card ticks order-1 p-6 sm:p-8"><span class="tr"></span><span class="bl"></span>
           <div class="kicker kicker-cyan mb-4">// proof</div>
           <h2 class="display-section text-text-primary kr-balance">WatchBIM demo video.</h2>
-          <p class="mt-4 text-[14px] leading-7 text-text-secondary kr-balance">A public demo recording walking through the large-model BIM viewer, cross-section generation, and 2D analysis viewer flow.</p>
+          <p class="mt-4 text-[14px] leading-7 text-text-secondary kr-balance">This recording shows the large BIM model being selected, sectioned, and checked in the linked 2D view.</p>
           <a href="https://youtu.be/ajJKPro7008" target="_blank" rel="noopener noreferrer" class="btn-ghost mt-6 w-fit">Open YouTube <span aria-hidden="true">↗</span></a>
         </div>
       </div>

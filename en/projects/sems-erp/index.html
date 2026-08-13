@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>SEMS ERP · Case Study | Daeki Hong</title>
-<meta name="description" content="A role-based manufacturing ERP connecting orders, BOM, materials, production, approval, inventory, and shipping. Mobile-first workbench, Fastify/TypeScript, MySQL, and GCP deployment."/>
+<meta name="description" content="SEMS ERP tracks orders, BOM, materials, production, approvals, inventory, and shipping in role-specific screens. Mobile workbenches, Fastify/TypeScript, MySQL, and GCP deployment."/>
 <meta property="og:title" content="SEMS ERP · Case Study"/>
 <meta property="og:description" content="A mobile-first role-based ERP connecting manufacturing work from order to shipping."/>
 <meta property="og:type" content="article"/>
@@ -83,7 +83,7 @@
           <h1 class="display-hero text-text-primary">SEMS ERP.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">mobile-first · role workflow · fastify/typescript · mysql</p>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl border-l-2 border-accent-amber/40 pl-5">
-            A manufacturing ERP that ties together orders, BOM, materials, production, approvals, inventory, and shipping that used to live across spreadsheets and verbal handoffs. The focus was not an admin lookup screen, but <strong class="text-text-primary font-semibold">a workbench where each role can finish today's work directly</strong>.
+            I built SEMS to move orders, BOM, materials, production, approvals, inventory, and shipping out of spreadsheets and chat. Each role opens <strong class="text-text-primary font-semibold">a workbench with today's tasks first</strong>, and shop-floor users can finish them from a phone.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="#workflow" class="btn-cyan">Workflow <span aria-hidden="true">↓</span></a>
@@ -115,11 +115,11 @@
       <div class="grid gap-8 lg:grid-cols-12">
         <div class="lg:col-span-5">
           <div class="kicker mb-4">// problem</div>
-          <h2 class="display-section text-text-primary">Turning status that lived in people&apos;s heads<br/>into a system flow.</h2>
+          <h2 class="display-section text-text-primary">I moved shop-floor status<br/>out of chat and spreadsheets.</h2>
         </div>
         <div class="lg:col-span-7 space-y-4 text-text-secondary text-[15px] leading-[1.85]">
           <p>When sales orders, material stock, production progress, and approvals sit in separate documents and chat threads, teams spend time asking around just to find the current state.</p>
-          <p>SEMS connects order registration → BOM review → material shortage calculation → picking, purchasing, and receiving → work orders and process tracking → completion requests and approvals → finished-goods stock → shipping.</p>
+          <p>In SEMS, an order moves through registration → BOM review → shortage calculation → picking, purchasing, and receiving → work orders and process tracking → completion request and approval → finished-goods stock → shipping. The server decides who handles the next step and which actions are allowed.</p>
         </div>
       </div>
 
@@ -163,7 +163,7 @@
           <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
             <div class="card-bar"><span>SALES</span><span class="text-text-muted">MOBILE</span></div>
             <div class="media-frame frame-contain aspect-[9/16] border-b border-hairline"><img src="../../../assets/images/sems-09-sales-dashboard-mobile.png" alt="SEMS sales mobile dashboard"/></div>
-            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">Sales home</h3><p class="text-[13px] text-text-secondary leading-relaxed">Order registration stays connected to production, stock, delivery risk, and shipping status.</p></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">Sales home</h3><p class="text-[13px] text-text-secondary leading-relaxed">After entering an order, sales can check its production, stock, due-date risk, and shipping status from the same record.</p></div>
           </article>
           <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
             <div class="card-bar"><span>SHIPPING</span><span class="text-text-muted">MOBILE</span></div>
@@ -204,7 +204,7 @@
         <div class="grid gap-8 lg:grid-cols-12">
           <div class="lg:col-span-5">
             <div class="kicker mb-4">// owned end to end</div>
-            <h2 class="display-section text-text-primary">Simple frontend,<br/>hard server boundary.</h2>
+            <h2 class="display-section text-text-primary">Light browser,<br/>business rules on the server.</h2>
           </div>
           <div class="lg:col-span-7 grid gap-px bg-hairline border border-hairline sm:grid-cols-2">
             <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// frontend</div><div class="font-display font-bold text-text-primary">Vanilla JS · HTML/CSS · PWA</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary">The app stays modular without adding build complexity, with touch-first mobile flows.</p></div>

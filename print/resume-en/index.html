@@ -175,7 +175,7 @@
           <h1 class="display-name">Daeki Hong</h1>
           <p class="display-title">Senior Unity/XR Systems Engineer</p>
           <p class="lead">
-            Unity C# engineer with 10 years of delivery experience across industrial XR, BIM runtime visualization, digital-twin authoring tools, robotics interfaces, and VR simulators. I focus on systems that survive real operating environments: heavy geometry, real-time input, hardware sync, non-developer tooling, installation, debugging, and operator handoff.
+            I have spent ten years building industrial XR, BIM runtimes, digital-twin authoring tools, robotics interfaces, and VR simulators in Unity C#. Because I also install and hand over the systems, I check large-model performance, real-time input, hardware synchronization, and failure recovery early.
           </p>
           <div class="token-list">
             <span class="token token--accent">Unity C# Runtime</span>
@@ -207,7 +207,7 @@
       </div>
 
       <div class="note-strip">
-        This resume shows the Unity, ERP, and AI features I built, with screenshots of the resulting interfaces.
+        All screenshots come from Unity, ERP, and AI features I built.
       </div>
 
       <section class="stack-md">
@@ -221,7 +221,7 @@
           <article class="proof-card">
             <div class="proof-card__eyebrow">Problems Solved Directly</div>
             <h3 class="proof-card__title">IK / BIM / Hardware Sync</h3>
-            <p class="proof-card__copy">Implemented a Jacobian IK solver, runtime BIM section cuts, nine EditorWindow workflows, and hardware-to-Unity synchronization where off-the-shelf tools did not cover delivery constraints.</p>
+            <p class="proof-card__copy">I implemented a Jacobian IK solver, runtime BIM section cuts, nine EditorWindow tools, and hardware-to-Unity synchronization when existing tools did not meet the delivery requirement.</p>
           </article>
           <article class="proof-card">
             <div class="proof-card__eyebrow">BIM Runtime</div>
@@ -258,7 +258,7 @@
             <div class="career-item__role">Industrial Unity development: digital-twin authoring tools, robotics interfaces, and exhibition systems.</div>
             <ul class="bullet-list">
               <li>Built a Unity 6 URP/WebGL DXCenter authoring environment with nine EditorWindow tools, ScriptableObject data flow, Service Locator, EventBus, strategy-based state effects, adapter-style device integration, validation flow, and runtime preparation for non-developers.</li>
-              <li>Built a Quest 3 - Unity - Flask - RoboDK - Doosan A0912 remote operation pipeline covering coordinate conversion, smoothing, speed/acceleration limits, TCP/HTTP communication, calibration, safety handling, and BEXCO public demo support.</li>
+              <li>I passed Quest 3 input through Unity and a Flask bridge to a Doosan A0912. I implemented coordinate conversion, smoothing, speed and acceleration limits, TCP/HTTP communication, calibration, and safety handling, then supported the public BEXCO demo.</li>
               <li>Implemented an internal Jacobian IK solver to reduce RoboDK dependency, including 6-DOF tracking, damping near singularities, debug UI, and multi-robot validation.</li>
             </ul>
           </article>
@@ -325,7 +325,7 @@
         key: "dxcenter",
         title: "DXCenter",
         kicker: "Unity 6 URP / WebGL / EditorWindow tooling",
-        summary: "A digital-twin authoring environment for non-developers. The work packages repeated data mapping, validation, device setup, and runtime preparation into Unity EditorWindow workflows.",
+        summary: "A digital-twin authoring tool where content creators and operators handle data mapping, validation, device setup, and runtime preparation without editing code.",
         contribution: [
           "Designed nine EditorWindow tools around data mapping, validation, asset registration, and runtime readiness.",
           "Used ScriptableObject data flow, Service Locator, EventBus, strategy-based state effects, and adapter-style device integration.",
@@ -339,14 +339,14 @@
         key: "sems-erp",
         title: "SEMS ERP",
         kicker: "Mobile-first ERP / Fastify TypeScript / MySQL / GCP",
-        summary: "A role-based ERP for small manufacturing teams that connects sales orders, BOM, materials, production, outsourcing, inventory, approvals, shipping, logs, and reporting into one execution flow. The design favors mobile actions over dense desktop tables so field users can complete work from the shop floor.",
+        summary: "A role-based ERP for small manufacturing teams. Sales orders, BOM, materials, production, outsourcing, inventory, approvals, and shipping are handled in role-specific screens, and shop-floor users can finish today's tasks from a phone.",
         contribution: [
-          "Structured manufacturing workflows around roles: admin, material manager, production manager, part leader, shop-floor user, and sales.",
+          "Mapped the work of admin, material manager, production manager, part leader, shop-floor user, and sales into separate task screens.",
           "Built mobile task screens that show each role its next action first.",
           "Implemented the system around Fastify/TypeScript, MySQL/Kysely, Zod validation, Identity Platform auth, Cloud Run, Cloud SQL, Cloud Storage, tests, and mobile/desktop screenshot checks."
         ],
         images: [
-          ["sems-00-demo-role-login-mobile.png", "Demo role selection screen showing that one ERP becomes a different workbench for admin, materials, production, part leader, shop-floor user, and sales."],
+          ["sems-00-demo-role-login-mobile.png", "Role selection screen for admin, materials, production, part leader, shop-floor user, and sales workbenches."],
           ["sems-01-admin-dashboard-mobile.png", "Admin mobile home gathers sales status, shipping wait, due-date risk, production risk, pending purchases, and material issue work into role-specific decisions."],
           ["sems-03-material-dashboard-mobile.png", "Material manager home removes unrelated menus and focuses on pending receipts and material issue work."],
           ["sems-05-production-dashboard-mobile.png", "Production manager home showing order progress and due-date risk before work, production, and inventory tasks."],
@@ -361,7 +361,7 @@
         key: "vr-robot",
         title: "VR Robot Teleoperation",
         kicker: "Quest 3 / Unity VR / Flask / RoboDK / Doosan A0912",
-        summary: "Real-time teleoperation of an industrial robot with a Meta Quest 3. The project combines Unity VR input, safety filtering, a Python bridge, RoboDK integration, and follow-up in-house IK R&D.",
+        summary: "I used a Meta Quest 3 to control a Doosan industrial robot in real time. Unity handled VR input and safety filters, a Python bridge talked to RoboDK, and I later added an in-house IK solver.",
         contribution: [
           "Mapped 6DOF VR controller input into robot target commands with coordinate conversion, smoothing, and safety limits.",
           "Built the Unity-side feedback loop and bridge assumptions needed for a live BEXCO demonstration.",
@@ -374,7 +374,7 @@
           ["ik_tcp_tracking.png", "TCP tracking view showing end-effector target following and solver response."],
           ["ik_damping_physics.png", "Damping behavior around unstable poses, used to keep the solver usable near singularities."],
           ["ik_debug_ui.png", "Debug UI for inspecting joints, angles, target error, and solver state during tuning."],
-          ["ik_multi_robot.png", "Multi-robot validation scene, proving the control model is not hard-coded to a single arm."]
+          ["ik_multi_robot.png", "Multi-robot validation scene used to check that the control model was not hard-coded to one arm."]
         ]
       },
       {
@@ -421,11 +421,11 @@
         key: "neostalgia",
         title: "Neostalgia",
         kicker: "XR exhibition / visitor memory pipeline / official selection",
-        summary: "An XR exhibition system selected by BIFAN XR Beyond Reality and recognized with an MSIT citation. It connected visitor input, visual material, and exhibition-grade runtime delivery.",
+        summary: "I turned visitor interviews into generated stories and visual assets, then placed them in a Unity XR exhibition. The project was selected by BIFAN XR Beyond Reality and received an MSIT citation.",
         contribution: [
-          "Built the Unity-side XR experience pipeline and presentation flow for exhibition operation.",
-          "Connected visitor memory, drawing and object assets, dialogue, and skybox presentation in the exhibition runtime.",
-          "The screenshots show the generated material and the finished immersive scene."
+          "I put Whisper interviews, GPT stories, drawing and object assets, and skyboxes into the Unity XR runtime.",
+          "I built the visitor input screens, XR transitions, dashboard, and on-site controls.",
+          "Operators could check generation status and failure reasons from the dashboard during the exhibition."
         ],
         images: [
           ["neostalgia_skybox.png", "Immersive skybox result used as the final XR memory environment."],
@@ -444,7 +444,7 @@
         contribution: [
           "Built a draggable 78-card wheel with direct card selection and separate slots for chosen cards. Card spacing and scale are calculated so one-, three-, and seven-card spreads stay inside the mobile viewport.",
           "Built a Qdrant-backed RAG pipeline combining the question, spread position, card, orientation, and retrieved knowledge, with provider adapters for local Ollama development and OpenAI API deployment.",
-          "Automated checks for 78 PNGs, 78 SVGs, 78 metadata files, and 170 retrieval records, then completed iOS Web Audio handling, pre-generated share posters, and Docker/NAS deployment."
+          "I automated checks for 78 PNGs, 78 SVGs, 78 metadata files, and 170 retrieval records, and handled iOS Web Audio, pre-generated share posters, and Docker/NAS deployment."
         ],
         images: [
           ["oracluna-question.jpg", "Opening screen for choosing today's, monthly, other, or deeper concerns."],

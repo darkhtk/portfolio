@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Engineering · 직접 풀어낸 문제들 | 홍대기</title>
-<meta name="description" content="Unity 프로젝트에서 직접 구현한 자코비안 IK 솔버, BIM 런타임 단면 생성, EditorWindow 툴링, 하드웨어-Unity 동기 작업을 정리했습니다."/>
+<meta name="description" content="홍대기가 Unity 프로젝트에서 직접 만든 자코비안 IK 솔버, BIM 런타임 단면, EditorWindow 도구와 하드웨어 동기화."/>
 <meta property="og:title" content="Engineering · 직접 풀어낸 문제들"/>
 <meta property="og:description" content="직접 구현한 자코비안 IK, BIM 런타임 단면, EditorWindow 툴링, 하드웨어 동기 작업."/>
 <meta property="og:type" content="website"/>
@@ -152,7 +152,7 @@
           <h1 class="display-hero max-w-3xl text-text-primary kr-balance">직접 풀어낸 문제들.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">jacobian ik · bim cross-section · editor tooling · hardware sync</p>
           <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base kr-balance">
-            프로젝트 카드 뒤에는, 직접 풀어야 했던 어려운 모듈들이 있었습니다. 외부 도구가 못 다루거나, 처음부터 직접 설계해야 했던 부분만 모았습니다. 위 <span class="text-accent-cyan font-medium">OVERVIEW / DEEP</span> 토글로 요약과 깊은 설명을 오갈 수 있습니다.
+            기성 도구로 해결되지 않아 납품 과정에서 직접 만든 모듈입니다. <span class="text-accent-cyan font-medium">OVERVIEW</span>에는 결과를, <span class="text-accent-cyan font-medium">DEEP</span>에는 구현 이유와 방식을 적었습니다.
           </p>
           <div class="ticker mt-2">
             <span class="dot"></span><span>jacobian ik solver</span>
@@ -439,7 +439,7 @@
             <span class="chip">Digital Twin</span>
           </div>
           <p class="text-[15px] leading-[1.85] text-text-secondary kr-balance">
-            가장 어려운 건 알고리즘이 아니라, 콘텐츠 제작자·운영자가 <strong class="text-text-primary font-medium">코드를 만지지 않고도</strong> 제품을 운영하게 만드는 것이었습니다. 데이터 매핑·자산 등록·디지털 트윈 모니터링·검증을 9개의 EditorWindow 로 묶어 반복 비용을 도구로 흡수했습니다.
+            콘텐츠가 바뀔 때마다 개발자가 데이터 매핑, 자산 등록과 검증을 다시 하고 있었습니다. 콘텐츠 제작자와 운영자가 <strong class="text-text-primary font-medium">코드를 열지 않고</strong> 직접 처리하도록 EditorWindow 9개를 만들었습니다.
           </p>
           <a href="../projects/dxcenter/" class="inline-flex w-fit font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">관련 케이스 · DX Center <span aria-hidden="true" class="ml-2">&nearr;</span></a>
 
@@ -454,7 +454,7 @@
             <div class="deep-block">
               <div class="deep-label">// approach</div>
               <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
-                Unity 에디터 확장으로 워크플로 전체를 GUI 화했습니다. <code>EditorWindow</code> · <code>SerializedObject</code> · 커스텀 인스펙터로 외부 데이터를 씬 오브젝트에 매핑하고, 적용 전 검증과 <code>Undo</code> 등록까지 도구 안에서 처리합니다. 비개발자가 안전하게 반복 작업을 끝낼 수 있는 형태.
+                데이터 매핑, 자산 등록, 라인업 교체와 검증에 각각 화면을 만들었습니다. <code>EditorWindow</code>, <code>SerializedObject</code>와 커스텀 인스펙터로 외부 데이터를 씬 오브젝트에 매핑하고, 적용 전 검증과 <code>Undo</code> 등록도 같은 창에서 처리합니다.
               </p>
             </div>
             <div class="deep-block">
@@ -488,9 +488,9 @@
             <div class="deep-block">
               <div class="deep-label">// result</div>
               <ul class="mt-3 grid gap-2 text-[14px] leading-relaxed text-text-secondary">
-                <li class="check"><span class="mark">[x]</span><span class="label">9개 EditorWindow 로 운영 워크플로 전체 커버</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">데이터 매핑·등록·검증을 9개 EditorWindow로 분리</span></li>
                 <li class="check"><span class="mark">[x]</span><span class="label">콘텐츠 제작자가 코드 없이 제작·운영</span></li>
-                <li class="check"><span class="mark">[x]</span><span class="label">검증·번들·납품까지 파이프라인화</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">검증·번들·납품 준비를 버튼으로 처리</span></li>
               </ul>
             </div>
           </div>
@@ -572,7 +572,7 @@
                 <div class="deep-label">// result</div>
                 <ul class="mt-3 grid gap-2 text-[14px] leading-relaxed text-text-secondary">
                   <li class="check"><span class="mark">[x]</span><span class="label">Samsung · LG · POSCO 안전체험관 납품</span></li>
-                  <li class="check"><span class="mark">[x]</span><span class="label">SW + HW + 운영 일체의 납품 단위 정립 (4 cycles)</span></li>
+                  <li class="check"><span class="mark">[x]</span><span class="label">SW · HW · 현장 운영을 함께 맡은 4차례 납품</span></li>
                   <li class="check"><span class="mark">[x]</span><span class="label">LCM 콕핏 등 하드웨어 입력 동기로 확장</span></li>
                 </ul>
               </div>
