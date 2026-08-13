@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>홍대기 - 한국어 이력서</title>
-  <meta name="description" content="프로젝트 설명과 스크린샷을 함께 정리한 홍대기 한국어 이력서."/>
+  <meta name="description" content="홍대기 한국어 이력서. Unity, ERP와 AI 프로젝트 설명 및 실제 화면 포함."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
@@ -175,7 +175,7 @@
           <h1 class="display-name">홍대기</h1>
           <p class="display-title">10년차 Unity/XR 시스템 엔지니어</p>
           <p class="lead">
-            산업 XR, BIM 런타임 시각화, 디지털 트윈 저작 도구, 로보틱스 인터페이스, VR 시뮬레이터를 현장 납품 기준으로 만들어 온 Unity C# 개발자입니다. 무거운 지오메트리, 실시간 입력, 하드웨어 동기화, 비개발자용 툴링, 설치와 디버깅, 운영자 인계처럼 실제 환경에서 문제가 되는 부분을 중요하게 봅니다.
+            Unity C#으로 산업 XR, BIM 런타임, 디지털 트윈 저작 도구, 로봇 인터페이스와 VR 시뮬레이터를 10년간 개발했습니다. 현장 설치와 운영자 인계까지 맡아 왔기 때문에 대용량 지오메트리, 실시간 입력, 장비 동기화와 장애 대응을 먼저 확인합니다.
           </p>
           <div class="token-list">
             <span class="token token--accent">Unity C# Runtime</span>
@@ -207,7 +207,7 @@
       </div>
 
       <div class="note-strip">
-        Unity, ERP, AI 프로젝트에서 제가 맡은 기능과 결과 화면을 스크린샷과 함께 정리했습니다.
+        Unity, ERP와 AI 프로젝트에서 제가 구현한 기능과 실제 화면입니다.
       </div>
 
       <section class="stack-md">
@@ -258,7 +258,7 @@
             <div class="career-item__role">산업 Unity 개발: 디지털 트윈 저작 도구, 로보틱스 인터페이스, 전시형 시스템.</div>
             <ul class="bullet-list">
               <li>Unity 6 URP/WebGL 기반 DXCenter 저작 환경을 만들었습니다. 9개 EditorWindow 도구, ScriptableObject 데이터 흐름, Service Locator, EventBus, Strategy 기반 상태 효과, adapter식 장비 연동, 검증 흐름, 런타임 준비를 포함합니다.</li>
-              <li>Quest 3 - Unity - Flask - RoboDK - Doosan A0912 원격 조작 파이프라인을 만들었습니다. 좌표 변환, smoothing, 속도/가속도 제한, TCP/HTTP 통신, 캘리브레이션, 안전 처리, BEXCO 공개 데모 지원까지 담당했습니다.</li>
+              <li>Quest 3 입력을 Unity와 Flask 브리지를 거쳐 Doosan A0912에 전달했습니다. 좌표 변환, smoothing, 속도·가속도 제한, TCP/HTTP 통신, 캘리브레이션과 안전 처리를 구현하고 BEXCO 공개 시연을 지원했습니다.</li>
               <li>RoboDK 의존도를 줄이기 위해 사내 Jacobian IK 솔버를 구현했습니다. 6축 추적, singularity 근처 damping, 디버그 UI, 다중 로봇 검증을 함께 진행했습니다.</li>
             </ul>
           </article>
@@ -325,9 +325,9 @@
         key: "dxcenter",
         title: "DXCenter",
         kicker: "Unity 6 URP / WebGL / EditorWindow 툴링",
-        summary: "비개발자가 반복해서 해야 하는 데이터 매핑, 검증, 장비 설정, 런타임 준비를 Unity EditorWindow 흐름으로 묶은 디지털 트윈 저작 환경입니다.",
+        summary: "콘텐츠 제작자와 운영자가 코드 없이 데이터 매핑, 검증, 장비 설정과 런타임 준비를 처리하도록 만든 디지털 트윈 저작 도구입니다.",
         contribution: [
-          "데이터 매핑, 검증, 에셋 등록, 런타임 준비를 중심으로 9개의 EditorWindow 도구를 설계했습니다.",
+          "데이터 매핑, 검증, 에셋 등록과 런타임 준비를 각각 맡는 EditorWindow 도구 9개를 만들었습니다.",
           "ScriptableObject 데이터 흐름, Service Locator, EventBus, Strategy 기반 상태 효과, adapter식 장비 연동을 사용했습니다.",
           "운영자가 코드 없이 콘텐츠를 준비할 수 있는 에디터 화면을 맡았습니다."
         ],
@@ -339,14 +339,14 @@
         key: "sems-erp",
         title: "SEMS ERP",
         kicker: "모바일 우선 ERP / Fastify TypeScript / MySQL / GCP",
-        summary: "중소 제조업 현장의 수주, BOM, 자재, 생산, 외주, 재고, 승인, 출고, 로그와 보고를 하나의 실행 흐름으로 연결한 역할 기반 ERP입니다. 데스크톱 표를 그대로 줄이는 대신, 현장 담당자가 휴대폰에서 다음 행동을 끝낼 수 있게 구성했습니다.",
+        summary: "중소 제조업 현장의 수주, BOM, 자재, 생산, 외주, 재고, 승인과 출고를 역할별 화면에서 처리하는 ERP입니다. 각 담당자는 휴대폰에서 오늘 할 일과 다음 작업을 확인하고 바로 처리합니다.",
         contribution: [
-          "관리자, 자재관리자, 생산관리자, 파트장, 작업자, 영업 담당자의 역할별 업무 흐름을 정리했습니다.",
-          "각 역할이 다음 행동을 먼저 볼 수 있도록 모바일 중심 작업 화면을 설계했습니다.",
-          "Fastify/TypeScript, MySQL/Kysely, Zod 검증, Identity Platform 인증, Cloud Run, Cloud SQL, Cloud Storage, 테스트와 모바일/PC 화면 검수까지 구성했습니다."
+          "관리자, 자재관리자, 생산관리자, 파트장, 작업자와 영업 담당자의 업무를 역할별 화면으로 나눴습니다.",
+          "각 역할의 작업 화면에서 지금 가능한 행동이 먼저 보이도록 모바일 화면을 만들었습니다.",
+          "Fastify/TypeScript, MySQL/Kysely, Zod, Identity Platform, Cloud Run, Cloud SQL과 Cloud Storage를 사용했고 테스트와 모바일·PC 화면 검수까지 맡았습니다."
         ],
         images: [
-          ["sems-00-demo-role-login-mobile.png", "데모 역할 선택 화면. 하나의 ERP가 관리자, 자재, 생산, 파트장, 작업자, 영업 담당자에게 다른 작업대로 열리도록 구성했습니다."],
+          ["sems-00-demo-role-login-mobile.png", "관리자, 자재, 생산, 파트장, 작업자와 영업 담당자가 각자 다른 작업대로 들어가는 역할 선택 화면."],
           ["sems-01-admin-dashboard-mobile.png", "관리자 모바일 홈. 매출 현황, 출고 대기, 납기 위험, 생산 위험, 구매 대기, 자재 출고 작업을 역할별 판단으로 묶었습니다."],
           ["sems-03-material-dashboard-mobile.png", "자재관리자 홈. 불필요한 메뉴를 줄이고 입고 대기와 자재 출고 작업에 집중하게 했습니다."],
           ["sems-05-production-dashboard-mobile.png", "생산관리자 홈. 수주 진행률과 생산 납기 위험을 먼저 보여주고 작업, 생산, 재고 업무로 이어지게 했습니다."],
@@ -354,7 +354,7 @@
           ["sems-10-sales-shipping-mobile.png", "모바일 출고 목록. 출고 가능 주문, 지연 배지, 바로 실행 버튼을 보여주어 데스크톱 표 없이도 처리할 수 있게 했습니다."],
           ["sems-11-sales-dashboard-desktop.png", "영업 데스크톱 대시보드. 넓은 화면에서는 출고 대기, 재고 정합성, 작업 현황, 자재 부족, 재고 이동 추이를 분석용으로 배치했습니다."],
           ["sems-12-sales-shipping-desktop.png", "데스크톱 출고 화면. 기간, 상태, 출고 가능 필터, 검색, D+ 지연 표시, 출고 실행을 배치 작업에 맞게 묶었습니다."],
-          ["sems-13-admin-dashboard-desktop.png", "관리자 데스크톱 대시보드. 부족 알림, 미입고 구매, 구매/매출 요약, 재고 정합성, 작업 현황, 권한별 메뉴를 통합했습니다."]
+          ["sems-13-admin-dashboard-desktop.png", "부족 알림, 미입고 구매, 구매·매출 요약, 재고 정합성, 작업 현황과 권한별 메뉴를 확인하는 관리자 대시보드."]
         ]
       },
       {
@@ -411,7 +411,7 @@
           ["vr_construction_scaffold.png", "비계 작업에서 공간 인지와 위험 작업 식별을 다루는 장면."],
           ["vr_lcm_cockpit.png", "상륙정 cockpit 시뮬레이터. 운영자 조작과 훈련 계기 화면이 함께 구성되어 있습니다."],
           ["vr_lcm_steering.png", "해군 시뮬레이터 조작 훈련을 위한 steering interface."],
-          ["vr_lghaus_safety.png", "LG하우시스 공장 안전 교육 장면. 작업자 인지를 중심으로 구성했습니다."],
+          ["vr_lghaus_safety.png", "LG하우시스 공장 안전 교육에서 작업자가 위험 설비와 절차를 확인하는 장면."],
           ["vr_lghaus_accident.png", "위험 대응과 절차 기억을 훈련하기 위한 공장 사고 시나리오."],
           ["vr_lghaus_maintenance.png", "장비 상태와 절차 cue를 함께 보여주는 maintenance 교육 화면."],
           ["vr_lghaus_printer.png", "산업 교육 환경을 보여주는 printer/equipment 시나리오."]
@@ -421,11 +421,11 @@
         key: "neostalgia",
         title: "Neostalgia",
         kicker: "XR 전시 / 관람객 기억 파이프라인 / 공식 선정",
-        summary: "BIFAN XR Beyond Reality 선정과 과기정통부 장관 표창을 받은 XR 전시 시스템입니다. 관람객 입력, 시각 재료, 전시 운영용 Unity 런타임을 연결했습니다.",
+        summary: "관람객 인터뷰로 서사와 시각 자산을 만들고 Unity XR 장면에 배치한 전시 시스템입니다. BIFAN XR Beyond Reality에 선정됐고 과기정통부 장관 표창을 받았습니다.",
         contribution: [
-          "전시 운영에 필요한 Unity XR 경험 파이프라인과 presentation flow를 만들었습니다.",
-          "관람객 기억, drawing/object asset, dialogue, skybox presentation을 하나의 경험으로 연결했습니다.",
-          "스크린샷은 입력 재료와 최종 immersive runtime 화면을 함께 보여줍니다."
+          "Whisper 인터뷰, GPT 서사, drawing/object asset과 skybox를 Unity XR 런타임에 넣었습니다.",
+          "관람객 입력 화면, XR 장면 전환, 대시보드와 현장 운영 기능을 구현했습니다.",
+          "전시 중 생성 상태와 실패 원인을 대시보드에서 확인할 수 있게 했습니다."
         ],
         images: [
           ["neostalgia_skybox.png", "최종 XR 기억 환경으로 사용한 immersive skybox 결과."],
@@ -442,7 +442,7 @@
         urlLabel: "oracluna.com",
         summary: "고민을 고르고 카드를 섞고 자른 뒤, 78장 카드 휠에서 뽑아 해석을 저장·공유하는 모바일 타로 웹앱입니다. 고민의 종류에 따라 1·3·7장 흐름이 달라집니다.",
         contribution: [
-          "78장 카드 휠을 손가락으로 돌리고 카드 자체를 눌러 고르는 방식으로 구성했습니다. 선택 카드는 별도 슬롯으로 옮기고, 1·3·7장 배열이 화면 안에 들어오도록 카드 간격과 축척을 함께 계산했습니다.",
+          "손가락으로 돌리는 78장 카드 휠과 선택 슬롯을 만들었습니다. 1·3·7장 배열이 휴대폰 화면 안에 들어오도록 카드 간격과 축척을 계산했습니다.",
           "질문, 배열 위치, 카드, 정·역방향과 검색 지식을 결합하는 Qdrant 기반 RAG 파이프라인을 만들고, 로컬 Ollama와 배포용 OpenAI API를 공급자 어댑터로 분리했습니다.",
           "78 PNG, 78 SVG, 78 metadata, 170개 검색 레코드를 자동 검증하고, iOS Web Audio, 공유 포스터 사전 생성, Docker/NAS 배포까지 마무리했습니다."
         ],
@@ -458,9 +458,9 @@
         key: "genworld",
         title: "GenWorld",
         kicker: "Unity 2D / NPC 상태 시스템 / 오프라인 플레이",
-        summary: "NPC 상태, 대화, 스킬, 오프라인에서도 유지되는 동작을 중심으로 만든 Unity 2D RPG 프로토타입입니다. 선택 서비스가 없어도 게임이 계속 돌아가게 만든 점을 중요하게 봤습니다.",
+        summary: "NPC 기억, 기분, 스킬과 대화를 관리하는 Unity 2D RPG 프로토타입입니다. 로컬 LLM이 응답하지 않으면 같은 NPC가 규칙 기반 대화를 계속합니다.",
         contribution: [
-          "선택 런타임 서비스가 없어도 게임이 동작하도록 dialogue path를 설계했습니다.",
+          "로컬 LLM timeout과 오프라인 상태에서 규칙 기반 dialogue path로 전환하도록 만들었습니다.",
           "NPC mood, dialogue, skill, world state를 Unity 런타임 시스템으로 모델링했습니다.",
           "결정적 규칙과 런타임 상태 확인을 사용해 오프라인에서도 플레이 가능한 프로토타입으로 유지했습니다."
         ],
@@ -475,9 +475,9 @@
         key: "deskrelay",
         title: "DeskRelay",
         kicker: "내부 운영 도구 / 브라우저와 모바일 제어 화면",
-        summary: "브라우저와 모바일에서 로컬 작업 세션을 제어하기 위한 도구입니다. 장비 등록, 세션 유지, 진단, 권한, 업데이트, 모바일 UX까지 다룹니다.",
+        summary: "브라우저와 휴대폰에서 로컬 작업 세션을 제어하는 도구입니다. 장비 등록, 세션 유지, 연결 진단, 권한과 업데이트 화면을 구현했습니다.",
         contribution: [
-          "여러 장비, 로컬 권한, 진단, 반복적인 일상 사용을 기준으로 제어 화면을 설계했습니다.",
+          "여러 PC를 등록하고 로컬 권한과 연결 상태를 확인하는 제어 화면을 만들었습니다.",
           "채팅, workspace 선택, 장비 전환, 설정, 권한, 업데이트 화면을 데스크톱과 모바일 양쪽으로 만들었습니다.",
           "메인 채팅 화면에서 끝내지 않고, 매일 쓰는 데 필요한 운영 설정까지 챙겼습니다."
         ],

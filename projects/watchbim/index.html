@@ -84,7 +84,7 @@
           <h1 class="display-hero text-text-primary kr-balance">WatchBIM.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">unity bim runtime · custom hit engine · cross-section · 2d viewer</p>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
-            대용량 BIM 상호작용, 단면 생성, 2D 분석 뷰어, 커스텀 카메라 시스템을 자체 설계한 Unity BIM 런타임. 외부 BIM 도구가 못 다루는 운영 요구(런타임 단면 생성·실시간 분석·툴 카메라)를 직접 구현한 사례.
+            대용량 BIM 모델을 런타임에서 선택하고 임의 평면으로 잘라 2D로 분석할 수 있게 만들었습니다. 표준 Raycast가 놓치는 픽킹은 커스텀 히트 엔진으로 처리했고, 현장 검토용 카메라 도구도 추가했습니다.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="#features" class="btn-cyan">기능 <span>↓</span></a>
@@ -116,12 +116,12 @@
         <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>SUB_01</span><span class="text-text-muted">HIT ENGINE</span></div>
           <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../assets/images/watchbim_clipping.png" alt="WatchBIM clipping"/></div>
-          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 01 · hit engine</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">커스텀 히트 엔진</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">대용량 BIM 모델에서 운영자 픽킹·hover·선택을 안정적으로. 표준 Unity Raycast 가 못 다루는 케이스를 직접 처리.</p></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 01 · hit engine</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">커스텀 히트 엔진</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">대용량 BIM 모델의 hover와 선택을 직접 판정합니다. 표준 Unity Raycast가 놓치는 경우는 삼각형 단위로 처리합니다.</p></div>
         </article>
         <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>SUB_02</span><span class="text-text-muted">CROSS-SECTION</span></div>
           <div class="media-frame aspect-[16/10] border-b border-hairline"><img src="../../assets/images/watchbim_crosssection_highlight.png" alt="cross-section highlight"/></div>
-          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 02 · cross-section</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">단면 생성</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">런타임에서 임의 평면으로 단면 생성. 단면 결과를 하이라이트해서 운영자가 직관적으로 확인.</p></div>
+          <div class="p-5"><div class="kicker kicker-cyan mb-2">// 02 · cross-section</div><h3 class="font-display font-bold text-lg text-text-primary mb-2">단면 생성</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">임의 평면으로 단면을 만들고 잘린 모서리를 강조해 선택한 위치를 바로 확인할 수 있습니다.</p></div>
         </article>
         <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>SUB_03</span><span class="text-text-muted">2D VIEWER</span></div>
@@ -153,7 +153,7 @@
         <div class="card ticks order-1 p-6 sm:p-8"><span class="tr"></span><span class="bl"></span>
           <div class="kicker kicker-cyan mb-4">// proof</div>
           <h2 class="display-section text-text-primary kr-balance">WatchBIM 시연 영상.</h2>
-          <p class="mt-4 text-[14px] leading-7 text-text-secondary kr-balance">대용량 BIM 뷰어, 단면 생성, 2D 분석 뷰어 흐름을 영상으로 확인할 수 있는 공개 시연 링크입니다.</p>
+          <p class="mt-4 text-[14px] leading-7 text-text-secondary kr-balance">아래 영상은 대용량 BIM 모델 선택, 단면 생성과 2D 분석을 실제로 조작한 장면입니다.</p>
           <a href="https://youtu.be/ajJKPro7008" target="_blank" rel="noopener noreferrer" class="btn-ghost mt-6 w-fit">Open YouTube <span aria-hidden="true">↗</span></a>
         </div>
       </div>

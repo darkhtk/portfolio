@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>DeskRelay · Case Study | Daeki Hong</title>
-<meta name="description" content="DeskRelay is a self-host developer tool that remotes your local Claude Code sessions to a browser and mobile, safely. Case study covering architecture, device lifecycle, and trust boundary."/>
+<meta name="description" content="I use DeskRelay to control Claude Code sessions running on my PCs from a browser or phone. One server hosts the UI and backend; registered PCs connect over LAN or Tailscale."/>
 <meta property="og:title" content="DeskRelay · Case Study | Daeki Hong"/>
 <meta property="og:description" content="Server PC + registered PCs + connector daemon + LAN/Tailscale — self-host AI developer tool case study."/>
 <meta property="og:type" content="article"/>
@@ -114,7 +114,7 @@
           </h1>
 
           <p class="font-body text-[15px] sm:text-base text-text-secondary leading-[1.85] max-w-2xl border-l-2 border-accent-cyan/40 pl-5">
-            DeskRelay is a <strong class="text-text-primary font-semibold">self-host developer tool</strong> that remotes Claude Code sessions running on your own PC to a browser or mobile, safely. A single server PC runs <code>site-frontend</code>, <code>site-backend</code>, and a local connector daemon. Other PCs in the same LAN or Tailscale tailnet register as devices.
+            I built DeskRelay to check and control Claude Code sessions running on my PCs from a browser or phone. One server PC runs <code>site-frontend</code>, <code>site-backend</code>, and a local connector daemon. I register the other PCs as devices over the same LAN or Tailscale tailnet.
           </p>
 
           <div class="flex flex-wrap items-center gap-3">
@@ -260,7 +260,7 @@
         <div class="grid gap-10 lg:grid-cols-12 mb-12">
           <div class="lg:col-span-5">
             <div class="kicker mb-4">// architecture</div>
-            <h2 class="display-section text-text-primary">Designed as<br/>a developer tool.</h2>
+            <h2 class="display-section text-text-primary">Built for<br/>my own daily work.</h2>
           </div>
           <div class="lg:col-span-7 lg:pt-2">
             <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl">
@@ -352,7 +352,7 @@
         </div>
         <div class="lg:col-span-7 lg:pt-2">
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] max-w-2xl">
-            The README covers server installation, the access URL and token, PC registration, validation reports, updates, and troubleshooting. The setup guide targets a first successful connection within 30 minutes.
+            The README follows the order I use: install the server, open the URL, enter the token, register another PC, check the report, update, and troubleshoot. On a new PC, I can follow it from installation to a working connection in under 30 minutes.
           </p>
         </div>
       </div>
@@ -529,7 +529,7 @@
           <div class="kicker mb-2">// notes</div>
           <h2 class="display-section text-text-primary">What daily use<br/>made me add.</h2>
           <p>It started as a small remote controller. Daily use led me to add authentication, logging, recovery, and update handling.</p>
-          <p>The Android app was built as a Capacitor wrapper while I worked out the permissions model, signing, and release channels. The self-host path was tightened so a non-developer can get it running in under 30 minutes.</p>
+          <p>I built the Android app as a Capacitor wrapper and set up its permissions, signing, and release channels. A non-developer can follow the README from server install to the first connected PC in under 30 minutes.</p>
           <p>I use DeskRelay in my own work and maintain it as an everyday tool for checking and controlling sessions across my PCs.</p>
         </div>
         <div class="lg:col-span-5 lg:pt-12">

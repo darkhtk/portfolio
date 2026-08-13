@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Daeki Hong · Print Portfolio</title>
-  <meta name="description" content="A4 print portfolio for Daeki Hong covering DeskRelay, Oracluna Tarot, Ops-Cure, GenWorld, and ten years of industrial Unity and manufacturing software."/>
+  <meta name="description" content="Daeki Hong's A4 portfolio: DeskRelay, Oracluna Tarot, Ops-Cure, GenWorld, and ten years of industrial Unity and manufacturing software."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
@@ -34,7 +34,7 @@
           <h1 class="display-name">Four recent AI projects and ten years of industrial software work</h1>
           <p class="display-title">DeskRelay, Oracluna Tarot, Ops-Cure, and GenWorld alongside Unity and manufacturing systems delivered to real sites.</p>
           <p class="lead">
-            The first section covers <strong>DeskRelay</strong>, <strong>Oracluna Tarot</strong>, <strong>Ops-Cure</strong>, and <strong>GenWorld + Ollama</strong>. The remaining pages cover Unity, XR, BIM, robotics, EditorWindow tooling, and manufacturing software delivered to exhibitions, factories, and construction sites.
+            My recent work includes <strong>DeskRelay</strong>, <strong>Oracluna Tarot</strong>, <strong>Ops-Cure</strong>, and <strong>GenWorld + Ollama</strong>. I have also delivered Unity, XR, BIM, robotics, EditorWindow, and manufacturing software to exhibitions, factories, and construction sites.
           </p>
           <div class="token-list">
             <span class="token token--accent">AI Systems × 4</span>
@@ -116,7 +116,7 @@
       </section>
 
       <div class="note-strip">
-        The first section covers four recent AI projects. The later pages cover industrial software delivered to exhibitions, factories, and construction sites.
+        I handled implementation, installation, validation, failure recovery, and operator handoff.
       </div>
 
       <div class="page__foot">
@@ -143,9 +143,9 @@
             orchestration, remote_codex, and chat store their state and events through the same Space / Actor / Event / Behavior model.
           </p>
           <ul class="project-list">
-            <li><strong>Problem:</strong> Orchestration, remote execution, and chat need different screens but share the same state and event storage model.</li>
-            <li><strong>Build:</strong> Channel-native state/event core on FastAPI + SQLite. Discord transport, behavior plugin registry, canonical DB, three behaviors (orchestration / remote_codex / chat), three runtimes (pc_launcher · remote_executor · chat_participant).</li>
-            <li><strong>Outcome:</strong> orchestration, remote_codex, and chat all store their state and events through the same Space/Actor/Event model.</li>
+            <li>Agent tasks, remote execution, and chat use different commands and screens but need the same state and event records.</li>
+            <li>I built a Space / Actor / Event core on FastAPI + SQLite, then added Discord transport, a behavior registry, and three runtimes.</li>
+            <li>orchestration, remote_codex, and chat now write state and execution records through the same model.</li>
           </ul>
         </div>
       </article>
@@ -161,9 +161,9 @@
             A self-host developer tool that remotes Claude Code sessions running on your own PC to a browser or mobile. A single server PC runs site-frontend, site-backend, and a connector daemon. Other PCs in the same LAN or Tailscale register as devices.
           </p>
           <ul class="project-list">
-            <li><strong>Problem:</strong> Local agent tools are powerful because they sit beside the user's repos, shell, and tokens — but that also pins work to one keyboard.</li>
-            <li><strong>Build:</strong> Solid + Vite SPA (<code>:18193</code>), Hono + Bun backend (<code>:18192</code>), pc-connector-daemon (<code>:18191</code> / <code>:18091</code>), behavior-remote-claude, Capacitor Android app, registration automation + validation report.</li>
-            <li><strong>Outcome:</strong> Public v0.0.0 self-host tool at github.com/darkhtk/deskrelay, used to manage my own sessions across multiple PCs.</li>
+            <li>I wanted to check my local Claude Code sessions elsewhere without moving repos, shells, or tokens off each PC.</li>
+            <li>I built the Solid + Vite UI, Hono + Bun server, PC connector, Claude behavior, and Capacitor Android app.</li>
+            <li>The tool is public at github.com/darkhtk/deskrelay, and I use it every day across my own PCs.</li>
           </ul>
         </div>
       </article>
@@ -192,9 +192,9 @@
             Ported a Phaser 3 TS-based RPG to Unity 2D C# while designing a local Ollama LLM-backed NPC cognition / dialogue system. The game uses local LLM dialogue when available and a rule-based dialogue graph when the service is offline.
           </p>
           <ul class="project-list">
-            <li><strong>Problem:</strong> The game has to keep running when the optional LLM service stops responding.</li>
-            <li><strong>Build:</strong> Stored NPC memory, mood, and skill state. A pre-defined dialogue graph handles response timeouts and offline mode.</li>
-            <li><strong>Outcome:</strong> LLM dialogue runs while the service is available; the same NPC switches to the rule-based graph when it is not.</li>
+            <li>The game and NPC conversations have to keep running when the local LLM stops responding.</li>
+            <li>I store NPC memory, mood, and skill state, and open a predefined dialogue graph on timeout or in offline mode.</li>
+            <li>The same NPC uses generated dialogue while Ollama is available and rule-based dialogue when it is not.</li>
           </ul>
         </div>
       </article>
@@ -210,9 +210,9 @@
             At oracluna.com, users choose a concern, shuffle and cut the deck, pick from a 78-card wheel, receive an interpretation, and save or share the result.
           </p>
           <ul class="project-list">
-            <li><strong>Problem:</strong> Mobile users needed to browse all 78 cards without losing the selected cards or their position in the deck.</li>
-            <li><strong>Build:</strong> Draggable 78-card wheel, selection slots, spread and orientation data, Qdrant retrieval, Ollama/OpenAI provider adapters, browser storage, Canvas posters, and Web Share.</li>
-            <li><strong>Outcome:</strong> Public service at oracluna.com with question entry, card selection, readings, saving, deletion, and sharing.</li>
+            <li>On a phone, users need to browse all 78 cards without losing their picks or their current place in the deck.</li>
+            <li>I built the card wheel and selection slots, then sent spread position, orientation, and Qdrant results to Ollama or OpenAI.</li>
+            <li>Question entry, card selection, readings, saving, deletion, and image sharing are live at oracluna.com.</li>
           </ul>
         </div>
       </article>
@@ -255,12 +255,12 @@
           <div class="project-kicker">Industrial XR × Robotics</div>
           <h3 class="project-title">VR Robot Teleoperation</h3>
           <p class="project-summary">
-            A full Quest 3 to Doosan A0912 control path through Unity, Flask, RoboDK, calibration, safety logic, and later in-house Jacobian IK ownership.
+            I passed Quest 3 input through Unity and a Flask bridge to a Doosan A0912. The first version used RoboDK; I later added calibration, safety rules, and an in-house Jacobian IK solver.
           </p>
           <ul class="project-list">
-            <li><strong>Problem:</strong> XR input had to control an industrial robot with stable mapping, safe movement, and operator-readable constraints.</li>
-            <li><strong>Build:</strong> Controller filtering, coordinate transforms, bridge APIs, safety boxes, deadman logic, resend control, and IK continuation.</li>
-            <li><strong>Outcome:</strong> Public demo at BEXCO with live Quest 3 input, robot movement limits, calibration, and operator safety controls.</li>
+            <li>I had to map Quest 3 input into robot coordinates and keep the robot inside defined movement limits.</li>
+            <li>I implemented input filtering, coordinate transforms, bridge APIs, safety boxes, deadman logic, resend control, and IK.</li>
+            <li>At BEXCO, I demonstrated the live robot with movement limits, calibration, and an operator stop control.</li>
           </ul>
         </div>
       </article>
@@ -273,12 +273,12 @@
           <div class="project-kicker">Simulation Tooling · Digital Twin</div>
           <h3 class="project-title">DXCenter</h3>
           <p class="project-summary">
-            A Unity authoring environment for LG Energy Solution content with nine EditorWindow tools, mapping rules, and a cleaner runtime path for non-developer operators.
+            I built nine Unity EditorWindow tools so LG Energy Solution content creators could map data and validate assets without editing code.
           </p>
           <ul class="project-list">
-            <li><strong>Problem:</strong> Production content needed repeatable authoring, validation, and handoff without depending on developer-only editing paths.</li>
-            <li><strong>Build:</strong> EditorWindow tools, state management, undo, data mapping, preview/runtime separation, and operator-facing authoring flow.</li>
-            <li><strong>Outcome:</strong> Lower repeated setup cost; content production becomes a maintainable workflow.</li>
+            <li>Developers were repeating scene and data setup whenever production content changed.</li>
+            <li>I put state management, undo, data mapping, preview/runtime separation, and validation into EditorWindow tools.</li>
+            <li>Content creators and operators can now handle repeated setup and checks themselves.</li>
           </ul>
         </div>
       </article>
@@ -299,7 +299,7 @@
         <div class="eyebrow">Industrial Software · 2/2</div>
         <h2 class="section-title">BIM geometry · ERP workflow · field delivery habits</h2>
         <p class="lead">
-          Separate from the AI cases, the industrial track was finished with the same discipline — heavy geometry, simulator delivery, manufacturing workflow design, hardware setup, and operator-facing runtime work.
+          Over the past ten years, I have built and installed large-model geometry tools, VR simulators, hardware setups, manufacturing software, and operator-facing Unity tools.
         </p>
       </div>
 
@@ -314,9 +314,9 @@
             A Unity BIM runtime with a custom hit engine, station-based cross-section generation, a 2D analysis viewer, and camera controls for inspecting large models.
           </p>
           <ul class="project-list">
-            <li><strong>Problem:</strong> Large BIM scenes needed accurate selection, reliable movement, and in-runtime cross-section analysis.</li>
-            <li><strong>Build:</strong> Triangle caching, hit filtering, geometry jobs, plane intersection, segment grouping, 3D-to-2D conversion, and slope labeling.</li>
-            <li><strong>Outcome:</strong> The viewer includes runtime section cutting, hit testing, linked 2D analysis, and slope labeling.</li>
+            <li>Operators needed to pick the right element in a large BIM scene and inspect a section without leaving the runtime.</li>
+            <li>I implemented triangle caching, hit filters, geometry jobs, plane intersection, segment grouping, and 3D-to-2D conversion.</li>
+            <li>The same viewer now shows the selected section, linked 2D analysis, and slope labels.</li>
           </ul>
         </div>
       </article>
@@ -357,7 +357,7 @@
 
         <section class="closing-card">
           <p>
-            For the AI projects, I handled setup, failure states, logs, recovery, and handoff. The same checks came from ten years of delivering Unity and manufacturing software to real operators.
+            I also install the AI projects myself, inspect failure logs and recovery steps, and document the handoff. It is the same routine I use for Unity and manufacturing software in the field.
           </p>
         </section>
       </div>

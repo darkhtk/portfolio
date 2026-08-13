@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>SEMS ERP · 케이스 스터디 | 홍대기</title>
-<meta name="description" content="수주, BOM, 자재, 생산, 승인, 출고를 하나의 흐름으로 연결한 제조 현장용 역할 기반 ERP. 모바일 작업대, Fastify/TypeScript, MySQL, GCP 배포."/>
+<meta name="description" content="수주, BOM, 자재, 생산, 승인과 출고 상태를 역할별 화면에서 처리하는 제조 현장 ERP. 모바일 작업대, Fastify/TypeScript, MySQL, GCP 배포."/>
 <meta property="og:title" content="SEMS ERP · 케이스 스터디"/>
 <meta property="og:description" content="수주부터 출고까지 제조 현장 업무를 연결한 모바일 우선 역할 기반 ERP."/>
 <meta property="og:type" content="article"/>
@@ -83,7 +83,7 @@
           <h1 class="display-hero text-text-primary kr-balance">SEMS ERP.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">mobile-first · role workflow · fastify/typescript · mysql</p>
           <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
-            엑셀과 구두 전달로 흩어지던 수주, BOM, 자재, 생산, 승인, 출고 업무를 하나의 흐름으로 묶은 제조 현장용 ERP입니다. 관리자 조회 화면보다 <strong class="text-text-primary font-semibold">각 역할이 오늘 처리할 일을 바로 끝내는 작업대</strong>에 초점을 맞췄습니다.
+            엑셀과 대화방에 흩어져 있던 수주, BOM, 자재, 생산, 승인과 출고 업무를 SEMS에서 처리하도록 만들었습니다. 역할마다 <strong class="text-text-primary font-semibold">오늘 처리할 업무만 먼저 보이게 했고</strong>, 현장에서는 휴대폰으로 바로 완료할 수 있습니다.
           </p>
           <div class="flex flex-wrap items-center gap-3">
             <a href="#workflow" class="btn-cyan">업무 흐름 <span>↓</span></a>
@@ -115,11 +115,11 @@
       <div class="grid gap-8 lg:grid-cols-12">
         <div class="lg:col-span-5">
           <div class="kicker mb-4">// problem</div>
-          <h2 class="display-section text-text-primary kr-balance">사람에게 물어야 알 수 있던 상태를<br/>시스템 흐름으로 남겼습니다.</h2>
+          <h2 class="display-section text-text-primary kr-balance">사람에게 묻던 진행 상태를<br/>화면에 남겼습니다.</h2>
         </div>
         <div class="lg:col-span-7 space-y-4 text-text-secondary text-[15px] leading-[1.85] kr-balance">
           <p>영업의 수주, 자재팀의 재고, 생산팀의 진행 상황, 관리자의 승인 정보가 문서와 대화에 흩어지면 지금 어느 단계인지 확인하는 데 시간이 걸립니다.</p>
-          <p>SEMS는 수주 등록 → BOM 확인 → 자재 부족 계산 → 피킹·발주·입고 → 작업지시와 공정 → 완료 요청·승인 → 완제품 재고 → 출고까지 이어지는 상태를 한 흐름으로 연결합니다.</p>
+          <p>SEMS에서는 수주 등록 → BOM 확인 → 자재 부족 계산 → 피킹·발주·입고 → 작업지시와 공정 → 완료 요청·승인 → 완제품 재고 → 출고 순서로 상태가 바뀝니다. 각 단계에서 다음 담당자와 가능한 작업을 서버가 결정합니다.</p>
         </div>
       </div>
 
@@ -148,7 +148,7 @@
           <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
             <div class="card-bar"><span>ADMIN</span><span class="text-text-muted">MOBILE</span></div>
             <div class="media-frame frame-contain aspect-[9/16] border-b border-hairline"><img src="../../assets/images/sems-01-admin-dashboard-mobile.png" alt="SEMS 관리자 모바일 대시보드"/></div>
-            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">관리자 홈</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">수주, 출고 대기, 납기 위험, 미입고 발주를 한 화면의 판단 항목으로 모았습니다.</p></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">관리자 홈</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">관리자는 수주, 출고 대기, 납기 위험과 미입고 발주를 한 화면에서 확인합니다.</p></div>
           </article>
           <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
             <div class="card-bar"><span>MATERIAL</span><span class="text-text-muted">MOBILE</span></div>
@@ -158,17 +158,17 @@
           <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
             <div class="card-bar"><span>PRODUCTION</span><span class="text-text-muted">MOBILE</span></div>
             <div class="media-frame frame-contain aspect-[9/16] border-b border-hairline"><img src="../../assets/images/sems-05-production-dashboard-mobile.png" alt="SEMS 생산관리자 모바일 화면"/></div>
-            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">생산 작업대</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">전체 수주와 생산 납기 위험을 먼저 보고 작업·생산·재고로 이어지게 했습니다.</p></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">생산 작업대</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">수주 진행률과 납기 위험을 먼저 보여준 뒤 작업·생산·재고 화면으로 들어갑니다.</p></div>
           </article>
           <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
             <div class="card-bar"><span>SALES</span><span class="text-text-muted">MOBILE</span></div>
             <div class="media-frame frame-contain aspect-[9/16] border-b border-hairline"><img src="../../assets/images/sems-09-sales-dashboard-mobile.png" alt="SEMS 영업 담당자 모바일 화면"/></div>
-            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">영업 홈</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">수주 등록에서 끝나지 않고 생산·재고·출고 상태까지 같은 흐름으로 추적합니다.</p></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">영업 홈</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">수주를 등록한 뒤에도 생산, 재고와 출고 상태를 같은 주문에서 확인합니다.</p></div>
           </article>
           <article class="card ticks group flex flex-col"><span class="tr"></span><span class="bl"></span>
             <div class="card-bar"><span>SHIPPING</span><span class="text-text-muted">MOBILE</span></div>
             <div class="media-frame frame-contain aspect-[9/16] border-b border-hairline"><img src="../../assets/images/sems-10-sales-shipping-mobile.png" alt="SEMS 모바일 출고 목록"/></div>
-            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">출고 목록</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">출고 가능 여부와 지연 일수를 목록에서 바로 판단하고 출고 행동으로 연결합니다.</p></div>
+            <div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary mb-2">출고 목록</h3><p class="text-[13px] text-text-secondary leading-relaxed kr-balance">목록에서 출고 가능 여부와 지연 일수를 확인하고 바로 출고 처리합니다.</p></div>
           </article>
         </div>
       </div>
@@ -204,11 +204,11 @@
         <div class="grid gap-8 lg:grid-cols-12">
           <div class="lg:col-span-5">
             <div class="kicker mb-4">// owned end to end</div>
-            <h2 class="display-section text-text-primary kr-balance">가벼운 프론트엔드와<br/>강한 서버 경계.</h2>
+            <h2 class="display-section text-text-primary kr-balance">브라우저는 가볍게,<br/>업무 규칙은 서버에.</h2>
           </div>
           <div class="lg:col-span-7 grid gap-px bg-hairline border border-hairline sm:grid-cols-2">
             <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// frontend</div><div class="font-display font-bold text-text-primary">Vanilla JS · HTML/CSS · PWA</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">현장용 웹 앱에 필요한 동작만 모듈로 나누고 모바일 터치 흐름을 우선했습니다.</p></div>
-            <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// backend</div><div class="font-display font-bold text-text-primary">Fastify · TypeScript · Zod</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">route → service → database 계층에 업무 규칙과 입력 검증을 모았습니다.</p></div>
+            <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// backend</div><div class="font-display font-bold text-text-primary">Fastify · TypeScript · Zod</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">업무 규칙과 입력 검증은 route → service → database 계층에서 처리합니다.</p></div>
             <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// data</div><div class="font-display font-bold text-text-primary">MySQL · Kysely · migrations</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">재고 이동, 취소, 승인, 활동 로그를 원장과 이력 중심으로 남겼습니다.</p></div>
             <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">// cloud</div><div class="font-display font-bold text-text-primary">Cloud Run · Cloud SQL · Storage</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">Identity Platform 인증, 파일 저장, health check, DB smoke check까지 배포 구성을 잡았습니다.</p></div>
           </div>

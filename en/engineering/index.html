@@ -152,7 +152,7 @@
           <h1 class="display-hero max-w-3xl text-text-primary kr-balance">Problems I solved directly.</h1>
           <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">jacobian ik · bim cross-section · editor tooling · hardware sync</p>
           <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base kr-balance">
-            Behind the project cards are the hard modules I had to solve myself. This collects only the parts that off-the-shelf tools could not handle, or that I had to design from scratch. Use the <span class="text-accent-cyan font-medium">OVERVIEW / DEEP</span> toggle above to move between the summary and the deeper explanation.
+            These are modules I built when off-the-shelf tools did not cover the delivery requirement. <span class="text-accent-cyan font-medium">OVERVIEW</span> shows the result; <span class="text-accent-cyan font-medium">DEEP</span> explains why I built it and how it works.
           </p>
           <div class="ticker mt-2">
             <span class="dot"></span><span>jacobian ik solver</span>
@@ -439,7 +439,7 @@
             <span class="chip">Digital Twin</span>
           </div>
           <p class="text-[15px] leading-[1.85] text-text-secondary kr-balance">
-            The hardest part was not the algorithm but letting content authors and operators run the product <strong class="text-text-primary font-medium">without touching code</strong>. I bundled data mapping, asset registration, digital-twin monitoring, and validation into nine EditorWindows, absorbing the cost of repetition into the tooling.
+            Developers were repeating data mapping, asset registration, and validation whenever the content changed. I built nine EditorWindows so content authors and operators could handle those jobs <strong class="text-text-primary font-medium">without opening the code</strong>.
           </p>
           <a href="../projects/dxcenter/" class="inline-flex w-fit font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Related case · DX Center <span aria-hidden="true" class="ml-2">&nearr;</span></a>
 
@@ -454,7 +454,7 @@
             <div class="deep-block">
               <div class="deep-label">// approach</div>
               <p class="mt-3 text-[14px] leading-[1.85] text-text-secondary kr-balance">
-                I turned the whole workflow into a GUI through Unity editor extensions. With <code>EditorWindow</code>, <code>SerializedObject</code>, and custom inspectors, external data is mapped onto scene objects, and validation before apply plus <code>Undo</code> registration are handled inside the tool. A form where non-developers can finish repetitive work safely.
+                I made separate screens for data mapping, asset registration, lineup changes, and validation. <code>EditorWindow</code>, <code>SerializedObject</code>, and custom inspectors map external data to scene objects; the same window validates changes and registers <code>Undo</code> before applying them.
               </p>
             </div>
             <div class="deep-block">
@@ -488,9 +488,9 @@
             <div class="deep-block">
               <div class="deep-label">// result</div>
               <ul class="mt-3 grid gap-2 text-[14px] leading-relaxed text-text-secondary">
-                <li class="check"><span class="mark">[x]</span><span class="label">Nine EditorWindows cover the full operations workflow</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">Nine EditorWindows split mapping, registration, and validation</span></li>
                 <li class="check"><span class="mark">[x]</span><span class="label">Content authors create and operate without code</span></li>
-                <li class="check"><span class="mark">[x]</span><span class="label">Validation, bundling, and delivery turned into a pipeline</span></li>
+                <li class="check"><span class="mark">[x]</span><span class="label">Buttons handle validation, bundling, and delivery preparation</span></li>
               </ul>
             </div>
           </div>
