@@ -97,7 +97,7 @@
           <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// selected work</div>
           <h1 class="display-hero max-w-3xl text-text-primary">Projects</h1>
           <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base">
-            These are VR, robotics, BIM runtime, manufacturing ERP, and EditorWindow projects I delivered to exhibitions, factories, and construction sites.
+            These are Unity systems delivered to exhibitions, factories, and construction sites, plus a live resident 3D community, manufacturing ERP, and EditorWindow tooling.
           </p>
           <div class="flex flex-wrap gap-2">
             <span class="chip chip-cyan">Industrial XR</span>
@@ -105,6 +105,7 @@
             <span class="chip">BIM Runtime</span>
             <span class="chip">Manufacturing ERP</span>
             <span class="chip">Editor Tooling</span>
+            <span class="chip">Three.js · WebGL</span>
             <span class="chip">AI Systems</span>
           </div>
         </div>
@@ -117,23 +118,28 @@
               <span class="term-title">recommended cases</span>
             </div>
             <div class="grid gap-3 p-4 sm:p-5">
-              <a href="./vr-robot/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+              <a href="./godeok-gangil-3d/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
                 <div class="kicker kicker-cyan">// 01</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">Godeok Gangil 3D Community</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary">1,305-home 3D · furniture planner · metaverse · operating data.</div>
+              </a>
+              <a href="./vr-robot/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// 02</div>
                 <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">VR Robot Teleoperation</div>
                 <div class="mt-1 text-sm leading-6 text-text-secondary">Industrial XR · robotics · in-house IK.</div>
               </a>
               <a href="./sems-erp/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
-                <div class="kicker kicker-cyan">// 02</div>
+                <div class="kicker kicker-cyan">// 03</div>
                 <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">SEMS ERP</div>
                 <div class="mt-1 text-sm leading-6 text-text-secondary">Manufacturing ERP from order to material, production, approval, and shipping.</div>
               </a>
               <a href="../engineering/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
-                <div class="kicker kicker-cyan">// 03</div>
+                <div class="kicker kicker-cyan">// 04</div>
                 <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">Engineering — problems solved directly</div>
                 <div class="mt-1 text-sm leading-6 text-text-secondary">IK · BIM section · tooling · hardware sync.</div>
               </a>
               <a href="../ai-systems/deskrelay/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
-                <div class="kicker kicker-cyan">// 04</div>
+                <div class="kicker kicker-cyan">// 05</div>
                 <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">DeskRelay</div>
                 <div class="mt-1 text-sm leading-6 text-text-secondary">Self-host tool for remote Claude Code control.</div>
               </a>
@@ -150,11 +156,24 @@
         <span class="tail">delivery first / ai on top</span>
       </div>
       <div class="max-w-3xl">
-        <h2 class="display-section text-text-primary">Projects I installed and handed over</h2>
-        <p class="mt-4 text-[15px] leading-8 text-text-secondary">I handled Unity development, hardware connections, site installation, live-demo fixes, and operator handoff.</p>
+        <h2 class="display-section text-text-primary">Projects I built and operated</h2>
+        <p class="mt-4 text-[15px] leading-8 text-text-secondary">I handled 3D models and user tools as well as hardware connections, site installation, deployment, and operator handoff.</p>
       </div>
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>godeok-gangil-3d</span><span class="text-text-muted">live community</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../../assets/images/godeok-live-complex-focused.jpg" alt="Full 3D view of the Godeok Gangil complex"/></div>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2"><span class="chip chip-cyan">Three.js</span><span class="chip">3D Pipeline</span><span class="chip">Self-host</span></div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">Godeok Gangil 3D Community</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary">A live service connecting official move-in information to 25 unit models, a 1,305-home complex, furniture planning, a metaverse, and traffic-assumption experiments.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Three.js / Node.js / Synology NAS</div>
+            <a href="./godeok-gangil-3d/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">Read case study <span aria-hidden="true" class="ml-2">&nearr;</span></a>
+          </div>
+        </article>
+
         <article class="card ticks group flex flex-col">
           <span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>vr-robot</span><span class="text-text-muted">industrial xr</span></div>
