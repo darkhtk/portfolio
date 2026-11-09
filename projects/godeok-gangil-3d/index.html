@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>고덕강일 3단지 3D 커뮤니티 · 케이스 스터디 | 홍대기</title>
+<meta name="description" content="공식 입주 자료를 25종 세대 모델, 1,305세대 단지 3D, 가구 배치, 메타버스와 교통 가정 실험으로 연결해 실제 운영한 주민 정보 서비스."/>
+<meta property="og:title" content="고덕강일 3단지 3D 커뮤니티 · 케이스 스터디"/>
+<meta property="og:description" content="17개 동·1,305세대를 탐색하고 입주 준비 도구를 함께 쓰는 실제 운영 3D 커뮤니티."/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://darkhtk.github.io/portfolio/assets/images/godeok-live-complex-focused.jpg"/>
+<meta property="og:url" content="https://darkhtk.github.io/portfolio/projects/godeok-gangil-3d/"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="고덕강일 3단지 3D 커뮤니티"/>
+<meta name="twitter:description" content="공식 자료, 단지 3D, 가구 배치와 시뮬레이션을 연결한 입주 준비 서비스."/>
+<meta name="twitter:image" content="https://darkhtk.github.io/portfolio/assets/images/godeok-live-complex-focused.jpg"/>
+<link rel="canonical" href="https://darkhtk.github.io/portfolio/projects/godeok-gangil-3d/"/>
+<link rel="alternate" hreflang="ko" href="https://darkhtk.github.io/portfolio/projects/godeok-gangil-3d/"/>
+<link rel="alternate" hreflang="en" href="https://darkhtk.github.io/portfolio/en/projects/godeok-gangil-3d/"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = { darkMode: "class", theme: { extend: {
+    colors: { "bg-primary": "#0B0F14", "bg-elevated": "#11161D", "text-primary": "#E6EDF3", "text-secondary": "#8A94A6", "text-muted": "#76818F", "accent-cyan": "#6FE3FF", "accent-amber": "#F5C26B", "success-green": "#6EE787", "danger-red": "#FF7B72", "hairline": "rgba(230,237,243,0.08)", "hairline-strong": "rgba(230,237,243,0.16)" },
+    fontFamily: { display: ["Space Grotesk", "Noto Sans KR", "sans-serif"], body: ["Noto Sans KR", "sans-serif"], mono: ["JetBrains Mono", "ui-monospace", "monospace"] }
+  } } }
+</script>
+<link rel="stylesheet" href="../../assets/css/portfolio-dark.css"/>
+</head>
+<body class="font-body antialiased">
+<div class="relative">
+
+  <header data-mobile-menu-root class="sticky-nav fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <a href="../../" class="font-mono text-[13px] font-bold text-accent-cyan flex items-center">daeki.hong<span class="caret"></span></a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="../../" class="nav-link">home</a>
+        <a href="../../#ch01" class="nav-link is-active">industrial</a>
+        <a href="../../engineering/" class="nav-link">engineering</a>
+        <a href="../../ai-systems/" class="nav-link">ai</a>
+        <a href="../../ai-systems/deskrelay/" class="nav-link">deskrelay</a>
+        <a href="../../#profile" class="nav-link">profile</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1 font-mono text-[11px] tracking-widest uppercase">
+          <span class="px-2 py-1 text-bg-primary bg-accent-cyan">KO</span>
+          <a href="../../en/projects/godeok-gangil-3d/" class="px-2 py-1 text-text-muted border border-hairline hover:text-accent-cyan hover:border-accent-cyan">EN</a>
+        </div>
+        <button data-mobile-menu-toggle aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">menu</span></button>
+      </div>
+    </div>
+    <div id="mobile-menu" data-mobile-menu class="mobile-drawer fixed inset-0 hidden flex-col px-4 pt-6 pb-10 md:hidden" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+      <div class="flex items-start justify-between pb-4 border-b border-hairline">
+        <div><div class="kicker">// menu</div><div class="mt-3 font-mono text-lg text-accent-cyan">daeki.hong<span class="caret"></span></div></div>
+        <button data-mobile-menu-close aria-label="메뉴 닫기" class="p-2 border border-hairline-strong text-accent-cyan"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="mt-6 grid gap-2 font-mono text-[12px] uppercase tracking-widest">
+        <a href="../../" class="flex items-center justify-between p-4 border border-hairline text-text-primary">home <span>→</span></a>
+        <a href="../../#ch01" class="flex items-center justify-between p-4 border border-hairline text-accent-cyan">industrial <span>→</span></a>
+        <a href="../../engineering/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">engineering <span>→</span></a>
+        <a href="../../ai-systems/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">ai systems <span>→</span></a>
+        <a href="../../ai-systems/deskrelay/" class="flex items-center justify-between p-4 border border-hairline text-text-primary">deskrelay <span>→</span></a>
+        <a href="../../#profile" class="flex items-center justify-between p-4 border border-hairline text-text-primary">profile <span>→</span></a>
+      </div>
+      <div class="mt-6 flex gap-2 font-mono text-[11px] uppercase tracking-widest">
+        <span class="px-3 py-2 text-bg-primary bg-accent-cyan">KO</span>
+        <a href="../../en/projects/godeok-gangil-3d/" class="px-3 py-2 text-text-secondary border border-hairline">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative pt-16">
+    <section class="relative bg-grid-dots">
+      <div class="absolute inset-0 bg-grid-lines pointer-events-none opacity-60"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// live service · three.js · community</div>
+          <h1 class="display-hero text-text-primary kr-balance">고덕강일 3단지.<br/><span class="text-accent-cyan">입주 준비를 위한 3D 커뮤니티.</span></h1>
+          <p class="font-mono text-[12px] uppercase tracking-widest text-text-secondary">17 buildings · 1,305 homes · 25 unit types · self-hosted</p>
+          <p class="text-text-secondary text-[15px] sm:text-base leading-[1.85] kr-balance max-w-2xl border-l-2 border-accent-amber/40 pl-5">
+            공고문과 도면을 읽는 데서 끝내지 않고, <strong class="text-text-primary font-semibold">단지 전체를 걸어 보고 내 집에 가구를 놓아 보는 서비스</strong>로 만들었습니다. 자료 정리, 3D 모델 파이프라인, 브라우저 기능, 서버와 NAS 운영을 직접 맡았습니다.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="https://xn--3-9y5e2u86qrpal18gcld.com/" target="_blank" rel="noopener noreferrer" class="btn-cyan">고덕강일3단지.com <span>↗</span></a>
+            <a href="#video" class="btn-ghost">영상 보기 <span>↓</span></a>
+          </div>
+          <div class="ticker mt-2">
+            <span class="dot"></span><span>Node.js 24 + SQLite</span>
+            <span class="dot"></span><span>Three.js / GLB</span>
+            <span class="dot"></span><span>WebSocket / Worker</span>
+            <span class="dot"></span><span>Synology NAS</span>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="term-window ticks"><span class="tr"></span><span class="bl"></span>
+            <div class="card-bar"><span>LIVE</span><span class="text-text-muted">COMPLEX VIEW</span></div>
+            <div class="media-frame aspect-[16/10] border-t border-hairline"><img src="../../assets/images/godeok-live-complex-focused.jpg" alt="고덕강일 3단지 17개 동과 주변 도로를 표시한 3D 단지 화면"/></div>
+          </div>
+        </div>
+      </div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 lg:pb-20">
+        <div class="grid grid-cols-2 gap-px border border-hairline bg-hairline md:grid-cols-5">
+          <div class="bg-bg-primary p-4"><div class="font-display text-2xl font-bold text-accent-cyan">17</div><div class="kicker mt-1">개 동</div></div>
+          <div class="bg-bg-primary p-4"><div class="font-display text-2xl font-bold text-accent-cyan">1,305</div><div class="kicker mt-1">세대 인스턴스</div></div>
+          <div class="bg-bg-primary p-4"><div class="font-display text-2xl font-bold text-accent-cyan">25</div><div class="kicker mt-1">세부 평면</div></div>
+          <div class="bg-bg-primary p-4"><div class="font-display text-2xl font-bold text-accent-cyan">50</div><div class="kicker mt-1">생활 배치</div></div>
+          <div class="bg-bg-primary p-4 col-span-2 md:col-span-1"><div class="font-display text-2xl font-bold text-accent-cyan">269</div><div class="kicker mt-1">FAQ</div></div>
+        </div>
+        <p class="mt-4 border-l-2 border-accent-amber/50 pl-4 text-[12px] leading-relaxed text-text-muted kr-balance">입주예정자 커뮤니티가 만든 참고 서비스입니다. SH 공식 사이트·공식 견본주택·준공 BIM이 아니며, 단지 규모 1,305세대는 서비스 이용자 수를 뜻하지 않습니다.</p>
+      </div>
+    </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14"><span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ SOURCE TO SERVICE ]</span><span class="kicker text-text-secondary">OFFICIAL DATA / COMMUNITY TOOLS</span><span class="line"></span></div>
+      <div class="grid gap-8 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-5">
+          <div class="kicker mb-4">// 먼저 근거를 정리했습니다</div>
+          <h2 class="display-section text-text-primary kr-balance">공고·정정본·도면을<br/>사용할 수 있는 화면으로.</h2>
+          <p class="mt-5 text-[15px] leading-[1.85] text-text-secondary kr-balance">분양가, 확장비, 면적, 일정, 공지와 269개 FAQ를 원문 링크·확인 수준과 함께 정리했습니다. 같은 타입 정보가 도면, 3D 뷰어, 모델하우스와 가구 배치에서 다시 쓰이도록 카탈로그를 맞췄습니다.</p>
+        </div>
+        <div class="lg:col-span-7 card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>HOME</span><span class="text-text-muted">LIVE SERVICE</span></div>
+          <div class="media-frame aspect-[16/9] border-b border-hairline"><img loading="lazy" src="../../assets/images/godeok-live-home.jpg" alt="고덕강일 3단지 일정과 공지를 보여주는 운영 홈 화면"/></div>
+          <div class="p-5 text-[13px] leading-relaxed text-text-secondary kr-balance">공식 일정과 중요한 공지를 먼저 보이고, 단지 3D·모델하우스·가구 배치·교통 화면으로 바로 이동하게 구성했습니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14"><span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ 3D COMPLEX ]</span><span class="kicker text-accent-cyan">SITE / FLOOR / UNIT LOD</span><span class="line"></span></div>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <article class="card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>LOD 01</span><span class="text-text-muted">SITE</span></div><div class="media-frame aspect-[16/9] border-b border-hairline"><img loading="lazy" src="../../assets/images/godeok-live-complex-overview.jpg" alt="주변 건물과 도로, 한강까지 표시한 단지 3D 전체 화면"/></div><div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary">17개 동과 주변 맥락</h3><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">전체 1,305세대를 인스턴스로 배치하고, 주변 도로·건물·공원·한강·B1/B2와 램프를 함께 볼 수 있게 했습니다.</p></div></article>
+          <article class="card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>LOD 02</span><span class="text-text-muted">FLOOR / UNIT</span></div><div class="media-frame aspect-[16/9] border-b border-hairline"><img loading="lazy" src="../../assets/images/godeok-04-floor-cutaway-historical-qa.png" alt="동 층 호수를 선택해 세대 내부를 단면으로 표시한 화면"/></div><div class="p-5"><h3 class="font-display font-bold text-lg text-text-primary">동·층·호에서 세대 내부까지</h3><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">동·층·호수를 고르면 해당 위치의 세대 내부를 불러옵니다. 외관, 층 단면, 세대 상세 사이를 옮겨도 선택과 카메라가 유지됩니다.</p></div></article>
+        </div>
+        <div class="mt-6 grid gap-6 md:grid-cols-3">
+          <article class="card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span><div class="media-frame aspect-[16/10] border-b border-hairline"><img loading="lazy" src="../../assets/images/godeok-03-complex-walk-minimap-local-qa.png" alt="단지 도로를 1인칭 드론 모드와 미니맵으로 탐색하는 화면"/></div><div class="p-5"><div class="kicker kicker-cyan">// walk / drone</div><h3 class="mt-2 font-display font-bold text-text-primary">지상부터 B2까지 연속 이동</h3><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">키보드·터치 입력, 충돌, 램프 높이, 미니맵을 맞춰 PC와 모바일에서 걷기와 드론 탐색을 지원합니다.</p></div></article>
+          <article class="card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span><div class="media-frame aspect-[16/10] border-b border-hairline"><img loading="lazy" src="../../assets/images/godeok-05-sunlight-historical-qa.png" alt="날짜와 시간을 바꿔 단지 그림자와 일조를 확인하는 화면"/></div><div class="p-5"><div class="kicker kicker-cyan">// sunlight</div><h3 class="mt-2 font-display font-bold text-text-primary">태양 위치와 누적 표면 일조</h3><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">날짜·시간별 그림자, 지점 직사광선 시간대와 Worker 누적 히트맵을 계산합니다. 법정 일조·실내 채광·날씨 판정은 아닙니다.</p></div></article>
+          <article class="card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span><div class="media-frame aspect-[9/16] border-b border-hairline bg-white"><img loading="lazy" class="object-contain" src="../../assets/images/godeok-07-showroom-mobile-local-qa.png" alt="모바일에서 59B 세대 3D 모델하우스를 회전하는 화면"/></div><div class="p-5"><div class="kicker kicker-cyan">// mobile</div><h3 class="mt-2 font-display font-bold text-text-primary">좁은 화면에서도 같은 3D</h3><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">회전·확대·공간 전환과 1인칭 조작을 모바일 입력에 맞췄습니다.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14"><span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ MODEL PIPELINE ]</span><span class="kicker text-text-secondary">25 TYPES / GLB</span><span class="line"></span></div>
+      <div class="grid gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-5"><div class="kicker mb-4">// floorplan-3d</div><h2 class="display-section text-text-primary kr-balance">도면 하나를 고치는 일이<br/>25번 반복되지 않도록.</h2><p class="mt-5 text-[15px] leading-[1.85] text-text-secondary kr-balance">AI와 작업자가 정리한 구조화 JSON을 Pydantic과 기하 규칙으로 검사하고, 층별 2D 화면에서 다시 확인한 뒤 GLB와 보고서를 만듭니다. 생성기가 도면을 자동으로 읽거나 DWG를 변환한다고 과장하지 않았습니다.</p></div>
+        <div class="lg:col-span-7 grid gap-px bg-hairline border border-hairline sm:grid-cols-2">
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">01 / input</div><div class="font-display font-bold text-text-primary">구조화 JSON</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary">공간, 벽, 문·창, 설비, 계단과 내측 치수를 타입별로 정리합니다.</p></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">02 / review</div><div class="font-display font-bold text-text-primary">Pydantic · Shapely · Tkinter</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary">누락·교차·바닥 형상을 검사하고 층별 2D 화면에서 원도면과 대조합니다.</p></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">03 / build</div><div class="font-display font-bold text-text-primary">Trimesh · NumPy · Pillow</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary">사각형 조합 바닥과 개구부를 메시로 만들고 한글 텍스처를 GLB에 넣습니다.</p></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">04 / delivery</div><div class="font-display font-bold text-text-primary">25타입 카탈로그</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary">같은 모델을 도면 뷰어, 단지 인스턴스, 모델하우스와 배치 도구에서 사용합니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14"><span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ MOVE-IN TOOLS ]</span><span class="kicker text-accent-cyan">SHOWROOM / PLANNER</span><span class="line"></span></div>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <article class="card ticks overflow-hidden lg:col-span-2"><span class="tr"></span><span class="bl"></span><div class="grid lg:grid-cols-2"><div class="media-frame aspect-[16/9] border-b border-hairline lg:border-b-0 lg:border-r"><img loading="lazy" src="../../assets/images/godeok-live-showroom-49a-family.jpg" alt="49A 가족형 가구 배치를 전체로 본 사이버 모델하우스"/></div><div class="media-frame aspect-[16/9] border-b border-hairline lg:border-b-0"><img loading="lazy" src="../../assets/images/godeok-live-showroom-49a-living.jpg" alt="49A 가족형 모델하우스 거실 1인칭 화면"/></div></div><div class="p-5"><div class="kicker kicker-cyan">// 25 types × 2 layouts</div><h3 class="mt-2 font-display font-bold text-lg text-text-primary">50가지 사이버 모델하우스</h3><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">각 타입에 가족형과 2인형 생활 배치를 준비하고 집 전체, 공간별 시점, 1인칭과 저녁 조명을 제공합니다.</p></div></article>
+          <article class="card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span><div class="media-frame aspect-[16/10] border-b border-hairline"><img loading="lazy" src="../../assets/images/godeok-10-planner-editor-local-qa-reserve.png" alt="가구 추가와 치수, 이동 회전 도구를 갖춘 내 가구 배치 편집 화면"/></div><div class="p-5"><div class="kicker kicker-amber">// my furniture</div><h3 class="mt-2 font-display font-bold text-lg text-text-primary">내 가구 배치</h3><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">게스트는 브라우저에 자동 저장하고, 로그인 사용자는 개인 문서를 기기 간 편집합니다. 이동·회전·치수·그룹·복제·잠금·실행 취소, 바닥과 벽 마감, 충돌 경고, JSON·PNG 내보내기를 넣었습니다.</p></div></article>
+          <article class="card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span><div class="media-frame aspect-[16/10] border-b border-hairline"><img loading="lazy" src="../../assets/images/godeok-06-metaverse-test-chat-local-qa.png" alt="합성 검수 데이터로 확인한 단지 메타버스 아바타와 채팅 화면"/></div><div class="p-5"><div class="kicker kicker-amber">// plaza / websocket</div><h3 class="mt-2 font-display font-bold text-lg text-text-primary">단지 메타버스</h3><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">닉네임으로 광장에 들어와 아바타 위치와 채팅을 WebSocket으로 공유합니다. 밤비는 FAQ 태그 안내, 요니는 동·층·호수 이동을 돕습니다. 생성형 AI 챗봇이 아닙니다.</p><p class="mt-3 text-[11px] leading-relaxed text-text-muted">화면의 닉네임과 대화는 실제 주민 대화가 아닌 합성 검수 데이터입니다.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14"><span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ SIMULATION ]</span><span class="kicker text-text-secondary">GATE / VEHICLE / PEDESTRIAN</span><span class="line"></span></div>
+      <div class="grid gap-8 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-7 card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span><div class="card-bar"><span>B0 vs G1</span><span class="text-text-muted">10 PAIRED RUNS</span></div><div class="media-frame aspect-[16/9] border-b border-hairline"><img loading="lazy" src="../../assets/images/godeok-live-simulation-comparison.jpg" alt="정문 차량과 보행 흐름의 B0 기준안과 G1 차단기 후퇴안을 나란히 비교한 화면"/></div><div class="p-5 text-[12px] leading-relaxed text-text-muted">동일한 가상 수요표로 기준안과 대안을 반복 계산한 검수 화면입니다. 실제 교통량 예측이나 현장 개선 효과를 뜻하지 않습니다.</div></div>
+        <div class="lg:col-span-5">
+          <div class="kicker mb-4">// 독립 브라우저 실험</div><h2 class="display-section text-text-primary kr-balance">정문 동선을 보고<br/>가정을 바꿔 봤습니다.</h2>
+          <p class="mt-5 text-[15px] leading-[1.85] text-text-secondary kr-balance">실제 차도와 보도 위에 차량·보행 경로를 놓고 차단기, 합류, 상충, 잔여 대기를 Web Worker에서 계산합니다. B0 기준, O1 사전등록, G1 차단기 후퇴, G2 입차 분리, G3 보행 접근 정리를 같은 수요로 10회·30회 비교할 수 있습니다.</p>
+          <div class="mt-6 border border-accent-amber/30 bg-accent-amber/5 p-5"><div class="kicker kicker-amber">// scope</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">설계자료를 바탕으로 만든 설명용 가정 실험입니다. 실제 정체·신호·사고 확률·안전 등급을 판정하지 않습니다.</p></div>
+        </div>
+      </div>
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        <article class="card ticks overflow-hidden"><span class="tr"></span><span class="bl"></span><div class="media-frame aspect-[9/16] max-h-[620px] border-b border-hairline bg-black"><img loading="lazy" class="object-contain" src="../../assets/images/godeok-09-monthly-calculator-dark-local-qa.png" alt="토지임대료와 대출이자, 기타 지출을 계산하는 모바일 월 지출 계산기"/></div><div class="p-5"><div class="kicker kicker-cyan">// calculator</div><h3 class="mt-2 font-display font-bold text-text-primary">월 주거비와 자산 참고 계산</h3><p class="mt-2 text-[13px] leading-relaxed text-text-secondary kr-balance">분양가·확장비, 전환보증금, 토지임대료와 대출이자, 기타 월 지출을 한 화면에서 바꿔 봅니다. 개인 자격이나 대출 심사의 최종 판정은 아닙니다.</p></div></article>
+        <article class="card ticks p-6"><span class="tr"></span><span class="bl"></span><div class="kicker kicker-cyan">// traffic information</div><h3 class="mt-3 font-display text-xl font-bold text-text-primary">주변 교통정보</h3><p class="mt-3 text-[14px] leading-[1.8] text-text-secondary kr-balance">MapLibre/OpenFreeMap 위에 도로 소통, CCTV 목록과 공식 보기, 즐겨찾기와 공유를 붙였습니다. 기관마다 다른 API를 서버 어댑터와 공유 캐시, 월 쿼터 원장으로 관리하고 자료 시각과 출처를 화면에 남깁니다.</p><div class="mt-6 grid gap-px border border-hairline bg-hairline sm:grid-cols-2"><div class="bg-bg-primary p-4"><div class="kicker">provider</div><div class="mt-2 font-display font-bold text-text-primary">TOPIS · ITS · GITS · UTIC</div></div><div class="bg-bg-primary p-4"><div class="kicker">boundary</div><div class="mt-2 text-[12px] leading-relaxed text-text-secondary">허용된 영상은 브라우저가 제공처에서 직접 받습니다. NAS가 영상을 모두 중계하지 않습니다.</div></div></div></article>
+      </div>
+    </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14"><span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ OPERATING DATA ]</span><span class="kicker text-accent-cyan">READ-ONLY AUDIT · 2026-11-09</span><span class="line"></span></div>
+        <div class="grid gap-8 lg:grid-cols-12">
+          <div class="lg:col-span-4"><div class="kicker mb-4">// 실제 운영 DB 집계</div><h2 class="display-section text-text-primary kr-balance">사람 수와 이벤트 수를<br/>섞지 않았습니다.</h2><p class="mt-5 text-[14px] leading-[1.8] text-text-secondary kr-balance">아래 수치는 2026-11-09 20:10 KST 기준 읽기 전용 집계입니다. 서로 기간과 단위가 달라 전환율이나 주민 침투율로 계산하지 않았습니다.</p></div>
+          <div class="lg:col-span-8 grid gap-px border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-3">
+            <div class="bg-bg-primary p-5"><div class="font-display text-3xl font-bold text-accent-cyan">3,581</div><div class="mt-2 font-display font-bold text-text-primary">일별 중복 제외 방문 합계</div><p class="mt-2 text-[11px] leading-relaxed text-text-muted">10/26~11/09 browser-days. 페이지뷰·누적 고유 방문자·사람 수가 아닙니다.</p></div>
+            <div class="bg-bg-primary p-5"><div class="font-display text-3xl font-bold text-accent-cyan">1,449</div><div class="mt-2 font-display font-bold text-text-primary">최근 7일 방문 합계</div><p class="mt-2 text-[11px] leading-relaxed text-text-muted">11/03~11/09 browser-days.</p></div>
+            <div class="bg-bg-primary p-5"><div class="font-display text-3xl font-bold text-accent-cyan">857</div><div class="mt-2 font-display font-bold text-text-primary">가구 배치 화면 방문</div><p class="mt-2 text-[11px] leading-relaxed text-text-muted">11/04 09:10 KST 이후 이벤트.</p></div>
+            <div class="bg-bg-primary p-5"><div class="font-display text-3xl font-bold text-accent-cyan">225</div><div class="mt-2 font-display font-bold text-text-primary">편집기 열기</div><p class="mt-2 text-[11px] leading-relaxed text-text-muted">기존 문서 열기를 포함한 이벤트이며 새 배치 수가 아닙니다.</p></div>
+            <div class="bg-bg-primary p-5"><div class="font-display text-3xl font-bold text-accent-cyan">8,715</div><div class="mt-2 font-display font-bold text-text-primary">저장 완료</div><p class="mt-2 text-[11px] leading-relaxed text-text-muted">자동·로컬 저장을 포함한 revision 증가 이벤트. 배치안 개수가 아닙니다.</p></div>
+            <div class="bg-bg-primary p-5"><div class="font-display text-3xl font-bold text-accent-cyan">10</div><div class="mt-2 font-display font-bold text-text-primary">JSON·이미지 내보내기</div><p class="mt-2 text-[11px] leading-relaxed text-text-muted">계측 시작 이후 내보내기 이벤트.</p></div>
+            <div class="bg-bg-primary p-5"><div class="font-display text-3xl font-bold text-accent-cyan">32</div><div class="mt-2 font-display font-bold text-text-primary">서버 저장 배치 문서</div><p class="mt-2 text-[11px] leading-relaxed text-text-muted">비운영 24계정의 현재 보관 문서. 로컬 전용·삭제본과 과거 누계 제외.</p></div>
+            <div class="bg-bg-primary p-5"><div class="font-display text-3xl font-bold text-accent-cyan">116</div><div class="mt-2 font-display font-bold text-text-primary">FAQ 태그 선택</div><p class="mt-2 text-[11px] leading-relaxed text-text-muted">최근 30일 태그별 일일 브라우저 중복 제외 합계. FAQ 조회수는 아닙니다.</p></div>
+            <div class="bg-bg-primary p-5"><div class="font-display text-3xl font-bold text-accent-amber">미계측</div><div class="mt-2 font-display font-bold text-text-primary">3D·쇼룸·교통·시뮬레이션</div><p class="mt-2 text-[11px] leading-relaxed text-text-muted">독립 사용 빈도 이벤트가 없어 0이나 추정치로 바꾸지 않았습니다.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="video" class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14"><span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ VIDEO ]</span><span class="kicker text-text-secondary">12:38 WALKTHROUGH</span><span class="line"></span></div>
+      <div class="grid gap-8 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-8 overflow-hidden border border-hairline bg-black aspect-video"><iframe class="h-full w-full" src="https://www.youtube-nocookie.com/embed/sKPbsD_hUYQ" title="고덕강일 3단지 서비스 소개 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="lg:col-span-4"><div class="kicker mb-4">// Daeki Hong</div><h2 class="display-section text-text-primary">기능을 직접<br/>돌아본 영상.</h2><p class="mt-5 text-[14px] leading-[1.8] text-text-secondary kr-balance">공식 정보부터 단지 3D, 모델하우스와 생활 도구까지 실제 화면을 따라갑니다.</p><div class="mt-6 grid gap-px border border-hairline bg-hairline"><div class="bg-bg-primary p-4"><div class="kicker">YouTube 조회수</div><div class="mt-1 font-display text-2xl font-bold text-accent-cyan">1,110회</div><div class="mt-1 text-[11px] text-text-muted">2026-11-09 공개 페이지 확인</div></div><div class="bg-bg-primary p-4"><div class="kicker">재생 시간</div><div class="mt-1 font-display text-2xl font-bold text-text-primary">12분 38초</div><div class="mt-1 text-[11px] text-text-muted">저장된 공급자 메타데이터 기준</div></div></div><a href="https://www.youtube.com/watch?v=sKPbsD_hUYQ" target="_blank" rel="noopener noreferrer" class="mt-5 btn-ghost">YouTube에서 열기 <span>↗</span></a></div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div class="chapter-rule mb-14"><span class="tag text-accent-cyan border-accent-cyan/40 bg-accent-cyan/5">[ FEEDBACK ]</span><span class="kicker text-accent-cyan">8 SELECTED MESSAGES</span><span class="line"></span></div>
+        <div class="max-w-3xl"><h2 class="display-section text-text-primary kr-balance">어떤 기능을 실제로<br/>써 봤는지 확인했습니다.</h2><p class="mt-5 text-[13px] leading-relaxed text-text-muted kr-balance">2026-11-06까지 저장된 대화에서 기능 사용 맥락이 확인되는 익명 메시지 8건을 골랐습니다. 대화 참여자라는 점만 확인했으며 입주민·당첨자 신분과 공개 인용 동의는 확인되지 않았습니다. 전체 만족도나 고유 이용자 수로 합산하지 않았습니다.</p></div>
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          <blockquote class="card p-5"><div class="kicker kicker-cyan">3D 둘러보기 · 10/28</div><p class="mt-3 text-[15px] leading-relaxed text-text-primary kr-balance">“만들어주신 3D 둘러보기가 사이버 견본주택보다 훨씬 좋아요.”</p></blockquote>
+          <blockquote class="card p-5"><div class="kicker kicker-cyan">FAQ · 10/28</div><p class="mt-3 text-[15px] leading-relaxed text-text-primary kr-balance">“사이트 QA 너무 좋은거같아요!! 공홈보다 잘 되어있네요”</p></blockquote>
+          <blockquote class="card p-5"><div class="kicker kicker-cyan">모델하우스 · 10/30</div><p class="mt-3 text-[15px] leading-relaxed text-text-primary kr-balance">“모델하우스 첨 보고있는데 대박이네요..”</p></blockquote>
+          <blockquote class="card p-5"><div class="kicker kicker-cyan">가구 배치 · 10/30</div><p class="mt-3 text-[15px] leading-relaxed text-text-primary kr-balance">“저 지금 안방 가구 배치 끝냈습니다!! … 이걸로 해 보니 조금 두근두근해졌어요!!!”</p></blockquote>
+          <blockquote class="card p-5"><div class="kicker kicker-cyan">3D 뷰어 추천 · 11/04</div><p class="mt-3 text-[15px] leading-relaxed text-text-primary kr-balance">“이 사이트 가보셔서 ‘단지정보→3D뷰어’ 들어가신 다음 대략적으로 유추 해보셔요~”</p></blockquote>
+          <blockquote class="card p-5"><div class="kicker kicker-cyan">드론 모드 · 11/05</div><p class="mt-3 text-[15px] leading-relaxed text-text-primary kr-balance">“드론모드 잘 사용했습니다 ㅋㅋ”</p></blockquote>
+          <blockquote class="card p-5"><div class="kicker kicker-cyan">정보 공유 · 11/05</div><p class="mt-3 text-[15px] leading-relaxed text-text-primary kr-balance">“좋은 사이트도 만들어주셔서 … 벌써 정들어서 큰일났네 싶은 생각이 듭니다.”</p></blockquote>
+          <blockquote class="card p-5"><div class="kicker kicker-cyan">3D 이동 · 11/05</div><p class="mt-3 text-[15px] leading-relaxed text-text-primary kr-balance">“점프도 되고 창문에서 뷰도 볼 수 있고 … 기능이 너무 많아요 최고”</p></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="chapter-rule mb-14"><span class="tag text-accent-amber border-accent-amber/40 bg-accent-amber/5">[ BUILD / OPERATE ]</span><span class="kicker text-text-secondary">BROWSER TO NAS</span><span class="line"></span></div>
+      <div class="grid gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-5"><div class="kicker mb-4">// 맡은 범위</div><h2 class="display-section text-text-primary kr-balance">모델을 띄운 뒤에도<br/>운영은 계속됐습니다.</h2><p class="mt-5 text-[15px] leading-[1.85] text-text-secondary kr-balance">클라이언트 기능만 만든 것이 아니라 세션·CSRF·개인 데이터 경계, 비동기 작업과 GPU 자원 수명, 재현 빌드, 선택 배포, DB 백업과 실제 복원까지 운영 기준을 함께 다뤘습니다.</p></div>
+        <div class="lg:col-span-7 grid gap-px bg-hairline border border-hairline sm:grid-cols-2">
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">runtime</div><div class="font-display font-bold text-text-primary">Vanilla JS ESM · Three.js · GLB</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary">공통 렌더러와 카탈로그를 여러 공개 화면에서 사용합니다.</p></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">server</div><div class="font-display font-bold text-text-primary">Node.js 24 · SQLite</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary">공개 자료, 계정 저장, 권한과 운영 데이터를 한 서버에서 구분합니다.</p></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">realtime</div><div class="font-display font-bold text-text-primary">WebSocket · Web Worker</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary">광장 동기화와 계산 작업을 UI 렌더링에서 분리했습니다.</p></div>
+          <div class="bg-bg-primary p-5"><div class="kicker kicker-cyan mb-2">operations</div><div class="font-display font-bold text-text-primary">Docker · Synology NAS · HTTPS</div><p class="mt-2 text-[13px] leading-relaxed text-text-secondary">봉인된 빌드, 해시 검증, 직렬 배포와 백업 복구 절차를 운영합니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-t border-hairline bg-bg-elevated">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div class="kicker kicker-cyan mb-6">// related work</div>
+        <div class="grid gap-4 md:grid-cols-3">
+          <a href="../watchbim/" class="card p-5 hover:border-accent-cyan/40"><div class="kicker">BIM RUNTIME</div><div class="mt-2 font-display font-bold text-text-primary">WatchBIM</div><p class="mt-2 text-[12px] leading-relaxed text-text-secondary">대용량 BIM 상호작용과 런타임 단면.</p></a>
+          <a href="../sems-erp/" class="card p-5 hover:border-accent-cyan/40"><div class="kicker">OPERATIONS</div><div class="mt-2 font-display font-bold text-text-primary">SEMS ERP</div><p class="mt-2 text-[12px] leading-relaxed text-text-secondary">현장 업무와 운영 데이터를 연결한 제조 ERP.</p></a>
+          <a href="../vr-robot/" class="card p-5 hover:border-accent-cyan/40"><div class="kicker">REALTIME CONTROL</div><div class="mt-2 font-display font-bold text-text-primary">VR Robot</div><p class="mt-2 text-[12px] leading-relaxed text-text-secondary">Quest 3와 산업용 로봇의 실시간 원격 조작.</p></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 font-mono text-[11px] uppercase tracking-widest text-text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div class="flex items-center gap-3"><span class="text-accent-cyan">daeki.hong<span class="caret"></span></span><span>godeok-gangil-3d.ko</span></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2"><a href="../../" class="hover:text-accent-cyan">home</a><a href="../" class="hover:text-accent-cyan">industrial</a><a href="https://xn--3-9y5e2u86qrpal18gcld.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent-cyan">live service</a><a href="../../en/projects/godeok-gangil-3d/" class="hover:text-accent-cyan">en</a></div>
+      <div>sys.version: community.3d.1</div>
+    </div>
+  </footer>
+</div>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

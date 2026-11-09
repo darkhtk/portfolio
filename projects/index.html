@@ -97,7 +97,7 @@
           <div class="kicker kicker-amber border border-accent-amber/30 bg-accent-amber/5 px-3 py-1.5 w-fit">// selected work</div>
           <h1 class="display-hero max-w-3xl text-text-primary kr-balance">프로젝트</h1>
           <p class="max-w-2xl border-l-2 border-accent-cyan/40 pl-5 text-[15px] leading-[1.85] text-text-secondary sm:text-base kr-balance">
-            전시, 공장과 건설현장에 납품한 VR, 로보틱스, BIM 런타임, 제조 ERP와 EditorWindow 작업입니다.
+            전시·공장·건설현장에 납품한 Unity 시스템과 실제 주민이 사용하는 3D 커뮤니티, 제조 ERP, EditorWindow 작업입니다.
           </p>
           <div class="flex flex-wrap gap-2">
             <span class="chip chip-cyan">Industrial XR</span>
@@ -105,6 +105,7 @@
             <span class="chip">BIM Runtime</span>
             <span class="chip">Manufacturing ERP</span>
             <span class="chip">Editor Tooling</span>
+            <span class="chip">Three.js · WebGL</span>
             <span class="chip">AI Systems</span>
           </div>
         </div>
@@ -117,23 +118,28 @@
               <span class="term-title">recommended cases</span>
             </div>
             <div class="grid gap-3 p-4 sm:p-5">
-              <a href="./vr-robot/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+              <a href="./godeok-gangil-3d/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
                 <div class="kicker kicker-cyan">// 01</div>
+                <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">고덕강일 3단지 3D 커뮤니티</div>
+                <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">1,305세대 3D · 가구 배치 · 메타버스 · 운영 통계.</div>
+              </a>
+              <a href="./vr-robot/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
+                <div class="kicker kicker-cyan">// 02</div>
                 <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">VR Robot Teleoperation</div>
                 <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">산업 XR · 로보틱스 제어 · 사내 IK.</div>
               </a>
               <a href="./sems-erp/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
-                <div class="kicker kicker-cyan">// 02</div>
+                <div class="kicker kicker-cyan">// 03</div>
                 <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">SEMS ERP</div>
                 <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">수주·자재·생산·승인·출고를 잇는 제조 현장 ERP.</div>
               </a>
               <a href="../engineering/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
-                <div class="kicker kicker-cyan">// 03</div>
+                <div class="kicker kicker-cyan">// 04</div>
                 <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">Engineering — 직접 풀어낸 문제들</div>
                 <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">IK · BIM 단면 · 툴링 · 하드웨어 동기.</div>
               </a>
               <a href="../ai-systems/deskrelay/" class="block border border-hairline bg-bg-primary p-4 transition-colors hover:border-accent-cyan/40">
-                <div class="kicker kicker-cyan">// 04</div>
+                <div class="kicker kicker-cyan">// 05</div>
                 <div class="mt-2 font-display text-sm font-bold tracking-tight text-text-primary">DeskRelay</div>
                 <div class="mt-1 text-sm leading-6 text-text-secondary kr-balance">AI 제품 — Claude Code 원격 조작.</div>
               </a>
@@ -150,11 +156,24 @@
         <span class="tail">delivery first / ai on top</span>
       </div>
       <div class="max-w-3xl">
-        <h2 class="display-section text-text-primary kr-balance">현장에 설치하고 인계한 프로젝트</h2>
-        <p class="mt-4 text-[15px] leading-8 text-text-secondary kr-balance">Unity 개발부터 장비 연결, 현장 설치, 시연 중 대응과 운영자 인계까지 맡은 작업입니다.</p>
+        <h2 class="display-section text-text-primary kr-balance">직접 만들고 운영한 프로젝트</h2>
+        <p class="mt-4 text-[15px] leading-8 text-text-secondary kr-balance">3D 모델과 사용자 도구부터 장비 연결, 현장 설치, 배포와 운영자 인계까지 맡은 작업입니다.</p>
       </div>
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <article class="card ticks group flex flex-col">
+          <span class="tr"></span><span class="bl"></span>
+          <div class="card-bar"><span>godeok-gangil-3d</span><span class="text-text-muted">live community</span></div>
+          <div class="media-frame aspect-[4/3] border-b border-hairline"><img src="../assets/images/godeok-live-complex-focused.jpg" alt="고덕강일 3단지 전체 3D 화면"/></div>
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex flex-wrap gap-2"><span class="chip chip-cyan">Three.js</span><span class="chip">3D Pipeline</span><span class="chip">Self-host</span></div>
+            <h3 class="mt-4 font-display text-xl font-bold tracking-tight text-text-primary">고덕강일 3단지 3D 커뮤니티</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary kr-balance">공식 입주 자료를 25타입 모델, 1,305세대 단지 3D, 가구 배치, 메타버스와 교통 가정 실험으로 연결해 운영했습니다.</p>
+            <div class="mt-4 font-mono text-[11px] uppercase tracking-widest text-text-muted">Three.js / Node.js / Synology NAS</div>
+            <a href="./godeok-gangil-3d/" class="mt-auto pt-6 inline-flex font-mono text-[11px] uppercase tracking-widest text-accent-cyan hover:text-accent-amber">케이스 보기 <span aria-hidden="true" class="ml-2">&nearr;</span></a>
+          </div>
+        </article>
+
         <article class="card ticks group flex flex-col">
           <span class="tr"></span><span class="bl"></span>
           <div class="card-bar"><span>vr-robot</span><span class="text-text-muted">industrial xr</span></div>

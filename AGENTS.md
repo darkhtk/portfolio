@@ -47,8 +47,8 @@ Industrial Unity × AI Agent 포트폴리오 사이트. 정적 HTML × Tailwind 
 | `en/ai-systems/index.html` | AI Systems 허브 (EN) | dark |
 | `ai-systems/<case>/index.html` | AI 케이스 KO — ops-cure, genworld-ollama, deskrelay, oracluna-tarot | dark |
 | `en/ai-systems/<case>/index.html` | AI 케이스 EN — ops-cure, genworld-ollama, deskrelay, oracluna-tarot | dark |
-| `projects/<case>/index.html` | 산업 케이스 KO — vr-robot, watchbim, dxcenter, neostalgia, vr-simulators | dark |
-| `en/projects/<case>/index.html` | 산업 케이스 EN — 동일 5종 | dark |
+| `projects/<case>/index.html` | 산업 케이스 KO — godeok-gangil-3d, sems-erp, vr-robot, watchbim, dxcenter, neostalgia, vr-simulators | dark |
+| `en/projects/<case>/index.html` | 산업 케이스 EN — 동일 7종 | dark |
 | `print/portfolio/`, `print/ko-portfolio/`, `print/resume/`, `print/resume-en/` | A4 인쇄용 (EN/KO 포트폴리오 + KO/EN 이력서) | print CSS |
 
 **Redirect stub** (`<meta http-equiv="refresh">` + JS replace): `ko/about/` → `about/`, `resume/` → `en/about/`, `ko/resume/` → `about/`, `cover-letter/` → `about/`, `ko/index.html` → `/`. `ko/ai-systems/`, `ko/projects/` 디렉터리는 존재하지 않음.
@@ -123,7 +123,7 @@ colors: {
 | `assets/` (루트) | `profile.jpg`, `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png` |
 | `assets/css/` | `portfolio-dark.css` (다크 공용), `site.css` (redirect stub 전용 잔존), `print-docs.css`, `print-dark.css` |
 | `assets/js/` | `site.js` (모바일 메뉴 + 가로 스크롤 드래그) |
-| `assets/images/` | 케이스 스크린샷 약 60개 — `deskrelay-*`, `remote-for-claude-*`, `ops-cure-discord-*`, `orchestration-v1-loop.png`, `genworld-*` (`genworld-skills.png` 포함 — genworld-ollama 케이스에서 사용 중), `oracluna-*` (모바일 녹화 추출 6장), `ik_*`, `vr_robot_expo*`, `vr_construction_*` / `vr_lcm_*` / `vr_lghaus_*`, `watchbim_*`, `neostalgia_*`, `v2_*`, `customeditor.png` (DXCenter 케이스), `milk-and-cereal.png` |
+| `assets/images/` | 케이스 스크린샷 약 80개 — `godeok-*` (운영 화면·검수 화면 16장), `deskrelay-*`, `remote-for-claude-*`, `ops-cure-discord-*`, `orchestration-v1-loop.png`, `genworld-*` (`genworld-skills.png` 포함 — genworld-ollama 케이스에서 사용 중), `oracluna-*` (모바일 녹화 추출 6장), `ik_*`, `vr_robot_expo*`, `vr_construction_*` / `vr_lcm_*` / `vr_lghaus_*`, `watchbim_*`, `neostalgia-*`, `v2_*`, `customeditor.png` (DXCenter 케이스), `milk-and-cereal.png` |
 
 ## Spec / Plan Documentation
 
@@ -139,6 +139,13 @@ colors: {
 새 작업도 같은 경로 패턴 (`YYYY-MM-DD-<topic>-design.md` / `YYYY-MM-DD-<topic>.md`) 으로 저장.
 
 ## Recent Work History
+
+### 2026-11-09: 고덕강일 3단지 3D 커뮤니티 케이스 스터디
+- `projects/godeok-gangil-3d/`, `en/projects/godeok-gangil-3d/` 에 실제 운영 서비스의 KO/EN 케이스 스터디를 추가. 공식 자료 정리, 17개 동·1,305세대 3D, 25종 세대 모델, 50개 쇼룸, 가구 배치, 메타버스, 교통 가정 실험, 생활비 계산기와 NAS 운영 범위를 정리.
+- 전달받은 운영·검수 이미지 16장을 `assets/images/godeok-*` 로 추가하고, 기능과 직접 연결되는 화면만 케이스와 인쇄 포트폴리오에 배치. QA 대화 화면은 합성 데이터임을 명시.
+- YouTube 소개 영상을 개인정보 보호 iframe으로 삽입하고 2026-11-09 확인 조회수 1,110회를 표기. 운영 DB 수치는 browser-days·화면 방문·편집기 열기·저장 이벤트·문서 수로 단위를 분리하고 미계측 기능은 추정하지 않음.
+- 기능 맥락이 확인되는 익명 후기 8건을 실었으며, 입주민·당첨자 신분과 공개 인용 동의가 확인되지 않았다는 한계를 함께 표기.
+- KO/EN 홈·산업 프로젝트 허브·기존 관련 케이스·인쇄 포트폴리오를 연결하고 인쇄 포트폴리오를 6페이지로 갱신. 390px·1280px 기준 16개 렌더 조합에서 깨진 이미지, 상대 경로, 가로 overflow와 브라우저 오류 0건 확인.
 
 ### 2026-08-13: Oracluna Screenshot Refresh
 - `녹화_2026_08_11_14_38_37_734.mp4` 를 구간별로 검수해 고민 선택, 3분할 컷 재결합, 78장 카드 휠, 3장 공개, 카드별 해석, 저장·공유 장면을 새 스크린샷으로 반영.
