@@ -114,6 +114,15 @@ img { display: block; max-width: 100%; }
 .media-frame.video.video-portrait { aspect-ratio: 9 / 16; }
 .media-frame.video iframe { width: 100%; height: 100%; border: 0; display: block; }
 
+/* Product captures retain their native aspect ratio and colors. */
+.planner-album { align-items: flex-start; scroll-snap-type: x proximity; }
+.planner-album figure { width: min(88vw, 1000px); flex: 0 0 auto; scroll-snap-align: start; }
+.planner-album .planner-portrait { width: min(80vw, 340px); }
+.planner-capture { position: relative; display: block; border-bottom: 1px solid rgba(230,237,243,0.08); background: #fff; }
+.planner-capture img { display: block; width: 100%; height: auto; object-fit: contain; filter: none; }
+.planner-capture:focus-visible { outline: 2px solid #6FE3FF; outline-offset: 3px; }
+.planner-capture .capture-zoom { position: absolute; right: 8px; bottom: 8px; display: grid; place-items: center; width: 32px; height: 32px; background: #0B0F14; color: #E6EDF3; border: 1px solid rgba(230,237,243,0.16); }
+
 /* === horizontal scroller === */
 .h-scroll {
   display: flex;
